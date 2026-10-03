@@ -4,6 +4,8 @@
 
 **Status:** completed as a **pilot** on 2026-10-03. The [raw logs and audited JSON](../../kv-service/benchmarks/results/paper-hca-stage-2026-10-03/) contain two traced and two control processes, each with one warmup plus five measured reads. The [per-read stage figure](figures/physical-single-hca-stage.svg) plots all ten traced reads. The source files and client binary are SHA-pinned in `audit.json`; this is research-branch instrumentation, not the `c1c1de1` PR binary.
 
+**Revision notice:** these timings are for the original one-Rail implementation. The later [no-copy one-Rail ablation](baseline-ablation-results.md) removes the measured assembly copy and supersedes these numbers as the current baseline. The original traces remain useful for attributing that avoidable cost.
+
 **Original hypothesis:** Fixed client/control costs (two metadata lookups, QP setup, MR registration, staging/checksum/publish) dominate this small object's end-to-end latency.
 
 **System/control:** node1 server and node2 client, mlx5_1 port 1/GID 3, the same checksummed 64 MiB/16-stripe object (`xxh3=a0a4cbfa5cad46af`), same storage directories and cache policy, same one-Rail `RailReader`, one read at a time. The 128 MiB server slab was enabled and disk forcing disabled, so the reads were **warm-slab eligible**; the exact hit source was not independently proven per request. A research-only opt-in timing flag emits per-stage microseconds without changing return values. Each traced process was followed by an untraced process of the same binary; do not combine these observations with the older `1bd4821` timing samples as one statistical cell.

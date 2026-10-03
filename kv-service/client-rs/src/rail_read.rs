@@ -1040,25 +1040,46 @@ impl RailReader {
             return Err(RailReadError::Cancelled);
         }
         let assembly_start = Instant::now();
-        let mut staged = Vec::new();
-        staged
-            .try_reserve_exact(plan.size)
-            .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
-        staged.resize(plan.size, 0);
-        for (task, result) in plan.tasks.iter().zip(results) {
-            let packed = result?;
-            if packed.len() != task.packed_len {
+        let single_ordered = plan.tasks.len() == 1
+            && plan.tasks[0].packed_len == plan.size
+            && plan.tasks[0]
+                .stripes
+                .iter()
+                .all(|stripe| stripe.packed_offset == stripe.object_offset);
+        let staged = if single_ordered {
+            // The sole QP/MR has already retired in fetch, and this private
+            // receive buffer is exactly the complete object in object order.
+            let packed = results.into_iter().next().expect("one planned task")?;
+            if packed.len() != plan.size {
                 return Err(RailReadError::Incomplete {
-                    expected: task.packed_len,
+                    expected: plan.size,
                     actual: packed.len(),
                 });
             }
-            for stripe in &task.stripes {
-                staged[stripe.object_offset..stripe.object_offset + stripe.length].copy_from_slice(
-                    &packed[stripe.packed_offset..stripe.packed_offset + stripe.length],
-                );
+            packed
+        } else {
+            let mut staged = Vec::new();
+            staged
+                .try_reserve_exact(plan.size)
+                .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
+            staged.resize(plan.size, 0);
+            for (task, result) in plan.tasks.iter().zip(results) {
+                let packed = result?;
+                if packed.len() != task.packed_len {
+                    return Err(RailReadError::Incomplete {
+                        expected: task.packed_len,
+                        actual: packed.len(),
+                    });
+                }
+                for stripe in &task.stripes {
+                    staged[stripe.object_offset..stripe.object_offset + stripe.length]
+                        .copy_from_slice(
+                            &packed[stripe.packed_offset..stripe.packed_offset + stripe.length],
+                        );
+                }
             }
-        }
+            staged
+        };
         let assembly_us = assembly_start.elapsed().as_micros();
         let checksum_start = Instant::now();
         for (index, checksum) in plan.checksums.iter().enumerate() {

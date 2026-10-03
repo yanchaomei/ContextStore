@@ -1,0 +1,12 @@
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+sample,environment=soft-roce,rails=2,concurrency=2,batch=1,worker=0,bytes=268435456,latency_us=2191965,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,concurrency=2,batch=1,worker=1,bytes=268435456,latency_us=2104938,xxh3=fe51c755b1336171
+batch,environment=soft-roce,rails=2,concurrency=2,iteration=1,wall_us=2284445
+sample,environment=soft-roce,rails=2,concurrency=2,batch=2,worker=0,bytes=268435456,latency_us=2141976,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,concurrency=2,batch=2,worker=1,bytes=268435456,latency_us=2231016,xxh3=fe51c755b1336171
+batch,environment=soft-roce,rails=2,concurrency=2,iteration=2,wall_us=2282102
+sample,environment=soft-roce,rails=2,concurrency=2,batch=3,worker=0,bytes=268435456,latency_us=2116836,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,concurrency=2,batch=3,worker=1,bytes=268435456,latency_us=2208026,xxh3=fe51c755b1336171
+batch,environment=soft-roce,rails=2,concurrency=2,iteration=3,wall_us=2257138
+summary_concurrent,environment=soft-roce,rails=2,concurrency=2,bytes_per_read=268435456,batches=3,median_request_us=2191965,median_batch_us=2282102,aggregate_gib_per_s=0.220,cpu_user_us=1525449,cpu_system_us=1841086,peak_rss_kb=1857996,rail_bytes=[805306368, 805306368]

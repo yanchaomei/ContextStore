@@ -1,0 +1,26 @@
+route,id=r0,device=mlx5_1,port=1,gid=3,weight=1,advertised=10.0.0.61:55153,listener=10.0.0.61:55153
+RAIL_TRANSPORT_TIMING rail=r0 bytes=67108864 connect_us=4762 allocation_us=31881 registration_us=1122 get_us=17550 teardown_us=2379 total_us=57699
+RAIL_STAGED_TIMING bytes=67108864 rails=1 plan_us=8 reserve_us=0 workers_us=57825 assembly_us=0 checksum_us=7337 finish_us=0 total_us=65173
+RAIL_OUTER_TIMING key=rust-bench/paperhca202610030/__combined__ bytes=67108864 lookup_us=777 transfer_us=65280 post_lookup_us=1130 publish_us=45905 total_us=113094
+RAIL_TRANSPORT_TIMING rail=r0 bytes=67108864 connect_us=4534 allocation_us=31846 registration_us=1276 get_us=16881 teardown_us=2475 total_us=57015
+RAIL_STAGED_TIMING bytes=67108864 rails=1 plan_us=5 reserve_us=0 workers_us=57162 assembly_us=0 checksum_us=7325 finish_us=0 total_us=64495
+RAIL_OUTER_TIMING key=rust-bench/paperhca202610030/__combined__ bytes=67108864 lookup_us=970 transfer_us=64549 post_lookup_us=1244 publish_us=19441 total_us=86206
+sample,environment=physical,rails=1,iteration=1,bytes=67108864,latency_us=88757,gib_per_s=0.704,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_TIMING rail=r0 bytes=67108864 connect_us=4478 allocation_us=31923 registration_us=1250 get_us=17609 teardown_us=2376 total_us=57639
+RAIL_STAGED_TIMING bytes=67108864 rails=1 plan_us=5 reserve_us=0 workers_us=57783 assembly_us=0 checksum_us=7294 finish_us=0 total_us=65085
+RAIL_OUTER_TIMING key=rust-bench/paperhca202610030/__combined__ bytes=67108864 lookup_us=1110 transfer_us=65135 post_lookup_us=1173 publish_us=19276 total_us=86694
+sample,environment=physical,rails=1,iteration=2,bytes=67108864,latency_us=89293,gib_per_s=0.700,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_TIMING rail=r0 bytes=67108864 connect_us=4554 allocation_us=32097 registration_us=1329 get_us=17462 teardown_us=2404 total_us=57849
+RAIL_STAGED_TIMING bytes=67108864 rails=1 plan_us=27 reserve_us=0 workers_us=58056 assembly_us=0 checksum_us=7339 finish_us=0 total_us=65425
+RAIL_OUTER_TIMING key=rust-bench/paperhca202610030/__combined__ bytes=67108864 lookup_us=1175 transfer_us=65488 post_lookup_us=1092 publish_us=19230 total_us=86987
+sample,environment=physical,rails=1,iteration=3,bytes=67108864,latency_us=89596,gib_per_s=0.698,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_TIMING rail=r0 bytes=67108864 connect_us=4274 allocation_us=32037 registration_us=1295 get_us=14640 teardown_us=2503 total_us=54753
+RAIL_STAGED_TIMING bytes=67108864 rails=1 plan_us=4 reserve_us=0 workers_us=54901 assembly_us=0 checksum_us=7341 finish_us=0 total_us=62249
+RAIL_OUTER_TIMING key=rust-bench/paperhca202610030/__combined__ bytes=67108864 lookup_us=1072 transfer_us=62299 post_lookup_us=1066 publish_us=19310 total_us=83749
+sample,environment=physical,rails=1,iteration=4,bytes=67108864,latency_us=86405,gib_per_s=0.723,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_TIMING rail=r0 bytes=67108864 connect_us=4283 allocation_us=31979 registration_us=1285 get_us=17261 teardown_us=2447 total_us=57257
+RAIL_STAGED_TIMING bytes=67108864 rails=1 plan_us=11 reserve_us=0 workers_us=57466 assembly_us=0 checksum_us=7403 finish_us=0 total_us=64883
+RAIL_OUTER_TIMING key=rust-bench/paperhca202610030/__combined__ bytes=67108864 lookup_us=1192 transfer_us=64947 post_lookup_us=1076 publish_us=19239 total_us=86456
+sample,environment=physical,rails=1,iteration=5,bytes=67108864,latency_us=89105,gib_per_s=0.701,xxh3=a0a4cbfa5cad46af
+summary,environment=physical,rails=1,bytes_per_iter=67108864,iters=5,median_us=89105,cpu_user_us=168751,cpu_system_us=165242,peak_rss_kb=138408,rail_bytes=[335544320]
+rail_stats,id=r0,device=mlx5_1,listener=10.0.0.61:55153,numa=Some(1),pci=Some("0000:af:00.1"),healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=402653184,avg_us=57071,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=67108864,registered_bytes_reserved=0,peak_registered_bytes=67108864

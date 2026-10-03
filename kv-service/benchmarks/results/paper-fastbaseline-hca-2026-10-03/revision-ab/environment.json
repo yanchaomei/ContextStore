@@ -1,0 +1,26 @@
+{
+  "environment": "physical",
+  "object_key": "paperhca202610030/__combined__",
+  "object_xxh3": "a0a4cbfa5cad46af",
+  "object_bytes": 67108864,
+  "rail": "r0,mlx5_1,10.0.0.61:55153,10.0.0.61:55153,1,3",
+  "trials": 10,
+  "iterations_per_arm": 5,
+  "warmup_reads": 1,
+  "baseline_binary_sha256": "41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679",
+  "candidate_binary_sha256": "fc85231d073248620d036ee3ece85a42a4fbc6cb500e43cb15c1fc6daee8a7eb",
+  "ratio_definition": "baseline median latency divided by candidate median latency, per block",
+  "paired_ratio_geometric_mean": 1.4255773798216018,
+  "paired_ratios": [
+    1.3191570136207487,
+    1.3155223355284484,
+    1.3471014972523574,
+    1.7639787074919713,
+    1.4379545495765094,
+    1.3269679609590495,
+    1.7409128147637116,
+    1.3277434164381814,
+    1.4409635489994823,
+    1.3227257611587349
+  ]
+}

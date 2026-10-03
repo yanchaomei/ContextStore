@@ -1,0 +1,8 @@
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+sample,environment=soft-roce,rails=1,iteration=1,bytes=268435456,latency_us=1332577,gib_per_s=0.188,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=1,iteration=2,bytes=268435456,latency_us=1144692,gib_per_s=0.218,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=1,iteration=3,bytes=268435456,latency_us=1138192,gib_per_s=0.220,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=1,iteration=4,bytes=268435456,latency_us=1259333,gib_per_s=0.199,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=1,iteration=5,bytes=268435456,latency_us=1102497,gib_per_s=0.227,xxh3=fe51c755b1336171
+summary,environment=soft-roce,rails=1,bytes_per_iter=268435456,iters=5,median_us=1144692,cpu_user_us=723488,cpu_system_us=675147,peak_rss_kb=530860,rail_bytes=[1342177280]
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=1610612736,avg_us=1091104,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=268435456,registered_bytes_reserved=0,peak_registered_bytes=268435456

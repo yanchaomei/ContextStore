@@ -1,0 +1,60 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 0.29s
+     Running unittests src/lib.rs (target/release/deps/contextstore_client_rs-711af12b033817b3)
+
+running 47 tests
+test rail_read::tests::cancellation_before_publish_preserves_caller_buffer ... ok
+test rail_read::tests::discovery_rejects_duplicate_fabrics_and_legacy_absence ... ok
+test rail_read::tests::discovery_rejects_one_listener_claimed_by_two_owners ... ok
+test rail_read::tests::changed_generation_cannot_publish_completed_rail_bytes ... ok
+test rail_read::tests::cancellation_and_publish_have_one_order ... ok
+test rail_read::tests::discovery_rejects_a_capability_for_another_owner ... ok
+test rail_read::tests::discovered_reader_rejects_a_changed_storage_owner_before_transport ... ok
+test rail_read::tests::discovered_reader_rejects_a_changed_listener_before_transport ... ok
+test rail_read::tests::duplicate_stripe_is_rejected_before_transport ... ok
+test rail_read::tests::descriptor_identity_rejects_generation_and_layout_changes ... ok
+test rail_read::tests::fixed_task_cap_preserves_nine_routes_and_rejects_excess ... ok
+test rail_read::tests::discovery_maps_one_local_fabric_to_each_actual_storage_owner ... ok
+test rail_read::tests::completed_payload_keeps_staging_and_active_read_reserved_until_drop ... ok
+test rail_read::tests::matching_stripe_checksums_allow_complete_read ... ok
+test rail_read::tests::missing_or_out_of_bounds_stripe_is_rejected_before_dispatch ... ok
+test rail_read::tests::partially_populated_checksums_are_rejected_before_dispatch ... ok
+test rail_read::tests::one_complete_rail_hands_off_its_receive_allocation_without_reassembly ... ok
+test rail_read::tests::one_rail_checksum_failure_preserves_caller_buffer ... ok
+test rail_read::tests::checksum_failure_keeps_destination_unchanged ... ok
+test rail_read::tests::one_rail_restores_the_same_object_layout ... ok
+test rail_read::tests::active_read_limit_rejects_concurrent_second_request ... ok
+test rail_read::tests::per_rail_inflight_limit_counts_concurrent_requests ... ok
+test rail_read::tests::advertised_rails_resolve_local_fabrics_and_restore_one_object ... ok
+test rail_read::tests::panicked_worker_releases_inflight_metrics_and_preserves_buffer ... ok
+test rail_read::tests::process_memlock_headroom_caps_registered_bytes_before_dispatch ... ok
+test rail_read::tests::per_rail_task_limit_counts_concurrent_requests ... ok
+test rail_read::tests::partial_rail_failure_leaves_caller_buffer_unchanged ... ok
+test rail_read::tests::placement_for_another_object_is_rejected_before_dispatch ... ok
+test rail_read::tests::disabled_second_rail_falls_back_to_first_listener ... ok
+test rail_read::tests::software_only_mock_benchmark ... ignored, software-only Mock measurement; this is not RDMA bandwidth
+test rail_read::tests::registration_budget_rejects_before_transport ... ok
+test rail_read::tests::sge_map_keeps_every_stripe_inside_its_registered_region ... ok
+test rail_read::tests::two_rails_for_one_node_require_distinct_local_ports ... ok
+test rail_read::tests::stale_descriptor_does_not_mark_healthy_transport_as_down ... ok
+test rail_read::tests::two_independent_listeners_restore_one_unmodified_placement ... ok
+test rail_read::tests::runtime_disable_and_enable_replans_without_changing_placement ... ok
+test rail_read::tests::weighted_scheduler_assigns_more_stripes_to_faster_rail ... ok
+test rdma::tests::canonical_key_preserves_namespace_boundary ... ok
+test rdma::tests::config_uses_roce_defaults ... ok
+test rdma::tests::descriptor_request_contains_identity_and_destination ... ok
+test rail_read::tests::topology_reads_numa_and_pci_address_from_sysfs_shape ... ok
+test rdma::tests::request_rejects_oversized_wire_string ... ok
+test rail_read::tests::virtual_soft_roce_device_is_not_reported_as_pci_hardware ... ok
+test rdma::tests::descriptor_reply_preserves_server_chunk_count ... ok
+test rail_read::tests::failed_rail_cools_down_then_recovers_on_next_request ... ok
+test rail_read::tests::cancellation_waits_for_started_mock_transfer_and_preserves_buffer ... ok
+test rdma::tests::control_socket_timeout_bounds_missing_get_reply ... ok
+
+test result: ok. 46 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.11s

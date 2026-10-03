@@ -1,0 +1,22 @@
+{
+  "environment": "soft-roce",
+  "source_commit": "2ff19ed-fastbaseline",
+  "client_binary_sha256": "fc85231d073248620d036ee3ece85a42a4fbc6cb500e43cb15c1fc6daee8a7eb",
+  "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "notes": "one-rail-allocation-handoff",
+  "objects_mib": [
+    64
+  ],
+  "concurrency": [
+    4
+  ],
+  "trials": 10,
+  "batches_per_trial": 3,
+  "warmup_reads": 1,
+  "coordinator": "http://10.31.0.2:55151",
+  "rails": [
+    "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+    "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+  ]
+}

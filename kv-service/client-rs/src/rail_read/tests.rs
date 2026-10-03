@@ -122,6 +122,65 @@ fn two_independent_listeners_restore_one_unmodified_placement() {
 }
 
 #[test]
+fn one_complete_rail_hands_off_its_receive_allocation_without_reassembly() {
+    struct ReceiveAllocation {
+        bytes: Vec<u8>,
+        address: Mutex<Option<usize>>,
+    }
+    impl RailTransport for ReceiveAllocation {
+        fn fetch(
+            &self,
+            _route: &RailRoute,
+            task: &RailTask,
+            _descriptor: &pb::ObjectDescriptor,
+            _timeout: Duration,
+        ) -> Result<Vec<u8>, RailReadError> {
+            assert_eq!(task.packed_len, self.bytes.len());
+            let received = self.bytes.clone();
+            *self.address.lock().unwrap() = Some(received.as_ptr() as usize);
+            Ok(received)
+        }
+    }
+
+    let bytes: Vec<u8> = (0..64).collect();
+    let transport = ReceiveAllocation {
+        bytes: bytes.clone(),
+        address: Mutex::new(None),
+    };
+    let reader = RailReader::new(vec![routes()[0].clone()], RailLimits::default()).unwrap();
+    let (descriptor, mut placement) = fixture(64, 8);
+    for chunk in &mut placement.chunks {
+        let start = chunk.offset as usize;
+        let end = start + chunk.length as usize;
+        chunk.checksum = format!("{:016x}", twox_hash::xxh3::hash64(&bytes[start..end]));
+    }
+    let staged = reader
+        .read_staged_with(&descriptor, &placement, &transport, None)
+        .unwrap();
+    assert_eq!(staged.as_bytes(), bytes);
+    assert_eq!(
+        staged.as_bytes().as_ptr() as usize,
+        transport.address.lock().unwrap().unwrap()
+    );
+}
+
+#[test]
+fn one_rail_checksum_failure_preserves_caller_buffer() {
+    let mock = MockTransport::new((0..64).collect());
+    let reader = RailReader::new(vec![routes()[0].clone()], RailLimits::default()).unwrap();
+    let (descriptor, mut placement) = fixture(64, 8);
+    for chunk in &mut placement.chunks {
+        chunk.checksum = "0000000000000000".into();
+    }
+    let mut destination = vec![0xA5; 64];
+    assert!(matches!(
+        reader.read_into_with(&descriptor, &placement, &mut destination, &mock, None),
+        Err(RailReadError::Checksum { stripe: 0 })
+    ));
+    assert_eq!(destination, vec![0xA5; 64]);
+}
+
+#[test]
 fn advertised_rails_resolve_local_fabrics_and_restore_one_object() {
     let bytes: Vec<u8> = (0..64).map(|index| index as u8).collect();
     let mock = MockTransport::new(bytes.clone());

@@ -1,4 +1,6 @@
-# Evaluation results and limits (2026-10-03)
+# Historical unoptimized-baseline evaluation (2026-10-03)
+
+**Revision notice:** the one-Rail implementation measured here performed an avoidable full-object reassembly copy. A later [controlled baseline ablation and complete RXE rerun](baseline-ablation-results.md) found that removing that copy speeds one physical-HCA Rail by 1.426× and changes the one/two-Rail software conclusion: the optimized 64 MiB sequential one-Rail path wins all ten paired blocks. Use the later result as the current performance assessment. This page preserves the original code revision and negative blocks for auditability.
 
 This is an evidence record for the paper candidate, not a claim of physical multi-HCA aggregation. The complete [ten-block Soft-RoCE dataset](../../kv-service/benchmarks/results/paper10-rxe-2026-10-03/) includes per-arm raw stdout, samples, batches, summaries, topology, the server log, binary hashes, a failed resource-boundary run and an [audited JSON](../../kv-service/benchmarks/results/paper10-rxe-2026-10-03/audit.json). The [editable figure](figures/rxe-ten-blocks.svg) plots every paired block and its interval. The independent [physical HCA stage pilot](stage-trace-pilot.md) answers a different question.
 
@@ -15,7 +17,7 @@ One **block** is a pair of separately launched one-Rail and two-Rail client proc
 | 64 MiB | 4 | 1.038× | 0.983–1.088× | 7/10 | 148.7 → 156.6 | 803.2 → 813.3 |
 | 256 MiB | 2 | 1.067× | 1.032–1.102× | 9/10 | 554.5 → 576.3 | 1798.4 → 1814.7 |
 
-The 64 MiB/concurrency-4 cell has three blocks favoring one Rail, with a worst dual/single ratio of **0.891×**; its interval crosses 1. The 64 MiB sequential cell also has three negative blocks. The 256 MiB cells show higher central ratios, yet both still include negative individual blocks. Added Rail bookkeeping costs CPU and client memory in every cell. These measurements support a modest, environment-specific software-path gain and show that adding a second Rail is not uniformly helpful. They do not establish HCA offload, NUMA, PCIe or physical bandwidth aggregation.
+The 64 MiB/concurrency-4 cell has three blocks favoring one Rail, with a worst dual/single ratio of **0.891×**; its interval crosses 1. The 64 MiB sequential cell also has three negative blocks. The 256 MiB cells show higher central ratios, yet both still include negative individual blocks. Added Rail bookkeeping costs CPU and client memory in every cell. These measurements characterize the **unoptimized implementation only** and show that adding a second Rail was not uniformly helpful even there. They do not establish HCA offload, NUMA, PCIe or physical bandwidth aggregation.
 
 ## Resource-boundary observation
 

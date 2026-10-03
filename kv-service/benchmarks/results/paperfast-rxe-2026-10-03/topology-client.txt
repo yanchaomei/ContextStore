@@ -1,0 +1,6 @@
+cs-railvm-client
+link rxe_c0/1 state ACTIVE physical_state LINK_UP netdev enp0s3
+link rxe_c1/1 state ACTIVE physical_state LINK_UP netdev enp0s4
+enp0s3           UP             10.31.0.1/24 fe80::5054:ff:fe31:1/64
+enp0s4           UP             10.32.0.1/24 fe80::5054:ff:fe32:1/64
+fc85231d073248620d036ee3ece85a42a4fbc6cb500e43cb15c1fc6daee8a7eb  /home/railtest/bin/cs-rail-read-bench-fastbaseline-20261003

@@ -14,6 +14,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--audit", type=Path, required=True)
     parser.add_argument("--output-prefix", type=Path, required=True)
+    parser.add_argument("--title", default="Soft-RoCE: ten paired process blocks per workload")
+    parser.add_argument(
+        "--note",
+        default="One server/client binary and object per cell; AB/BA order alternates. Dots are launched process blocks, not individual reads.",
+    )
     args = parser.parse_args()
     data = json.loads(args.audit.read_text())
     cells = data["cells"]
@@ -35,6 +40,9 @@ def main() -> None:
     fig.subplots_adjust(left=0.095, right=0.985, top=0.83, bottom=0.26)
     ax.axhline(1.0, color="#a93737", linestyle="--", linewidth=1, zorder=1)
     ax.axvspan(1.5, 3.5, color="#f2f5f7", zorder=0)
+    values = [block["paired_throughput_ratio"] for block in blocks]
+    bottom = min(0.85, min(values) - 0.035)
+    top = max(1.255, max(values) + 0.065)
 
     for position, cell in enumerate(cells):
         selected = [
@@ -72,7 +80,7 @@ def main() -> None:
         )
         ax.text(
             position,
-            1.225,
+            top - 0.03,
             f"{estimate:.3f}×\n{cell['blocks_favoring_dual']}/10 favor dual",
             ha="center",
             va="top",
@@ -81,12 +89,12 @@ def main() -> None:
         )
 
     ax.set_xlim(-0.55, 3.55)
-    ax.set_ylim(0.85, 1.255)
+    ax.set_ylim(bottom, top)
     ax.set_xticks(range(4))
     ax.set_xticklabels([f"{cell['size_mib']} MiB\nc{cell['concurrency']}" for cell in cells])
     ax.set_ylabel("two-Rail / one-Rail throughput")
     ax.set_title(
-        "Soft-RoCE: ten paired process blocks per workload",
+        args.title,
         loc="left",
         fontsize=10,
         fontweight="bold",
@@ -98,8 +106,7 @@ def main() -> None:
     fig.text(
         0.095,
         0.052,
-        "One server/client binary and object per cell; AB/BA order alternates. "
-        "Dots are launched process blocks, not individual reads.",
+        args.note,
         color="#566270",
         fontsize=7,
     )

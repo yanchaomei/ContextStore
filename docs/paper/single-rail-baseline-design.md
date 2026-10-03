@@ -1,6 +1,6 @@
 # Design: remove redundant assembly from the one-Rail baseline
 
-**Date:** 2026-10-03. **Scope:** research branch only, after evidence commit `b443a92`. The user has authorized continued work toward paper-level quality. This design changes the one-Rail `RailReader` staged-read implementation without changing the stored stripe layout, public API, wire protocol, QP/MR lifetime or final caller-buffer publication gate.
+**Date:** 2026-10-03. **Status:** implemented and evaluated on the research branch after evidence commit `b443a92`; [results](baseline-ablation-results.md). This design changes the one-Rail `RailReader` staged-read implementation without changing the stored stripe layout, public API, wire protocol, QP/MR lifetime or final caller-buffer publication gate.
 
 ## Problem
 

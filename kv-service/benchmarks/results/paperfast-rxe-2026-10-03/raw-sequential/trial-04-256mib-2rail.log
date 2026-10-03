@@ -1,0 +1,10 @@
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+sample,environment=soft-roce,rails=2,iteration=1,bytes=268435456,latency_us=1345352,gib_per_s=0.186,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=2,bytes=268435456,latency_us=1333281,gib_per_s=0.188,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=3,bytes=268435456,latency_us=1313904,gib_per_s=0.190,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=4,bytes=268435456,latency_us=1333672,gib_per_s=0.187,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=5,bytes=268435456,latency_us=1280101,gib_per_s=0.195,xxh3=fe51c755b1336171
+summary,environment=soft-roce,rails=2,bytes_per_iter=268435456,iters=5,median_us=1333281,cpu_user_us=1103234,cpu_system_us=1429648,peak_rss_kb=801320,rail_bytes=[671088640, 671088640]
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=805306368,avg_us=907442,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=134217728,registered_bytes_reserved=0,peak_registered_bytes=138412032
+rail_stats,id=r1,device=rxe_c1,listener=10.32.0.2:55154,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=805306368,avg_us=945300,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=134217728,registered_bytes_reserved=0,peak_registered_bytes=138412032
