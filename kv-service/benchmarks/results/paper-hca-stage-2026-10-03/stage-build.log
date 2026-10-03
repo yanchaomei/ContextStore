@@ -1,0 +1,10 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+
+running 45 tests
+.......................i.....................
+test result: ok. 44 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service/client-rs)
+    Finished `release` profile [optimized] target(s) in 19.66s

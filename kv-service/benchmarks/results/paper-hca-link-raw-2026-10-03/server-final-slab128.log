@@ -1,0 +1,41 @@
+[2m2026-10-02T03:59:28.684239Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-02T03:59:28.684307Z[0m [32m INFO[0m config file: evidence/server-hca.toml
+[2m2026-10-02T03:59:28.684685Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 128 MB, I/O executor = tier_a
+[2m2026-10-02T03:59:28.690852Z[0m [32m INFO[0m gRPC listening on: 10.0.0.61:55151
+[2m2026-10-02T03:59:28.690882Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=128
+[2m2026-10-02T03:59:28.690898Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 1 NIC(s) ["mlx5_1@10.0.0.61:55153"]
+[2m2026-10-02T03:59:28.690908Z[0m [32m INFO[0m RDMA tier enabled: 1 NIC(s), primary listener=10.0.0.61:55153
+[2m2026-10-02T03:59:28.719042Z[0m [32m INFO[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 3d]
+[2m2026-10-02T03:59:28.719065Z[0m [32m INFO[0m opened NIC 0: dev=mlx5_1 port=1 gid_index=3
+[2m2026-10-02T03:59:28.719102Z[0m [32m INFO[0m SlabBacking: mmap 134217728 bytes at 0x7f5548000000 (huge_pages=true)
+[2m2026-10-02T03:59:28.743529Z[0m [32m INFO[0m RdmaSlab registered: 134217728 bytes (128 MB) on 1 NIC(s), lkeys=["0x9fcca"] rkeys=["0x9fcca"]
+[2m2026-10-02T03:59:28.743552Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (128 MB, 1 NIC)
+[2m2026-10-02T03:59:28.743572Z[0m [32m INFO[0m RDMA server listening on 10.0.0.61:55153 (nic_idx=0 dev=mlx5_1 port=1 gid_index=3)
+[2m2026-10-02T03:59:31.377376Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:39714 (nic_idx=0)
+[2m2026-10-02T03:59:31.378213Z[0m [32m INFO[0m RcQp created: qpn=2425 psn=0x6c9e4e
+[2m2026-10-02T03:59:31.378656Z[0m [32m INFO[0m RDMA QP established: local_qpn=2425 remote_qpn=14461
+[2m2026-10-02T03:59:31.430793Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=228 first_io_us=2146 last_io_us=17636 poll_us=393 total_us=18005
+[2m2026-10-02T04:04:43.909241Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:51156 (nic_idx=0)
+[2m2026-10-02T04:04:43.909860Z[0m [32m INFO[0m RcQp created: qpn=2426 psn=0xc31f65
+[2m2026-10-02T04:04:43.910293Z[0m [32m INFO[0m RDMA QP established: local_qpn=2426 remote_qpn=14462
+[2m2026-10-02T04:04:43.960135Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=230 first_io_us=1977 last_io_us=14911 poll_us=393 total_us=15281
+[2m2026-10-02T04:04:44.109101Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:51162 (nic_idx=0)
+[2m2026-10-02T04:04:44.109672Z[0m [32m INFO[0m RcQp created: qpn=2427 psn=0xac0248
+[2m2026-10-02T04:04:44.110106Z[0m [32m INFO[0m RDMA QP established: local_qpn=2427 remote_qpn=14463
+[2m2026-10-02T04:04:44.160070Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=193 first_io_us=2016 last_io_us=15750 poll_us=420 total_us=16140
+[2m2026-10-02T04:04:44.289227Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:51178 (nic_idx=0)
+[2m2026-10-02T04:04:44.289738Z[0m [32m INFO[0m RcQp created: qpn=2428 psn=0x679ca4
+[2m2026-10-02T04:04:44.290173Z[0m [32m INFO[0m RDMA QP established: local_qpn=2428 remote_qpn=14464
+[2m2026-10-02T04:04:44.339851Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=164 first_io_us=1924 last_io_us=15475 poll_us=387 total_us=15845
+[2m2026-10-02T04:04:44.465320Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:51188 (nic_idx=0)
+[2m2026-10-02T04:04:44.465847Z[0m [32m INFO[0m RcQp created: qpn=2429 psn=0xe6cf96
+[2m2026-10-02T04:04:44.466273Z[0m [32m INFO[0m RDMA QP established: local_qpn=2429 remote_qpn=14465
+[2m2026-10-02T04:04:44.516083Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=171 first_io_us=1970 last_io_us=15648 poll_us=384 total_us=16017
+[2m2026-10-02T04:04:44.645117Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:51192 (nic_idx=0)
+[2m2026-10-02T04:04:44.645642Z[0m [32m INFO[0m RcQp created: qpn=2430 psn=0x9e44ff
+[2m2026-10-02T04:04:44.646058Z[0m [32m INFO[0m RDMA QP established: local_qpn=2430 remote_qpn=14466
+[2m2026-10-02T04:04:44.696237Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=164 first_io_us=1880 last_io_us=14084 poll_us=398 total_us=14468
+[2m2026-10-02T04:04:44.803776Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:51200 (nic_idx=0)
+[2m2026-10-02T04:04:44.804295Z[0m [32m INFO[0m RcQp created: qpn=2431 psn=0x131ece
+[2m2026-10-02T04:04:44.804750Z[0m [32m INFO[0m RDMA QP established: local_qpn=2431 remote_qpn=14467
+[2m2026-10-02T04:04:44.855694Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=189 first_io_us=1981 last_io_us=16770 poll_us=397 total_us=17137

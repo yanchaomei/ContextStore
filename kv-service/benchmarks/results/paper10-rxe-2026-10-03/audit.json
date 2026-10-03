@@ -1,0 +1,1284 @@
+{
+  "interpretation": "paired launched process blocks; confidence intervals only when n>=10, and no physical-HCA aggregation claim",
+  "provenance": {
+    "paper10-sequential": {
+      "environment": {
+        "environment": "soft-roce",
+        "source_commit": "c1c1de1-research-timing",
+        "client_binary_sha256": "41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679",
+        "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+        "machine": "x86_64",
+        "notes": "two KVM guests; independent RXE paths; server binary sha256 51e13244c4309c15d2cd519050caa3b42edac558243112c0487dbcbf4329add7; no timing env",
+        "objects_mib": [
+          64,
+          256
+        ],
+        "trials": 10,
+        "iterations_per_trial": 5,
+        "warmup_reads": 1,
+        "coordinator": "http://10.31.0.2:55151",
+        "rails": [
+          "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+          "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+        ]
+      },
+      "input_sha256": {
+        "paper10-sequential-summary.csv": "ee76a4d30dee58f93a5e7796cec7c423f7d7a03cb173da33035c9fba084f13f5",
+        "paper10-sequential-samples.csv": "509958f40bddb4c02ad59090200ba0b7b00128653b6c53d93accb44f537c3f49",
+        "paper10-sequential-environment.json": "ee1d7ce591b8b3aa69c464fef74b676d872838aeeeee8c2a5d4d598d637103c4"
+      }
+    },
+    "paper10-c4": {
+      "environment": {
+        "environment": "soft-roce",
+        "source_commit": "c1c1de1-research-timing",
+        "client_binary_sha256": "41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679",
+        "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+        "machine": "x86_64",
+        "notes": "two KVM guests; independent RXE paths; 64 MiB c4; server binary sha256 51e13244c4309c15d2cd519050caa3b42edac558243112c0487dbcbf4329add7; no timing env",
+        "objects_mib": [
+          64
+        ],
+        "concurrency": [
+          4
+        ],
+        "trials": 10,
+        "batches_per_trial": 3,
+        "warmup_reads": 1,
+        "coordinator": "http://10.31.0.2:55151",
+        "rails": [
+          "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+          "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+        ]
+      },
+      "input_sha256": {
+        "paper10-c4-summary.csv": "fb2c1c036cb2a3473c5aeb9ab900e5b0a98e54b7352576503d2da5ca255fcc18",
+        "paper10-c4-samples.csv": "b11c1dfd06ef2852a8b67177add48dcf055c4a3b9899c4fb1e9a4662cdfc72a4",
+        "paper10-c4-environment.json": "03bdf54d7f46d51e739190a509e7e737ee7ea9177c064b1678e694a925a713e3",
+        "paper10-c4-batches.csv": "cd49f37cf3a27aa0f24cecfcb5034c0f15a877392690c9c6054c2263ab376897"
+      }
+    },
+    "paper10-c2": {
+      "environment": {
+        "environment": "soft-roce",
+        "source_commit": "c1c1de1-research-timing",
+        "client_binary_sha256": "41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679",
+        "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+        "machine": "x86_64",
+        "notes": "rxe-256-c2-memlock-unlimited",
+        "objects_mib": [
+          256
+        ],
+        "concurrency": [
+          2
+        ],
+        "trials": 10,
+        "batches_per_trial": 3,
+        "warmup_reads": 1,
+        "coordinator": "http://10.31.0.2:55151",
+        "rails": [
+          "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+          "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+        ]
+      },
+      "input_sha256": {
+        "paper10-c2-summary.csv": "a258fb83b688d5ec3e784d93c0c62aff88a35932ab4434c8f7b9602f413f5848",
+        "paper10-c2-samples.csv": "446a1122b621b68322cbb27956eef46e038537a92d26885eb7a46d911ca9f517",
+        "paper10-c2-environment.json": "f894f9e21406a8b1575ce57b667d8613eeefa6513b55232e93092d81846c13f6",
+        "paper10-c2-batches.csv": "3444447266fd289c195ebb8dc1236448b16e47a3a9c0eaf57a590052daab35f0"
+      }
+    }
+  },
+  "blocks": [
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 347599,
+        "throughput_gib_per_s": 0.17980489011763556,
+        "cpu_us_per_read": 139952.0,
+        "peak_rss_kb": 202956,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 314711,
+        "throughput_gib_per_s": 0.1985949013539406,
+        "cpu_us_per_read": 148220.4,
+        "peak_rss_kb": 211272,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1045022258516544,
+      "dual_cpu_over_single_cpu": 1.0590802560878014,
+      "dual_minus_single_peak_rss_kb": 8316
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 407599,
+        "throughput_gib_per_s": 0.15333698070898114,
+        "cpu_us_per_read": 132021.0,
+        "peak_rss_kb": 202848,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 371392,
+        "throughput_gib_per_s": 0.16828580044804411,
+        "cpu_us_per_read": 146100.4,
+        "peak_rss_kb": 211200,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0974899836291574,
+      "dual_cpu_over_single_cpu": 1.106645154937472,
+      "dual_minus_single_peak_rss_kb": 8352
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 412129,
+        "throughput_gib_per_s": 0.1516515459965205,
+        "cpu_us_per_read": 137494.0,
+        "peak_rss_kb": 203000,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 415306,
+        "throughput_gib_per_s": 0.15049144486234245,
+        "cpu_us_per_read": 146897.6,
+        "peak_rss_kb": 211336,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 0.9923502188747574,
+      "dual_cpu_over_single_cpu": 1.0683928025950225,
+      "dual_minus_single_peak_rss_kb": 8336
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 4,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 420543,
+        "throughput_gib_per_s": 0.14861738276466377,
+        "cpu_us_per_read": 140061.0,
+        "peak_rss_kb": 203128,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 368701,
+        "throughput_gib_per_s": 0.16951405068063283,
+        "cpu_us_per_read": 147304.0,
+        "peak_rss_kb": 211224,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.140607158646166,
+      "dual_cpu_over_single_cpu": 1.0517131821135077,
+      "dual_minus_single_peak_rss_kb": 8096
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 5,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 350323,
+        "throughput_gib_per_s": 0.17840678459593004,
+        "cpu_us_per_read": 140619.6,
+        "peak_rss_kb": 202828,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 378730,
+        "throughput_gib_per_s": 0.16502521585298233,
+        "cpu_us_per_read": 155229.4,
+        "peak_rss_kb": 211216,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 0.9249940590922293,
+      "dual_cpu_over_single_cpu": 1.1038959007136984,
+      "dual_minus_single_peak_rss_kb": 8388
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 6,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 368443,
+        "throughput_gib_per_s": 0.1696327518774953,
+        "cpu_us_per_read": 132329.6,
+        "peak_rss_kb": 203104,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 383355,
+        "throughput_gib_per_s": 0.16303426328077109,
+        "cpu_us_per_read": 150270.4,
+        "peak_rss_kb": 211196,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 0.9611013290553143,
+      "dual_cpu_over_single_cpu": 1.1355766208013929,
+      "dual_minus_single_peak_rss_kb": 8092
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 7,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 408149,
+        "throughput_gib_per_s": 0.1531303519057991,
+        "cpu_us_per_read": 132378.6,
+        "peak_rss_kb": 202736,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 368923,
+        "throughput_gib_per_s": 0.16941204533195273,
+        "cpu_us_per_read": 152850.6,
+        "peak_rss_kb": 211052,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1063257102430588,
+      "dual_cpu_over_single_cpu": 1.1546473523666212,
+      "dual_minus_single_peak_rss_kb": 8316
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 8,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 404487,
+        "throughput_gib_per_s": 0.15451670881882484,
+        "cpu_us_per_read": 131966.4,
+        "peak_rss_kb": 203132,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 370880,
+        "throughput_gib_per_s": 0.16851811906816222,
+        "cpu_us_per_read": 151599.0,
+        "peak_rss_kb": 211224,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0906142148403797,
+      "dual_cpu_over_single_cpu": 1.1487696868293749,
+      "dual_minus_single_peak_rss_kb": 8092
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 9,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 388007,
+        "throughput_gib_per_s": 0.16107956815212096,
+        "cpu_us_per_read": 134759.0,
+        "peak_rss_kb": 203104,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 369197,
+        "throughput_gib_per_s": 0.1692863159776488,
+        "cpu_us_per_read": 148508.0,
+        "peak_rss_kb": 211060,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0509484096566333,
+      "dual_cpu_over_single_cpu": 1.1020265807849567,
+      "dual_minus_single_peak_rss_kb": 7956
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 10,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 410043,
+        "throughput_gib_per_s": 0.15242303855937062,
+        "cpu_us_per_read": 137178.6,
+        "peak_rss_kb": 202928,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 367969,
+        "throughput_gib_per_s": 0.16985126464457603,
+        "cpu_us_per_read": 145228.0,
+        "peak_rss_kb": 211348,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1143411537384942,
+      "dual_cpu_over_single_cpu": 1.0586782486481128,
+      "dual_minus_single_peak_rss_kb": 8420
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1615281,
+        "throughput_gib_per_s": 0.15477183226943175,
+        "cpu_us_per_read": 506885.0,
+        "peak_rss_kb": 793192,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1394286,
+        "throughput_gib_per_s": 0.17930324194605698,
+        "cpu_us_per_read": 511089.6,
+        "peak_rss_kb": 801220,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1585004798154754,
+      "dual_cpu_over_single_cpu": 1.0082949781508626,
+      "dual_minus_single_peak_rss_kb": 8028
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1614753,
+        "throughput_gib_per_s": 0.15482244033607614,
+        "cpu_us_per_read": 487425.2,
+        "peak_rss_kb": 792868,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1371679,
+        "throughput_gib_per_s": 0.18225838552605966,
+        "cpu_us_per_read": 528923.6,
+        "peak_rss_kb": 801252,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1772090992134456,
+      "dual_cpu_over_single_cpu": 1.0851379863002568,
+      "dual_minus_single_peak_rss_kb": 8384
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1619946,
+        "throughput_gib_per_s": 0.15432613185871627,
+        "cpu_us_per_read": 488139.6,
+        "peak_rss_kb": 792892,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1366776,
+        "throughput_gib_per_s": 0.18291219629258929,
+        "cpu_us_per_read": 502205.0,
+        "peak_rss_kb": 801240,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1852315229415793,
+      "dual_cpu_over_single_cpu": 1.0288142982048578,
+      "dual_minus_single_peak_rss_kb": 8348
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 4,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1380836,
+        "throughput_gib_per_s": 0.18104974088161085,
+        "cpu_us_per_read": 507702.4,
+        "peak_rss_kb": 792876,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1430688,
+        "throughput_gib_per_s": 0.1747411035809345,
+        "cpu_us_per_read": 533157.2,
+        "peak_rss_kb": 801076,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 0.965155226017133,
+      "dual_cpu_over_single_cpu": 1.050137245756569,
+      "dual_minus_single_peak_rss_kb": 8200
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 5,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1641341,
+        "throughput_gib_per_s": 0.1523144794408962,
+        "cpu_us_per_read": 502017.4,
+        "peak_rss_kb": 792984,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1384457,
+        "throughput_gib_per_s": 0.1805762114677451,
+        "cpu_us_per_read": 512074.8,
+        "peak_rss_kb": 801128,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1855485580267209,
+      "dual_cpu_over_single_cpu": 1.0200339669501495,
+      "dual_minus_single_peak_rss_kb": 8144
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 6,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1617945,
+        "throughput_gib_per_s": 0.15451699532431573,
+        "cpu_us_per_read": 489630.6,
+        "peak_rss_kb": 792996,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1364714,
+        "throughput_gib_per_s": 0.18318856551629134,
+        "cpu_us_per_read": 508947.8,
+        "peak_rss_kb": 801356,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1855560945370238,
+      "dual_cpu_over_single_cpu": 1.0394525995720039,
+      "dual_minus_single_peak_rss_kb": 8360
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 7,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1497258,
+        "throughput_gib_per_s": 0.1669718912839337,
+        "cpu_us_per_read": 480048.0,
+        "peak_rss_kb": 793052,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1412536,
+        "throughput_gib_per_s": 0.1769866396325474,
+        "cpu_us_per_read": 508169.4,
+        "peak_rss_kb": 801140,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0599786483317948,
+      "dual_cpu_over_single_cpu": 1.058580391960804,
+      "dual_minus_single_peak_rss_kb": 8088
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 8,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1490091,
+        "throughput_gib_per_s": 0.16777498823897333,
+        "cpu_us_per_read": 501820.4,
+        "peak_rss_kb": 793028,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1371577,
+        "throughput_gib_per_s": 0.182271939526545,
+        "cpu_us_per_read": 533623.4,
+        "peak_rss_kb": 801216,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0864071065641958,
+      "dual_cpu_over_single_cpu": 1.0633752633412272,
+      "dual_minus_single_peak_rss_kb": 8188
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 9,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1451935,
+        "throughput_gib_per_s": 0.17218401650211615,
+        "cpu_us_per_read": 494678.4,
+        "peak_rss_kb": 792856,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1378801,
+        "throughput_gib_per_s": 0.18131695581886,
+        "cpu_us_per_read": 564873.2,
+        "peak_rss_kb": 801372,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.053041736987426,
+      "dual_cpu_over_single_cpu": 1.14189986868236,
+      "dual_minus_single_peak_rss_kb": 8516
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 10,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1353456,
+        "throughput_gib_per_s": 0.18471232164178222,
+        "cpu_us_per_read": 493054.0,
+        "peak_rss_kb": 792944,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1377519,
+        "throughput_gib_per_s": 0.18148570001575295,
+        "cpu_us_per_read": 522347.6,
+        "peak_rss_kb": 801240,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 0.9825316384020838,
+      "dual_cpu_over_single_cpu": 1.0594125592734265,
+      "dual_minus_single_peak_rss_kb": 8296
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3321687,
+        "throughput_gib_per_s": 0.2257888837810426,
+        "cpu_us_per_read": 147835.5,
+        "peak_rss_kb": 806492,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3125007,
+        "throughput_gib_per_s": 0.2399994624012042,
+        "cpu_us_per_read": 163057.16666666666,
+        "peak_rss_kb": 849004,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.0629374590200917,
+      "dual_cpu_over_single_cpu": 1.102963541684282,
+      "dual_minus_single_peak_rss_kb": 42512
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3480577,
+        "throughput_gib_per_s": 0.21548151355364356,
+        "cpu_us_per_read": 149311.66666666666,
+        "peak_rss_kb": 816532,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3165640,
+        "throughput_gib_per_s": 0.23691891686989047,
+        "cpu_us_per_read": 164952.66666666666,
+        "peak_rss_kb": 805976,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.099486043896337,
+      "dual_cpu_over_single_cpu": 1.1047540379742598,
+      "dual_minus_single_peak_rss_kb": -10556
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3408880,
+        "throughput_gib_per_s": 0.22001361150876536,
+        "cpu_us_per_read": 148197.75,
+        "peak_rss_kb": 826124,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3149339,
+        "throughput_gib_per_s": 0.23814521078867662,
+        "cpu_us_per_read": 155833.66666666666,
+        "peak_rss_kb": 817684,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.0824112615377386,
+      "dual_cpu_over_single_cpu": 1.0515251862235875,
+      "dual_minus_single_peak_rss_kb": -8440
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 4,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3418950,
+        "throughput_gib_per_s": 0.21936559470012723,
+        "cpu_us_per_read": 148168.75,
+        "peak_rss_kb": 810868,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3137698,
+        "throughput_gib_per_s": 0.23902874017830908,
+        "cpu_us_per_read": 160068.83333333334,
+        "peak_rss_kb": 817528,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.0896364149768396,
+      "dual_cpu_over_single_cpu": 1.0803143937796151,
+      "dual_minus_single_peak_rss_kb": 6660
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 5,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3391636,
+        "throughput_gib_per_s": 0.2211322205566871,
+        "cpu_us_per_read": 149857.16666666666,
+        "peak_rss_kb": 801816,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3130180,
+        "throughput_gib_per_s": 0.23960283434179502,
+        "cpu_us_per_read": 156369.58333333334,
+        "peak_rss_kb": 817496,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.0835274648742246,
+      "dual_cpu_over_single_cpu": 1.0434574923010023,
+      "dual_minus_single_peak_rss_kb": 15680
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 6,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 2922553,
+        "throughput_gib_per_s": 0.25662494401299135,
+        "cpu_us_per_read": 147642.25,
+        "peak_rss_kb": 850108,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3098060,
+        "throughput_gib_per_s": 0.24208698346707297,
+        "cpu_us_per_read": 156571.0,
+        "peak_rss_kb": 852448,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 0.9433493863901926,
+      "dual_cpu_over_single_cpu": 1.0604755752503094,
+      "dual_minus_single_peak_rss_kb": 2340
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 7,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 2754198,
+        "throughput_gib_per_s": 0.2723115767275991,
+        "cpu_us_per_read": 154737.75,
+        "peak_rss_kb": 832184,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 2979146,
+        "throughput_gib_per_s": 0.25174999815383337,
+        "cpu_us_per_read": 162469.58333333334,
+        "peak_rss_kb": 865580,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 0.9244924552203887,
+      "dual_cpu_over_single_cpu": 1.0499673372097846,
+      "dual_minus_single_peak_rss_kb": 33396
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 8,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3408703,
+        "throughput_gib_per_s": 0.22002503591542003,
+        "cpu_us_per_read": 148144.16666666666,
+        "peak_rss_kb": 818816,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3826198,
+        "throughput_gib_per_s": 0.1960170383236832,
+        "cpu_us_per_read": 156556.83333333334,
+        "peak_rss_kb": 847876,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 0.8908851554467385,
+      "dual_cpu_over_single_cpu": 1.056787026151328,
+      "dual_minus_single_peak_rss_kb": 29060
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 9,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3426527,
+        "throughput_gib_per_s": 0.218880516628061,
+        "cpu_us_per_read": 149172.75,
+        "peak_rss_kb": 854212,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3075094,
+        "throughput_gib_per_s": 0.243894983372866,
+        "cpu_us_per_read": 156710.66666666666,
+        "peak_rss_kb": 775032,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.1142836609222353,
+      "dual_cpu_over_single_cpu": 1.0505314587729102,
+      "dual_minus_single_peak_rss_kb": -79180
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 10,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3440073,
+        "throughput_gib_per_s": 0.21801862925583265,
+        "cpu_us_per_read": 149765.33333333334,
+        "peak_rss_kb": 854524,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 3059852,
+        "throughput_gib_per_s": 0.24510989420403342,
+        "cpu_us_per_read": 155873.91666666666,
+        "peak_rss_kb": 869460,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.124261238778869,
+      "dual_cpu_over_single_cpu": 1.0407876989779565,
+      "dual_minus_single_peak_rss_kb": 14936
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7007369,
+        "throughput_gib_per_s": 0.2140603698763402,
+        "cpu_us_per_read": 564097.5,
+        "peak_rss_kb": 1842188,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6966335,
+        "throughput_gib_per_s": 0.2153212557248539,
+        "cpu_us_per_read": 574947.0,
+        "peak_rss_kb": 1858348,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.0058903282716092,
+      "dual_cpu_over_single_cpu": 1.0192333772087272,
+      "dual_minus_single_peak_rss_kb": 16160
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 6772418,
+        "throughput_gib_per_s": 0.22148662412745343,
+        "cpu_us_per_read": 568412.1666666666,
+        "peak_rss_kb": 1842052,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6672433,
+        "throughput_gib_per_s": 0.22480555443569086,
+        "cpu_us_per_read": 583202.8333333334,
+        "peak_rss_kb": 1858452,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.014984788906835,
+      "dual_cpu_over_single_cpu": 1.0260210240632313,
+      "dual_minus_single_peak_rss_kb": 16400
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 6989243,
+        "throughput_gib_per_s": 0.21461551701664972,
+        "cpu_us_per_read": 553924.3333333334,
+        "peak_rss_kb": 1841440,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6773009,
+        "throughput_gib_per_s": 0.2214672976220761,
+        "cpu_us_per_read": 595068.1666666666,
+        "peak_rss_kb": 1858364,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.031925839756008,
+      "dual_cpu_over_single_cpu": 1.0742769921042163,
+      "dual_minus_single_peak_rss_kb": 16924
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 4,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7225721,
+        "throughput_gib_per_s": 0.20759174067196892,
+        "cpu_us_per_read": 553519.6666666666,
+        "peak_rss_kb": 1841496,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6790972,
+        "throughput_gib_per_s": 0.22088148795194562,
+        "cpu_us_per_read": 559053.6666666666,
+        "peak_rss_kb": 1857824,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.0640186706704136,
+      "dual_cpu_over_single_cpu": 1.0099978380774186,
+      "dual_minus_single_peak_rss_kb": 16328
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 5,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7667744,
+        "throughput_gib_per_s": 0.19562468439217584,
+        "cpu_us_per_read": 550505.8333333334,
+        "peak_rss_kb": 1816136,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6678770,
+        "throughput_gib_per_s": 0.22459225276510494,
+        "cpu_us_per_read": 584596.8333333334,
+        "peak_rss_kb": 1858204,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.1480772657240779,
+      "dual_cpu_over_single_cpu": 1.061926682581323,
+      "dual_minus_single_peak_rss_kb": 42068
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 6,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7515843,
+        "throughput_gib_per_s": 0.1995784105655214,
+        "cpu_us_per_read": 610581.5,
+        "peak_rss_kb": 1841672,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6738409,
+        "throughput_gib_per_s": 0.22260447532941383,
+        "cpu_us_per_read": 630223.6666666666,
+        "peak_rss_kb": 1858076,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.1153735251154984,
+      "dual_cpu_over_single_cpu": 1.0321696066236312,
+      "dual_minus_single_peak_rss_kb": 16404
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 7,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7639584,
+        "throughput_gib_per_s": 0.19634576961258624,
+        "cpu_us_per_read": 546022.0,
+        "peak_rss_kb": 1841876,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6731563,
+        "throughput_gib_per_s": 0.22283086409501032,
+        "cpu_us_per_read": 567760.0,
+        "peak_rss_kb": 1858228,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.134890069364277,
+      "dual_cpu_over_single_cpu": 1.0398115826834817,
+      "dual_minus_single_peak_rss_kb": 16352
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 8,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 6658016,
+        "throughput_gib_per_s": 0.22529233933952697,
+        "cpu_us_per_read": 557515.5,
+        "peak_rss_kb": 1841448,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6823370,
+        "throughput_gib_per_s": 0.21983272195410772,
+        "cpu_us_per_read": 563450.8333333334,
+        "peak_rss_kb": 1858344,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 0.975766520062667,
+      "dual_cpu_over_single_cpu": 1.0106460418290315,
+      "dual_minus_single_peak_rss_kb": 16896
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 9,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7209210,
+        "throughput_gib_per_s": 0.20806718073131453,
+        "cpu_us_per_read": 553673.3333333334,
+        "peak_rss_kb": 1841940,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6583566,
+        "throughput_gib_per_s": 0.22784004899472413,
+        "cpu_us_per_read": 577569.1666666666,
+        "peak_rss_kb": 1858068,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.0950311730755034,
+      "dual_cpu_over_single_cpu": 1.0431587217492864,
+      "dual_minus_single_peak_rss_kb": 16128
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 10,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7471210,
+        "throughput_gib_per_s": 0.20077069176211082,
+        "cpu_us_per_read": 555059.1666666666,
+        "peak_rss_kb": 1841180,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6806661,
+        "throughput_gib_per_s": 0.22037236759697595,
+        "cpu_us_per_read": 565436.5,
+        "peak_rss_kb": 1858592,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.0976321576761352,
+      "dual_cpu_over_single_cpu": 1.0186959047909308,
+      "dual_minus_single_peak_rss_kb": 17412
+    }
+  ],
+  "cells": [
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 64,
+      "concurrency": 1,
+      "independent_process_blocks": 10,
+      "repeated_request_samples_per_arm": 50,
+      "paired_ratio_geometric_mean": 1.055949155246046,
+      "paired_ratio_min": 0.9249940590922293,
+      "paired_ratio_max": 1.140607158646166,
+      "blocks_favoring_dual": 7,
+      "blocks_favoring_single": 3,
+      "ratio_95pct_block_bootstrap": [
+        1.010189690424633,
+        1.0976487499130918
+      ],
+      "interval_status": "20,000 seeded block-resampling draws; percentile interval"
+    },
+    {
+      "dataset": "paper10-sequential",
+      "size_mib": 256,
+      "concurrency": 1,
+      "independent_process_blocks": 10,
+      "repeated_request_samples_per_arm": 50,
+      "paired_ratio_geometric_mean": 1.100797282124306,
+      "paired_ratio_min": 0.965155226017133,
+      "paired_ratio_max": 1.1855560945370238,
+      "blocks_favoring_dual": 8,
+      "blocks_favoring_single": 2,
+      "ratio_95pct_block_bootstrap": [
+        1.048985003501755,
+        1.1508431445138259
+      ],
+      "interval_status": "20,000 seeded block-resampling draws; percentile interval"
+    },
+    {
+      "dataset": "paper10-c4",
+      "size_mib": 64,
+      "concurrency": 4,
+      "independent_process_blocks": 10,
+      "repeated_request_samples_per_arm": 120,
+      "paired_ratio_geometric_mean": 1.038119128173323,
+      "paired_ratio_min": 0.8908851554467385,
+      "paired_ratio_max": 1.124261238778869,
+      "blocks_favoring_dual": 7,
+      "blocks_favoring_single": 3,
+      "ratio_95pct_block_bootstrap": [
+        0.9834143225586863,
+        1.0880504841963925
+      ],
+      "interval_status": "20,000 seeded block-resampling draws; percentile interval"
+    },
+    {
+      "dataset": "paper10-c2",
+      "size_mib": 256,
+      "concurrency": 2,
+      "independent_process_blocks": 10,
+      "repeated_request_samples_per_arm": 60,
+      "paired_ratio_geometric_mean": 1.0668865410533015,
+      "paired_ratio_min": 0.975766520062667,
+      "paired_ratio_max": 1.1480772657240779,
+      "blocks_favoring_dual": 9,
+      "blocks_favoring_single": 1,
+      "ratio_95pct_block_bootstrap": [
+        1.0324260487436516,
+        1.1015765079101074
+      ],
+      "interval_status": "20,000 seeded block-resampling draws; percentile interval"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+sample,environment=soft-roce,rails=1,concurrency=4,batch=1,worker=0,bytes=67108864,latency_us=1098276,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=1,worker=1,bytes=67108864,latency_us=1073358,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=1,worker=2,bytes=67108864,latency_us=1120354,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=1,worker=3,bytes=67108864,latency_us=1101003,xxh3=a0a4cbfa5cad46af
+batch,environment=soft-roce,rails=1,concurrency=4,iteration=1,wall_us=1147298
+sample,environment=soft-roce,rails=1,concurrency=4,batch=2,worker=0,bytes=67108864,latency_us=827702,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=2,worker=1,bytes=67108864,latency_us=851080,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=2,worker=2,bytes=67108864,latency_us=872761,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=2,worker=3,bytes=67108864,latency_us=803841,xxh3=a0a4cbfa5cad46af
+batch,environment=soft-roce,rails=1,concurrency=4,iteration=2,wall_us=895138
+sample,environment=soft-roce,rails=1,concurrency=4,batch=3,worker=0,bytes=67108864,latency_us=811361,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=3,worker=1,bytes=67108864,latency_us=836723,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=3,worker=2,bytes=67108864,latency_us=858960,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,concurrency=4,batch=3,worker=3,bytes=67108864,latency_us=861740,xxh3=a0a4cbfa5cad46af
+batch,environment=soft-roce,rails=1,concurrency=4,iteration=3,wall_us=880117
+summary_concurrent,environment=soft-roce,rails=1,concurrency=4,bytes_per_read=67108864,batches=3,median_request_us=861740,median_batch_us=895138,aggregate_gib_per_s=0.257,cpu_user_us=805020,cpu_system_us=966687,peak_rss_kb=850108,rail_bytes=[805306368]

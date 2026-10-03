@@ -1,0 +1,515 @@
+{
+  "environment": "physical single ConnectX-6 DX HCA, node1 to node2, mlx5_1 port 1/GID 3, one Rail, warm server slab, 64 MiB/16 stripes",
+  "interpretation": "pilot stage accounting only; two process blocks per arm, no confidence interval, no physical multi-HCA scaling claim",
+  "object_xxh3": "a0a4cbfa5cad46af",
+  "bytes_per_read": 67108864,
+  "client_binary_sha256": "41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679",
+  "source_file_sha256": {
+    "client-rs/src/lib.rs": "7b385c24efc1ad559859c7f8e389e6c4c5cd98a428297120e1dd33db5e0500d4",
+    "client-rs/src/rail_read.rs": "b11185d7d1e4bc3cf0868b73ee5dba343258ee846b8f0cdac5889452922ec37d"
+  },
+  "processes": [
+    {
+      "log": "stage-trace-1.log",
+      "sha256": "8947713b92e40e5b1a403de5c814f853fabd34074af6e7c5f89edfdb9b29c7fb",
+      "median_wall_us": 144771,
+      "samples": [
+        {
+          "iteration": 1,
+          "wall_us": 163542,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 21658,
+              "allocation": 32191,
+              "registration": 1295,
+              "get": 20640,
+              "teardown": 2486,
+              "total": 78271,
+              "unaccounted": 1
+            },
+            "STAGED": {
+              "plan": 12,
+              "reserve": 1,
+              "workers": 78485,
+              "assembly": 53343,
+              "checksum": 7096,
+              "finish": 0,
+              "total": 138941,
+              "unaccounted": 4
+            },
+            "OUTER": {
+              "lookup": 1398,
+              "transfer": 139007,
+              "post_lookup": 1150,
+              "publish": 19635,
+              "total": 161191,
+              "unaccounted": 1
+            }
+          }
+        },
+        {
+          "iteration": 2,
+          "wall_us": 144462,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 4388,
+              "allocation": 32321,
+              "registration": 1313,
+              "get": 19187,
+              "teardown": 2432,
+              "total": 59644,
+              "unaccounted": 3
+            },
+            "STAGED": {
+              "plan": 5,
+              "reserve": 0,
+              "workers": 59780,
+              "assembly": 53337,
+              "checksum": 7050,
+              "finish": 0,
+              "total": 120174,
+              "unaccounted": 2
+            },
+            "OUTER": {
+              "lookup": 1130,
+              "transfer": 120230,
+              "post_lookup": 1098,
+              "publish": 19620,
+              "total": 142081,
+              "unaccounted": 3
+            }
+          }
+        },
+        {
+          "iteration": 3,
+          "wall_us": 144408,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 4503,
+              "allocation": 32491,
+              "registration": 1295,
+              "get": 18515,
+              "teardown": 2412,
+              "total": 59219,
+              "unaccounted": 3
+            },
+            "STAGED": {
+              "plan": 11,
+              "reserve": 0,
+              "workers": 59352,
+              "assembly": 53358,
+              "checksum": 7072,
+              "finish": 0,
+              "total": 119795,
+              "unaccounted": 2
+            },
+            "OUTER": {
+              "lookup": 1248,
+              "transfer": 119847,
+              "post_lookup": 1279,
+              "publish": 19653,
+              "total": 142030,
+              "unaccounted": 3
+            }
+          }
+        },
+        {
+          "iteration": 4,
+          "wall_us": 166236,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 24414,
+              "allocation": 32270,
+              "registration": 1353,
+              "get": 20431,
+              "teardown": 2651,
+              "total": 81121,
+              "unaccounted": 2
+            },
+            "STAGED": {
+              "plan": 11,
+              "reserve": 1,
+              "workers": 81326,
+              "assembly": 53389,
+              "checksum": 7118,
+              "finish": 0,
+              "total": 141849,
+              "unaccounted": 4
+            },
+            "OUTER": {
+              "lookup": 1274,
+              "transfer": 141914,
+              "post_lookup": 1077,
+              "publish": 19592,
+              "total": 163859,
+              "unaccounted": 2
+            }
+          }
+        },
+        {
+          "iteration": 5,
+          "wall_us": 144771,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 4326,
+              "allocation": 32249,
+              "registration": 1347,
+              "get": 19142,
+              "teardown": 2524,
+              "total": 59591,
+              "unaccounted": 3
+            },
+            "STAGED": {
+              "plan": 12,
+              "reserve": 1,
+              "workers": 59789,
+              "assembly": 53320,
+              "checksum": 7108,
+              "finish": 0,
+              "total": 120233,
+              "unaccounted": 3
+            },
+            "OUTER": {
+              "lookup": 1191,
+              "transfer": 120295,
+              "post_lookup": 1286,
+              "publish": 19622,
+              "total": 142396,
+              "unaccounted": 2
+            }
+          }
+        }
+      ],
+      "warmup_stages_us": {
+        "TRANSPORT": {
+          "connect": 25188,
+          "allocation": 33946,
+          "registration": 2432,
+          "get": 200996,
+          "teardown": 3048,
+          "total": 265618,
+          "unaccounted": 8
+        },
+        "STAGED": {
+          "plan": 8,
+          "reserve": 0,
+          "workers": 265774,
+          "assembly": 57873,
+          "checksum": 7157,
+          "finish": 1,
+          "total": 330815,
+          "unaccounted": 2
+        },
+        "OUTER": {
+          "lookup": 852,
+          "transfer": 330925,
+          "post_lookup": 1185,
+          "publish": 45642,
+          "total": 378606,
+          "unaccounted": 2
+        }
+      }
+    },
+    {
+      "log": "stage-control-1.log",
+      "sha256": "58d8316fecbc0395a263f6a7a64c2bcca57dce33efc0982b6d2b63f3397281c3",
+      "median_wall_us": 143513,
+      "samples": [
+        {
+          "iteration": 1,
+          "wall_us": 142926
+        },
+        {
+          "iteration": 2,
+          "wall_us": 160282
+        },
+        {
+          "iteration": 3,
+          "wall_us": 144792
+        },
+        {
+          "iteration": 4,
+          "wall_us": 142716
+        },
+        {
+          "iteration": 5,
+          "wall_us": 143513
+        }
+      ],
+      "warmup_stages_us": null
+    },
+    {
+      "log": "stage-trace-2.log",
+      "sha256": "c1c807aab3f9d8a2f9ee54e192787993d4b14864dee1a32bab98c345364fb9d7",
+      "median_wall_us": 160734,
+      "samples": [
+        {
+          "iteration": 1,
+          "wall_us": 145387,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 4483,
+              "allocation": 31734,
+              "registration": 1095,
+              "get": 20984,
+              "teardown": 2332,
+              "total": 60632,
+              "unaccounted": 4
+            },
+            "STAGED": {
+              "plan": 5,
+              "reserve": 0,
+              "workers": 60775,
+              "assembly": 52996,
+              "checksum": 7075,
+              "finish": 0,
+              "total": 120855,
+              "unaccounted": 4
+            },
+            "OUTER": {
+              "lookup": 1234,
+              "transfer": 120915,
+              "post_lookup": 1211,
+              "publish": 19658,
+              "total": 143019,
+              "unaccounted": 1
+            }
+          }
+        },
+        {
+          "iteration": 2,
+          "wall_us": 168048,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 27036,
+              "allocation": 31944,
+              "registration": 1091,
+              "get": 20728,
+              "teardown": 2470,
+              "total": 83271,
+              "unaccounted": 2
+            },
+            "STAGED": {
+              "plan": 5,
+              "reserve": 0,
+              "workers": 83405,
+              "assembly": 52947,
+              "checksum": 7072,
+              "finish": 0,
+              "total": 143432,
+              "unaccounted": 3
+            },
+            "OUTER": {
+              "lookup": 1091,
+              "transfer": 143490,
+              "post_lookup": 1242,
+              "publish": 19802,
+              "total": 165627,
+              "unaccounted": 2
+            }
+          }
+        },
+        {
+          "iteration": 3,
+          "wall_us": 161281,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 22772,
+              "allocation": 31905,
+              "registration": 1162,
+              "get": 18192,
+              "teardown": 2431,
+              "total": 76464,
+              "unaccounted": 2
+            },
+            "STAGED": {
+              "plan": 11,
+              "reserve": 0,
+              "workers": 76606,
+              "assembly": 52995,
+              "checksum": 7076,
+              "finish": 0,
+              "total": 136692,
+              "unaccounted": 4
+            },
+            "OUTER": {
+              "lookup": 1210,
+              "transfer": 136748,
+              "post_lookup": 1259,
+              "publish": 19676,
+              "total": 158894,
+              "unaccounted": 1
+            }
+          }
+        },
+        {
+          "iteration": 4,
+          "wall_us": 143538,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 4479,
+              "allocation": 32105,
+              "registration": 1179,
+              "get": 18245,
+              "teardown": 2805,
+              "total": 58816,
+              "unaccounted": 3
+            },
+            "STAGED": {
+              "plan": 5,
+              "reserve": 0,
+              "workers": 58964,
+              "assembly": 53043,
+              "checksum": 7081,
+              "finish": 0,
+              "total": 119096,
+              "unaccounted": 3
+            },
+            "OUTER": {
+              "lookup": 1078,
+              "transfer": 119150,
+              "post_lookup": 1262,
+              "publish": 19664,
+              "total": 141156,
+              "unaccounted": 2
+            }
+          }
+        },
+        {
+          "iteration": 5,
+          "wall_us": 160734,
+          "stages_us": {
+            "TRANSPORT": {
+              "connect": 21176,
+              "allocation": 32399,
+              "registration": 1188,
+              "get": 18566,
+              "teardown": 2429,
+              "total": 75760,
+              "unaccounted": 2
+            },
+            "STAGED": {
+              "plan": 12,
+              "reserve": 0,
+              "workers": 75955,
+              "assembly": 53032,
+              "checksum": 7061,
+              "finish": 0,
+              "total": 136063,
+              "unaccounted": 3
+            },
+            "OUTER": {
+              "lookup": 1205,
+              "transfer": 136131,
+              "post_lookup": 1219,
+              "publish": 19799,
+              "total": 158356,
+              "unaccounted": 2
+            }
+          }
+        }
+      ],
+      "warmup_stages_us": {
+        "TRANSPORT": {
+          "connect": 23012,
+          "allocation": 31988,
+          "registration": 1379,
+          "get": 20368,
+          "teardown": 2570,
+          "total": 79324,
+          "unaccounted": 7
+        },
+        "STAGED": {
+          "plan": 8,
+          "reserve": 0,
+          "workers": 79451,
+          "assembly": 53283,
+          "checksum": 7070,
+          "finish": 0,
+          "total": 139814,
+          "unaccounted": 2
+        },
+        "OUTER": {
+          "lookup": 816,
+          "transfer": 139922,
+          "post_lookup": 1482,
+          "publish": 43989,
+          "total": 186210,
+          "unaccounted": 1
+        }
+      }
+    },
+    {
+      "log": "stage-control-2.log",
+      "sha256": "a55297988a2960f95b473f181748e764a381b1dda3861db19373f9c01c2e2942",
+      "median_wall_us": 163815,
+      "samples": [
+        {
+          "iteration": 1,
+          "wall_us": 163815
+        },
+        {
+          "iteration": 2,
+          "wall_us": 165181
+        },
+        {
+          "iteration": 3,
+          "wall_us": 168007
+        },
+        {
+          "iteration": 4,
+          "wall_us": 142737
+        },
+        {
+          "iteration": 5,
+          "wall_us": 145439
+        }
+      ],
+      "warmup_stages_us": null
+    }
+  ],
+  "paired_trace_over_control_process_median": [
+    1.0087657564123111,
+    0.9811921985166193
+  ],
+  "traced_sample_count": 10,
+  "control_sample_count": 10,
+  "traced_median_wall_us": 153060.5,
+  "control_median_wall_us": 145115.5,
+  "stage_medians_us": {
+    "TRANSPORT": {
+      "connect": 12839.5,
+      "allocation": 32220.0,
+      "registration": 1241.5,
+      "get": 19164.5,
+      "teardown": 2451.0,
+      "total": 68196.0,
+      "unaccounted": 2.5
+    },
+    "STAGED": {
+      "plan": 11.0,
+      "reserve": 0.0,
+      "workers": 68365.0,
+      "assembly": 53181.5,
+      "checksum": 7075.5,
+      "finish": 0.0,
+      "total": 128459.0,
+      "unaccounted": 3.0
+    },
+    "OUTER": {
+      "lookup": 1207.5,
+      "transfer": 128523.0,
+      "post_lookup": 1230.5,
+      "publish": 19655.5,
+      "total": 150687.5,
+      "unaccounted": 2.0
+    }
+  },
+  "server_diagnostics": {
+    "log": "server-stage-20261003.log",
+    "sha256": "bb88d27613720c35897a222d0861b3a1e24d5af6bf5cc5ab2b52c88d45fea6c2",
+    "records": 24,
+    "median_subset_total_us_including_warmups": 17993.5,
+    "request_matching": "none: server records lack a shared request ID"
+  }
+}

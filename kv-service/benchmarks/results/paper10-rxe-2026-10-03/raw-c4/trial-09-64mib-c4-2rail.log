@@ -1,0 +1,18 @@
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+sample,environment=soft-roce,rails=2,concurrency=4,batch=1,worker=0,bytes=67108864,latency_us=922385,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=1,worker=1,bytes=67108864,latency_us=980411,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=1,worker=2,bytes=67108864,latency_us=1006601,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=1,worker=3,bytes=67108864,latency_us=956139,xxh3=a0a4cbfa5cad46af
+batch,environment=soft-roce,rails=2,concurrency=4,iteration=1,wall_us=1031471
+sample,environment=soft-roce,rails=2,concurrency=4,batch=2,worker=0,bytes=67108864,latency_us=947623,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=2,worker=1,bytes=67108864,latency_us=918628,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=2,worker=2,bytes=67108864,latency_us=996832,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=2,worker=3,bytes=67108864,latency_us=972048,xxh3=a0a4cbfa5cad46af
+batch,environment=soft-roce,rails=2,concurrency=4,iteration=2,wall_us=1022536
+sample,environment=soft-roce,rails=2,concurrency=4,batch=3,worker=0,bytes=67108864,latency_us=973299,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=3,worker=1,bytes=67108864,latency_us=909590,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=3,worker=2,bytes=67108864,latency_us=994928,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=2,concurrency=4,batch=3,worker=3,bytes=67108864,latency_us=948523,xxh3=a0a4cbfa5cad46af
+batch,environment=soft-roce,rails=2,concurrency=4,iteration=3,wall_us=1021087
+summary_concurrent,environment=soft-roce,rails=2,concurrency=4,bytes_per_read=67108864,batches=3,median_request_us=972048,median_batch_us=1022536,aggregate_gib_per_s=0.244,cpu_user_us=876158,cpu_system_us=1004370,peak_rss_kb=775032,rail_bytes=[402653184, 402653184]

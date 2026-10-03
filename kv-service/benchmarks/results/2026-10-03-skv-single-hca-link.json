@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "label": "physical RoCE v2 single HCA link calibration, not dual-rail aggregation",
+  "topology": {
+    "sender": "skv-node1; mlx5_1 port 1; GID index 3; 10.0.0.61; NUMA 1",
+    "receiver": "skv-node2; mlx5_1 port 1; GID index 3; 10.0.0.62; NUMA 1",
+    "link_nominal_gbit_per_s": 100,
+    "perftest_version": "5.99"
+  },
+  "calibration": {
+    "operation": "RDMA WRITE",
+    "message_bytes": 1048576,
+    "qp_count": 1,
+    "duration_seconds_per_trial": 8,
+    "trials": [
+      {
+        "trial": 1,
+        "iterations": 46712,
+        "average_gbit_per_s": 97.96,
+        "reported_cpu_util_percent": 2.86,
+        "sender": {
+          "file": "ib_write_bw_sender.log",
+          "bytes": 1316,
+          "sha256": "a8f4bcbf99c29cb1173d8e27d710833daeed7a8b4abe0c30e211deb86ee066b2",
+          "full_output": "Conflicting CPU frequency values detected: 800.028000 != 2993.007000. CPU Frequency is not max.\n---------------------------------------------------------------------------------------\n                    RDMA_Write BW Test\n Dual-port       : OFF\t\tDevice         : mlx5_1\n Number of qps   : 1\t\tTransport type : IB\n Connection type : RC\t\tUsing SRQ      : OFF\n PCIe relax order: ON\n ibv_wr* API     : ON\n TX depth        : 128\n CQ Moderation   : 1\n Mtu             : 4096[B]\n Link type       : Ethernet\n GID index       : 3\n Max inline data : 0[B]\n rdma_cm QPs\t : OFF\n Data ex. method : Ethernet\n---------------------------------------------------------------------------------------\n local address: LID 0000 QPN 0x0993 PSN 0xa73ad0 RKey 0x003355 VAddr 0x007f959dd33000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:61\n remote address: LID 0000 QPN 0x3892 PSN 0xf01bbf RKey 0x003e92 VAddr 0x007f2975173000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:62\n---------------------------------------------------------------------------------------\n #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]    CPU_Util[%]\n 1048576    46712            0.00               97.96  \t\t   0.011678\t    2.86\n---------------------------------------------------------------------------------------\n"
+        },
+        "receiver": {
+          "file": "ib_write_bw_receiver.log",
+          "bytes": 1309,
+          "sha256": "9f60433cf8152d937723f71ff895100f4ec065b47e0f69e77919d518360dd3f2",
+          "full_output": "\n************************************\n* Waiting for client to connect... *\n************************************\n---------------------------------------------------------------------------------------\n                    RDMA_Write BW Test\n Dual-port       : OFF\t\tDevice         : mlx5_1\n Number of qps   : 1\t\tTransport type : IB\n Connection type : RC\t\tUsing SRQ      : OFF\n PCIe relax order: ON\n ibv_wr* API     : ON\n CQ Moderation   : 1\n Mtu             : 4096[B]\n Link type       : Ethernet\n GID index       : 3\n Max inline data : 0[B]\n rdma_cm QPs\t : OFF\n Data ex. method : Ethernet\n---------------------------------------------------------------------------------------\n local address: LID 0000 QPN 0x3892 PSN 0xf01bbf RKey 0x003e92 VAddr 0x007f2975173000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:62\n remote address: LID 0000 QPN 0x0993 PSN 0xa73ad0 RKey 0x003355 VAddr 0x007f959dd33000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:61\n---------------------------------------------------------------------------------------\n #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]    CPU_Util[%]\n 1048576    46712            0.00               97.96  \t\t   0.011678\t    0.00\n---------------------------------------------------------------------------------------\n"
+        }
+      },
+      {
+        "trial": 2,
+        "iterations": 46659,
+        "average_gbit_per_s": 97.85,
+        "reported_cpu_util_percent": 3.0,
+        "sender": {
+          "file": "ib_write_bw_sender_t2.log",
+          "bytes": 1316,
+          "sha256": "3619a7efb8a566452c5d4a6a0288fb2ae6b3d5ff03be9af31efecf330663ba5d",
+          "full_output": "Conflicting CPU frequency values detected: 800.022000 != 2747.570000. CPU Frequency is not max.\n---------------------------------------------------------------------------------------\n                    RDMA_Write BW Test\n Dual-port       : OFF\t\tDevice         : mlx5_1\n Number of qps   : 1\t\tTransport type : IB\n Connection type : RC\t\tUsing SRQ      : OFF\n PCIe relax order: ON\n ibv_wr* API     : ON\n TX depth        : 128\n CQ Moderation   : 1\n Mtu             : 4096[B]\n Link type       : Ethernet\n GID index       : 3\n Max inline data : 0[B]\n rdma_cm QPs\t : OFF\n Data ex. method : Ethernet\n---------------------------------------------------------------------------------------\n local address: LID 0000 QPN 0x0994 PSN 0x6aa129 RKey 0x003356 VAddr 0x007f9433788000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:61\n remote address: LID 0000 QPN 0x3893 PSN 0x20d4c6 RKey 0x003e93 VAddr 0x007f9eb3b11000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:62\n---------------------------------------------------------------------------------------\n #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]    CPU_Util[%]\n 1048576    46659            0.00               97.85  \t\t   0.011665\t    3.00\n---------------------------------------------------------------------------------------\n"
+        },
+        "receiver": {
+          "file": "ib_write_bw_receiver_t2.log",
+          "bytes": 1309,
+          "sha256": "691d7ad6672847797175e143a97a8ae6cf7dc1908f055146871581e2fa623d24",
+          "full_output": "\n************************************\n* Waiting for client to connect... *\n************************************\n---------------------------------------------------------------------------------------\n                    RDMA_Write BW Test\n Dual-port       : OFF\t\tDevice         : mlx5_1\n Number of qps   : 1\t\tTransport type : IB\n Connection type : RC\t\tUsing SRQ      : OFF\n PCIe relax order: ON\n ibv_wr* API     : ON\n CQ Moderation   : 1\n Mtu             : 4096[B]\n Link type       : Ethernet\n GID index       : 3\n Max inline data : 0[B]\n rdma_cm QPs\t : OFF\n Data ex. method : Ethernet\n---------------------------------------------------------------------------------------\n local address: LID 0000 QPN 0x3893 PSN 0x20d4c6 RKey 0x003e93 VAddr 0x007f9eb3b11000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:62\n remote address: LID 0000 QPN 0x0994 PSN 0x6aa129 RKey 0x003356 VAddr 0x007f9433788000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:61\n---------------------------------------------------------------------------------------\n #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]    CPU_Util[%]\n 1048576    46659            0.00               97.85  \t\t   0.011665\t    0.00\n---------------------------------------------------------------------------------------\n"
+        }
+      },
+      {
+        "trial": 3,
+        "iterations": 46702,
+        "average_gbit_per_s": 97.94,
+        "reported_cpu_util_percent": 2.94,
+        "sender": {
+          "file": "ib_write_bw_sender_t3.log",
+          "bytes": 1316,
+          "sha256": "aa21aba0a70436a4e1733c5908f11cfe7fe4ec3a6ebeed507bcb75a8fb51db8e",
+          "full_output": "Conflicting CPU frequency values detected: 800.001000 != 2882.685000. CPU Frequency is not max.\n---------------------------------------------------------------------------------------\n                    RDMA_Write BW Test\n Dual-port       : OFF\t\tDevice         : mlx5_1\n Number of qps   : 1\t\tTransport type : IB\n Connection type : RC\t\tUsing SRQ      : OFF\n PCIe relax order: ON\n ibv_wr* API     : ON\n TX depth        : 128\n CQ Moderation   : 1\n Mtu             : 4096[B]\n Link type       : Ethernet\n GID index       : 3\n Max inline data : 0[B]\n rdma_cm QPs\t : OFF\n Data ex. method : Ethernet\n---------------------------------------------------------------------------------------\n local address: LID 0000 QPN 0x0995 PSN 0x2ef7f0 RKey 0x003357 VAddr 0x007ff45fc22000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:61\n remote address: LID 0000 QPN 0x3894 PSN 0x24760a RKey 0x003e94 VAddr 0x007fcfc1bf6000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:62\n---------------------------------------------------------------------------------------\n #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]    CPU_Util[%]\n 1048576    46702            0.00               97.94  \t\t   0.011675\t    2.94\n---------------------------------------------------------------------------------------\n"
+        },
+        "receiver": {
+          "file": "ib_write_bw_receiver_t3.log",
+          "bytes": 1309,
+          "sha256": "40ef740450177dc1a7387c3060cb21e28a3031836e841c4e7d86b5e03a6620f0",
+          "full_output": "\n************************************\n* Waiting for client to connect... *\n************************************\n---------------------------------------------------------------------------------------\n                    RDMA_Write BW Test\n Dual-port       : OFF\t\tDevice         : mlx5_1\n Number of qps   : 1\t\tTransport type : IB\n Connection type : RC\t\tUsing SRQ      : OFF\n PCIe relax order: ON\n ibv_wr* API     : ON\n CQ Moderation   : 1\n Mtu             : 4096[B]\n Link type       : Ethernet\n GID index       : 3\n Max inline data : 0[B]\n rdma_cm QPs\t : OFF\n Data ex. method : Ethernet\n---------------------------------------------------------------------------------------\n local address: LID 0000 QPN 0x3894 PSN 0x24760a RKey 0x003e94 VAddr 0x007fcfc1bf6000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:62\n remote address: LID 0000 QPN 0x0995 PSN 0x2ef7f0 RKey 0x003357 VAddr 0x007ff45fc22000\n GID: 00:00:00:00:00:00:00:00:00:00:255:255:10:00:00:61\n---------------------------------------------------------------------------------------\n #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]    CPU_Util[%]\n 1048576    46702            0.00               97.94  \t\t   0.011675\t    0.00\n---------------------------------------------------------------------------------------\n"
+        }
+      }
+    ],
+    "median_average_gbit_per_s": 97.94,
+    "median_average_gib_per_s": 11.401716619729996
+  },
+  "application_reference": {
+    "source_file": "kv-service/benchmarks/results/2026-10-02-skv-single-hca.json",
+    "source_sha256": "463d72edffde45dcccfa7463da91f11672538a41ca01b0092553cf0920cb263c",
+    "source_commit": "1bd4821",
+    "mode": "slab_128_mib",
+    "object_bytes": 67108864,
+    "median_latency_us": 163271,
+    "derived_payload_gib_per_s": 0.38279914987964797,
+    "link_capacity_over_application_payload_ratio": 29.785114787518975
+  },
+  "server_stage_reference": {
+    "source_file": "server-final-slab128.log",
+    "source_sha256": "c06fbabc585f0d9367578fa56a1f757753792696ccd4fde8bd06556cb4a48c65",
+    "full_output": "\u001b[2m2026-10-02T03:59:28.684239Z\u001b[0m \u001b[32m INFO\u001b[0m starting ContextStore KV Service v0.1.0...\n\u001b[2m2026-10-02T03:59:28.684307Z\u001b[0m \u001b[32m INFO\u001b[0m config file: evidence/server-hca.toml\n\u001b[2m2026-10-02T03:59:28.684685Z\u001b[0m \u001b[32m INFO\u001b[0m loaded config: 2 storage device(s), L1 capacity 128 MB, I/O executor = tier_a\n\u001b[2m2026-10-02T03:59:28.690852Z\u001b[0m \u001b[32m INFO\u001b[0m gRPC listening on: 10.0.0.61:55151\n\u001b[2m2026-10-02T03:59:28.690882Z\u001b[0m \u001b[32m INFO\u001b[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=128\n\u001b[2m2026-10-02T03:59:28.690898Z\u001b[0m \u001b[32m INFO\u001b[0m CS_RDMA_DEVICES override: 1 NIC(s) [\"mlx5_1@10.0.0.61:55153\"]\n\u001b[2m2026-10-02T03:59:28.690908Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA tier enabled: 1 NIC(s), primary listener=10.0.0.61:55153\n\u001b[2m2026-10-02T03:59:28.719042Z\u001b[0m \u001b[32m INFO\u001b[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 3d]\n\u001b[2m2026-10-02T03:59:28.719065Z\u001b[0m \u001b[32m INFO\u001b[0m opened NIC 0: dev=mlx5_1 port=1 gid_index=3\n\u001b[2m2026-10-02T03:59:28.719102Z\u001b[0m \u001b[32m INFO\u001b[0m SlabBacking: mmap 134217728 bytes at 0x7f5548000000 (huge_pages=true)\n\u001b[2m2026-10-02T03:59:28.743529Z\u001b[0m \u001b[32m INFO\u001b[0m RdmaSlab registered: 134217728 bytes (128 MB) on 1 NIC(s), lkeys=[\"0x9fcca\"] rkeys=[\"0x9fcca\"]\n\u001b[2m2026-10-02T03:59:28.743552Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA slab injected into MemoryTier (128 MB, 1 NIC)\n\u001b[2m2026-10-02T03:59:28.743572Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA server listening on 10.0.0.61:55153 (nic_idx=0 dev=mlx5_1 port=1 gid_index=3)\n\u001b[2m2026-10-02T03:59:31.377376Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:39714 (nic_idx=0)\n\u001b[2m2026-10-02T03:59:31.378213Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2425 psn=0x6c9e4e\n\u001b[2m2026-10-02T03:59:31.378656Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2425 remote_qpn=14461\n\u001b[2m2026-10-02T03:59:31.430793Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=228 first_io_us=2146 last_io_us=17636 poll_us=393 total_us=18005\n\u001b[2m2026-10-02T04:04:43.909241Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:51156 (nic_idx=0)\n\u001b[2m2026-10-02T04:04:43.909860Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2426 psn=0xc31f65\n\u001b[2m2026-10-02T04:04:43.910293Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2426 remote_qpn=14462\n\u001b[2m2026-10-02T04:04:43.960135Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=230 first_io_us=1977 last_io_us=14911 poll_us=393 total_us=15281\n\u001b[2m2026-10-02T04:04:44.109101Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:51162 (nic_idx=0)\n\u001b[2m2026-10-02T04:04:44.109672Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2427 psn=0xac0248\n\u001b[2m2026-10-02T04:04:44.110106Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2427 remote_qpn=14463\n\u001b[2m2026-10-02T04:04:44.160070Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=193 first_io_us=2016 last_io_us=15750 poll_us=420 total_us=16140\n\u001b[2m2026-10-02T04:04:44.289227Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:51178 (nic_idx=0)\n\u001b[2m2026-10-02T04:04:44.289738Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2428 psn=0x679ca4\n\u001b[2m2026-10-02T04:04:44.290173Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2428 remote_qpn=14464\n\u001b[2m2026-10-02T04:04:44.339851Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=164 first_io_us=1924 last_io_us=15475 poll_us=387 total_us=15845\n\u001b[2m2026-10-02T04:04:44.465320Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:51188 (nic_idx=0)\n\u001b[2m2026-10-02T04:04:44.465847Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2429 psn=0xe6cf96\n\u001b[2m2026-10-02T04:04:44.466273Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2429 remote_qpn=14465\n\u001b[2m2026-10-02T04:04:44.516083Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=171 first_io_us=1970 last_io_us=15648 poll_us=384 total_us=16017\n\u001b[2m2026-10-02T04:04:44.645117Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:51192 (nic_idx=0)\n\u001b[2m2026-10-02T04:04:44.645642Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2430 psn=0x9e44ff\n\u001b[2m2026-10-02T04:04:44.646058Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2430 remote_qpn=14466\n\u001b[2m2026-10-02T04:04:44.696237Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=164 first_io_us=1880 last_io_us=14084 poll_us=398 total_us=14468\n\u001b[2m2026-10-02T04:04:44.803776Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA client connected: 10.0.0.62:51200 (nic_idx=0)\n\u001b[2m2026-10-02T04:04:44.804295Z\u001b[0m \u001b[32m INFO\u001b[0m RcQp created: qpn=2431 psn=0x131ece\n\u001b[2m2026-10-02T04:04:44.804750Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA QP established: local_qpn=2431 remote_qpn=14467\n\u001b[2m2026-10-02T04:04:44.855694Z\u001b[0m \u001b[32m INFO\u001b[0m RDMA_SUBSET_DETAIL key=10:rust-benchrailtest0/__combined__ bytes=67108864 stripes=16 requests=64 alloc_us=4 stream_setup_us=189 first_io_us=1981 last_io_us=16770 poll_us=397 total_us=17137\n",
+    "subset_total_us": [
+      18005,
+      15281,
+      16140,
+      15845,
+      16017,
+      14468,
+      17137
+    ],
+    "subset_total_median_us": 16017,
+    "subset_poll_us": [
+      393,
+      393,
+      420,
+      387,
+      384,
+      398,
+      397
+    ],
+    "subset_poll_median_us": 393,
+    "request_mapping": "not request-ID matched to the client benchmark; stage values are diagnostic only"
+  },
+  "interpretation": "Three perftest runs show the physical link can approach 100 Gb/s. The older ContextStore single-rail object's payload rate was about 30 times lower, so this workload has not demonstrated a one-NIC bandwidth bottleneck. Perftest bypasses storage, metadata, QP setup, MR registration, validation and assembly; the ratio is capacity headroom, not a same-path speedup prediction."
+}

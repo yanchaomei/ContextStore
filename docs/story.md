@@ -20,8 +20,8 @@ The transport state machine is deterministic. An LLM or agent is not placed on t
 
 - [Independent draft PR #32](https://github.com/DaoCloud/ContextStore/pull/32) starts from official `main`, keeps the existing object layout, and contains the implementation, tests and reusable deployment scripts.
 - Two isolated KVM guests with two separate tap/bridge/RXE paths completed a 64 MiB / 16-stripe object read over real Verbs; each rail carried 32 MiB. The [four-minute demo and raw live command record](https://github.com/yanchaomei/ContextStore/releases/tag/multi-rail-softroce-demo-2026-10-02) show link shutdown/recovery, corruption/recovery and late second-rail completion.
-- The [paired software-RoCE samples](../kv-service/benchmarks/results/softroce-vm-paired-samples.csv) show 1.071×, 1.086× and 1.113× single-to-dual throughput ratios at 64, 128 and 256 MiB with one concurrent read. At 64 MiB and four concurrent reads, the [recorded aggregate ratio](../kv-service/benchmarks/results/softroce-vm-concurrent-64-128-summary.csv) is only 1.018×. CPU cost rises.
-- A separate [single-rail physical HCA record](../kv-service/benchmarks/results/2026-10-02-skv-single-hca.json) verifies the Verbs path on ConnectX-6 Dx; it is not a dual-HCA aggregation measurement.
+- A new [ten-block software-RoCE evaluation](paper/evaluation-results.md) measured paired geometric-mean two/one-Rail throughput ratios of 1.056×–1.101× across four object/concurrency cells. At 64 MiB and concurrency 4, the 95% block-bootstrap interval crosses parity and three of ten blocks favor one Rail; CPU and RSS increase. This is a modest software-path result on two KVM guests sharing one host and virtual disk.
+- A separate [single-Rail physical HCA stage record](paper/stage-trace-pilot.md) verifies the Verbs path on ConnectX-6 Dx and shows substantial receive-buffer initialization, assembly and publication time. A link-capacity calibration reaches 97.94 Gb/s, so the measured 64 MiB application load is not demonstrated to be NIC-limited. There is no physical dual-HCA aggregation measurement.
 
 ## 5. Next decision
 

@@ -23,6 +23,13 @@ pub mod rdma;
 #[cfg(feature = "rdma")]
 pub mod rail_read;
 
+/// Research-only stage diagnostics; disabled for normal reads and benchmarks.
+#[cfg(feature = "rdma")]
+pub(crate) fn rail_timing_enabled() -> bool {
+    static ENABLED: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *ENABLED.get_or_init(|| std::env::var("CS_RAIL_TIMING").ok().as_deref() == Some("1"))
+}
+
 use pb::kv_service_client::KvServiceClient;
 use prost::bytes::Bytes;
 use tonic::transport::Channel;
@@ -234,6 +241,7 @@ impl KvClient {
         destination: &mut [u8],
         cancel: Option<rail_read::RailCancel>,
     ) -> anyhow::Result<Option<usize>> {
+        let timing_start = std::time::Instant::now();
         let initial = match self.lookup_object(namespace, object_key).await? {
             Some(lookup) => lookup,
             None => return Ok(None),
@@ -252,14 +260,20 @@ impl KvClient {
             .ok_or_else(|| anyhow::anyhow!("lookup returned no RDMA placement"))?;
         let descriptor = initial.descriptor.clone();
         let fetch_cancel = cancel.clone();
+        let lookup_us = timing_start.elapsed().as_micros();
+        let transfer_start = std::time::Instant::now();
         let payload = tokio::task::spawn_blocking(move || {
             reader.read_staged(&descriptor, &placement, fetch_cancel.as_ref())
         })
         .await??;
+        let transfer_us = transfer_start.elapsed().as_micros();
+        let post_lookup_start = std::time::Instant::now();
         let current = self
             .lookup_object(namespace, object_key)
             .await?
             .ok_or(rail_read::RailReadError::VersionChanged)?;
+        let post_lookup_us = post_lookup_start.elapsed().as_micros();
+        let publish_start = std::time::Instant::now();
         let copied = rail_read::commit_if_unchanged(
             &initial,
             &current,
@@ -267,6 +281,13 @@ impl KvClient {
             destination,
             cancel.as_ref(),
         )?;
+        if rail_timing_enabled() {
+            eprintln!(
+                "RAIL_OUTER_TIMING key={namespace}/{object_key} bytes={copied} lookup_us={lookup_us} transfer_us={transfer_us} post_lookup_us={post_lookup_us} publish_us={} total_us={}",
+                publish_start.elapsed().as_micros(),
+                timing_start.elapsed().as_micros(),
+            );
+        }
         Ok(Some(copied))
     }
 

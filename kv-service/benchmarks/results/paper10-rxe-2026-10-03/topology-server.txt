@@ -1,0 +1,12 @@
+cs-railvm
+link rxe_s0/1 state ACTIVE physical_state LINK_UP netdev enp0s3
+link rxe_s1/1 state ACTIVE physical_state LINK_UP netdev enp0s4
+enp0s3           UP             10.31.0.2/24 fe80::5054:ff:fe31:2/64
+enp0s4           UP             10.32.0.2/24 fe80::5054:ff:fe32:2/64
+Filesystem     Type 1K-blocks    Used Available Use% Mounted on
+/dev/vda1      ext4  12005572 5427980   6561208  46% /
+/dev/vda1      ext4  12005572 5427980   6561208  46% /
+CPU(s):                                  4
+NUMA node(s):                            1
+51e13244c4309c15d2cd519050caa3b42edac558243112c0487dbcbf4329add7  /home/railtest/bin/contextstore-server-paper-20261003
+78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365  /home/railtest/evidence/server.toml

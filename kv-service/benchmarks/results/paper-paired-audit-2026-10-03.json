@@ -1,0 +1,740 @@
+{
+  "interpretation": "paired launched process blocks; confidence intervals only when n>=10, and no physical-HCA aggregation claim",
+  "provenance": {
+    "softroce-vm-paired": {
+      "environment": {
+        "environment": "soft-roce",
+        "source_commit": "52b933d",
+        "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+        "machine": "x86_64",
+        "notes": "Two Ubuntu 22.04 KVM guests, two isolated Linux bridges and virtio Ethernet links, four RXE devices, 4 vCPU and 4 GiB each, two stripe directories on one guest virtual disk",
+        "objects_mib": [
+          64,
+          128,
+          256
+        ],
+        "trials": 3,
+        "iterations_per_trial": 5,
+        "warmup_reads": 1,
+        "coordinator": "http://10.31.0.2:55151",
+        "rails": [
+          "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+          "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+        ]
+      },
+      "input_sha256": {
+        "softroce-vm-paired-summary.csv": "52cfa74cf0b6dcc7f14c44087efcf18cdd99948def26455e7d7e6ceff809a313",
+        "softroce-vm-paired-samples.csv": "6ef8623cf88b98a8732fb5c6c416f9b60d188e8421cda93b3d0fb3e11e01b49f",
+        "softroce-vm-paired-environment.json": "b848d0f47618441c03da6dee7c5e50f52ae72af12bcdfc89ae9b19e9be3dec32"
+      }
+    },
+    "softroce-vm-concurrent-64-128": {
+      "environment": {
+        "environment": "soft-roce",
+        "source_commit": "cd529b5",
+        "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+        "machine": "x86_64",
+        "notes": "Two KVM guests, two virtual RXE rails, 4 vCPU and 4 GiB each; RLIMIT_MEMLOCK raised to unlimited inside the isolated client guest for a fair concurrent matrix",
+        "objects_mib": [
+          64,
+          128
+        ],
+        "concurrency": [
+          2,
+          4
+        ],
+        "trials": 2,
+        "batches_per_trial": 3,
+        "warmup_reads": 1,
+        "coordinator": "http://10.31.0.2:55151",
+        "rails": [
+          "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+          "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+        ]
+      },
+      "input_sha256": {
+        "softroce-vm-concurrent-64-128-summary.csv": "8d05a8af20fea9a3d992a4a3e63f9a44f41bcbaac3c889e601c63e8a5343a808",
+        "softroce-vm-concurrent-64-128-samples.csv": "6031bd3396b28f2cbc6eea510eed3e07a0a8818f5a4cdebef9297797d096c19f",
+        "softroce-vm-concurrent-64-128-environment.json": "748c252f746f3eb8c83acd9d81b1d40b88d22d266a46f636320df86ff18fe83c",
+        "softroce-vm-concurrent-64-128-batches.csv": "3af9fe7dc7ae9960e4255278a6df1439682911cc225344ebf347303fb04d3be4"
+      }
+    },
+    "softroce-vm-concurrent-256": {
+      "environment": {
+        "environment": "soft-roce",
+        "source_commit": "cd529b5",
+        "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+        "machine": "x86_64",
+        "notes": "Two KVM guests, two virtual RXE rails, 4 vCPU and 4 GiB each; RLIMIT_MEMLOCK raised to unlimited inside the isolated client guest for a fair concurrent matrix",
+        "objects_mib": [
+          256
+        ],
+        "concurrency": [
+          2
+        ],
+        "trials": 2,
+        "batches_per_trial": 3,
+        "warmup_reads": 1,
+        "coordinator": "http://10.31.0.2:55151",
+        "rails": [
+          "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+          "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+        ]
+      },
+      "input_sha256": {
+        "softroce-vm-concurrent-256-summary.csv": "6dd48f945eb7f73c4dd0bda4a1cfeb36ae8ca86f312e58cee633f7221a115a01",
+        "softroce-vm-concurrent-256-samples.csv": "c921e99de71630b3c6739aac4e2ffa4c813565b8f0f673d341244e63cc409799",
+        "softroce-vm-concurrent-256-environment.json": "239f5bf9c1da721b8308b9d5fdf255d01df2f6c38555b0a506f674af8e881e5a",
+        "softroce-vm-concurrent-256-batches.csv": "2cc203527cb97fcf173f75231997d67ff0cecadef1921aded9d4b873679ee79f"
+      }
+    }
+  },
+  "blocks": [
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 352824,
+        "throughput_gib_per_s": 0.17714214452531574,
+        "cpu_us_per_read": 123132.0,
+        "peak_rss_kb": 203044,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 329447,
+        "throughput_gib_per_s": 0.18971185046456637,
+        "cpu_us_per_read": 136193.4,
+        "peak_rss_kb": 211360,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0709583028529628,
+      "dual_cpu_over_single_cpu": 1.1060764058084007,
+      "dual_minus_single_peak_rss_kb": 8316
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 371380,
+        "throughput_gib_per_s": 0.16829123808498034,
+        "cpu_us_per_read": 137235.8,
+        "peak_rss_kb": 202808,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 328238,
+        "throughput_gib_per_s": 0.1904106166866725,
+        "cpu_us_per_read": 136512.4,
+        "peak_rss_kb": 211044,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1314351172015429,
+      "dual_cpu_over_single_cpu": 0.9947287806825916,
+      "dual_minus_single_peak_rss_kb": 8236
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 64,
+      "concurrency": 1,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 352691,
+        "throughput_gib_per_s": 0.17720894494047199,
+        "cpu_us_per_read": 115668.6,
+        "peak_rss_kb": 203032,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 330370,
+        "throughput_gib_per_s": 0.18918182643702516,
+        "cpu_us_per_read": 140192.6,
+        "peak_rss_kb": 211312,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0675636407664135,
+      "dual_cpu_over_single_cpu": 1.212019510913074,
+      "dual_minus_single_peak_rss_kb": 8280
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 128,
+      "concurrency": 1,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 703299,
+        "throughput_gib_per_s": 0.17773379458807706,
+        "cpu_us_per_read": 235071.0,
+        "peak_rss_kb": 399608,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 647801,
+        "throughput_gib_per_s": 0.19296049249692424,
+        "cpu_us_per_read": 250199.2,
+        "peak_rss_kb": 407544,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0856713713007544,
+      "dual_cpu_over_single_cpu": 1.064355875458904,
+      "dual_minus_single_peak_rss_kb": 7936
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 128,
+      "concurrency": 1,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 737776,
+        "throughput_gib_per_s": 0.16942811910390146,
+        "cpu_us_per_read": 270055.0,
+        "peak_rss_kb": 399904,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 649725,
+        "throughput_gib_per_s": 0.19238908769094618,
+        "cpu_us_per_read": 264405.4,
+        "peak_rss_kb": 407716,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.135520412482204,
+      "dual_cpu_over_single_cpu": 0.9790798170742998,
+      "dual_minus_single_peak_rss_kb": 7812
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 128,
+      "concurrency": 1,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 687005,
+        "throughput_gib_per_s": 0.18194918523154854,
+        "cpu_us_per_read": 232439.0,
+        "peak_rss_kb": 399684,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 615369,
+        "throughput_gib_per_s": 0.20313015442766857,
+        "cpu_us_per_read": 245795.6,
+        "peak_rss_kb": 407928,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1164114539406438,
+      "dual_cpu_over_single_cpu": 1.0574628182017647,
+      "dual_minus_single_peak_rss_kb": 8244
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1432946,
+        "throughput_gib_per_s": 0.17446575097735714,
+        "cpu_us_per_read": 451400.2,
+        "peak_rss_kb": 792776,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1238127,
+        "throughput_gib_per_s": 0.2019178969524128,
+        "cpu_us_per_read": 463818.0,
+        "peak_rss_kb": 801036,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1573497710654885,
+      "dual_cpu_over_single_cpu": 1.0275095137308312,
+      "dual_minus_single_peak_rss_kb": 8260
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1411231,
+        "throughput_gib_per_s": 0.1771503035293301,
+        "cpu_us_per_read": 432960.6,
+        "peak_rss_kb": 793100,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1279419,
+        "throughput_gib_per_s": 0.19540119382313376,
+        "cpu_us_per_read": 510025.2,
+        "peak_rss_kb": 801076,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.1030248886408596,
+      "dual_cpu_over_single_cpu": 1.177994487258194,
+      "dual_minus_single_peak_rss_kb": 7976
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 256,
+      "concurrency": 1,
+      "trial": 3,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 1424505,
+        "throughput_gib_per_s": 0.17549955949610568,
+        "cpu_us_per_read": 440461.4,
+        "peak_rss_kb": 792824,
+        "raw_request_samples": 5
+      },
+      "dual": {
+        "decisive_time_us": 1309757,
+        "throughput_gib_per_s": 0.1908751012592412,
+        "cpu_us_per_read": 461670.4,
+        "peak_rss_kb": 801232,
+        "raw_request_samples": 5
+      },
+      "paired_throughput_ratio": 1.0876101444771817,
+      "dual_cpu_over_single_cpu": 1.0481517790208177,
+      "dual_minus_single_peak_rss_kb": 8408
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 64,
+      "concurrency": 2,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 1822389,
+        "throughput_gib_per_s": 0.20577384960071643,
+        "cpu_us_per_read": 142965.83333333334,
+        "peak_rss_kb": 465624,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 1647237,
+        "throughput_gib_per_s": 0.22765394415011317,
+        "cpu_us_per_read": 148866.5,
+        "peak_rss_kb": 482064,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.1063307830020817,
+      "dual_cpu_over_single_cpu": 1.0412732645911902,
+      "dual_minus_single_peak_rss_kb": 16440
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 64,
+      "concurrency": 2,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 1806445,
+        "throughput_gib_per_s": 0.20759004564213135,
+        "cpu_us_per_read": 138851.5,
+        "peak_rss_kb": 465248,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 1663743,
+        "throughput_gib_per_s": 0.22539538859066574,
+        "cpu_us_per_read": 152380.33333333334,
+        "peak_rss_kb": 481960,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.085771660647107,
+      "dual_cpu_over_single_cpu": 1.097433829186817,
+      "dual_minus_single_peak_rss_kb": 16712
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 3041166,
+        "throughput_gib_per_s": 0.2466159361244996,
+        "cpu_us_per_read": 147965.33333333334,
+        "peak_rss_kb": 858216,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 2880101,
+        "throughput_gib_per_s": 0.26040753431910896,
+        "cpu_us_per_read": 149600.25,
+        "peak_rss_kb": 873036,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.0559233860201431,
+      "dual_cpu_over_single_cpu": 1.0110493223637969,
+      "dual_minus_single_peak_rss_kb": 14820
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 64,
+      "concurrency": 4,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "a0a4cbfa5cad46af",
+      "single": {
+        "decisive_time_us": 2905754,
+        "throughput_gib_per_s": 0.25810856665774184,
+        "cpu_us_per_read": 148751.16666666666,
+        "peak_rss_kb": 857316,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 2948750,
+        "throughput_gib_per_s": 0.2543450614667232,
+        "cpu_us_per_read": 158136.91666666666,
+        "peak_rss_kb": 797296,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 0.9854189063162357,
+      "dual_cpu_over_single_cpu": 1.0630969841132898,
+      "dual_minus_single_peak_rss_kb": -60020
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 128,
+      "concurrency": 2,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 3467011,
+        "throughput_gib_per_s": 0.21632466698259684,
+        "cpu_us_per_read": 262832.0,
+        "peak_rss_kb": 793308,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 3164471,
+        "throughput_gib_per_s": 0.23700643804288302,
+        "cpu_us_per_read": 282125.3333333333,
+        "peak_rss_kb": 940816,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.0956052370206584,
+      "dual_cpu_over_single_cpu": 1.073405572127189,
+      "dual_minus_single_peak_rss_kb": 147508
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 128,
+      "concurrency": 2,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 3548659,
+        "throughput_gib_per_s": 0.2113474413856051,
+        "cpu_us_per_read": 258538.33333333334,
+        "peak_rss_kb": 824140,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 3132073,
+        "throughput_gib_per_s": 0.23945802029518468,
+        "cpu_us_per_read": 277336.1666666667,
+        "peak_rss_kb": 940856,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.1330064784569198,
+      "dual_cpu_over_single_cpu": 1.0727081090489483,
+      "dual_minus_single_peak_rss_kb": 116716
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 128,
+      "concurrency": 4,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 6016877,
+        "throughput_gib_per_s": 0.24929876412630672,
+        "cpu_us_per_read": 275015.1666666667,
+        "peak_rss_kb": 1374280,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 5584092,
+        "throughput_gib_per_s": 0.2686202161425707,
+        "cpu_us_per_read": 288477.25,
+        "peak_rss_kb": 1545312,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.077503200162175,
+      "dual_cpu_over_single_cpu": 1.0489503306181294,
+      "dual_minus_single_peak_rss_kb": 171032
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 128,
+      "concurrency": 4,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "6c7a2ea2bc98454c",
+      "single": {
+        "decisive_time_us": 6039107,
+        "throughput_gib_per_s": 0.24838109342987302,
+        "cpu_us_per_read": 269338.8333333333,
+        "peak_rss_kb": 1434616,
+        "raw_request_samples": 12
+      },
+      "dual": {
+        "decisive_time_us": 5623196,
+        "throughput_gib_per_s": 0.26675221706659347,
+        "cpu_us_per_read": 278203.0833333333,
+        "peak_rss_kb": 1640536,
+        "raw_request_samples": 12
+      },
+      "paired_throughput_ratio": 1.0739634542349226,
+      "dual_cpu_over_single_cpu": 1.032911147235236,
+      "dual_minus_single_peak_rss_kb": 205920
+    },
+    {
+      "dataset": "softroce-vm-concurrent-256",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 1,
+      "run_order": [
+        1,
+        2
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7397528,
+        "throughput_gib_per_s": 0.20277043898988958,
+        "cpu_us_per_read": 513954.0,
+        "peak_rss_kb": 1827932,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6282179,
+        "throughput_gib_per_s": 0.23877065585046206,
+        "cpu_us_per_read": 524538.3333333334,
+        "peak_rss_kb": 1857996,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.1775417414881046,
+      "dual_cpu_over_single_cpu": 1.020593931233794,
+      "dual_minus_single_peak_rss_kb": 30064
+    },
+    {
+      "dataset": "softroce-vm-concurrent-256",
+      "size_mib": 256,
+      "concurrency": 2,
+      "trial": 2,
+      "run_order": [
+        2,
+        1
+      ],
+      "object_xxh3": "fe51c755b1336171",
+      "single": {
+        "decisive_time_us": 7059991,
+        "throughput_gib_per_s": 0.2124648600826828,
+        "cpu_us_per_read": 501488.0,
+        "peak_rss_kb": 1841696,
+        "raw_request_samples": 6
+      },
+      "dual": {
+        "decisive_time_us": 6262040,
+        "throughput_gib_per_s": 0.2395385529316325,
+        "cpu_us_per_read": 526856.1666666666,
+        "peak_rss_kb": 1858212,
+        "raw_request_samples": 6
+      },
+      "paired_throughput_ratio": 1.1274266852335662,
+      "dual_cpu_over_single_cpu": 1.050585790022227,
+      "dual_minus_single_peak_rss_kb": 16516
+    }
+  ],
+  "cells": [
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 64,
+      "concurrency": 1,
+      "independent_process_blocks": 3,
+      "repeated_request_samples_per_arm": 15,
+      "paired_ratio_geometric_mean": 1.08959557322,
+      "paired_ratio_min": 1.0675636407664135,
+      "paired_ratio_max": 1.1314351172015429,
+      "blocks_favoring_dual": 3,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 128,
+      "concurrency": 1,
+      "independent_process_blocks": 3,
+      "repeated_request_samples_per_arm": 15,
+      "paired_ratio_geometric_mean": 1.1123442265059855,
+      "paired_ratio_min": 1.0856713713007544,
+      "paired_ratio_max": 1.135520412482204,
+      "blocks_favoring_dual": 3,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-paired",
+      "size_mib": 256,
+      "concurrency": 1,
+      "independent_process_blocks": 3,
+      "repeated_request_samples_per_arm": 15,
+      "paired_ratio_geometric_mean": 1.1155980092021918,
+      "paired_ratio_min": 1.0876101444771817,
+      "paired_ratio_max": 1.1573497710654885,
+      "blocks_favoring_dual": 3,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 64,
+      "concurrency": 2,
+      "independent_process_blocks": 2,
+      "repeated_request_samples_per_arm": 12,
+      "paired_ratio_geometric_mean": 1.0960030161843464,
+      "paired_ratio_min": 1.085771660647107,
+      "paired_ratio_max": 1.1063307830020817,
+      "blocks_favoring_dual": 2,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 64,
+      "concurrency": 4,
+      "independent_process_blocks": 2,
+      "repeated_request_samples_per_arm": 24,
+      "paired_ratio_geometric_mean": 1.0200621884011316,
+      "paired_ratio_min": 0.9854189063162357,
+      "paired_ratio_max": 1.0559233860201431,
+      "blocks_favoring_dual": 1,
+      "blocks_favoring_single": 1,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 128,
+      "concurrency": 2,
+      "independent_process_blocks": 2,
+      "repeated_request_samples_per_arm": 12,
+      "paired_ratio_geometric_mean": 1.1141489269284135,
+      "paired_ratio_min": 1.0956052370206584,
+      "paired_ratio_max": 1.1330064784569198,
+      "blocks_favoring_dual": 2,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-concurrent-64-128",
+      "size_mib": 128,
+      "concurrency": 4,
+      "independent_process_blocks": 2,
+      "repeated_request_samples_per_arm": 24,
+      "paired_ratio_geometric_mean": 1.075731871237137,
+      "paired_ratio_min": 1.0739634542349226,
+      "paired_ratio_max": 1.077503200162175,
+      "blocks_favoring_dual": 2,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    },
+    {
+      "dataset": "softroce-vm-concurrent-256",
+      "size_mib": 256,
+      "concurrency": 2,
+      "independent_process_blocks": 2,
+      "repeated_request_samples_per_arm": 12,
+      "paired_ratio_geometric_mean": 1.152211778420137,
+      "paired_ratio_min": 1.1274266852335662,
+      "paired_ratio_max": 1.1775417414881046,
+      "blocks_favoring_dual": 2,
+      "blocks_favoring_single": 0,
+      "ratio_95pct_block_bootstrap": null,
+      "interval_status": "not estimated: fewer than 10 independent blocks"
+    }
+  ]
+}

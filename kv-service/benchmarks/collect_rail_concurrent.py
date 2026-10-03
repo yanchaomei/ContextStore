@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import platform
 import re
@@ -52,6 +53,7 @@ def main() -> None:
     parser.add_argument("--warmup", type=int, default=1)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--output-prefix", default="rail-verbs-concurrent")
+    parser.add_argument("--raw-output-dir", type=Path, help="save complete output for every arm")
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--notes", default="")
     args = parser.parse_args()
@@ -67,6 +69,8 @@ def main() -> None:
         objects.append((int(size_text), key))
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    if args.raw_output_dir:
+        args.raw_output_dir.mkdir(parents=True, exist_ok=True)
     summaries: list[dict[str, object]] = []
     samples: list[dict[str, object]] = []
     batches: list[dict[str, object]] = []
@@ -94,13 +98,23 @@ def main() -> None:
                     ]
                     for rail in args.rail[:rails]:
                         command.extend(["--rail", rail])
-                    output = subprocess.run(
+                    completed = subprocess.run(
                         command,
                         text=True,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.STDOUT,
-                        check=True,
-                    ).stdout
+                        check=False,
+                    )
+                    output = completed.stdout
+                    if args.raw_output_dir:
+                        (
+                            args.raw_output_dir
+                            / f"trial-{trial:02d}-{size_mib}mib-c{concurrency}-{rails}rail.log"
+                        ).write_text(output)
+                    if completed.returncode != 0:
+                        raise RuntimeError(
+                            f"arm failed with exit {completed.returncode}: {output[-2000:]}"
+                        )
                     sample_matches = SAMPLE.findall(output)
                     batch_matches = BATCH.findall(output)
                     summary_match = SUMMARY.search(output)
@@ -195,6 +209,7 @@ def main() -> None:
     environment = {
         "environment": args.environment,
         "source_commit": args.source_commit,
+        "client_binary_sha256": hashlib.sha256(args.binary.read_bytes()).hexdigest(),
         "platform": platform.platform(),
         "machine": platform.machine(),
         "notes": args.notes,

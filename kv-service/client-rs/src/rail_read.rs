@@ -949,6 +949,7 @@ impl RailReader {
         transport: &T,
         cancel: Option<&RailCancel>,
     ) -> Result<StagedRailRead, RailReadError> {
+        let timing_start = Instant::now();
         if let Some(expected) = &self.discovered_owners {
             let current: HashSet<(&str, &str)> = placement
                 .chunks
@@ -979,10 +980,14 @@ impl RailReader {
             route.enabled = counters.is_available();
         }
         let plan = RailPlan::build(descriptor, placement, &available)?;
+        let plan_us = timing_start.elapsed().as_micros();
+        let reserve_start = Instant::now();
         let mut budget = self.reserve(&plan)?;
         if cancel.is_some_and(RailCancel::is_cancelled) {
             return Err(RailReadError::Cancelled);
         }
+        let reserve_us = reserve_start.elapsed().as_micros();
+        let workers_start = Instant::now();
         let results = std::thread::scope(|scope| {
             let handles: Vec<_> = plan
                 .tasks
@@ -1030,9 +1035,11 @@ impl RailReader {
                 .map(|handle| handle.join().unwrap_or(Err(RailReadError::WorkerPanic)))
                 .collect::<Vec<_>>()
         });
+        let workers_us = workers_start.elapsed().as_micros();
         if cancel.is_some_and(RailCancel::is_cancelled) {
             return Err(RailReadError::Cancelled);
         }
+        let assembly_start = Instant::now();
         let mut staged = Vec::new();
         staged
             .try_reserve_exact(plan.size)
@@ -1052,6 +1059,8 @@ impl RailReader {
                 );
             }
         }
+        let assembly_us = assembly_start.elapsed().as_micros();
+        let checksum_start = Instant::now();
         for (index, checksum) in plan.checksums.iter().enumerate() {
             if checksum.is_empty() {
                 continue;
@@ -1065,7 +1074,18 @@ impl RailReader {
                 });
             }
         }
+        let checksum_us = checksum_start.elapsed().as_micros();
+        let finish_start = Instant::now();
         budget.finish_transfer();
+        if crate::rail_timing_enabled() {
+            eprintln!(
+                "RAIL_STAGED_TIMING bytes={} rails={} plan_us={plan_us} reserve_us={reserve_us} workers_us={workers_us} assembly_us={assembly_us} checksum_us={checksum_us} finish_us={} total_us={}",
+                plan.size,
+                plan.tasks.len(),
+                finish_start.elapsed().as_micros(),
+                timing_start.elapsed().as_micros(),
+            );
+        }
         Ok(StagedRailRead {
             bytes: staged,
             _budget: budget,
@@ -1178,8 +1198,11 @@ impl RailTransport for VerbsTransport {
         descriptor: &pb::ObjectDescriptor,
         timeout: Duration,
     ) -> Result<Vec<u8>, RailReadError> {
+        let timing_start = Instant::now();
         let mut client = RdmaClient::connect(route.connection.clone().with_io_timeout(timeout))
             .map_err(|error| RailReadError::Transport(error.to_string()))?;
+        let connect_us = timing_start.elapsed().as_micros();
+        let allocation_start = Instant::now();
         let capacity = task
             .packed_len
             .checked_add(task.dummy_len)
@@ -1189,9 +1212,13 @@ impl RailTransport for VerbsTransport {
             .try_reserve_exact(capacity)
             .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
         packed.resize(capacity, 0u8);
+        let allocation_us = allocation_start.elapsed().as_micros();
+        let registration_start = Instant::now();
         let registered = client
             .register_buffer(&mut packed)
             .map_err(|error| RailReadError::Transport(error.to_string()))?;
+        let registration_us = registration_start.elapsed().as_micros();
+        let get_start = Instant::now();
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
             if descriptor.is_striped {
                 let view = registered.view();
@@ -1205,8 +1232,11 @@ impl RailTransport for VerbsTransport {
                     .map(|outcome| outcome.map(|bytes| RdmaReadOutcome { bytes, chunks: 1 }))
             }
         }));
+        let get_us = get_start.elapsed().as_micros();
+        let teardown_start = Instant::now();
         drop(client);
         drop(registered);
+        let teardown_us = teardown_start.elapsed().as_micros();
         let result = match result {
             Ok(result) => result.map_err(|error| RailReadError::Transport(error.to_string()))?,
             Err(panic) => std::panic::resume_unwind(panic),
@@ -1219,6 +1249,14 @@ impl RailTransport for VerbsTransport {
             });
         }
         packed.truncate(task.packed_len);
+        if crate::rail_timing_enabled() {
+            eprintln!(
+                "RAIL_TRANSPORT_TIMING rail={} bytes={} connect_us={connect_us} allocation_us={allocation_us} registration_us={registration_us} get_us={get_us} teardown_us={teardown_us} total_us={}",
+                route.id,
+                task.packed_len,
+                timing_start.elapsed().as_micros(),
+            );
+        }
         Ok(packed)
     }
 }

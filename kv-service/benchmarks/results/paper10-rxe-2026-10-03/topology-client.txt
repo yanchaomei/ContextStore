@@ -1,0 +1,8 @@
+cs-railvm-client
+link rxe_c0/1 state ACTIVE physical_state LINK_UP netdev enp0s3
+link rxe_c1/1 state ACTIVE physical_state LINK_UP netdev enp0s4
+enp0s3           UP             10.31.0.1/24 fe80::5054:ff:fe31:1/64
+enp0s4           UP             10.32.0.1/24 fe80::5054:ff:fe32:1/64
+CPU(s):                                  4
+NUMA node(s):                            1
+41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679  /home/railtest/bin/cs-rail-read-bench-paper-20261003

@@ -1,0 +1,20 @@
+{
+  "environment": "soft-roce",
+  "source_commit": "c1c1de1-research-timing",
+  "client_binary_sha256": "41ee6b203c806653c1b422ec1157494f9ccf18f9b8de1fd6c299b8685e6e9679",
+  "platform": "Linux-5.15.0-194-generic-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "notes": "two KVM guests; independent RXE paths; server binary sha256 51e13244c4309c15d2cd519050caa3b42edac558243112c0487dbcbf4329add7; no timing env",
+  "objects_mib": [
+    64,
+    256
+  ],
+  "trials": 10,
+  "iterations_per_trial": 5,
+  "warmup_reads": 1,
+  "coordinator": "http://10.31.0.2:55151",
+  "rails": [
+    "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+    "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+  ]
+}
