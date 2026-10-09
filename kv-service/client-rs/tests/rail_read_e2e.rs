@@ -933,7 +933,7 @@ async fn concurrent_rewrites_never_publish_mixed_direct_staging_bytes() {
 }
 
 /// Each committed Generation has unique bytes. Monotonic read/write intervals
-/// show which attempts actually overlapped a write, and the SDK's opt-in
+/// show which attempts overlapped a client PUT call, and the SDK's opt-in
 /// accepted-ID trace is checked against the returned generation-coded bytes.
 #[tokio::test]
 #[ignore = "requires two real Rails, striped writes, and CS_RAIL_TIMING=1"]
@@ -985,7 +985,7 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
         .iter()
         .all(|chunk| chunk.rdma_endpoint == advertised));
     println!(
-        "UNIQUE_CONFIG,object_key={key},object_mib={mib},stripe_count={},direct_staging=true",
+        "UNIQUE_CONFIG,object_key={key},object_mib={mib},stripe_count={},direct_staging=true,put_interval_scope=sdk_call",
         initial.descriptor.stripe_count
     );
     let listener0 = setting("CS_RAIL_LISTENER0", &advertised);
@@ -1016,13 +1016,11 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
         let mut committed = Vec::new();
         for revision in 0..15u8 {
             let value = 0x20u8 + revision;
+            let payload = Bytes::from(vec![value; size]);
+            let chunks = segments(&payload);
             let start_ns = epoch.elapsed().as_nanos();
             assert!(writer_client
-                .put_stream_chunks(
-                    "rail-e2e",
-                    &writer_key,
-                    segments(&Bytes::from(vec![value; size])),
-                )
+                .put_stream_chunks("rail-e2e", &writer_key, chunks)
                 .await
                 .expect("concurrent rewrite"));
             let put_end_ns = epoch.elapsed().as_nanos();
@@ -1115,7 +1113,7 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
             })
         })
         .count();
-    assert!(put_overlaps > 0, "no read overlapped a PUT operation");
+    assert!(put_overlaps > 0, "no read overlapped an SDK PUT call");
     assert!(round_overlaps >= put_overlaps);
     assert!(!accepted_generations.is_empty());
     assert!(

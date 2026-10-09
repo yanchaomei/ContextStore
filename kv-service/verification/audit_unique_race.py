@@ -1,4 +1,4 @@
-"""Audit generation-unique direct-Rail race logs and actual overlap intervals."""
+"""Audit generation-unique direct-Rail race logs and measured intervals."""
 
 from __future__ import annotations
 
@@ -68,6 +68,9 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
         "direct_staging"
     ) != "true":
         raise ValueError(f"object layout or mode differs: {path}")
+    put_scope = config[0].get("put_interval_scope", "prepare_plus_sdk_call")
+    if put_scope not in ("prepare_plus_sdk_call", "sdk_call"):
+        raise ValueError(f"unknown PUT interval scope: {path}")
     object_key = config[0]["object_key"]
     writes = [fields(line) for line in raw.splitlines() if line.startswith("UNIQUE_WRITE,")]
     if len(writes) != 15:
@@ -225,6 +228,19 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
         "put_overlap_rejected": put_rejected if has_put_end else None,
         "direct_mode_admissions": int(modes[0]["direct"]),
         "put_end_timestamp_logged": has_put_end,
+        "put_interval_scope": put_scope if has_put_end else None,
+        "put_interval_definition": (
+            "start_ns is recorded immediately before put_stream_chunks and "
+            "after payload Bytes allocation/segmentation; put_end_ns is "
+            "recorded after the SDK call returns. Overlap establishes SDK "
+            "call overlap, not server commit overlap."
+            if has_put_end and put_scope == "sdk_call" else
+            "start_ns is recorded before payload Bytes allocation/segmentation; "
+            "put_end_ns is recorded after put_stream_chunks returns. Overlap "
+            "with this client PUT attempt includes preparation time and does "
+            "not establish overlap with the SDK call or server commit."
+            if has_put_end else None
+        ),
         "rejection_reasons": rejection_reasons,
         "accepted_generations": accepted,
         "per_rail_bytes": {item["id"]: int(item["bytes"]) for item in rails},
@@ -248,6 +264,8 @@ def main() -> None:
         {run["launch_time_binary_sha256"] for run in runs}
     ) != 1:
         raise ValueError("campaign mixed source commits or binaries")
+    if len({run["put_interval_scope"] for run in runs}) != 1:
+        raise ValueError("campaign mixed PUT interval scopes")
     server_before = server_image_receipt(args.logs / "server-live-before.txt")
     server_after = server_image_receipt(args.logs / "server-live-after.txt")
     if any(
@@ -273,13 +291,22 @@ def main() -> None:
         )
     result = {
         "environment": "isolated two-RXE KVM guests on one host",
-        "scope": "per-Generation unique byte values; exact SDK accepted Generation trace; writer-round overlap is available for all runs, exact PUT overlap only when put_end_ns is logged",
+        "scope": "per-Generation unique byte values; SDK accepted Generation trace; writer-round overlap for all runs; put_overlap_* counts intersection with the per-run put_interval_scope, not proven server commit overlap",
         "auditor_sha256": digest(Path(__file__)),
         "runs": runs,
         "server_image_before": server_before,
         "server_image_after": server_after,
         "totals": totals,
         "source_commit_label_boundary": "source_commit in launch manifests is an operator-supplied label; binary SHA was recorded before execution and source/build identity requires a separate build receipt",
+        "put_interval_boundary": (
+            "put_overlap_* counts SDK put_stream_chunks call intersections; payload "
+            "allocation/segmentation ended before start_ns, but server commit overlap is unknown"
+            if runs[0]["put_interval_scope"] == "sdk_call" else
+            "put_overlap_* counts payload preparation plus SDK call intersections; "
+            "SDK call and server commit overlap are unknown"
+            if runs[0]["put_interval_scope"] == "prepare_plus_sdk_call" else
+            "put_end_ns is absent; only the wider writer-round interval is available"
+        ),
         "non_claim": "finite observed schedules and a logged accepted-ID implementation path do not prove all provider, crash, or aliasing behaviors",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
