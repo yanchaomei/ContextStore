@@ -31,8 +31,12 @@ def main() -> None:
     args = parser.parse_args()
     audit = json.loads(args.audit.read_text())
     has_put_end = audit["totals"].get("put_overlap_reads") is not None
+    put_scope = audit["runs"][0]["put_interval_scope"] if has_put_end else None
+    if has_put_end and put_scope not in ("prepare_plus_sdk_call", "sdk_call"):
+        raise ValueError("unknown measured PUT interval scope")
+    is_sdk_call = put_scope == "sdk_call"
     runs = []
-    for index in (1, 2, 3):
+    for index in range(1, len(audit["runs"]) + 1):
         lines = (args.logs / f"run{index}.log").read_text().splitlines()
         writes = [fields(line) for line in lines if line.startswith("UNIQUE_WRITE,")]
         reads = [fields(line) for line in lines if line.startswith("UNIQUE_READ,")]
@@ -76,24 +80,28 @@ def main() -> None:
     ax.set_xlim(0, max_read * 1.02)
     ax.set_xlabel("Elapsed monotonic time (ms)")
     ax.set_ylabel("Read attempt, run 1")
-    ax.set_yticks([0, 5, 10, 15, 20])
+    tick_marks = list(range(0, len(reads), 5))
+    if len(reads) - 1 not in tick_marks:
+        tick_marks.append(len(reads) - 1)
+    ax.set_yticks(tick_marks)
     ax.grid(axis="x", color="#E5E8EA", linewidth=0.55)
     ax.set_title("A  |  Timestamped write/read intervals", loc="left", fontweight="bold")
     ax.legend(
         handles=[
             Line2D(
                 [0], [0], color=PALE, lw=4,
-                label="PUT interval" if has_put_end else "PUT + Lookup round",
+                label=("SDK PUT call" if is_sdk_call else "PUT attempt (prepare + SDK call)")
+                if has_put_end else "PUT + Lookup round",
             ),
             Line2D([0], [0], color=BLUE, lw=3, label="Accepted generation"),
             Line2D([0], [0], color=VERMILION, lw=3, label="Safe rejection"),
         ],
-        loc="lower right",
+        loc="lower left",
         frameon=False,
         fontsize=8,
     )
 
-    labels = ["Run 1", "Run 2", "Run 3"]
+    labels = [f"Run {index}" for index in range(1, len(runs) + 1)]
     accepted_key = "put_overlap_accepted" if has_put_end else "round_overlap_accepted"
     rejected_key = "put_overlap_rejected" if has_put_end else "round_overlap_rejected"
     overlap_key = "put_overlap_reads" if has_put_end else "writer_round_overlap_reads"
@@ -103,7 +111,7 @@ def main() -> None:
         run["read_attempts"] - run[overlap_key]
         for run in audit["runs"]
     ]
-    positions = range(3)
+    positions = range(len(runs))
     summary.bar(positions, overlap_accepted, color=BLUE, width=0.62, label="Accepted in overlap")
     summary.bar(
         positions,
@@ -119,7 +127,8 @@ def main() -> None:
         bottom=[a + b for a, b in zip(overlap_accepted, overlap_rejected)],
         color=GREY,
         width=0.62,
-        label="After final write",
+        label=("No SDK-call overlap" if is_sdk_call else "No attempt overlap")
+        if has_put_end else "No round overlap",
     )
     for x, run in enumerate(audit["runs"]):
         summary.text(x, run["read_attempts"] + 0.4, str(run["read_attempts"]), ha="center", fontsize=8)
@@ -127,7 +136,8 @@ def main() -> None:
     summary.set_xticks(list(positions), labels)
     summary.set_ylabel("Read attempts")
     summary.set_title(
-        "B  |  PUT overlap classes" if has_put_end else "B  |  Writer-round overlap",
+        ("B  |  SDK-call overlap" if is_sdk_call else "B  |  Client-attempt overlap")
+        if has_put_end else "B  |  Writer-round overlap",
         loc="left", fontweight="bold",
     )
     summary.legend(frameon=False, fontsize=7.5, loc="upper right")
@@ -135,7 +145,8 @@ def main() -> None:
     summary.set_axisbelow(True)
     fig.suptitle(
         (
-            f"Generation-unique direct reads: {audit['totals'][overlap_key]} PUT overlaps, "
+            f"Generation-unique direct reads: {audit['totals'][overlap_key]} "
+            f"{'SDK-call' if is_sdk_call else 'client-attempt'} overlaps, "
             f"{audit['totals'][accepted_key]} accepted and {audit['totals'][rejected_key]} safely rejected"
             if has_put_end else
             f"Generation-unique reads: {audit['totals'][overlap_key]} writer-round overlaps (PUT + Lookup)"
@@ -147,7 +158,11 @@ def main() -> None:
         0.5,
         -0.005,
         (
-            "Two software RXE paths, one VM host, 8 MiB/2 stripes; intervals are observed executions, not all schedules."
+            (
+                "Payload prepared before SDK call; server commit overlap is unproven. Two RXE paths, one VM host."
+                if is_sdk_call else
+                "Client PUT attempts include payload preparation; SDK-call/commit overlap is unproven. Two RXE paths, one VM host."
+            )
             if has_put_end else
             "Writer-round intervals include post-PUT Lookup: overlap is an upper bound on PUT overlap."
         ),

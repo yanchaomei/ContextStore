@@ -1,0 +1,38 @@
+{
+  "schema": "contextstore.multi-rail-ownership-supplement.v1",
+  "date": "2026-10-09",
+  "product_code_commit": "bcdb1fd308ec2759481694678c592696e4d8d042",
+  "test_and_auditor_code_commit": "4b3d84055af5b3e1d3cc81cef0c6e95fab5748fe",
+  "branch": "research/direct-ordered-staging",
+  "environment": "two isolated KVM guests with two independently faultable software RXE paths on one host",
+  "rust_release_test_binary_sha256_64mib_initial": "b024846ac2aee345dff8b53d3f1688f5a5e4d54a7e1dd839b386a902617d97f9",
+  "rust_release_test_binary_sha256_32mib_enriched": "d94594839e140c3a04ed3b3b142b240bd2de021f3047487e7730095022da3cde",
+  "server_binary_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+  "test_only_verbs_interposer_sha256": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+  "rewrite_campaign": {
+    "process_runs": 5,
+    "object_sizes_mib": [64, 32],
+    "committed_overwrites": 75,
+    "total_read_attempts": 100,
+    "timestamp_verified_overlaps": null,
+    "accepted_complete_a": 2,
+    "accepted_complete_b": 53,
+    "safe_rejections": 45,
+    "version_changed_rejections": 40,
+    "stale_descriptor_rejections": 5,
+    "missing_reads": 0
+  },
+  "server_error_return_injection": {
+    "operations": ["ibv_destroy_qp", "ibv_dereg_mr"],
+    "server_shell_exit_code_each": 134,
+    "normal_recovery_read": "same 32 MiB object, complete xxh3 cbc0b23c1894ad96"
+  },
+  "boundaries": [
+    "A/B content repeats across different Generations: these logs reject observed A/B byte mixtures but cannot detect mixing different Generations with identical A or B bytes",
+    "100 is total read attempts in runs that also performed writes; read/write interval overlap was not timestamped and cannot be inferred for every attempt",
+    "64 MiB transcripts were produced by a pre-enriched test binary; its SHA is pinned, but size/direct-mode/Rail-byte configuration is not independently present in those raw logs",
+    "the interposer forces software return values and does not reproduce real provider or device faults",
+    "finite observed schedules are not an implementation-level formal proof",
+    "Python/rdma-ffi external-buffer API is out of scope"
+  ]
+}

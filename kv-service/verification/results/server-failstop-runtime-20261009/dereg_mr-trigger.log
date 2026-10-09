@@ -1,0 +1,6 @@
+object_identity,generation=16,layout_version=1,stripe_count=2,chunk_size=4194304,handle_xxh3=1ee5984be9909303,etag_xxh3=bd060a8588577b5a,descriptor_xxh3=3f89ed69e1be784e,placement_xxh3=abdeac6bde1433c7
+mode,direct_staging=false
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1],bytes=8388608
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+Error: rail transfer failed: failed to fill whole buffer

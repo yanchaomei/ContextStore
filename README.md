@@ -500,6 +500,8 @@ The [five-arm collector](kv-service/benchmarks/collect_rail_modes.py) and [raw-l
 
 The [bounded two-Rail state explorer](kv-service/verification/multirail_state_explorer.py) and its [result/assumptions](docs/paper/safety-model-plan.md) test an abstract ownership contract; they do not prove the Rust/provider implementation. The test-only [Verbs return-value shim](kv-service/verification/verbs_failstop_shim.c) exercises QP/MR fail-stop cleanup in an isolated guest, not on production devices. The separate Python/`rdma-ffi` external-buffer path is outside the direct-staging safety claim.
 
+The [concurrent rewrite and server fault supplement](docs/paper/rewrite-race-and-server-failstop-2026-10-09.md) uses unique bytes for every committed Generation and compares them with SDK-accepted IDs. Two final real-RXE runs prepare each payload before timing the SDK PUT call: **31 of 40 read attempts intersected the SDK call**, six returning a whole value matching the accepted Generation and 25 safely rejecting. Server commit overlap remains unknown. An earlier preparation-inclusive run is retained as weaker evidence. A release-build receipt connects the launched test binary to 20 files from its Git source commit. Earlier runs that only timed PUT plus post-PUT Lookup, and repeated A/B-byte runs, remain explicitly weaker evidence. Isolated test-only server QP/MR cleanup-error injections each aborted with launch-time hashes; a normal server restart read the same object. [Raw logs and replay auditors](kv-service/verification/results/README.md) are checked in; this is bounded execution evidence rather than a provider or implementation proof.
+
 ---
 
 ## Deployment shapes

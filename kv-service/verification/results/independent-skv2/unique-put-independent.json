@@ -1,0 +1,121 @@
+{
+  "environment": "isolated two-RXE KVM guests on one host",
+  "scope": "per-Generation unique byte values; SDK accepted Generation trace; writer-round overlap for all runs; put_overlap_* counts intersection with the per-run put_interval_scope, not proven server commit overlap",
+  "auditor_sha256": "f939630608f1d794bf0ef4c235d388186c3cde95a6b5a1e82554ab485d0aa2cd",
+  "runs": [
+    {
+      "file": "run1.log",
+      "raw_sha256": "8819b7641e187b4103d001dce45d3bcb916eaf348d01d2f6451d781990a79904",
+      "launch_manifest_sha256": "662ec824581cce11502bccf3c6e983abba38a240781afa91b1b91f649f60ae1c",
+      "exit_receipt_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_commit_label": "d74b687738bfc803f6dccb24c568acc067fc48d7",
+      "launch_time_binary_sha256": "018f3b8a8f4b34abdf9786df20fc7a3cc0d0f64885f4643d538fb3e76b8d3f34",
+      "object_key": "unique-race-1791534347830162347",
+      "object_mib": 8,
+      "write_commits": 15,
+      "read_attempts": 21,
+      "writer_round_overlap_reads": 20,
+      "put_overlap_reads": 20,
+      "accepted": 10,
+      "rejected": 11,
+      "missing": 0,
+      "round_overlap_accepted": 9,
+      "round_overlap_rejected": 11,
+      "put_overlap_accepted": 9,
+      "put_overlap_rejected": 11,
+      "direct_mode_admissions": 22,
+      "put_end_timestamp_logged": true,
+      "put_interval_scope": "prepare_plus_sdk_call",
+      "put_interval_definition": "start_ns is recorded before payload Bytes allocation/segmentation; put_end_ns is recorded after put_stream_chunks returns. Overlap with this client PUT attempt includes preparation time and does not establish overlap with the SDK call or server commit.",
+      "rejection_reasons": {
+        "object version changed during rail read": 11
+      },
+      "accepted_generations": [
+        1,
+        2,
+        2,
+        3,
+        4,
+        6,
+        11,
+        12,
+        12,
+        16
+      ],
+      "per_rail_bytes": {
+        "rail0": 92274688,
+        "rail1": 92274688
+      },
+      "terminal_resources_zero": true
+    },
+    {
+      "file": "run2.log",
+      "raw_sha256": "a7eec81ed787c53714117488ccc95bdf112c571680bb6cf85173bbebdc7157ce",
+      "launch_manifest_sha256": "662ec824581cce11502bccf3c6e983abba38a240781afa91b1b91f649f60ae1c",
+      "exit_receipt_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_commit_label": "d74b687738bfc803f6dccb24c568acc067fc48d7",
+      "launch_time_binary_sha256": "018f3b8a8f4b34abdf9786df20fc7a3cc0d0f64885f4643d538fb3e76b8d3f34",
+      "object_key": "unique-race-1791534364533856523",
+      "object_mib": 8,
+      "write_commits": 15,
+      "read_attempts": 20,
+      "writer_round_overlap_reads": 16,
+      "put_overlap_reads": 16,
+      "accepted": 5,
+      "rejected": 15,
+      "missing": 0,
+      "round_overlap_accepted": 1,
+      "round_overlap_rejected": 15,
+      "put_overlap_accepted": 1,
+      "put_overlap_rejected": 15,
+      "direct_mode_admissions": 21,
+      "put_end_timestamp_logged": true,
+      "put_interval_scope": "prepare_plus_sdk_call",
+      "put_interval_definition": "start_ns is recorded before payload Bytes allocation/segmentation; put_end_ns is recorded after put_stream_chunks returns. Overlap with this client PUT attempt includes preparation time and does not establish overlap with the SDK call or server commit.",
+      "rejection_reasons": {
+        "object version changed during rail read": 13,
+        "object descriptor became stale": 2
+      },
+      "accepted_generations": [
+        9,
+        16,
+        16,
+        16,
+        16
+      ],
+      "per_rail_bytes": {
+        "rail0": 79691776,
+        "rail1": 79691776
+      },
+      "terminal_resources_zero": true
+    }
+  ],
+  "server_image_before": {
+    "server_pid": "1102",
+    "live_executable_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+    "config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+    "receipt_sha256": "a9ff8c69a4da6457e91af2b8d9677e77b338e2d3f528d234d70b28a5be96cbce"
+  },
+  "server_image_after": {
+    "server_pid": "1102",
+    "live_executable_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+    "config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+    "receipt_sha256": "a9ff8c69a4da6457e91af2b8d9677e77b338e2d3f528d234d70b28a5be96cbce"
+  },
+  "totals": {
+    "write_commits": 30,
+    "read_attempts": 41,
+    "writer_round_overlap_reads": 36,
+    "accepted": 15,
+    "rejected": 26,
+    "missing": 0,
+    "round_overlap_accepted": 10,
+    "round_overlap_rejected": 26,
+    "put_overlap_reads": 36,
+    "put_overlap_accepted": 10,
+    "put_overlap_rejected": 26
+  },
+  "source_commit_label_boundary": "source_commit in launch manifests is an operator-supplied label; binary SHA was recorded before execution and source/build identity requires a separate build receipt",
+  "put_interval_boundary": "put_overlap_* counts payload preparation plus SDK call intersections; SDK call and server commit overlap are unknown",
+  "non_claim": "finite observed schedules and a logged accepted-ID implementation path do not prove all provider, crash, or aliasing behaviors"
+}

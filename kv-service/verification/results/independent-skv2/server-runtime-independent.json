@@ -1,0 +1,58 @@
+{
+  "environment": "isolated two-RXE server, one-Rail 8 MiB GET trigger",
+  "scope": "test-only libibverbs return-value interposition with launch-time server/shim/client/script hashes; not a real provider failure",
+  "object_key": "unique-race-1791532679692478926",
+  "auditor_sha256": "948a0b52b02bafef852a69d417f5ee7dbb53503cd5a2aa27bb72d97717762437",
+  "cases": [
+    {
+      "operation": "destroy_qp",
+      "slab_mb": 128,
+      "server_shell_exit_code": 134,
+      "event_sequence": [
+        "destroy_qp"
+      ],
+      "server_launch_sha256": {
+        "/home/railtest/bin/contextstore-server": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+        "/home/railtest/libverbs_failstop.so": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+        "/home/railtest/evidence/server.toml": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+        "/home/railtest/launch_server_failstop.sh": "b269771cde6bb3053d879a0d179bfaba207ab33a992292db1276e4ca32f8cff2"
+      },
+      "client_trigger_binary_sha256": "4b511dfa061afb1131da39daac85e1d60f98b971b4f38b952e023d67865f0ee0"
+    },
+    {
+      "operation": "dereg_mr",
+      "slab_mb": 4,
+      "server_shell_exit_code": 134,
+      "event_sequence": [
+        "dereg_mr"
+      ],
+      "server_launch_sha256": {
+        "/home/railtest/bin/contextstore-server": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+        "/home/railtest/libverbs_failstop.so": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+        "/home/railtest/evidence/server.toml": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+        "/home/railtest/launch_server_failstop.sh": "b269771cde6bb3053d879a0d179bfaba207ab33a992292db1276e4ca32f8cff2"
+      },
+      "client_trigger_binary_sha256": "4b511dfa061afb1131da39daac85e1d60f98b971b4f38b952e023d67865f0ee0"
+    }
+  ],
+  "normal_recovery_xxh3": "fb2d91a1ef239d15",
+  "raw_sha256": {
+    "destroy_qp/launch-manifest.txt": "90e03427ce596cd62f65f8e734418ae2f4a9876971078e95c7ceda7019222f9f",
+    "destroy_qp/server.log": "74f62802e89ce8b688e948d07dbbc130659393e3563c4a63cdaedbd421c652e8",
+    "destroy_qp/verbs.events": "841dcd1d91fbe53ec5fde30ded5d2ef4357ce805f639c8a25894655fe535eed1",
+    "destroy_qp/exit-code.txt": "e726b440cc164001999e718b51780d80314709efe06e7857282377be9111127b",
+    "destroy_qp-trigger.launch": "3c4845fab7a5cc68ad8089ba78f6799bc58d9fd945012f1bb9ee66c234c51431",
+    "destroy_qp-trigger.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "destroy_qp-trigger.log": "2bd8d61c8845e85739867d6ec916c9907ee21c56b48b9d2bf8ea5fc903b7cb9a",
+    "dereg_mr/launch-manifest.txt": "4f1611f70cf60ad21ef5ae7523ddebac819191dbc257c2d8337bee7e10783cc6",
+    "dereg_mr/server.log": "d19ea33b7dfd5eda5abcdf353c98bab571058bc5f46233e2c61650b635ec0a36",
+    "dereg_mr/verbs.events": "08151a3f07da329ca7ea702853141cd50dd4d72f0bae1608874887d1c5621a77",
+    "dereg_mr/exit-code.txt": "e726b440cc164001999e718b51780d80314709efe06e7857282377be9111127b",
+    "dereg_mr-trigger.launch": "3c4845fab7a5cc68ad8089ba78f6799bc58d9fd945012f1bb9ee66c234c51431",
+    "dereg_mr-trigger.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "dereg_mr-trigger.log": "a817067436ba17bebf6081f54fab34dd114ff4ab319d48662a847e7945fbd5e9",
+    "normal-recovery.launch": "3c4845fab7a5cc68ad8089ba78f6799bc58d9fd945012f1bb9ee66c234c51431",
+    "normal-recovery.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "normal-recovery.log": "a9d3e03ea32ab22b8d83dd32b163c914b1883fdcddc1523edf88353de51160f4"
+  }
+}

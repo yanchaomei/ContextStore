@@ -1,0 +1,11 @@
+{
+  "source_commit": "d74b687738bfc803f6dccb24c568acc067fc48d7",
+  "source_files_matched_to_commit": 20,
+  "source_before_and_after_identical": true,
+  "binary_sha256": "018f3b8a8f4b34abdf9786df20fc7a3cc0d0f64885f4643d538fb3e76b8d3f34",
+  "rustc_version": "rustc 1.90.0 (1159e78c4 2025-09-14)\nbinary: rustc\ncommit-hash: 1159e78c4747b02ef996e55082b704c09b970588\ncommit-date: 2025-09-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.90.0\nLLVM version: 20.1.8",
+  "cargo_version": "cargo 1.90.0 (840b83a10 2025-07-30)",
+  "auditor_sha256": "dd60ca7dd2d17d9163cb3563e449441188547cb27791690a69293ab6f17b449b",
+  "source_manifest_sha256": "a3a2feb58c3e49db43d347d4d1703793d3df836aa2e308e423b266fe0bbd20e9",
+  "scope": "source-byte parity and binary hash for one release build; not a hermetic reproducible-build proof"
+}

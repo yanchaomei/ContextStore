@@ -1,0 +1,67 @@
+{
+  "schema": "contextstore.multi-rail-ownership-supplement.v5",
+  "date": "2026-10-09",
+  "classification": "two isolated software RXE paths in KVM guests on one host; no physical multi-HCA claim",
+  "product_direct_staging_commit": "bcdb1fd308ec2759481694678c592696e4d8d042",
+  "accepted_generation_trace_commit": "56af825c96d798a805a9e42b3c38f84d43956bad",
+  "source_files_matched_to_build_commit": 20,
+  "source_before_and_after_build_identical": true,
+  "live_server_executable_sha256_before_and_after": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+  "server_config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+  "fault_shim_sha256": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+  "fault_launcher_script_sha256": "b269771cde6bb3053d879bfaba207ab33a992292db1276e4ca32f8cff2",
+  "fault_trigger_client_binary_sha256": "4b511dfa061afb1131da39daac85e1d60f98b971b4f38b952e023d67865f0ee0",
+  "server_cleanup_return_injection": {
+    "operations": [
+      "ibv_destroy_qp",
+      "ibv_dereg_mr"
+    ],
+    "server_shell_exit_code_each": 134,
+    "normal_recovery_read_xxh3": "fb2d91a1ef239d15",
+    "launch_time_manifests": true
+  },
+  "independent_replay": "same raw receipts re-audited under Python 3.8 on a second physical SKV node; SDK-call, preparation-inclusive and writer-round races, strict server fault, and HCA inventory JSON match local outputs in full",
+  "physical_port_snapshot": "read-only audit of SKV nodes 1-7 found two enumerated mlx5 names but only mlx5_1/1 ACTIVE/LINK_UP per node",
+  "limitations": [
+    "31 observed SDK PUT-call/read intersections begin after payload preparation, but server commit overlap is unknown; finite schedules are not an implementation proof",
+    "36 earlier preparation-inclusive client-attempt intersections bound SDK-call overlap only within those earlier runs and are not pooled with the 31 primary intersections",
+    "the launch-time binary hash and matching 20-file source build receipt are provenance evidence, not a hermetic reproducible build",
+    "the fail-stop shim fakes software return codes, not physical provider or device faults",
+    "the earlier unique-content writer-round campaign has 51 PUT+Lookup intersections but no put_end_ns; repeated A/B campaigns are still weaker",
+    "Python/rdma-ffi external-buffer API remains outside this safety contract"
+  ],
+  "primary_sdk_call_timestamp_test_and_build_audit_commit": "9209d5026c7e91e5ac728c47c412a44ac12d9515",
+  "primary_sdk_call_test_binary_sha256": "d642014038dfc5eefb71b02f956c71301f064190b9578f11b97a5e5be1beba24",
+  "preparation_inclusive_test_commit": "d74b687738bfc803f6dccb24c568acc067fc48d7",
+  "preparation_inclusive_test_binary_sha256": "018f3b8a8f4b34abdf9786df20fc7a3cc0d0f64885f4643d538fb3e76b8d3f34",
+  "preparation_inclusive_unique_generation_campaign": {
+    "object_mib": 8,
+    "stored_stripes": 2,
+    "process_runs": 2,
+    "committed_distinct_content_generations": 30,
+    "read_attempts_total": 41,
+    "rejected_total": 26,
+    "missing": 0,
+    "timestamp_verified_client_put_attempt_read_overlaps": 36,
+    "client_put_attempt_overlapped_accepted_complete_and_matching_sdk_generation": 10,
+    "client_put_attempt_overlapped_safe_rejections": 26,
+    "accepted_total_including_no_attempt_overlap_reads": 15,
+    "measured_client_put_attempt_interval": "timestamp starts before payload Bytes allocation/segmentation and ends after put_stream_chunks returns",
+    "actual_put_rpc_or_commit_overlap_count": null
+  },
+  "unique_generation_sdk_call_campaign": {
+    "object_mib": 8,
+    "stored_stripes": 2,
+    "process_runs": 2,
+    "committed_distinct_content_generations": 30,
+    "read_attempts_total": 40,
+    "timestamp_verified_sdk_put_call_read_overlaps": 31,
+    "sdk_call_overlapped_accepted_complete_and_matching_sdk_generation": 6,
+    "sdk_call_overlapped_safe_rejections": 25,
+    "accepted_total": 15,
+    "rejected_total": 25,
+    "missing": 0,
+    "payload_preparation_finished_before_start_timestamp": true,
+    "server_commit_overlap_count": null
+  }
+}

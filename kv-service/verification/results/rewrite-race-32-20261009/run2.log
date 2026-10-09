@@ -1,0 +1,46 @@
+
+running 1 test
+RACE_CONFIG,object_key=direct-race-1791530690657642792,object_mib=32,stripe_count=8,direct_staging=true
+RACE_WRITE,revision=0,generation=2
+RACE_WRITE,revision=1,generation=3
+RACE_READ,attempt=0,result=rejected,error=object version changed during rail read
+RACE_WRITE,revision=2,generation=4
+RACE_WRITE,revision=3,generation=5
+RACE_READ,attempt=1,result=rejected,error=object version changed during rail read
+RACE_WRITE,revision=4,generation=6
+RACE_READ,attempt=2,result=rejected,error=object version changed during rail read
+RACE_WRITE,revision=5,generation=7
+RACE_WRITE,revision=6,generation=8
+RACE_READ,attempt=3,result=rejected,error=object version changed during rail read
+RACE_WRITE,revision=7,generation=9
+RACE_READ,attempt=4,result=rejected,error=object descriptor became stale
+RACE_WRITE,revision=8,generation=10
+RACE_WRITE,revision=9,generation=11
+RACE_READ,attempt=5,result=rejected,error=object version changed during rail read
+RACE_WRITE,revision=10,generation=12
+RACE_READ,attempt=6,result=rejected,error=object descriptor became stale
+RACE_WRITE,revision=11,generation=13
+RACE_WRITE,revision=12,generation=14
+RACE_READ,attempt=7,result=rejected,error=object version changed during rail read
+RACE_WRITE,revision=13,generation=15
+RACE_WRITE,revision=14,generation=16
+RACE_READ,attempt=8,result=rejected,error=object version changed during rail read
+RACE_READ,attempt=9,result=accepted_B
+RACE_READ,attempt=10,result=accepted_B
+RACE_READ,attempt=11,result=accepted_B
+RACE_READ,attempt=12,result=accepted_B
+RACE_READ,attempt=13,result=accepted_B
+RACE_READ,attempt=14,result=accepted_B
+RACE_READ,attempt=15,result=accepted_B
+RACE_READ,attempt=16,result=accepted_B
+RACE_READ,attempt=17,result=accepted_B
+RACE_READ,attempt=18,result=accepted_B
+RACE_READ,attempt=19,result=accepted_B
+RACE_MODE,direct=21,one=0,packed_greedy=0,packed_contiguous=0
+RACE_RAIL,id=rail0,bytes=318767104,reads_ok=19,reads_err=2,inflight_requests=0,inflight_bytes=0,registered_bytes=0
+RACE_RAIL,id=rail1,bytes=318767104,reads_ok=19,reads_err=2,inflight_requests=0,inflight_bytes=0,registered_bytes=0
+RACE_SUMMARY,accepted_a=0,accepted_b=11,rejected=9,missing=0,first_generation=1,last_generation=16
+test concurrent_rewrites_never_publish_mixed_direct_staging_bytes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 18 filtered out; finished in 4.61s
+

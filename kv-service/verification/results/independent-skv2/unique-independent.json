@@ -1,0 +1,168 @@
+{
+  "environment": "isolated two-RXE KVM guests on one host",
+  "scope": "per-Generation unique byte values; SDK accepted Generation trace; writer-round overlap for all runs; put_overlap_* counts intersection with the per-run put_interval_scope, not proven server commit overlap",
+  "auditor_sha256": "f939630608f1d794bf0ef4c235d388186c3cde95a6b5a1e82554ab485d0aa2cd",
+  "runs": [
+    {
+      "file": "run1.log",
+      "raw_sha256": "709df27fdf5c9a25eaf2e90ccca2684c272fd7cd9b21654b284410d3c5e1b295",
+      "launch_manifest_sha256": "3021b3bf0a9cc1adbb05e4262233d1157b71c6e87bf796764b4744ee92df5626",
+      "exit_receipt_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_commit_label": "56af825c96d798a805a9e42b3c38f84d43956bad",
+      "launch_time_binary_sha256": "df4131e8b1e8566cec06b13ffd03186821210c380d26ed1f55d5952e0eb4a40b",
+      "object_key": "unique-race-1791532637068779065",
+      "object_mib": 8,
+      "write_commits": 15,
+      "read_attempts": 23,
+      "writer_round_overlap_reads": 23,
+      "put_overlap_reads": null,
+      "accepted": 11,
+      "rejected": 12,
+      "missing": 0,
+      "round_overlap_accepted": 11,
+      "round_overlap_rejected": 12,
+      "put_overlap_accepted": null,
+      "put_overlap_rejected": null,
+      "direct_mode_admissions": 24,
+      "put_end_timestamp_logged": false,
+      "put_interval_scope": null,
+      "put_interval_definition": null,
+      "rejection_reasons": {
+        "object version changed during rail read": 8,
+        "object descriptor became stale": 4
+      },
+      "accepted_generations": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        9,
+        13,
+        14
+      ],
+      "per_rail_bytes": {
+        "rail0": 83886080,
+        "rail1": 83886080
+      },
+      "terminal_resources_zero": true
+    },
+    {
+      "file": "run2.log",
+      "raw_sha256": "7aec81b25fda953a5a5106dd29a9ac48654df09028611b9efdb80c27c5be7f40",
+      "launch_manifest_sha256": "3021b3bf0a9cc1adbb05e4262233d1157b71c6e87bf796764b4744ee92df5626",
+      "exit_receipt_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_commit_label": "56af825c96d798a805a9e42b3c38f84d43956bad",
+      "launch_time_binary_sha256": "df4131e8b1e8566cec06b13ffd03186821210c380d26ed1f55d5952e0eb4a40b",
+      "object_key": "unique-race-1791532672263525371",
+      "object_mib": 8,
+      "write_commits": 15,
+      "read_attempts": 20,
+      "writer_round_overlap_reads": 15,
+      "put_overlap_reads": null,
+      "accepted": 7,
+      "rejected": 13,
+      "missing": 0,
+      "round_overlap_accepted": 2,
+      "round_overlap_rejected": 13,
+      "put_overlap_accepted": null,
+      "put_overlap_rejected": null,
+      "direct_mode_admissions": 21,
+      "put_end_timestamp_logged": false,
+      "put_interval_scope": null,
+      "put_interval_definition": null,
+      "rejection_reasons": {
+        "object descriptor became stale": 2,
+        "object version changed during rail read": 11
+      },
+      "accepted_generations": [
+        3,
+        4,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "per_rail_bytes": {
+        "rail0": 79691776,
+        "rail1": 83886080
+      },
+      "terminal_resources_zero": true
+    },
+    {
+      "file": "run3.log",
+      "raw_sha256": "42c8093f6fd14232a3a52bd5a0a54870853fd039615a2bbb95bd3abc16f72e46",
+      "launch_manifest_sha256": "3021b3bf0a9cc1adbb05e4262233d1157b71c6e87bf796764b4744ee92df5626",
+      "exit_receipt_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_commit_label": "56af825c96d798a805a9e42b3c38f84d43956bad",
+      "launch_time_binary_sha256": "df4131e8b1e8566cec06b13ffd03186821210c380d26ed1f55d5952e0eb4a40b",
+      "object_key": "unique-race-1791532679692478926",
+      "object_mib": 8,
+      "write_commits": 15,
+      "read_attempts": 20,
+      "writer_round_overlap_reads": 13,
+      "put_overlap_reads": null,
+      "accepted": 7,
+      "rejected": 13,
+      "missing": 0,
+      "round_overlap_accepted": 0,
+      "round_overlap_rejected": 13,
+      "put_overlap_accepted": null,
+      "put_overlap_rejected": null,
+      "direct_mode_admissions": 21,
+      "put_end_timestamp_logged": false,
+      "put_interval_scope": null,
+      "put_interval_definition": null,
+      "rejection_reasons": {
+        "object version changed during rail read": 12,
+        "object descriptor became stale": 1
+      },
+      "accepted_generations": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "per_rail_bytes": {
+        "rail0": 83886080,
+        "rail1": 88080384
+      },
+      "terminal_resources_zero": true
+    }
+  ],
+  "server_image_before": {
+    "server_pid": "1102",
+    "live_executable_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+    "config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+    "receipt_sha256": "a9ff8c69a4da6457e91af2b8d9677e77b338e2d3f528d234d70b28a5be96cbce"
+  },
+  "server_image_after": {
+    "server_pid": "1102",
+    "live_executable_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+    "config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+    "receipt_sha256": "a9ff8c69a4da6457e91af2b8d9677e77b338e2d3f528d234d70b28a5be96cbce"
+  },
+  "totals": {
+    "write_commits": 45,
+    "read_attempts": 63,
+    "writer_round_overlap_reads": 51,
+    "accepted": 25,
+    "rejected": 38,
+    "missing": 0,
+    "round_overlap_accepted": 13,
+    "round_overlap_rejected": 38,
+    "put_overlap_reads": null,
+    "put_overlap_accepted": null,
+    "put_overlap_rejected": null
+  },
+  "source_commit_label_boundary": "source_commit in launch manifests is an operator-supplied label; binary SHA was recorded before execution and source/build identity requires a separate build receipt",
+  "put_interval_boundary": "put_end_ns is absent; only the wider writer-round interval is available",
+  "non_claim": "finite observed schedules and a logged accepted-ID implementation path do not prove all provider, crash, or aliasing behaviors"
+}

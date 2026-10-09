@@ -1,0 +1,135 @@
+{
+  "collection_date": "2026-10-09",
+  "scope": "read-only ibv_devinfo -l and rdma link show on SKV nodes 1-7; nodes 6-7 reached via SKV_1 jump",
+  "auditor_sha256": "4ce59f2261f27e124944fa0df35fe1834fe80793698745cf345a0ecbb35166b0",
+  "nodes": [
+    {
+      "node": "skv-node1",
+      "receipt_sha256": "60cddf47e06ea5e3bc66e3173331590b13b2a8b0de0fcdad307d6a15de98e0a6",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "ens4f0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "ens4f1"
+        }
+      }
+    },
+    {
+      "node": "skv-node2",
+      "receipt_sha256": "60cddf47e06ea5e3bc66e3173331590b13b2a8b0de0fcdad307d6a15de98e0a6",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "ens4f0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "ens4f1"
+        }
+      }
+    },
+    {
+      "node": "skv-node3",
+      "receipt_sha256": "60cddf47e06ea5e3bc66e3173331590b13b2a8b0de0fcdad307d6a15de98e0a6",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "ens4f0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "ens4f1"
+        }
+      }
+    },
+    {
+      "node": "skv-node4",
+      "receipt_sha256": "60cddf47e06ea5e3bc66e3173331590b13b2a8b0de0fcdad307d6a15de98e0a6",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "ens4f0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "ens4f1"
+        }
+      }
+    },
+    {
+      "node": "skv-node5",
+      "receipt_sha256": "d06e793d5c70cdb68d9aa0c3b7aeaf3e8f5060085d4c95256e58f9ae8b63717e",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "enp175s0f0np0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "enp175s0f1np1"
+        }
+      }
+    },
+    {
+      "node": "skv-node6",
+      "receipt_sha256": "a7466f79a534e810b3d99818411b9d0fd23a9726887dd3f4274e0a3bd0fc35d1",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "ens3f0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "ens3f1"
+        }
+      }
+    },
+    {
+      "node": "skv-node7",
+      "receipt_sha256": "a7466f79a534e810b3d99818411b9d0fd23a9726887dd3f4274e0a3bd0fc35d1",
+      "verbs_devices_enumerated": 2,
+      "usable_active_ports": 1,
+      "links": {
+        "mlx5_0": {
+          "state": "DOWN",
+          "physical_state": "DISABLED",
+          "netdev": "ens3f0"
+        },
+        "mlx5_1": {
+          "state": "ACTIVE",
+          "physical_state": "LINK_UP",
+          "netdev": "ens3f1"
+        }
+      }
+    }
+  ],
+  "conclusion": "each observed node has two enumerated Verbs device names but only mlx5_1/1 is ACTIVE/LINK_UP; a single Worker lacks two simultaneously usable physical local Rails in this cluster snapshot",
+  "non_claim": "does not test cabling changes, HCA performance, PCIe/NUMA bandwidth, or future availability"
+}

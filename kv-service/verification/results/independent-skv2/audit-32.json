@@ -1,0 +1,55 @@
+{
+  "environment": "two independent software RXE paths, 32 MiB and 8 stored stripes",
+  "scope": "2 process runs; each performs 15 rewrites and at least 20 concurrent direct reads, followed by one asserted final-B read",
+  "binary_sha256": null,
+  "auditor_sha256": "624388c557ddadfa17a00abda5fc7a05c133fa83ff1b2d56e56ae24f9bfda89b",
+  "runs": [
+    {
+      "file": "run1.log",
+      "sha256": "5b3fe2f692012c8d2439dca626f9f6779638996c1da1e683375b7a3fd2aa0b46",
+      "object_mib": 32,
+      "concurrent_read_attempts": 20,
+      "configuration_logged": true,
+      "object_key": "direct-race-1791530669309163520",
+      "mode_direct_admissions": 21,
+      "rail_bytes": {
+        "rail0": 335544320,
+        "rail1": 335544320
+      },
+      "accepted_a": 0,
+      "accepted_b": 11,
+      "rejected": 9,
+      "missing": 0,
+      "version_rejected": 8,
+      "stale_descriptor_rejected": 1
+    },
+    {
+      "file": "run2.log",
+      "sha256": "c6035f19d6be76aa6af3b45c1999d8834d07b7023ddfdf1846e1aa69275ac7b2",
+      "object_mib": 32,
+      "concurrent_read_attempts": 20,
+      "configuration_logged": true,
+      "object_key": "direct-race-1791530690657642792",
+      "mode_direct_admissions": 21,
+      "rail_bytes": {
+        "rail0": 318767104,
+        "rail1": 318767104
+      },
+      "accepted_a": 0,
+      "accepted_b": 11,
+      "rejected": 9,
+      "missing": 0,
+      "version_rejected": 7,
+      "stale_descriptor_rejected": 2
+    }
+  ],
+  "totals": {
+    "accepted_a": 0,
+    "accepted_b": 22,
+    "rejected": 18,
+    "missing": 0,
+    "version_rejected": 15,
+    "stale_descriptor_rejected": 3
+  },
+  "interpretation": "test code checks every accepted byte against complete A or B and failure sentinels; transcript audit verifies exposed version rejections, generations, outcomes and test success, not every interleaving"
+}

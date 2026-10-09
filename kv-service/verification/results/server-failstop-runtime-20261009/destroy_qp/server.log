@@ -1,0 +1,21 @@
+[2m2026-10-09T08:02:50.166391Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-09T08:02:50.166451Z[0m [32m INFO[0m config file: /home/railtest/evidence/server.toml
+[2m2026-10-09T08:02:50.166894Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 128 MB, I/O executor = tier_a
+[2m2026-10-09T08:02:50.174787Z[0m [32m INFO[0m gRPC listening on: 10.31.0.2:55151
+[2m2026-10-09T08:02:50.174832Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=128
+[2m2026-10-09T08:02:50.174851Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 2 NIC(s) ["rxe_s0@10.31.0.2:55153", "rxe_s1@10.32.0.2:55154"]
+[2m2026-10-09T08:02:50.174863Z[0m [32m INFO[0m RDMA tier enabled: 2 NIC(s), primary listener=10.31.0.2:55153
+[2m2026-10-09T08:02:50.179245Z[0m [32m INFO[0m RdmaContext: opened device=rxe_s0 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 1f, 00, 02]
+[2m2026-10-09T08:02:50.179284Z[0m [32m INFO[0m opened NIC 0: dev=rxe_s0 port=1 gid_index=1
+[2m2026-10-09T08:02:50.179735Z[0m [32m INFO[0m RdmaContext: opened device=rxe_s1 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 20, 00, 02]
+[2m2026-10-09T08:02:50.179753Z[0m [32m INFO[0m opened NIC 1: dev=rxe_s1 port=1 gid_index=1
+[2m2026-10-09T08:02:50.179821Z[0m [32m INFO[0m SlabBacking: mmap 134217728 bytes at 0x7f37e4000000 (huge_pages=false)
+[2m2026-10-09T08:02:50.258606Z[0m [32m INFO[0m RdmaSlab registered: 134217728 bytes (128 MB) on 2 NIC(s), lkeys=["0x2c6", "0x2fc"] rkeys=["0x2c6", "0x2fc"]
+[2m2026-10-09T08:02:50.258644Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (128 MB, 2 NICs)
+[2m2026-10-09T08:02:50.258783Z[0m [32m INFO[0m RDMA server listening on 10.31.0.2:55153 (nic_idx=0 dev=rxe_s0 port=1 gid_index=1)
+[2m2026-10-09T08:02:50.258956Z[0m [32m INFO[0m RDMA server listening on 10.32.0.2:55154 (nic_idx=1 dev=rxe_s1 port=1 gid_index=1)
+[2m2026-10-09T08:03:01.062998Z[0m [32m INFO[0m RDMA client connected: 10.31.0.1:56374 (nic_idx=0)
+[2m2026-10-09T08:03:01.063376Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xadcf99
+[2m2026-10-09T08:03:01.063665Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-09T08:03:01.106584Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2eunique-race-1791532679692478926 bytes=8388608 stripes=2 requests=8 alloc_us=4 stream_setup_us=198 first_io_us=2667 last_io_us=4078 poll_us=33031 total_us=37117
+ContextStore RDMA server QP destruction failed; aborting

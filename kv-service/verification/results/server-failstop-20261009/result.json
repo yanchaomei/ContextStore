@@ -1,0 +1,37 @@
+{
+  "environment": "isolated two-RXE KVM server; one-Rail 32 MiB object trigger",
+  "scope": "test-only LD_PRELOAD returns -1 from one libibverbs cleanup call; not a genuine provider failure",
+  "server_binary_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+  "shim_sha256": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+  "auditor_sha256": "f0d25dd96d320e2e348a2af5415193ab4a9e9d2aa8c85015be86a54ff60289c3",
+  "cases": [
+    {
+      "operation": "destroy_qp",
+      "server_shell_exit_code": 134,
+      "event_sequence": [
+        "destroy_qp"
+      ],
+      "client_request": "failed without a completed summary"
+    },
+    {
+      "operation": "dereg_mr",
+      "server_shell_exit_code": 134,
+      "event_sequence": [
+        "dereg_mr"
+      ],
+      "client_request": "failed without a completed summary"
+    }
+  ],
+  "normal_recovery": "same 32 MiB object read successfully after an uninjected server restart",
+  "source_sha256": {
+    "destroy_qp/exit-code.txt": "e726b440cc164001999e718b51780d80314709efe06e7857282377be9111127b",
+    "destroy_qp/verbs.events": "841dcd1d91fbe53ec5fde30ded5d2ef4357ce805f639c8a25894655fe535eed1",
+    "destroy_qp/server.log": "079df8dbd97ac3bd8b37084fdd0424cd7675e57332df9d3c90eff3ba2fd863df",
+    "server-failstop-destroy-qp-trigger.log": "fb77d70c8077dce3f9753ad7f661b1108dd0edba0cd196a44db0184ea178d61a",
+    "dereg_mr/exit-code.txt": "e726b440cc164001999e718b51780d80314709efe06e7857282377be9111127b",
+    "dereg_mr/verbs.events": "08151a3f07da329ca7ea702853141cd50dd4d72f0bae1608874887d1c5621a77",
+    "dereg_mr/server.log": "845522da48966f609844dcbf436d2126dc1033ac161a545740624b090920da65",
+    "server-failstop-dereg-mr-trigger.log": "7a86fb84c84ed9099625109b8977c94e3934bc309058fea1b9f43746650dd4c5",
+    "server-failstop-normal-recovery.log": "26c51acc143f6dbd767a770afe3a3d2170569905410c10171d7dcc9a7bdcc884"
+  }
+}

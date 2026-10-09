@@ -1,0 +1,21 @@
+[2m2026-10-09T07:28:04.379813Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-09T07:28:04.379849Z[0m [32m INFO[0m config file: /home/railtest/evidence/server.toml
+[2m2026-10-09T07:28:04.380006Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 128 MB, I/O executor = tier_a
+[2m2026-10-09T07:28:04.383053Z[0m [32m INFO[0m gRPC listening on: 10.31.0.2:55151
+[2m2026-10-09T07:28:04.383070Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=16
+[2m2026-10-09T07:28:04.383076Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 2 NIC(s) ["rxe_s0@10.31.0.2:55153", "rxe_s1@10.32.0.2:55154"]
+[2m2026-10-09T07:28:04.383081Z[0m [32m INFO[0m RDMA tier enabled: 2 NIC(s), primary listener=10.31.0.2:55153
+[2m2026-10-09T07:28:04.385023Z[0m [32m INFO[0m RdmaContext: opened device=rxe_s0 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 1f, 00, 02]
+[2m2026-10-09T07:28:04.385043Z[0m [32m INFO[0m opened NIC 0: dev=rxe_s0 port=1 gid_index=1
+[2m2026-10-09T07:28:04.385255Z[0m [32m INFO[0m RdmaContext: opened device=rxe_s1 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 20, 00, 02]
+[2m2026-10-09T07:28:04.385264Z[0m [32m INFO[0m opened NIC 1: dev=rxe_s1 port=1 gid_index=1
+[2m2026-10-09T07:28:04.385295Z[0m [32m INFO[0m SlabBacking: mmap 16777216 bytes at 0x7f85700d4000 (huge_pages=false)
+[2m2026-10-09T07:28:04.394583Z[0m [32m INFO[0m RdmaSlab registered: 16777216 bytes (16 MB) on 2 NIC(s), lkeys=["0x2e0", "0x297"] rkeys=["0x2e0", "0x297"]
+[2m2026-10-09T07:28:04.394613Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (16 MB, 2 NICs)
+[2m2026-10-09T07:28:04.394732Z[0m [32m INFO[0m RDMA server listening on 10.31.0.2:55153 (nic_idx=0 dev=rxe_s0 port=1 gid_index=1)
+[2m2026-10-09T07:28:04.394814Z[0m [32m INFO[0m RDMA server listening on 10.32.0.2:55154 (nic_idx=1 dev=rxe_s1 port=1 gid_index=1)
+[2m2026-10-09T07:28:14.343420Z[0m [32m INFO[0m RDMA client connected: 10.31.0.1:36094 (nic_idx=0)
+[2m2026-10-09T07:28:14.343884Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x813ec2
+[2m2026-10-09T07:28:14.344219Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-09T07:28:14.365939Z[0m [33m WARN[0m RDMA stripe-subset slab path unavailable; using registered-buffer fallback [3mkey[0m[2m=[0m8:rail-e2edirect-race-1791530690657642792 [3merror[0m[2m=[0mRDMA subset staging requires 33554432 bytes but slab capacity is 16777216
+ContextStore RDMA server MR deregistration failed; aborting

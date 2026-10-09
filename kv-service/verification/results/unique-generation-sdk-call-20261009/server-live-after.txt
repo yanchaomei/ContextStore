@@ -1,0 +1,4 @@
+server_pid=1102
+/home/railtest/bin/contextstore-server
+2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2  /proc/1102/exe
+78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365  /home/railtest/evidence/server.toml

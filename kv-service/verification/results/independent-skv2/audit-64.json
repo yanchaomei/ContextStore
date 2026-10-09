@@ -1,0 +1,65 @@
+{
+  "environment": "two independent software RXE paths, 64 MiB and 16 stored stripes",
+  "scope": "3 process runs; each performs 15 rewrites and at least 20 concurrent direct reads, followed by one asserted final-B read",
+  "binary_sha256": null,
+  "auditor_sha256": "624388c557ddadfa17a00abda5fc7a05c133fa83ff1b2d56e56ae24f9bfda89b",
+  "runs": [
+    {
+      "file": "run1.log",
+      "sha256": "e1ba3608b0a6e0333a79df6e25eccfdf23dbd718394e272ca11a0c8ca2e41c76",
+      "object_mib": 64,
+      "concurrent_read_attempts": 20,
+      "configuration_logged": false,
+      "object_key": null,
+      "mode_direct_admissions": null,
+      "rail_bytes": null,
+      "accepted_a": 1,
+      "accepted_b": 11,
+      "rejected": 8,
+      "missing": 0,
+      "version_rejected": 8,
+      "stale_descriptor_rejected": 0
+    },
+    {
+      "file": "run2.log",
+      "sha256": "2a8e178d7c93808090dfdc7fad9a521dd73a8f6c97d1c661123e62ebffc66040",
+      "object_mib": 64,
+      "concurrent_read_attempts": 20,
+      "configuration_logged": false,
+      "object_key": null,
+      "mode_direct_admissions": null,
+      "rail_bytes": null,
+      "accepted_a": 1,
+      "accepted_b": 10,
+      "rejected": 9,
+      "missing": 0,
+      "version_rejected": 8,
+      "stale_descriptor_rejected": 1
+    },
+    {
+      "file": "run3.log",
+      "sha256": "fb8987a246545aabced3a52d53026b8bac41d28bdee01fba8aa1b65bb657d09a",
+      "object_mib": 64,
+      "concurrent_read_attempts": 20,
+      "configuration_logged": false,
+      "object_key": null,
+      "mode_direct_admissions": null,
+      "rail_bytes": null,
+      "accepted_a": 0,
+      "accepted_b": 10,
+      "rejected": 10,
+      "missing": 0,
+      "version_rejected": 9,
+      "stale_descriptor_rejected": 1
+    }
+  ],
+  "totals": {
+    "accepted_a": 2,
+    "accepted_b": 31,
+    "rejected": 27,
+    "missing": 0,
+    "version_rejected": 25,
+    "stale_descriptor_rejected": 2
+  },
+  "interpretation": "test code checks every accepted byte against complete A or B and failure sentinels; transcript audit verifies exposed version rejections, generations, outcomes and test success, not every interleaving"
+}

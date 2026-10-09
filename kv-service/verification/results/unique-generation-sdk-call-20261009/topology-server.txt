@@ -1,0 +1,11 @@
+role=server
+link rxe_s0/1 state ACTIVE physical_state LINK_UP netdev enp0s3 
+link rxe_s1/1 state ACTIVE physical_state LINK_UP netdev enp0s4 
+    device          	   node GUID
+    ------          	----------------
+    rxe_s0          	505400fffe310002
+    rxe_s1          	505400fffe320002
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp0s2           UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe12:3456/64 fe80::5054:ff:fe12:3456/64 
+enp0s3           UP             10.31.0.2/24 fe80::5054:ff:fe31:2/64 
+enp0s4           UP             10.32.0.2/24 fe80::5054:ff:fe32:2/64 

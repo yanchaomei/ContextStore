@@ -1,0 +1,4 @@
+120: csrs0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master csrb0 state forwarding priority 32 cost 100 
+121: csrc0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master csrb0 state forwarding priority 32 cost 100 
+122: csrs1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master csrb1 state forwarding priority 32 cost 100 
+123: csrc1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master csrb1 state forwarding priority 32 cost 100 
