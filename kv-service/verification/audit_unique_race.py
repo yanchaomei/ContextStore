@@ -72,6 +72,9 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
     writes = [fields(line) for line in raw.splitlines() if line.startswith("UNIQUE_WRITE,")]
     if len(writes) != 15:
         raise ValueError(f"expected 15 committed generations: {path}")
+    has_put_end = all("put_end_ns" in item for item in writes)
+    if any(("put_end_ns" in item) != has_put_end for item in writes):
+        raise ValueError(f"mixed writer timestamp formats: {path}")
     write_ranges = []
     for revision, item in enumerate(writes):
         if (
@@ -83,7 +86,10 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
         start, end = int(item["start_ns"]), int(item["end_ns"])
         if not 0 <= start < end:
             raise ValueError(f"invalid writer interval: {path}")
-        write_ranges.append((start, end))
+        put_end = int(item["put_end_ns"]) if has_put_end else None
+        if put_end is not None and not start < put_end <= end:
+            raise ValueError(f"invalid PUT completion timestamp: {path}")
+        write_ranges.append((start, put_end, end))
 
     reads = [fields(line) for line in raw.splitlines() if line.startswith("UNIQUE_READ,")]
     if not 20 <= len(reads) <= 36:
@@ -91,9 +97,12 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
     accepted = []
     rejected = 0
     missing = 0
-    overlapped = 0
-    overlap_accepted = 0
-    overlap_rejected = 0
+    round_overlapped = 0
+    round_accepted = 0
+    round_rejected = 0
+    put_overlapped = 0
+    put_accepted = 0
+    put_rejected = 0
     rejection_reasons: dict[str, int] = {}
     for attempt, item in enumerate(reads):
         if int(item["attempt"]) != attempt:
@@ -101,8 +110,16 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
         start, end = int(item["start_ns"]), int(item["end_ns"])
         if not 0 <= start < end:
             raise ValueError(f"invalid reader interval: {path}")
-        overlap = any(start < write_end and write_start < end for write_start, write_end in write_ranges)
-        overlapped += overlap
+        round_overlap = any(
+            start < round_end and write_start < end
+            for write_start, _, round_end in write_ranges
+        )
+        put_overlap = has_put_end and any(
+            start < put_end and write_start < end
+            for write_start, put_end, _ in write_ranges
+        )
+        round_overlapped += round_overlap
+        put_overlapped += put_overlap
         outcome = item["result"]
         if outcome == "accepted":
             value, generation = int(item["byte"]), int(item["generation_inferred"])
@@ -110,7 +127,8 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
             if value not in (0x10, *range(0x20, 0x2F)) or generation != expected:
                 raise ValueError(f"accepted byte does not name one generation: {path}")
             accepted.append(generation)
-            overlap_accepted += overlap
+            round_accepted += round_overlap
+            put_accepted += put_overlap
         elif outcome == "rejected":
             reason = item.get("error", "")
             if reason not in (
@@ -120,7 +138,8 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
                 raise ValueError(f"unexpected reject reason: {path}: {reason}")
             rejection_reasons[reason] = rejection_reasons.get(reason, 0) + 1
             rejected += 1
-            overlap_rejected += overlap
+            round_rejected += round_overlap
+            put_rejected += put_overlap
         elif outcome == "missing":
             missing += 1
         else:
@@ -151,23 +170,27 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
     }:
         raise ValueError(f"post-rewrite final read changed: {path}")
     summary = [fields(line) for line in raw.splitlines() if line.startswith("UNIQUE_SUMMARY,")]
-    if len(summary) != 1 or any(
-        int(summary[0][name]) != value
-        for name, value in (
-            ("attempts", len(reads)),
-            ("accepted", len(accepted)),
-            ("rejected", rejected),
-            ("missing", missing),
-            ("overlapping", overlapped),
-            ("first_generation", 1),
-            ("last_generation", 16),
-        )
+    expected_summary = {
+        "attempts": len(reads),
+        "accepted": len(accepted),
+        "rejected": rejected,
+        "missing": missing,
+        "first_generation": 1,
+        "last_generation": 16,
+    }
+    if has_put_end:
+        expected_summary["put_overlapping"] = put_overlapped
+        expected_summary["round_overlapping"] = round_overlapped
+    else:
+        expected_summary["overlapping"] = round_overlapped
+    if len(summary) != 1 or set(summary[0]) != set(expected_summary) or any(
+        int(summary[0][name]) != value for name, value in expected_summary.items()
     ):
         raise ValueError(f"summary does not match timestamped events: {path}")
-    if overlapped == 0 or len(accepted) == 0:
-        raise ValueError(f"no actual write/read competition or complete read: {path}")
+    if round_overlapped == 0 or (has_put_end and put_overlapped == 0) or len(accepted) == 0:
+        raise ValueError(f"no writer/read intersection or complete read: {path}")
     modes = [fields(line) for line in raw.splitlines() if line.startswith("UNIQUE_MODE,")]
-    if len(modes) != 1 or int(modes[0]["direct"]) < len(accepted) + 1 or any(
+    if len(modes) != 1 or int(modes[0]["direct"]) != len(reads) + 1 or any(
         int(modes[0][name]) for name in ("one", "packed_greedy", "packed_contiguous")
     ):
         raise ValueError(f"read did not use direct mode: {path}")
@@ -185,18 +208,23 @@ def parse_one(path: Path, object_mib: int, binary_path: Path | None) -> dict:
         "raw_sha256": digest(path),
         "launch_manifest_sha256": digest(launch),
         "exit_receipt_sha256": digest(exit_file),
-        "source_commit": source_commit,
+        "source_commit_label": source_commit,
         "launch_time_binary_sha256": binary_sha,
         "object_key": object_key,
         "object_mib": object_mib,
         "write_commits": len(writes),
         "read_attempts": len(reads),
-        "actually_overlapped_reads": overlapped,
+        "writer_round_overlap_reads": round_overlapped,
+        "put_overlap_reads": put_overlapped if has_put_end else None,
         "accepted": len(accepted),
         "rejected": rejected,
         "missing": missing,
-        "overlap_accepted": overlap_accepted,
-        "overlap_rejected": overlap_rejected,
+        "round_overlap_accepted": round_accepted,
+        "round_overlap_rejected": round_rejected,
+        "put_overlap_accepted": put_accepted if has_put_end else None,
+        "put_overlap_rejected": put_rejected if has_put_end else None,
+        "direct_mode_admissions": int(modes[0]["direct"]),
+        "put_end_timestamp_logged": has_put_end,
         "rejection_reasons": rejection_reasons,
         "accepted_generations": accepted,
         "per_rail_bytes": {item["id"]: int(item["bytes"]) for item in rails},
@@ -216,7 +244,7 @@ def main() -> None:
     runs = [parse_one(path, args.object_mib, args.binary) for path in paths]
     if len({run["object_key"] for run in runs}) != len(runs):
         raise ValueError("two runs reused the same object key")
-    if len({run["source_commit"] for run in runs}) != 1 or len(
+    if len({run["source_commit_label"] for run in runs}) != 1 or len(
         {run["launch_time_binary_sha256"] for run in runs}
     ) != 1:
         raise ValueError("campaign mixed source commits or binaries")
@@ -230,18 +258,28 @@ def main() -> None:
     totals = {
         key: sum(run[key] for run in runs)
         for key in (
-            "write_commits", "read_attempts", "actually_overlapped_reads",
-            "accepted", "rejected", "missing", "overlap_accepted", "overlap_rejected",
+            "write_commits", "read_attempts", "writer_round_overlap_reads",
+            "accepted", "rejected", "missing", "round_overlap_accepted", "round_overlap_rejected",
         )
     }
+    if all(run["put_end_timestamp_logged"] for run in runs):
+        for key in ("put_overlap_reads", "put_overlap_accepted", "put_overlap_rejected"):
+            totals[key] = sum(run[key] for run in runs)
+    else:
+        totals.update(
+            put_overlap_reads=None,
+            put_overlap_accepted=None,
+            put_overlap_rejected=None,
+        )
     result = {
         "environment": "isolated two-RXE KVM guests on one host",
-        "scope": "per-Generation unique byte values; exact SDK accepted Generation trace and monotonic read/write interval audit",
+        "scope": "per-Generation unique byte values; exact SDK accepted Generation trace; writer-round overlap is available for all runs, exact PUT overlap only when put_end_ns is logged",
         "auditor_sha256": digest(Path(__file__)),
         "runs": runs,
         "server_image_before": server_before,
         "server_image_after": server_after,
         "totals": totals,
+        "source_commit_label_boundary": "source_commit in launch manifests is an operator-supplied label; binary SHA was recorded before execution and source/build identity requires a separate build receipt",
         "non_claim": "finite observed schedules and a logged accepted-ID implementation path do not prove all provider, crash, or aliasing behaviors",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

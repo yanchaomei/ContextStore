@@ -1025,6 +1025,7 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
                 )
                 .await
                 .expect("concurrent rewrite"));
+            let put_end_ns = epoch.elapsed().as_nanos();
             let current = writer_client
                 .lookup_object("rail-e2e", &writer_key)
                 .await
@@ -1034,9 +1035,9 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
             let generation = current.descriptor.object_generation;
             assert_eq!(generation, u64::from(revision) + 2);
             println!(
-                "UNIQUE_WRITE,revision={revision},generation={generation},byte={value},start_ns={start_ns},end_ns={end_ns}"
+                "UNIQUE_WRITE,revision={revision},generation={generation},byte={value},start_ns={start_ns},put_end_ns={put_end_ns},end_ns={end_ns}"
             );
-            committed.push((generation, start_ns, end_ns));
+            committed.push((generation, start_ns, put_end_ns, end_ns));
             tokio::time::sleep(Duration::from_millis(15)).await;
         }
         committed
@@ -1098,15 +1099,24 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
         }
     }
     let committed = writer.await.expect("writer task joined");
-    let overlaps = read_intervals
+    let put_overlaps = read_intervals
         .iter()
         .filter(|(read_start, read_end)| {
             committed
                 .iter()
-                .any(|(_, write_start, write_end)| read_start < write_end && write_start < read_end)
+                .any(|(_, write_start, put_end, _)| read_start < put_end && write_start < read_end)
         })
         .count();
-    assert!(overlaps > 0, "no read overlapped a committed rewrite");
+    let round_overlaps = read_intervals
+        .iter()
+        .filter(|(read_start, read_end)| {
+            committed.iter().any(|(_, write_start, _, round_end)| {
+                read_start < round_end && write_start < read_end
+            })
+        })
+        .count();
+    assert!(put_overlaps > 0, "no read overlapped a PUT operation");
+    assert!(round_overlaps >= put_overlaps);
     assert!(!accepted_generations.is_empty());
     assert!(
         accepted_generations
@@ -1132,7 +1142,7 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
     assert!(final_destination.iter().all(|byte| *byte == 0x2E));
     println!("UNIQUE_FINAL,generation_inferred=16,byte=46,bytes={size}");
     let modes = reader.mode_counts();
-    assert!(modes.direct > 0 && modes.direct as usize <= read_intervals.len() + 1);
+    assert_eq!(modes.direct as usize, read_intervals.len() + 1);
     assert_eq!(modes.one + modes.packed_greedy + modes.packed_contiguous, 0);
     println!(
         "UNIQUE_MODE,direct={},one={},packed_greedy={},packed_contiguous={}",
@@ -1155,7 +1165,7 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
         );
     }
     println!(
-        "UNIQUE_SUMMARY,attempts={},accepted={},rejected={rejected},missing={missing},overlapping={overlaps},first_generation=1,last_generation=16",
+        "UNIQUE_SUMMARY,attempts={},accepted={},rejected={rejected},missing={missing},put_overlapping={put_overlaps},round_overlapping={round_overlaps},first_generation=1,last_generation=16",
         read_intervals.len(),
         accepted_generations.len(),
     );
