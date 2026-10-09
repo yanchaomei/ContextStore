@@ -733,3 +733,201 @@ async fn old_generation_is_rejected_without_publishing_bytes() {
         .is_err());
     assert!(destination.iter().all(|byte| *byte == 0xA5));
 }
+
+/// Empirical race campaign: successful reads must equal one complete written
+/// version; every rejected read must leave the caller's sentinel intact.
+/// The writer's generations and each outcome are printed for raw audit.
+#[tokio::test]
+#[ignore = "requires two RXE/HCA Rails, a striped KVService, and repeated writes"]
+async fn concurrent_rewrites_never_publish_mixed_direct_staging_bytes() {
+    fn segments(bytes: &Bytes) -> Vec<Bytes> {
+        const CHUNK: usize = 4 * 1024 * 1024;
+        (0..bytes.len())
+            .step_by(CHUNK)
+            .map(|offset| bytes.slice(offset..(offset + CHUNK).min(bytes.len())))
+            .collect()
+    }
+
+    let coordinator = setting("CS_RAIL_COORDINATOR", "http://127.0.0.1:50051");
+    let mib = setting("CS_RAIL_OBJECT_MIB", "64")
+        .parse::<usize>()
+        .expect("object size in MiB");
+    let size = mib * 1024 * 1024;
+    let a = Bytes::from(vec![0x11; size]);
+    let b = Bytes::from(vec![0xE7; size]);
+    let nanos = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("wall clock")
+        .as_nanos();
+    let key = format!("direct-race-{nanos}");
+    let mut seed = KvClient::connect(coordinator.clone())
+        .await
+        .expect("connect initial writer");
+    assert!(seed
+        .put_stream_chunks("rail-e2e", &key, segments(&a))
+        .await
+        .expect("seed version A"));
+    let initial = seed
+        .lookup_object("rail-e2e", &key)
+        .await
+        .expect("initial lookup")
+        .expect("seeded object");
+    assert!(initial.descriptor.is_striped);
+    assert_eq!(initial.descriptor.size as usize, size);
+    println!(
+        "RACE_CONFIG,object_key={key},object_mib={mib},stripe_count={},direct_staging=true",
+        initial.descriptor.stripe_count
+    );
+    let placement = initial.placement.as_ref().expect("initial placement");
+    let advertised = placement
+        .chunks
+        .first()
+        .expect("stripe")
+        .rdma_endpoint
+        .clone();
+    assert!(placement
+        .chunks
+        .iter()
+        .all(|chunk| chunk.rdma_endpoint == advertised));
+    let listener0 = setting("CS_RAIL_LISTENER0", &advertised);
+    let listener1 = setting("CS_RAIL_LISTENER1", "127.0.0.1:50054");
+    let reader = Arc::new(
+        RailReader::new(
+            vec![
+                route(&advertised, 0, &listener0),
+                route(&advertised, 1, &listener1),
+            ],
+            RailLimits {
+                direct_staging: true,
+                io_timeout: Duration::from_secs(10),
+                ..RailLimits::default()
+            },
+        )
+        .expect("direct reader"),
+    );
+    let mut client = KvClient::connect(coordinator.clone())
+        .await
+        .expect("connect reader");
+    let writer_key = key.clone();
+    let writer = tokio::spawn(async move {
+        let mut writer_client = KvClient::connect(coordinator)
+            .await
+            .expect("connect concurrent writer");
+        let mut generations = vec![initial.descriptor.object_generation];
+        for revision in 0..15usize {
+            let value = if revision % 2 == 0 { &b } else { &a };
+            assert!(writer_client
+                .put_stream_chunks("rail-e2e", &writer_key, segments(value))
+                .await
+                .expect("concurrent rewrite"));
+            let current = writer_client
+                .lookup_object("rail-e2e", &writer_key)
+                .await
+                .expect("writer lookup")
+                .expect("written object");
+            let generation = current.descriptor.object_generation;
+            println!("RACE_WRITE,revision={revision},generation={generation}");
+            generations.push(generation);
+            tokio::time::sleep(Duration::from_millis(15)).await;
+        }
+        generations
+    });
+
+    let mut accepted_a = 0usize;
+    let mut accepted_b = 0usize;
+    let mut rejected = 0usize;
+    let mut missing = 0usize;
+    for attempt in 0..36usize {
+        let mut destination = vec![0xA5; size];
+        let result = tokio::time::timeout(
+            Duration::from_secs(30),
+            client.read_multi_rail_into(
+                Arc::clone(&reader),
+                "rail-e2e",
+                &key,
+                &mut destination,
+                None,
+            ),
+        )
+        .await
+        .expect("bounded direct read");
+        match result {
+            Ok(Some(length)) => {
+                assert_eq!(length, size);
+                let version = if destination.iter().all(|byte| *byte == 0x11) {
+                    accepted_a += 1;
+                    "A"
+                } else if destination.iter().all(|byte| *byte == 0xE7) {
+                    accepted_b += 1;
+                    "B"
+                } else {
+                    panic!("direct read published a mixed or corrupt object at attempt {attempt}");
+                };
+                println!("RACE_READ,attempt={attempt},result=accepted_{version}");
+            }
+            Ok(None) => {
+                assert!(destination.iter().all(|byte| *byte == 0xA5));
+                missing += 1;
+                println!("RACE_READ,attempt={attempt},result=missing");
+            }
+            Err(error) => {
+                assert!(destination.iter().all(|byte| *byte == 0xA5));
+                rejected += 1;
+                println!("RACE_READ,attempt={attempt},result=rejected,error={error}");
+            }
+        }
+        if writer.is_finished() && attempt >= 19 {
+            break;
+        }
+    }
+    let generations = writer.await.expect("writer task joined");
+    assert!(generations.windows(2).all(|pair| pair[1] > pair[0]));
+    assert!(
+        accepted_a + accepted_b > 0,
+        "no complete version was accepted"
+    );
+
+    let mut final_destination = vec![0xA5; size];
+    assert_eq!(
+        client
+            .read_multi_rail_into(
+                Arc::clone(&reader),
+                "rail-e2e",
+                &key,
+                &mut final_destination,
+                None,
+            )
+            .await
+            .expect("post-rewrite direct read"),
+        Some(size)
+    );
+    assert!(final_destination.iter().all(|byte| *byte == 0xE7));
+    let modes = reader.mode_counts();
+    assert!(modes.direct > 0, "test did not enter direct mode");
+    assert_eq!(modes.one + modes.packed_greedy + modes.packed_contiguous, 0);
+    println!(
+        "RACE_MODE,direct={},one={},packed_greedy={},packed_contiguous={}",
+        modes.direct, modes.one, modes.packed_greedy, modes.packed_contiguous
+    );
+    for rail in reader.snapshots() {
+        assert_eq!(rail.inflight_requests, 0);
+        assert_eq!(rail.inflight_bytes, 0);
+        assert_eq!(rail.registered_bytes, 0);
+        assert!(rail.bytes > 0, "both Rail paths must carry payload");
+        println!(
+            "RACE_RAIL,id={},bytes={},reads_ok={},reads_err={},inflight_requests={},inflight_bytes={},registered_bytes={}",
+            rail.id,
+            rail.bytes,
+            rail.reads_ok,
+            rail.reads_err,
+            rail.inflight_requests,
+            rail.inflight_bytes,
+            rail.registered_bytes,
+        );
+    }
+    println!(
+        "RACE_SUMMARY,accepted_a={accepted_a},accepted_b={accepted_b},rejected={rejected},missing={missing},first_generation={},last_generation={}",
+        generations[0],
+        generations.last().expect("writer generation")
+    );
+}
