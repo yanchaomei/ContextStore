@@ -3,17 +3,20 @@ set -euo pipefail
 
 # Test-only: run in the isolated RXE server guest while its Redis session is up.
 # A separate client process must issue a descriptor GET to trigger QP/MR cleanup.
-operation=${1:?usage: launch_server_failstop.sh destroy_qp|dereg_mr OUTPUT_DIR}
-output_dir=${2:?usage: launch_server_failstop.sh destroy_qp|dereg_mr OUTPUT_DIR}
+operation=${1:?usage: launch_server_failstop.sh destroy_qp|dereg_mr OUTPUT_DIR [SLAB_MB]}
+output_dir=${2:?usage: launch_server_failstop.sh destroy_qp|dereg_mr OUTPUT_DIR [SLAB_MB]}
 case "$operation" in
   destroy_qp) slab_mb=128 ;;
-  dereg_mr) slab_mb=16 ;;
+  dereg_mr) slab_mb=${3:-16} ;;
   *) echo "unsupported operation: $operation" >&2; exit 2 ;;
 esac
 mkdir -p "$output_dir"
 {
   printf 'operation=%s\nslab_mb=%s\n' "$operation" "$slab_mb"
-  sha256sum /home/railtest/bin/contextstore-server /home/railtest/libverbs_failstop.so
+  sha256sum /home/railtest/bin/contextstore-server \
+    /home/railtest/libverbs_failstop.so \
+    /home/railtest/evidence/server.toml \
+    "$0"
 } > "$output_dir/launch-manifest.txt"
 ulimit -c 0
 set +e

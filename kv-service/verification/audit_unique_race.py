@@ -12,6 +12,29 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def server_image_receipt(path: Path) -> dict:
+    lines = path.read_text().splitlines()
+    if len(lines) != 4 or not lines[0].startswith("server_pid="):
+        raise ValueError(f"incomplete live server image receipt: {path}")
+    if lines[1] != "/home/railtest/bin/contextstore-server":
+        raise ValueError(f"unexpected live server executable: {path}")
+    image_sha, image_path = lines[2].split("  ", 1)
+    config_sha, config_path = lines[3].split("  ", 1)
+    if (
+        image_path != f"/proc/{lines[0].split('=', 1)[1]}/exe"
+        or config_path != "/home/railtest/evidence/server.toml"
+        or len(image_sha) != 64
+        or len(config_sha) != 64
+    ):
+        raise ValueError(f"invalid server image/config hashes: {path}")
+    return {
+        "server_pid": lines[0].split("=", 1)[1],
+        "live_executable_sha256": image_sha,
+        "config_sha256": config_sha,
+        "receipt_sha256": digest(path),
+    }
+
+
 def fields(line: str) -> dict[str, str]:
     return dict(part.split("=", 1) for part in line.split(",")[1:] if "=" in part)
 
@@ -197,6 +220,13 @@ def main() -> None:
         {run["launch_time_binary_sha256"] for run in runs}
     ) != 1:
         raise ValueError("campaign mixed source commits or binaries")
+    server_before = server_image_receipt(args.logs / "server-live-before.txt")
+    server_after = server_image_receipt(args.logs / "server-live-after.txt")
+    if any(
+        server_before[key] != server_after[key]
+        for key in ("server_pid", "live_executable_sha256", "config_sha256")
+    ):
+        raise ValueError("server process or image changed during the campaign")
     totals = {
         key: sum(run[key] for run in runs)
         for key in (
@@ -209,6 +239,8 @@ def main() -> None:
         "scope": "per-Generation unique byte values; exact SDK accepted Generation trace and monotonic read/write interval audit",
         "auditor_sha256": digest(Path(__file__)),
         "runs": runs,
+        "server_image_before": server_before,
+        "server_image_after": server_after,
         "totals": totals,
         "non_claim": "finite observed schedules and a logged accepted-ID implementation path do not prove all provider, crash, or aliasing behaviors",
     }
