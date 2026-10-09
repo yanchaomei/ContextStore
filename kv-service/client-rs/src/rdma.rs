@@ -48,6 +48,19 @@ const CQ_DEPTH: i32 = 128;
 const MAX_WRITE_BYTES: u64 = 1 << 30;
 const COMPLETION_TIMEOUT: Duration = Duration::from_secs(30);
 
+/// A failed QP destruction leaves the provider's WRITE lifetime unknown.
+/// Fail-stop before Drop can recycle target or source allocations.
+fn destroy_qp_or_abort(qp: NonNull<ibv_qp>) {
+    let rc = unsafe { ibv_destroy_qp(qp.as_ptr()) };
+    if rc != 0 {
+        // Never format or use stderr's Rust lock here: an I/O panic could be
+        // caught by the caller and unwind through buffers still exposed to DMA.
+        const MESSAGE: &[u8] = b"ContextStore RDMA QP destruction failed; aborting\n";
+        unsafe { libc::write(libc::STDERR_FILENO, MESSAGE.as_ptr().cast(), MESSAGE.len()) };
+        std::process::abort();
+    }
+}
+
 /// RDMA connection parameters for a ContextStore data node.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct RdmaClientConfig {
@@ -340,7 +353,7 @@ impl RdmaClient {
         let resources = Arc::new(RdmaResources::open(&config)?);
         let qp = create_qp(&resources)?;
         if let Err(error) = transition_qp_to_init(qp, config.port) {
-            unsafe { ibv_destroy_qp(qp.as_ptr()) };
+            destroy_qp_or_abort(qp);
             return Err(error);
         }
 
@@ -366,7 +379,7 @@ impl RdmaClient {
                 mr_cache: Vec::new(),
             }),
             Err(error) => {
-                unsafe { ibv_destroy_qp(qp.as_ptr()) };
+                destroy_qp_or_abort(qp);
                 Err(error)
             }
         }
@@ -383,7 +396,7 @@ impl RdmaClient {
     fn retire_after_control_error(&mut self) {
         let _ = self.stream.shutdown(std::net::Shutdown::Both);
         if let Some(qp) = self.qp.take() {
-            unsafe { ibv_destroy_qp(qp.as_ptr()) };
+            destroy_qp_or_abort(qp);
         }
         self.mr_cache.clear();
     }
@@ -904,7 +917,7 @@ impl Drop for RdmaClient {
         if let Some(qp) = self.qp.take() {
             let _ = self.stream.write_all(&[MSG_BYE]);
             let _ = self.stream.flush();
-            unsafe { ibv_destroy_qp(qp.as_ptr()) };
+            destroy_qp_or_abort(qp);
         }
     }
 }
@@ -976,8 +989,13 @@ impl<'a> RegisteredBuffer<'a> {
 
 impl Drop for RegisteredBuffer<'_> {
     fn drop(&mut self) {
-        unsafe {
-            ibv_dereg_mr(self.mr.as_ptr());
+        // The backing slice may be freed or reused immediately after Drop.
+        // An unsuccessful deregistration cannot establish that it is safe.
+        let rc = unsafe { ibv_dereg_mr(self.mr.as_ptr()) };
+        if rc != 0 {
+            const MESSAGE: &[u8] = b"ContextStore RDMA MR deregistration failed; aborting\n";
+            unsafe { libc::write(libc::STDERR_FILENO, MESSAGE.as_ptr().cast(), MESSAGE.len()) };
+            std::process::abort();
         }
     }
 }

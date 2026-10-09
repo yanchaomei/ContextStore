@@ -122,6 +122,350 @@ fn two_independent_listeners_restore_one_unmodified_placement() {
 }
 
 #[test]
+fn direct_staging_assigns_disjoint_ordered_slices_and_restores_the_object() {
+    struct DirectMock {
+        object: Vec<u8>,
+        targets: Mutex<Vec<(Vec<u32>, usize, usize)>>,
+    }
+    impl RailTransport for DirectMock {
+        fn fetch(
+            &self,
+            _route: &RailRoute,
+            _task: &RailTask,
+            _descriptor: &pb::ObjectDescriptor,
+            _timeout: Duration,
+        ) -> Result<Vec<u8>, RailReadError> {
+            panic!("direct staging must receive into the private ordered target")
+        }
+
+        fn fetch_into(
+            &self,
+            _route: &RailRoute,
+            task: &RailTask,
+            _descriptor: &pb::ObjectDescriptor,
+            target: &mut [u8],
+            _timeout: Duration,
+        ) -> Result<(), RailReadError> {
+            assert_eq!(target.len(), task.packed_len);
+            self.targets.lock().unwrap().push((
+                task.stripes.iter().map(|stripe| stripe.index).collect(),
+                target.as_ptr() as usize,
+                target.len(),
+            ));
+            for stripe in &task.stripes {
+                target[stripe.packed_offset..stripe.packed_offset + stripe.length].copy_from_slice(
+                    &self.object[stripe.object_offset..stripe.object_offset + stripe.length],
+                );
+            }
+            Ok(())
+        }
+    }
+
+    let object: Vec<u8> = (0..64).collect();
+    let mock = DirectMock {
+        object: object.clone(),
+        targets: Mutex::new(Vec::new()),
+    };
+    let reader = RailReader::new(
+        routes(),
+        RailLimits {
+            direct_staging: true,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap();
+    let (descriptor, placement) = fixture(64, 8);
+    let staged = reader
+        .read_staged_with(&descriptor, &placement, &mock, None)
+        .unwrap();
+    assert_eq!(staged.as_bytes(), object);
+    assert_eq!(reader.mode_counts().direct, 1);
+    let mut targets = mock.targets.lock().unwrap().clone();
+    targets.sort_by_key(|(_, address, _)| *address);
+    let base = staged.as_bytes().as_ptr() as usize;
+    assert_eq!(
+        targets,
+        vec![
+            (vec![0, 1, 2, 3], base, 32),
+            (vec![4, 5, 6, 7], base + 32, 32)
+        ]
+    );
+}
+
+#[test]
+fn direct_staging_sge_uses_the_owned_slice_and_separate_dummy_mr() {
+    let (descriptor, placement) = fixture(64, 8);
+    let plan = RailPlan::build(&descriptor, &placement, &routes())
+        .unwrap()
+        .contiguous_for_single_owner(&placement, &routes(), true);
+    assert!(plan.direct_staging);
+    let task = &plan.tasks[0];
+    let target = SgeRegion {
+        addr: 1000,
+        rkey: 11,
+        len: 32,
+    };
+    let dummy = SgeRegion {
+        addr: 2000,
+        rkey: 22,
+        len: 8,
+    };
+    let segments = build_sge_segments_direct(task, &descriptor, target, dummy).unwrap();
+    assert_eq!(segments.len(), 8);
+    assert_eq!(segments[0], (1000, 11, 8));
+    assert_eq!(segments[3], (1024, 11, 8));
+    assert_eq!(segments[4], (2000, 22, 8));
+    assert_eq!(segments[7], (2000, 22, 8));
+    assert!(
+        build_sge_segments_direct(task, &descriptor, target, SgeRegion { len: 7, ..dummy })
+            .is_err()
+    );
+}
+
+#[test]
+fn direct_staging_partial_second_rail_failure_never_publishes() {
+    struct PartialWrite;
+    impl RailTransport for PartialWrite {
+        fn fetch(
+            &self,
+            _route: &RailRoute,
+            _task: &RailTask,
+            _descriptor: &pb::ObjectDescriptor,
+            _timeout: Duration,
+        ) -> Result<Vec<u8>, RailReadError> {
+            panic!("direct path must not use packed receive buffers")
+        }
+
+        fn fetch_into(
+            &self,
+            route: &RailRoute,
+            _task: &RailTask,
+            _descriptor: &pb::ObjectDescriptor,
+            target: &mut [u8],
+            _timeout: Duration,
+        ) -> Result<(), RailReadError> {
+            target.fill(0x42);
+            if route.id == "rail1" {
+                return Err(RailReadError::Transport(
+                    "injected second-Rail failure".into(),
+                ));
+            }
+            Ok(())
+        }
+    }
+
+    let reader = RailReader::new(
+        routes(),
+        RailLimits {
+            direct_staging: true,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap();
+    let (descriptor, placement) = fixture(64, 8);
+    let mut destination = vec![0xA5; 64];
+    assert!(matches!(
+        reader.read_into_with(
+            &descriptor,
+            &placement,
+            &mut destination,
+            &PartialWrite,
+            None
+        ),
+        Err(RailReadError::Transport(_))
+    ));
+    assert_eq!(destination, vec![0xA5; 64]);
+    assert_eq!(reader.budget.lock().unwrap().active_reads, 0);
+    assert!(reader
+        .snapshots()
+        .iter()
+        .all(|rail| rail.inflight_requests == 0 && rail.registered_bytes == 0));
+}
+
+#[test]
+fn direct_staging_reserves_one_object_buffer_and_keeps_it_until_drop() {
+    let mock = MockTransport::new(vec![0x42; 64]);
+    let reader = RailReader::new(
+        routes(),
+        RailLimits {
+            direct_staging: true,
+            max_active_reads: 2,
+            max_staging_bytes: 80,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap();
+    let (descriptor, placement) = fixture(64, 8);
+    let staged = reader
+        .read_staged_with(&descriptor, &placement, &mock, None)
+        .expect("one 64-byte object plus two 8-byte dummies fits exactly");
+    assert_eq!(staged.as_bytes(), vec![0x42; 64]);
+    assert_eq!(reader.budget.lock().unwrap().staging_bytes, 64);
+    assert!(matches!(
+        reader.read_staged_with(&descriptor, &placement, &mock, None),
+        Err(RailReadError::ResourceExhausted(_))
+    ));
+    drop(staged);
+    assert_eq!(reader.budget.lock().unwrap().staging_bytes, 0);
+    assert!(reader
+        .read_staged_with(&descriptor, &placement, &mock, None)
+        .is_ok());
+}
+
+#[test]
+fn direct_staging_weighted_ranges_and_multi_owner_fallback_are_explicit() {
+    let (descriptor, placement) = fixture(64, 8);
+    let mut weighted = routes();
+    weighted[0].weight = 3;
+    let plan = RailPlan::build(&descriptor, &placement, &weighted)
+        .unwrap()
+        .contiguous_for_single_owner(&placement, &weighted, true);
+    assert!(plan.direct_staging);
+    assert_eq!(
+        plan.tasks
+            .iter()
+            .map(|task| task
+                .stripes
+                .iter()
+                .map(|stripe| stripe.index)
+                .collect::<Vec<_>>())
+            .collect::<Vec<_>>(),
+        vec![vec![0, 1, 2, 3, 4, 5], vec![6, 7]]
+    );
+
+    let (_, mut different_owners) = fixture(64, 8);
+    for chunk in &mut different_owners.chunks[4..] {
+        chunk.node_id = "node-b".into();
+        chunk.rdma_endpoint = "10.0.0.2:50053".into();
+    }
+    let owner_routes = vec![
+        routes()[0].clone(),
+        RailRoute::new(
+            "node-b",
+            "10.0.0.2:50053",
+            crate::rdma::RdmaClientConfig::new("10.0.0.2:50053", "mock1"),
+        ),
+    ];
+    let plan = RailPlan::build(&descriptor, &different_owners, &owner_routes)
+        .unwrap()
+        .contiguous_for_single_owner(&different_owners, &owner_routes, true);
+    assert!(!plan.direct_staging);
+    let (_, mut ambiguous_owner) = fixture(64, 8);
+    for chunk in &mut ambiguous_owner.chunks[4..] {
+        chunk.node_id = "node-b".into();
+    }
+    let plan = RailPlan::build(&descriptor, &ambiguous_owner, &routes())
+        .unwrap()
+        .contiguous_for_single_owner(&ambiguous_owner, &routes(), true);
+    assert!(!plan.direct_staging);
+    let (_, mut missing_owner) = fixture(64, 8);
+    for chunk in &mut missing_owner.chunks {
+        chunk.node_id.clear();
+    }
+    let plan = RailPlan::build(&descriptor, &missing_owner, &routes())
+        .unwrap()
+        .contiguous_for_single_owner(&missing_owner, &routes(), true);
+    assert!(!plan.direct_staging);
+    let reader = RailReader::new(
+        owner_routes,
+        RailLimits {
+            direct_staging: true,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap();
+    let object: Vec<u8> = (0..64).collect();
+    let mock = MockTransport::new(object.clone());
+    let mut destination = vec![0xA5; 64];
+    reader
+        .read_into_with(
+            &descriptor,
+            &different_owners,
+            &mut destination,
+            &mock,
+            None,
+        )
+        .unwrap();
+    assert_eq!(destination, object);
+}
+
+#[test]
+fn packed_contiguous_control_uses_the_same_rail_ranges_as_direct_staging() {
+    let (descriptor, placement) = fixture(64, 8);
+    let configured = routes();
+    let packed = RailPlan::build(&descriptor, &placement, &configured)
+        .unwrap()
+        .contiguous_for_single_owner(&placement, &configured, false);
+    let direct = RailPlan::build(&descriptor, &placement, &configured)
+        .unwrap()
+        .contiguous_for_single_owner(&placement, &configured, true);
+    assert!(!packed.direct_staging);
+    assert!(direct.direct_staging);
+    assert_eq!(
+        packed
+            .tasks
+            .iter()
+            .map(|task| task
+                .stripes
+                .iter()
+                .map(|stripe| stripe.index)
+                .collect::<Vec<_>>())
+            .collect::<Vec<_>>(),
+        direct
+            .tasks
+            .iter()
+            .map(|task| task
+                .stripes
+                .iter()
+                .map(|stripe| stripe.index)
+                .collect::<Vec<_>>())
+            .collect::<Vec<_>>()
+    );
+    let reader = RailReader::new(
+        configured,
+        RailLimits {
+            contiguous_schedule: true,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap();
+    let assignments = reader.describe_assignment(&descriptor, &placement).unwrap();
+    assert_eq!(assignments[0].stripe_indices, vec![0, 1, 2, 3]);
+    assert_eq!(assignments[1].stripe_indices, vec![4, 5, 6, 7]);
+    let object: Vec<u8> = (0..64).collect();
+    let mock = MockTransport::new(object.clone());
+    let mut destination = vec![0xA5; 64];
+    reader
+        .read_into_with(&descriptor, &placement, &mut destination, &mock, None)
+        .unwrap();
+    assert_eq!(destination, object);
+    assert_eq!(reader.mode_counts().packed_contiguous, 1);
+}
+
+#[test]
+fn direct_staging_checksum_failure_preserves_caller_sentinel() {
+    let mock = MockTransport::new(vec![0x42; 64]);
+    let reader = RailReader::new(
+        routes(),
+        RailLimits {
+            direct_staging: true,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap();
+    let (descriptor, mut placement) = fixture(64, 8);
+    for chunk in &mut placement.chunks {
+        chunk.checksum = "0000000000000000".into();
+    }
+    let mut destination = vec![0xA5; 64];
+    assert!(matches!(
+        reader.read_into_with(&descriptor, &placement, &mut destination, &mock, None),
+        Err(RailReadError::Checksum { stripe: 0 })
+    ));
+    assert_eq!(destination, vec![0xA5; 64]);
+}
+
+#[test]
 fn one_complete_rail_hands_off_its_receive_allocation_without_reassembly() {
     struct ReceiveAllocation {
         bytes: Vec<u8>,

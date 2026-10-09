@@ -397,8 +397,13 @@ fn wc_status_str(status: u32) -> &'static str {
 
 impl Drop for RcQp {
     fn drop(&mut self) {
-        unsafe {
-            ibv_destroy_qp(self.qp.as_ptr());
+        // Retained WRITE sources and slab pins drop immediately after this
+        // QP. An unsuccessful destroy cannot prove they are safe to release.
+        let rc = unsafe { ibv_destroy_qp(self.qp.as_ptr()) };
+        if rc != 0 {
+            const MESSAGE: &[u8] = b"ContextStore RDMA server QP destruction failed; aborting\n";
+            unsafe { libc::write(libc::STDERR_FILENO, MESSAGE.as_ptr().cast(), MESSAGE.len()) };
+            std::process::abort();
         }
     }
 }

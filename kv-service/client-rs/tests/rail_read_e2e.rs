@@ -191,9 +191,7 @@ async fn cancellation_after_real_transfer_starts_cannot_write_reused_buffer() {
     assert_eq!(reader.snapshots()[0].registered_bytes, 0);
 }
 
-#[tokio::test]
-#[ignore = "requires two real rails and a large striped object"]
-async fn cancellation_during_two_rail_transfer_preserves_reused_buffer() {
+async fn cancellation_during_two_rail_transfer_case(direct_staging: bool) {
     let (mut client, key, payload, advertised) = seeded_object().await;
     let listener0 = setting("CS_RAIL_LISTENER0", &advertised);
     let listener1 = setting("CS_RAIL_LISTENER1", "127.0.0.1:50054");
@@ -203,7 +201,10 @@ async fn cancellation_during_two_rail_transfer_preserves_reused_buffer() {
                 route(&advertised, 0, &listener0),
                 route(&advertised, 1, &listener1),
             ],
-            RailLimits::default(),
+            RailLimits {
+                direct_staging,
+                ..RailLimits::default()
+            },
         )
         .expect("dual reader"),
     );
@@ -252,6 +253,18 @@ async fn cancellation_during_two_rail_transfer_preserves_reused_buffer() {
         .snapshots()
         .iter()
         .all(|snapshot| snapshot.inflight_requests == 0 && snapshot.registered_bytes == 0));
+}
+
+#[tokio::test]
+#[ignore = "requires two real rails and a large striped object"]
+async fn cancellation_during_two_rail_transfer_preserves_reused_buffer() {
+    cancellation_during_two_rail_transfer_case(false).await;
+}
+
+#[tokio::test]
+#[ignore = "requires two real rails and a large striped object"]
+async fn cancellation_during_direct_staging_preserves_reused_buffer() {
+    cancellation_during_two_rail_transfer_case(true).await;
 }
 
 #[tokio::test]
@@ -373,9 +386,7 @@ async fn late_server_write_after_timeout_cannot_corrupt_reused_buffer() {
     assert!(destination.iter().all(|byte| *byte == 0x33));
 }
 
-#[tokio::test]
-#[ignore = "requires two real rails and a three-second pre-WRITE delay on server nic_idx=1"]
-async fn late_second_rail_after_first_completion_cannot_publish_or_corrupt() {
+async fn late_second_rail_case(direct_staging: bool) {
     let (mut client, key, payload, advertised) = seeded_object().await;
     let listener0 = setting("CS_RAIL_LISTENER0", &advertised);
     let listener1 = setting("CS_RAIL_LISTENER1", "127.0.0.1:50054");
@@ -387,6 +398,7 @@ async fn late_second_rail_after_first_completion_cannot_publish_or_corrupt() {
             ],
             RailLimits {
                 io_timeout: Duration::from_secs(1),
+                direct_staging,
                 ..RailLimits::default()
             },
         )
@@ -414,6 +426,18 @@ async fn late_second_rail_after_first_completion_cannot_publish_or_corrupt() {
         .snapshots()
         .iter()
         .all(|snapshot| snapshot.inflight_requests == 0 && snapshot.registered_bytes == 0));
+}
+
+#[tokio::test]
+#[ignore = "requires two real rails and a three-second pre-WRITE delay on server nic_idx=1"]
+async fn late_second_rail_after_first_completion_cannot_publish_or_corrupt() {
+    late_second_rail_case(false).await;
+}
+
+#[tokio::test]
+#[ignore = "requires two real rails and a three-second pre-WRITE delay on server nic_idx=1"]
+async fn late_second_rail_direct_staging_cannot_publish_or_corrupt() {
+    late_second_rail_case(true).await;
 }
 
 #[tokio::test]
@@ -626,14 +650,13 @@ async fn advertised_second_link_down_cannot_publish_partial_object() {
     assert!(destination.iter().all(|byte| *byte == 0xA5));
 }
 
-#[tokio::test]
-#[ignore = "requires one reachable RDMA listener and one injected dead listener"]
-async fn failed_second_rail_does_not_publish_partial_bytes() {
+async fn failed_second_rail_case(direct_staging: bool) {
     let (mut client, key, payload, advertised) = seeded_object().await;
     let listener0 = setting("CS_RAIL_LISTENER0", &advertised);
     let dead = setting("CS_RAIL_DEAD_LISTENER", "127.0.0.1:59999");
     let limits = RailLimits {
         io_timeout: Duration::from_secs(3),
+        direct_staging,
         ..RailLimits::default()
     };
     let reader = Arc::new(
@@ -652,6 +675,18 @@ async fn failed_second_rail_does_not_publish_partial_bytes() {
         .await
         .is_err());
     assert!(destination.iter().all(|byte| *byte == 0xA5));
+}
+
+#[tokio::test]
+#[ignore = "requires one reachable RDMA listener and one injected dead listener"]
+async fn failed_second_rail_does_not_publish_partial_bytes() {
+    failed_second_rail_case(false).await;
+}
+
+#[tokio::test]
+#[ignore = "requires one reachable RDMA listener and one injected dead listener"]
+async fn failed_second_rail_direct_staging_does_not_publish_partial_bytes() {
+    failed_second_rail_case(true).await;
 }
 
 #[tokio::test]

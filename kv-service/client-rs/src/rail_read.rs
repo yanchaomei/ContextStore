@@ -149,6 +149,10 @@ pub struct RailLimits {
     pub io_timeout: Duration,
     /// Delay before a failed rail is eligible for a later request.
     pub rail_cooldown: Duration,
+    /// Opt in to contiguous direct-to-private-staging reads when eligible.
+    pub direct_staging: bool,
+    /// Use the direct mode's contiguous scheduler with the packed receive path.
+    pub contiguous_schedule: bool,
 }
 
 impl Default for RailLimits {
@@ -162,6 +166,8 @@ impl Default for RailLimits {
             max_inflight_bytes_per_rail: 2 * 1024 * 1024 * 1024,
             io_timeout: Duration::from_secs(30),
             rail_cooldown: Duration::from_secs(10),
+            direct_staging: false,
+            contiguous_schedule: false,
         }
     }
 }
@@ -308,6 +314,8 @@ struct RailPlan {
     chunk_size: usize,
     checksums: Vec<String>,
     tasks: Vec<RailTask>,
+    direct_staging: bool,
+    contiguous_schedule: bool,
 }
 
 impl RailPlan {
@@ -444,7 +452,83 @@ impl RailPlan {
             chunk_size,
             checksums,
             tasks,
+            direct_staging: false,
+            contiguous_schedule: false,
         })
+    }
+
+    /// Repartition an already validated single-owner object into disjoint
+    /// consecutive slices. Multi-owner layouts keep the original planner.
+    fn contiguous_for_single_owner(
+        mut self,
+        placement: &pb::PlacementDescriptor,
+        routes: &[RailRoute],
+        direct_staging: bool,
+    ) -> Self {
+        let count = self.checksums.len();
+        let rails = self.tasks.len();
+        if rails < 2
+            || rails > count
+            || placement.chunks[0].node_id.trim().is_empty()
+            || !placement.chunks.iter().all(|chunk| {
+                chunk.rdma_endpoint == placement.chunks[0].rdma_endpoint
+                    && chunk.node_id == placement.chunks[0].node_id
+            })
+        {
+            return self;
+        }
+        self.tasks.sort_by_key(|task| task.route_index);
+        let total_weight: u128 = self
+            .tasks
+            .iter()
+            .map(|task| routes[task.route_index].weight as u128)
+            .sum();
+        let remaining = count - rails;
+        let mut quotas: Vec<(usize, u128)> = self
+            .tasks
+            .iter()
+            .map(|task| {
+                let share = remaining as u128 * routes[task.route_index].weight as u128;
+                (1 + (share / total_weight) as usize, share % total_weight)
+            })
+            .collect();
+        let assigned: usize = quotas.iter().map(|quota| quota.0).sum();
+        let mut residual_order: Vec<usize> = (0..rails).collect();
+        residual_order.sort_by(|left, right| {
+            quotas[*right]
+                .1
+                .cmp(&quotas[*left].1)
+                .then_with(|| left.cmp(right))
+        });
+        for position in residual_order.into_iter().take(count - assigned) {
+            quotas[position].0 += 1;
+        }
+        let mut stripe_index = 0;
+        for (task, (stripe_quota, _)) in self.tasks.iter_mut().zip(quotas) {
+            task.stripes.clear();
+            task.packed_len = 0;
+            task.dummy_len = self.chunk_size.min(self.size);
+            for _ in 0..stripe_quota {
+                let object_offset = stripe_index * self.chunk_size;
+                let length = (self.size - object_offset).min(self.chunk_size);
+                task.stripes.push(StripeRead {
+                    index: stripe_index as u32,
+                    object_offset,
+                    length,
+                    packed_offset: task.packed_len,
+                });
+                task.packed_len += length;
+                stripe_index += 1;
+            }
+        }
+        debug_assert_eq!(stripe_index, count);
+        debug_assert_eq!(
+            self.tasks.iter().map(|task| task.packed_len).sum::<usize>(),
+            self.size
+        );
+        self.direct_staging = direct_staging;
+        self.contiguous_schedule = true;
+        self
     }
 }
 
@@ -456,6 +540,25 @@ trait RailTransport: Sync {
         descriptor: &pb::ObjectDescriptor,
         timeout: Duration,
     ) -> Result<Vec<u8>, RailReadError>;
+
+    fn fetch_into(
+        &self,
+        route: &RailRoute,
+        task: &RailTask,
+        descriptor: &pb::ObjectDescriptor,
+        target: &mut [u8],
+        timeout: Duration,
+    ) -> Result<(), RailReadError> {
+        let packed = self.fetch(route, task, descriptor, timeout)?;
+        if packed.len() != target.len() {
+            return Err(RailReadError::Incomplete {
+                expected: target.len(),
+                actual: packed.len(),
+            });
+        }
+        target.copy_from_slice(&packed);
+        Ok(())
+    }
 }
 
 #[derive(Default)]
@@ -589,12 +692,31 @@ pub struct RailReader {
     topologies: Vec<RailTopology>,
     limits: RailLimits,
     counters: Vec<RailCounters>,
+    mode_counts: [AtomicU64; 4],
     budget: Arc<Mutex<BudgetState>>,
+}
+
+/// Counts admitted reads by the plan actually selected after route filtering.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct RailModeCounts {
+    pub one: u64,
+    pub packed_greedy: u64,
+    pub packed_contiguous: u64,
+    pub direct: u64,
+}
+
+/// Validated per-Rail stripe plan for diagnostic and benchmark provenance.
+#[derive(Clone, Debug)]
+pub struct RailAssignmentSnapshot {
+    pub id: String,
+    pub stripe_indices: Vec<u32>,
+    pub bytes: usize,
 }
 
 struct BudgetGuard {
     state: Arc<Mutex<BudgetState>>,
     staging: u64,
+    transient_staging: u64,
     registered: u64,
     inflight: u64,
     rail_reservations: Vec<(usize, u64)>,
@@ -603,14 +725,15 @@ struct BudgetGuard {
 impl BudgetGuard {
     fn finish_transfer(&mut self) {
         let mut budget = self.state.lock().unwrap();
-        budget.staging_bytes -= self.registered;
+        budget.staging_bytes -= self.transient_staging;
         budget.registered_bytes -= self.registered;
         budget.inflight_bytes -= self.inflight;
         for (index, bytes) in self.rail_reservations.drain(..) {
             budget.rail_active_reads[index] -= 1;
             budget.rail_inflight_bytes[index] -= bytes;
         }
-        self.staging -= self.registered;
+        self.staging -= self.transient_staging;
+        self.transient_staging = 0;
         self.registered = 0;
         self.inflight = 0;
     }
@@ -830,6 +953,7 @@ impl RailReader {
             topologies,
             limits,
             counters,
+            mode_counts: std::array::from_fn(|_| AtomicU64::new(0)),
             budget: Arc::new(Mutex::new(BudgetState {
                 rail_active_reads: vec![0; route_count],
                 rail_inflight_bytes: vec![0; route_count],
@@ -841,6 +965,40 @@ impl RailReader {
     /// The resolved route map used by this reader, including discovered listeners.
     pub fn routes(&self) -> &[RailRoute] {
         &self.routes
+    }
+
+    pub fn mode_counts(&self) -> RailModeCounts {
+        RailModeCounts {
+            one: self.mode_counts[0].load(Ordering::Relaxed),
+            packed_greedy: self.mode_counts[1].load(Ordering::Relaxed),
+            packed_contiguous: self.mode_counts[2].load(Ordering::Relaxed),
+            direct: self.mode_counts[3].load(Ordering::Relaxed),
+        }
+    }
+
+    pub fn describe_assignment(
+        &self,
+        descriptor: &pb::ObjectDescriptor,
+        placement: &pb::PlacementDescriptor,
+    ) -> Result<Vec<RailAssignmentSnapshot>, RailReadError> {
+        let mut available = self.routes.clone();
+        for (route, counters) in available.iter_mut().zip(&self.counters) {
+            route.enabled = counters.is_available();
+        }
+        let mut plan = RailPlan::build(descriptor, placement, &available)?;
+        if self.limits.direct_staging || self.limits.contiguous_schedule {
+            plan =
+                plan.contiguous_for_single_owner(placement, &available, self.limits.direct_staging);
+        }
+        Ok(plan
+            .tasks
+            .iter()
+            .map(|task| RailAssignmentSnapshot {
+                id: self.routes[task.route_index].id.clone(),
+                stripe_indices: task.stripes.iter().map(|stripe| stripe.index).collect(),
+                bytes: task.packed_len,
+            })
+            .collect())
     }
 
     /// Read per-rail counters without blocking in-flight transfers.
@@ -883,6 +1041,13 @@ impl RailReader {
     }
 
     fn reserve(&self, plan: &RailPlan) -> Result<BudgetGuard, RailReadError> {
+        let dummy_bytes = plan
+            .tasks
+            .iter()
+            .try_fold(0u64, |sum, task| sum.checked_add(task.dummy_len as u64))
+            .ok_or_else(|| {
+                RailReadError::ResourceExhausted("dummy staging size overflow".into())
+            })?;
         let registered = plan
             .tasks
             .iter()
@@ -892,7 +1057,12 @@ impl RailReader {
                     .and_then(|bytes| sum.checked_add(bytes as u64))
             })
             .ok_or_else(|| RailReadError::ResourceExhausted("registration size overflow".into()))?;
-        let staging = registered
+        let transient_staging = if plan.direct_staging {
+            dummy_bytes
+        } else {
+            registered
+        };
+        let staging = transient_staging
             .checked_add(plan.size as u64)
             .ok_or_else(|| RailReadError::ResourceExhausted("staging size overflow".into()))?;
         let inflight = plan.size as u64;
@@ -936,10 +1106,100 @@ impl RailReader {
         Ok(BudgetGuard {
             state: Arc::clone(&self.budget),
             staging,
+            transient_staging,
             registered,
             inflight,
             rail_reservations,
         })
+    }
+
+    fn fetch_direct_staged<T: RailTransport>(
+        &self,
+        plan: &RailPlan,
+        descriptor: &pb::ObjectDescriptor,
+        transport: &T,
+        cancel: Option<&RailCancel>,
+    ) -> Result<(Vec<u8>, u128), RailReadError> {
+        let workers_start = Instant::now();
+        let mut staged = Vec::new();
+        staged
+            .try_reserve_exact(plan.size)
+            .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
+        staged.resize(plan.size, 0);
+        let mut remainder = staged.as_mut_slice();
+        let mut targets = Vec::with_capacity(plan.tasks.len());
+        for task in &plan.tasks {
+            let (target, tail) = remainder.split_at_mut(task.packed_len);
+            targets.push(target);
+            remainder = tail;
+        }
+        if !remainder.is_empty() {
+            return Err(RailReadError::InvalidPlacement(
+                "direct Rail slices do not cover the object".into(),
+            ));
+        }
+        let results = std::thread::scope(|scope| {
+            let handles: Vec<_> = plan
+                .tasks
+                .iter()
+                .zip(targets)
+                .map(|(task, target)| {
+                    let route = &self.routes[task.route_index];
+                    let counters = &self.counters[task.route_index];
+                    scope.spawn(move || {
+                        let started = Instant::now();
+                        let _activity = RailActivityGuard::new(
+                            counters,
+                            task.packed_len as u64,
+                            (task.packed_len + task.dummy_len) as u64,
+                        );
+                        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                            transport.fetch_into(
+                                route,
+                                task,
+                                descriptor,
+                                target,
+                                self.limits.io_timeout,
+                            )
+                        }))
+                        .unwrap_or(Err(RailReadError::WorkerPanic));
+                        counters
+                            .duration_us
+                            .fetch_add(started.elapsed().as_micros() as u64, Ordering::Relaxed);
+                        if result.is_ok() {
+                            counters.reads_ok.fetch_add(1, Ordering::Relaxed);
+                            counters
+                                .bytes
+                                .fetch_add(task.packed_len as u64, Ordering::Relaxed);
+                        } else {
+                            counters.reads_err.fetch_add(1, Ordering::Relaxed);
+                            if matches!(
+                                &result,
+                                Err(RailReadError::Transport(_)
+                                    | RailReadError::Incomplete { .. }
+                                    | RailReadError::WorkerPanic)
+                            ) {
+                                *counters.cooldown_until.lock().unwrap() =
+                                    Some(Instant::now() + self.limits.rail_cooldown);
+                            }
+                        }
+                        result
+                    })
+                })
+                .collect();
+            handles
+                .into_iter()
+                .map(|handle| handle.join().unwrap_or(Err(RailReadError::WorkerPanic)))
+                .collect::<Vec<_>>()
+        });
+        let workers_us = workers_start.elapsed().as_micros();
+        if cancel.is_some_and(RailCancel::is_cancelled) {
+            return Err(RailReadError::Cancelled);
+        }
+        for result in results {
+            result?;
+        }
+        Ok((staged, workers_us))
     }
 
     fn read_staged_with<T: RailTransport>(
@@ -979,14 +1239,62 @@ impl RailReader {
         for (route, counters) in available.iter_mut().zip(&self.counters) {
             route.enabled = counters.is_available();
         }
-        let plan = RailPlan::build(descriptor, placement, &available)?;
+        let mut plan = RailPlan::build(descriptor, placement, &available)?;
+        if self.limits.direct_staging || self.limits.contiguous_schedule {
+            plan =
+                plan.contiguous_for_single_owner(placement, &available, self.limits.direct_staging);
+        }
         let plan_us = timing_start.elapsed().as_micros();
         let reserve_start = Instant::now();
         let mut budget = self.reserve(&plan)?;
         if cancel.is_some_and(RailCancel::is_cancelled) {
             return Err(RailReadError::Cancelled);
         }
+        let mode_index = if plan.tasks.len() == 1 {
+            0
+        } else if plan.direct_staging {
+            3
+        } else if plan.contiguous_schedule {
+            2
+        } else {
+            1
+        };
+        self.mode_counts[mode_index].fetch_add(1, Ordering::Relaxed);
         let reserve_us = reserve_start.elapsed().as_micros();
+        if plan.direct_staging {
+            let (staged, workers_us) =
+                self.fetch_direct_staged(&plan, descriptor, transport, cancel)?;
+            let checksum_start = Instant::now();
+            for (index, checksum) in plan.checksums.iter().enumerate() {
+                if checksum.is_empty() {
+                    continue;
+                }
+                let start = index * plan.chunk_size;
+                let end = (start + plan.chunk_size).min(plan.size);
+                let actual = format!("{:016x}", twox_hash::xxh3::hash64(&staged[start..end]));
+                if !checksum.eq_ignore_ascii_case(&actual) {
+                    return Err(RailReadError::Checksum {
+                        stripe: index as u32,
+                    });
+                }
+            }
+            let checksum_us = checksum_start.elapsed().as_micros();
+            let finish_start = Instant::now();
+            budget.finish_transfer();
+            if crate::rail_timing_enabled() {
+                eprintln!(
+                    "RAIL_STAGED_TIMING bytes={} rails={} plan_us={plan_us} reserve_us={reserve_us} workers_us={workers_us} assembly_us=0 checksum_us={checksum_us} finish_us={} total_us={}",
+                    plan.size,
+                    plan.tasks.len(),
+                    finish_start.elapsed().as_micros(),
+                    timing_start.elapsed().as_micros(),
+                );
+            }
+            return Ok(StagedRailRead {
+                bytes: staged,
+                _budget: budget,
+            });
+        }
         let workers_start = Instant::now();
         let results = std::thread::scope(|scope| {
             let handles: Vec<_> = plan
@@ -1209,6 +1517,68 @@ fn build_sge_segments(
     Ok(segments)
 }
 
+#[derive(Clone, Copy)]
+struct SgeRegion {
+    addr: u64,
+    rkey: u32,
+    len: usize,
+}
+
+fn build_sge_segments_direct(
+    task: &RailTask,
+    descriptor: &pb::ObjectDescriptor,
+    target: SgeRegion,
+    dummy: SgeRegion,
+) -> Result<Vec<(u64, u32, u64)>, RailReadError> {
+    if target.len != task.packed_len || dummy.len < task.dummy_len {
+        return Err(RailReadError::InvalidPlacement(
+            "direct SGE registration does not cover the task".into(),
+        ));
+    }
+    let size = usize::try_from(descriptor.size)
+        .map_err(|_| RailReadError::InvalidPlacement("object size exceeds address space".into()))?;
+    let chunk_size = usize::try_from(descriptor.chunk_size)
+        .map_err(|_| RailReadError::InvalidPlacement("chunk size exceeds address space".into()))?;
+    let mut segments = Vec::with_capacity(descriptor.stripe_count as usize);
+    let mut owned = task.stripes.iter().peekable();
+    for index in 0..descriptor.stripe_count as usize {
+        let offset = index
+            .checked_mul(chunk_size)
+            .ok_or_else(|| RailReadError::InvalidPlacement("stripe offset overflow".into()))?;
+        let length = size
+            .checked_sub(offset)
+            .ok_or_else(|| RailReadError::InvalidPlacement("stripe offset exceeds size".into()))?
+            .min(chunk_size);
+        let (region, local_offset) = if owned
+            .peek()
+            .is_some_and(|stripe| stripe.index as usize == index)
+        {
+            (target, owned.next().expect("owned stripe").packed_offset)
+        } else {
+            (dummy, 0)
+        };
+        let end = local_offset
+            .checked_add(length)
+            .ok_or_else(|| RailReadError::InvalidPlacement("SGE range overflow".into()))?;
+        if end > region.len {
+            return Err(RailReadError::InvalidPlacement(
+                "direct SGE maps outside registered memory".into(),
+            ));
+        }
+        let address = region
+            .addr
+            .checked_add(local_offset as u64)
+            .ok_or_else(|| RailReadError::InvalidPlacement("SGE address overflow".into()))?;
+        segments.push((address, region.rkey, length as u64));
+    }
+    if owned.next().is_some() {
+        return Err(RailReadError::InvalidPlacement(
+            "direct SGE left an owned stripe unmapped".into(),
+        ));
+    }
+    Ok(segments)
+}
+
 struct VerbsTransport;
 
 impl RailTransport for VerbsTransport {
@@ -1279,6 +1649,91 @@ impl RailTransport for VerbsTransport {
             );
         }
         Ok(packed)
+    }
+
+    fn fetch_into(
+        &self,
+        route: &RailRoute,
+        task: &RailTask,
+        descriptor: &pb::ObjectDescriptor,
+        target: &mut [u8],
+        timeout: Duration,
+    ) -> Result<(), RailReadError> {
+        if !descriptor.is_striped || target.len() != task.packed_len || task.dummy_len == 0 {
+            return Err(RailReadError::InvalidPlacement(
+                "direct Rail target does not match a partial stripe task".into(),
+            ));
+        }
+        let timing_start = Instant::now();
+        let mut dummy = Vec::new();
+        dummy
+            .try_reserve_exact(task.dummy_len)
+            .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
+        dummy.resize(task.dummy_len, 0);
+        let mut client = RdmaClient::connect(route.connection.clone().with_io_timeout(timeout))
+            .map_err(|error| RailReadError::Transport(error.to_string()))?;
+        let connect_us = timing_start.elapsed().as_micros();
+        let registration_start = Instant::now();
+        let registered_target = client
+            .register_buffer(target)
+            .map_err(|error| RailReadError::Transport(error.to_string()))?;
+        let registered_dummy = match client.register_buffer(&mut dummy) {
+            Ok(registered) => registered,
+            Err(error) => {
+                drop(client);
+                drop(registered_target);
+                return Err(RailReadError::Transport(error.to_string()));
+            }
+        };
+        let registration_us = registration_start.elapsed().as_micros();
+        let get_start = Instant::now();
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            let target_view = registered_target.view();
+            let dummy_view = registered_dummy.view();
+            let segments = build_sge_segments_direct(
+                task,
+                descriptor,
+                SgeRegion {
+                    addr: target_view.addr(),
+                    rkey: target_view.rkey(),
+                    len: registered_target.len(),
+                },
+                SgeRegion {
+                    addr: dummy_view.addr(),
+                    rkey: dummy_view.rkey(),
+                    len: registered_dummy.len(),
+                },
+            )
+            .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+            let indices: Vec<u32> = task.stripes.iter().map(|stripe| stripe.index).collect();
+            client.get_descriptor_stripes_sge_detailed(descriptor, &indices, &segments)
+        }));
+        let get_us = get_start.elapsed().as_micros();
+        let teardown_start = Instant::now();
+        drop(client);
+        drop(registered_dummy);
+        drop(registered_target);
+        let teardown_us = teardown_start.elapsed().as_micros();
+        let outcome = match result {
+            Ok(result) => result.map_err(|error| RailReadError::Transport(error.to_string()))?,
+            Err(panic) => std::panic::resume_unwind(panic),
+        }
+        .ok_or(RailReadError::StaleDescriptor)?;
+        if outcome.bytes != task.packed_len || outcome.chunks != task.stripes.len() as u32 {
+            return Err(RailReadError::Incomplete {
+                expected: task.packed_len,
+                actual: outcome.bytes,
+            });
+        }
+        if crate::rail_timing_enabled() {
+            eprintln!(
+                "RAIL_TRANSPORT_DIRECT_TIMING rail={} bytes={} connect_us={connect_us} registration_us={registration_us} get_us={get_us} teardown_us={teardown_us} total_us={}",
+                route.id,
+                task.packed_len,
+                timing_start.elapsed().as_micros(),
+            );
+        }
+        Ok(())
     }
 }
 

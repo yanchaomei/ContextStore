@@ -184,8 +184,12 @@ impl MemRegion {
 
 impl Drop for MemRegion {
     fn drop(&mut self) {
-        unsafe {
-            ibv_dereg_mr(self.mr.as_ptr());
+        // Source storage may be recycled immediately after this guard drops.
+        let rc = unsafe { ibv_dereg_mr(self.mr.as_ptr()) };
+        if rc != 0 {
+            const MESSAGE: &[u8] = b"ContextStore RDMA server MR deregistration failed; aborting\n";
+            unsafe { libc::write(libc::STDERR_FILENO, MESSAGE.as_ptr().cast(), MESSAGE.len()) };
+            std::process::abort();
         }
     }
 }

@@ -2,9 +2,12 @@
 
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
-use contextstore_client_rs::rail_read::{LocalRailPath, RailLimits, RailReader, RailRoute};
+use contextstore_client_rs::rail_read::{
+    LocalRailPath, RailLimits, RailModeCounts, RailReader, RailRoute,
+};
 use contextstore_client_rs::rdma::RdmaClientConfig;
-use contextstore_client_rs::KvClient;
+use contextstore_client_rs::{KvClient, ObjectLookup};
+use prost::Message;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
@@ -34,6 +37,12 @@ struct Args {
     /// Concurrent object reads within this Worker, sharing one RailReader.
     #[arg(long, default_value_t = 1)]
     concurrency: usize,
+    /// Opt in to the experimental direct-to-ordered private staging path.
+    #[arg(long)]
+    direct_staging: bool,
+    /// Use the direct path's contiguous stripe planner with packed buffers.
+    #[arg(long)]
+    contiguous_schedule: bool,
 }
 
 fn parse_route(spec: &str) -> Result<RailRoute> {
@@ -117,12 +126,63 @@ fn process_usage() -> (u64, u64, u64) {
     (0, 0, 0)
 }
 
+fn print_effective_modes(reader: &RailReader, before: RailModeCounts) {
+    let after = reader.mode_counts();
+    println!(
+        "mode_effective,one={},packed_greedy={},packed_contiguous={},direct={}",
+        after.one - before.one,
+        after.packed_greedy - before.packed_greedy,
+        after.packed_contiguous - before.packed_contiguous,
+        after.direct - before.direct,
+    );
+}
+
+fn print_object_identity(label: &str, lookup: &ObjectLookup) -> Result<()> {
+    let placement = lookup
+        .placement
+        .as_ref()
+        .ok_or_else(|| anyhow!("object lookup has no placement"))?;
+    let hash = twox_hash::xxh3::hash64;
+    println!(
+        "{label},generation={},layout_version={},stripe_count={},chunk_size={},handle_xxh3={:016x},etag_xxh3={:016x},descriptor_xxh3={:016x},placement_xxh3={:016x}",
+        lookup.descriptor.object_generation,
+        lookup.descriptor.layout_version,
+        lookup.descriptor.stripe_count,
+        lookup.descriptor.chunk_size,
+        hash(lookup.descriptor.object_handle.as_bytes()),
+        hash(lookup.descriptor.content_etag.as_bytes()),
+        hash(&lookup.descriptor.encode_to_vec()),
+        hash(&placement.encode_to_vec()),
+    );
+    Ok(())
+}
+
+async fn verify_object_identity(
+    client: &mut KvClient,
+    args: &Args,
+    initial: &ObjectLookup,
+) -> Result<()> {
+    let current = client
+        .lookup_object(&args.namespace, &args.object_key)
+        .await?
+        .ok_or_else(|| anyhow!("object disappeared after benchmark"))?;
+    print_object_identity("object_identity_after", &current)?;
+    if current.descriptor != initial.descriptor || current.placement != initial.placement {
+        return Err(anyhow!(
+            "object descriptor or placement changed during benchmark"
+        ));
+    }
+    Ok(())
+}
+
 async fn run_concurrent(
     args: &Args,
     client: &KvClient,
     reader: Arc<RailReader>,
     size: usize,
     warmup_bytes: &[u64],
+    warmup_modes: RailModeCounts,
+    initial_lookup: &ObjectLookup,
 ) -> Result<()> {
     let mut request_times = Vec::<Duration>::new();
     let mut batch_times = Vec::<Duration>::new();
@@ -232,6 +292,9 @@ async fn run_concurrent(
         cpu_system_us,
         process_usage().2
     );
+    print_effective_modes(&reader, warmup_modes);
+    let mut verification_client = client.clone();
+    verify_object_identity(&mut verification_client, args, initial_lookup).await?;
     Ok(())
 }
 
@@ -271,15 +334,33 @@ async fn main() -> Result<()> {
         .lookup_object(&args.namespace, &args.object_key)
         .await?
         .ok_or_else(|| anyhow!("object not found"))?;
+    print_object_identity("object_identity", &lookup)?;
+    let limits = RailLimits {
+        direct_staging: args.direct_staging,
+        contiguous_schedule: args.contiguous_schedule,
+        ..RailLimits::default()
+    };
     let reader = Arc::new(if local_paths.is_empty() {
-        RailReader::new(explicit_routes, RailLimits::default())?
+        RailReader::new(explicit_routes, limits)?
     } else {
         let placement = lookup
             .placement
             .as_ref()
             .ok_or_else(|| anyhow!("object lookup returned no placement"))?;
-        RailReader::discover_from_placement(placement, &local_paths, RailLimits::default())?
+        RailReader::discover_from_placement(placement, &local_paths, limits)?
     });
+    println!("mode,direct_staging={}", args.direct_staging);
+    println!("mode,contiguous_schedule={}", args.contiguous_schedule);
+    let placement = lookup
+        .placement
+        .as_ref()
+        .ok_or_else(|| anyhow!("object lookup returned no placement"))?;
+    for assignment in reader.describe_assignment(&lookup.descriptor, placement)? {
+        println!(
+            "plan_assignment,id={},stripes={:?},bytes={}",
+            assignment.id, assignment.stripe_indices, assignment.bytes
+        );
+    }
     let size = usize::try_from(lookup.descriptor.size)?;
     let mut destination = vec![0u8; size];
     for route in reader.routes() {
@@ -307,8 +388,18 @@ async fn main() -> Result<()> {
             .ok_or_else(|| anyhow!("object disappeared during warmup"))?;
     }
     let warmup_bytes: Vec<_> = reader.snapshots().iter().map(|rail| rail.bytes).collect();
+    let warmup_modes = reader.mode_counts();
     if args.concurrency > 1 {
-        return run_concurrent(&args, &client, reader, size, &warmup_bytes).await;
+        return run_concurrent(
+            &args,
+            &client,
+            reader,
+            size,
+            &warmup_bytes,
+            warmup_modes,
+            &lookup,
+        )
+        .await;
     }
     let mut times = Vec::with_capacity(args.iterations);
     let mut cpu_user_us = 0u64;
@@ -365,6 +456,7 @@ async fn main() -> Result<()> {
         cpu_system_us,
         process_usage().2
     );
+    print_effective_modes(&reader, warmup_modes);
     for snapshot in reader.snapshots() {
         let completed = snapshot.reads_ok + snapshot.reads_err;
         let average_us = snapshot.duration_us / completed.max(1);
@@ -388,6 +480,7 @@ async fn main() -> Result<()> {
             snapshot.peak_registered_bytes
         );
     }
+    verify_object_identity(&mut client, &args, &lookup).await?;
     Ok(())
 }
 
