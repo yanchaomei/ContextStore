@@ -1,0 +1,659 @@
+{
+  "schema": "paper-svg-receipt.v1",
+  "source_sha256": "9d0fb435daf00feb8d67c337b286c82ea6d6ee7b7b6e3a32ad154fc3b95a2978",
+  "renderer_sha256": "56b65a1f3784fb35f9e80407279bab6de7434bc32d7b01d3279c80de1da74727",
+  "tools": {
+    "rsvg-convert": {
+      "path": "/opt/homebrew/bin/rsvg-convert",
+      "version": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.2.1\n  fontconfig 2.18.1"
+    },
+    "pdfinfo": {
+      "path": "/opt/homebrew/bin/pdfinfo",
+      "version": "pdfinfo version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "pdftotext": {
+      "path": "/opt/homebrew/bin/pdftotext",
+      "version": "pdftotext version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "pdftoppm": {
+      "path": "/opt/homebrew/bin/pdftoppm",
+      "version": "pdftoppm version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "pdffonts": {
+      "path": "/opt/homebrew/bin/pdffonts",
+      "version": "pdffonts version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    }
+  },
+  "semantic_check": "not_requested",
+  "human_visual_review": "required",
+  "outputs": {
+    "en": {
+      "geometry_passed": true,
+      "canvas_pt": [
+        500.0,
+        215.0
+      ],
+      "font_requested": "Arial, Liberation Sans, sans-serif",
+      "fonts_in_pdf": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nSAJEXF+Arial-BoldMT                  TrueType          WinAnsi          yes yes yes      7  0\n[none]                               Type 3            Custom           yes no  yes      8  0\nQWMKWQ+ArialMT                       TrueType          WinAnsi          yes yes yes      9  0\n[none]                               Type 3            Custom           yes no  yes     10  0\nESJMPT+ArialMT                       TrueType          WinAnsi          yes yes yes     11  0\n[none]                               Type 3            Custom           yes no  yes     12  0\nFBWUGN+ArialMT                       TrueType          WinAnsi          yes yes yes     13  0\n[none]                               Type 3            Custom           yes no  yes     14  0\nQKVNSB+ArialMT                       TrueType          WinAnsi          yes yes yes     15  0\n[none]                               Type 3            Custom           yes no  yes     16  0\nMFBAEL+Arial-BoldMT                  TrueType          WinAnsi          yes yes yes     17  0\n[none]                               Type 3            Custom           yes no  yes     18  0\n",
+      "pdf_info": "Producer:        cairo 1.18.4 (https://cairographics.org)\nCreationDate:    Fri Oct  9 13:02:19 2026 CST\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           1\nEncrypted:       no\nPage size:       500 x 215 pts\nPage rot:        0\nFile size:       91420 bytes\nOptimized:       no\nPDF version:     1.7\n",
+      "text_boxes": [
+        {
+          "id": "data-title:0",
+          "text": "(a) Private RDMA targets; one publication gate",
+          "size_pt": 7.2,
+          "bbox": [
+            170.72011600000002,
+            5.982291499999999,
+            329.27988400000004,
+            14.017708500000001
+          ]
+        },
+        {
+          "id": "descriptor:0",
+          "text": "Lookup V0",
+          "size_pt": 6.3,
+          "bbox": [
+            30.9379905,
+            36.087417,
+            61.0620095,
+            43.118
+          ]
+        },
+        {
+          "id": "descriptor:1",
+          "text": "16 stripes",
+          "size_pt": 6.3,
+          "bbox": [
+            32.343758,
+            44.882000000000005,
+            59.656242,
+            51.912583000000005
+          ]
+        },
+        {
+          "id": "planner:0",
+          "text": "Validate layout",
+          "size_pt": 6.3,
+          "bbox": [
+            118.569548,
+            36.087417,
+            159.430452,
+            43.118
+          ]
+        },
+        {
+          "id": "planner:1",
+          "text": "assign stripes",
+          "size_pt": 6.3,
+          "bbox": [
+            119.742222,
+            44.882000000000005,
+            158.257778,
+            51.912583000000005
+          ]
+        },
+        {
+          "id": "rail0:0",
+          "text": "Rail 0",
+          "size_pt": 6.2,
+          "bbox": [
+            239.074165,
+            28.712582999999995,
+            254.925835,
+            35.632
+          ]
+        },
+        {
+          "id": "rail0:1",
+          "text": "QP + CQ + MR",
+          "size_pt": 6.2,
+          "bbox": [
+            226.039321,
+            37.367999999999995,
+            267.960679,
+            44.287417
+          ]
+        },
+        {
+          "id": "rail1:0",
+          "text": "Rail 1",
+          "size_pt": 6.2,
+          "bbox": [
+            239.074165,
+            72.712583,
+            254.925835,
+            79.632
+          ]
+        },
+        {
+          "id": "rail1:1",
+          "text": "QP + CQ + MR",
+          "size_pt": 6.2,
+          "bbox": [
+            226.039321,
+            81.368,
+            267.960679,
+            88.287417
+          ]
+        },
+        {
+          "id": "target0:0",
+          "text": "Private target 0",
+          "size_pt": 6.2,
+          "bbox": [
+            327.977464,
+            28.712582999999995,
+            370.022536,
+            35.632
+          ]
+        },
+        {
+          "id": "target0:1",
+          "text": "registered",
+          "size_pt": 6.2,
+          "bbox": [
+            335.2145565,
+            37.367999999999995,
+            362.78544350000004,
+            44.287417
+          ]
+        },
+        {
+          "id": "target1:0",
+          "text": "Private target 1",
+          "size_pt": 6.2,
+          "bbox": [
+            327.977464,
+            72.712583,
+            370.022536,
+            79.632
+          ]
+        },
+        {
+          "id": "target1:1",
+          "text": "registered",
+          "size_pt": 6.2,
+          "bbox": [
+            335.2145565,
+            81.368,
+            362.78544350000004,
+            88.287417
+          ]
+        },
+        {
+          "id": "gate:0",
+          "text": "Join all Rails",
+          "size_pt": 6.1,
+          "bbox": [
+            433.88059,
+            47.081255500000005,
+            468.11940999999996,
+            53.8884185
+          ]
+        },
+        {
+          "id": "gate:1",
+          "text": "coverage + hash",
+          "size_pt": 6.1,
+          "bbox": [
+            428.3647325,
+            55.5964185,
+            473.6352675,
+            62.403581499999994
+          ]
+        },
+        {
+          "id": "gate:2",
+          "text": "Lookup V1 = V0",
+          "size_pt": 6.1,
+          "bbox": [
+            429.2105765,
+            64.1115815,
+            472.7894235,
+            70.9187445
+          ]
+        },
+        {
+          "id": "cancel:0",
+          "text": "Cancel holds publish gate",
+          "size_pt": 6.2,
+          "bbox": [
+            46.9972235,
+            120.712583,
+            118.00277650000001,
+            127.632
+          ]
+        },
+        {
+          "id": "cancel:1",
+          "text": "no partial caller write",
+          "size_pt": 6.2,
+          "bbox": [
+            54.0708345,
+            129.368,
+            110.92916550000001,
+            136.287417
+          ]
+        },
+        {
+          "id": "caller:0",
+          "text": "One complete copy to caller C",
+          "size_pt": 6.2,
+          "bbox": [
+            359.974134,
+            120.712583,
+            443.025866,
+            127.632
+          ]
+        },
+        {
+          "id": "caller:1",
+          "text": "only after every check succeeds",
+          "size_pt": 6.2,
+          "bbox": [
+            357.4662035,
+            129.368,
+            445.5337965,
+            136.287417
+          ]
+        },
+        {
+          "id": "cancel-mutex-label:0",
+          "text": "shared publish mutex",
+          "size_pt": 6.0,
+          "bbox": [
+            204.983887,
+            108.652,
+            262.016113,
+            115.348
+          ]
+        },
+        {
+          "id": "life-title:0",
+          "text": "(b) Failure lifetime: timeout does not stop a WRITE",
+          "size_pt": 7.0,
+          "bbox": [
+            166.057792,
+            154.594,
+            333.942208,
+            162.406
+          ]
+        },
+        {
+          "id": "uncertain:0",
+          "text": "WRITE uncertain",
+          "size_pt": 6.3,
+          "bbox": [
+            34.0189065,
+            180.4847085,
+            81.9810935,
+            187.51529150000002
+          ]
+        },
+        {
+          "id": "retire:0",
+          "text": "Retire QP / CQ",
+          "size_pt": 6.3,
+          "bbox": [
+            169.37791049999998,
+            180.4847085,
+            211.6220895,
+            187.51529150000002
+          ]
+        },
+        {
+          "id": "deregister:0",
+          "text": "Deregister MR",
+          "size_pt": 6.3,
+          "bbox": [
+            305.196356,
+            180.4847085,
+            345.80364399999996,
+            187.51529150000002
+          ]
+        },
+        {
+          "id": "reuse:0",
+          "text": "Reuse target",
+          "size_pt": 6.3,
+          "bbox": [
+            432.4649625,
+            180.4847085,
+            468.53503750000004,
+            187.51529150000002
+          ]
+        },
+        {
+          "id": "source-note:0",
+          "text": "Server source stays pinned until the uncertain QP is retired",
+          "size_pt": 6.0,
+          "bbox": [
+            171.68193050000002,
+            202.152,
+            328.3180695,
+            208.84799999999998
+          ]
+        }
+      ],
+      "sha256": {
+        "contextstore-safe-rail-read_en.svg": "23b1ea33221f4de2567165ed744f2305bf4411d64a2419b7b37c6a2ccb4245d3",
+        "contextstore-safe-rail-read_en.pdf": "cecfd86019d7e238d923aed0465f3f359f024ea7333be4d510ac903f7724dbf1",
+        "contextstore-safe-rail-read_en.png": "89364f2a1dd45eb73ca016e4feb0fe763a14f81a894a01ba49fa96905d72247d"
+      }
+    },
+    "zh": {
+      "geometry_passed": true,
+      "canvas_pt": [
+        500.0,
+        215.0
+      ],
+      "font_requested": "Noto Sans CJK SC, PingFang SC, sans-serif",
+      "fonts_in_pdf": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nYQXGMC+PingFangSC-Semibold           CID Type 0C       Identity-H       yes yes yes      7  0\n[none]                               Type 3            Custom           yes no  yes      8  0\nIDJQDC+PingFangSC-Regular            CID Type 0C       Identity-H       yes yes yes      9  0\n[none]                               Type 3            Custom           yes no  yes     10  0\nRZBKXP+PingFangSC-Regular            CID Type 0C       Identity-H       yes yes yes     11  0\n[none]                               Type 3            Custom           yes no  yes     12  0\nAGBDRI+PingFangSC-Regular            CID Type 0C       Identity-H       yes yes yes     13  0\n[none]                               Type 3            Custom           yes no  yes     14  0\nWTHPCO+PingFangSC-Regular            CID Type 0C       Identity-H       yes yes yes     15  0\nQZGXFO+PingFangSC-Semibold           CID Type 0C       Identity-H       yes yes yes     16  0\n[none]                               Type 3            Custom           yes no  yes     17  0\n[none]                               Type 3            Custom           yes no  yes     18  0\n",
+      "pdf_info": "Producer:        cairo 1.18.4 (https://cairographics.org)\nCreationDate:    Fri Oct  9 13:02:22 2026 CST\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           1\nEncrypted:       no\nPage size:       500 x 215 pts\nPage rot:        0\nFile size:       41526 bytes\nOptimized:       no\nPDF version:     1.7\n",
+      "text_boxes": [
+        {
+          "id": "data-title:0",
+          "text": "(a) RDMA 写入私有缓冲区；校验后统一发布",
+          "size_pt": 7.2,
+          "bbox": [
+            178.3472595,
+            4.959863500000001,
+            321.6527405,
+            15.0401365
+          ]
+        },
+        {
+          "id": "descriptor:0",
+          "text": "查询版本 V0",
+          "size_pt": 6.3,
+          "bbox": [
+            28.4487435,
+            34.298273,
+            63.5512565,
+            43.118
+          ]
+        },
+        {
+          "id": "descriptor:1",
+          "text": "16 个条带",
+          "size_pt": 6.3,
+          "bbox": [
+            32.348322499999995,
+            44.882000000000005,
+            59.6516775,
+            53.701727000000005
+          ]
+        },
+        {
+          "id": "planner:0",
+          "text": "校验布局",
+          "size_pt": 6.3,
+          "bbox": [
+            126.40039,
+            34.298273,
+            151.59960999999998,
+            43.118
+          ]
+        },
+        {
+          "id": "planner:1",
+          "text": "分配条带",
+          "size_pt": 6.3,
+          "bbox": [
+            126.40039,
+            44.882000000000005,
+            151.59960999999998,
+            53.701727000000005
+          ]
+        },
+        {
+          "id": "rail0:0",
+          "text": "轨道 0",
+          "size_pt": 6.2,
+          "bbox": [
+            237.907414,
+            26.951726999999998,
+            256.092586,
+            35.632
+          ]
+        },
+        {
+          "id": "rail0:1",
+          "text": "QP + CQ + MR",
+          "size_pt": 6.2,
+          "bbox": [
+            225.286917,
+            37.367999999999995,
+            268.713083,
+            46.048272999999995
+          ]
+        },
+        {
+          "id": "rail1:0",
+          "text": "轨道 1",
+          "size_pt": 6.2,
+          "bbox": [
+            238.5243335,
+            70.951727,
+            255.47566650000002,
+            79.632
+          ]
+        },
+        {
+          "id": "rail1:1",
+          "text": "QP + CQ + MR",
+          "size_pt": 6.2,
+          "bbox": [
+            225.286917,
+            81.36800000000001,
+            268.713083,
+            90.04827300000001
+          ]
+        },
+        {
+          "id": "target0:0",
+          "text": "私有接收区 0",
+          "size_pt": 6.2,
+          "bbox": [
+            330.6071215,
+            26.951726999999998,
+            367.3928785,
+            35.632
+          ]
+        },
+        {
+          "id": "target0:1",
+          "text": "已注册",
+          "size_pt": 6.2,
+          "bbox": [
+            339.6997075,
+            37.367999999999995,
+            358.3002925,
+            46.048272999999995
+          ]
+        },
+        {
+          "id": "target1:0",
+          "text": "私有接收区 1",
+          "size_pt": 6.2,
+          "bbox": [
+            331.224041,
+            70.951727,
+            366.775959,
+            79.632
+          ]
+        },
+        {
+          "id": "target1:1",
+          "text": "已注册",
+          "size_pt": 6.2,
+          "bbox": [
+            339.6997075,
+            81.36800000000001,
+            358.3002925,
+            90.04827300000001
+          ]
+        },
+        {
+          "id": "gate:0",
+          "text": "等待全部轨道",
+          "size_pt": 6.1,
+          "bbox": [
+            432.701173,
+            44.482820499999995,
+            469.29882699999996,
+            53.0222735
+          ]
+        },
+        {
+          "id": "gate:1",
+          "text": "覆盖 + 校验",
+          "size_pt": 6.1,
+          "bbox": [
+            434.9244805,
+            54.730273499999996,
+            467.07551950000004,
+            63.2697265
+          ]
+        },
+        {
+          "id": "gate:2",
+          "text": "再次查询 V1 = V0",
+          "size_pt": 6.1,
+          "bbox": [
+            426.958391,
+            64.9777265,
+            475.041609,
+            73.5171795
+          ]
+        },
+        {
+          "id": "cancel:0",
+          "text": "取消与发布共用门锁",
+          "size_pt": 6.2,
+          "bbox": [
+            54.5991225,
+            118.951727,
+            110.4008775,
+            127.632
+          ]
+        },
+        {
+          "id": "cancel:1",
+          "text": "不写入不完整结果",
+          "size_pt": 6.2,
+          "bbox": [
+            57.69922,
+            129.368,
+            107.30078,
+            138.048273
+          ]
+        },
+        {
+          "id": "caller:0",
+          "text": "完整对象一次复制给调用方 C",
+          "size_pt": 6.2,
+          "bbox": [
+            361.0096265,
+            118.951727,
+            441.99037350000003,
+            127.632
+          ]
+        },
+        {
+          "id": "caller:1",
+          "text": "仅全部校验成功后执行",
+          "size_pt": 6.2,
+          "bbox": [
+            370.499025,
+            129.368,
+            432.50097500000004,
+            138.048273
+          ]
+        },
+        {
+          "id": "cancel-mutex-label:0",
+          "text": "共享发布门锁",
+          "size_pt": 6.0,
+          "bbox": [
+            215.5,
+            107.8,
+            251.5,
+            116.19999999999999
+          ]
+        },
+        {
+          "id": "life-title:0",
+          "text": "(b) 故障生命周期：超时不等于 RDMA 写入停止",
+          "size_pt": 7.0,
+          "bbox": [
+            175.56900000000002,
+            153.6,
+            324.43100000000004,
+            163.4
+          ]
+        },
+        {
+          "id": "uncertain:0",
+          "text": "写入状态不确定",
+          "size_pt": 6.3,
+          "bbox": [
+            35.9506825,
+            179.5901365,
+            80.0493175,
+            188.4098635
+          ]
+        },
+        {
+          "id": "retire:0",
+          "text": "退役 QP / CQ",
+          "size_pt": 6.3,
+          "bbox": [
+            170.3311745,
+            179.5901365,
+            210.6688255,
+            188.4098635
+          ]
+        },
+        {
+          "id": "deregister:0",
+          "text": "注销 MR",
+          "size_pt": 6.3,
+          "bbox": [
+            313.2437295,
+            179.5901365,
+            337.75627049999997,
+            188.4098635
+          ]
+        },
+        {
+          "id": "reuse:0",
+          "text": "复用缓冲区",
+          "size_pt": 6.3,
+          "bbox": [
+            434.7504875,
+            179.5901365,
+            466.24951250000004,
+            188.4098635
+          ]
+        },
+        {
+          "id": "source-note:0",
+          "text": "服务端写入源在不确定 QP 退役前保持固定",
+          "size_pt": 6.0,
+          "bbox": [
+            192.775,
+            201.3,
+            307.225,
+            209.70000000000002
+          ]
+        }
+      ],
+      "sha256": {
+        "contextstore-safe-rail-read_zh.svg": "a51b5170a444b8dea4b795c90ae76335229f2a2e15191f5e5088911001945c4e",
+        "contextstore-safe-rail-read_zh.pdf": "4a5db8c29f18632f1c2a847dd2d42877d2b072e9084334e5bf24e92724228b7c",
+        "contextstore-safe-rail-read_zh.png": "cb83851f145112b90fd6c756f0e785e5728f0b95d541efec86a7ba0c0865c0d5"
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500pt" height="215pt" viewBox="0 0 500 215"><rect width="500" height="215" fill="white"/>
+<text x="178.34726" y="12.59305" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="7.2" font-weight="bold" fill="#202a30">(a) RDMA 写入私有缓冲区；校验后统一发布</text>
+<rect x="8" y="27" width="76" height="34" rx="0" fill="#e4f0f7" stroke="#202a30" stroke-width="0.5"/>
+<text x="28.44874" y="40.97802" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">查询版本 V0</text>
+<text x="32.34832" y="51.56175" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">16 个条带</text>
+<rect x="100" y="27" width="78" height="34" rx="0" fill="#edf0f2" stroke="#202a30" stroke-width="0.5"/>
+<text x="126.40039" y="40.97802" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">校验布局</text>
+<text x="126.40039" y="51.56175" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">分配条带</text>
+<rect x="208" y="22" width="78" height="29" rx="0" fill="#f5deb0" stroke="#202a30" stroke-width="0.5"/>
+<text x="237.90741" y="33.52198" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">轨道 0</text>
+<text x="225.28692" y="43.93825" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">QP + CQ + MR</text>
+<rect x="208" y="66" width="78" height="29" rx="0" fill="#f5deb0" stroke="#202a30" stroke-width="0.5"/>
+<text x="238.52433" y="77.52198" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">轨道 1</text>
+<text x="225.28692" y="87.93825" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">QP + CQ + MR</text>
+<rect x="306" y="22" width="86" height="29" rx="0" fill="#e4f0f7" stroke="#202a30" stroke-width="0.5"/>
+<text x="330.60712" y="33.52198" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">私有接收区 0</text>
+<text x="339.69971" y="43.93825" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">已注册</text>
+<rect x="306" y="66" width="86" height="29" rx="0" fill="#e4f0f7" stroke="#202a30" stroke-width="0.5"/>
+<text x="331.22404" y="77.52198" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">私有接收区 1</text>
+<text x="339.69971" y="87.93825" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">已注册</text>
+<rect x="411" y="33" width="80" height="52" rx="0" fill="#e5f0ea" stroke="#202a30" stroke-width="0.5"/>
+<text x="432.70117" y="50.94743" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.1" font-weight="normal" fill="#202a30">等待全部轨道</text>
+<text x="434.92448" y="61.19488" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.1" font-weight="normal" fill="#202a30">覆盖 + 校验</text>
+<text x="426.95839" y="71.44234" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.1" font-weight="normal" fill="#202a30">再次查询 V1 = V0</text>
+<path d="M 84 44 L 100 44" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="100.0,44.0 97.4,45.0 97.4,43.0" fill="#166d9a"/>
+<path d="M 178 40 L 208 37" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="208.0,37.0 205.512407024475,38.25374685966459 205.31339958643304,36.263672479244605" fill="#166d9a"/>
+<path d="M 178 49 L 195 49 L 195 80 L 208 80" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="208.0,80.0 205.4,81.0 205.4,79.0" fill="#166d9a"/>
+<path d="M 286 37 L 306 37" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="306.0,37.0 303.4,38.0 303.4,36.0" fill="#166d9a"/>
+<path d="M 286 80 L 306 80" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="306.0,80.0 303.4,81.0 303.4,79.0" fill="#166d9a"/>
+<path d="M 392 37 L 411 48" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="411.0,48.0 408.24885538720736,47.5627319820727 409.25092792829076,45.83187941111044" fill="#166d9a"/>
+<path d="M 392 80 L 411 70" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="411.0,70.0 409.1649590546395,72.0958589477468 408.2334661889742,70.32602250298284" fill="#166d9a"/>
+<rect x="8" y="113" width="149" height="31" rx="0" fill="#edf0f2" stroke="#202a30" stroke-width="0.5"/>
+<text x="54.59912" y="125.52198" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">取消与发布共用门锁</text>
+<text x="57.69922" y="135.93825" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">不写入不完整结果</text>
+<rect x="312" y="113" width="179" height="31" rx="0" fill="#e5f0ea" stroke="#202a30" stroke-width="0.5"/>
+<text x="361.00963" y="125.52198" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">完整对象一次复制给调用方 C</text>
+<text x="370.49903" y="135.93825" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.2" font-weight="normal" fill="#202a30">仅全部校验成功后执行</text>
+<path d="M 451 85 L 451 113" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="451.0,113.0 450.0,110.4 452.0,110.4" fill="#166d9a"/>
+<text x="215.50000" y="114.15902" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6" font-weight="normal" fill="#202a30">共享发布门锁</text>
+<path d="M 157 130 L 312 130" fill="none" stroke="#66747b" stroke-width="0.55" stroke-dasharray="2 1.7"/>
+<text x="175.56900" y="161.02195" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="7" font-weight="bold" fill="#202a30">(b) 故障生命周期：超时不等于 RDMA 写入停止</text>
+<rect x="8" y="171" width="100" height="26" rx="0" fill="#f5deb0" stroke="#202a30" stroke-width="0.5"/>
+<text x="35.95068" y="186.26988" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">写入状态不确定</text>
+<rect x="140" y="171" width="101" height="26" rx="0" fill="#e4f0f7" stroke="#202a30" stroke-width="0.5"/>
+<text x="170.33117" y="186.26988" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">退役 QP / CQ</text>
+<rect x="275" y="171" width="101" height="26" rx="0" fill="#edf0f2" stroke="#202a30" stroke-width="0.5"/>
+<text x="313.24373" y="186.26988" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">注销 MR</text>
+<rect x="410" y="171" width="81" height="26" rx="0" fill="#e5f0ea" stroke="#202a30" stroke-width="0.5"/>
+<text x="434.75049" y="186.26988" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6.3" font-weight="normal" fill="#202a30">复用缓冲区</text>
+<path d="M 108 184 L 140 184" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="140.0,184.0 137.4,185.0 137.4,183.0" fill="#166d9a"/>
+<path d="M 241 184 L 275 184" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="275.0,184.0 272.4,185.0 272.4,183.0" fill="#166d9a"/>
+<path d="M 376 184 L 410 184" fill="none" stroke="#166d9a" stroke-width="0.55" />
+<polygon points="410.0,184.0 407.4,185.0 407.4,183.0" fill="#166d9a"/>
+<text x="192.77500" y="207.65902" font-family="Noto Sans CJK SC, PingFang SC, sans-serif" font-size="6" font-weight="normal" fill="#202a30">服务端写入源在不确定 QP 退役前保持固定</text></svg>
