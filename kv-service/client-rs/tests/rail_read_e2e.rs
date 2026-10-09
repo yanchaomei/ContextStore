@@ -931,3 +931,232 @@ async fn concurrent_rewrites_never_publish_mixed_direct_staging_bytes() {
         generations.last().expect("writer generation")
     );
 }
+
+/// Each committed Generation has unique bytes. Monotonic read/write intervals
+/// show which attempts actually overlapped a write, and the SDK's opt-in
+/// accepted-ID trace is checked against the returned generation-coded bytes.
+#[tokio::test]
+#[ignore = "requires two real Rails, striped writes, and CS_RAIL_TIMING=1"]
+async fn unique_generations_survive_concurrent_direct_rail_reads() {
+    fn segments(bytes: &Bytes) -> Vec<Bytes> {
+        const CHUNK: usize = 4 * 1024 * 1024;
+        (0..bytes.len())
+            .step_by(CHUNK)
+            .map(|offset| bytes.slice(offset..(offset + CHUNK).min(bytes.len())))
+            .collect()
+    }
+
+    assert_eq!(std::env::var("CS_RAIL_TIMING").as_deref(), Ok("1"));
+    let coordinator = setting("CS_RAIL_COORDINATOR", "http://127.0.0.1:50051");
+    let mib = setting("CS_RAIL_OBJECT_MIB", "8")
+        .parse::<usize>()
+        .expect("object size in MiB");
+    assert!(mib >= 8 && mib % 4 == 0);
+    let size = mib * 1024 * 1024;
+    let nanos = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("wall clock")
+        .as_nanos();
+    let key = format!("unique-race-{nanos}");
+    let mut seed = KvClient::connect(coordinator.clone())
+        .await
+        .expect("connect initial writer");
+    assert!(seed
+        .put_stream_chunks("rail-e2e", &key, segments(&Bytes::from(vec![0x10; size])))
+        .await
+        .expect("seed generation 1"));
+    let initial = seed
+        .lookup_object("rail-e2e", &key)
+        .await
+        .expect("initial lookup")
+        .expect("seeded object");
+    assert_eq!(initial.descriptor.object_generation, 1);
+    assert_eq!(initial.descriptor.size as usize, size);
+    assert!(initial.descriptor.is_striped);
+    let placement = initial.placement.as_ref().expect("initial placement");
+    let advertised = placement
+        .chunks
+        .first()
+        .expect("stripe")
+        .rdma_endpoint
+        .clone();
+    assert!(placement
+        .chunks
+        .iter()
+        .all(|chunk| chunk.rdma_endpoint == advertised));
+    println!(
+        "UNIQUE_CONFIG,object_key={key},object_mib={mib},stripe_count={},direct_staging=true",
+        initial.descriptor.stripe_count
+    );
+    let listener0 = setting("CS_RAIL_LISTENER0", &advertised);
+    let listener1 = setting("CS_RAIL_LISTENER1", "127.0.0.1:50054");
+    let reader = Arc::new(
+        RailReader::new(
+            vec![
+                route(&advertised, 0, &listener0),
+                route(&advertised, 1, &listener1),
+            ],
+            RailLimits {
+                direct_staging: true,
+                io_timeout: Duration::from_secs(10),
+                ..RailLimits::default()
+            },
+        )
+        .expect("direct reader"),
+    );
+    let mut client = KvClient::connect(coordinator.clone())
+        .await
+        .expect("connect reader");
+    let epoch = Instant::now();
+    let writer_key = key.clone();
+    let writer = tokio::spawn(async move {
+        let mut writer_client = KvClient::connect(coordinator)
+            .await
+            .expect("connect concurrent writer");
+        let mut committed = Vec::new();
+        for revision in 0..15u8 {
+            let value = 0x20u8 + revision;
+            let start_ns = epoch.elapsed().as_nanos();
+            assert!(writer_client
+                .put_stream_chunks(
+                    "rail-e2e",
+                    &writer_key,
+                    segments(&Bytes::from(vec![value; size])),
+                )
+                .await
+                .expect("concurrent rewrite"));
+            let current = writer_client
+                .lookup_object("rail-e2e", &writer_key)
+                .await
+                .expect("writer lookup")
+                .expect("written object");
+            let end_ns = epoch.elapsed().as_nanos();
+            let generation = current.descriptor.object_generation;
+            assert_eq!(generation, u64::from(revision) + 2);
+            println!(
+                "UNIQUE_WRITE,revision={revision},generation={generation},byte={value},start_ns={start_ns},end_ns={end_ns}"
+            );
+            committed.push((generation, start_ns, end_ns));
+            tokio::time::sleep(Duration::from_millis(15)).await;
+        }
+        committed
+    });
+
+    let mut accepted_generations = Vec::new();
+    let mut read_intervals = Vec::new();
+    let mut rejected = 0usize;
+    let mut missing = 0usize;
+    for attempt in 0..36usize {
+        let mut destination = vec![0xA5; size];
+        let start_ns = epoch.elapsed().as_nanos();
+        let result = tokio::time::timeout(
+            Duration::from_secs(30),
+            client.read_multi_rail_into(
+                Arc::clone(&reader),
+                "rail-e2e",
+                &key,
+                &mut destination,
+                None,
+            ),
+        )
+        .await
+        .expect("bounded direct read");
+        let end_ns = epoch.elapsed().as_nanos();
+        read_intervals.push((start_ns, end_ns));
+        match result {
+            Ok(Some(length)) => {
+                assert_eq!(length, size);
+                let value = destination[0];
+                assert!(destination.iter().all(|byte| *byte == value));
+                let generation = match value {
+                    0x10 => 1,
+                    0x20..=0x2E => u64::from(value - 0x20) + 2,
+                    _ => panic!("unknown version byte at read attempt {attempt}: {value}"),
+                };
+                accepted_generations.push(generation);
+                println!(
+                    "UNIQUE_READ,attempt={attempt},result=accepted,byte={value},generation_inferred={generation},start_ns={start_ns},end_ns={end_ns}"
+                );
+            }
+            Ok(None) => {
+                assert!(destination.iter().all(|byte| *byte == 0xA5));
+                missing += 1;
+                println!(
+                    "UNIQUE_READ,attempt={attempt},result=missing,start_ns={start_ns},end_ns={end_ns}"
+                );
+            }
+            Err(error) => {
+                assert!(destination.iter().all(|byte| *byte == 0xA5));
+                rejected += 1;
+                println!(
+                    "UNIQUE_READ,attempt={attempt},result=rejected,error={error},start_ns={start_ns},end_ns={end_ns}"
+                );
+            }
+        }
+        if writer.is_finished() && attempt >= 19 {
+            break;
+        }
+    }
+    let committed = writer.await.expect("writer task joined");
+    let overlaps = read_intervals
+        .iter()
+        .filter(|(read_start, read_end)| {
+            committed
+                .iter()
+                .any(|(_, write_start, write_end)| read_start < write_end && write_start < read_end)
+        })
+        .count();
+    assert!(overlaps > 0, "no read overlapped a committed rewrite");
+    assert!(!accepted_generations.is_empty());
+    assert!(
+        accepted_generations
+            .iter()
+            .all(|generation| *generation == 1
+                || committed.iter().any(|entry| entry.0 == *generation))
+    );
+
+    let mut final_destination = vec![0xA5; size];
+    assert_eq!(
+        client
+            .read_multi_rail_into(
+                Arc::clone(&reader),
+                "rail-e2e",
+                &key,
+                &mut final_destination,
+                None,
+            )
+            .await
+            .expect("post-rewrite direct read"),
+        Some(size)
+    );
+    assert!(final_destination.iter().all(|byte| *byte == 0x2E));
+    println!("UNIQUE_FINAL,generation_inferred=16,byte=46,bytes={size}");
+    let modes = reader.mode_counts();
+    assert!(modes.direct > 0 && modes.direct as usize <= read_intervals.len() + 1);
+    assert_eq!(modes.one + modes.packed_greedy + modes.packed_contiguous, 0);
+    println!(
+        "UNIQUE_MODE,direct={},one={},packed_greedy={},packed_contiguous={}",
+        modes.direct, modes.one, modes.packed_greedy, modes.packed_contiguous
+    );
+    for rail in reader.snapshots() {
+        assert_eq!(rail.inflight_requests, 0);
+        assert_eq!(rail.inflight_bytes, 0);
+        assert_eq!(rail.registered_bytes, 0);
+        assert!(rail.bytes > 0);
+        println!(
+            "UNIQUE_RAIL,id={},bytes={},reads_ok={},reads_err={},inflight_requests={},inflight_bytes={},registered_bytes={}",
+            rail.id,
+            rail.bytes,
+            rail.reads_ok,
+            rail.reads_err,
+            rail.inflight_requests,
+            rail.inflight_bytes,
+            rail.registered_bytes,
+        );
+    }
+    println!(
+        "UNIQUE_SUMMARY,attempts={},accepted={},rejected={rejected},missing={missing},overlapping={overlaps},first_generation=1,last_generation=16",
+        read_intervals.len(),
+        accepted_generations.len(),
+    );
+}

@@ -282,7 +282,18 @@ impl KvClient {
             cancel.as_ref(),
         )?;
         if rail_timing_enabled() {
-            eprintln!(
+            use std::io::Write as _;
+            let mut stderr = std::io::stderr().lock();
+            // Diagnostics run after publication. Ignore a broken stderr so
+            // logging cannot turn a successful caller-buffer copy into Err.
+            let _ = writeln!(
+                stderr,
+                "RAIL_ACCEPTED_ID,namespace={namespace},object_key={object_key},generation={},layout_version={}",
+                current.descriptor.object_generation,
+                current.descriptor.layout_version,
+            );
+            let _ = writeln!(
+                stderr,
                 "RAIL_OUTER_TIMING key={namespace}/{object_key} bytes={copied} lookup_us={lookup_us} transfer_us={transfer_us} post_lookup_us={post_lookup_us} publish_us={} total_us={}",
                 publish_start.elapsed().as_micros(),
                 timing_start.elapsed().as_micros(),

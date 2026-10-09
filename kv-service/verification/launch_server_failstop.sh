@@ -11,6 +11,10 @@ case "$operation" in
   *) echo "unsupported operation: $operation" >&2; exit 2 ;;
 esac
 mkdir -p "$output_dir"
+{
+  printf 'operation=%s\nslab_mb=%s\n' "$operation" "$slab_mb"
+  sha256sum /home/railtest/bin/contextstore-server /home/railtest/libverbs_failstop.so
+} > "$output_dir/launch-manifest.txt"
 ulimit -c 0
 set +e
 LD_PRELOAD=/home/railtest/libverbs_failstop.so \
