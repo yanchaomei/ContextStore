@@ -1,0 +1,24 @@
+Linux cs-railvm-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+link rxe_c0/1 state ACTIVE physical_state LINK_UP netdev enp0s3 
+link rxe_c1/1 state ACTIVE physical_state LINK_UP netdev enp0s4 
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp0s2           UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe12:3457/64 fe80::5054:ff:fe12:3457/64 
+enp0s3           UP             10.31.0.1/24 fe80::5054:ff:fe31:1/64 
+enp0s4           UP             10.32.0.1/24 fe80::5054:ff:fe32:1/64 
+NAME      SIZE TYPE MODEL        MOUNTPOINT
+loop0      74M loop              /snap/core22/2955
+loop1   115.2M loop              /snap/lxd/40911
+loop2    50.3M loop              /snap/snapd/27738
+sr0       366K rom  QEMU DVD-ROM 
+sr1      1024M rom  QEMU DVD-ROM 
+vda        12G disk              
+├─vda1   11.9G part              /
+├─vda14     4M part              
+└─vda15   106M part              /boot/efi
+CPU NODE SOCKET CORE
+  0    0      0    0
+  1    0      1    1
+  2    0      2    2
+  3    0      3    3
+/sys/devices/virtual/infiniband/rxe_c0/device
+/sys/devices/virtual/infiniband/rxe_c1/device

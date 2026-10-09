@@ -1,0 +1,31 @@
+object_identity,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31
+mode,direct_staging=false
+mode,contiguous_schedule=true
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7],bytes=33554432
+plan_assignment,id=r1,stripes=[8, 9, 10, 11, 12, 13, 14, 15],bytes=33554432
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+RAIL_TRANSPORT_TIMING rail=r1 bytes=33554432 connect_us=7593 allocation_us=28316 registration_us=894 get_us=241392 teardown_us=2701 total_us=280906
+RAIL_TRANSPORT_TIMING rail=r0 bytes=33554432 connect_us=6957 allocation_us=26737 registration_us=922 get_us=256152 teardown_us=1297 total_us=292067
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=14 reserve_us=1 workers_us=292354 assembly_us=70088 checksum_us=7343 finish_us=1 total_us=369806
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=1295 transfer_us=370101 post_lookup_us=1925 publish_us=53742 total_us=427066
+RAIL_TRANSPORT_TIMING rail=r0 bytes=33554432 connect_us=2211 allocation_us=28077 registration_us=717 get_us=238695 teardown_us=1150 total_us=270853
+RAIL_TRANSPORT_TIMING rail=r1 bytes=33554432 connect_us=2039 allocation_us=30966 registration_us=635 get_us=237826 teardown_us=1114 total_us=272584
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=34 reserve_us=2 workers_us=272952 assembly_us=84833 checksum_us=7672 finish_us=1 total_us=365498
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=2277 transfer_us=365681 post_lookup_us=2396 publish_us=20938 total_us=391295
+sample,environment=soft-roce,rails=2,iteration=1,bytes=67108864,latency_us=394509,gib_per_s=0.158,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_TIMING rail=r0 bytes=33554432 connect_us=2814 allocation_us=25953 registration_us=655 get_us=229434 teardown_us=1180 total_us=260046
+RAIL_TRANSPORT_TIMING rail=r1 bytes=33554432 connect_us=2386 allocation_us=26065 registration_us=681 get_us=242567 teardown_us=1199 total_us=272902
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=22 reserve_us=1 workers_us=273218 assembly_us=75916 checksum_us=7744 finish_us=1 total_us=356905
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=2567 transfer_us=357241 post_lookup_us=2657 publish_us=35911 total_us=398379
+sample,environment=soft-roce,rails=2,iteration=2,bytes=67108864,latency_us=401348,gib_per_s=0.156,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_TIMING rail=r0 bytes=33554432 connect_us=2452 allocation_us=26974 registration_us=676 get_us=227151 teardown_us=1136 total_us=258392
+RAIL_TRANSPORT_TIMING rail=r1 bytes=33554432 connect_us=2177 allocation_us=27558 registration_us=661 get_us=238869 teardown_us=1006 total_us=270275
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=20 reserve_us=1 workers_us=270605 assembly_us=66233 checksum_us=7413 finish_us=1 total_us=344276
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=2084 transfer_us=344455 post_lookup_us=2460 publish_us=22724 total_us=371726
+sample,environment=soft-roce,rails=2,iteration=3,bytes=67108864,latency_us=377710,gib_per_s=0.165,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=2,bytes_per_iter=67108864,iters=3,median_us=394509,cpu_user_us=230165,cpu_system_us=299920,peak_rss_kb=211368,rail_bytes=[100663296, 100663296]
+mode_effective,one=0,packed_greedy=0,packed_contiguous=3,direct=0
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=4,reads_err=0,bytes=134217728,avg_us=270391,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+rail_stats,id=r1,device=rxe_c1,listener=10.32.0.2:55154,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=4,reads_err=0,bytes=134217728,avg_us=274223,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+object_identity_after,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31

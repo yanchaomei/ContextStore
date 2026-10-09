@@ -1,0 +1,17 @@
+object_identity,generation=1,layout_version=1,stripe_count=64,chunk_size=4194304,handle_xxh3=6b4de8d98e0ac248,etag_xxh3=bb940c7b2b575529,descriptor_xxh3=1db39a4ce6dc5043,placement_xxh3=1b10db0ed2bfe54e
+mode,direct_staging=true
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],bytes=134217728
+plan_assignment,id=r1,stripes=[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63],bytes=134217728
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+sample,environment=soft-roce,rails=2,iteration=1,bytes=268435456,latency_us=1218578,gib_per_s=0.205,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=2,bytes=268435456,latency_us=1098800,gib_per_s=0.228,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=3,bytes=268435456,latency_us=1111187,gib_per_s=0.225,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=4,bytes=268435456,latency_us=1199857,gib_per_s=0.208,xxh3=fe51c755b1336171
+sample,environment=soft-roce,rails=2,iteration=5,bytes=268435456,latency_us=1333094,gib_per_s=0.188,xxh3=fe51c755b1336171
+summary,environment=soft-roce,rails=2,bytes_per_iter=268435456,iters=5,median_us=1199857,cpu_user_us=835641,cpu_system_us=777437,peak_rss_kb=539328,rail_bytes=[671088640, 671088640]
+mode_effective,one=0,packed_greedy=0,packed_contiguous=0,direct=5
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=805306368,avg_us=900001,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=134217728,registered_bytes_reserved=0,peak_registered_bytes=138412032
+rail_stats,id=r1,device=rxe_c1,listener=10.32.0.2:55154,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=805306368,avg_us=838928,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=134217728,registered_bytes_reserved=0,peak_registered_bytes=138412032
+object_identity_after,generation=1,layout_version=1,stripe_count=64,chunk_size=4194304,handle_xxh3=6b4de8d98e0ac248,etag_xxh3=bb940c7b2b575529,descriptor_xxh3=1db39a4ce6dc5043,placement_xxh3=1b10db0ed2bfe54e

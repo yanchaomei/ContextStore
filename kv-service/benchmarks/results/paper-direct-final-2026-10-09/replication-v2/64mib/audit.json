@@ -1,0 +1,655 @@
+{
+  "interpretation": "balanced five-arm launched-process blocks with both one-Rail paths and same-planner packed control; exploratory block-bootstrap intervals, no physical-HCA aggregation claim",
+  "environment": {
+    "environment": "soft-roce",
+    "binary_sha256": "f3147178fdaefed2a7e62970d4fde7d5f876d72cdf5e4822f063ac8146cf3863",
+    "coordinator": "http://10.31.0.2:55151",
+    "namespace": "rust-bench",
+    "object_key": "paper640/__combined__",
+    "object_bytes": 67108864,
+    "object_xxh3": "a0a4cbfa5cad46af",
+    "rails": [
+      "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+      "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+    ],
+    "blocks": 10,
+    "orders": [
+      [
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct"
+      ],
+      [
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0"
+      ],
+      [
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1"
+      ],
+      [
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed"
+      ],
+      [
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous"
+      ],
+      [
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0"
+      ],
+      [
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1"
+      ],
+      [
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed"
+      ],
+      [
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous"
+      ],
+      [
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct"
+      ]
+    ],
+    "warmup_reads_per_arm": 1,
+    "measured_reads_per_arm": 5,
+    "arms": [
+      "single_r0",
+      "single_r1",
+      "packed",
+      "packed_contiguous",
+      "direct"
+    ],
+    "arm_set": "five",
+    "object_identity": "generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31",
+    "plan_assignments": {
+      "single_r0": [
+        [
+          "r0",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          67108864
+        ]
+      ],
+      "single_r1": [
+        [
+          "r1",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          67108864
+        ]
+      ],
+      "packed": [
+        [
+          "r0",
+          [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14
+          ],
+          33554432
+        ],
+        [
+          "r1",
+          [
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15
+          ],
+          33554432
+        ]
+      ],
+      "packed_contiguous": [
+        [
+          "r0",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          33554432
+        ],
+        [
+          "r1",
+          [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          33554432
+        ]
+      ],
+      "direct": [
+        [
+          "r0",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          33554432
+        ],
+        [
+          "r1",
+          [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          33554432
+        ]
+      ]
+    }
+  },
+  "source_sha256": {
+    "environment.json": "c456c2cea7f46091bec80227b530f8836889d0b248b4cef4e4c85673e826d1cb",
+    "summary.csv": "fece078c5115ac1968e72d3042d1e8d5ea4c640fc92914890b66019d2c6e3adf",
+    "samples.csv": "ea4ee666b464ba7babb87946f5bdd6a7b095bc01b44fb299ee3f2062578b797a",
+    "block-01-single_r0.log": "21aa41e97198874f00c622632a3957117ada54498c985f113736a0a6e8d9d53e",
+    "block-01-single_r1.log": "1aaa5f65bbe1ad571ae418a5d9211297f40be35ae78a2eaf6d0e234c9bee452c",
+    "block-01-packed.log": "c52c34dc64f1e841421df4414f1a709bd9d5e57a8803fc0cc62953d24782fc8b",
+    "block-01-packed_contiguous.log": "6103585bf36b4928f4764f5d4b585968d4f0573a0e5b64e10981b58ae6badcbb",
+    "block-01-direct.log": "c67f3c4dde40e8c4cd6c520e602bb8759eb4a0baba08ece401cbb05da6e0e5d7",
+    "block-02-single_r0.log": "fd760701775f8709a620a426e4730e5a87e6a8e79370abbaab5456c27f961348",
+    "block-02-single_r1.log": "e47287d5c86c726ddecae449c498a51852e52d6914940f4a605d16c3bb2b1e71",
+    "block-02-packed.log": "9c38424b806a9ab80c62d4df01fed61e36884be6648b3aed81ea0695e2eb3302",
+    "block-02-packed_contiguous.log": "6da761934f3f5c0b2a53b4307d13566a468b313ca7ae0476865377aa728ca5d0",
+    "block-02-direct.log": "1c5bcc10e538a94ebb43a084b026f47feb5a7f57ded16473849abdcdf58eddef",
+    "block-03-single_r0.log": "3b10c7de7a55429362387c9b66b596cb9434848b5a120a3d0de256f1eccb3f08",
+    "block-03-single_r1.log": "827b713f9826e7d8e4421468d00778601c7afd171b6617ea0d5ee739c56a2074",
+    "block-03-packed.log": "9e50d0b107c8537e44ff5276ecc714f949eb362a3d6be35e0b4a686b0f9b96b9",
+    "block-03-packed_contiguous.log": "9da59673a540ceb7022b7f034ae408fdd3a6a0a6d05daa2738d4e0182f4fbec9",
+    "block-03-direct.log": "d1bc17038d599109dbea6c963cabcb02a733327231ca9294396adc7e397fc05c",
+    "block-04-single_r0.log": "6f4e9a8ac4b904c61f1687b0cb582a363a257a8335804c49ebafba621ebac87e",
+    "block-04-single_r1.log": "e95dbc906934a46f8949decbe1e2ad89c8a585bae0ef64141395382819f65abd",
+    "block-04-packed.log": "d2856dae591527cf646fa97942bd2dec7489124554066461d479fc1417152b98",
+    "block-04-packed_contiguous.log": "af8206b8aced1e1042e70e8963e5cb97e9b01b98a37b47de6a4378a4a7fbf433",
+    "block-04-direct.log": "b5eaed7495db19e9b4fe5a664649975e9cc9c79e2b4aa939febd5d152ea8db43",
+    "block-05-single_r0.log": "2aea980bd81b8b88227b49e26b30b74f70be986a730eba9dcab790f13717f8bd",
+    "block-05-single_r1.log": "d48da04be9a83b9c48ed9813e27c379f4229eeac6cdc26e4b96cc8a2317d6c5e",
+    "block-05-packed.log": "507483faed3d97e805d4f47f80d11a41cc1fe9e8bb5adbbfdf16ca2142b67e76",
+    "block-05-packed_contiguous.log": "7ffc0d65f3e24a660c389c9c37e04ab1f6eaaec0e445532c09b37130af6b7986",
+    "block-05-direct.log": "53d9ab166003c1dd690c1d7355cb47bbda37d689c39a80e38fcc55f7221c3bbd",
+    "block-06-single_r0.log": "dff566f374d9249915724dd7a42805156e13e2af07050c0f8b772cfb1c7c1df6",
+    "block-06-single_r1.log": "6af7bad932a5d1eed3d656ba068c1d45464f90229fd7b4f5b747301c70bdd472",
+    "block-06-packed.log": "88427d9f84520dae1956f499d837455bdc3748ff5507bcb3cf37d3f987580922",
+    "block-06-packed_contiguous.log": "4c4219a79a83d79aad7af6486dc3aa314036d178a16e51b8c51322ce706da927",
+    "block-06-direct.log": "c60ae59fc05f69065ac2cc0a0858962ecfd34cdc41b5fef4174d8eaa6928edad",
+    "block-07-single_r0.log": "8e21ccc37dfa1adae256859f0a60f5e10b342c684fc2802a63b5aa5d2b4f8425",
+    "block-07-single_r1.log": "d456f9ee7c80a328495a1eff326f81f2fa1e9220404489a2d19a48f94f21499c",
+    "block-07-packed.log": "bc633dfb1a3e87abd233260a39139e186d86d8fdea9bfed22b69e981e3f5ab18",
+    "block-07-packed_contiguous.log": "a82615cd8f4e5d15b0dcc46b406bef0f539fe31b6c19fd38152f808fac8370cc",
+    "block-07-direct.log": "2bba9616ac8661f73808c4af379c2c4d211df65748a4936ab623c7d703d68363",
+    "block-08-single_r0.log": "804144998c1ab5b27c489856e26a75d5707c4521e5c6e25d76d91db1b4b8d43e",
+    "block-08-single_r1.log": "f3fd2b2d11fa317bfb4a64320342e5987e90a352cc5ffda033709d31a8d4c873",
+    "block-08-packed.log": "59342bc3d4b23825d9530a9971d251dea726dc7d07e5dc7ac1780b4bdda71d7a",
+    "block-08-packed_contiguous.log": "734d067cd667e3e7dac2ab834eaa8d464d97a612e06b363bb7763411997e1f6e",
+    "block-08-direct.log": "c26223af00e6d005fdc0b73c2509103fd032bbc3aec221779ebfd36a1c79f658",
+    "block-09-single_r0.log": "1bcfb74bf9333ce511bc09d51f050fd68f9561ab7ca4625af384189a5b096a27",
+    "block-09-single_r1.log": "62631708fc84ef4796a8b8d2070ead21fbbf667b0bd4a3fd1821a32fad38ad08",
+    "block-09-packed.log": "4705159c189adf07cf2a6b55521b4cad4be0ae2396850cc9d6970ad05ec3fe4d",
+    "block-09-packed_contiguous.log": "b4dc44ec9ea204bd8238b8c4bcba53d1ce263844709ea77f43ca620089d7462a",
+    "block-09-direct.log": "fcc4ab326718b2f51cffc611d6ace387d6fe2289ea0c1b99f96db77b9cbe783f",
+    "block-10-single_r0.log": "050669b6ddaea376d8e401b4eeda004ad01c0d7bb39973cc3dd3687a07c9d4f6",
+    "block-10-single_r1.log": "47e8db1b936c30f725e2eb48884e2e083d8224259695b5ef7f863eae3075db71",
+    "block-10-packed.log": "03644df2740ea7236ba72bc4256852c4aac716a1d2cdf0b38c056c8d87ea9779",
+    "block-10-packed_contiguous.log": "23f5627738fe8a55463e39c6a27e854acb3e714cc78e9aef3548543db35f490c",
+    "block-10-direct.log": "bd1d89cdda874a4eb65241576919776bf7800f74130c161e61ae42f4110a4df7"
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "order": [
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct"
+      ],
+      "median_us": {
+        "single_r0": 307321,
+        "single_r1": 347045,
+        "packed": 388271,
+        "packed_contiguous": 331218,
+        "direct": 289249
+      },
+      "packed_over_r0_throughput": 0.791511598857499,
+      "contiguous_over_r0_throughput": 0.9278511433557355,
+      "direct_over_r0_throughput": 1.0624790405498377,
+      "direct_over_r1_throughput": 1.1998140010855698,
+      "direct_over_contiguous_throughput": 1.1450964393999634,
+      "contiguous_over_packed_throughput": 1.172252111902131,
+      "r1_over_r0_throughput": 0.8855364578080652
+    },
+    {
+      "block": 2,
+      "order": [
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0"
+      ],
+      "median_us": {
+        "single_r0": 351616,
+        "single_r1": 348729,
+        "packed": 381341,
+        "packed_contiguous": 363434,
+        "direct": 347305
+      },
+      "packed_over_r0_throughput": 0.922051392323406,
+      "contiguous_over_r0_throughput": 0.9674824039578025,
+      "direct_over_r0_throughput": 1.0124127208073594,
+      "direct_over_r1_throughput": 1.0041001425260219,
+      "direct_over_contiguous_throughput": 1.0464404485970544,
+      "contiguous_over_packed_throughput": 1.0492716696841793,
+      "r1_over_r0_throughput": 1.0082786346991504
+    },
+    {
+      "block": 3,
+      "order": [
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1"
+      ],
+      "median_us": {
+        "single_r0": 337114,
+        "single_r1": 367486,
+        "packed": 366939,
+        "packed_contiguous": 368145,
+        "direct": 344017
+      },
+      "packed_over_r0_throughput": 0.9187194601827552,
+      "contiguous_over_r0_throughput": 0.9157098425891972,
+      "direct_over_r0_throughput": 0.9799341311621228,
+      "direct_over_r1_throughput": 1.0682204658490715,
+      "direct_over_contiguous_throughput": 1.0701360688570623,
+      "contiguous_over_packed_throughput": 0.99672411685613,
+      "r1_over_r0_throughput": 0.9173519535438085
+    },
+    {
+      "block": 4,
+      "order": [
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed"
+      ],
+      "median_us": {
+        "single_r0": 309313,
+        "single_r1": 345770,
+        "packed": 346145,
+        "packed_contiguous": 363658,
+        "direct": 336573
+      },
+      "packed_over_r0_throughput": 0.8935937251729766,
+      "contiguous_over_r0_throughput": 0.8505601416715706,
+      "direct_over_r0_throughput": 0.9190071693213656,
+      "direct_over_r1_throughput": 1.027325424202179,
+      "direct_over_contiguous_throughput": 1.080472884040015,
+      "contiguous_over_packed_throughput": 0.9518421153941341,
+      "r1_over_r0_throughput": 0.8945628597044278
+    },
+    {
+      "block": 5,
+      "order": [
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous"
+      ],
+      "median_us": {
+        "single_r0": 366174,
+        "single_r1": 346454,
+        "packed": 363039,
+        "packed_contiguous": 352864,
+        "direct": 298659
+      },
+      "packed_over_r0_throughput": 1.0086354358622627,
+      "contiguous_over_r0_throughput": 1.037719914754693,
+      "direct_over_r0_throughput": 1.2260604903920524,
+      "direct_over_r1_throughput": 1.1600320097502503,
+      "direct_over_contiguous_throughput": 1.1814946142590714,
+      "contiguous_over_packed_throughput": 1.0288354720232158,
+      "r1_over_r0_throughput": 1.0569195333291
+    },
+    {
+      "block": 6,
+      "order": [
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0"
+      ],
+      "median_us": {
+        "single_r0": 354586,
+        "single_r1": 324894,
+        "packed": 344740,
+        "packed_contiguous": 335425,
+        "direct": 304545
+      },
+      "packed_over_r0_throughput": 1.0285606544062191,
+      "contiguous_over_r0_throughput": 1.0571245434896028,
+      "direct_over_r0_throughput": 1.1643139765880248,
+      "direct_over_r1_throughput": 1.0668177116682265,
+      "direct_over_contiguous_throughput": 1.1013971662644273,
+      "contiguous_over_packed_throughput": 1.0277707386151897,
+      "r1_over_r0_throughput": 1.091389807137097
+    },
+    {
+      "block": 7,
+      "order": [
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1"
+      ],
+      "median_us": {
+        "single_r0": 354032,
+        "single_r1": 354985,
+        "packed": 345271,
+        "packed_contiguous": 378172,
+        "direct": 333390
+      },
+      "packed_over_r0_throughput": 1.0253742712246323,
+      "contiguous_over_r0_throughput": 0.936166612017812,
+      "direct_over_r0_throughput": 1.0619154743693573,
+      "direct_over_r1_throughput": 1.0647739884219682,
+      "direct_over_contiguous_throughput": 1.1343231650619394,
+      "contiguous_over_packed_throughput": 0.9129999048052209,
+      "r1_over_r0_throughput": 0.9973153795230785
+    },
+    {
+      "block": 8,
+      "order": [
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed"
+      ],
+      "median_us": {
+        "single_r0": 303927,
+        "single_r1": 353201,
+        "packed": 345255,
+        "packed_contiguous": 346250,
+        "direct": 300023
+      },
+      "packed_over_r0_throughput": 0.8802971716557327,
+      "contiguous_over_r0_throughput": 0.8777675090252708,
+      "direct_over_r0_throughput": 1.013012335720928,
+      "direct_over_r1_throughput": 1.1772464111084817,
+      "direct_over_contiguous_throughput": 1.1540781873389707,
+      "contiguous_over_packed_throughput": 0.9971263537906138,
+      "r1_over_r0_throughput": 0.8604930337116826
+    },
+    {
+      "block": 9,
+      "order": [
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous"
+      ],
+      "median_us": {
+        "single_r0": 309246,
+        "single_r1": 303292,
+        "packed": 327569,
+        "packed_contiguous": 379385,
+        "direct": 312915
+      },
+      "packed_over_r0_throughput": 0.9440636934508455,
+      "contiguous_over_r0_throughput": 0.8151244777732383,
+      "direct_over_r0_throughput": 0.9882747711039739,
+      "direct_over_r1_throughput": 0.9692472396657239,
+      "direct_over_contiguous_throughput": 1.2124219037118706,
+      "contiguous_over_packed_throughput": 0.8634210630362297,
+      "r1_over_r0_throughput": 1.019631246455561
+    },
+    {
+      "block": 10,
+      "order": [
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct"
+      ],
+      "median_us": {
+        "single_r0": 304605,
+        "single_r1": 310175,
+        "packed": 342360,
+        "packed_contiguous": 364647,
+        "direct": 334374
+      },
+      "packed_over_r0_throughput": 0.8897213459516299,
+      "contiguous_over_r0_throughput": 0.8353421253979877,
+      "direct_over_r0_throughput": 0.9109709486981643,
+      "direct_over_r1_throughput": 0.927628942441697,
+      "direct_over_contiguous_throughput": 1.0905363455292576,
+      "contiguous_over_packed_throughput": 0.938880616047849,
+      "r1_over_r0_throughput": 0.9820423954219393
+    }
+  ],
+  "comparisons": {
+    "packed_over_r0_throughput": {
+      "geometric_mean": 0.9275272111823659,
+      "block_bootstrap_95pct": [
+        0.883248150161586,
+        0.9706315256586477
+      ],
+      "range": [
+        0.791511598857499,
+        1.0285606544062191
+      ],
+      "blocks_above_one": 3
+    },
+    "contiguous_over_r0_throughput": {
+      "geometric_mean": 0.9188849884515333,
+      "block_bootstrap_95pct": [
+        0.8737164722362085,
+        0.9679530893512359
+      ],
+      "range": [
+        0.8151244777732383,
+        1.0571245434896028
+      ],
+      "blocks_above_one": 2
+    },
+    "direct_over_r0_throughput": {
+      "geometric_mean": 1.0296420430161837,
+      "block_bootstrap_95pct": [
+        0.9765379283253987,
+        1.0905389983688294
+      ],
+      "range": [
+        0.9109709486981643,
+        1.2260604903920524
+      ],
+      "blocks_above_one": 6
+    },
+    "direct_over_r1_throughput": {
+      "geometric_mean": 1.063103075848417,
+      "block_bootstrap_95pct": [
+        1.0117665587339089,
+        1.1177216189641817
+      ],
+      "range": [
+        0.927628942441697,
+        1.1998140010855698
+      ],
+      "blocks_above_one": 8
+    },
+    "direct_over_contiguous_throughput": {
+      "geometric_mean": 1.1205341864941047,
+      "block_bootstrap_95pct": [
+        1.0909018300669797,
+        1.152940024162094
+      ],
+      "range": [
+        1.0464404485970544,
+        1.2124219037118706
+      ],
+      "blocks_above_one": 10
+    },
+    "contiguous_over_packed_throughput": {
+      "geometric_mean": 0.9906825130016229,
+      "block_bootstrap_95pct": [
+        0.9432134985665864,
+        1.042407815855399
+      ],
+      "range": [
+        0.8634210630362297,
+        1.172252111902131
+      ],
+      "blocks_above_one": 4
+    },
+    "r1_over_r0_throughput": {
+      "geometric_mean": 0.9685251283789869,
+      "block_bootstrap_95pct": [
+        0.9234345447357722,
+        1.0146562124661396
+      ],
+      "range": [
+        0.8604930337116826,
+        1.091389807137097
+      ],
+      "blocks_above_one": 4
+    }
+  },
+  "resources": {
+    "single_r0": {
+      "median_cpu_us_per_read": 71662.5,
+      "median_peak_rss_kb": 137708.0,
+      "median_sum_per_rail_peak_registered_bytes": 67108864.0,
+      "median_sum_per_rail_peak_inflight_bytes": 67108864.0
+    },
+    "single_r1": {
+      "median_cpu_us_per_read": 72773.0,
+      "median_peak_rss_kb": 137666.0,
+      "median_sum_per_rail_peak_registered_bytes": 67108864.0,
+      "median_sum_per_rail_peak_inflight_bytes": 67108864.0
+    },
+    "packed": {
+      "median_cpu_us_per_read": 129185.66666666666,
+      "median_peak_rss_kb": 211342.0,
+      "median_sum_per_rail_peak_registered_bytes": 75497472.0,
+      "median_sum_per_rail_peak_inflight_bytes": 67108864.0
+    },
+    "packed_contiguous": {
+      "median_cpu_us_per_read": 130834.5,
+      "median_peak_rss_kb": 211306.0,
+      "median_sum_per_rail_peak_registered_bytes": 75497472.0,
+      "median_sum_per_rail_peak_inflight_bytes": 67108864.0
+    },
+    "direct": {
+      "median_cpu_us_per_read": 78870.0,
+      "median_peak_rss_kb": 145880.0,
+      "median_sum_per_rail_peak_registered_bytes": 75497472.0,
+      "median_sum_per_rail_peak_inflight_bytes": 67108864.0
+    }
+  }
+}

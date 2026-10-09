@@ -1,0 +1,41 @@
+{
+  "schema": "contextstore.paper-direct-staging.v1",
+  "date": "2026-10-09",
+  "code_commit": "bcdb1fd308ec2759481694678c592696e4d8d042",
+  "branch": "research/direct-ordered-staging",
+  "classification": "two independent software RXE paths in two KVM guests on one host; no physical multi-HCA claim",
+  "client_benchmark_binary_sha256": "4b511dfa061afb1131da39daac85e1d60f98b971b4f38b952e023d67865f0ee0",
+  "server_binary_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+  "client_e2e_binary_sha256": "26f4e8ed3d853e7bd9b079fc33f757af9a16aa74b73e5a72d51bb5dc52f5cb4e",
+  "test_only_interposer_sha256": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+  "server_config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+  "remote_source_parity": "checksum dry-run found no content differences for client-rs/src, server/src, Cargo.lock or their Cargo.toml files; only timestamps differed",
+  "rust_feature": "rdma",
+  "rust_unit_tests": {
+    "client_passed": 53,
+    "client_ignored_mock_benchmark": 1,
+    "server_passed": 102
+  },
+  "quality_gates": {
+    "client_lib_clippy_deny_warnings": "passed",
+    "server_lib_clippy_deny_warnings": "not passed: 41 existing repository lints, including two in qp.rs outside changed drop block",
+    "format_check": "changed client sources and server qp.rs passed; server context.rs has pre-existing unrelated formatting differences"
+  },
+  "final_matrix": {
+    "sizes_mib": [64, 256],
+    "arms": ["single_r0", "single_r1", "packed", "packed_contiguous", "direct"],
+    "blocks_per_size": 10,
+    "warmup_reads_per_arm": 1,
+    "measured_reads_per_arm": 5,
+    "bootstrap_draws": 20000,
+    "bootstrap_seed": 20261009,
+    "primary_contrast": "direct / packed_contiguous throughput"
+  },
+  "model": {
+    "source": "kv-service/verification/multirail_state_explorer.py",
+    "safe_states_explored": 19657,
+    "unsafe_counterexample_classes": 6,
+    "interpretation": "bounded abstract ownership contract, not a proof of Rust or Verbs"
+  },
+  "known_boundary": "256 MiB source exceeds 128 MiB server slab and uses registered-buffer fallback; object-size trend is confounded with source mode"
+}

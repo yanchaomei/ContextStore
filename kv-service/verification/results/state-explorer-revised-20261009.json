@@ -1,0 +1,2223 @@
+{
+  "model_sha256": "7f74b3883e01d3fb45bd52370f156e8fd15ae739fb5964ce9170b0f3e9aad68f",
+  "scope": "one request, two Rails, one stripe per Rail, two object versions, one late WRITE per Rail",
+  "provider_assumption": "retiring a QP prevents future WRITEs through it; not proved by this model",
+  "interpretation": "abstract state exploration only; not a proof of ContextStore Rust/Verbs implementation or process-crash safety",
+  "runs": [
+    {
+      "unsafe_mode": null,
+      "explored_states": 19657,
+      "violation": null,
+      "counterexample": [],
+      "complete": true
+    },
+    {
+      "unsafe_mode": "reuse",
+      "explored_states": 2430,
+      "violation": "late WRITE corrupted another request's buffer",
+      "counterexample": [
+        {
+          "event": "Lookup0 and admit (checksum=True)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "posted",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Timeout r0 (completion uncertain)",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "uncertain",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Deregister MR r0",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "uncertain",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Reuse target r0",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "uncertain",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              true,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Late WRITE r0",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              true,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": true
+          }
+        }
+      ],
+      "complete": false
+    },
+    {
+      "unsafe_mode": "staging",
+      "explored_states": 16925,
+      "violation": "published object is incomplete, unverified, or cancelled",
+      "counterexample": [
+        {
+          "event": "Lookup0 and admit (checksum=True)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "posted",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Deregister MR r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "posted"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Join all Rail workers",
+          "state": {
+            "phase": "quiesced",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Check coverage, checksums and Lookup1 identity",
+          "state": {
+            "phase": "checked",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Reuse target r0",
+          "state": {
+            "phase": "checked",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              true,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": false,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Publish complete object under cancel gate",
+          "state": {
+            "phase": "published",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "freed",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              true,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": false,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": true,
+            "reused_buffer_corrupt": false
+          }
+        }
+      ],
+      "complete": false
+    },
+    {
+      "unsafe_mode": "source",
+      "explored_states": 448,
+      "violation": "Rail 0 can READ a released source",
+      "counterexample": [
+        {
+          "event": "Lookup0 and admit (checksum=True)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "posted",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Timeout r0 (completion uncertain)",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "uncertain",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Release source r0",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "uncertain",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              false,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        }
+      ],
+      "complete": false
+    },
+    {
+      "unsafe_mode": "partial",
+      "explored_states": 11977,
+      "violation": "published object is incomplete, unverified, or cancelled",
+      "counterexample": [
+        {
+          "event": "Lookup0 and admit (checksum=True)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "posted",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "posted"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete short WRITE r1 (missing stripe bytes)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Join all Rail workers",
+          "state": {
+            "phase": "quiesced",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "UNSAFE accept a short completed stripe",
+          "state": {
+            "phase": "checked",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Publish complete object under cancel gate",
+          "state": {
+            "phase": "published",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": true,
+            "reused_buffer_corrupt": false
+          }
+        }
+      ],
+      "complete": false
+    },
+    {
+      "unsafe_mode": "cancel",
+      "explored_states": 14688,
+      "violation": "published object is incomplete, unverified, or cancelled",
+      "counterexample": [
+        {
+          "event": "Lookup0 and admit (checksum=True)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "posted",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "posted"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Join all Rail workers",
+          "state": {
+            "phase": "quiesced",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Check coverage, checksums and Lookup1 identity",
+          "state": {
+            "phase": "checked",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Cancel before publication",
+          "state": {
+            "phase": "failed",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": true,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "UNSAFE publish after cancel returns",
+          "state": {
+            "phase": "published",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": 0,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": true,
+            "caller_complete": true,
+            "reused_buffer_corrupt": false
+          }
+        }
+      ],
+      "complete": false
+    },
+    {
+      "unsafe_mode": "version",
+      "explored_states": 14157,
+      "violation": "published object is incomplete, unverified, or cancelled",
+      "counterexample": [
+        {
+          "event": "Lookup0 and admit (checksum=True)",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 0,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Rewrite object A to B",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "none",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "posted",
+              "none"
+            ],
+            "covered": [
+              false,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "open",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r0",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "none"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Post WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "posted"
+            ],
+            "covered": [
+              true,
+              false
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Complete WRITE r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "open"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Retire QP/CQ r1",
+          "state": {
+            "phase": "transferring",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": false,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Join all Rail workers",
+          "state": {
+            "phase": "quiesced",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": -1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "UNSAFE accept mismatched Lookup1",
+          "state": {
+            "phase": "checked",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": 1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": false,
+            "reused_buffer_corrupt": false
+          }
+        },
+        {
+          "event": "Publish complete object under cancel gate",
+          "state": {
+            "phase": "published",
+            "qp": [
+              "retired",
+              "retired"
+            ],
+            "mr": [
+              "registered",
+              "registered"
+            ],
+            "wr": [
+              "complete",
+              "complete"
+            ],
+            "covered": [
+              true,
+              true
+            ],
+            "target_reusable": [
+              false,
+              false
+            ],
+            "source_pinned": [
+              true,
+              true
+            ],
+            "version": 1,
+            "snapshot": 0,
+            "checked_version": 1,
+            "checksum_present": true,
+            "data_valid": true,
+            "staging_valid": true,
+            "joined": true,
+            "cancel_precommit": false,
+            "caller_complete": true,
+            "reused_buffer_corrupt": false
+          }
+        }
+      ],
+      "complete": false
+    }
+  ]
+}

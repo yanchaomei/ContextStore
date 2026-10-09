@@ -1,0 +1,33 @@
+{
+  "scope": "isolated single-Rail RXE process, test-only Verbs return-value interposition",
+  "non_claim": "does not reproduce a real provider failure or establish multi-Rail late-WRITE safety",
+  "binary_sha256": "4b511dfa061afb1131da39daac85e1d60f98b971b4f38b952e023d67865f0ee0",
+  "shim_sha256": "98809aeeed33d8e8e057eb974139360c51941b8ae28c7f9d06dd7651fa633deb",
+  "cases": [
+    {
+      "operation": "destroy_qp",
+      "returncode": -6,
+      "signal": "SIGABRT",
+      "stderr_fd": "closed before program start",
+      "verbs_cleanup_events_before_abort": [
+        "destroy_qp"
+      ],
+      "stdout_sha256": "e42adb47173e09512d36a228c0996dbafff135131556551628f35ce19838354f"
+    },
+    {
+      "operation": "dereg_mr",
+      "returncode": -6,
+      "signal": "SIGABRT",
+      "stderr_fd": "closed before program start",
+      "verbs_cleanup_events_before_abort": [
+        "destroy_qp",
+        "dereg_mr"
+      ],
+      "stdout_sha256": "e42adb47173e09512d36a228c0996dbafff135131556551628f35ce19838354f"
+    }
+  ],
+  "normal_after_fault": {
+    "returncode": 0,
+    "stdout_sha256": "15109ae1d0315e713badc14bfa18a1be8fcb3d3d12ff33f58cf57b9f464a8340"
+  }
+}

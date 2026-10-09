@@ -1,0 +1,237 @@
+{
+  "environment": "soft-roce",
+  "binary_sha256": "f3147178fdaefed2a7e62970d4fde7d5f876d72cdf5e4822f063ac8146cf3863",
+  "coordinator": "http://10.31.0.2:55151",
+  "namespace": "rust-bench",
+  "object_key": "paper640/__combined__",
+  "object_bytes": 67108864,
+  "object_xxh3": "a0a4cbfa5cad46af",
+  "rails": [
+    "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+    "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+  ],
+  "blocks": 10,
+  "orders": [
+    [
+      "single_r0",
+      "single_r1",
+      "packed",
+      "packed_contiguous",
+      "direct"
+    ],
+    [
+      "single_r1",
+      "packed",
+      "packed_contiguous",
+      "direct",
+      "single_r0"
+    ],
+    [
+      "packed",
+      "packed_contiguous",
+      "direct",
+      "single_r0",
+      "single_r1"
+    ],
+    [
+      "packed_contiguous",
+      "direct",
+      "single_r0",
+      "single_r1",
+      "packed"
+    ],
+    [
+      "direct",
+      "single_r0",
+      "single_r1",
+      "packed",
+      "packed_contiguous"
+    ],
+    [
+      "direct",
+      "packed_contiguous",
+      "packed",
+      "single_r1",
+      "single_r0"
+    ],
+    [
+      "single_r0",
+      "direct",
+      "packed_contiguous",
+      "packed",
+      "single_r1"
+    ],
+    [
+      "single_r1",
+      "single_r0",
+      "direct",
+      "packed_contiguous",
+      "packed"
+    ],
+    [
+      "packed",
+      "single_r1",
+      "single_r0",
+      "direct",
+      "packed_contiguous"
+    ],
+    [
+      "packed_contiguous",
+      "packed",
+      "single_r1",
+      "single_r0",
+      "direct"
+    ]
+  ],
+  "warmup_reads_per_arm": 1,
+  "measured_reads_per_arm": 5,
+  "arms": [
+    "single_r0",
+    "single_r1",
+    "packed",
+    "packed_contiguous",
+    "direct"
+  ],
+  "arm_set": "five",
+  "object_identity": "generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31",
+  "plan_assignments": {
+    "single_r0": [
+      [
+        "r0",
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        67108864
+      ]
+    ],
+    "single_r1": [
+      [
+        "r1",
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        67108864
+      ]
+    ],
+    "packed": [
+      [
+        "r0",
+        [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14
+        ],
+        33554432
+      ],
+      [
+        "r1",
+        [
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          15
+        ],
+        33554432
+      ]
+    ],
+    "packed_contiguous": [
+      [
+        "r0",
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        33554432
+      ],
+      [
+        "r1",
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        33554432
+      ]
+    ],
+    "direct": [
+      [
+        "r0",
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        33554432
+      ],
+      [
+        "r1",
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        33554432
+      ]
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+object_identity,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31
+mode,direct_staging=true
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7],bytes=33554432
+plan_assignment,id=r1,stripes=[8, 9, 10, 11, 12, 13, 14, 15],bytes=33554432
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+RAIL_TRANSPORT_DIRECT_TIMING rail=r0 bytes=33554432 connect_us=10565 registration_us=1033 get_us=211392 teardown_us=1631 total_us=224638
+RAIL_TRANSPORT_DIRECT_TIMING rail=r1 bytes=33554432 connect_us=11006 registration_us=810 get_us=211296 teardown_us=3226 total_us=226341
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=22 reserve_us=2 workers_us=272177 assembly_us=0 checksum_us=13721 finish_us=0 total_us=285925
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=1163 transfer_us=286180 post_lookup_us=1832 publish_us=60685 total_us=349862
+RAIL_TRANSPORT_DIRECT_TIMING rail=r1 bytes=33554432 connect_us=8969 registration_us=2073 get_us=201111 teardown_us=1112 total_us=213269
+RAIL_TRANSPORT_DIRECT_TIMING rail=r0 bytes=33554432 connect_us=8703 registration_us=990 get_us=202134 teardown_us=1510 total_us=213338
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=23 reserve_us=2 workers_us=258094 assembly_us=0 checksum_us=14619 finish_us=0 total_us=272740
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=2248 transfer_us=272904 post_lookup_us=1603 publish_us=21446 total_us=298204
+sample,environment=soft-roce,rails=2,iteration=1,bytes=67108864,latency_us=302039,gib_per_s=0.207,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_DIRECT_TIMING rail=r1 bytes=33554432 connect_us=3175 registration_us=2068 get_us=219584 teardown_us=2425 total_us=227255
+RAIL_TRANSPORT_DIRECT_TIMING rail=r0 bytes=33554432 connect_us=3395 registration_us=2209 get_us=219299 teardown_us=2673 total_us=227578
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=20 reserve_us=2 workers_us=268630 assembly_us=0 checksum_us=15428 finish_us=0 total_us=284083
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=1738 transfer_us=284349 post_lookup_us=1430 publish_us=20725 total_us=308244
+sample,environment=soft-roce,rails=2,iteration=2,bytes=67108864,latency_us=311902,gib_per_s=0.200,xxh3=a0a4cbfa5cad46af
+RAIL_TRANSPORT_DIRECT_TIMING rail=r0 bytes=33554432 connect_us=3320 registration_us=2368 get_us=227818 teardown_us=1541 total_us=235050
+RAIL_TRANSPORT_DIRECT_TIMING rail=r1 bytes=33554432 connect_us=3316 registration_us=2010 get_us=294269 teardown_us=2716 total_us=302315
+RAIL_STAGED_TIMING bytes=67108864 rails=2 plan_us=10 reserve_us=1 workers_us=343990 assembly_us=0 checksum_us=17857 finish_us=0 total_us=361862
+RAIL_OUTER_TIMING key=rust-bench/paper640/__combined__ bytes=67108864 lookup_us=1752 transfer_us=361990 post_lookup_us=1536 publish_us=21276 total_us=386557
+sample,environment=soft-roce,rails=2,iteration=3,bytes=67108864,latency_us=390495,gib_per_s=0.160,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=2,bytes_per_iter=67108864,iters=3,median_us=311902,cpu_user_us=142617,cpu_system_us=158555,peak_rss_kb=145924,rail_bytes=[100663296, 100663296]
+mode_effective,one=0,packed_greedy=0,packed_contiguous=0,direct=3
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=4,reads_err=0,bytes=134217728,avg_us=225271,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+rail_stats,id=r1,device=rxe_c1,listener=10.32.0.2:55154,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=4,reads_err=0,bytes=134217728,avg_us=242521,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+object_identity_after,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31

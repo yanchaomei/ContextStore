@@ -1,0 +1,5 @@
+object_identity,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31
+mode,direct_staging=false
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],bytes=67108864
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153

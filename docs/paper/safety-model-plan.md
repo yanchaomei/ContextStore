@@ -1,49 +1,38 @@
-# Bounded state exploration plan for the multi-Rail read contract
+# Bounded state exploration of multi-Rail read ownership
 
-**Status:** specification and acceptance criteria, 2026-10-09. No model checker has run on this document; [safety-contract.md](safety-contract.md) remains an implementation-linked argument rather than a formal proof. The goal is to make a future TLA+/explicit-state run traceable to actual fault-injection points.
+**Status (2026-10-09):** the revised [explicit-state explorer](../../kv-service/verification/multirail_state_explorer.py) ran on SKV_2 (Python 3.8.10). Its [raw JSON](../../kv-service/verification/results/state-explorer-revised-20261009.json) records source SHA-256, every explored-state count and the shortest counterexample for each negative control. The safe abstraction exhausted **19,657 states** without violating its stated invariants. Six deliberately weakened guards produced counterexamples. The earlier 6,045-state [result](../../kv-service/verification/results/state-explorer-20261009.json) remains available as a superseded, weaker model; independent review found that it allowed a direct-staging slice to be reused between verification and publication.
 
-## Model boundary and assumptions
+This is an **abstract contract check**, not a proof of the Rust code, libibverbs, NIC behavior, operating-system crash behavior or implementation-level linearizability. The model has two Rails and one required stripe per Rail. It does not explore all stripe counts, all provider outcomes, resource limits or every interleaving in the real program.
 
-Model one request, two Rails, one stripe assigned to each Rail, one caller destination, two candidate object versions, and one possible delayed RDMA WRITE per Rail. This is enough to explore the ordering classes that threaten publication and reuse; larger stripe counts should not change the ownership rules but need separate coverage tests. The model assumes (A1) a successful provider QP-destruction operation prevents any subsequent WRITE through that QP, (A2) completion accounting correctly identifies the WR set for that QP, (A3) each object rewrite changes the descriptor/placement identity or fails an enabled checksum, and (A4) the caller only accesses its destination after the read returns or after cancellation returns. A model cannot establish these provider and application assumptions by itself; real Verbs tests must accompany it.
+## Contract encoded
 
-## State variables and events
+The state records request phase; each Rail's QP, MR, WR, stripe coverage, source ownership and target ownership; the first lookup identity, current version and second checked identity; whether a checksum was supplied; corruption; whether the private staging bytes remain valid; cancellation before the publish gate; caller publication; and a late WRITE into a reused target. `Complete short WRITE` marks a WR complete without marking its stripe covered. `Corrupt one stripe` can occur with or without a checksum. Without an advertised checksum, the checker allows undetected byte corruption: the implementation cannot claim to detect it either.
 
-| State | Domain |
-| --- | --- |
-| `phase` | `new`, `transferring`, `quiesced`, `verified`, `published`, `failed` |
-| `qp[r]` | `absent`, `open`, `retired` for each Rail `r` |
-| `wr[r]` | `none`, `posted`, `completed`, `uncertain` |
-| `mr[r]` | `unregistered`, `registered`, `deregistered` |
-| `target[r]` | `private`, `reusable`; includes the private ordered staging slice in the proposed direct mode |
-| `source[r]` | `pinned`, `released` |
-| `v0`, `v1`, `storage_version` | first lookup, second lookup, current storage identity; each version is `A` or `B` |
-| `covered`, `checksums_ok`, `cancelled`, `caller_changed` | booleans |
+The direct-staging target has **two independent lifetime obligations**. A QP must be retired before its MR or target allocation can be recycled, and the private staging bytes must remain owned by this request through checksum/identity checks and final caller publication (or request failure). Since both Rail slices occupy one vector, even failed direct requests must retire **both** QPs and join all workers before any target slice can be reused. In packed mode, per-Rail receive buffers can instead be released after their bytes have been assembled into a separate request-private staging vector. The current model conservatively uses the *direct* shared-vector rule for both modes; it does not model packed assembly.
 
-Allow transitions for `Lookup0`, `Post(r)`, `Complete(r)`, `Timeout(r)`, `RetireQP(r)`, `Deregister(r)`, `ReleaseSource(r)`, `ReuseTarget(r)`, `Join`, `CheckCoverage`, `CheckChecksums`, `Rewrite`, `Lookup1`, `Publish`, `Cancel` and `LateWrite(r)`. A timeout marks `wr[r]` uncertain but does **not** itself free the MR, source or target. `RetireQP(r)` is the required quiescence step before those resources can be released. `Publish` and `Cancel` are serialized as one atomic choice at the publication gate; a cancellation that begins after publication may return afterward and cannot undo the completed read.
+`Cancel` and `Publish` are mutually exclusive transitions at the final gate. A cancellation before publication moves the request to a failed terminal state; a cancellation after publication cannot undo the completed read. A read publishes only after both WRs completed, both stripes are covered, both QPs retired, any supplied checksum passed, and the second lookup matched the first. The caller's allocation changes only at this publication event. The model does not encode the exact instruction-level lock implementation or a caller racing with cancellation after return.
 
-## Safety properties to check
+## Assumptions and limits
 
-1. **Atomic caller visibility:** `caller_changed` implies `phase = published`; every failure state retains the caller's entry sentinel. No Rail WRITE targets the caller allocation.
-2. **One version and complete coverage:** `phase = published` implies `covered`, `checksums_ok` when checksums are supplied, `v0 = v1`, and each required stripe came from the descriptor/placement identity accepted at both lookups. A rewrite after `Lookup1` is allowed: the published bytes remain a valid snapshot observed at the second lookup, but the API does not promise that they are current at return.
-3. **Target lifetime:** `target[r] = reusable` implies either `qp[r] = retired` or every WR that can address `target[r]` is known complete and its CQ accounting is finished. Under the implementation's stricter policy, require `qp[r] = retired` before reuse on every error path.
-4. **Source lifetime:** `source[r] = released` cannot coexist with an open QP and a posted/uncertain WRITE that reads it. The server's retained extent/`(MR, Bytes)` lists discharge this obligation only after QP destruction.
-5. **Budget closure:** after quiescence and result drop, active requests, per-Rail tasks, registered bytes and in-flight bytes return to their pre-request values. The model treats admission as an atomic reservation; a refused request has no posted WR.
+1. **Provider retirement:** a *successful* `ibv_destroy_qp` prevents future WRITEs through that QP. This assumption must be validated against provider behavior. The client and server now fail-stop if QP destruction returns an error, before their retained memory can be dropped. A test-only interposer has exercised the **client** QP/MR error-return branch with stderr closed, but not real provider failure or the server error-return branch.
+2. **Accounting:** WR completion, short-transfer detection and per-stripe coverage are represented as truthful events. The model is not wired to actual CQE and response parsing. Implementation tests must check wrong byte counts, duplicate/missing stripes and partial responses.
+3. **Identity:** a relevant object rewrite changes the checked descriptor/placement identity or an available checksum. The model has only versions A and B and one rewrite; ETag collision, ABA and concurrent layout mutation outside that assumption are not proven away.
+4. **Checksum availability:** corruption is rejected only when a checksum is supplied. A stripe with no checksum can be silently damaged; neither the model nor current code can guarantee detection in that case.
+5. **No resource model:** queue depth, registered bytes, admission refusal and budget release are tested in code but are **not** state variables here. The result provides no formal budget-closure evidence.
 
-## Negative controls and expected traces
+## Negative-control receipts
 
-- **Unsafe target reuse:** change `Timeout(r) → Deregister(r) → ReuseTarget(r)` to omit `RetireQP(r)`. The checker should find `LateWrite(r)` into a reusable allocation. If it does not, the model is too weak to evaluate the intended property.
-- **Partial publication:** permit `Publish` after only Rail 0 completes. The checker should find `caller_changed` with incomplete coverage.
-- **Version race:** permit publication without the second identity comparison, then interleave `Rewrite`; the checker should find mixed or stale publication against the stated contract.
-- **Cancel race:** split the final copy and cancellation into two unordered actions. The checker should find publication after cancellation returns; reintroducing the shared gate should remove this trace.
+| Removed guard | Shortest observed counterexample | Scope of evidence |
+| --- | --- | --- |
+| QP retirement before target reuse | `Timeout r0 → Deregister MR r0 → Reuse target r0 → Late WRITE r0` | A late WRITE can corrupt a recycled allocation. |
+| Private staging ownership until publication | both Rails complete and retire → Check → Reuse target r0 → Publish | DMA quiescence alone does not preserve checked staged bytes. |
+| QP retirement before source release | `Post r0 → Timeout r0 → Release source r0` | A posted/uncertain WRITE can still read released source memory. |
+| Full coverage before publication | both WRs and QPs finish, but Rail 1 reports a short stripe → Join → accept incomplete coverage → Publish | Completion alone does not establish every expected stripe byte. |
+| Final cancel/publish gate | both Rails complete → Check → Cancel returns → Publish | A fully verified read can still publish after cancellation without the gate. |
+| Matching second identity | object A→B → both Rails complete → accept mismatched Lookup1 → Publish | Coverage and checksum alone do not establish the chosen object version. |
 
-## Connection to executable tests
+The shortest traces are for this finite abstraction; they do not reproduce a real provider's exact sequence. The first negative trace *does* include a `Late WRITE`; the previous explorer stopped at target reuse and supported only a risk statement. The cancellation trace reaches the final gate after both Rails complete and validate; the previous trace cancelled before any WR. The version trace contains a mismatched second lookup; the previous trace had no second checked identity. These corrections came from independent review.
 
-| Model event/class | ContextStore test or required injection |
-| --- | --- |
-| `Timeout → RetireQP → LateWrite` | existing two-RXE late-second-Rail and CQ-retirement receipts; repeat on the direct-staging path with target-address reuse sentinel |
-| `Cancel` before/during publish | existing `RailCancel` unit and one/two-Rail cancellation tests; add a direct-mode completion race |
-| `Rewrite → Lookup1` | stale Generation/placement tests plus sustained concurrent writer/readers run that records accepted version IDs |
-| `Deregister/ReleaseSource` | client `RdmaClient::drop`, server retained-source/QP drop trace; instrument release times and MR/QP identities |
-| admission refusal | `RLIMIT_MEMLOCK`, total/per-Rail registered/in-flight byte and queue-depth tests |
+## Connection to code and remaining checks
 
-The first executable model should cover both the original packed-buffer path and the proposed direct ordered staging path by changing only their private-target ownership map. A model check is accepted only with the exact source revision, state bounds, checker version, full command, explored-state count, invariant results and raw counterexample traces saved alongside the real-Verbs receipts. If the checker cannot run on the current remote environment, keep this file labeled a plan and make no formal-verification claim.
+The [safety contract](safety-contract.md) maps the provider and caller-memory obligations to Rust ownership, QP/MR drop order and end-to-end tests. The revised model checks the event-level argument only. Repeat the real two-RXE cancellation, delayed-WRITE and dead-listener tests on the exact final binary; retain server retirement logs and source hashes. A future stronger model should represent admission and release counters, multi-stripe descriptors, read/rename races, provider destruction failure and the atomic publication lock more directly. Stronger claims require both a code-to-model refinement argument and hardware-path evidence.

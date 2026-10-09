@@ -492,6 +492,14 @@ both guests, power them off, run `stop-pair.sh` if needed, then
 | Two physical HCA rails | Not run: only one HCA port was online on each available SKV node | No physical aggregation claim |
 | Linux ARM64 | Earlier RDMA/Mock and server feature suites pass; latest CQ/timeout changes were checked on x86_64 | No ARM64 hardware measurement |
 
+#### Research branch: direct ordered private staging
+
+The `research/direct-ordered-staging` branch adds opt-in `RailLimits::direct_staging` and a `contiguous_schedule` packed control. Both default to `false`. Eligible single-owner striped objects use consecutive weighted stripe runs and disjoint mutable slices of one request-private ordered vector; other placements retain the existing packed path. The disk stripe layout and `KvClient::read_multi_rail_into` signature are unchanged. The [mechanism diagram](docs/paper/figures/direct-vs-packed-2026-10-09-v1/contextstore-direct-vs-packed_en.svg), [safety contract](docs/paper/safety-contract.md), [complete evaluation](docs/paper/direct-staging-eval-2026-10-09.md) and [Chinese research summary](docs/paper/中文研究摘要与验收边界-2026-10-09.md) explain the route guard, QP/MR lifetime, evidence and limits.
+
+The [five-arm collector](kv-service/benchmarks/collect_rail_modes.py) and [raw-log auditor](kv-service/benchmarks/audit_rail_modes.py) compare both optimized one-Rail paths, original packed-greedy, same-plan packed-contiguous and direct-contiguous. After seeding the two documented objects in the isolated VM setup above, [`run_rxe_five_arm_20261009.sh`](kv-service/benchmarks/run_rxe_five_arm_20261009.sh) runs the fixed ten-block protocol. The [final raw 64/256 MiB receipts](kv-service/benchmarks/results/paper-direct-final-2026-10-09/) include every process log, identity/stripe/Rail audit, fault logs, binary hashes and topology. The final-binary primary direct/same-plan packed throughput ratios are **1.100×** and **1.161×** on **software RXE**. They do not establish physical multi-HCA aggregation. The prior [six-paper venue audit](docs/paper/top-venue-methods.md) identifies Mooncake FAST '25 multi-NIC transfer as direct prior art; this branch's narrow contribution is the versioned object/failure contract plus a controlled reduction in software staging cost.
+
+The [bounded two-Rail state explorer](kv-service/verification/multirail_state_explorer.py) and its [result/assumptions](docs/paper/safety-model-plan.md) test an abstract ownership contract; they do not prove the Rust/provider implementation. The test-only [Verbs return-value shim](kv-service/verification/verbs_failstop_shim.c) exercises QP/MR fail-stop cleanup in an isolated guest, not on production devices. The separate Python/`rdma-ffi` external-buffer path is outside the direct-staging safety claim.
+
 ---
 
 ## Deployment shapes

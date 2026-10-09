@@ -1,0 +1,791 @@
+{
+  "schema": "paper-svg-receipt.v1",
+  "source_sha256": "416bdc836b90a3ab88b119a63d40808396670d7df4f92422cd058fe1ec63b527",
+  "renderer_sha256": "56b65a1f3784fb35f9e80407279bab6de7434bc32d7b01d3279c80de1da74727",
+  "tools": {
+    "rsvg-convert": {
+      "path": "/opt/homebrew/bin/rsvg-convert",
+      "version": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.1\n  harfbuzz 14.2.1\n  fontconfig 2.18.1"
+    },
+    "pdfinfo": {
+      "path": "/opt/homebrew/bin/pdfinfo",
+      "version": "pdfinfo version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "pdftotext": {
+      "path": "/opt/homebrew/bin/pdftotext",
+      "version": "pdftotext version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "pdftoppm": {
+      "path": "/opt/homebrew/bin/pdftoppm",
+      "version": "pdftoppm version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "pdffonts": {
+      "path": "/opt/homebrew/bin/pdffonts",
+      "version": "pdffonts version 26.04.0\nCopyright 2005-2026 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    }
+  },
+  "semantic_check": "not_requested",
+  "human_visual_review": "required",
+  "outputs": {
+    "en": {
+      "geometry_passed": true,
+      "canvas_pt": [
+        500.0,
+        242.0
+      ],
+      "font_requested": "Arial, Liberation Sans, sans-serif",
+      "fonts_in_pdf": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nMNQGDJ+Arial-BoldMT                  TrueType          WinAnsi          yes yes yes      7  0\n[none]                               Type 3            Custom           yes no  yes      8  0\nWZLFRL+ArialMT                       TrueType          WinAnsi          yes yes yes      9  0\n[none]                               Type 3            Custom           yes no  yes     10  0\nQSJXJY+ArialMT                       TrueType          WinAnsi          yes yes yes     11  0\n[none]                               Type 3            Custom           yes no  yes     12  0\nOUHZRJ+ArialMT                       CID TrueType      Identity-H       yes yes yes     13  0\nMJGBOW+Arial-BoldMT                  TrueType          WinAnsi          yes yes yes     14  0\n[none]                               Type 3            Custom           yes no  yes     15  0\n",
+      "pdf_info": "Producer:        cairo 1.18.4 (https://cairographics.org)\nCreationDate:    Fri Oct  9 14:18:43 2026 CST\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           1\nEncrypted:       no\nPage size:       500 x 242 pts\nPage rot:        0\nFile size:       68449 bytes\nOptimized:       no\nPDF version:     1.7\n",
+      "text_boxes": [
+        {
+          "id": "packed-title:0",
+          "text": "(a) Packed control: private Rail targets, then assemble",
+          "size_pt": 7.2,
+          "bbox": [
+            157.1674085,
+            5.982291499999999,
+            342.83259150000004,
+            14.017708500000001
+          ]
+        },
+        {
+          "id": "packed-stripes0:0",
+          "text": "Stripes 0–7",
+          "size_pt": 6.0,
+          "bbox": [
+            31.824219,
+            32.964,
+            62.175781,
+            39.66
+          ]
+        },
+        {
+          "id": "packed-stripes0:1",
+          "text": "same layout",
+          "size_pt": 6.0,
+          "bbox": [
+            30.8251955,
+            41.339999999999996,
+            63.1748045,
+            48.035999999999994
+          ]
+        },
+        {
+          "id": "packed-stripes1:0",
+          "text": "Stripes 8–15",
+          "size_pt": 6.0,
+          "bbox": [
+            30.155762,
+            73.964,
+            63.844238000000004,
+            80.66
+          ]
+        },
+        {
+          "id": "packed-stripes1:1",
+          "text": "same layout",
+          "size_pt": 6.0,
+          "bbox": [
+            30.8251955,
+            82.34,
+            63.1748045,
+            89.036
+          ]
+        },
+        {
+          "id": "packed-rail0:0",
+          "text": "Rail 0",
+          "size_pt": 6.0,
+          "bbox": [
+            134.33007800000001,
+            32.964,
+            149.669922,
+            39.66
+          ]
+        },
+        {
+          "id": "packed-rail0:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            132.332031,
+            41.339999999999996,
+            151.667969,
+            48.035999999999994
+          ]
+        },
+        {
+          "id": "packed-rail1:0",
+          "text": "Rail 1",
+          "size_pt": 6.0,
+          "bbox": [
+            134.33007800000001,
+            73.964,
+            149.669922,
+            80.66
+          ]
+        },
+        {
+          "id": "packed-rail1:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            132.332031,
+            82.34,
+            151.667969,
+            89.036
+          ]
+        },
+        {
+          "id": "packed-target0:0",
+          "text": "Packed target 0",
+          "size_pt": 6.0,
+          "bbox": [
+            224.9868165,
+            32.964,
+            267.0131835,
+            39.66
+          ]
+        },
+        {
+          "id": "packed-target0:1",
+          "text": "own MR",
+          "size_pt": 6.0,
+          "bbox": [
+            234.9975585,
+            41.339999999999996,
+            257.0024415,
+            48.035999999999994
+          ]
+        },
+        {
+          "id": "packed-target1:0",
+          "text": "Packed target 1",
+          "size_pt": 6.0,
+          "bbox": [
+            224.9868165,
+            73.964,
+            267.0131835,
+            80.66
+          ]
+        },
+        {
+          "id": "packed-target1:1",
+          "text": "own MR",
+          "size_pt": 6.0,
+          "bbox": [
+            234.9975585,
+            82.34,
+            257.0024415,
+            89.036
+          ]
+        },
+        {
+          "id": "packed-copy:0",
+          "text": "Assemble",
+          "size_pt": 6.0,
+          "bbox": [
+            347.837125,
+            52.964,
+            374.162875,
+            59.66
+          ]
+        },
+        {
+          "id": "packed-copy:1",
+          "text": "D-byte copy",
+          "size_pt": 6.0,
+          "bbox": [
+            344.9936525,
+            61.339999999999996,
+            377.0063475,
+            68.036
+          ]
+        },
+        {
+          "id": "packed-gate:0",
+          "text": "Private stage",
+          "size_pt": 5.8,
+          "bbox": [
+            440.5749345,
+            53.215417,
+            474.42506549999996,
+            59.688
+          ]
+        },
+        {
+          "id": "packed-gate:1",
+          "text": "check → caller",
+          "size_pt": 5.8,
+          "bbox": [
+            438.4835495,
+            61.312000000000005,
+            476.51645049999996,
+            67.784583
+          ]
+        },
+        {
+          "id": "direct-title:0",
+          "text": "(b) Direct mode: same assignment, one request-private ordered vector",
+          "size_pt": 7.1,
+          "bbox": [
+            131.246214,
+            116.5384185,
+            368.753786,
+            124.46158150000001
+          ]
+        },
+        {
+          "id": "direct-stripes0:0",
+          "text": "Stripes 0–7",
+          "size_pt": 6.0,
+          "bbox": [
+            31.824219,
+            153.152,
+            62.175781,
+            159.84799999999998
+          ]
+        },
+        {
+          "id": "direct-stripes1:0",
+          "text": "Stripes 8–15",
+          "size_pt": 6.0,
+          "bbox": [
+            30.155762,
+            194.152,
+            63.844238000000004,
+            200.84799999999998
+          ]
+        },
+        {
+          "id": "direct-rail0:0",
+          "text": "Rail 0",
+          "size_pt": 6.0,
+          "bbox": [
+            134.33007800000001,
+            148.964,
+            149.669922,
+            155.66
+          ]
+        },
+        {
+          "id": "direct-rail0:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            132.332031,
+            157.34,
+            151.667969,
+            164.036
+          ]
+        },
+        {
+          "id": "direct-rail1:0",
+          "text": "Rail 1",
+          "size_pt": 6.0,
+          "bbox": [
+            134.33007800000001,
+            189.964,
+            149.669922,
+            196.66
+          ]
+        },
+        {
+          "id": "direct-rail1:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            132.332031,
+            198.34,
+            151.667969,
+            205.036
+          ]
+        },
+        {
+          "id": "direct-slice0:0",
+          "text": "Slice [0,D/2)",
+          "size_pt": 6.0,
+          "bbox": [
+            231.661133,
+            148.964,
+            264.338867,
+            155.66
+          ]
+        },
+        {
+          "id": "direct-slice0:1",
+          "text": "target MR 0",
+          "size_pt": 6.0,
+          "bbox": [
+            232.32763699999998,
+            157.34,
+            263.67236299999996,
+            164.036
+          ]
+        },
+        {
+          "id": "direct-slice1:0",
+          "text": "Slice [D/2,D)",
+          "size_pt": 6.0,
+          "bbox": [
+            231.163086,
+            189.964,
+            264.836914,
+            196.66
+          ]
+        },
+        {
+          "id": "direct-slice1:1",
+          "text": "target MR 1",
+          "size_pt": 6.0,
+          "bbox": [
+            232.32763699999998,
+            198.34,
+            263.67236299999996,
+            205.036
+          ]
+        },
+        {
+          "id": "direct-no-copy:0",
+          "text": "No assembly",
+          "size_pt": 6.0,
+          "bbox": [
+            343.6606445,
+            168.964,
+            378.3393555,
+            175.66
+          ]
+        },
+        {
+          "id": "direct-no-copy:1",
+          "text": "copy",
+          "size_pt": 6.0,
+          "bbox": [
+            354.663086,
+            177.34,
+            367.33691400000004,
+            184.036
+          ]
+        },
+        {
+          "id": "direct-gate:0",
+          "text": "Check version",
+          "size_pt": 5.8,
+          "bbox": [
+            439.126399,
+            169.215417,
+            475.873601,
+            175.688
+          ]
+        },
+        {
+          "id": "direct-gate:1",
+          "text": "copy → caller",
+          "size_pt": 5.8,
+          "bbox": [
+            439.933501,
+            177.312,
+            475.06649899999996,
+            183.784583
+          ]
+        },
+        {
+          "id": "lifetime-note:0",
+          "text": "Both: QP retired before MR release; private stage held through checks and publish/fail",
+          "size_pt": 6.0,
+          "bbox": [
+            135.8100285,
+            226.152,
+            364.18997149999996,
+            232.84799999999998
+          ]
+        }
+      ],
+      "sha256": {
+        "contextstore-direct-vs-packed_en.svg": "c6672e88c82ee5453314174c1bf7e79fa620bf0ebf36fab23eb0c26a6c17dde0",
+        "contextstore-direct-vs-packed_en.pdf": "7ed33329a23177d21b4c314fb6840f4264c53f15cadf229e16619cd43c1a9d68",
+        "contextstore-direct-vs-packed_en.png": "8f6b5f9a8fa91b1602a544c6b493372f42fe513697ddd5194ca6d6ffe9a74544"
+      }
+    },
+    "zh": {
+      "geometry_passed": true,
+      "canvas_pt": [
+        500.0,
+        242.0
+      ],
+      "font_requested": "Noto Sans CJK SC, PingFang SC, sans-serif",
+      "fonts_in_pdf": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nPPIVPS+PingFangSC-Semibold           CID Type 0C       Identity-H       yes yes yes      7  0\n[none]                               Type 3            Custom           yes no  yes      8  0\nHJTPHY+PingFangSC-Regular            CID Type 0C       Identity-H       yes yes yes      9  0\n[none]                               Type 3            Custom           yes no  yes     10  0\nKFRLIP+PingFangSC-Regular            CID Type 0C       Identity-H       yes yes yes     11  0\nRKRDQQ+PingFangSC-Semibold           CID Type 0C       Identity-H       yes yes yes     12  0\n[none]                               Type 3            Custom           yes no  yes     13  0\n",
+      "pdf_info": "Producer:        cairo 1.18.4 (https://cairographics.org)\nCreationDate:    Fri Oct  9 14:18:46 2026 CST\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           1\nEncrypted:       no\nPage size:       500 x 242 pts\nPage rot:        0\nFile size:       30423 bytes\nOptimized:       no\nPDF version:     1.7\n",
+      "text_boxes": [
+        {
+          "id": "packed-title:0",
+          "text": "(a) 打包对照：各轨道独立接收，再组装对象",
+          "size_pt": 7.2,
+          "bbox": [
+            179.54249199999998,
+            4.959863500000001,
+            320.45750799999996,
+            15.0401365
+          ]
+        },
+        {
+          "id": "packed-stripes0:0",
+          "text": "条带 0–7",
+          "size_pt": 6.0,
+          "bbox": [
+            34.088,
+            31.26,
+            59.912,
+            39.66
+          ]
+        },
+        {
+          "id": "packed-stripes0:1",
+          "text": "布局不变",
+          "size_pt": 6.0,
+          "bbox": [
+            35.0,
+            41.34,
+            59.0,
+            49.74
+          ]
+        },
+        {
+          "id": "packed-stripes1:0",
+          "text": "条带 8–15",
+          "size_pt": 6.0,
+          "bbox": [
+            32.726,
+            72.26,
+            61.274,
+            80.66
+          ]
+        },
+        {
+          "id": "packed-stripes1:1",
+          "text": "布局不变",
+          "size_pt": 6.0,
+          "bbox": [
+            35.0,
+            82.34,
+            59.0,
+            90.74000000000001
+          ]
+        },
+        {
+          "id": "packed-rail0:0",
+          "text": "轨道 0",
+          "size_pt": 6.0,
+          "bbox": [
+            133.201,
+            31.26,
+            150.79899999999998,
+            39.66
+          ]
+        },
+        {
+          "id": "packed-rail0:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            131.788,
+            41.34,
+            152.21200000000002,
+            49.74
+          ]
+        },
+        {
+          "id": "packed-rail1:0",
+          "text": "轨道 1",
+          "size_pt": 6.0,
+          "bbox": [
+            133.798,
+            72.26,
+            150.202,
+            80.66
+          ]
+        },
+        {
+          "id": "packed-rail1:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            131.788,
+            82.34,
+            152.21200000000002,
+            90.74000000000001
+          ]
+        },
+        {
+          "id": "packed-target0:0",
+          "text": "打包接收区 0",
+          "size_pt": 6.0,
+          "bbox": [
+            228.201,
+            31.26,
+            263.799,
+            39.66
+          ]
+        },
+        {
+          "id": "packed-target0:1",
+          "text": "独立 MR",
+          "size_pt": 6.0,
+          "bbox": [
+            234.327,
+            41.34,
+            257.673,
+            49.74
+          ]
+        },
+        {
+          "id": "packed-target1:0",
+          "text": "打包接收区 1",
+          "size_pt": 6.0,
+          "bbox": [
+            228.798,
+            72.26,
+            263.202,
+            80.66
+          ]
+        },
+        {
+          "id": "packed-target1:1",
+          "text": "独立 MR",
+          "size_pt": 6.0,
+          "bbox": [
+            234.327,
+            82.34,
+            257.673,
+            90.74000000000001
+          ]
+        },
+        {
+          "id": "packed-copy:0",
+          "text": "组装有序对象",
+          "size_pt": 6.0,
+          "bbox": [
+            343.0,
+            51.260000000000005,
+            379.0,
+            59.660000000000004
+          ]
+        },
+        {
+          "id": "packed-copy:1",
+          "text": "复制 D 字节",
+          "size_pt": 6.0,
+          "bbox": [
+            344.884,
+            61.34,
+            377.116,
+            69.74000000000001
+          ]
+        },
+        {
+          "id": "packed-gate:0",
+          "text": "私有暂存区",
+          "size_pt": 5.8,
+          "bbox": [
+            443.0004875,
+            51.568273000000005,
+            471.99951250000004,
+            59.688
+          ]
+        },
+        {
+          "id": "packed-gate:1",
+          "text": "校验→调用方",
+          "size_pt": 5.8,
+          "bbox": [
+            440.100585,
+            61.312000000000005,
+            474.89941500000003,
+            69.431727
+          ]
+        },
+        {
+          "id": "direct-title:0",
+          "text": "(b) 直接暂存：条带分配相同，仅用一个请求私有有序向量",
+          "size_pt": 7.1,
+          "bbox": [
+            159.121455,
+            115.5302735,
+            340.87854500000003,
+            125.46972650000001
+          ]
+        },
+        {
+          "id": "direct-stripes0:0",
+          "text": "条带 0–7",
+          "size_pt": 6.0,
+          "bbox": [
+            34.088,
+            152.3,
+            59.912,
+            160.70000000000002
+          ]
+        },
+        {
+          "id": "direct-stripes1:0",
+          "text": "条带 8–15",
+          "size_pt": 6.0,
+          "bbox": [
+            32.726,
+            193.3,
+            61.274,
+            201.70000000000002
+          ]
+        },
+        {
+          "id": "direct-rail0:0",
+          "text": "轨道 0",
+          "size_pt": 6.0,
+          "bbox": [
+            133.201,
+            147.26,
+            150.79899999999998,
+            155.66
+          ]
+        },
+        {
+          "id": "direct-rail0:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            131.788,
+            157.33999999999997,
+            152.21200000000002,
+            165.73999999999998
+          ]
+        },
+        {
+          "id": "direct-rail1:0",
+          "text": "轨道 1",
+          "size_pt": 6.0,
+          "bbox": [
+            133.798,
+            188.26,
+            150.202,
+            196.66
+          ]
+        },
+        {
+          "id": "direct-rail1:1",
+          "text": "QP/CQ",
+          "size_pt": 6.0,
+          "bbox": [
+            131.788,
+            198.33999999999997,
+            152.21200000000002,
+            206.73999999999998
+          ]
+        },
+        {
+          "id": "direct-slice0:0",
+          "text": "前半对象切片",
+          "size_pt": 6.0,
+          "bbox": [
+            230.0,
+            147.26,
+            266.0,
+            155.66
+          ]
+        },
+        {
+          "id": "direct-slice0:1",
+          "text": "目标 MR 0",
+          "size_pt": 6.0,
+          "bbox": [
+            233.528,
+            157.33999999999997,
+            262.472,
+            165.73999999999998
+          ]
+        },
+        {
+          "id": "direct-slice1:0",
+          "text": "后半对象切片",
+          "size_pt": 6.0,
+          "bbox": [
+            230.0,
+            188.26,
+            266.0,
+            196.66
+          ]
+        },
+        {
+          "id": "direct-slice1:1",
+          "text": "目标 MR 1",
+          "size_pt": 6.0,
+          "bbox": [
+            234.125,
+            198.33999999999997,
+            261.875,
+            206.73999999999998
+          ]
+        },
+        {
+          "id": "direct-no-copy:0",
+          "text": "无需对象",
+          "size_pt": 6.0,
+          "bbox": [
+            349.0,
+            167.26,
+            373.0,
+            175.66
+          ]
+        },
+        {
+          "id": "direct-no-copy:1",
+          "text": "组装复制",
+          "size_pt": 6.0,
+          "bbox": [
+            349.0,
+            177.33999999999997,
+            373.0,
+            185.73999999999998
+          ]
+        },
+        {
+          "id": "direct-gate:0",
+          "text": "校验对象版本",
+          "size_pt": 5.8,
+          "bbox": [
+            440.100585,
+            167.568273,
+            474.89941500000003,
+            175.688
+          ]
+        },
+        {
+          "id": "direct-gate:1",
+          "text": "复制→调用方",
+          "size_pt": 5.8,
+          "bbox": [
+            440.100585,
+            177.312,
+            474.89941500000003,
+            185.43172700000002
+          ]
+        },
+        {
+          "id": "lifetime-note:0",
+          "text": "两种模式均在 MR 释放前退役 QP；私有暂存区保持到校验和发布或失败",
+          "size_pt": 6.0,
+          "bbox": [
+            154.102,
+            225.3,
+            345.898,
+            233.70000000000002
+          ]
+        }
+      ],
+      "sha256": {
+        "contextstore-direct-vs-packed_zh.svg": "e6df228fcf21642fdb87f1cd83b4bd5a3fa1caae08e143eb06bf4068383853a4",
+        "contextstore-direct-vs-packed_zh.pdf": "27c8a80ba90b72b35adf2592696dd8363adf6cc0c0bba559ac28112b8c1a7b0d",
+        "contextstore-direct-vs-packed_zh.png": "a8b2e41017cc9dcc680286f96f808825e8a6e48be6caac093eea209d728b60f8"
+      }
+    }
+  }
+}

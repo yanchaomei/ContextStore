@@ -1,0 +1,14 @@
+object_identity,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31
+mode,direct_staging=false
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],bytes=67108864
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+sample,environment=soft-roce,rails=1,iteration=1,bytes=67108864,latency_us=337374,gib_per_s=0.185,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,iteration=2,bytes=67108864,latency_us=295631,gib_per_s=0.211,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,iteration=3,bytes=67108864,latency_us=304082,gib_per_s=0.206,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,iteration=4,bytes=67108864,latency_us=311046,gib_per_s=0.201,xxh3=a0a4cbfa5cad46af
+sample,environment=soft-roce,rails=1,iteration=5,bytes=67108864,latency_us=307321,gib_per_s=0.203,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=1,bytes_per_iter=67108864,iters=5,median_us=307321,cpu_user_us=206993,cpu_system_us=232591,peak_rss_kb=137676,rail_bytes=[335544320]
+mode_effective,one=5,packed_greedy=0,packed_contiguous=0,direct=0
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=402653184,avg_us=271595,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=67108864,registered_bytes_reserved=0,peak_registered_bytes=67108864
+object_identity_after,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=cef5c18b624c92ca,etag_xxh3=97b295417c9f21d5,descriptor_xxh3=bb0b6efd2c29788c,placement_xxh3=44c1c47ceed4ea31
