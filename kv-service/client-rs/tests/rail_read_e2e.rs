@@ -985,7 +985,7 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
         .iter()
         .all(|chunk| chunk.rdma_endpoint == advertised));
     println!(
-        "UNIQUE_CONFIG,object_key={key},object_mib={mib},stripe_count={},direct_staging=true,put_interval_scope=sdk_call",
+        "UNIQUE_CONFIG,object_key={key},object_mib={mib},stripe_count={},direct_staging=true,put_interval_scope=sdk_call,rejection_id_trace=true",
         initial.descriptor.stripe_count
     );
     let listener0 = setting("CS_RAIL_LISTENER0", &advertised);

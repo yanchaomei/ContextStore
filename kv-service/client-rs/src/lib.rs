@@ -274,13 +274,30 @@ impl KvClient {
             .ok_or(rail_read::RailReadError::VersionChanged)?;
         let post_lookup_us = post_lookup_start.elapsed().as_micros();
         let publish_start = std::time::Instant::now();
-        let copied = rail_read::commit_if_unchanged(
+        let copied_result = rail_read::commit_if_unchanged(
             &initial,
             &current,
             payload.as_bytes(),
             destination,
             cancel.as_ref(),
-        )?;
+        );
+        if let Err(rail_read::RailReadError::VersionChanged) = &copied_result {
+            if rail_timing_enabled() {
+                use std::io::Write as _;
+                let mut stderr = std::io::stderr().lock();
+                // This diagnostic runs only after the second lookup and never
+                // changes a rejected read or publishes bytes to the caller.
+                let _ = writeln!(
+                    stderr,
+                    "RAIL_REJECTED_ID,namespace={namespace},object_key={object_key},reason=version_changed,initial_generation={},current_generation={},initial_layout_version={},current_layout_version={}",
+                    initial.descriptor.object_generation,
+                    current.descriptor.object_generation,
+                    initial.descriptor.layout_version,
+                    current.descriptor.layout_version,
+                );
+            }
+        }
+        let copied = copied_result?;
         if rail_timing_enabled() {
             use std::io::Write as _;
             let mut stderr = std::io::stderr().lock();
