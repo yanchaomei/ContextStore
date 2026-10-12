@@ -56,6 +56,23 @@ def main() -> None:
     source_hashes = parse_sha_file(before)
     if len(source_hashes) < 10:
         raise ValueError("source manifest unexpectedly short")
+    if snapshot_root.exists():
+        committed_tree = subprocess.run(
+            ["git", "rev-parse", f"{args.commit}^{{tree}}"],
+            cwd=args.repo,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+        ).stdout.decode().strip()
+        index_tree = subprocess.run(
+            ["git", "write-tree"],
+            cwd=args.repo,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+        ).stdout.decode().strip()
+        if committed_tree != index_tree:
+            raise ValueError("Git index does not equal the requested commit tree")
     for name, expected in source_hashes.items():
         if snapshot_root.exists():
             source = (snapshot_root / name).read_bytes()
@@ -66,13 +83,18 @@ def main() -> None:
                 stderr=subprocess.PIPE,
                 check=True,
             ).stdout.decode().strip()
-            committed_blob_id = subprocess.run(
-                ["git", "rev-parse", f"{args.commit}:{name}"],
+            stage_line = subprocess.run(
+                ["git", "ls-files", "--stage", "--", name],
                 cwd=args.repo,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 check=True,
             ).stdout.decode().strip()
+            if not stage_line.endswith(f"\t{name}"):
+                raise ValueError(f"source file is absent from Git index: {name}")
+            mode, committed_blob_id, stage = stage_line.split("\t", 1)[0].split(" ")
+            if mode != "100644" or stage != "0":
+                raise ValueError(f"source file is not a normal staged blob: {name}")
             if blob_id != committed_blob_id:
                 raise ValueError(f"build snapshot differs from Git tree: {name}")
         else:
