@@ -24,6 +24,12 @@ printf '%s\n' "$source_commit" > "$output_dir/source-commit-label.txt"
 rustc --version --verbose > "$output_dir/rustc-version.txt"
 cargo --version > "$output_dir/cargo-version.txt"
 sha256sum "${sources[@]}" > "$output_dir/source-before.sha256"
+for source in "${sources[@]}"; do
+  mkdir -p "$output_dir/source-snapshot/$(dirname "$source")"
+  cp "$source" "$output_dir/source-snapshot/$source"
+done
+sha256sum "${sources[@]}" > "$output_dir/source-after-snapshot.sha256"
+cmp "$output_dir/source-before.sha256" "$output_dir/source-after-snapshot.sha256"
 cargo test -p contextstore-client-rs --features rdma --release --test rail_read_e2e --no-run \
   > "$output_dir/build.stdout" 2> "$output_dir/build.stderr"
 sha256sum "${sources[@]}" > "$output_dir/source-after.sha256"
@@ -32,5 +38,6 @@ sha256sum target/release/deps/rail_read_e2e-999328bb0f338845 \
   > "$output_dir/binary.sha256"
 (
   cd "$output_dir"
-  sha256sum source-before.sha256 source-after.sha256 binary.sha256 > receipt.sha256
+  sha256sum source-before.sha256 source-after-snapshot.sha256 \
+    source-after.sha256 binary.sha256 > receipt.sha256
 )
