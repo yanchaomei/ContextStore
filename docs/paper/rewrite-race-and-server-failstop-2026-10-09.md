@@ -18,6 +18,8 @@
 
 这些只是**两个进程轮次、31 次观测到的 SDK PUT 调用/读区间交叠**，不能推出所有时序均安全。每代唯一内容与实际 SDK Generation 对应避免了旧 A/B 测试无法识别同内容、不同 Generation 条带混合的缺陷；无 checksum 对象的任意静默损坏、真正的提供者异常和代码层形式化证明仍未由它覆盖。
 
+随后的一轮[Generation 切换见证实验](generation-transition-witness-2026-10-12.md)记录了八次同一读取的初查与复查分别返回旧/新 Generation，并且都安全拒绝。这提供“读取期间确有元数据版本切换”的直接见证；其单轮样本不与本节两轮计数相加，且未观测提交瞬间或 RDMA WRITE 是否仍在途。
+
 ## 历史连续性证据：明确降级
 
 - 较早的[两轮每代唯一内容运行](../../kv-service/verification/results/unique-generation-put-20261009/result.json)提交 30 次覆盖、41 次读取；有 **36 次**与“**数据准备＋SDK 调用**”区间相交，十次完整接受、26 次拒绝。其起始时间戳早于 8 MiB payload 构造与分段，不能证明与 SDK PUT 调用相交；[旧时间线图](figures/unique-generation-put-race-2026-10-09.svg)和构建收据保留，绝不与新的 31 次相加。

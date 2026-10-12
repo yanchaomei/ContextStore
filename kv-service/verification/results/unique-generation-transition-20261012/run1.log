@@ -1,0 +1,134 @@
+
+running 1 test
+UNIQUE_CONFIG,object_key=unique-race-1791774969736248068,object_mib=8,stripe_count=2,direct_staging=true,put_interval_scope=sdk_call,rejection_id_trace=true
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=12468 registration_us=261 get_us=33634 teardown_us=657 total_us=47035
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=12327 registration_us=215 get_us=46623 teardown_us=392 total_us=59559
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=86 reserve_us=4 workers_us=69264 assembly_us=0 checksum_us=3112 finish_us=1 total_us=72471
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=15059 transfer_us=73109 post_lookup_us=947 publish_us=3675 total_us=92792
+UNIQUE_READ,attempt=0,result=accepted,byte=16,generation_inferred=1,start_ns=8216200,end_ns=101062438
+UNIQUE_WRITE,revision=0,generation=2,byte=32,start_ns=14231517,put_end_ns=134116396,end_ns=135081603
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=3060 registration_us=277 get_us=34416 teardown_us=353 total_us=38109
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=3079 registration_us=487 get_us=34326 teardown_us=645 total_us=38541
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=11 reserve_us=1 workers_us=40825 assembly_us=0 checksum_us=1403 finish_us=1 total_us=42244
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=1,current_generation=2,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=1,result=rejected,error=object version changed during rail read,start_ns=108893410,end_ns=174647205
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2874 registration_us=565 get_us=34992 teardown_us=272 total_us=38707
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2802 registration_us=492 get_us=38872 teardown_us=633 total_us=42803
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=15 reserve_us=3 workers_us=44956 assembly_us=0 checksum_us=2898 finish_us=1 total_us=47877
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=2,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=4972 transfer_us=48207 post_lookup_us=1261 publish_us=3569 total_us=58011
+UNIQUE_READ,attempt=2,result=accepted,byte=32,generation_inferred=2,start_ns=179445575,end_ns=237547869
+UNIQUE_WRITE,revision=1,generation=3,byte=33,start_ns=153477325,put_end_ns=250489830,end_ns=251058893
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2395 registration_us=367 get_us=40545 teardown_us=364 total_us=43673
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2635 registration_us=513 get_us=40411 teardown_us=667 total_us=44230
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=16 reserve_us=2 workers_us=46406 assembly_us=0 checksum_us=1419 finish_us=0 total_us=47847
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=3,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=2431 transfer_us=48158 post_lookup_us=717 publish_us=3098 total_us=54405
+UNIQUE_READ,attempt=3,result=accepted,byte=33,generation_inferred=3,start_ns=248136430,end_ns=302601396
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=3061 registration_us=308 get_us=29362 teardown_us=833 total_us=33567
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=3285 registration_us=523 get_us=33763 teardown_us=583 total_us=38157
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=13 reserve_us=2 workers_us=40198 assembly_us=0 checksum_us=2868 finish_us=1 total_us=43085
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=3,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=887 transfer_us=43458 post_lookup_us=821 publish_us=3092 total_us=48260
+UNIQUE_READ,attempt=4,result=accepted,byte=33,generation_inferred=3,start_ns=311287512,end_ns=359693182
+UNIQUE_WRITE,revision=2,generation=4,byte=34,start_ns=269394564,put_end_ns=371485123,end_ns=372256034
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2319 registration_us=535 get_us=41708 teardown_us=582 total_us=45148
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2231 registration_us=262 get_us=43170 teardown_us=271 total_us=45936
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=22 reserve_us=2 workers_us=47833 assembly_us=0 checksum_us=2983 finish_us=1 total_us=50844
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=4,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=792 transfer_us=51142 post_lookup_us=4733 publish_us=2532 total_us=59202
+UNIQUE_READ,attempt=5,result=accepted,byte=34,generation_inferred=4,start_ns=371306824,end_ns=430577052
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2670 registration_us=332 get_us=32108 teardown_us=1381 total_us=36494
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2820 registration_us=519 get_us=34163 teardown_us=640 total_us=38145
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=13 reserve_us=2 workers_us=40259 assembly_us=0 checksum_us=2760 finish_us=0 total_us=43038
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=4,current_generation=5,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=6,result=rejected,error=object version changed during rail read,start_ns=441235406,end_ns=486017070
+UNIQUE_WRITE,revision=3,generation=5,byte=35,start_ns=390410608,put_end_ns=494641529,end_ns=495215615
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=1981 registration_us=434 get_us=41210 teardown_us=370 total_us=43999
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2446 registration_us=446 get_us=40941 teardown_us=737 total_us=44574
+UNIQUE_WRITE,revision=4,generation=6,byte=36,start_ns=513513934,put_end_ns=542681728,end_ns=543241678
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=10 reserve_us=1 workers_us=46290 assembly_us=0 checksum_us=2997 finish_us=1 total_us=49303
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=5,current_generation=6,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=7,result=rejected,error=object version changed during rail read,start_ns=494428230,end_ns=545354015
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2031 registration_us=424 get_us=40945 teardown_us=495 total_us=43898
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2523 registration_us=502 get_us=40320 teardown_us=724 total_us=44072
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=9 reserve_us=1 workers_us=45817 assembly_us=0 checksum_us=2952 finish_us=1 total_us=48783
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=6,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=633 transfer_us=49077 post_lookup_us=790 publish_us=2632 total_us=53136
+UNIQUE_READ,attempt=8,result=accepted,byte=36,generation_inferred=6,start_ns=553189516,end_ns=606399851
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2270 registration_us=381 get_us=31577 teardown_us=403 total_us=34633
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2354 registration_us=502 get_us=31506 teardown_us=578 total_us=34944
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=11 reserve_us=1 workers_us=36957 assembly_us=0 checksum_us=2874 finish_us=1 total_us=39848
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=6,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=1728 transfer_us=40130 post_lookup_us=1080 publish_us=2941 total_us=45881
+UNIQUE_READ,attempt=9,result=accepted,byte=36,generation_inferred=6,start_ns=617668575,end_ns=663676273
+UNIQUE_WRITE,revision=5,generation=7,byte=37,start_ns=561019424,put_end_ns=678977457,end_ns=680058678
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2299 registration_us=407 get_us=40011 teardown_us=490 total_us=43210
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2487 registration_us=529 get_us=41266 teardown_us=507 total_us=44792
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=8 reserve_us=1 workers_us=46563 assembly_us=0 checksum_us=2776 finish_us=1 total_us=49353
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=7,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=1442 transfer_us=49602 post_lookup_us=892 publish_us=3073 total_us=55011
+UNIQUE_READ,attempt=10,result=accepted,byte=37,generation_inferred=7,start_ns=674905575,end_ns=729977501
+UNIQUE_WRITE,revision=6,generation=8,byte=38,start_ns=697516060,put_end_ns=741860983,end_ns=742443551
+UNIQUE_READ,attempt=11,result=rejected,error=object descriptor became stale,start_ns=737206803,end_ns=743737026
+UNIQUE_WRITE,revision=7,generation=9,byte=39,start_ns=759481944,put_end_ns=793515933,end_ns=794583242
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2281 registration_us=289 get_us=40202 teardown_us=449 total_us=43223
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2314 registration_us=294 get_us=40233 teardown_us=599 total_us=43443
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=10 reserve_us=2 workers_us=45449 assembly_us=0 checksum_us=2757 finish_us=1 total_us=48224
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=8,current_generation=9,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=12,result=rejected,error=object version changed during rail read,start_ns=749453294,end_ns=799332877
+UNIQUE_WRITE,revision=8,generation=10,byte=40,start_ns=812451300,put_end_ns=845082894,end_ns=848394076
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2269 registration_us=301 get_us=47179 teardown_us=421 total_us=50172
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2423 registration_us=489 get_us=46964 teardown_us=599 total_us=50479
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=12 reserve_us=2 workers_us=52570 assembly_us=0 checksum_us=2941 finish_us=1 total_us=55529
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=9,current_generation=10,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=13,result=rejected,error=object version changed during rail read,start_ns=808280837,end_ns=879070492
+UNIQUE_WRITE,revision=9,generation=11,byte=41,start_ns=865914572,put_end_ns=891693595,end_ns=892560066
+UNIQUE_READ,attempt=14,result=rejected,error=object descriptor became stale,start_ns=886987142,end_ns=894382991
+UNIQUE_WRITE,revision=10,generation=12,byte=42,start_ns=910300958,put_end_ns=944402183,end_ns=945347377
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2343 registration_us=307 get_us=42997 teardown_us=447 total_us=46096
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2278 registration_us=256 get_us=43179 teardown_us=716 total_us=46432
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=8 reserve_us=1 workers_us=48484 assembly_us=0 checksum_us=1208 finish_us=0 total_us=49704
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=11,current_generation=12,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=15,result=rejected,error=object version changed during rail read,start_ns=900167851,end_ns=951489376
+UNIQUE_WRITE,revision=11,generation=13,byte=43,start_ns=965043313,put_end_ns=999498916,end_ns=1000957739
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2546 registration_us=342 get_us=37248 teardown_us=437 total_us=40575
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2696 registration_us=546 get_us=36892 teardown_us=700 total_us=40837
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=13 reserve_us=2 workers_us=43025 assembly_us=0 checksum_us=2953 finish_us=1 total_us=45997
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=12,current_generation=13,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=16,result=rejected,error=object version changed during rail read,start_ns=963349486,end_ns=1029226163
+UNIQUE_WRITE,revision=12,generation=14,byte=44,start_ns=1018543523,put_end_ns=1050792838,end_ns=1052027974
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2216 registration_us=288 get_us=39061 teardown_us=411 total_us=41979
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2677 registration_us=344 get_us=38352 teardown_us=763 total_us=42138
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=9 reserve_us=1 workers_us=44146 assembly_us=0 checksum_us=3003 finish_us=1 total_us=47163
+RAIL_REJECTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,reason=version_changed,initial_generation=13,current_generation=14,initial_layout_version=1,current_layout_version=1
+UNIQUE_READ,attempt=17,result=rejected,error=object version changed during rail read,start_ns=1035100992,end_ns=1084297873
+UNIQUE_WRITE,revision=13,generation=15,byte=45,start_ns=1069486687,put_end_ns=1095878673,end_ns=1096624027
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2370 registration_us=256 get_us=38737 teardown_us=267 total_us=41633
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2534 registration_us=487 get_us=40030 teardown_us=390 total_us=43444
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=8 reserve_us=1 workers_us=45239 assembly_us=0 checksum_us=2236 finish_us=1 total_us=47488
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=15,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=843 transfer_us=47670 post_lookup_us=774 publish_us=2819 total_us=52108
+UNIQUE_READ,attempt=18,result=accepted,byte=45,generation_inferred=15,start_ns=1094064076,end_ns=1146223115
+UNIQUE_WRITE,revision=14,generation=16,byte=46,start_ns=1114161163,put_end_ns=1153577490,end_ns=1154157264
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2059 registration_us=287 get_us=47338 teardown_us=350 total_us=50037
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2348 registration_us=475 get_us=46898 teardown_us=387 total_us=50111
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=11 reserve_us=1 workers_us=51738 assembly_us=0 checksum_us=1051 finish_us=0 total_us=52805
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=16,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=706 transfer_us=52924 post_lookup_us=580 publish_us=2927 total_us=57139
+UNIQUE_READ,attempt=19,result=accepted,byte=46,generation_inferred=16,start_ns=1153428510,end_ns=1210631879
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail1 bytes=4194304 connect_us=2107 registration_us=267 get_us=32539 teardown_us=299 total_us=35215
+RAIL_TRANSPORT_DIRECT_TIMING rail=rail0 bytes=4194304 connect_us=2095 registration_us=270 get_us=32422 teardown_us=633 total_us=35422
+RAIL_STAGED_TIMING bytes=8388608 rails=2 plan_us=9 reserve_us=1 workers_us=36934 assembly_us=0 checksum_us=1600 finish_us=0 total_us=38547
+RAIL_ACCEPTED_ID,namespace=rail-e2e,object_key=unique-race-1791774969736248068,generation=16,layout_version=1
+RAIL_OUTER_TIMING key=rail-e2e/unique-race-1791774969736248068 bytes=8388608 lookup_us=781 transfer_us=38708 post_lookup_us=984 publish_us=3299 total_us=43775
+UNIQUE_FINAL,generation_inferred=16,byte=46,bytes=8388608
+UNIQUE_MODE,direct=21,one=0,packed_greedy=0,packed_contiguous=0
+UNIQUE_RAIL,id=rail0,bytes=79691776,reads_ok=19,reads_err=2,inflight_requests=0,inflight_bytes=0,registered_bytes=0
+UNIQUE_RAIL,id=rail1,bytes=79691776,reads_ok=19,reads_err=2,inflight_requests=0,inflight_bytes=0,registered_bytes=0
+UNIQUE_SUMMARY,attempts=20,accepted=10,rejected=10,missing=0,put_overlapping=20,round_overlapping=20,first_generation=1,last_generation=16
+test unique_generations_survive_concurrent_direct_rail_reads ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 19 filtered out; finished in 1.40s
+

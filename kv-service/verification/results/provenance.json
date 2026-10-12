@@ -1,5 +1,5 @@
 {
-  "schema": "contextstore.multi-rail-ownership-supplement.v5",
+  "schema": "contextstore.multi-rail-ownership-supplement.v6",
   "date": "2026-10-09",
   "classification": "two isolated software RXE paths in KVM guests on one host; no physical multi-HCA claim",
   "product_direct_staging_commit": "bcdb1fd308ec2759481694678c592696e4d8d042",
@@ -28,7 +28,8 @@
     "the launch-time binary hash and matching 20-file source build receipt are provenance evidence, not a hermetic reproducible build",
     "the fail-stop shim fakes software return codes, not physical provider or device faults",
     "the earlier unique-content writer-round campaign has 51 PUT+Lookup intersections but no put_end_ns; repeated A/B campaigns are still weaker",
-    "Python/rdma-ffi external-buffer API remains outside this safety contract"
+    "Python/rdma-ffi external-buffer API remains outside this safety contract",
+    "the 2026-10-12 Generation-transition witness is one process run because the isolated server VM had about 115 MiB free afterward; it is not pooled with the earlier two-run campaign"
   ],
   "primary_sdk_call_timestamp_test_and_build_audit_commit": "9209d5026c7e91e5ac728c47c412a44ac12d9515",
   "primary_sdk_call_test_binary_sha256": "d642014038dfc5eefb71b02f956c71301f064190b9578f11b97a5e5be1beba24",
@@ -63,5 +64,22 @@
     "missing": 0,
     "payload_preparation_finished_before_start_timestamp": true,
     "server_commit_overlap_count": null
+  },
+  "latest_evidence_date": "2026-10-12",
+  "generation_transition_witness": {
+    "source_commit": "f1a3fbf4861918f68376ce7c09d287a331ff29bf",
+    "release_test_binary_sha256": "fe3635ddb8e4e64466ecda79e8f699f5d2a1c479405fd9548e145cc62b147fdb",
+    "environment": "one process run; two virtual RXE rails in separate KVM guests on one host",
+    "read_attempts": 20,
+    "sdk_call_overlap_reads": 20,
+    "accepted_complete": 10,
+    "safe_rejections": 10,
+    "generation_transition_rejections": 8,
+    "stale_descriptor_rejections_without_transition_trace": 2,
+    "missing": 0,
+    "source_snapshot_files_matched_to_git_tree": 20,
+    "independent_second_physical_node_json_match": true,
+    "server_commit_timestamp_observed": false,
+    "rdma_write_inflight_at_commit_observed": false
   }
 }

@@ -1,0 +1,9 @@
+test_counts_only_observed_generation_changes (test_audit_generation_transition.RejectionIdentityAuditTest) ... ok
+test_missing_identity_trace_fails (test_audit_generation_transition.RejectionIdentityAuditTest) ... ok
+test_same_generation_identity_rejection_is_not_a_transition (test_audit_generation_transition.RejectionIdentityAuditTest) ... ok
+test_unrelated_object_trace_fails (test_audit_generation_transition.RejectionIdentityAuditTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

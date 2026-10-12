@@ -1,0 +1,6 @@
+Source-snapshot negative control, 2026-10-12
+Source commit: f1a3fbf4861918f68376ce7c09d287a331ff29bf
+Mutation: append one ASCII x to a copy of build-receipt/source-snapshot/Cargo.toml.
+Auditor: kv-service/verification/audit_race_build_receipt.py
+Expected/observed: nonzero exit; ValueError: build snapshot differs from Git tree: Cargo.toml
+The original saved build receipt was not modified.
