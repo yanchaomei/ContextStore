@@ -1,0 +1,19 @@
+{
+  "text": "我们先看一个容易被忽略的问题。请求已经报错，并不代表网卡已经停止写入。如果这时把同一块缓冲区交给下一次请求，晚到的数据仍然可能覆盖它。RailFuse 的做法，是先结束这次传输的资源所有权，再允许复用。接下来，我们用真实运行结果来看这个区别。",
+  "rate": "-4%",
+  "provider": "Microsoft Edge online TTS via edge-tts 7.2.7",
+  "auditions": [
+    {
+      "voice": "zh-CN-YunyangNeural",
+      "error": "WebSocket handshake refused: HTTP 403; no audio generated"
+    },
+    {
+      "voice": "zh-CN-YunxiNeural",
+      "error": "WebSocket handshake refused: HTTP 403; no audio generated"
+    },
+    {
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "error": "WebSocket handshake refused: HTTP 403; no audio generated"
+    }
+  ]
+}

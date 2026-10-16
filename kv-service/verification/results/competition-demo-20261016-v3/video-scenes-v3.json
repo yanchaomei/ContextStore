@@ -1,0 +1,89 @@
+{
+  "duration_seconds": 270,
+  "source_commit": "39ce2d50fcee00405758f1e2c4f7bd389baccf1c",
+  "segments": [
+    {
+      "id": "intro",
+      "title": "一次对象读取，三个交付决策",
+      "duration": 25,
+      "visual": "mechanism-overview.png",
+      "kind": "image",
+      "narration": "大家好，这是 Rail Fuse Context Store。我们关注的是：怎样让多条网络路径共同完成一次对象读取，同时管好版本、结果发布和内存回收。下面先看整体机制，再用真实运行记录展示它在正常和异常情况下的表现。",
+      "action": "打开作品介绍第1页，指向三项决策；随后切到总体机制图。",
+      "observe": "先让评委记住对象级交付目标。"
+    },
+    {
+      "id": "architecture",
+      "title": "先规划，再检查发布，失败后安全回收",
+      "duration": 30,
+      "visual": "mechanism-overview.png",
+      "kind": "image",
+      "narration": "这张图分成上下两部分。上方是 Rust 多轨读取：各条路径写入私有暂存，检查全部通过后，才把完整结果交给调用方。直接有序暂存需要满足一定条件。下方是单独的 Python 接口：它先结束失败传输、排空旧完成事件，再允许复用和重新连接。",
+      "action": "展示详细技术说明第1章总体机制图，沿左到右箭头说明Rust路径，再指出Python接口的独立语义。",
+      "observe": "区分 Rust 多轨原子发布与 Python 单连接 FFI。"
+    },
+    {
+      "id": "read",
+      "title": "真实操作：写入64 MiB，单轨与双轨读取",
+      "duration": 40,
+      "kind": "terminal",
+      "narration": "现在看真实操作。我先写入一个六十四兆的测试对象，再把它完整读回来，逐字节核对。接着，分别用一条和两条路径读取同一个对象。请注意三个结果：内容哈希相同，两条路径各传输三十二兆，结束时，在途请求、在途字节和预留注册预算都回到零。",
+      "action": "在已配置客户端目录执行 python3 run_demo.py read --output receipts-read-新编号。",
+      "observe": "full_content_verified: True；两次 xxh3 相同；rail_bytes=[33554432,33554432]；direct=1。"
+    },
+    {
+      "id": "performance",
+      "title": "固定调度的对照，回答优化是否值得",
+      "duration": 35,
+      "kind": "image",
+      "visual": "direct-staging-evidence.png",
+      "narration": "功能跑通以后，还要回答：这个优化值不值得？这里是十月九日的归档实验。两种实现采用相同的条带分配，每个尺寸运行十个独立进程块。直接有序暂存的吞吐分别提高大约百分之十和百分之十六。图中保留了区间和获益块数，两个尺寸分别作对照。",
+      "action": "打开详细技术说明第18章。先说对照保持相同调度，再读两个主结果。",
+      "observe": "明确是归档软件 RXE 实验，两个尺寸分别比较。"
+    },
+    {
+      "id": "version",
+      "title": "对象更新时，拒绝发布失效版本",
+      "duration": 35,
+      "kind": "image",
+      "visual": "generation-witness-evidence.png",
+      "narration": "另一个问题是：读取过程中，对象更新了怎么办？在十月十二日的归档实验中，二十次读取与十五次内容覆盖并发执行。十次返回完整内容，十次安全拒绝。其中八次，明确看到了同一次读取的版本号发生增长，调用方原来的缓冲区没有被改写。",
+      "action": "打开详细技术说明第19章。指出10、8、2的不同含义，再读一个1到2的例子。",
+      "observe": "这是两次查询之间的版本切换见证，不定位精确提交时刻。"
+    },
+    {
+      "id": "late",
+      "title": "真实操作：旧库污染，修复版安全复用",
+      "duration": 40,
+      "kind": "comparison",
+      "visual": "late-write-comparison.png",
+      "narration": "接下来，比较晚到写入。旧库已经报错返回，但队列对仍然存活，晚到的数据把复用哨兵覆盖成了服务端内容，哈希完全一致。修复版先结束这次传输，保留原来的注册内存，等服务端进入终态后再检查。哨兵保持完整，同一个句柄重连后的写入和读取也通过了内容核对。",
+      "action": "执行 python3 run_demo.py late --output receipts-late-新编号。等待约30秒；不要提前关进程或注销MR。",
+      "observe": "旧库 exact_payload_corruption: True；修复版 reused_sentinel_intact: True；same_handle_reconnect...: True。"
+    },
+    {
+      "id": "put",
+      "title": "真实操作：排空旧完成事件，三轮重连恢复",
+      "duration": 35,
+      "kind": "terminal",
+      "narration": "最后，看旧完成事件会不会影响下一次请求。测试先受控隐藏完成队列的轮询结果，随后读取底层实际产生的完成事件。旧事件在错误返回前已经排空。接着，同一句柄、同一块注册区域，连续三轮写入和读取都核对了完整内容。",
+      "action": "执行 python3 run_demo.py put --output receipts-put-新编号。先解释受控CQ观察，再等实际完成。",
+      "observe": "old_qp_real_completion...: True；same_registered_buffer_reused: True；rounds: 3；passed: True。"
+    },
+    {
+      "id": "reproduce",
+      "title": "交付入口：代码、PDF、演示脚本与完整证据",
+      "duration": 30,
+      "kind": "summary",
+      "narration": "整个演示回答了三个问题：路径怎样协作，安全暂存的开销怎样降低，版本变化和异步错误时怎样守住边界。仓库首页已经放好详细技术说明、操作提词卡、演示脚本和原始记录。按相同的输入与命令，就可以复查这次演示。",
+      "action": "返回仓库首页，依次点开PDF、视频和原始证据链接。",
+      "observe": "说明当前验证环境为两台KVM、双RXE；正式提交与代码推送分别记录。"
+    }
+  ],
+  "scope": "real 2026-10-16 timed terminal capture plus mechanism images and explicitly dated archived evidence",
+  "voice_provider": "Microsoft Edge online neural TTS",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "voice_client_version": "7.3.1",
+  "speech_rate": "-4%",
+  "rate_policy": "Keep natural rate; refuse segments that exceed scene duration, never truncate."
+}

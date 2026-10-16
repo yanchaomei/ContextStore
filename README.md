@@ -2,13 +2,14 @@
 
 **Tiered shared storage for LLM inference KV caches.**
 
-## RailFuse competition entry and demonstration (2026-10-16 V2)
+## RailFuse competition entry and demonstration (2026-10-16 V3)
 
 This fork's research branch adds object-aware multi-rail client reads, optional direct ordered private staging, and explicit publication/retirement boundaries. It builds on the upstream ContextStore service, protocol and storage layout.
 
-- [Project introduction (Chinese PDF)](kv-service/verification/results/competition-demo-20261016-v2/RailFuse-project-introduction-v2.pdf)
-- [4:30 narrated demonstration](kv-service/verification/results/competition-demo-20261016-v2/RailFuse-demo-v2.mp4)
-- [Step-by-step presenter guide (Chinese PDF)](kv-service/verification/results/competition-demo-20261016-v2/RailFuse-demo-guide-v2.pdf)
+- [Detailed project introduction (Chinese PDF, 27 pages)](kv-service/verification/results/competition-demo-20261016-v3/RailFuse-project-introduction-v3.pdf)
+- [4:30 demonstration with neural female narration](kv-service/verification/results/competition-demo-20261016-v3/RailFuse-demo-v3.mp4)
+- [Step-by-step presenter guide (Chinese PDF)](kv-service/verification/results/competition-demo-20261016-v3/RailFuse-demo-guide-v3.pdf)
+- [V3 material sources, narration, subtitles and independent review](kv-service/verification/results/competition-demo-20261016-v3/)
 - [Live demo scripts, timed terminal capture and raw receipts](kv-service/verification/results/competition-demo-20261016-v2/)
 - [Frozen FFI/Python safety acceptance and independent reviews](kv-service/verification/results/ffi-lifecycle-20261016/)
 

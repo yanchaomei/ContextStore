@@ -1,0 +1,66 @@
+{
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "provider": "Microsoft Edge online neural TTS",
+  "rate": "-4%; no trimming or time compression",
+  "segments": [
+    {
+      "scene": "intro",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 21.24,
+      "scene_seconds": 25,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "architecture",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 25.512,
+      "scene_seconds": 30,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "read",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 25.68,
+      "scene_seconds": 40,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "performance",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 25.752,
+      "scene_seconds": 35,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "version",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 24.432,
+      "scene_seconds": 35,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "late",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 27.648,
+      "scene_seconds": 40,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "put",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 24.072,
+      "scene_seconds": 35,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "reproduce",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "audio_seconds": 22.488,
+      "scene_seconds": 30,
+      "complete_audio_fits": true
+    }
+  ],
+  "duration_seconds": 270,
+  "terminal_capture_duration_seconds": 65.71773,
+  "waiting_gaps_capped_seconds_in_video": 4
+}

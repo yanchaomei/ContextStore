@@ -1,0 +1,18 @@
+{
+  "previous_materials_commit": "2705d2e7c2e6ecfbf9141bee1b1dab14fe552b7b",
+  "core_safety_commit": "39ce2d50fcee00405758f1e2c4f7bd389baccf1c",
+  "runtime_source_changed": false,
+  "historical_performance_date": "2026-10-09",
+  "generation_witness_date": "2026-10-12",
+  "live_capture_date": "2026-10-16",
+  "live_capture_path": "../competition-demo-20261016-v2/",
+  "frozen_safety_path": "../ffi-lifecycle-20261016/",
+  "v3_changes": [
+    "Expanded detailed report with source links and API/configuration appendices",
+    "Corrected valid-prefix consumption and explicit FFI library location after independent review",
+    "Replaced all eight Tingting narration segments with captured neural female speech",
+    "Updated presenter guide and optional timed sentence subtitles"
+  ],
+  "report_images": "Existing V2 mechanism illustrations and audit-derived plots reused unchanged.",
+  "voice_sources": "voice-research.md"
+}

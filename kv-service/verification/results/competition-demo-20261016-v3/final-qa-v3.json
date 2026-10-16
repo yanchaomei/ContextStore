@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-16",
+  "project_pdf_pages": 27,
+  "guide_pdf_pages": 3,
+  "sections": 20,
+  "appendices": 6,
+  "source_references": 32,
+  "figures": 4,
+  "technical_tables": 8,
+  "pdf_all_pages_rendered": 27,
+  "pdf_visual_review": "all page contact sheets reviewed; detailed resource table and code/API pages checked; no clipping/overlap found",
+  "pdf_content_review": "all paragraphs and code blocks extracted against frozen JSON by independent reviewer",
+  "independent_review_open_P1_P2": 0,
+  "review_binding_sha256": {
+    "report-content.json": "913e566a03c04f84aaf3fbaa8ca02c8deabd4c77983aa3d34d08cc25c6864fb8",
+    "RailFuse-project-introduction-v3.pdf": "1aa078ef9439e9c1810a05dd88d597dccb1843d1c66fa31cd2193be05d261a4e",
+    "video-scenes-v3.json": "f71b2c73eb82b308caf0304d467659ba370b53d2e8d49f1de3facff710385b77"
+  },
+  "video_duration_seconds": 270,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "full_video_decode_exit": 0,
+  "final_video_true_peak_dBTP": -1.42,
+  "final_video_integrated_loudness_LUFS": -18.14,
+  "narration_segments": 8,
+  "narration_voice": "zh-CN-XiaoxiaoNeural",
+  "narration_rate": "-4%",
+  "narration_complete_fits": true,
+  "narration_truncation": false,
+  "narration_time_compression": false,
+  "voice_selection": "User requested a clear, friendly female voice; generated matching audition. No objective naturalness score assigned.",
+  "video_visual_review": "all scene previews and final read/late/put evidence viewports inspected",
+  "runtime_source_changed": false,
+  "new_core_experiment_run": false,
+  "tests_reference_only": "Core/Python/RXE acceptance remains the frozen October 16 receipt campaign; this revision validates materials and media only.",
+  "artifact_python_black_check_exit": 0,
+  "artifact_python_ruff_critical_exit": 0,
+  "artifact_python_compile_exit": 0,
+  "artifact_python_ruff_full_exit": 0
+}
