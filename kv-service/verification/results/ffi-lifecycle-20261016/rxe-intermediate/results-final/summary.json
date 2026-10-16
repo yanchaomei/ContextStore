@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "case": "rail0-baseline-bad_tag-1m",
+      "passed": true,
+      "exit": 1
+    },
+    {
+      "case": "rail0-candidate-bad_tag-1m",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail0-candidate-timeout-1m",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail0-candidate-bad_tag-8m",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail0-candidate-timeout-8m",
+      "passed": false,
+      "exit": -11
+    },
+    {
+      "case": "rail0-put-cq",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail1-baseline-bad_tag-1m",
+      "passed": true,
+      "exit": 1
+    },
+    {
+      "case": "rail1-candidate-bad_tag-1m",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail1-candidate-timeout-1m",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail1-candidate-bad_tag-8m",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "rail1-candidate-timeout-8m",
+      "passed": false,
+      "exit": -11
+    },
+    {
+      "case": "rail1-put-cq",
+      "passed": true,
+      "exit": 0
+    }
+  ],
+  "all_passed": false
+}

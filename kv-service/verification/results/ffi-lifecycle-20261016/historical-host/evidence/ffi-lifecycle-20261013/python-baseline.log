@@ -1,0 +1,125 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+__________ test_native_teardown_waits_for_active_external_read[close] __________
+
+teardown = 'close'
+
+    @pytest.mark.parametrize("teardown", ["close", "unregister"])
+    def test_native_teardown_waits_for_active_external_read(teardown: str) -> None:
+        native = FakeNative()
+        client = client_with(native)
+        errors = []
+    
+        def read() -> None:
+            try:
+                assert client.get_into(0, "key") == 4
+            except Exception as exc:
+                errors.append(exc)
+    
+        reader = Thread(target=read)
+        reader.start()
+        assert native.started.wait(1)
+        entered = Event()
+    
+        def finish() -> None:
+            entered.set()
+            if teardown == "close":
+                client.close()
+            else:
+                client.unregister_external_buffer(0)
+    
+        closer = Thread(target=finish)
+        closer.start()
+        assert entered.wait(1)
+        event = native.freed if teardown == "close" else native.unregistered
+        try:
+>           assert not event.wait(0.1), "native resource released while get_into is active"
+E           AssertionError: native resource released while get_into is active
+E           assert not True
+E            +  where True = wait(0.1)
+E            +    where wait = <threading.Event object at 0x7fefdf4f17c0>.wait
+
+tests/unit/test_rdma_client_lifecycle.py:81: AssertionError
+_______ test_native_teardown_waits_for_active_external_read[unregister] ________
+
+teardown = 'unregister'
+
+    @pytest.mark.parametrize("teardown", ["close", "unregister"])
+    def test_native_teardown_waits_for_active_external_read(teardown: str) -> None:
+        native = FakeNative()
+        client = client_with(native)
+        errors = []
+    
+        def read() -> None:
+            try:
+                assert client.get_into(0, "key") == 4
+            except Exception as exc:
+                errors.append(exc)
+    
+        reader = Thread(target=read)
+        reader.start()
+        assert native.started.wait(1)
+        entered = Event()
+    
+        def finish() -> None:
+            entered.set()
+            if teardown == "close":
+                client.close()
+            else:
+                client.unregister_external_buffer(0)
+    
+        closer = Thread(target=finish)
+        closer.start()
+        assert entered.wait(1)
+        event = native.freed if teardown == "close" else native.unregistered
+        try:
+>           assert not event.wait(0.1), "native resource released while get_into is active"
+E           AssertionError: native resource released while get_into is active
+E           assert not True
+E            +  where True = wait(0.1)
+E            +    where wait = <threading.Event object at 0x7fefdf510b80>.wait
+
+tests/unit/test_rdma_client_lifecycle.py:81: AssertionError
+_____________ test_failed_native_read_requires_explicit_reconnect ______________
+
+    def test_failed_native_read_requires_explicit_reconnect() -> None:
+        native = FakeNative()
+        native.read_result = -3
+        client = client_with(native)
+        with pytest.raises(RuntimeError):
+            client.get("key")
+>       assert not client._connected
+E       assert not True
+E        +  where True = <contextstore.storage.rdma_client.RdmaClient object at 0x7fefdf56df10>._connected
+
+tests/unit/test_rdma_client_lifecycle.py:97: AssertionError
+_________________ test_failed_unregister_is_reported_to_owner __________________
+
+    def test_failed_unregister_is_reported_to_owner() -> None:
+        native = FakeNative()
+        native.unregister_result = -2
+        client = client_with(native)
+        with pytest.raises(RuntimeError, match="unregister"):
+>           client.unregister_external_buffer(0)
+E           Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests/unit/test_rdma_client_lifecycle.py:108: Failed
+------------------------------ Captured log call -------------------------------
+WARNING  contextstore.storage.rdma_client:rdma_client.py:333 unregister_external_buffer rc=-2 (region_id=0)
+_______________ test_closed_client_rejects_external_registration _______________
+
+    def test_closed_client_rejects_external_registration() -> None:
+        client = client_with(FakeNative())
+        client.close()
+        with pytest.raises(RuntimeError, match="closed"):
+>           client.register_external_buffer(4096, 4096)
+E           Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests/unit/test_rdma_client_lifecycle.py:115: Failed
+=========================== short test summary info ============================
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_native_teardown_waits_for_active_external_read[close]
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_native_teardown_waits_for_active_external_read[unregister]
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_failed_native_read_requires_explicit_reconnect
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_failed_unregister_is_reported_to_owner
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_closed_client_rejects_external_registration
+5 failed in 3.07s

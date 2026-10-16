@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 144, in <module>
+    main()
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 128, in main
+    assert result < 0, f"malformed/failed operation returned success: {result}"
+AssertionError: malformed/failed operation returned success: 8192

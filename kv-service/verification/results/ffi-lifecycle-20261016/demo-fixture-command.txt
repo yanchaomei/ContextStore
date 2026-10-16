@@ -1,0 +1,1 @@
+cd /home/kvgroup/chaomei/contextstore_multirail_20261002; out=evidence/ffi-lifecycle-20261016-verified; libs=(target/release/deps/libtwox_hash-*.rlib); for lib in $libs; do echo "$lib"; sha256sum "$lib"; rustc "$out/demo-fixture.rs" -L dependency=target/release/deps --extern twox_hash="$lib" -o "$out/demo-fixture" && "$out/demo-fixture"; done

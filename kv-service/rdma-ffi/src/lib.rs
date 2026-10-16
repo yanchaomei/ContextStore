@@ -8,6 +8,9 @@
 //!
 //! // TCP connect to the server, negotiate QP, transition INIT->RTR->RTS.
 //! int cs_rdma_client_connect(void* client, const char* server_addr);
+//! // Optional override; zero is rejected. Default: 30 seconds per control I/O
+//! // after hostname resolution (DNS itself is not bounded by this setting).
+//! int32_t cs_rdma_client_set_timeout_ms(void* client, uint64_t timeout_ms);
 //!
 //! // ====== Classic interface: server WRITEs into the client's built-in buffer (needs
 //! //        string_at to copy out, holding the GIL). ======
@@ -36,14 +39,71 @@
 //! // Destroy the client (also unregisters all external regions + frees the built-in buffer).
 //! void cs_rdma_client_free(void* client);
 //! ```
+//!
+//! C callers must serialize every operation on a handle, including registration,
+//! unregistration and free. After a failed transfer the QP is retired before the
+//! error is returned; reconnect is required. A provider cleanup error aborts the
+//! process before registered memory can be freed or reused. External-buffer GETs
+//! may contain partial data on failure; this ABI does not provide atomic publication.
 
 use anyhow::{anyhow, Result};
 use rdma_sys::*;
 use std::ffi::{c_char, c_int, CStr};
 use std::io::{Read, Write};
-use std::net::TcpStream;
+use std::net::{Shutdown, TcpStream, ToSocketAddrs};
 use std::os::raw::c_void;
 use std::ptr::{self, NonNull};
+use std::time::{Duration, Instant};
+
+const DEFAULT_CONTROL_TIMEOUT: Duration = Duration::from_secs(30);
+
+fn require_cleanup_success(rc: i32, message: &'static [u8]) {
+    if rc != 0 {
+        // A failed provider cleanup leaves DMA ownership uncertain. Logging
+        // must not unwind before the process has stopped using that memory.
+        unsafe { libc::write(libc::STDERR_FILENO, message.as_ptr().cast(), message.len()) };
+        std::process::abort();
+    }
+}
+
+fn report_error(operation: &str, error: &anyhow::Error) {
+    let mut stderr = std::io::stderr().lock();
+    let _ = writeln!(stderr, "[cs_rdma_ffi] {operation} failed: {error}");
+}
+
+fn read_get_response(
+    stream: &mut TcpStream,
+    capacity: u64,
+    expected_size: Option<u64>,
+) -> Result<u64> {
+    let mut tag = [0u8; 1];
+    stream.read_exact(&mut tag)?;
+    if tag[0] != MSG_GET_RESP {
+        return Err(anyhow!("expected GET_RESP, got {}", tag[0]));
+    }
+    let mut body = [0u8; 13];
+    stream.read_exact(&mut body)?;
+    let bytes = u64::from_le_bytes([
+        body[1], body[2], body[3], body[4], body[5], body[6], body[7], body[8],
+    ]);
+    let chunks = u32::from_le_bytes([body[9], body[10], body[11], body[12]]);
+    if body[0] > 1 || bytes > capacity || bytes > i64::MAX as u64 {
+        return Err(anyhow!("invalid GET response flags or byte count"));
+    }
+    if body[0] == 0 {
+        if bytes != 0 || chunks != 0 {
+            return Err(anyhow!("missing GET response reports transferred data"));
+        }
+        return Ok(0);
+    }
+    if expected_size.is_some_and(|expected| bytes != expected) {
+        return Err(anyhow!("descriptor GET returned an incomplete object"));
+    }
+    if bytes != 0 && chunks == 0 {
+        return Err(anyhow!("GET response has no completed chunks"));
+    }
+    Ok(bytes)
+}
 
 // ===== Control-plane constants, matching the server-side wire.rs =====
 const MSG_HELLO: u8 = 1;
@@ -75,8 +135,8 @@ impl QpInfo {
         buf
     }
     fn from_bytes(buf: &[u8; 24]) -> Self {
-        let qpn = u32::from_le_bytes(buf[0..4].try_into().unwrap());
-        let psn = u32::from_le_bytes(buf[4..8].try_into().unwrap());
+        let qpn = u32::from_le_bytes([buf[0], buf[1], buf[2], buf[3]]);
+        let psn = u32::from_le_bytes([buf[4], buf[5], buf[6], buf[7]]);
         let mut gid: ibv_gid = unsafe { std::mem::zeroed() };
         unsafe {
             gid.raw[..].copy_from_slice(&buf[8..24]);
@@ -99,11 +159,64 @@ struct ExternalRegion {
 
 unsafe impl Send for ExternalRegion {}
 
+struct DeviceList(*mut *mut ibv_device);
+
+impl Drop for DeviceList {
+    fn drop(&mut self) {
+        unsafe { ibv_free_device_list(self.0) };
+    }
+}
+
+/// Roll back partial initialization; ownership moves to Client only on success.
+#[derive(Default)]
+struct InitResources {
+    ctx: Option<NonNull<ibv_context>>,
+    pd: Option<NonNull<ibv_pd>>,
+    cq: Option<NonNull<ibv_cq>>,
+    mr: Option<NonNull<ibv_mr>>,
+    buffer: Option<(*mut u8, std::alloc::Layout)>,
+}
+
+impl Drop for InitResources {
+    fn drop(&mut self) {
+        unsafe {
+            if let Some(mr) = self.mr.take() {
+                require_cleanup_success(
+                    ibv_dereg_mr(mr.as_ptr()),
+                    b"ContextStore FFI init MR cleanup failed; aborting\n",
+                );
+            }
+            if let Some((buffer, layout)) = self.buffer.take() {
+                std::alloc::dealloc(buffer, layout);
+            }
+            if let Some(cq) = self.cq.take() {
+                require_cleanup_success(
+                    ibv_destroy_cq(cq.as_ptr()),
+                    b"ContextStore FFI init CQ cleanup failed; aborting\n",
+                );
+            }
+            if let Some(pd) = self.pd.take() {
+                require_cleanup_success(
+                    ibv_dealloc_pd(pd.as_ptr()),
+                    b"ContextStore FFI init PD cleanup failed; aborting\n",
+                );
+            }
+            if let Some(ctx) = self.ctx.take() {
+                require_cleanup_success(
+                    ibv_close_device(ctx.as_ptr()),
+                    b"ContextStore FFI init device cleanup failed; aborting\n",
+                );
+            }
+        }
+    }
+}
+
 /// Internal client state (opaque to C).
 struct Client {
     // Config
     port_num: u8,
     gid_index: u8,
+    control_timeout: Duration,
     // Resources
     ctx: NonNull<ibv_context>,
     pd: NonNull<ibv_pd>,
@@ -127,6 +240,10 @@ struct Client {
 
 impl Client {
     fn new(device: &str, port: u8, gid_index: u8, buf_size: usize) -> Result<Self> {
+        if buf_size == 0 {
+            return Err(anyhow!("built-in buffer must have positive size"));
+        }
+        let mut resources = InitResources::default();
         unsafe {
             // ===== 1. Find device + open =====
             let mut num = 0i32;
@@ -134,6 +251,7 @@ impl Client {
             if dev_list.is_null() {
                 return Err(anyhow!("ibv_get_device_list returned null"));
             }
+            let devices = DeviceList(dev_list);
             let mut dev_ptr: *mut ibv_device = ptr::null_mut();
             for i in 0..num {
                 let d = *dev_list.offset(i as isize);
@@ -144,16 +262,17 @@ impl Client {
                 }
             }
             if dev_ptr.is_null() {
-                ibv_free_device_list(dev_list);
                 return Err(anyhow!("device {} not found", device));
             }
             let ctx = NonNull::new(ibv_open_device(dev_ptr))
                 .ok_or_else(|| anyhow!("ibv_open_device failed"))?;
-            ibv_free_device_list(dev_list);
+            resources.ctx = Some(ctx);
+            drop(devices);
 
             // ===== 2. PD + CQ =====
             let pd = NonNull::new(ibv_alloc_pd(ctx.as_ptr()))
                 .ok_or_else(|| anyhow!("ibv_alloc_pd failed"))?;
+            resources.pd = Some(pd);
             let cq = NonNull::new(ibv_create_cq(
                 ctx.as_ptr(),
                 128,
@@ -162,6 +281,7 @@ impl Client {
                 0,
             ))
             .ok_or_else(|| anyhow!("ibv_create_cq failed"))?;
+            resources.cq = Some(cq);
 
             // ===== 3. Query local GID =====
             let mut local_gid: ibv_gid = std::mem::zeroed();
@@ -177,6 +297,7 @@ impl Client {
             if buf_ptr.is_null() {
                 return Err(anyhow!("alloc {} bytes failed", buf_size));
             }
+            resources.buffer = Some((buf_ptr, layout));
             let mr = NonNull::new(ibv_reg_mr(
                 pd.as_ptr(),
                 buf_ptr as *mut c_void,
@@ -185,15 +306,14 @@ impl Client {
                     | ibv_access_flags::IBV_ACCESS_REMOTE_WRITE.0
                     | ibv_access_flags::IBV_ACCESS_REMOTE_READ.0) as i32,
             ))
-            .ok_or_else(|| {
-                std::alloc::dealloc(buf_ptr, layout);
-                anyhow!("ibv_reg_mr failed: {}", std::io::Error::last_os_error())
-            })?;
+            .ok_or_else(|| anyhow!("ibv_reg_mr failed: {}", std::io::Error::last_os_error()))?;
+            resources.mr = Some(mr);
             let local_rkey = (*mr.as_ptr()).rkey;
 
-            Ok(Client {
+            let client = Client {
                 port_num: port,
                 gid_index,
+                control_timeout: DEFAULT_CONTROL_TIMEOUT,
                 ctx,
                 pd,
                 cq,
@@ -208,11 +328,59 @@ impl Client {
                 local_rkey,
                 stream: None,
                 external_regions: Vec::new(),
-            })
+            };
+            std::mem::forget(resources);
+            Ok(client)
         }
     }
 
+    fn retire_connection(&mut self) {
+        if let Some(stream) = self.stream.take() {
+            let _ = stream.shutdown(Shutdown::Both);
+        }
+        if let Some(qp) = self.qp.take() {
+            require_cleanup_success(
+                unsafe { ibv_destroy_qp(qp.as_ptr()) },
+                b"ContextStore FFI QP destruction failed; aborting\n",
+            );
+            // A later reconnect reuses this CQ. Consume old/flush completions
+            // after QP destruction so they cannot acknowledge a new PUT WR.
+            loop {
+                let mut completion: ibv_wc = unsafe { std::mem::zeroed() };
+                let count = unsafe { ibv_poll_cq(self.cq.as_ptr(), 1, &mut completion) };
+                if count < 0 {
+                    require_cleanup_success(-1, b"ContextStore FFI CQ drain failed; aborting\n");
+                }
+                if count == 0 {
+                    break;
+                }
+            }
+        }
+    }
+
+    fn settle_on_error<T>(&mut self, operation: impl FnOnce(&mut Self) -> Result<T>) -> Result<T> {
+        let result = operation(self);
+        if result.is_err() {
+            self.retire_connection();
+        }
+        result
+    }
+
+    fn set_timeout(&mut self, timeout_ms: u64) -> Result<()> {
+        if timeout_ms == 0 {
+            return Err(anyhow!("control timeout must be positive"));
+        }
+        let timeout = Duration::from_millis(timeout_ms);
+        if let Some(stream) = self.stream.as_mut() {
+            stream.set_read_timeout(Some(timeout))?;
+            stream.set_write_timeout(Some(timeout))?;
+        }
+        self.control_timeout = timeout;
+        Ok(())
+    }
+
     fn connect(&mut self, server_addr: &str) -> Result<()> {
+        self.retire_connection();
         unsafe {
             // ===== 1. Create QP =====
             let mut qp_attr = ibv_qp_init_attr {
@@ -259,8 +427,27 @@ impl Client {
             }
 
             // ===== 3. TCP connect + exchange QP info =====
-            let mut stream = TcpStream::connect(server_addr)
-                .map_err(|e| anyhow!("tcp connect {}: {}", server_addr, e))?;
+            let started = Instant::now();
+            let mut connected = None;
+            let mut last_error = None;
+            for address in server_addr.to_socket_addrs()? {
+                let remaining = self.control_timeout.saturating_sub(started.elapsed());
+                if remaining.is_zero() {
+                    break;
+                }
+                match TcpStream::connect_timeout(&address, remaining) {
+                    Ok(stream) => {
+                        connected = Some(stream);
+                        break;
+                    }
+                    Err(error) => last_error = Some(error),
+                }
+            }
+            let mut stream = connected
+                .ok_or_else(|| anyhow!("tcp connect {}: {:?}", server_addr, last_error))?;
+            stream.set_nodelay(true)?;
+            stream.set_read_timeout(Some(self.control_timeout))?;
+            stream.set_write_timeout(Some(self.control_timeout))?;
             let local_qp_info = QpInfo {
                 qpn: self.local_qpn,
                 psn: self.local_psn,
@@ -348,6 +535,9 @@ impl Client {
 
         // send GetReq
         let key_bytes = key.as_bytes();
+        if key_bytes.len() > u16::MAX as usize {
+            return Err(anyhow!("key exceeds wire length limit"));
+        }
         let mut req = Vec::with_capacity(1 + 2 + key_bytes.len() + 8 + 4 + 8);
         req.push(MSG_GET_REQ);
         req.extend_from_slice(&(key_bytes.len() as u16).to_le_bytes());
@@ -359,19 +549,7 @@ impl Client {
         stream.flush()?;
 
         // recv GetResp: tag(1) + found(1) + bytes(8) + nchunks(4)
-        let mut tag = [0u8; 1];
-        stream.read_exact(&mut tag)?;
-        if tag[0] != MSG_GET_RESP {
-            return Err(anyhow!("expected GET_RESP, got {}", tag[0]));
-        }
-        let mut body = [0u8; 13];
-        stream.read_exact(&mut body)?;
-        let found = body[0] != 0;
-        let bytes_written = u64::from_le_bytes(body[1..9].try_into().unwrap());
-        if !found {
-            return Ok(0);
-        }
-        Ok(bytes_written)
+        read_get_response(stream, self.buf_size as u64, None)
     }
 
     /// Register a caller-owned buffer as an RDMA MR. Returns region_id (Vec index).
@@ -432,7 +610,7 @@ impl Client {
         let region_ptr = region.ptr;
         let region_size = region.size;
         let region_rkey = region.rkey;
-        if (offset as usize) >= region_size {
+        if offset >= region_size as u64 {
             return Err(anyhow!(
                 "get_into: offset {} >= region size {}",
                 offset,
@@ -446,11 +624,16 @@ impl Client {
             .as_mut()
             .ok_or_else(|| anyhow!("not connected"))?;
         // Use the offset within the region as the destination address.
-        let dst_addr = region_ptr as u64 + offset;
+        let dst_addr = (region_ptr as u64)
+            .checked_add(offset)
+            .ok_or_else(|| anyhow!("external target address overflow"))?;
 
         // send GetReq: max_size uses the remaining region capacity so the server can
         // clamp as needed.
         let key_bytes = key.as_bytes();
+        if key_bytes.len() > u16::MAX as usize {
+            return Err(anyhow!("key exceeds wire length limit"));
+        }
         let mut req = Vec::with_capacity(1 + 2 + key_bytes.len() + 8 + 4 + 8);
         req.push(MSG_GET_REQ);
         req.extend_from_slice(&(key_bytes.len() as u16).to_le_bytes());
@@ -462,19 +645,7 @@ impl Client {
         stream.flush()?;
 
         // recv GetResp
-        let mut tag = [0u8; 1];
-        stream.read_exact(&mut tag)?;
-        if tag[0] != MSG_GET_RESP {
-            return Err(anyhow!("expected GET_RESP, got {}", tag[0]));
-        }
-        let mut body = [0u8; 13];
-        stream.read_exact(&mut body)?;
-        let found = body[0] != 0;
-        let bytes_written = u64::from_le_bytes(body[1..9].try_into().unwrap());
-        if !found {
-            return Ok(0);
-        }
-        Ok(bytes_written)
+        read_get_response(stream, available as u64, None)
     }
 
     /// Descriptor GET: server reads the specified version according to the
@@ -503,7 +674,7 @@ impl Client {
         let region_ptr = region.ptr;
         let region_size = region.size;
         let region_rkey = region.rkey;
-        if (offset as usize) >= region_size {
+        if offset >= region_size as u64 {
             return Err(anyhow!(
                 "get_descriptor_into: offset {} >= region size {}",
                 offset,
@@ -511,7 +682,14 @@ impl Client {
             ));
         }
         let available = region_size - offset as usize;
-        let dst_addr = region_ptr as u64 + offset;
+        if size > available as u64 {
+            return Err(anyhow!(
+                "descriptor object exceeds external target capacity"
+            ));
+        }
+        let dst_addr = (region_ptr as u64)
+            .checked_add(offset)
+            .ok_or_else(|| anyhow!("external target address overflow"))?;
 
         let stream = self
             .stream
@@ -561,19 +739,7 @@ impl Client {
         stream.write_all(&req)?;
         stream.flush()?;
 
-        let mut tag = [0u8; 1];
-        stream.read_exact(&mut tag)?;
-        if tag[0] != MSG_GET_RESP {
-            return Err(anyhow!("expected GET_RESP, got {}", tag[0]));
-        }
-        let mut body = [0u8; 13];
-        stream.read_exact(&mut body)?;
-        let found = body[0] != 0;
-        let bytes_written = u64::from_le_bytes(body[1..9].try_into().unwrap());
-        if !found {
-            return Ok(0);
-        }
-        Ok(bytes_written)
+        read_get_response(stream, available as u64, Some(size))
     }
 
     #[allow(clippy::too_many_arguments)]
@@ -604,6 +770,11 @@ impl Client {
             Ok(())
         }
 
+        if size > self.buf_size as u64 {
+            return Err(anyhow!(
+                "descriptor object exceeds built-in target capacity"
+            ));
+        }
         let local_addr = self.buf_ptr as u64;
         let mut req = Vec::with_capacity(
             1 + 2
@@ -638,19 +809,7 @@ impl Client {
         stream.write_all(&req)?;
         stream.flush()?;
 
-        let mut tag = [0u8; 1];
-        stream.read_exact(&mut tag)?;
-        if tag[0] != MSG_GET_RESP {
-            return Err(anyhow!("expected GET_RESP, got {}", tag[0]));
-        }
-        let mut body = [0u8; 13];
-        stream.read_exact(&mut body)?;
-        let found = body[0] != 0;
-        let bytes_written = u64::from_le_bytes(body[1..9].try_into().unwrap());
-        if !found {
-            return Ok(0);
-        }
-        Ok(bytes_written)
+        read_get_response(stream, self.buf_size as u64, Some(size))
     }
 
     /// Unregister an external buffer (dereg_mr). Caller is responsible for freeing
@@ -664,7 +823,10 @@ impl Client {
         match slot.take() {
             Some(region) => {
                 unsafe {
-                    ibv_dereg_mr(region.mr.as_ptr());
+                    require_cleanup_success(
+                        ibv_dereg_mr(region.mr.as_ptr()),
+                        b"ContextStore FFI external MR deregistration failed; aborting\n",
+                    );
                 }
                 Ok(())
             }
@@ -693,7 +855,10 @@ impl Client {
             .get(region_id as usize)
             .and_then(|opt| opt.as_ref())
             .ok_or_else(|| anyhow!("put: invalid region_id {}", region_id))?;
-        if offset + size > region.size as u64 {
+        let end = offset
+            .checked_add(size)
+            .ok_or_else(|| anyhow!("PUT range overflow"))?;
+        if size == 0 || end > region.size as u64 {
             return Err(anyhow!(
                 "put: offset {} + size {} > region size {}",
                 offset,
@@ -701,7 +866,9 @@ impl Client {
                 region.size
             ));
         }
-        let src_addr = region.ptr as u64 + offset;
+        let src_addr = (region.ptr as u64)
+            .checked_add(offset)
+            .ok_or_else(|| anyhow!("external source address overflow"))?;
         let src_lkey = region.lkey;
 
         let qp = self.qp.ok_or_else(|| anyhow!("put: QP not initialized"))?;
@@ -714,6 +881,9 @@ impl Client {
 
         // ===== 1. send PUT_REQ =====
         let key_bytes = key.as_bytes();
+        if key_bytes.len() > u16::MAX as usize {
+            return Err(anyhow!("key exceeds wire length limit"));
+        }
         let mut req = Vec::with_capacity(1 + 2 + key_bytes.len() + 8);
         req.push(MSG_PUT_REQ);
         req.extend_from_slice(&(key_bytes.len() as u16).to_le_bytes());
@@ -735,8 +905,10 @@ impl Client {
         let mut body = [0u8; 1 + 8 + 4];
         stream.read_exact(&mut body)?;
         let ok = body[0] != 0;
-        let dst_addr = u64::from_le_bytes(body[1..9].try_into().unwrap());
-        let dst_rkey = u32::from_le_bytes(body[9..13].try_into().unwrap());
+        let dst_addr = u64::from_le_bytes([
+            body[1], body[2], body[3], body[4], body[5], body[6], body[7], body[8],
+        ]);
+        let dst_rkey = u32::from_le_bytes([body[9], body[10], body[11], body[12]]);
         if !ok {
             // Server rejected (slab full / no slab). Don't send COMMIT; just recv
             // PUT_RESP{ok=false}.
@@ -835,6 +1007,7 @@ impl Client {
             let _ = s.write_all(&[MSG_BYE]);
             let _ = s.flush();
         }
+        self.retire_connection();
     }
 }
 
@@ -842,20 +1015,30 @@ impl Drop for Client {
     fn drop(&mut self) {
         self.close();
         unsafe {
-            if let Some(qp) = self.qp.take() {
-                ibv_destroy_qp(qp.as_ptr());
-            }
             // First dereg all external MRs (same PD as self.mr; must precede dealloc_pd).
-            for slot in self.external_regions.drain(..) {
-                if let Some(region) = slot {
-                    ibv_dereg_mr(region.mr.as_ptr());
-                }
+            for region in self.external_regions.drain(..).flatten() {
+                require_cleanup_success(
+                    ibv_dereg_mr(region.mr.as_ptr()),
+                    b"ContextStore FFI external MR deregistration failed; aborting\n",
+                );
             }
-            ibv_dereg_mr(self.mr.as_ptr());
+            require_cleanup_success(
+                ibv_dereg_mr(self.mr.as_ptr()),
+                b"ContextStore FFI MR deregistration failed; aborting\n",
+            );
             std::alloc::dealloc(self.buf_ptr, self.buf_layout);
-            ibv_destroy_cq(self.cq.as_ptr());
-            ibv_dealloc_pd(self.pd.as_ptr());
-            ibv_close_device(self.ctx.as_ptr());
+            require_cleanup_success(
+                ibv_destroy_cq(self.cq.as_ptr()),
+                b"ContextStore FFI CQ destruction failed; aborting\n",
+            );
+            require_cleanup_success(
+                ibv_dealloc_pd(self.pd.as_ptr()),
+                b"ContextStore FFI PD deallocation failed; aborting\n",
+            );
+            require_cleanup_success(
+                ibv_close_device(self.ctx.as_ptr()),
+                b"ContextStore FFI device close failed; aborting\n",
+            );
         }
     }
 }
@@ -863,6 +1046,13 @@ impl Drop for Client {
 // ====================================================================
 // C ABI Exports
 // ====================================================================
+
+/// Lifecycle ABI version: failed transfers retire their QP before returning,
+/// and uncertain provider cleanup stops the process before memory is reused.
+#[no_mangle]
+pub extern "C" fn cs_rdma_client_lifecycle_version() -> u32 {
+    1
+}
 
 /// Create an RDMA client. Returns NULL on failure.
 ///
@@ -886,13 +1076,16 @@ pub unsafe extern "C" fn cs_rdma_client_new(
     match Client::new(dev, port, gid_index, buf_size as usize) {
         Ok(c) => Box::into_raw(Box::new(c)) as *mut c_void,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] new failed: {}", e);
+            report_error("new", &e);
             ptr::null_mut()
         }
     }
 }
 
 /// TCP connect to the server + set up QP. Returns non-zero on failure.
+///
+/// # Safety
+/// `client` must be live and exclusively accessed. `server_addr` must be a valid C string.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_connect(
     client: *mut c_void,
@@ -906,16 +1099,41 @@ pub unsafe extern "C" fn cs_rdma_client_connect(
         Ok(s) => s,
         Err(_) => return -2,
     };
-    match c.connect(addr) {
+    match c.settle_on_error(|client| client.connect(addr)) {
         Ok(()) => 0,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] connect failed: {}", e);
+            report_error("connect", &e);
             -3
         }
     }
 }
 
+/// Set a positive TCP control deadline after DNS resolution. Zero is rejected.
+///
+/// # Safety
+/// `client` must be a live handle and no other operation may use it concurrently.
+#[no_mangle]
+pub unsafe extern "C" fn cs_rdma_client_set_timeout_ms(
+    client: *mut c_void,
+    timeout_ms: u64,
+) -> i32 {
+    if client.is_null() || timeout_ms == 0 {
+        return -1;
+    }
+    let c = &mut *(client as *mut Client);
+    match c.settle_on_error(|client| client.set_timeout(timeout_ms)) {
+        Ok(()) => 0,
+        Err(error) => {
+            report_error("set_timeout", &error);
+            -2
+        }
+    }
+}
+
 /// Send GET; returns bytes written; 0 = miss; <0 = error.
+///
+/// # Safety
+/// `client` must be live and exclusively accessed. `key` must be a valid C string.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_get(client: *mut c_void, key: *const c_char) -> i64 {
     if client.is_null() || key.is_null() {
@@ -926,16 +1144,19 @@ pub unsafe extern "C" fn cs_rdma_client_get(client: *mut c_void, key: *const c_c
         Ok(s) => s,
         Err(_) => return -2,
     };
-    match c.get(k) {
+    match c.settle_on_error(|client| client.get(k)) {
         Ok(n) => n as i64,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] get failed: {}", e);
+            report_error("get", &e);
             -3
         }
     }
 }
 
 /// Get the buffer pointer. Python can do ctypes.string_at(ptr, n) for a zero-copy view.
+///
+/// # Safety
+/// `client` must be live and exclusively accessed. The returned pointer must not outlive the handle or be accessed during transfers.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_buffer(client: *mut c_void) -> *const u8 {
     if client.is_null() {
@@ -945,6 +1166,9 @@ pub unsafe extern "C" fn cs_rdma_client_buffer(client: *mut c_void) -> *const u8
     c.buf_ptr as *const u8
 }
 
+///
+/// # Safety
+/// `client` must be live and exclusively accessed.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_buffer_size(client: *mut c_void) -> u64 {
     if client.is_null() {
@@ -955,6 +1179,9 @@ pub unsafe extern "C" fn cs_rdma_client_buffer_size(client: *mut c_void) -> u64 
 }
 
 /// Free the client (implicitly close + dealloc).
+///
+/// # Safety
+/// `client` must be a live handle freed exactly once, without concurrent operations. External buffers must remain alive until this call returns.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_free(client: *mut c_void) {
     if !client.is_null() {
@@ -989,7 +1216,7 @@ pub unsafe extern "C" fn cs_rdma_client_register_external_buffer(
     match c.register_external(ptr, size as usize) {
         Ok(id) => id as i32,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] register_external failed: {}", e);
+            report_error("register_external", &e);
             -1
         }
     }
@@ -997,6 +1224,9 @@ pub unsafe extern "C" fn cs_rdma_client_register_external_buffer(
 
 /// Send GET; server WRITEs into `region_id`'s external buffer at `offset`.
 /// Returns bytes_written; 0 = miss; <0 = error.
+///
+/// # Safety
+/// `client` must be live and exclusively accessed. `key` must be a valid C string; the registered target must remain writable and alive through this call.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_get_into(
     client: *mut c_void,
@@ -1012,10 +1242,10 @@ pub unsafe extern "C" fn cs_rdma_client_get_into(
         Ok(s) => s,
         Err(_) => return -2,
     };
-    match c.get_into(region_id as u32, k, offset) {
+    match c.settle_on_error(|client| client.get_into(region_id as u32, k, offset)) {
         Ok(n) => n as i64,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] get_into failed: {}", e);
+            report_error("get_into", &e);
             -3
         }
     }
@@ -1023,6 +1253,9 @@ pub unsafe extern "C" fn cs_rdma_client_get_into(
 
 /// Descriptor GET: server RDMA-WRITEs the version pointed to by the descriptor into
 /// the external buffer.
+///
+/// # Safety
+/// The live handle requires exclusive access; all string pointers must be valid C strings. The registered target must remain writable and alive through this call.
 #[no_mangle]
 #[allow(clippy::too_many_arguments)]
 pub unsafe extern "C" fn cs_rdma_client_get_descriptor_into(
@@ -1060,28 +1293,33 @@ pub unsafe extern "C" fn cs_rdma_client_get_descriptor_into(
         Ok(s) => s,
         Err(_) => return -2,
     };
-    match c.get_descriptor_into(
-        region_id as u32,
-        k,
-        handle,
-        object_generation,
-        etag,
-        layout_version,
-        size,
-        is_striped != 0,
-        stripe_count,
-        chunk_size,
-        offset,
-    ) {
+    match c.settle_on_error(|client| {
+        client.get_descriptor_into(
+            region_id as u32,
+            k,
+            handle,
+            object_generation,
+            etag,
+            layout_version,
+            size,
+            is_striped != 0,
+            stripe_count,
+            chunk_size,
+            offset,
+        )
+    }) {
         Ok(n) => n as i64,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] get_descriptor_into failed: {}", e);
+            report_error("get_descriptor_into", &e);
             -3
         }
     }
 }
 
 /// Descriptor GET into the client's built-in buffer.
+///
+/// # Safety
+/// The live handle requires exclusive access; all string pointers must be valid C strings.
 #[no_mangle]
 #[allow(clippy::too_many_arguments)]
 pub unsafe extern "C" fn cs_rdma_client_get_descriptor(
@@ -1112,20 +1350,22 @@ pub unsafe extern "C" fn cs_rdma_client_get_descriptor(
         Ok(s) => s,
         Err(_) => return -2,
     };
-    match c.get_descriptor(
-        k,
-        handle,
-        object_generation,
-        etag,
-        layout_version,
-        size,
-        is_striped != 0,
-        stripe_count,
-        chunk_size,
-    ) {
+    match c.settle_on_error(|client| {
+        client.get_descriptor(
+            k,
+            handle,
+            object_generation,
+            etag,
+            layout_version,
+            size,
+            is_striped != 0,
+            stripe_count,
+            chunk_size,
+        )
+    }) {
         Ok(n) => n as i64,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] get_descriptor failed: {}", e);
+            report_error("get_descriptor", &e);
             -3
         }
     }
@@ -1133,6 +1373,9 @@ pub unsafe extern "C" fn cs_rdma_client_get_descriptor(
 
 /// Unregister an external buffer (dereg_mr). Caller is responsible for freeing their
 /// own memory. Returns 0 on success, <0 on error.
+///
+/// # Safety
+/// The live handle requires exclusive access. The external allocation must remain alive until successful return.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_unregister_external_buffer(
     client: *mut c_void,
@@ -1145,7 +1388,7 @@ pub unsafe extern "C" fn cs_rdma_client_unregister_external_buffer(
     match c.unregister_external(region_id as u32) {
         Ok(()) => 0,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] unregister_external failed: {}", e);
+            report_error("unregister_external", &e);
             -2
         }
     }
@@ -1162,6 +1405,9 @@ pub unsafe extern "C" fn cs_rdma_client_unregister_external_buffer(
 ///
 /// Fully symmetric with the GET path: GET is the server WRITEing into our buffer;
 /// PUT is us WRITEing into the server's slab.
+///
+/// # Safety
+/// The live handle requires exclusive access; `key` must be a valid C string. The registered source must remain alive and unmodified through this call.
 #[no_mangle]
 pub unsafe extern "C" fn cs_rdma_client_put(
     client: *mut c_void,
@@ -1178,10 +1424,10 @@ pub unsafe extern "C" fn cs_rdma_client_put(
         Ok(s) => s,
         Err(_) => return -2,
     };
-    match c.put(region_id as u32, k, offset, size) {
+    match c.settle_on_error(|client| client.put(region_id as u32, k, offset, size)) {
         Ok(()) => 0,
         Err(e) => {
-            eprintln!("[cs_rdma_ffi] put failed: {}", e);
+            report_error("put", &e);
             -3
         }
     }

@@ -1,0 +1,37 @@
+Independent ContextStore FFI/Python lifecycle review, 2026-10-16
+
+Repository: /Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore
+Baseline HEAD: b6d1cd984b9e4c5081ac2ac998ad5521fc658db9
+Mode: read-only source and evidence-harness review. No local build or test was run.
+Status: initial findings sent to parent; final approval is pending resolution/review.
+
+Scope reviewed:
+- CLAUDE.md
+- kv-service/rdma-ffi/src/lib.rs
+- src/contextstore/storage/rdma_client.py
+- tests/unit/test_rdma_client_lifecycle.py
+- kv-service/verification/ffi_rxe_late_write.py
+- kv-service/verification/ffi_rxe_put_reconnect.py
+- kv-service/verification/verbs_cq_delay_shim.c
+- kv-service/verification/run_ffi_lifecycle_validation.py
+- kv-service/verification/test_ffi_validation_receipts.py
+- Relevant descriptor definition and conversion in kvservice_client/types.py and client.py.
+
+Important finding 1: close retains a dangling native handle if Python raises at native return.
+Location: src/contextstore/storage/rdma_client.py:466-471.
+close() clears _handle only after the ctypes free call returns normally. A blocking native free may finish destroying the Rust client, then ctypes surfaces a pending KeyboardInterrupt before the assignment clearing _handle executes. A later close() or __del__ retries free on the dangling pointer, creating a double-free/use-after-free path. Detach _handle into a local and set _handle=None / _connected=False under the lock before the free call. The provider failure path already aborts; retrying a freed pointer is never a safe recovery strategy. Regression: simulate native free completing and then raising BaseException, and confirm a second close does not call native free again. The pre-existing sequencing is now in the lifecycle-hardening scope.
+
+Important finding 2: descriptor fields silently alias through ctypes narrowing, and C strings accept embedded NUL.
+Locations: src/contextstore/storage/rdma_client.py:373-385 and 400-410; all key.encode(), descriptor handle/etag .encode() native arguments; constructor port/gid at 111-115.
+ObjectDescriptor is a mutable dataclass without value validation (src/contextstore/kvservice_client/types.py:42-54). c_uint64/c_uint32 modulo conversion means generation=2**64+g aliases generation=g, size=2**64+n aliases size=n, and stripe_count=2**32+s aliases s. This can successfully read a different object identity than the caller supplied. Embedded NUL in key/handle/etag is truncated by the CStr ABI, silently aliasing another key/descriptor instead of rejecting invalid input. port/gid similarly wrap through c_uint8. Snapshot all descriptor fields once, validate the same snapshot before ctypes conversion, and reject invalid integer types/ranges, non-bool striping flag, non-string/NUL-containing/wire-overlength strings. Add tests proving invalid calls make no native transfer and preserve connection state. This behavior predates parts of the diff but remains a gap in the requested invalid-argument hardening.
+
+Evidence qualification:
+- verbs_cq_delay_shim.c:23-25 deliberately returns 0 instead of polling while retired is false. The PUT receipt's wording "no ... provider return code" is inaccurate (ffi_rxe_put_reconnect.py:39). It is controlled CQ-poll suppression with genuine provider-generated WCs; it is not fully unmodified polling behavior. Preserve this boundary when describing results.
+- The delayed-GET probe correctly retains the same registered allocation/rkey through relay forwarding and a terminal server response/EOF before sentinel inspection. It then exercises the same native handle with a newly registered buffer. Candidate EOF is a legitimate terminal outcome after QP retirement, but the probe alone directly witnesses a delayed request plus handler termination; retain the server raw WRITE-error/attempt log when claiming a real late WRITE attempt. The exact-payload baseline corruption supplies the real-DMA positive witness.
+- The PUT probe checks the old genuine success WC has been consumed before error return, then checks three same-handle/same-region PUT/GET rounds and full payload equality. It correctly avoids QPN inequality, because RXE may reuse QPNs.
+- The native receipt checker rejects unrelated SIGABRT and incorrect cleanup ordering, and optimized Python is rejected by the safety probes.
+
+Static findings on core DMA safety:
+No additional concrete blocker found in InitResources rollback, fail-stop provider cleanup, QP destruction before error return, CQ draining before reconnect, or lifecycle lock coverage. Successful QP destruction and successful provider deregistration are the provider synchronization boundary; this review does not independently execute provider behavior. Raw-pointer/view/external-allocation lifetime remains the documented caller obligation. FFI external-buffer failure may publish partial data and is not RailReader failure-atomic publication.
+
+The parent reports fresh remote build/unit/native receipts and real RXE matrix execution; this reviewer has not substituted those reports for direct source findings or independently rerun the matrix. Approval should bind the final source hashes to the matching post-fix remote receipts.

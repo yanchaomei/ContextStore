@@ -1,0 +1,28 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+___________ test_legacy_default_reports_unbounded_native_control_io ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fc5978a28e0>
+
+    def test_legacy_default_reports_unbounded_native_control_io(monkeypatch) -> None:
+        legacy_library(monkeypatch)
+        client = RdmaClient("127.0.0.1:50053", buf_size_mb=1)
+>       assert client.control_timeout is None
+E       AttributeError: 'RdmaClient' object has no attribute 'control_timeout'
+
+tests/unit/test_rdma_client_lifecycle.py:149: AttributeError
+_______ test_explicit_deadline_rejects_legacy_library_even_at_30_seconds _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fc597857580>
+
+    def test_explicit_deadline_rejects_legacy_library_even_at_30_seconds(monkeypatch) -> None:
+        freed = legacy_library(monkeypatch)
+        with pytest.raises(RuntimeError, match="control deadlines"):
+>           RdmaClient("127.0.0.1:50053", buf_size_mb=1, timeout=30.0)
+E           Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests/unit/test_rdma_client_lifecycle.py:156: Failed
+=========================== short test summary info ============================
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_legacy_default_reports_unbounded_native_control_io
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_explicit_deadline_rejects_legacy_library_even_at_30_seconds
+2 failed, 5 deselected in 1.50s

@@ -1,0 +1,7 @@
+[cs_rdma_ffi] connect failed: expected HELLO, got 255
+Traceback (most recent call last):
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 143, in <module>
+    main()
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 131, in main
+    assert events == ["destroy_qp"], f"QP was not retired before error return: {events}"
+AssertionError: QP was not retired before error return: []

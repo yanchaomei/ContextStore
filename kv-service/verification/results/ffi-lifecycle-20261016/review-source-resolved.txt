@@ -1,0 +1,46 @@
+Independent ContextStore FFI/Python lifecycle review - final source approval
+Date: 2026-10-16
+Repository: /Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore
+Baseline HEAD: b6d1cd984b9e4c5081ac2ac998ad5521fc658db9
+Reviewer mode: independent read-only source review; no repository edits, builds, or tests executed locally.
+
+Decision: APPROVE THE REVIEWED SOURCE SCOPE. No remaining concrete blocking correctness/security finding was identified in the source hashes below. This is source-review approval, not an independent assertion that pending remote checks or runtime evidence have passed. Commit/push should follow the matching final remote verification receipts and retained negative controls.
+
+Resolved prior finding 1 - interrupted native free:
+src/contextstore/storage/rdma_client.py:516-524 now takes the lifecycle lock, marks disconnected, detaches the native handle, and only then invokes cs_rdma_client_free(handle). If ctypes surfaces KeyboardInterrupt after Rust frees the client, a later close()/__del__ sees no live handle and cannot retry a dangling pointer. tests/unit/test_rdma_client_lifecycle.py:284-299 verifies exactly-once free and detached state after KeyboardInterrupt.
+
+Resolved prior finding 2 - descriptor narrowing and string aliases:
+src/contextstore/storage/rdma_client.py:32-77 validates integer type/range (rejecting bool-as-int), rejects NUL-containing/non-string/wire-overlength text, and reads each descriptor field once before converting the same validated snapshot. Both descriptor APIs use that argument tuple (425-463). Constructor port/gid and strings are validated before allocation (135-171); transfer keys use the same C-string validation; registration and PUT ranges are validated before native calls. tests/unit/test_rdma_client_lifecycle.py:200-281 verifies invalid descriptors, C-string NULs, constructor narrowing, and PUT values are rejected without native transfer; lines 302-324 verify both valid descriptor API variants read every field once and preserve the expected argument mapping.
+
+Native parsing revision:
+The four fixed-size slice unwrap conversions in QP HELLO and PUT_READY parsing were replaced with explicit byte arrays. The byte order/indices and resulting values remain equivalent; no semantic regression found.
+
+Core lifecycle assessment:
+- InitResources owns partial initialization cleanup and transfers resource ownership only after successful Client construction.
+- All fallible transfer implementations are called through settle_on_error; errors retire the control connection/QP before returning.
+- Successful QP destruction precedes CQ draining and MR/buffer reuse; remaining CQ entries are consumed before a new PUT can be acknowledged on the reused CQ.
+- Provider cleanup errors fail-stop before uncertain DMA-owned memory can be reused or freed.
+- The Python lifecycle lock covers native handle access, registration/unregistration, transfers, and free.
+- Raw native buffer views and externally owned allocations retain documented caller-lifetime obligations. Failed external-buffer GET can publish partial data; this legacy FFI is not RailReader failure-atomic publication.
+
+Evidence-harness assessment:
+- The delayed-GET probe retains the exact original registered allocation/rkey until the delayed request has reached a terminal server response/EOF, then checks reused-buffer contents and performs same-native-handle recovery PUT/GET. Exact-payload baseline corruption remains necessary to establish the real-DMA negative control.
+- Candidate EOF is an admissible terminal outcome after QP retirement; server raw logs should remain correlated with each candidate attempt when describing actual WRITE attempts.
+- The PUT/CQ probe requires a genuine old WC be observed after QP destruction but before error return, then performs three same-handle/same-registration PUT/GET payload checks. It correctly avoids QPN inequality as a condition.
+- The PUT receipt now states that its test-only shim returns 0 from CQ polling until QP destruction, then delegates to the provider, and does not generate synthetic WCs. This accurately separates controlled poll suppression from genuine completion contents.
+- Native receipt checks reject unrelated SIGABRT, incorrect cleanup order, and optimized Python. The no-data-WR local Verbs lifecycle suite remains distinct from real RXE transfer validation.
+
+Verification boundary:
+The parent reports captured remote red/green evidence for the original two findings and is collecting final matching checks and RXE receipts. This reviewer did not independently rerun those jobs. Approval binds the source hashes below; later source changes or mismatching runtime/build hashes require review of the changed scope.
+
+SHA-256 of reviewed files (re-read after inspection):
+a0c85c89fb75415bc0ced6cd322627d239b4a7c54b3f9a35e77bb27a94fab971  src/contextstore/storage/rdma_client.py
+9328dceb45b3c4c485f384205cec73e08b84026cf99cd332e6e6285d8b376320  kv-service/rdma-ffi/src/lib.rs
+d3876988543d8b12eb5a240c647355874821a1e9cb3c61243813be2623e85a12  tests/unit/test_rdma_client_lifecycle.py
+df2a1f6c1d6ed0208b4cc129b353ab0c3eba8f92157f2566ec88d98a0bddf031  kv-service/verification/ffi_rxe_late_write.py
+ae55235287388d7604dc2b93f0dfeefd27b647fa091abae1216fda86750a5c3e  kv-service/verification/ffi_rxe_put_reconnect.py
+950e0c59f219c1f28d40bb1c953185547c4a46731ded2eaf884815b17d676648  kv-service/verification/verbs_cq_delay_shim.c
+d2c6662af860997195068e3c20f9ee5a137ce4374fbe860604d412ea32a89281  kv-service/verification/run_ffi_lifecycle_validation.py
+a2022067388d31c0f7d35a10c23f2c1c79473c814c737259d37501fea00f306a  kv-service/verification/test_ffi_validation_receipts.py
+bdc2414eb1484e02d238913274bc5dc4d56b404a7f56ed88adbe25ec74864585  kv-service/verification/ffi_lifecycle_probe.py
+529e38fca187d32d73935471525d9647d7eb62b53634e570779e06f53f3e9b42  kv-service/verification/verbs_failstop_shim.c

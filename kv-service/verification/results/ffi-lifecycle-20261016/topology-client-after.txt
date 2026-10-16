@@ -1,0 +1,14 @@
+Fri Oct 16 13:13:36 UTC 2026
+Linux cs-railvm-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+link rxe_c0/1 state ACTIVE physical_state LINK_UP netdev enp0s3 
+link rxe_c1/1 state ACTIVE physical_state LINK_UP netdev enp0s4 
+    device          	   node GUID
+    ------          	----------------
+    rxe_c0          	505400fffe310001
+    rxe_c1          	505400fffe320001
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp0s2           UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe12:3457/64 fe80::5054:ff:fe12:3457/64 
+enp0s3           UP             10.31.0.1/24 fe80::5054:ff:fe31:1/64 
+enp0s4           UP             10.32.0.1/24 fe80::5054:ff:fe32:1/64 
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        12G  2.9G  8.6G  25% /

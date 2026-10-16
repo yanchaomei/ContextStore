@@ -1,0 +1,76 @@
+ContextStore FFI lifecycle and fresh RXE demonstration — independent final evidence review
+Review date: 2026-10-16
+Verdict: APPROVE THE EVIDENCE GATE FOR COMMIT/PUSH OF THE FROZEN SOURCE MANIFEST.
+No unresolved evidence blocker was found. This verdict covers the explicitly observed scenarios and artifact attribution below; the separate source-safety review and final Git scope check remain the implementing agent's responsibility.
+
+Repository:
+/Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore
+Evidence root:
+kv-service/verification/results/ffi-lifecycle-20261016
+
+Audit method:
+Read raw remote-produced results, stdout/stderr/event files, commands, saved source files, build receipts, binary archives and topology/server records. Independently recomputed file SHA-256 values, deterministic payload SHA-256 values, receipt/log agreement, ordering relations, matrix cardinality and exit/summary consistency. No local compilation or test execution occurred; no repository file was edited by this reviewer. The exact-dependency demonstration checksum helper was compiled/executed remotely by the implementing agent and its source, command and raw output were independently inspected here.
+
+Final matrix and recorded verification:
+- Final RXE runner: rxe-final/results-verified, 12/12 accepted cases, runner exit 0.
+- Two old-library controls: one per rail, 1 MiB bad_tag; expected exit 1 with exact late-WRITE corruption.
+- Eight hardened GET cases: rail0/rail1 x 1 MiB/8 MiB x bad_tag/timeout; all exit 0, reused sentinel intact and same-handle reconnect PUT/GET full content verified.
+- Two controlled CQ-delay PUT cases: one per rail, both exit 0, genuine old completion consumed before error return and three same-handle/same-region recovery rounds.
+- host-final/evidence/ffi-lifecycle-20261016-verified: all 12 named checks exit 0 (FFI build, clippy, rustfmt, Python suite, receipt suite, make build, server tests, two C shim builds, native runner, black, ruff).
+- Python: 165 passed, 11 skipped. Receipt suite: 6 passed. Native lifecycle runner: 13 accepted cases. Server log contains successful Rust test result groups of 77, 3 and 2 nonempty tests, with no failures.
+- Original round1 and historical negative/failing artifacts remain present, including the failed historical PUT CQ run; they were not overwritten by final green results.
+
+Exact source/build/binary attribution: PASS.
+1. All 10 FFI build input source hashes in build-receipt/source-before.sha256 exactly equal source-after.sha256; every saved snapshot matches its hash and the current repository bytes.
+2. All seven Python source hashes in python-sources.sha256 match current bytes. The RXE snapshots of rdma_client.py, ffi_rxe_late_write.py and ffi_rxe_put_reconnect.py exactly equal the current files. Every final result and launch receipt attributes the corresponding exact module/probe hash.
+3. source-sha256.json matches the current 10 changed/verification source files, including both C shims.
+4. The built FFI library SHA-256 is aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b. It matches the native launch/result, every final candidate RXE receipt and the independently hashed candidate.so retained in binaries-rxe.tar.gz.
+5. Preserved baseline.so independently hashes to 6f17158aec8edf75cfc923a06a502ac525c78a54b77d42c80986bfc7d6d961d1, matching both final negative controls. Preserved CQ shim and final host CQ shim independently hash to 66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553, matching both final CQ receipts. Native failstop shim independently hashes to 9b1ae5ee664399547f21dfcd6818e98d1b741193321bd9b4d357331e7230e1d0, matching the native launch/result.
+6. For all 13 native cases, every stdout, stderr and events SHA-256 independently matches the receipt; each stored exit is consistent with the result. Intentional failstop exits -6 remain explicit.
+7. Each of the 12 final RXE results exactly appears in its raw log; launch fields match the result, command/exit/summary predicates agree, and no success rests only on summary.all_passed.
+
+Late DMA corruption and buffer reuse: PASS within the observed matrix.
+Both old-library controls reproduce exact deterministic payload corruption after return and sentinel reuse. Their post-WRITE target SHA-256 is:
+631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769.
+It equals the independent 1 MiB fixture SHA-256 and differs from the 0x5A sentinel SHA-256:
+bf63d8a95fcc2e64619813aae35fdcbe871fdd9264caa3f365eb3aed0f679129.
+Both negative controls receive a complete GET_RESP. Baseline recovery is false and no baseline reconnect claim is inferred from the native_handle_after field, which is assigned from the original handle variable.
+
+All eight candidate actual target SHA-256 values equal the independent 0x5A sentinel hash for their size. The 8 MiB sentinel hash is:
+7014ae0f2fc0fee42a440b97859207efb72ffee09d4864f7433f1bf756a17aca.
+The independent 8 MiB payload hash also matches every corresponding receipt:
+bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a.
+For all 10 final GET cases, including controls, the numeric ordering was independently checked:
+ffi_error_return_ns < sentinel_reused_ns < relay_forwarded_ns < server_terminal_ns < sentinel_checked_ns.
+The original registered allocation/rkey remains live through terminal observation and inspection. The probe rejects Python optimization, relay timeout, truncated response and unexpected response tag. Candidate server terminal observations are EOF approximately 30.002–30.004 seconds after forwarding. The sentinel is inspected before deregistration. Candidate recovery then reconnects the same live native handle, registers a recovery region, and checks actual PUT/GET full content.
+
+Controlled CQ-delay PUT and same-region reconnect: PASS.
+Both final event files exactly equal their receipt event arrays. The probe snapshots the events immediately after the failed PUT returns, before reconnect: installation, successful QP destruction, then exactly one real provider status=0 WC are required. It then reuses exactly the same registered external region and native handle for three full-content PUT/GET rounds. Exactly four provider completions are recorded in total, all status=0. The measured failed calls are approximately 31.001 and 31.002 seconds, with actual FFI CQ timeout errors retained in logs.
+No QPN inequality assumption is used. RXE reused QPN 17, and the witness is chronological consumption before reconnect plus three newly posted successful operations.
+Scope is now accurately written in the final receipt: the test-only shim returns 0 from CQ polling until QP destruction, then delegates to the provider; WC objects/status are genuine. This is a controlled CQ observation-delay experiment. Native cleanup failstop tests separately inject cleanup return values and do not claim a real RDMA data WR.
+
+Server/topology evidence: PASS with explicit granularity.
+Before/after topology records show the same ACTIVE/LINK_UP rxe_c0/c1 and rxe_s0/s1 devices, interface identities and IPs in two KVM guests on one host. Date and filesystem usage changed as expected. The listeners are 10.31.0.2:55153 and 10.32.0.2:55154.
+Server PID remains 21517, with unchanged /proc/21517/exe SHA-256:
+2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2.
+Its configuration SHA-256 remains 78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365.
+server-full-after.log.gz decompresses to 20,454 lines. It retains 24 Oct 16 legacy GET retirement warnings across successive attempts, including the eight final observations (four per NIC). These logs are coarse and do not include these legacy GET key IDs. Dedicated relay terminal/timing receipts supply the per-case witness; the server log is corroboration, not a per-key trace.
+Current server source also supports the terminal interpretation: uncertain legacy GET returns out of handle_client; local RcQp destruction is checked before owned TcpStream drops; QP destruction failure aborts. This explanatory inspection is not a claim that the long-running server binary was newly built for this task.
+
+Fresh 64 MiB FFI + Rust single/dual demonstration: APPROVE WITH BOUNDED CLAIMS.
+- demo-seed.py creates deterministic bytes(index % 251) for 67,108,864 bytes, performs actual FFI PUT followed by a cleared-buffer external GET, and asserts exact full content. Its independently recomputed SHA-256 matches demo-seed.log:
+  98dc891b284e4d84ac25b0c0a24fdbe39a7f0dbd643ad5e8aa06e02fc6258254.
+- All 19 Rust SDK/demo build inputs have equal before/after hashes, saved snapshots and current repository bytes. The recorded current-build bench SHA-256 is:
+  0f1279cba22edf25c02d966975ddac0eacdc41fe884a383a0219b64a9924b451.
+- demo-commands.json preserves the exact commands. Fresh demo-bound-single.log and demo-bound-dual.log read back that same guest binary SHA-256 immediately before and after execution; both logged and stored exits are 0.
+- Both modes read the same stable object identity (generation/layout/descriptor/placement fingerprints unchanged before and after), report 67,108,864 returned bytes, and produce content digest a0a4cbfa5cad46af. Single uses 64 MiB on rail0; dual direct staging assigns and reports 32 MiB on each rail.
+- An independent standard Python XXH3 check initially produced 7d985970875d064c despite matching the fixture SHA-256. This discrepancy was investigated rather than accepted as equivalent. Cargo.lock pins twox-hash 1.6.3, and a remote independent deterministic Vec fixture compiled against the exact existing dependency rlib produces a0a4cbfa5cad46af. The helper source, command and raw output are retained as demo-fixture.rs, demo-fixture-command.txt and demo-fixture-check.txt. The rlib hash is c3d3e9a2ade2607dc68ff7c70f8ec141d27d75e8b5efeaa19e59fb05a8ce6450. Therefore the locked dependency's fixture digest equals both demonstration reads. Label this digest as the locked twox-hash 1.6.3 implementation; do not present it as a standardized interoperable XXH3 vector.
+- Original first demo logs remain unchanged for video provenance; the newer binary-bound rerun is separately named. One iteration per mode and a common virtualized host support an execution/correctness demonstration, not a physical dual-HCA throughput result or a statistically established speedup.
+
+Final disposition:
+The former round1 source-attribution gap is closed by final exact-byte snapshots and receipts. The PUT injection wording is accurate in the final evidence. The new demonstration binary attribution and dependency-specific expected-content checksum gaps are closed. No false-green assertion or unresolved inconsistency remains in the reviewed final evidence.
+APPROVED for the evidence portion of the authorized commit/push gate, provided the staged source bytes match source-sha256.json and the implementation agent preserves the reviewed raw evidence and bounded claims. No further RXE rerun is requested unless the frozen implementation/probe bytes change.
+
+Companion audit outputs (reviewer's temporary files):
+/tmp/contextstore-ffi-20261016-final-audit-raw.txt
+/tmp/contextstore-ffi-20261016-demo-audit.json (records the initially detected standard-XXH3 mismatch; this historical observation is resolved by demo-fixture-check.txt and must not be misread as an unresolved final failure)

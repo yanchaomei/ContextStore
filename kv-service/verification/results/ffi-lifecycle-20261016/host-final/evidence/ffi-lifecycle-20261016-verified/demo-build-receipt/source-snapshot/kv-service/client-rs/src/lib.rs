@@ -1,0 +1,751 @@
+//! ContextStore KV Service — Rust client SDK.
+//!
+//! Mirrors the Python `contextstore_client.KVClient` but uses native Rust + tonic,
+//! bypassing the ~30ms per-RPC protocol/interpreter overhead of the Python gRPC stack.
+//!
+//! **Zero-copy interfaces**: `get_stream_chunks` / `put_stream_chunks` operate on
+//! `Vec<Bytes>` directly, avoiding the ~0.4 GB/s single-connection ceiling caused by
+//! concatenating 480MB on the client side. Instead, the gRPC framework's inbound
+//! buffer view is handed straight to the caller.
+
+pub mod pb {
+    tonic::include_proto!("contextstore.kv.v1");
+}
+
+/// Optional native RDMA data-plane client.
+///
+/// This module is only available with the `rdma` cargo feature. The default
+/// gRPC-only SDK build therefore has no libibverbs dependency.
+#[cfg(feature = "rdma")]
+pub mod rdma;
+
+/// Failure-atomic multi-rail descriptor reads over the native RDMA path.
+#[cfg(feature = "rdma")]
+pub mod rail_read;
+
+/// Research-only stage diagnostics; disabled for normal reads and benchmarks.
+#[cfg(feature = "rdma")]
+pub(crate) fn rail_timing_enabled() -> bool {
+    static ENABLED: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *ENABLED.get_or_init(|| std::env::var("CS_RAIL_TIMING").ok().as_deref() == Some("1"))
+}
+
+use pb::kv_service_client::KvServiceClient;
+use prost::bytes::Bytes;
+use tonic::transport::Channel;
+
+const TWO_GIB: usize = 2 * 1024 * 1024 * 1024;
+
+/// Result of a KVService object lookup. Upper-layer tier clients can keep the
+/// descriptor identity in their cached object reference, then read through
+/// `read_by_descriptor_stream_chunks`.
+#[derive(Clone, Debug)]
+pub struct ObjectLookup {
+    /// Server-generated object identity, including generation / etag / layout version.
+    pub descriptor: pb::ObjectDescriptor,
+    /// Actual object placement. The first gRPC descriptor-read path can pass it back to
+    /// the server without interpreting it.
+    pub placement: Option<pb::PlacementDescriptor>,
+}
+
+/// Descriptor-read result, preserving the fresh descriptor / placement returned by the server.
+#[derive(Clone, Debug)]
+pub struct DescriptorReadChunks {
+    /// Data segments returned in offset order.
+    pub segments: Vec<Bytes>,
+    /// Fresh descriptor returned by the server; callers may refresh cached object references with it.
+    pub descriptor: pb::ObjectDescriptor,
+    /// Fresh placement returned by the server; later RDMA/GDS paths can reuse it.
+    pub placement: Option<pb::PlacementDescriptor>,
+}
+
+/// Result of `read_by_descriptor_stream_into`: chunk data has already been copied to the
+/// caller's destination buffer during the receive loop.
+pub struct DescriptorReadInto {
+    /// Total bytes copied into the destination.
+    pub bytes_written: usize,
+    /// Fresh descriptor returned by the server.
+    pub descriptor: pb::ObjectDescriptor,
+    /// Fresh placement returned by the server.
+    pub placement: Option<pb::PlacementDescriptor>,
+}
+
+/// Rust gRPC client wrapper for the KV Service.
+#[derive(Clone)]
+pub struct KvClient {
+    inner: KvServiceClient<Channel>,
+}
+
+impl KvClient {
+    /// Connect to a server. `endpoint` looks like "http://127.0.0.1:50051".
+    pub async fn connect(endpoint: String) -> Result<Self, Box<dyn std::error::Error>> {
+        // Large messages: raise decode/encode limits to 2 GiB, matching server main.rs.
+        // Widen the HTTP/2 flow-control window (default ~64KB); otherwise large-value
+        // transfers get bottlenecked by WINDOW_UPDATE round trips.
+        let channel = Channel::from_shared(endpoint)?
+            .initial_stream_window_size(Some(64 * 1024 * 1024))
+            .initial_connection_window_size(Some(128 * 1024 * 1024))
+            .connect()
+            .await?;
+        let inner = KvServiceClient::new(channel)
+            .max_decoding_message_size(TWO_GIB)
+            .max_encoding_message_size(TWO_GIB);
+        Ok(Self { inner })
+    }
+
+    pub async fn health(&mut self) -> Result<bool, tonic::Status> {
+        let resp = self.inner.health(pb::HealthRequest {}).await?;
+        Ok(resp.into_inner().status == pb::health_response::ServingStatus::Serving as i32)
+    }
+
+    fn key(namespace: &str, object_key: &str) -> pb::ObjectKey {
+        pb::ObjectKey {
+            namespace: namespace.to_string(),
+            object_key: object_key.to_string(),
+        }
+    }
+
+    /// Construct immutable write options: the server returns `Ok(false)` if the object
+    /// already exists and does not overwrite it.
+    pub fn put_options_if_absent() -> pb::PutOptions {
+        pb::PutOptions {
+            ttl_seconds: 0,
+            if_not_exists: true,
+            compression: pb::CompressionType::None as i32,
+        }
+    }
+
+    /// Single PUT. `data` is moved directly into the request; Vec<u8> → Bytes is a
+    /// zero-copy takeover.
+    pub async fn put(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        data: Vec<u8>,
+    ) -> Result<bool, tonic::Status> {
+        self.put_with_options(namespace, object_key, data, None)
+            .await
+    }
+
+    /// Single PUT with `PutOptions`. `Ok(false)` means the server explicitly rejected
+    /// the write, typically because `if_not_exists=true` and the object already exists.
+    pub async fn put_with_options(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        data: Vec<u8>,
+        options: Option<pb::PutOptions>,
+    ) -> Result<bool, tonic::Status> {
+        let req = pb::PutRequest {
+            key: Some(Self::key(namespace, object_key)),
+            data: Bytes::from(data),
+            metadata: None,
+            options,
+        };
+        let resp = self.inner.put(req).await?;
+        Ok(resp.into_inner().success)
+    }
+
+    /// Single immutable PUT. Returns `Ok(false)` when the object already exists.
+    pub async fn put_if_absent(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        data: Vec<u8>,
+    ) -> Result<bool, tonic::Status> {
+        self.put_with_options(
+            namespace,
+            object_key,
+            data,
+            Some(Self::put_options_if_absent()),
+        )
+        .await
+    }
+
+    /// Single GET, returns `data` (None = not found). Bytes → Vec<u8> is a zero-copy
+    /// takeover (Bytes::into fallback path).
+    pub async fn get(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+    ) -> Result<Option<Vec<u8>>, tonic::Status> {
+        let req = pb::GetRequest {
+            key: Some(Self::key(namespace, object_key)),
+        };
+        let resp = self.inner.get(req).await?.into_inner();
+        if resp.found {
+            // resp.data is Bytes (a refcounted view owned by the gRPC framework); converting
+            // to Vec<u8> is a move when we're the sole owner, otherwise it falls back to a copy.
+            Ok(Some(resp.data.to_vec()))
+        } else {
+            Ok(None)
+        }
+    }
+
+    /// Single Exists check — only tests object existence, does not fetch the value.
+    pub async fn exists(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+    ) -> Result<bool, tonic::Status> {
+        let req = pb::ExistsRequest {
+            key: Some(Self::key(namespace, object_key)),
+        };
+        let resp = self.inner.exists(req).await?;
+        Ok(resp.into_inner().exists)
+    }
+
+    /// Delete an object. `false` means the object was absent or no underlying bytes were removed.
+    pub async fn delete(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+    ) -> Result<bool, tonic::Status> {
+        let req = pb::DeleteRequest {
+            key: Some(Self::key(namespace, object_key)),
+        };
+        let resp = self.inner.delete(req).await?;
+        Ok(resp.into_inner().success)
+    }
+
+    /// Look up object descriptor and actual placement without reading the value.
+    pub async fn lookup_object(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+    ) -> Result<Option<ObjectLookup>, tonic::Status> {
+        let req = pb::LookupObjectRequest {
+            key: Some(Self::key(namespace, object_key)),
+        };
+        let resp = self.inner.lookup_object(req).await?.into_inner();
+        if !resp.found {
+            return Ok(None);
+        }
+        let Some(descriptor) = resp.descriptor else {
+            return Ok(None);
+        };
+        Ok(Some(ObjectLookup {
+            descriptor,
+            placement: resp.placement,
+        }))
+    }
+
+    /// Look up, read via several RDMA rails, and recheck identity before
+    /// publishing bytes to the caller. A concurrent rewrite fails atomically.
+    #[cfg(feature = "rdma")]
+    pub async fn read_multi_rail_into(
+        &mut self,
+        reader: std::sync::Arc<rail_read::RailReader>,
+        namespace: &str,
+        object_key: &str,
+        destination: &mut [u8],
+        cancel: Option<rail_read::RailCancel>,
+    ) -> anyhow::Result<Option<usize>> {
+        let timing_start = std::time::Instant::now();
+        let initial = match self.lookup_object(namespace, object_key).await? {
+            Some(lookup) => lookup,
+            None => return Ok(None),
+        };
+        let size = usize::try_from(initial.descriptor.size)?;
+        if destination.len() < size {
+            return Err(rail_read::RailReadError::BufferTooSmall {
+                need: size,
+                have: destination.len(),
+            }
+            .into());
+        }
+        let placement = initial
+            .placement
+            .clone()
+            .ok_or_else(|| anyhow::anyhow!("lookup returned no RDMA placement"))?;
+        let descriptor = initial.descriptor.clone();
+        let fetch_cancel = cancel.clone();
+        let lookup_us = timing_start.elapsed().as_micros();
+        let transfer_start = std::time::Instant::now();
+        let payload = tokio::task::spawn_blocking(move || {
+            reader.read_staged(&descriptor, &placement, fetch_cancel.as_ref())
+        })
+        .await??;
+        let transfer_us = transfer_start.elapsed().as_micros();
+        let post_lookup_start = std::time::Instant::now();
+        let current = self
+            .lookup_object(namespace, object_key)
+            .await?
+            .ok_or(rail_read::RailReadError::VersionChanged)?;
+        let post_lookup_us = post_lookup_start.elapsed().as_micros();
+        let publish_start = std::time::Instant::now();
+        let copied_result = rail_read::commit_if_unchanged(
+            &initial,
+            &current,
+            payload.as_bytes(),
+            destination,
+            cancel.as_ref(),
+        );
+        if let Err(rail_read::RailReadError::VersionChanged) = &copied_result {
+            if rail_timing_enabled() {
+                use std::io::Write as _;
+                let mut stderr = std::io::stderr().lock();
+                // This diagnostic runs only after the second lookup and never
+                // changes a rejected read or publishes bytes to the caller.
+                let _ = writeln!(
+                    stderr,
+                    "RAIL_REJECTED_ID,namespace={namespace},object_key={object_key},reason=version_changed,initial_generation={},current_generation={},initial_layout_version={},current_layout_version={}",
+                    initial.descriptor.object_generation,
+                    current.descriptor.object_generation,
+                    initial.descriptor.layout_version,
+                    current.descriptor.layout_version,
+                );
+            }
+        }
+        let copied = copied_result?;
+        if rail_timing_enabled() {
+            use std::io::Write as _;
+            let mut stderr = std::io::stderr().lock();
+            // Diagnostics run after publication. Ignore a broken stderr so
+            // logging cannot turn a successful caller-buffer copy into Err.
+            let _ = writeln!(
+                stderr,
+                "RAIL_ACCEPTED_ID,namespace={namespace},object_key={object_key},generation={},layout_version={}",
+                current.descriptor.object_generation,
+                current.descriptor.layout_version,
+            );
+            let _ = writeln!(
+                stderr,
+                "RAIL_OUTER_TIMING key={namespace}/{object_key} bytes={copied} lookup_us={lookup_us} transfer_us={transfer_us} post_lookup_us={post_lookup_us} publish_us={} total_us={}",
+                publish_start.elapsed().as_micros(),
+                timing_start.elapsed().as_micros(),
+            );
+        }
+        Ok(Some(copied))
+    }
+
+    /// Batched [`Self::lookup_object`]: one round trip for N keys. Results
+    /// align with the input order; missing objects yield `None` at their
+    /// position.
+    pub async fn lookup_objects(
+        &mut self,
+        namespace: &str,
+        object_keys: &[&str],
+    ) -> Result<Vec<Option<ObjectLookup>>, tonic::Status> {
+        let req = pb::LookupObjectsRequest {
+            keys: object_keys
+                .iter()
+                .map(|k| Self::key(namespace, k))
+                .collect(),
+        };
+        let resp = self.inner.lookup_objects(req).await?.into_inner();
+        Ok(resp
+            .results
+            .into_iter()
+            .map(|r| {
+                if !r.found {
+                    return None;
+                }
+                r.descriptor.map(|descriptor| ObjectLookup {
+                    descriptor,
+                    placement: r.placement,
+                })
+            })
+            .collect())
+    }
+
+    /// Batch PUT (single RPC; server writes in parallel).
+    pub async fn put_batch(
+        &mut self,
+        items: Vec<(pb::ObjectKey, Vec<u8>)>,
+    ) -> Result<Vec<bool>, tonic::Status> {
+        let pb_items: Vec<pb::PutRequest> = items
+            .into_iter()
+            .map(|(key, data)| pb::PutRequest {
+                key: Some(key),
+                data: Bytes::from(data),
+                metadata: None,
+                options: None,
+            })
+            .collect();
+        let resp = self
+            .inner
+            .put_batch(pb::PutBatchRequest { items: pb_items })
+            .await?;
+        Ok(resp.into_inner().success)
+    }
+
+    /// Batch GET (single RPC).
+    pub async fn get_batch(
+        &mut self,
+        keys: Vec<pb::ObjectKey>,
+    ) -> Result<Vec<Option<Vec<u8>>>, tonic::Status> {
+        let resp = self
+            .inner
+            .get_batch(pb::GetBatchRequest { keys })
+            .await?
+            .into_inner();
+        Ok(resp
+            .results
+            .into_iter()
+            .map(|r| if r.found { Some(r.data.to_vec()) } else { None })
+            .collect())
+    }
+
+    pub fn make_key(namespace: &str, object_key: &str) -> pb::ObjectKey {
+        Self::key(namespace, object_key)
+    }
+
+    // ===== Streaming (bypasses the large single-message codec wall) =====
+    // Split a large value into N smaller PutChunk messages sent as a stream. Each chunk
+    // is an independent small protobuf message that goes through the prost fast path,
+    // and the server accumulates the small buffers as they arrive. Mirrors the Python
+    // put_objects_stream.
+
+    /// Streaming PUT: split a large value into multiple small PutChunk messages,
+    /// bypassing the slow-path decoder for 480MB single messages. `chunk_size` is the
+    /// per-chunk byte cap (1–4 MB recommended).
+    pub async fn put_stream(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        data: Vec<u8>,
+        chunk_size: usize,
+    ) -> Result<bool, tonic::Status> {
+        self.put_stream_with_options(namespace, object_key, data, chunk_size, None)
+            .await
+    }
+
+    /// Streaming PUT with `PutOptions`. Options are sent only on the first PutChunk.
+    pub async fn put_stream_with_options(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        data: Vec<u8>,
+        chunk_size: usize,
+        options: Option<pb::PutOptions>,
+    ) -> Result<bool, tonic::Status> {
+        // Vec<u8> → Bytes is a zero-copy takeover; then slice into N Bytes (Arc-refcounted)
+        // and delegate to the chunks variant.
+        let total = data.len();
+        let big = Bytes::from(data);
+        let chunk_size = chunk_size.max(1);
+        let n = if total == 0 {
+            1
+        } else {
+            total.div_ceil(chunk_size)
+        };
+        let mut segments: Vec<Bytes> = Vec::with_capacity(n);
+        for i in 0..n {
+            let start = i * chunk_size;
+            let end = (start + chunk_size).min(total);
+            segments.push(big.slice(start..end));
+        }
+        self.put_stream_chunks_with_options(namespace, object_key, segments, options)
+            .await
+    }
+
+    /// Streaming immutable PUT. Returns `Ok(false)` when the object already exists.
+    pub async fn put_stream_if_absent(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        data: Vec<u8>,
+        chunk_size: usize,
+    ) -> Result<bool, tonic::Status> {
+        self.put_stream_with_options(
+            namespace,
+            object_key,
+            data,
+            chunk_size,
+            Some(Self::put_options_if_absent()),
+        )
+        .await
+    }
+
+    /// Streaming PUT passthrough (zero-copy): caller has already split the data into N
+    /// Bytes segments (typical case: Python-side layer tensors each pointing at a pinned
+    /// memory pool). Sends them directly, without another Vec → Bytes → slice conversion
+    /// on the client.
+    pub async fn put_stream_chunks(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        segments: Vec<Bytes>,
+    ) -> Result<bool, tonic::Status> {
+        self.put_stream_chunks_with_options(namespace, object_key, segments, None)
+            .await
+    }
+
+    /// Streaming PUT passthrough with `PutOptions`. Options are sent only on the first chunk.
+    pub async fn put_stream_chunks_with_options(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        mut segments: Vec<Bytes>,
+        options: Option<pb::PutOptions>,
+    ) -> Result<bool, tonic::Status> {
+        if segments.is_empty() {
+            segments.push(Bytes::new());
+        }
+        let key = Self::key(namespace, object_key);
+        let total: usize = segments.iter().map(|s| s.len()).sum();
+        let n_chunks = segments.len().max(1);
+        let mut chunks: Vec<pb::PutChunk> = Vec::with_capacity(n_chunks);
+        let mut running_offset = 0usize;
+        for (i, seg) in segments.into_iter().enumerate() {
+            let is_first = i == 0;
+            let key_field = if is_first { Some(key.clone()) } else { None };
+            let seg_len = seg.len();
+            chunks.push(pb::PutChunk {
+                key: key_field,
+                data: seg,
+                offset: running_offset as i64,
+                is_last: i + 1 == n_chunks,
+                metadata: None,
+                total_size: if is_first { total as i64 } else { 0 },
+                options: if is_first { options.clone() } else { None },
+            });
+            running_offset += seg_len;
+        }
+        let outbound = tokio_stream::iter(chunks);
+        let resp = self.inner.put_stream(outbound).await?;
+        Ok(resp.into_inner().success)
+    }
+
+    /// Streaming immutable PUT passthrough. Returns `Ok(false)` when the object already exists.
+    pub async fn put_stream_chunks_if_absent(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        segments: Vec<Bytes>,
+    ) -> Result<bool, tonic::Status> {
+        self.put_stream_chunks_with_options(
+            namespace,
+            object_key,
+            segments,
+            Some(Self::put_options_if_absent()),
+        )
+        .await
+    }
+
+    /// Streaming GET: consume the DataChunk stream and concatenate into a Vec<u8>
+    /// (compatible with callers that expect a single buffer).
+    /// Note: concatenating 480MB triggers page-fault first-touch writes, capping a
+    /// single connection at ~0.4 GB/s. For high-throughput cases use
+    /// `get_stream_chunks` (zero-copy, returns Vec<Bytes>).
+    pub async fn get_stream(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+    ) -> Result<Option<Vec<u8>>, tonic::Status> {
+        match self.get_stream_chunks(namespace, object_key).await? {
+            None => Ok(None),
+            Some(segments) => {
+                let total: usize = segments.iter().map(|s| s.len()).sum();
+                let mut buf = Vec::with_capacity(total);
+                for s in &segments {
+                    buf.extend_from_slice(s);
+                }
+                Ok(Some(buf))
+            }
+        }
+    }
+
+    /// Streaming GET passthrough (zero-copy): returns a Vec<Bytes> segment list without
+    /// concatenating on the client. Each Bytes segment is an Arc-refcounted view of
+    /// the gRPC inbound buffer; callers can:
+    ///   - iterate over segments and do GPU H2D copies directly (no concat needed when
+    ///     object boundaries align)
+    ///   - extend into a large Vec<u8> themselves (equivalent to falling back to
+    ///     get_stream). Measured: single-connection 0.4 → ~1.5 GB/s; multi-connection
+    ///     aggregate approaches the server-side raw-read ceiling.
+    pub async fn get_stream_chunks(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+    ) -> Result<Option<Vec<Bytes>>, tonic::Status> {
+        use tokio_stream::StreamExt;
+        let req = pb::GetRequest {
+            key: Some(Self::key(namespace, object_key)),
+        };
+        let mut stream = match self.inner.get_stream(req).await {
+            Ok(s) => s.into_inner(),
+            Err(status) if status.code() == tonic::Code::NotFound => return Ok(None),
+            Err(status) => return Err(status),
+        };
+        let mut segments: Vec<Bytes> = Vec::new();
+        while let Some(chunk) = stream.next().await {
+            let chunk = chunk?;
+            // chunk.data is Bytes (build.rs bytes(["."])), so push is a zero-copy handoff.
+            // Capacity estimate: use the first chunk's total_size to guess the segment
+            // count (assumes ~4MB sub-chunks; even if off, a few Vec reallocs cost far
+            // less than the 480MB payload itself).
+            if segments.is_empty() && chunk.total_size > 0 {
+                let est = ((chunk.total_size as usize) / (4 * 1024 * 1024)).max(8);
+                segments.reserve(est);
+            }
+            segments.push(chunk.data);
+            if chunk.is_last {
+                break;
+            }
+        }
+        Ok(Some(segments))
+    }
+
+    /// Multi-endpoint direct writes, phase 1: reserve a striped layout on the
+    /// coordinator. Returns None when the object does not qualify for
+    /// distributed placement (or already exists under if_not_exists) — the
+    /// caller should fall back to a regular PUT.
+    pub async fn prepare_distributed_put(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        size: u64,
+        options: Option<pb::PutOptions>,
+    ) -> Result<Option<(pb::ObjectDescriptor, pb::PlacementDescriptor)>, tonic::Status> {
+        let req = pb::PrepareDistributedPutRequest {
+            key: Some(Self::key(namespace, object_key)),
+            size,
+            metadata: None,
+            options,
+        };
+        let resp = self.inner.prepare_distributed_put(req).await?.into_inner();
+        if !resp.accepted {
+            return Ok(None);
+        }
+        match (resp.descriptor, resp.placement) {
+            (Some(descriptor), Some(placement)) => Ok(Some((descriptor, placement))),
+            _ => Err(tonic::Status::internal(
+                "prepare_distributed_put accepted without descriptor/placement",
+            )),
+        }
+    }
+
+    /// Multi-endpoint direct writes, phase 3: publish the assembled metadata.
+    /// `chunks` are the per-stripe locations returned by each node's
+    /// stripe-subset PUT. Returns false when an if_not_exists race was lost
+    /// (the server already rolled back the written stripes).
+    pub async fn commit_distributed_put(
+        &mut self,
+        namespace: &str,
+        object_key: &str,
+        descriptor: pb::ObjectDescriptor,
+        chunks: Vec<pb::PlacementChunk>,
+        options: Option<pb::PutOptions>,
+    ) -> Result<bool, tonic::Status> {
+        let req = pb::CommitDistributedPutRequest {
+            key: Some(Self::key(namespace, object_key)),
+            descriptor: Some(descriptor),
+            chunks,
+            options,
+            metadata: None,
+        };
+        let resp = self.inner.commit_distributed_put(req).await?.into_inner();
+        Ok(resp.committed)
+    }
+
+    /// Read an object using a client-held descriptor. The server validates generation / etag /
+    /// layout first. A stale descriptor returns `FAILED_PRECONDITION`; callers should lookup again.
+    pub async fn read_by_descriptor_stream_chunks(
+        &mut self,
+        descriptor: pb::ObjectDescriptor,
+        placement: Option<pb::PlacementDescriptor>,
+    ) -> Result<Option<DescriptorReadChunks>, tonic::Status> {
+        use tokio_stream::StreamExt;
+
+        let req = pb::ReadByDescriptorRequest {
+            descriptor: Some(descriptor.clone()),
+            placement: placement.clone(),
+        };
+        let mut stream = match self.inner.read_by_descriptor_stream(req).await {
+            Ok(s) => s.into_inner(),
+            Err(status) if status.code() == tonic::Code::NotFound => return Ok(None),
+            Err(status) => return Err(status),
+        };
+
+        let mut segments = Vec::new();
+        let mut fresh_descriptor: Option<pb::ObjectDescriptor> = None;
+        let mut fresh_placement: Option<pb::PlacementDescriptor> = None;
+        while let Some(chunk) = stream.next().await {
+            let chunk = chunk?;
+            if fresh_descriptor.is_none() {
+                fresh_descriptor = chunk.descriptor;
+            }
+            if fresh_placement.is_none() {
+                fresh_placement = chunk.placement;
+            }
+            segments.push(chunk.data);
+            if chunk.is_last {
+                break;
+            }
+        }
+
+        let descriptor = fresh_descriptor.unwrap_or(descriptor);
+        Ok(Some(DescriptorReadChunks {
+            segments,
+            descriptor,
+            placement: fresh_placement.or(placement),
+        }))
+    }
+
+    /// Read an object by descriptor, copying each chunk into `dst` as it arrives.
+    ///
+    /// Unlike `read_by_descriptor_stream_chunks`, no `Vec<Bytes>` is accumulated: every
+    /// chunk is written to `dst[chunk.offset..]` inside the receive loop, so the memcpy
+    /// overlaps network receive instead of running serially after it. For a 256MB object
+    /// this hides the entire copy (and any destination page-fault first-touch) behind the
+    /// stream. Returns the number of bytes written, plus the fresh descriptor/placement.
+    ///
+    /// `dst` must be at least the object size; chunks outside `dst` bounds are an error.
+    pub async fn read_by_descriptor_stream_into(
+        &mut self,
+        descriptor: pb::ObjectDescriptor,
+        placement: Option<pb::PlacementDescriptor>,
+        dst: &mut [u8],
+    ) -> Result<Option<DescriptorReadInto>, tonic::Status> {
+        use tokio_stream::StreamExt;
+
+        let req = pb::ReadByDescriptorRequest {
+            descriptor: Some(descriptor.clone()),
+            placement: placement.clone(),
+        };
+        let mut stream = match self.inner.read_by_descriptor_stream(req).await {
+            Ok(s) => s.into_inner(),
+            Err(status) if status.code() == tonic::Code::NotFound => return Ok(None),
+            Err(status) => return Err(status),
+        };
+
+        let mut written: usize = 0;
+        let mut fresh_descriptor: Option<pb::ObjectDescriptor> = None;
+        let mut fresh_placement: Option<pb::PlacementDescriptor> = None;
+        while let Some(chunk) = stream.next().await {
+            let chunk = chunk?;
+            if fresh_descriptor.is_none() {
+                fresh_descriptor = chunk.descriptor;
+            }
+            if fresh_placement.is_none() {
+                fresh_placement = chunk.placement;
+            }
+            let offset = usize::try_from(chunk.offset).map_err(|_| {
+                tonic::Status::internal(format!("negative chunk offset {}", chunk.offset))
+            })?;
+            let end = offset
+                .checked_add(chunk.data.len())
+                .ok_or_else(|| tonic::Status::internal("chunk offset + length overflows usize"))?;
+            if end > dst.len() {
+                return Err(tonic::Status::internal(format!(
+                    "chunk [{offset}, {end}) exceeds destination buffer of {} bytes",
+                    dst.len()
+                )));
+            }
+            dst[offset..end].copy_from_slice(&chunk.data);
+            written += chunk.data.len();
+            if chunk.is_last {
+                break;
+            }
+        }
+
+        let descriptor = fresh_descriptor.unwrap_or(descriptor);
+        Ok(Some(DescriptorReadInto {
+            bytes_written: written,
+            descriptor,
+            placement: fresh_placement.or(placement),
+        }))
+    }
+}

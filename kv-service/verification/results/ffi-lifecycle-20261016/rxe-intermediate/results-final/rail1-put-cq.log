@@ -1,0 +1,27 @@
+[cs_rdma_ffi] put failed: RDMA WRITE poll_cq timeout 30s
+{
+  "library_sha256": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+  "module_sha256": "c3a2bf556b96ab8d5052de686557a304d99ec1e32b26233ce29b893cba47b13b",
+  "probe_sha256": "c207af313b1a19003795b2a9f6251043b377708f64d89b4b056440584d98628e",
+  "shim_sha256": "66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553",
+  "scope": "real RXE RDMA WRITE and genuine provider WCs; test-only shim returns 0 from CQ polling until QP destruction, then delegates to the provider; no synthetic WCs",
+  "python_optimize": 0,
+  "elapsed_seconds": 31.002078085,
+  "error": "cs_rdma_client_put failed: rc=-3",
+  "old_qp_real_completion_drained_before_error_return": true,
+  "retired_qp_number": 17,
+  "same_native_handle": 94579151893152,
+  "same_registered_buffer_reused": true,
+  "reconnect_put_get_full_content_rounds": 3,
+  "payload_sha256": "631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769",
+  "events": [
+    "cq_delay_installed",
+    "qp_destroyed_reveal_real_cq",
+    "real_completion,qp=17,wr=0,status=0",
+    "real_completion,qp=17,wr=0,status=0",
+    "real_completion,qp=17,wr=0,status=0",
+    "real_completion,qp=17,wr=0,status=0",
+    "qp_destroyed_reveal_real_cq"
+  ],
+  "passed": true
+}

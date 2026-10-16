@@ -1,0 +1,12 @@
+{
+  "library_sha256": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+  "python_module_sha256": "45a02c8fd7924700e750b1090e78c485c5fea2f492966ffedb3314cab7307789",
+  "probe_sha256": "e96d52ba3714587c213f4709cc1407d1d45a4c2cee86bebabcb50d068ce98777",
+  "environment": "real RXE Verbs in two KVM guests on one host; TCP relay delays a GET frame, no provider return-code injection",
+  "key": "3:ffi-20261016-1792131845878713317",
+  "bytes": 8388608,
+  "failure_mode": "timeout",
+  "unsafe_baseline": false,
+  "python_optimize": 0,
+  "expected_payload_sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a"
+}

@@ -52,3 +52,35 @@ int ibv_dereg_mr(struct ibv_mr *mr) {
     }
     return next(mr);
 }
+
+int ibv_destroy_cq(struct ibv_cq *cq) {
+    record("destroy_cq\n");
+    int (*next)(struct ibv_cq *) = dlvsym(RTLD_NEXT, "ibv_destroy_cq", "IBVERBS_1.1");
+    if (!next) next = dlsym(RTLD_NEXT, "ibv_destroy_cq");
+    if (!next) { errno = ENOSYS; return -1; }
+    return next(cq);
+}
+
+int ibv_dealloc_pd(struct ibv_pd *pd) {
+    record("dealloc_pd\n");
+    int (*next)(struct ibv_pd *) = dlvsym(RTLD_NEXT, "ibv_dealloc_pd", "IBVERBS_1.1");
+    if (!next) next = dlsym(RTLD_NEXT, "ibv_dealloc_pd");
+    if (!next) { errno = ENOSYS; return -1; }
+    return next(pd);
+}
+
+int ibv_close_device(struct ibv_context *ctx) {
+    record("close_device\n");
+    int (*next)(struct ibv_context *) = dlvsym(RTLD_NEXT, "ibv_close_device", "IBVERBS_1.1");
+    if (!next) next = dlsym(RTLD_NEXT, "ibv_close_device");
+    if (!next) { errno = ENOSYS; return -1; }
+    return next(ctx);
+}
+
+int ibv_query_gid(struct ibv_context *ctx, uint8_t port, int index, union ibv_gid *gid) {
+    if (inject("query_gid")) { record("query_gid\n"); errno = EIO; return -1; }
+    int (*next)(struct ibv_context *, uint8_t, int, union ibv_gid *) = dlvsym(RTLD_NEXT, "ibv_query_gid", "IBVERBS_1.1");
+    if (!next) next = dlsym(RTLD_NEXT, "ibv_query_gid");
+    if (!next) { errno = ENOSYS; return -1; }
+    return next(ctx, port, index, gid);
+}

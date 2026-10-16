@@ -1,0 +1,1 @@
+["python3", "ffi_rxe_put_reconnect.py", "--library", "candidate.so", "--module", "rdma_client.py", "--server", "10.32.0.2:55154", "--device", "rxe_c1", "--output", "/home/railtest/ffi-20261016/results-final/rail1-put-cq.json"]

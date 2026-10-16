@@ -1,0 +1,83 @@
+{
+  "source_manifest_matches_current_files": true,
+  "native_and_demo_build_snapshots_match_current_sources": true,
+  "check_exits": {
+    "cq-shim-build": 0,
+    "ruff": 0,
+    "black": 0,
+    "clippy": 0,
+    "make-build": 0,
+    "native": 0,
+    "python-full": 0,
+    "rustfmt": 0,
+    "test-server": 0,
+    "ffi-build": 0,
+    "receipt-tests": 0,
+    "shim-build": 0
+  },
+  "rxe_matrix": {
+    "cases": [
+      {
+        "case": "rail0-baseline-bad_tag-1m",
+        "passed": true,
+        "exit": 1
+      },
+      {
+        "case": "rail0-candidate-bad_tag-1m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail0-candidate-timeout-1m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail0-candidate-bad_tag-8m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail0-candidate-timeout-8m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail0-put-cq",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail1-baseline-bad_tag-1m",
+        "passed": true,
+        "exit": 1
+      },
+      {
+        "case": "rail1-candidate-bad_tag-1m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail1-candidate-timeout-1m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail1-candidate-bad_tag-8m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail1-candidate-timeout-8m",
+        "passed": true,
+        "exit": 0
+      },
+      {
+        "case": "rail1-put-cq",
+        "passed": true,
+        "exit": 0
+      }
+    ],
+    "all_passed": true
+  }
+}

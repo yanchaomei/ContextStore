@@ -1,0 +1,218 @@
+{
+  "source_commit_label": "b6d1cd9-working-tree-20261016",
+  "library_sha256": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+  "shim_sha256": "9b1ae5ee664399547f21dfcd6818e98d1b741193321bd9b4d357331e7230e1d0",
+  "probe_sha256": "70d6ac65c8a80497db5654787b19a39203fdd8a3c79e37d53b9ecebeeb71e542",
+  "runner_sha256": "b44d6677b5785a50d09b1adc433cd3851ca9c378f89a75630711da44f2b4ee21",
+  "python_optimize": 0,
+  "device": "mlx5_1",
+  "gid_index": 3,
+  "scope": "real local Verbs allocations and self-QP control handshake; no RDMA data WR, no bandwidth claim; shim fakes cleanup return codes",
+  "cases": [
+    {
+      "case": "free_qp",
+      "exit": -6,
+      "expected_exit": -6,
+      "passed": true,
+      "events": [
+        "destroy_qp"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_sha256": "841dcd1d91fbe53ec5fde30ded5d2ef4357ce805f639c8a25894655fe535eed1"
+    },
+    {
+      "case": "free_mr",
+      "exit": -6,
+      "expected_exit": -6,
+      "passed": true,
+      "events": [
+        "dereg_mr"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_sha256": "08151a3f07da329ca7ea702853141cd50dd4d72f0bae1608874887d1c5621a77"
+    },
+    {
+      "case": "unregister_mr",
+      "exit": -6,
+      "expected_exit": -6,
+      "passed": true,
+      "events": [
+        "dereg_mr"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_sha256": "08151a3f07da329ca7ea702853141cd50dd4d72f0bae1608874887d1c5621a77"
+    },
+    {
+      "case": "connect_error",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "4771271d2b3cb80ff6ca2a2bcf4ca080a3b87d0e5ce7ac240ca62ea25727c18d",
+      "stderr_sha256": "2f4a7dc64e10e8c22e0207d03db6873d11e8cc8ce67516bd21043a65a9bc0e81",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "get_error",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "3bf3a2c8ef324444bf9edc0a2bc2c03328fab8c4519f96e1b37550278266f7b5",
+      "stderr_sha256": "78fbab48ff3a510bb07e733e867029bd7a242d8fc2bbc5af9eb369c3920292b4",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "get_into_error",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "131ff7938fce8593a08f67ae165cadafd3c647fbeaf7881a70e302f002a29ef3",
+      "stderr_sha256": "7b76a14c3d61706f36f430bef7253a2e190afa3cf6a7c2815ca5ede84ddd58a9",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "descriptor_error",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "79550a0c1632dafd57c32202a7b40887b03d589f960e25af5d9fee5384a48d63",
+      "stderr_sha256": "c098f9c42e070552628ac5122a5e0b8f01ce1392415205a125bcdb92e740c61f",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "descriptor_into_error",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "46dc67300f783992b0ce31d715a6283d5baefb96b5886451b64ea9518952fb3f",
+      "stderr_sha256": "86b55bb05492fba771c5f23f28a93ae951f6a792634a102a1b21ae055f1670a6",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "put_error",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "cc90aa595ae9daab7a2b1d16a58120fb2fc51fa6af14074888683a02028e6a90",
+      "stderr_sha256": "699bab8aa0d62fa3949b964b71b29b803a446a6c5b8c2371d6c638a517dc83ee",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "oversized_reply",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "c9675a76e884333504ca46baad742054e030fcf5ac17fa939640e4f7fd82bc8b",
+      "stderr_sha256": "fa238c626f5c6e89210a4b72c1ee89919648bed0d03f5ec91cfa2b468ceaa4c9",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "short_descriptor",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "1009a20d267ca1e0a522c60fc412112c0e6a164f1c3098f94d5e29720333c0af",
+      "stderr_sha256": "a990453f795d5c84a270354f902960d978deb3867e2a595f3f36eba21913a127",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    },
+    {
+      "case": "init_failure",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "query_gid",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "1fa28dcec8aec07be110043ef5026256df94b2c92a998c0b547fbc36cc6b0f95",
+      "stderr_sha256": "70eb45e2ad8c6285c5bd01ca8e26e0d5642988cb9fe2e1a3a7c700a8d7117ec3",
+      "events_sha256": "6050ee3ed3e7e96cd4ca03106549042de4826bed73b98aff8c6b5cc14feaa2f1"
+    },
+    {
+      "case": "timeout",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "events": [
+        "destroy_qp",
+        "dereg_mr",
+        "dereg_mr",
+        "destroy_cq",
+        "dealloc_pd",
+        "close_device"
+      ],
+      "stdout_sha256": "63e866c681282fe51b7bb81645e651e5a488d47f9f021e900ec9a5e2670c3083",
+      "stderr_sha256": "309b5ea32d3b92b0efa1fce38da5cd09940ed6472e3b033af1c5104896083ff5",
+      "events_sha256": "3a43af6159f8a155836d40d8cd29c78e248f64308f5205011059451c3458d93a"
+    }
+  ],
+  "all_passed": true
+}

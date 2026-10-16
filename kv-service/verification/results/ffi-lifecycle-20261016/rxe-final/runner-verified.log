@@ -1,0 +1,12 @@
+rail1-baseline-bad_tag-1m 1 True
+rail0-baseline-bad_tag-1m 1 True
+rail1-candidate-bad_tag-1m 0 True
+rail0-candidate-bad_tag-1m 0 True
+rail1-candidate-timeout-1m 0 True
+rail0-candidate-timeout-1m 0 True
+rail1-candidate-bad_tag-8m 0 True
+rail0-candidate-bad_tag-8m 0 True
+rail1-candidate-timeout-8m 0 True
+rail0-candidate-timeout-8m 0 True
+rail1-put-cq 0 True
+rail0-put-cq 0 True

@@ -1,0 +1,27 @@
+Independent ContextStore FFI/Python lifecycle review - frozen-source addendum
+Date: 2026-10-16
+Repository: /Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore
+Baseline HEAD: b6d1cd984b9e4c5081ac2ac998ad5521fc658db9
+Prior review: /tmp/contextstore-ffi-20261016-independent-review-final.txt
+
+Decision: APPROVE CURRENT FROZEN SOURCE. This addendum supersedes the prior report's file-hash binding. All ten hashes in /tmp/contextstore-ffi-20261016/source-sha256.json were independently re-computed from the current on-disk files and matched the manifest. No remaining concrete blocking finding identified in this reviewed adjustment.
+
+Changes re-reviewed:
+1. Python module-level text following the mandatory first-line future import is now comments. These comments retain the descriptive content without an executable top-level string statement before imports. Re-read the wrapper validation, descriptor snapshot, native-call routing, lifecycle locking and close code; their previously approved behavior is unchanged. In particular, the current close implementation still detaches _handle before cs_rdma_client_free.
+2. ffi_rxe_late_write.py:95-135 now puts the accepted downstream socket in the relay's outer context manager and creates the upstream socket in _relay_connected's inner context manager. The helper is defined before the thread is started. The whole helper call remains inside the relay's try/except, so errors still populate peer_errors and both sockets close on exit. Handshake forwarding, frame capture, bad-tag injection, delay, forwarding event, terminal-response/EOF checks and timestamps retain their previous order and behavior. Removing the parenthesized multi-manager with syntax makes this portion parse on Python 3.8 without weakening the optimization guard.
+3. test_ffi_validation_receipts.py:19-40 now checks both real RXE probes as well as the native probe/runner under -O, -OO and PYTHONOPTIMIZE. Each is required to reject execution with a Python optimization error before normal verification. Existing cleanup-receipt checks remain unchanged in substance.
+4. Re-read the current headers and relevant control logic of ffi_lifecycle_probe.py, ffi_rxe_put_reconnect.py and run_ffi_lifecycle_validation.py. The header/comment adjustment does not alter the previously reviewed lifecycle or evidence contract. PUT scope still explicitly describes controlled CQ polling suppression and genuine provider WCs.
+
+Read-only verification scope: source reads and SHA-256 computations only. No local build/test executed. The parent reports matching remote build/lint/test success (including native lifecycle 13 and Python 165) and a final real-RXE matrix in progress. Those are the parent's runtime evidence, not jobs independently executed by this reviewer. Source-review approval is complete; end-to-end completion still requires the final matching RXE receipts and retained corruption controls.
+
+Current reviewed SHA-256 manifest:
+9328dceb45b3c4c485f384205cec73e08b84026cf99cd332e6e6285d8b376320  kv-service/rdma-ffi/src/lib.rs
+c3a2bf556b96ab8d5052de686557a304d99ec1e32b26233ce29b893cba47b13b  src/contextstore/storage/rdma_client.py
+d3876988543d8b12eb5a240c647355874821a1e9cb3c61243813be2623e85a12  tests/unit/test_rdma_client_lifecycle.py
+70d6ac65c8a80497db5654787b19a39203fdd8a3c79e37d53b9ecebeeb71e542  kv-service/verification/ffi_lifecycle_probe.py
+7c60c214a5fc920321a1ec560fbeb49cf597c7193e545b5cf0d82d886b97448a  kv-service/verification/ffi_rxe_late_write.py
+c207af313b1a19003795b2a9f6251043b377708f64d89b4b056440584d98628e  kv-service/verification/ffi_rxe_put_reconnect.py
+b44d6677b5785a50d09b1adc433cd3851ca9c378f89a75630711da44f2b4ee21  kv-service/verification/run_ffi_lifecycle_validation.py
+bac17d5f1ba8d7e1358d1fb426f90c9b1b1b398de7fc9fc2ee94f7863f857b74  kv-service/verification/test_ffi_validation_receipts.py
+529e38fca187d32d73935471525d9647d7eb62b53634e570779e06f53f3e9b42  kv-service/verification/verbs_failstop_shim.c
+950e0c59f219c1f28d40bb1c953185547c4a46731ded2eaf884815b17d676648  kv-service/verification/verbs_cq_delay_shim.c

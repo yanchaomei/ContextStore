@@ -1,0 +1,2 @@
+[cs_rdma_ffi] connect failed: expected HELLO, got 255
+[cs_rdma_ffi] get failed: not connected

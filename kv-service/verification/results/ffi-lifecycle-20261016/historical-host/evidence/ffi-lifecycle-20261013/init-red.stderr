@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 190, in <module>
+    main()
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 82, in main
+    assert not lib.cs_rdma_client_new(args.device.encode(), 1, 255, 4096)
+AssertionError

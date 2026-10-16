@@ -1,0 +1,26 @@
+{
+  "library_sha256": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+  "module_sha256": "45a02c8fd7924700e750b1090e78c485c5fea2f492966ffedb3314cab7307789",
+  "probe_sha256": "197d84160c86c91a9fb3d9c8a03d400353287d27b42a0defbab670e1cde7c088",
+  "shim_sha256": "66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553",
+  "scope": "real RXE RDMA WRITE and real CQ entries; test-only shim hides CQ polling until QP destruction, no synthetic WC or provider return code",
+  "python_optimize": 0,
+  "elapsed_seconds": 31.000844159,
+  "error": "cs_rdma_client_put failed: rc=-3",
+  "old_qp_real_completion_drained_before_error_return": true,
+  "retired_qp_number": 17,
+  "same_native_handle": 94479381966832,
+  "same_registered_buffer_reused": true,
+  "reconnect_put_get_full_content_rounds": 3,
+  "payload_sha256": "631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769",
+  "events": [
+    "cq_delay_installed",
+    "qp_destroyed_reveal_real_cq",
+    "real_completion,qp=17,wr=0,status=0",
+    "real_completion,qp=17,wr=0,status=0",
+    "real_completion,qp=17,wr=0,status=0",
+    "real_completion,qp=17,wr=0,status=0",
+    "qp_destroyed_reveal_real_cq"
+  ],
+  "passed": true
+}

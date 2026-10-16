@@ -1,0 +1,55 @@
+ContextStore FFI lifecycle evidence review — provisional
+Reviewed on 2026-10-16. Independent evidence audit only; no local build/test executed and no repository files edited.
+
+Status: ROUND1 EVIDENCE SEMANTICALLY ACCEPTABLE; FINAL APPROVAL PENDING exact-source final RXE and host evidence.
+
+Evidence root:
+/Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore/kv-service/verification/results/ffi-lifecycle-20261016
+
+Reviewed artifacts:
+- rxe-round1/results-round1: summary plus all 12 result JSON, commands, launch receipts, logs, and exit files; both PUT .events files.
+- rxe-round1 probes, runner, and Python module actually used.
+- binaries-rxe.tar.gz: all three archived binary hashes independently recomputed without extracting/executing them.
+- topology-client.txt, topology-server.txt, server-live.txt, server.toml, and decompressed server-full.log.gz (20,233 lines, 2,725,212 characters).
+- host-round1/evidence/ffi-lifecycle-20261016-round1: exits and logs, native result/launch receipt and per-case raw files.
+- CLAUDE.md and current CQ shim / FFI retirement code for interpretation; current code differs from round1 and therefore is not falsely attributed to it.
+
+1. Baseline corruption: PASS for the explicit negative controls.
+Both rails' 1 MiB bad_tag controls exit 1 with reused_sentinel_intact=false and exact_payload_corruption=true. Their actual post-WRITE sentinel hash is exactly the independently recomputed deterministic payload hash:
+631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769.
+It differs from the independent 0x5A sentinel hash bf63d8a95fcc2e64619813aae35fdcbe871fdd9264caa3f365eb3aed0f679129.
+The registered allocation and its rkey remain live until after the server GET response and inspection; this is observable late DMA into a reused allocation without relying on a use-after-free.
+Baseline reconnect is deliberately not claimed: recovery=false and native_handle_after is written from the original variable, not a separate measurement.
+
+2. Candidate GET safety: PASS for the eight collected round1 interleavings.
+Matrix: rail0/rail1 x 1 MiB/8 MiB x bad_tag/timeout. Every command, raw log JSON, result JSON, exit and summary agrees. All candidate exits are 0. All eight actual sentinel hashes equal the independently recomputed 0x5A hash; payload hashes independently match the expected bytes.
+For all 10 GET cases including controls, the exact monotonic ordering holds:
+ffi_error_return_ns < sentinel_reused_ns < relay_forwarded_ns < server_terminal_ns < sentinel_checked_ns.
+The eight candidate terminal observations are EOF after approximately 30.003–30.004 seconds following forwarding; both controls receive a complete GET_RESP. The probe refuses optimization, truncated responses and timeouts, joins the relay before inspecting, and unregisters only after inspection.
+All eight candidates actually assert the same live native handle after reconnect, then PUT and GET full expected content through a newly registered recovery region. The original region is deliberately retained across the uncertain late WRITE, then separately deregistered before this recovery registration.
+
+3. Controlled CQ-delay PUT: PASS for both collected round1 rails.
+Both raw event files exactly equal their receipt event lists. At the Python error-return observation, the probe asserts the first two events are installation and successful QP destruction, followed by exactly one genuine provider completion with status=0. Three recovery PUT/GET rounds use the same native handle and same still-registered external region. There are exactly four real completions in total, with the recovery three also status=0. QPN reuse (17) is correctly allowed; no inequality inference is used. Both elapsed durations are about 31.001 seconds, with the original FFI poll timeout retained in raw stderr.
+The observer calls provider_poll only after QP destruction and logs provider-populated WC fields; FFI polls one WC per call. This supports consumption of an old genuine completion before error returns and no stale acknowledgement of the next three PUTs in this scenario.
+Wording caution: the scope string 'no synthetic WC or provider return code' is overly broad if read literally. The shim explicitly returns synthetic zero CQ counts before retirement. Correct scope is controlled CQ-poll suppression, genuine provider WCs, no fabricated WC or injected provider error status. It is not a fully uninjected natural timeout experiment.
+
+4. Topology and attribution: provisional PASS for binary-to-receipt identity; final source-to-build link still required.
+Client rxe_c0/c1 and server rxe_s0/s1 are ACTIVE/LINK_UP in two KVM guests on a common host. Server paths are 10.31.0.2:55153 and 10.32.0.2:55154. This proves Soft-RoCE execution on two virtual links, not independent physical HCAs or bandwidth.
+Independent archive hashes match receipts:
+candidate.so aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b
+baseline.so 6f17158aec8edf75cfc923a06a502ac525c78a54b77d42c80986bfc7d6d961d1
+verbs_cq_delay.so 66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553
+The probes/module hashes match round1 snapshots. The native host receipt uses the same candidate library hash. Server PID is 21517 with /proc/21517/exe hash 2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2; server configuration hash is 78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365.
+The full server log spans historical work plus round1; it contains exactly eight 2026-10-16 legacy-GET poll_n timeout warnings, four for each NIC, and the subsequent PUT disconnect/reconnect sequence. It does not log these legacy GET keys, so per-case attribution rests on the dedicated TCP relay terminal observations and command receipts. Do not call the full server log a per-key trace.
+Round1 has a working-tree label but no new source snapshot/hash manifest. Current Python and probe hashes differ after further fixes. This is expected, but round1 does not validate final source by itself; final source-to-build receipts are required before approval.
+
+5. Host verification: collected round1 receipts show all 10 check exit files are 0.
+Python 125 passed, 11 skipped; receipt suite 6 passed; native 13 cases true. FFI build, clippy, rustfmt, make build, test-server and both shim builds have successful recorded exits. These are read from remote-produced logs, not rerun locally. Native scope is real local allocations/self-QP handshake plus cleanup-return injection, no RDMA data WR. It must remain distinct from RXE data-plane evidence.
+
+Pending before final approval:
+- Copy final exact-source RXE results and source snapshots/manifest, build outputs/binary hashes, final host checks.
+- Verify final result/probe/module/shim hashes against actual preserved files and latest source.
+- Recheck all final raw receipts and timelines; preserve round1 and historical failures unchanged.
+- Use precise controlled-injection and Soft-RoCE scope in the final delivery.
+
+No runtime-safety blocker found in round1 evidence. Approval is withheld only because final evidence has not yet been supplied to this reviewer.

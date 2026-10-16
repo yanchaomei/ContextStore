@@ -1,0 +1,155 @@
+{
+  "all_match": true,
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "git_blob": "d063aef7b6574ab3a1d188d7c4c341120a7bc9d4",
+      "sha256": "338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd"
+    },
+    {
+      "path": "Cargo.toml",
+      "git_blob": "24bc9508106072e8e7a7c3fc33933a6475dfbc2a",
+      "sha256": "289fe5e3ccbee0945b73a6b40574fe64cb9e78652358983a8af40607773b0a62"
+    },
+    {
+      "path": "kv-service/client-rs/Cargo.toml",
+      "git_blob": "cc3983d4a37687290f37d337ac56cecb02cc3861",
+      "sha256": "55789b3ceac5aafce9bf624286815ab2eb60533574bde5a27295a0b9c2183a2b"
+    },
+    {
+      "path": "kv-service/client-rs/build.rs",
+      "git_blob": "1bde82b0aaca08b8e2de0d32479b6a6f7f6e3b80",
+      "sha256": "29a912c6fc5f42b3e9bef10762d206bdb358ae69e765af58a7ce6d866a78acc2"
+    },
+    {
+      "path": "kv-service/client-rs/src/bin/bench.rs",
+      "git_blob": "4ee17931a09e13653a93c3dca8e82f458ce1dc7f",
+      "sha256": "5330f7faea342ef3167aac2944f519da77d1a6fbfaaf848458b08f282a87b7c7"
+    },
+    {
+      "path": "kv-service/client-rs/src/bin/rail_read_bench.rs",
+      "git_blob": "1413d286c4ad983a36deff5470f2e9a452102156",
+      "sha256": "0c44b91f28e1fe7fc62e28519b28c6d99687e5cbd3dca738c80166935e38ed38"
+    },
+    {
+      "path": "kv-service/client-rs/src/bin/rdma_bench.rs",
+      "git_blob": "19454e41da4e82f4cd995e31c898b22fd6f99440",
+      "sha256": "784c3ec18a8e25f057eb438f56a14aefdbe291f2c379d8c02a3ae36288a1a53c"
+    },
+    {
+      "path": "kv-service/client-rs/src/lib.rs",
+      "git_blob": "52dd65be3cc4e5958845690ac3fdc71bbf4b9fb4",
+      "sha256": "07b8488c52be71dd163097583b778ed46073c44a30aa7a0c8c4a79155cfabe04"
+    },
+    {
+      "path": "kv-service/client-rs/src/rail_read.rs",
+      "git_blob": "73d7c275bf5849d3f92bfb5e56ed104a4949670a",
+      "sha256": "a74de46a10ea07897995eb202277ed0a3f29c33dad487009255c519c1f6c6f3c"
+    },
+    {
+      "path": "kv-service/client-rs/src/rail_read/tests.rs",
+      "git_blob": "cbe714b4e8d08fddc095ed8cfbb083639a332c64",
+      "sha256": "935cc543d9b591316c3e76efa4259e233a7d04780326387c3f3adf89282b48f2"
+    },
+    {
+      "path": "kv-service/client-rs/src/rdma.rs",
+      "git_blob": "16a4746b9f3346c43c864606844ec4148330df2c",
+      "sha256": "3a72539756cefab82e510f739b76855fcb3dacf61c45dfde8fd5cbcd75ac5ae2"
+    },
+    {
+      "path": "kv-service/proto/kv_service.proto",
+      "git_blob": "b1461c58773e0c8b575a6fa5d34953836c786cac",
+      "sha256": "369b318bcd0eb67ee958cb67f6ff8e77b48c2327b976e96ae5f32b033c869ea7"
+    },
+    {
+      "path": "kv-service/rdma-ffi/Cargo.toml",
+      "git_blob": "499813c4f2826ee5aa6f299d818f39088a33f840",
+      "sha256": "0907828df7c8aa7f3908d74b2d7c3a0bee6e788f06e54c56adc2a8ef4be716b3"
+    },
+    {
+      "path": "kv-service/rdma-ffi/src/lib.rs",
+      "git_blob": "6b9bd9977e94c010365296cf939f6a878d6f0c3e",
+      "sha256": "9328dceb45b3c4c485f384205cec73e08b84026cf99cd332e6e6285d8b376320"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/Cargo.toml",
+      "git_blob": "b77af730fa8ac16d8c7a7299b16499e8a54e1efa",
+      "sha256": "bf9bbd52746598ce4586af6398264d2aa37464118f1337784ab2358738159343"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/build.rs",
+      "git_blob": "19be5d4bca197f151d8cd2fbc07443de0d58ff22",
+      "sha256": "36fbd8c4812afe2594f6c8bc2b27548c29239b277988c9461e7175687d515cd5"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/src/bindings.h",
+      "git_blob": "d0c264737a4f710a9d7681ea8b0d0ddba6f1e614",
+      "sha256": "4902b82ec0f06d4d84d1e692c419fecd51271dbe3f421ec41226c645f9afed48"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/src/lib.rs",
+      "git_blob": "37247c1c666c04936c1ab4e656c8645299583428",
+      "sha256": "dc344669cfc4c18eff1a73e86b6db0c29f032b2cb338e97120e9e93b333c1c06"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/src/opcode.rs",
+      "git_blob": "cf1a1adfc8324dbcdfa32b07ad218740cc4640eb",
+      "sha256": "74c18bc436766ff11dc67e8375c0f7465cd7875b331d0b642f38aefc0556e9e3"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/src/types.rs",
+      "git_blob": "f1f6e35a46ed6520f041f738c7f2273e311f8567",
+      "sha256": "0944dd3bdc45427d02e209d3397868daaa0ef2aa1abc7e19f2b3cfa32ff695a0"
+    },
+    {
+      "path": "kv-service/vendor/rdma-sys/src/verbs.rs",
+      "git_blob": "86c9ed41c251c7cf8711004b68adf56bddbed0bb",
+      "sha256": "3e41055204ed1f19b88e5eea565a504a4623197e11a2f943656d15e7a51a6afc"
+    },
+    {
+      "path": "kv-service/verification/ffi_lifecycle_probe.py",
+      "git_blob": "479de329723df4f33a03b923fa0515100b66d20b",
+      "sha256": "70d6ac65c8a80497db5654787b19a39203fdd8a3c79e37d53b9ecebeeb71e542"
+    },
+    {
+      "path": "kv-service/verification/ffi_rxe_late_write.py",
+      "git_blob": "5fd1f9b87d3d7d4b2a33b265414579db37eff170",
+      "sha256": "7c60c214a5fc920321a1ec560fbeb49cf597c7193e545b5cf0d82d886b97448a"
+    },
+    {
+      "path": "kv-service/verification/ffi_rxe_put_reconnect.py",
+      "git_blob": "8f08d493af43818372e7cef45c6baad8570ffdb3",
+      "sha256": "c207af313b1a19003795b2a9f6251043b377708f64d89b4b056440584d98628e"
+    },
+    {
+      "path": "kv-service/verification/run_ffi_lifecycle_validation.py",
+      "git_blob": "b2500fba6f54d7c75260f1c72b7d6e7e15b7b5ce",
+      "sha256": "b44d6677b5785a50d09b1adc433cd3851ca9c378f89a75630711da44f2b4ee21"
+    },
+    {
+      "path": "kv-service/verification/test_ffi_validation_receipts.py",
+      "git_blob": "2ecbf76790c843fbc8b381f55b94e2077452bba1",
+      "sha256": "bac17d5f1ba8d7e1358d1fb426f90c9b1b1b398de7fc9fc2ee94f7863f857b74"
+    },
+    {
+      "path": "kv-service/verification/verbs_cq_delay_shim.c",
+      "git_blob": "a7d715b9887245a53da6ea257db850f3aef79815",
+      "sha256": "950e0c59f219c1f28d40bb1c953185547c4a46731ded2eaf884815b17d676648"
+    },
+    {
+      "path": "kv-service/verification/verbs_failstop_shim.c",
+      "git_blob": "a56d1e91eecaef076c7cc41b2f302965634a63f4",
+      "sha256": "529e38fca187d32d73935471525d9647d7eb62b53634e570779e06f53f3e9b42"
+    },
+    {
+      "path": "src/contextstore/storage/rdma_client.py",
+      "git_blob": "1c456cc8d58cef73ab053c634c5d498eee5e6ba9",
+      "sha256": "c3a2bf556b96ab8d5052de686557a304d99ec1e32b26233ce29b893cba47b13b"
+    },
+    {
+      "path": "tests/unit/test_rdma_client_lifecycle.py",
+      "git_blob": "f9b5a851383dd0effe74d298a98bf68f0b3dd347",
+      "sha256": "d3876988543d8b12eb5a240c647355874821a1e9cb3c61243813be2623e85a12"
+    }
+  ]
+}

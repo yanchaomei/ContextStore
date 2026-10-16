@@ -1,0 +1,1 @@
+["python3", "ffi_rxe_late_write.py", "--library", "candidate.so", "--module", "rdma_client.py", "--server", "10.31.0.2:55153", "--device", "rxe_c0", "--key", "3:ffi-20261016-1792131783180393450", "--bytes", "1048576", "--failure-mode", "timeout", "--output", "/home/railtest/ffi-20261016/results-round1/rail0-candidate-timeout-1m.json"]

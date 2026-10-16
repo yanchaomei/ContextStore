@@ -1,0 +1,10 @@
+{
+  "source_commit_label": "precommit-working-tree",
+  "library_sha256": "173b8cf9d10eeee8216097559bc1be7f1b489e056e22ee82acbf59273548f007",
+  "shim_sha256": "8161fa871097f3d26218fb326e68400aa412c8f93caf980df534db7912728230",
+  "probe_sha256": "1965cf4d6775a7d647c7292668d17de0dc3b46f6f12d2fdba866df6a86b78b49",
+  "runner_sha256": "8bc07b0cd64e1341863c308605395388d0140ba1633079ee11773942279cf93d",
+  "device": "mlx5_1",
+  "gid_index": 3,
+  "scope": "real local Verbs allocations and self-QP control handshake; no RDMA data WR, no bandwidth claim; shim fakes cleanup return codes"
+}

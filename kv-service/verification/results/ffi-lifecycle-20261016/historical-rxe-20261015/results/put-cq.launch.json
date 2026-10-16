@@ -1,0 +1,8 @@
+{
+  "library_sha256": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+  "module_sha256": "45a02c8fd7924700e750b1090e78c485c5fea2f492966ffedb3314cab7307789",
+  "probe_sha256": "7d3b808e80d7f8d2a178e0d33a25b176a09eeeb40e7e2fbcb7c4734a1a9b3fb1",
+  "shim_sha256": "66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553",
+  "scope": "real RXE RDMA WRITE and real CQ entries; test-only shim hides CQ polling until QP destruction, no synthetic WC or provider return code",
+  "python_optimize": 0
+}

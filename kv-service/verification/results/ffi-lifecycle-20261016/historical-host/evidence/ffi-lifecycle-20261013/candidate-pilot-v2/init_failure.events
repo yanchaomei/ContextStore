@@ -1,0 +1,4 @@
+query_gid
+destroy_cq
+dealloc_pd
+close_device

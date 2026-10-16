@@ -1,0 +1,7 @@
+[cs_rdma_ffi] put failed: RDMA WRITE poll_cq timeout 30s
+Traceback (most recent call last):
+  File "/home/railtest/ffi-20261015/ffi_rxe_put_reconnect.py", line 95, in <module>
+    main()
+  File "/home/railtest/ffi-20261015/ffi_rxe_put_reconnect.py", line 81, in main
+    assert all(int(e.split("qp=")[1].split(",")[0]) != old_qp for e in completions[1:])
+AssertionError

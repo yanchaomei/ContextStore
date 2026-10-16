@@ -1,0 +1,7 @@
+[cs_rdma_ffi] new failed: ibv_query_gid failed: -1
+Traceback (most recent call last):
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 190, in <module>
+    main()
+  File "kv-service/verification/ffi_lifecycle_probe.py", line 85, in main
+    assert events == ["query_gid", "destroy_cq", "dealloc_pd", "close_device"], events
+AssertionError: ['query_gid']

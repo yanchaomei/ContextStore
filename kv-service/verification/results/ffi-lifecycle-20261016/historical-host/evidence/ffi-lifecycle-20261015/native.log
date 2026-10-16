@@ -1,0 +1,13 @@
+free_qp -6 True
+free_mr -6 True
+unregister_mr -6 True
+connect_error 0 True
+get_error 0 True
+get_into_error 0 True
+descriptor_error 0 True
+descriptor_into_error 0 True
+put_error 0 True
+oversized_reply 0 True
+short_descriptor 0 True
+init_failure 0 True
+timeout 0 True

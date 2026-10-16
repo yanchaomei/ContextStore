@@ -1,0 +1,36 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+________ test_unsafe_native_library_is_rejected_before_allocation[None] ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f6b1eba2f10>
+lifecycle_version = None
+
+    @pytest.mark.parametrize("lifecycle_version", [None, 0])
+    def test_unsafe_native_library_is_rejected_before_allocation(
+        monkeypatch, lifecycle_version: int | None
+    ) -> None:
+        events = native_library(monkeypatch, lifecycle_version)
+        with pytest.raises(RuntimeError, match="lifecycle safety"):
+>           RdmaClient("127.0.0.1:50053", buf_size_mb=1)
+E           Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests/unit/test_rdma_client_lifecycle.py:155: Failed
+_________ test_unsafe_native_library_is_rejected_before_allocation[0] __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f6c70800460>
+lifecycle_version = 0
+
+    @pytest.mark.parametrize("lifecycle_version", [None, 0])
+    def test_unsafe_native_library_is_rejected_before_allocation(
+        monkeypatch, lifecycle_version: int | None
+    ) -> None:
+        events = native_library(monkeypatch, lifecycle_version)
+        with pytest.raises(RuntimeError, match="lifecycle safety"):
+>           RdmaClient("127.0.0.1:50053", buf_size_mb=1)
+E           Failed: DID NOT RAISE <class 'RuntimeError'>
+
+tests/unit/test_rdma_client_lifecycle.py:155: Failed
+=========================== short test summary info ============================
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_unsafe_native_library_is_rejected_before_allocation[None]
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_unsafe_native_library_is_rejected_before_allocation[0]
+2 failed, 7 deselected in 1.55s

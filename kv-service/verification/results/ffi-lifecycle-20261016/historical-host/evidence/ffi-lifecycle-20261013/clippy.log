@@ -1,0 +1,169 @@
+    Checking libc v0.2.186
+    Checking anyhow v1.0.103
+    Checking memoffset v0.6.5
+    Checking rdma-sys v0.3.0 (/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service/vendor/rdma-sys)
+    Checking contextstore-rdma-ffi v0.1.0 (/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service/rdma-ffi)
+error: this `map_or` can be simplified
+   --> kv-service/rdma-ffi/src/lib.rs:796:16
+    |
+796 |               || offset
+    |  ________________^
+797 | |                 .checked_add(size)
+798 | |                 .map_or(true, |end| end > region.size as u64)
+    | |_____________________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unnecessary_map_or
+    = note: `-D clippy::unnecessary-map-or` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::unnecessary_map_or)]`
+help: use is_none_or instead
+    |
+798 -                 .map_or(true, |end| end > region.size as u64)
+798 +                 .is_none_or(|end| end > region.size as u64)
+    |
+
+error: unnecessary `if let` since only the `Some` variant of the iterator element is used
+   --> kv-service/rdma-ffi/src/lib.rs:955:13
+    |
+955 | /             for slot in self.external_regions.drain(..) {
+956 | |                 if let Some(region) = slot {
+957 | |                     require_cleanup_success(
+958 | |                         ibv_dereg_mr(region.mr.as_ptr()),
+...   |
+962 | |             }
+    | |_____________^
+    |
+help: try `.flatten()` and remove the `if let` statement in the for loop
+   --> kv-service/rdma-ffi/src/lib.rs:956:17
+    |
+956 | /                 if let Some(region) = slot {
+957 | |                     require_cleanup_success(
+958 | |                         ibv_dereg_mr(region.mr.as_ptr()),
+959 | |                         b"ContextStore FFI external MR deregistration failed; aborting\n",
+960 | |                     );
+961 | |                 }
+    | |_________________^
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#manual_flatten
+    = note: `-D clippy::manual-flatten` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::manual_flatten)]`
+help: try
+    |
+955 ~             for region in self.external_regions.drain(..).flatten() {
+956 +                 require_cleanup_success(
+957 +                     ibv_dereg_mr(region.mr.as_ptr()),
+958 +                     b"ContextStore FFI external MR deregistration failed; aborting\n",
+959 +                 );
+960 +             }
+    |
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1018:1
+     |
+1018 | / pub unsafe extern "C" fn cs_rdma_client_connect(
+1019 | |     client: *mut c_void,
+1020 | |     server_addr: *const c_char,
+1021 | | ) -> c_int {
+     | |__________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+     = note: `-D clippy::missing-safety-doc` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::missing_safety_doc)]`
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1063:1
+     |
+1063 | pub unsafe extern "C" fn cs_rdma_client_get(client: *mut c_void, key: *const c_char) -> i64 {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1083:1
+     |
+1083 | pub unsafe extern "C" fn cs_rdma_client_buffer(client: *mut c_void) -> *const u8 {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1092:1
+     |
+1092 | pub unsafe extern "C" fn cs_rdma_client_buffer_size(client: *mut c_void) -> u64 {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1102:1
+     |
+1102 | pub unsafe extern "C" fn cs_rdma_client_free(client: *mut c_void) {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1144:1
+     |
+1144 | / pub unsafe extern "C" fn cs_rdma_client_get_into(
+1145 | |     client: *mut c_void,
+1146 | |     region_id: i32,
+1147 | |     key: *const c_char,
+1148 | |     offset: u64,
+1149 | | ) -> i64 {
+     | |________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1171:1
+     |
+1171 | / pub unsafe extern "C" fn cs_rdma_client_get_descriptor_into(
+1172 | |     client: *mut c_void,
+1173 | |     region_id: i32,
+1174 | |     key: *const c_char,
+...    |
+1183 | |     offset: u64,
+1184 | | ) -> i64 {
+     | |________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1232:1
+     |
+1232 | / pub unsafe extern "C" fn cs_rdma_client_get_descriptor(
+1233 | |     client: *mut c_void,
+1234 | |     key: *const c_char,
+1235 | |     object_handle: *const c_char,
+...    |
+1242 | |     chunk_size: u64,
+1243 | | ) -> i64 {
+     | |________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1284:1
+     |
+1284 | / pub unsafe extern "C" fn cs_rdma_client_unregister_external_buffer(
+1285 | |     client: *mut c_void,
+1286 | |     region_id: i32,
+1287 | | ) -> i32 {
+     | |________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: unsafe function's docs are missing a `# Safety` section
+    --> kv-service/rdma-ffi/src/lib.rs:1313:1
+     |
+1313 | / pub unsafe extern "C" fn cs_rdma_client_put(
+1314 | |     client: *mut c_void,
+1315 | |     region_id: i32,
+1316 | |     key: *const c_char,
+1317 | |     offset: u64,
+1318 | |     size: u64,
+1319 | | ) -> i32 {
+     | |________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc
+
+error: could not compile `contextstore-rdma-ffi` (lib) due to 12 previous errors

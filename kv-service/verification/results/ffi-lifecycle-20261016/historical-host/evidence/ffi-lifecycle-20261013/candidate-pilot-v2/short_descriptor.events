@@ -1,0 +1,6 @@
+destroy_qp
+dereg_mr
+dereg_mr
+destroy_cq
+dealloc_pd
+close_device

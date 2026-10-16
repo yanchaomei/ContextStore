@@ -1,0 +1,11 @@
+test_expected_abort_stops_at_intended_verb (__main__.FfiReceiptTest) ... ok
+test_later_mr_cleanup_invalidates_qp_failstop_order (__main__.FfiReceiptTest) ... ok
+test_normal_error_requires_asserted_return_and_settled_resources (__main__.FfiReceiptTest) ... ok
+test_optimized_interpreters_reject_validation_before_argument_parsing (__main__.FfiReceiptTest) ... ok
+test_returned_cleanup_marker_invalidates_abort (__main__.FfiReceiptTest) ... ok
+test_unrelated_abort_does_not_prove_qp_failstop (__main__.FfiReceiptTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 3.375s
+
+OK

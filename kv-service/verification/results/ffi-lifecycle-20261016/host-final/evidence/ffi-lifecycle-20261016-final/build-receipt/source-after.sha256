@@ -1,0 +1,10 @@
+9328dceb45b3c4c485f384205cec73e08b84026cf99cd332e6e6285d8b376320  kv-service/rdma-ffi/src/lib.rs
+bf9bbd52746598ce4586af6398264d2aa37464118f1337784ab2358738159343  kv-service/vendor/rdma-sys/Cargo.toml
+36fbd8c4812afe2594f6c8bc2b27548c29239b277988c9461e7175687d515cd5  kv-service/vendor/rdma-sys/build.rs
+dc344669cfc4c18eff1a73e86b6db0c29f032b2cb338e97120e9e93b333c1c06  kv-service/vendor/rdma-sys/src/lib.rs
+74c18bc436766ff11dc67e8375c0f7465cd7875b331d0b642f38aefc0556e9e3  kv-service/vendor/rdma-sys/src/opcode.rs
+0944dd3bdc45427d02e209d3397868daaa0ef2aa1abc7e19f2b3cfa32ff695a0  kv-service/vendor/rdma-sys/src/types.rs
+3e41055204ed1f19b88e5eea565a504a4623197e11a2f943656d15e7a51a6afc  kv-service/vendor/rdma-sys/src/verbs.rs
+289fe5e3ccbee0945b73a6b40574fe64cb9e78652358983a8af40607773b0a62  Cargo.toml
+338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd  Cargo.lock
+0907828df7c8aa7f3908d74b2d7c3a0bee6e788f06e54c56adc2a8ef4be716b3  kv-service/rdma-ffi/Cargo.toml

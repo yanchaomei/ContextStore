@@ -1,0 +1,11 @@
+{
+  "server_pid_binary_config_unchanged": true,
+  "candidate_library_sha256": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+  "python_full": "165 passed, 11 skipped",
+  "native_cases": 13,
+  "rxe_accepted_cases": 12,
+  "negative_controls": 2,
+  "candidate_get_cases": 8,
+  "candidate_put_cases": 2,
+  "demo_binary_sha256": "0f1279cba22edf25c02d966975ddac0eacdc41fe884a383a0219b64a9924b451"
+}

@@ -1,0 +1,30 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_interrupted_native_free_cannot_leave_a_dangling_handle __________
+
+    def test_interrupted_native_free_cannot_leave_a_dangling_handle():
+        native = FakeNative()
+        client = client_with(native)
+        calls = []
+    
+        def free_then_interrupt(handle):
+            calls.append(handle)
+            raise KeyboardInterrupt()
+    
+        native.cs_rdma_client_free = free_then_interrupt
+        with pytest.raises(KeyboardInterrupt):
+            client.close()
+>       assert client._handle is None
+E       assert 123 is None
+E        +  where 123 = <contextstore.storage.rdma_client.RdmaClient object at 0x7fd6d7ef7880>._handle
+
+tests/unit/test_rdma_client_lifecycle.py:296: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_rdma_client_lifecycle.py::test_interrupted_native_free_cannot_leave_a_dangling_handle
+1 failed, 46 deselected in 1.57s
+Exception ignored in: <function RdmaClient.__del__ at 0x7fd6d7f4b670>
+Traceback (most recent call last):
+  File "/home/kvgroup/chaomei/contextstore_multirail_20261002/src/contextstore/storage/rdma_client.py", line 482, in __del__
+  File "/home/kvgroup/chaomei/contextstore_multirail_20261002/src/contextstore/storage/rdma_client.py", line 470, in close
+  File "/home/kvgroup/chaomei/contextstore_multirail_20261002/tests/unit/test_rdma_client_lifecycle.py", line 291, in free_then_interrupt
+KeyboardInterrupt: 

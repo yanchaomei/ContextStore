@@ -1,0 +1,21 @@
+make -C kv-service build
+make[1]: Entering directory '/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service'
+==> ContextStore KVService build configuration
+    profile: release
+    server features: io-uring,rdma,metrics
+    Rust client features: rdma
+    protoc (auto-discovered): /usr/local/bin/protoc
+    protoc library path: system loader path
+==> Building contextstore-server (release, features: io-uring,rdma,metrics)
+cd server && cargo build --release --features io-uring,rdma,metrics
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service/server)
+    Finished `release` profile [optimized] target(s) in 1m 21s
+==> Building contextstore-client-rs (release, features: rdma)
+cd client-rs && cargo build --release --features rdma
+    Finished `release` profile [optimized] target(s) in 0.13s
+cd rdma-ffi && cargo build --release
+    Finished `release` profile [optimized] target(s) in 0.09s
+==> Building cs-meta (release, features: io-uring,rdma,metrics)
+cd server && cargo build --release --features io-uring,rdma,metrics --bin cs-meta
+    Finished `release` profile [optimized] target(s) in 0.15s
+make[1]: Leaving directory '/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service'

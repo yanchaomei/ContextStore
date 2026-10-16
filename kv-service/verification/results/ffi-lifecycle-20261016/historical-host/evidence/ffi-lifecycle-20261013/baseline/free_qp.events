@@ -1,0 +1,5 @@
+destroy_qp
+dereg_mr
+dereg_mr_lookup_failed
+dereg_mr
+dereg_mr_lookup_failed

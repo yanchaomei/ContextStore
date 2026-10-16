@@ -1,0 +1,15 @@
+   Compiling quote v1.0.46
+   Compiling regex-syntax v0.8.11
+   Compiling bitflags v2.13.0
+   Compiling itertools v0.12.1
+   Compiling libc v0.2.186
+   Compiling anyhow v1.0.103
+   Compiling memoffset v0.6.5
+   Compiling syn v2.0.118
+   Compiling regex-automata v0.4.15
+   Compiling regex v1.13.0
+   Compiling prettyplease v0.2.37
+   Compiling bindgen v0.71.1
+   Compiling rdma-sys v0.3.0 (/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service/vendor/rdma-sys)
+   Compiling contextstore-rdma-ffi v0.1.0 (/home/kvgroup/chaomei/contextstore_multirail_20261002/kv-service/rdma-ffi)
+    Finished `release` profile [optimized] target(s) in 9.85s
