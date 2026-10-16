@@ -1,0 +1,4 @@
+{
+  "role": "isolated RXE client guest",
+  "command": "cd /home/railtest/railfuse-demo-20261016-v2 && python3 -u run_demo.py all --output receipts-take1"
+}

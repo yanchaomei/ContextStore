@@ -1,0 +1,130 @@
+{
+  "environment": "isolated two-RXE KVM guests on one host",
+  "scope": "single sequential reader and single writer; an observed initial_generation < current_generation in one read establishes a metadata Generation transition between its two LookupObject snapshots, not its exact server commit timestamp",
+  "auditor_sha256": "eddb0acff570696767c843658d423a80b537e544331cf2bdd107334e6cfd8338",
+  "base_auditor_sha256": "f939630608f1d794bf0ef4c235d388186c3cde95a6b5a1e82554ab485d0aa2cd",
+  "runs": [
+    {
+      "file": "run1.log",
+      "raw_sha256": "ef78486029bf3fee876d69102eaa6fd9a521ce8694d9f3881fb4f2352f097ce3",
+      "launch_manifest_sha256": "517ae614bfa9117fc71794dfb6d129499e7bac48dbad0f346bd28eb5826a1f11",
+      "exit_receipt_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_commit_label": "f1a3fbf4861918f68376ce7c09d287a331ff29bf",
+      "launch_time_binary_sha256": "fe3635ddb8e4e64466ecda79e8f699f5d2a1c479405fd9548e145cc62b147fdb",
+      "object_key": "unique-race-1791774969736248068",
+      "object_mib": 8,
+      "write_commits": 15,
+      "read_attempts": 20,
+      "writer_round_overlap_reads": 20,
+      "put_overlap_reads": 20,
+      "accepted": 10,
+      "rejected": 10,
+      "missing": 0,
+      "round_overlap_accepted": 10,
+      "round_overlap_rejected": 10,
+      "put_overlap_accepted": 10,
+      "put_overlap_rejected": 10,
+      "direct_mode_admissions": 21,
+      "put_end_timestamp_logged": true,
+      "put_interval_scope": "sdk_call",
+      "put_interval_definition": "start_ns is recorded immediately before put_stream_chunks and after payload Bytes allocation/segmentation; put_end_ns is recorded after the SDK call returns. Overlap establishes SDK call overlap, not server commit overlap.",
+      "rejection_reasons": {
+        "object version changed during rail read": 8,
+        "object descriptor became stale": 2
+      },
+      "accepted_generations": [
+        1,
+        2,
+        3,
+        3,
+        4,
+        6,
+        6,
+        7,
+        15,
+        16
+      ],
+      "per_rail_bytes": {
+        "rail0": 79691776,
+        "rail1": 79691776
+      },
+      "terminal_resources_zero": true,
+      "rejection_identity": {
+        "version_changed_rejections": 8,
+        "generation_transition_rejections": 8,
+        "same_generation_identity_rejections": 0,
+        "transitions": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ]
+        ],
+        "transition_attempts": [
+          1,
+          6,
+          7,
+          12,
+          13,
+          15,
+          16,
+          17
+        ],
+        "transition_rejections_with_sdk_call_overlap": 8
+      }
+    }
+  ],
+  "server_image_before": {
+    "server_pid": "1618",
+    "live_executable_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+    "config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+    "receipt_sha256": "ac4ef7cdbe2f4cd99427105b2658dad38ee8a39304927e3a32aa698f5b82e367"
+  },
+  "server_image_after": {
+    "server_pid": "1618",
+    "live_executable_sha256": "2d396c136846b3e8e4c2378c126bb2a89d148061bd220ecff6d03cac93c233d2",
+    "config_sha256": "78cbc4b06474596b8952ba1e59dd25bff54ee577d39200c9ff02c3ffb8726365",
+    "receipt_sha256": "ac4ef7cdbe2f4cd99427105b2658dad38ee8a39304927e3a32aa698f5b82e367"
+  },
+  "totals": {
+    "version_changed_rejections": 8,
+    "generation_transition_rejections": 8,
+    "same_generation_identity_rejections": 0,
+    "transition_rejections_with_sdk_call_overlap": 8,
+    "write_commits": 15,
+    "read_attempts": 20,
+    "sdk_call_overlap_reads": 20,
+    "accepted": 10,
+    "rejected": 10,
+    "missing": 0
+  },
+  "source_commit_label_boundary": "launch manifest labels require the separate 20-file Git-to-build receipt for source attribution",
+  "non_claim": "finite observed schedules do not prove all provider, crash, or buffer-aliasing behaviors"
+}

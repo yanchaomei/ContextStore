@@ -1,0 +1,1 @@
+["/usr/bin/python3", "ffi_rxe_late_write.py", "--library", "candidate.so", "--module", "rdma_client.py", "--server", "10.31.0.2:55153", "--device", "rxe_c0", "--key", "3:ffi-demo-v2-1792158481563227747", "--bytes", "1048576", "--failure-mode", "bad_tag", "--output", "receipts-take1/fixed.json"]

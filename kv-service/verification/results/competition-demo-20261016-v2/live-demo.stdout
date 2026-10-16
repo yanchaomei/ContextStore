@@ -1,0 +1,69 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+Live RXE demonstration
+  mode: all
+  server: 10.31.0.2:55153
+  device: rxe_c0
+LIVE: PUT then full-content GET
+  bytes: 67108864
+  payload_sha256: 98dc891b284e4d84ac25b0c0a24fdbe39a7f0dbd643ad5e8aa06e02fc6258254
+  full_content_verified: True
+$ ./cs-rail-read-bench --environment soft-roce --coordinator http://10.31.0.2:55151 --namespace ffi --object-key railfuse-demo-v2 --warmup 0 --iterations 1 --rail r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1
+object_identity,generation=1,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=73cc14df33591f2f,etag_xxh3=0fc76c61f8fbd60d,descriptor_xxh3=8dfc126ca17d3015,placement_xxh3=b7d747163e50f81c
+mode,direct_staging=false
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],bytes=67108864
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+sample,environment=soft-roce,rails=1,iteration=1,bytes=67108864,latency_us=420739,gib_per_s=0.149,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=1,bytes_per_iter=67108864,iters=1,median_us=420739,cpu_user_us=44738,cpu_system_us=117906,peak_rss_kb=217452,rail_bytes=[67108864]
+mode_effective,one=1,packed_greedy=0,packed_contiguous=0,direct=0
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=67108864,avg_us=379853,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=67108864,registered_bytes_reserved=0,peak_registered_bytes=67108864
+object_identity_after,generation=1,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=73cc14df33591f2f,etag_xxh3=0fc76c61f8fbd60d,descriptor_xxh3=8dfc126ca17d3015,placement_xxh3=b7d747163e50f81c
+
+$ ./cs-rail-read-bench --environment soft-roce --coordinator http://10.31.0.2:55151 --namespace ffi --object-key railfuse-demo-v2 --warmup 0 --iterations 1 --direct-staging --rail r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1 --rail r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1
+object_identity,generation=1,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=73cc14df33591f2f,etag_xxh3=0fc76c61f8fbd60d,descriptor_xxh3=8dfc126ca17d3015,placement_xxh3=b7d747163e50f81c
+mode,direct_staging=true
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7],bytes=33554432
+plan_assignment,id=r1,stripes=[8, 9, 10, 11, 12, 13, 14, 15],bytes=33554432
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+sample,environment=soft-roce,rails=2,iteration=1,bytes=67108864,latency_us=317733,gib_per_s=0.197,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=2,bytes_per_iter=67108864,iters=1,median_us=317733,cpu_user_us=35567,cpu_system_us=60006,peak_rss_kb=217452,rail_bytes=[33554432, 33554432]
+mode_effective,one=0,packed_greedy=0,packed_contiguous=0,direct=1
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=33554432,avg_us=227006,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+rail_stats,id=r1,device=rxe_c1,listener=10.32.0.2:55154,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=33554432,avg_us=243216,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+object_identity_after,generation=1,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=73cc14df33591f2f,etag_xxh3=0fc76c61f8fbd60d,descriptor_xxh3=8dfc126ca17d3015,placement_xxh3=b7d747163e50f81c
+
+$ /usr/bin/python3 ffi_rxe_late_write.py --library baseline.so --module rdma_client.py --server 10.31.0.2:55153 --device rxe_c0 --key 3:ffi-demo-v2-1792158480705446588 --bytes 1048576 --failure-mode bad_tag --output receipts-take1/baseline.json --unsafe-baseline
+LIVE: baseline result
+  reused_sentinel_intact: False
+  exact_payload_corruption: True
+  sentinel_sha256: 631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769
+  expected_payload_sha256: 631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769
+  same_handle_reconnect_put_get_full_content: False
+$ /usr/bin/python3 ffi_rxe_late_write.py --library candidate.so --module rdma_client.py --server 10.31.0.2:55153 --device rxe_c0 --key 3:ffi-demo-v2-1792158481563227747 --bytes 1048576 --failure-mode bad_tag --output receipts-take1/fixed.json
+Waiting for the real delayed server terminal state (about 30 seconds).
+LIVE: fixed result
+  reused_sentinel_intact: True
+  exact_payload_corruption: False
+  sentinel_sha256: bf63d8a95fcc2e64619813aae35fdcbe871fdd9264caa3f365eb3aed0f679129
+  expected_payload_sha256: 631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769
+  same_handle_reconnect_put_get_full_content: True
+$ CS_CQ_DELAY_LOG=... LD_PRELOAD=./verbs_cq_delay.so /usr/bin/python3 ffi_rxe_put_reconnect.py --library candidate.so --module rdma_client.py --server 10.31.0.2:55153 --device rxe_c0 --output receipts-take1/put-cq.json
+Controlled CQ poll suppression; recorded WC contents come from the real provider.
+LIVE: PUT/CQ recovery
+  old_qp_real_completion_drained_before_error_return: True
+  same_registered_buffer_reused: True
+  reconnect_put_get_full_content_rounds: 3
+  passed: True
+cq_delay_installed
+qp_destroyed_reveal_real_cq
+real_completion,qp=17,wr=0,status=0
+real_completion,qp=17,wr=0,status=0
+real_completion,qp=17,wr=0,status=0
+real_completion,qp=17,wr=0,status=0
+qp_destroyed_reveal_real_cq
+
+LIVE_DEMO_COMPLETE: all requested checks passed

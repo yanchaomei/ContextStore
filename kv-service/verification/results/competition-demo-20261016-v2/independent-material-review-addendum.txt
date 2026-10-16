@@ -1,0 +1,21 @@
+RailFuse V2 independent material review — final-byte addendum
+Date: 2026-10-16
+Recommendation: APPROVE the two narrow visual-QA edits; prior content/evidence approval remains valid for the final files bound below.
+
+Directory:
+/Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore/kv-service/verification/results/competition-demo-20261016-v2
+
+Independently checked without local core builds/tests or new RXE runs:
+- All 9 project-PDF pages and all 3 guide pages now contain the ASCII header '2026-10-16 / V2'; the former middle-dot header is absent.
+- Renderer now labels waiting compression only for the late/put scenes. The read scene uses '按实际输出顺序展示', which correctly describes its output sequence without implying a 30-second wait.
+- README.md and video-scenes.json hashes are unchanged from the prior approved bytes, including narration/data scopes.
+- Final MP4 metadata remains H.264 1920x1080 plus AAC, both exactly 270.000 seconds. Parent reports full decode and final remote lint/prepare/recorder checks green; this addendum does not claim those were independently rerun.
+
+Final SHA-256 bindings:
+4383c8c3c96c4ba5457beb19cce5064f33742d68e003c973b313ed2e01a69855  RailFuse-project-introduction-v2.pdf
+1c093bb86ad2fa1b686f54601dccac42a350abb4c32207da8702df45e377e5d9  RailFuse-demo-guide-v2.pdf
+3139a710319c89f5d08946cf8d42389591b7d465fa778ad03dd31565c33f617d  RailFuse-demo-v2.mp4
+c663b27be1f407383a591935f61d39e566edea0d673f791b3f2830e97210efa6  README.md
+09f6f57a47b8e9527e3a4d0e4662243598c4ee72fe38b8f250b0f6bbd8019bf6  video-scenes.json
+
+These display changes add no measurement, change no technical claim and require no broad re-audit. APPROVED for final packaging/publication with the prior documented evidence boundaries. Repository push, formal submission and organizer acknowledgment remain separate delivery states.

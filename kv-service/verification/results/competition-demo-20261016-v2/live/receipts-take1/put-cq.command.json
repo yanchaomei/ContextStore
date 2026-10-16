@@ -1,0 +1,1 @@
+["/usr/bin/python3", "ffi_rxe_put_reconnect.py", "--library", "candidate.so", "--module", "rdma_client.py", "--server", "10.31.0.2:55153", "--device", "rxe_c0", "--output", "receipts-take1/put-cq.json"]

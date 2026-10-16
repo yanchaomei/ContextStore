@@ -1,0 +1,65 @@
+{
+  "voice": "Tingting",
+  "rate": "per-segment measured",
+  "segments": [
+    {
+      "scene": "intro",
+      "voice_rate": 146,
+      "audio_seconds": 24.625533,
+      "scene_seconds": 25,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "architecture",
+      "voice_rate": 135,
+      "audio_seconds": 26.434649,
+      "scene_seconds": 30,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "read",
+      "voice_rate": 135,
+      "audio_seconds": 29.694104,
+      "scene_seconds": 40,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "performance",
+      "voice_rate": 135,
+      "audio_seconds": 24.284535,
+      "scene_seconds": 35,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "version",
+      "voice_rate": 135,
+      "audio_seconds": 22.90254,
+      "scene_seconds": 35,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "late",
+      "voice_rate": 135,
+      "audio_seconds": 27.7278,
+      "scene_seconds": 40,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "put",
+      "voice_rate": 135,
+      "audio_seconds": 30.837324,
+      "scene_seconds": 35,
+      "complete_audio_fits": true
+    },
+    {
+      "scene": "reproduce",
+      "voice_rate": 135,
+      "audio_seconds": 26.948435,
+      "scene_seconds": 30,
+      "complete_audio_fits": true
+    }
+  ],
+  "duration_seconds": 270,
+  "terminal_capture_duration_seconds": 65.71773,
+  "waiting_gaps_capped_seconds_in_video": 4
+}

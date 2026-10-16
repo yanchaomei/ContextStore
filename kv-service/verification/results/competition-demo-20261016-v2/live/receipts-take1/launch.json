@@ -1,0 +1,13 @@
+{
+  "hashes": {
+    "candidate.so": "aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b",
+    "baseline.so": "6f17158aec8edf75cfc923a06a502ac525c78a54b77d42c80986bfc7d6d961d1",
+    "verbs_cq_delay.so": "66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553",
+    "cs-rail-read-bench": "0f1279cba22edf25c02d966975ddac0eacdc41fe884a383a0219b64a9924b451",
+    "rdma_client.py": "c3a2bf556b96ab8d5052de686557a304d99ec1e32b26233ce29b893cba47b13b",
+    "ffi_rxe_late_write.py": "7c60c214a5fc920321a1ec560fbeb49cf597c7193e545b5cf0d82d886b97448a",
+    "ffi_rxe_put_reconnect.py": "c207af313b1a19003795b2a9f6251043b377708f64d89b4b056440584d98628e"
+  },
+  "mode": "all",
+  "scope": "real RXE on isolated KVM guests; controlled CQ suppression only in PUT probe"
+}

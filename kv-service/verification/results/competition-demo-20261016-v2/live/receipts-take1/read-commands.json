@@ -1,0 +1,39 @@
+{
+  "single": [
+    "./cs-rail-read-bench",
+    "--environment",
+    "soft-roce",
+    "--coordinator",
+    "http://10.31.0.2:55151",
+    "--namespace",
+    "ffi",
+    "--object-key",
+    "railfuse-demo-v2",
+    "--warmup",
+    "0",
+    "--iterations",
+    "1",
+    "--rail",
+    "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1"
+  ],
+  "dual": [
+    "./cs-rail-read-bench",
+    "--environment",
+    "soft-roce",
+    "--coordinator",
+    "http://10.31.0.2:55151",
+    "--namespace",
+    "ffi",
+    "--object-key",
+    "railfuse-demo-v2",
+    "--warmup",
+    "0",
+    "--iterations",
+    "1",
+    "--direct-staging",
+    "--rail",
+    "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+    "--rail",
+    "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+  ]
+}

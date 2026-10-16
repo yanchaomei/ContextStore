@@ -1,0 +1,40 @@
+将运行真实 RXE 演示：read
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+Live RXE demonstration
+  mode: read
+  server: 10.31.0.2:55153
+  device: rxe_c0
+LIVE: PUT then full-content GET
+  bytes: 67108864
+  payload_sha256: 98dc891b284e4d84ac25b0c0a24fdbe39a7f0dbd643ad5e8aa06e02fc6258254
+  full_content_verified: True
+$ ./cs-rail-read-bench --environment soft-roce --coordinator http://10.31.0.2:55151 --namespace ffi --object-key railfuse-demo-v2 --warmup 0 --iterations 1 --rail r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1
+object_identity,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=813597ab541b1d6a,etag_xxh3=39e8c00373f00918,descriptor_xxh3=b93a4fef156b3b7a,placement_xxh3=09aa4e22fc30052c
+mode,direct_staging=false
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],bytes=67108864
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+sample,environment=soft-roce,rails=1,iteration=1,bytes=67108864,latency_us=381797,gib_per_s=0.164,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=1,bytes_per_iter=67108864,iters=1,median_us=381797,cpu_user_us=39603,cpu_system_us=81039,peak_rss_kb=216636,rail_bytes=[67108864]
+mode_effective,one=1,packed_greedy=0,packed_contiguous=0,direct=0
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=67108864,avg_us=338974,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=67108864,registered_bytes_reserved=0,peak_registered_bytes=67108864
+object_identity_after,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=813597ab541b1d6a,etag_xxh3=39e8c00373f00918,descriptor_xxh3=b93a4fef156b3b7a,placement_xxh3=09aa4e22fc30052c
+
+$ ./cs-rail-read-bench --environment soft-roce --coordinator http://10.31.0.2:55151 --namespace ffi --object-key railfuse-demo-v2 --warmup 0 --iterations 1 --direct-staging --rail r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1 --rail r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1
+object_identity,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=813597ab541b1d6a,etag_xxh3=39e8c00373f00918,descriptor_xxh3=b93a4fef156b3b7a,placement_xxh3=09aa4e22fc30052c
+mode,direct_staging=true
+mode,contiguous_schedule=false
+plan_assignment,id=r0,stripes=[0, 1, 2, 3, 4, 5, 6, 7],bytes=33554432
+plan_assignment,id=r1,stripes=[8, 9, 10, 11, 12, 13, 14, 15],bytes=33554432
+route,id=r0,device=rxe_c0,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.31.0.2:55153
+route,id=r1,device=rxe_c1,port=1,gid=1,weight=1,advertised=10.31.0.2:55153,listener=10.32.0.2:55154
+sample,environment=soft-roce,rails=2,iteration=1,bytes=67108864,latency_us=305487,gib_per_s=0.205,xxh3=a0a4cbfa5cad46af
+summary,environment=soft-roce,rails=2,bytes_per_iter=67108864,iters=1,median_us=305487,cpu_user_us=60039,cpu_system_us=44140,peak_rss_kb=216636,rail_bytes=[33554432, 33554432]
+mode_effective,one=0,packed_greedy=0,packed_contiguous=0,direct=1
+rail_stats,id=r0,device=rxe_c0,listener=10.31.0.2:55153,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=33554432,avg_us=202628,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+rail_stats,id=r1,device=rxe_c1,listener=10.32.0.2:55154,numa=None,pci=None,healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=33554432,avg_us=222999,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=33554432,registered_bytes_reserved=0,peak_registered_bytes=37748736
+object_identity_after,generation=2,layout_version=1,stripe_count=16,chunk_size=4194304,handle_xxh3=813597ab541b1d6a,etag_xxh3=39e8c00373f00918,descriptor_xxh3=b93a4fef156b3b7a,placement_xxh3=09aa4e22fc30052c
+
+LIVE_DEMO_COMPLETE: all requested checks passed

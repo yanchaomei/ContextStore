@@ -1,0 +1,7 @@
+{
+  "captured_driver": "live/run_demo.py",
+  "captured_sha256": "38686f4d697137910b13f188365d09a226ab56a5bd31d096a939146a2d49eaaf",
+  "published_driver_sha256": "3dd895b5f170d5d1a72c38cdc544569a425224877ccefbacf1d911a4accc6773",
+  "ast_identical": true,
+  "note": "Only formatting changed after the captured run; original executed bytes are retained."
+}

@@ -1,0 +1,68 @@
+RailFuse submission V2 — independent material and runtime-evidence review
+Date: 2026-10-16
+Recommendation: APPROVE the revised material claims, demonstration instructions and evidence attribution for publication. No unresolved claim/evidence blocker remains after the fixes reviewed below.
+
+Reviewed directory:
+/Users/yanchaomei/Documents/Codex/2026-10-01/daocloud-contextstore-1-kv-cache-nvme/work/ContextStore/kv-service/verification/results/competition-demo-20261016-v2
+
+Scope and method
+This was a read-only artifact audit. I inspected both PDFs' extracted text and link annotations, README, scene/narration metadata, generated mechanism illustrations, audit-derived plots and their generating logic, copied historical JSON and underlying historical raw-file hashes, original timed output, per-case live receipts, and source/binary attribution. No local core build/test or new RXE run was performed, and no repository file was edited by this reviewer. The parent agent owns final full-PDF visual QA, video frame/audio/decode QA, inventory generation and repository push.
+
+1. Claim boundaries and attribution: PASS
+- The 9-page project PDF, 3-page guide, README and architecture image explicitly distinguish Rust RailReader private staging/failure-atomic publication from Python single-connection FFI lifecycle semantics. They explicitly state that a failed Python GET may leave partial data; the Python API does not inherit Rust multi-rail atomic publication.
+- Direct ordered staging is described as an optional path with admission conditions and packed fallback; existing upstream service/protocol/storage layout and Apache-2.0 provenance are acknowledged. The user-facing contribution is scoped to the research branch rather than presented as a replacement storage implementation.
+- Core safety commit 39ce2d50fcee00405758f1e2c4f7bd389baccf1c and base material commit 3997eabdb241213eddbd668f6902fa7610de52ae are accurately separated. Read-only Git comparison finds no changes to src, server, client-rs, rdma-ffi or vendor runtime sources since the core safety commit. The full tracked diff since that commit consists of README and earlier presentation materials; this is consistent with a material update, not a runtime change.
+- Current live data, October 9 performance, October 12 Generation witness and October 16 frozen acceptance remain separately dated. The full frozen RXE matrix is not claimed to have been rerun in this single-link V2 demonstration.
+- Two generated images visibly state mechanism/schematic status. The images do not masquerade as runtime screenshots or measured data. Numerical plots are generated from real audit JSON.
+
+2. Historical performance figure and PDF numbers: PASS
+- assets/perf-64.json and assets/perf-256.json are byte-identical to their source-map paths. All 53 underlying source-file hashes per size (106 total) match the original files.
+- Recomputed block geometric means from the 10 paired ratios equal 1.1004322903070844 and 1.160570317360564, which round to the displayed 1.100x and 1.161x.
+- Blocks above one are 8/10 and 10/10; the 64 MiB loss blocks remain represented. Reported ranges and 95% block-bootstrap intervals match the JSON: 64 MiB [1.0475284045167368, 1.1609288514605396], 256 MiB [1.116578644367493, 1.2091924869008828]. These are bounded/exploratory block observations.
+- The direct and packed-contiguous stripe plans are identical within each size, independently checked from environment.plan_assignments. The control is therefore correctly named Direct/packed-contiguous rather than a planner or single/dual-rail attribution.
+- PDF CPU values 123.9->76.5 ms and 433.6->259.4 ms and RSS 206.3->142.5 MiB and 782.5->526.6 MiB match the audit resources after unit conversion/rounding. The PDF states that CPU includes warmup/process setup amortization and is not the latency statistic; net effect includes allocation/registration/cleanup rather than being a pure memcpy estimate.
+- The materials state 10 launched process blocks per size, one warmup and five measured reads per mode, different server source conditions for the two sizes, and comparisons only within size. They do not turn this software-RoCE experiment into physical dual-HCA aggregation or end-to-end inference evidence.
+
+3. Historical Generation figure and narration: PASS
+- assets/generation-witness.json is byte-identical to the October 12 result.json. The referenced raw run1.log matches its SHA-256.
+- Independently counted 20 UNIQUE_READ records: 10 accepted and 10 rejected. Rejections consist of 8 'object version changed during rail read' and 2 'object descriptor became stale'. The 8 RAIL_REJECTED_ID records explicitly show transitions 1->2, 4->5, 5->6, 8->9, 9->10, 11->12, 12->13 and 13->14, agreeing with the figure and metadata. The run records 15 unique-content overwrites.
+- The material does not label all 10 rejections as observed Generation transitions. It states that 8 reads establish a metadata transition between their two Lookup snapshots, while exact server commit and overlap with in-flight WRITE remain unmeasured. The figure's 10/8/2 meanings and the guide's explanation agree.
+
+4. Fresh live RXE outcomes and source/binary hashes: PASS
+- live/receipts-take1 launch.json and completed.json have identical seven-file before/after hashes. Candidate, baseline, CQ shim and Rust bench hashes match the prior frozen build/binary evidence. Current Python wrapper/probe source bytes also match those hashes.
+- Candidate FFI SHA-256 aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b; baseline 6f17158aec8edf75cfc923a06a502ac525c78a54b77d42c80986bfc7d6d961d1; CQ observer 66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553; Rust bench 0f1279cba22edf25c02d966975ddac0eacdc41fe884a383a0219b64a9924b451.
+- The 64 MiB FFI seed records exact full-content readback and SHA-256 98dc891b284e4d84ac25b0c0a24fdbe39a7f0dbd643ad5e8aa06e02fc6258254. Rust single and dual reads have stable matching object identities and return 67,108,864 bytes with locked-dependency digest a0a4cbfa5cad46af. The same dependency's independent expected-fixture checksum was verified in the frozen evidence; this is correctly scoped to twox-hash 1.6.3, not standardized cross-library XXH3.
+- Single exit=0, dual exit=0. Dual direct mode is effective and reports 33,554,432 bytes per rail; terminal in-flight requests/bytes and reserved registered budget are zero. Peak counters remain nonzero and are not now claimed to be zero.
+- Baseline late-WRITE probe exit=1 with exact corruption and actual target SHA equal to deterministic payload SHA 631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769. Fixed probe exit=0 with actual sentinel SHA bf63d8a95fcc2e64619813aae35fdcbe871fdd9264caa3f365eb3aed0f679129, no exact payload corruption, and same-handle reconnect full-content recovery true. The baseline is explicitly a pollution control, with no recovery claim.
+- Both late-WRITE receipts independently satisfy error_return < sentinel_reuse < relay_forward < server_terminal < sentinel_check. The original allocation/rkey remains registered until after the terminal check. Baseline terminates with full GET_RESP; fixed terminates with EOF after the actual approximately 30-second server timeout.
+- PUT probe exit=0, elapsed 31.002416224 s. Raw event file exactly equals receipt events: genuine provider status=0 old completion before error-return observation, then three same-handle/same-registration full-content PUT/GET rounds, four genuine status=0 completions total. QPN reuse is allowed. Controlled CQ polling suppression and genuine WC contents are accurately disclosed.
+- Full result JSON appears unchanged in each corresponding raw probe log; launch/result fields agree; overall live-demo exit is 0 and completed.json says passed. The before/after server executable/config hashes remain consistent with the prior server, and topology identifies the actual dedicated two-KVM/RXE fixture.
+
+5. Original timing, edited video and narration: PASS within this review scope
+- live-demo.cast has 12 output events ending at 65.71773 seconds. Its event array exactly equals live-events.json. Concatenating event payload bytes reproduces live-demo.stdout byte-for-byte, including the original transport notice. The first apparent text mismatch was only universal-newline conversion and was resolved by comparing original decoded bytes.
+- The video renderer splits at actual printed command boundaries, preserves output content/order, and removes transport notices/ANSI escapes only from displayed excerpts. It explicitly caps idle gaps and labels the terminal display 'REAL CAPTURE / EDITED REPLAY'. README and project PDF explain that the result combines real output replay, mechanism illustrations and dated historical evidence; it is not presented as a continuous desktop screen recording.
+- The final MP4 contains H.264 1920x1080 video and AAC audio, each exactly 270.000 s. Scene durations sum to 270 s and match the guide's timeline. Updated audio QA says every complete narration fits its scene; the revised read narration is 29.694104 s in a 40 s scene. Full frame/decode/listening approval remains with the parent agent's final QA.
+- The guide explains what command to execute, what concrete fields to inspect, the actual approximately 30/31-second waits, failure-stop behavior, and the need to identify archived replay explicitly when used in place of a live run.
+
+6. Delivery fixes identified and rechecked
+- FIXED: the guide previously promised a directory README that did not exist. README.md now supplies actual environment prerequisites, topology constants, make build + prepare_demo.sh sequence, per-mode and recorder commands, legacy-control scope, and the distinction between fixture preparation and automatic VM/RXE/Redis/storage provisioning. It links to retained server configuration and root dependency instructions.
+- FIXED: vague 'terminal resources zero' wording became the measured 'in-flight requests, bytes, and reserved registered budget zero' in the rebuilt guide and re-rendered narration. This agrees with logged counters.
+- The published run_demo.py was formatted after capture. The original executed bytes remain under live/run_demo.py. I independently parsed both without executing them and found identical ASTs excluding source positions. Captured SHA-256 is 38686f4d697137910b13f188365d09a226ab56a5bd31d096a939146a2d49eaaf; published SHA-256 is 3dd895b5f170d5d1a72c38cdc544569a425224877ccefbacf1d911a4accc6773. audit-driver-formatting.json accurately preserves this distinction. No fresh RXE run is required for this formatting-only difference.
+
+7. Links, dependency scope and completion boundary
+- PDF source/evidence annotations point to the correct fork/branch and frozen core/material commits. Root README links to the actual V2 PDF/video/guide/raw directory. Local targets exist; parent should perform normal remote link/readback verification after pushing.
+- Runtime prerequisites (Linux, libibverbs/provider, configured RXE endpoints, service/storage/Redis) are separated from artifact-generation dependencies (ReportLab, Pillow, Matplotlib, macOS fonts/say/Tingting, ffmpeg). Unsafe baseline and observer are described as isolated test dependencies.
+- Materials preserve the distinction between artifact preparation, repository push, official email submission and organizer acknowledgment. The stated deadline/email are explicitly attributed to the user-supplied notice, not independently certified here.
+- Final SHA256SUMS/inventory, remote artifact style/prepare/recorder checks, full-PDF/video QA and push remain parent-owned finishing steps. They are not asserted complete by this independent report.
+
+Reviewed final artifact SHA-256 values
+RailFuse-project-introduction-v2.pdf b18dd001a8111b7379e5d2062b9a70cd0ebd1c0d3cd80f92bc7570be6db91aae
+RailFuse-demo-guide-v2.pdf ce16a6e31b7a76afa4b9a664750493e4bab3fd13af85ffd60ee98354eb04780d
+RailFuse-demo-v2.mp4 30aa08f803f7438637a0475a8b871ba28ae7efc827d9089a41def52a66638d50
+README.md c663b27be1f407383a591935f61d39e566edea0d673f791b3f2830e97210efa6
+video-scenes.json 09f6f57a47b8e9527e3a4d0e4662243598c4ee72fe38b8f250b0f6bbd8019bf6
+live-demo.cast ad9a7c5d233c6a24ae5832ccf533411e9ffb210dd230cd4363a178f835fd78d8
+live-events.json 311ef94d66886005a4dc1f2c2c67947e1c6299d6e08854826d8bd19306d41c15
+
+Final recommendation
+APPROVE publication of the reviewed V2 materials after parent-owned final packaging/visual checks. Claims, figures, dates, guide actions and fresh live outcomes align; no evidence issue requires a new core build/test or RXE run. Keep the demonstrated same-host RXE, controlled-CQ, one-iteration demo and historical-experiment scopes visible. This approval is for artifact content/evidence, not an assertion that formal competition submission or acknowledgment has occurred.

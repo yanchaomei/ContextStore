@@ -1,0 +1,13 @@
+{
+  "base_materials_commit": "3997eabdb241213eddbd668f6902fa7610de52ae",
+  "core_safety_commit": "39ce2d50fcee00405758f1e2c4f7bd389baccf1c",
+  "historical_performance_date": "2026-10-09",
+  "generation_witness_date": "2026-10-12",
+  "live_demo_date": "2026-10-16",
+  "runtime_source_changed": false,
+  "archived_sources": {
+    "perf-64.json": "kv-service/benchmarks/results/paper-direct-final-2026-10-09/64mib/audit.json",
+    "perf-256.json": "kv-service/benchmarks/results/paper-direct-final-2026-10-09/256mib/audit.json",
+    "generation-witness.json": "kv-service/verification/results/unique-generation-transition-20261012/result.json"
+  }
+}

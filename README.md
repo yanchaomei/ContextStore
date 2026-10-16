@@ -2,6 +2,22 @@
 
 **Tiered shared storage for LLM inference KV caches.**
 
+## RailFuse competition entry and demonstration (2026-10-16 V2)
+
+This fork's research branch adds object-aware multi-rail client reads, optional direct ordered private staging, and explicit publication/retirement boundaries. It builds on the upstream ContextStore service, protocol and storage layout.
+
+- [Project introduction (Chinese PDF)](kv-service/verification/results/competition-demo-20261016-v2/RailFuse-project-introduction-v2.pdf)
+- [4:30 narrated demonstration](kv-service/verification/results/competition-demo-20261016-v2/RailFuse-demo-v2.mp4)
+- [Step-by-step presenter guide (Chinese PDF)](kv-service/verification/results/competition-demo-20261016-v2/RailFuse-demo-guide-v2.pdf)
+- [Live demo scripts, timed terminal capture and raw receipts](kv-service/verification/results/competition-demo-20261016-v2/)
+- [Frozen FFI/Python safety acceptance and independent reviews](kv-service/verification/results/ffi-lifecycle-20261016/)
+
+The story follows three decisions: **plan the paths, validate before publication, retire DMA ownership before reuse**. The optional Rust direct path writes disjoint regions of one request-private ordered buffer; Python's legacy FFI remains a separate single-connection interface with explicit lifetime obligations.
+
+<img src="kv-service/verification/results/competition-demo-20261016-v2/assets/mechanism-overview.png" alt="RailFuse planning, publication and lifetime boundaries" width="100%">
+
+Historical same-plan direct/packed-contiguous RXE comparisons give 1.100x (64 MiB) and 1.161x (256 MiB) paired throughput ratios over ten process blocks per size. The October 12 witness records eight reads with observed Generation growth and safe rejection. The new October 16 live capture demonstrates a 64 MiB write/read, matching single/dual-rail hashes, genuine baseline late-WRITE corruption, fixed-buffer recovery, and three same-registration PUT/GET recovery rounds. Dates and scopes remain separate; these software-RoCE results do not establish physical dual-HCA aggregation or end-to-end inference speedup.
+
 ContextStore extends the KV cache from a single node's GPU HBM out to host memory, local NVMe, and remote JBOF / NVMe-oF pools. It gives vLLM / Dynamo inference workers cross-instance, cross-session KV reuse so long-context and multi-replica deployments avoid repeating prefill on cache-warm prefixes.
 
 The repository is split into two independently built parts, plus a thin plugin layer:

@@ -1,0 +1,14 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+All checks passed!
+All done! ✨ 🍰 ✨
+5 files would be left unchanged.
+aec0981a59a8669bccabad1bef9091e58af4ee882ba9ebe572061e4285f82c5b  candidate.so
+6f17158aec8edf75cfc923a06a502ac525c78a54b77d42c80986bfc7d6d961d1  baseline.so
+66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553  verbs_cq_delay.so
+0f1279cba22edf25c02d966975ddac0eacdc41fe884a383a0219b64a9924b451  cs-rail-read-bench
+c3a2bf556b96ab8d5052de686557a304d99ec1e32b26233ce29b893cba47b13b  rdma_client.py
+3dd895b5f170d5d1a72c38cdc544569a425224877ccefbacf1d911a4accc6773  run_demo.py
+Prepared the recorded fixture. It requires the documented RXE server, devices and routes.
+67890

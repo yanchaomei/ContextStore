@@ -1,0 +1,21 @@
+{
+  "project_pdf_pages": 9,
+  "guide_pdf_pages": 3,
+  "full_video_decode_exit": 0,
+  "sampled_frames": [
+    "cover",
+    "mechanism",
+    "read",
+    "performance",
+    "generation",
+    "late",
+    "put",
+    "reproduce"
+  ],
+  "sampled_audio_seconds": 9,
+  "audio_narration_fit": true,
+  "core_git_diff_since_safety_commit": "",
+  "remote_artifact_style_exit": 0,
+  "live_all_exit": 0,
+  "presenter_launcher_read_exit": 0
+}
