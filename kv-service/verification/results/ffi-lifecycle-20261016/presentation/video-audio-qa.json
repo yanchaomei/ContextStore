@@ -1,0 +1,66 @@
+[
+  {
+    "scene": 1,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 18.571655,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 2,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 21.085714,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 3,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 19.203356,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 4,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 19.342676,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 5,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 19.540045,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 6,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 21.895147,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 7,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 20.48644,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  },
+  {
+    "scene": 8,
+    "voice": "Tingting",
+    "rate": 135,
+    "audio_seconds": 20.66449,
+    "scene_seconds": 30,
+    "complete_audio_fits": true
+  }
+]
