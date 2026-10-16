@@ -1,0 +1,16 @@
+{
+  "prior_materials_commit": "eb75f83fcf177e27398b154f05956a019e803e91",
+  "core_safety_commit": "39ce2d50fcee00405758f1e2c4f7bd389baccf1c",
+  "runtime_source_changed": false,
+  "new_measurements": false,
+  "historical_performance_date": "2026-10-09",
+  "generation_witness_date": "2026-10-12",
+  "live_capture_date": "2026-10-16",
+  "live_capture_path": "../competition-demo-20261016-v2/",
+  "frozen_safety_path": "../ffi-lifecycle-20261016/",
+  "voice_reused_from": "../competition-demo-20261016-v3/narration/",
+  "new_illustration_manifest": "assets/image-manifest-v4.json",
+  "image_prompts": "assets/image-generation-prompts-v4.json",
+  "image_review": "independent-image-review.md",
+  "workflow_skill": "workflow-skill/SKILL.md"
+}

@@ -1,0 +1,895 @@
+{
+  "interpretation": "balanced five-arm launched-process blocks with both one-Rail paths and same-planner packed control; exploratory block-bootstrap intervals, no physical-HCA aggregation claim",
+  "environment": {
+    "environment": "soft-roce",
+    "binary_sha256": "4b511dfa061afb1131da39daac85e1d60f98b971b4f38b952e023d67865f0ee0",
+    "coordinator": "http://10.31.0.2:55151",
+    "namespace": "rust-bench",
+    "object_key": "paper256direct0/__combined__",
+    "object_bytes": 268435456,
+    "object_xxh3": "fe51c755b1336171",
+    "rails": [
+      "r0,rxe_c0,10.31.0.2:55153,10.31.0.2:55153,1,1",
+      "r1,rxe_c1,10.31.0.2:55153,10.32.0.2:55154,1,1"
+    ],
+    "blocks": 10,
+    "orders": [
+      [
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct"
+      ],
+      [
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0"
+      ],
+      [
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1"
+      ],
+      [
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed"
+      ],
+      [
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous"
+      ],
+      [
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0"
+      ],
+      [
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1"
+      ],
+      [
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed"
+      ],
+      [
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous"
+      ],
+      [
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct"
+      ]
+    ],
+    "warmup_reads_per_arm": 1,
+    "measured_reads_per_arm": 5,
+    "arms": [
+      "single_r0",
+      "single_r1",
+      "packed",
+      "packed_contiguous",
+      "direct"
+    ],
+    "arm_set": "five",
+    "object_identity": "generation=1,layout_version=1,stripe_count=64,chunk_size=4194304,handle_xxh3=6b4de8d98e0ac248,etag_xxh3=bb940c7b2b575529,descriptor_xxh3=1db39a4ce6dc5043,placement_xxh3=1b10db0ed2bfe54e",
+    "plan_assignments": {
+      "single_r0": [
+        [
+          "r0",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          268435456
+        ]
+      ],
+      "single_r1": [
+        [
+          "r1",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          268435456
+        ]
+      ],
+      "packed": [
+        [
+          "r0",
+          [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40,
+            42,
+            44,
+            46,
+            48,
+            50,
+            52,
+            54,
+            56,
+            58,
+            60,
+            62
+          ],
+          134217728
+        ],
+        [
+          "r1",
+          [
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15,
+            17,
+            19,
+            21,
+            23,
+            25,
+            27,
+            29,
+            31,
+            33,
+            35,
+            37,
+            39,
+            41,
+            43,
+            45,
+            47,
+            49,
+            51,
+            53,
+            55,
+            57,
+            59,
+            61,
+            63
+          ],
+          134217728
+        ]
+      ],
+      "packed_contiguous": [
+        [
+          "r0",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          134217728
+        ],
+        [
+          "r1",
+          [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          134217728
+        ]
+      ],
+      "direct": [
+        [
+          "r0",
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          134217728
+        ],
+        [
+          "r1",
+          [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          134217728
+        ]
+      ]
+    }
+  },
+  "source_sha256": {
+    "environment.json": "87c7af3a923af08f93c42b64599dcd65e3ce7ef66f465eaad5ca6a067586007e",
+    "summary.csv": "efcb0232fdbd78eadfaa870e2f3319bdcc9d815a619a31524c635b64b6856104",
+    "samples.csv": "d10e8f4f879322cacf444cbc2499d2a90b7a6ba0872cd2b79699c6a9879a0cb2",
+    "block-01-single_r0.log": "f2eac70c28212d17e2ad1c97ef4c990dd3713ea200f1a30900448464ace757e5",
+    "block-01-single_r1.log": "2d32b9b171fc07a7db1fa8c66b4cd86d12913e2a4cb18d7e5d83007869a61ebd",
+    "block-01-packed.log": "73cd4bc3568c35293d0d48ce4e344f3221c9dbdb46c54b6287cbad00a12a0d01",
+    "block-01-packed_contiguous.log": "05f9731d9573f02987b025ebd6afc8adf43a2c1deda14032e264029ccc291fb9",
+    "block-01-direct.log": "22d0e478e2a119d0c85807f8db42a729990a0a79fe4ad92ba3209373771a4f83",
+    "block-02-single_r0.log": "27b392b935cd41b5f8c91aa361b179b9d837372c636da872aae3f567da40b072",
+    "block-02-single_r1.log": "5a904763c5d663b92d4c720a43defd6182aba2ccf19ff034b50fe11b22388cc3",
+    "block-02-packed.log": "f061996837135237fb47195e60ee8d41117b8619e634d0f4de3cff43751e1486",
+    "block-02-packed_contiguous.log": "bcc38ce312557bdbb297e2142d7942051a0669501eb10cd48297f8096d4e85d1",
+    "block-02-direct.log": "a8b4b21d09dfc98c2b36a1235c75bd3f814749833d7c698bb92bde4a3cc60684",
+    "block-03-single_r0.log": "8bf75e753f485101e0569737aa9ef0ded121493a5a1ad6963ef3e0f3e1b1a6ae",
+    "block-03-single_r1.log": "28ccae42bb356bbebb186817c7100f8b05621a84aab5571fd483443d6072d438",
+    "block-03-packed.log": "dbf171150a62e7f0d26256ec2a40715f401cd5a1163f53f1406367a54e4c4054",
+    "block-03-packed_contiguous.log": "6af80757d2a7d6136c86120b01905b699619b1654c20313eab297dd43dc6aba2",
+    "block-03-direct.log": "9f7f1364ad04a52847466b737e81819aa9e4d463eab65f5be4f2198d9bff51cd",
+    "block-04-single_r0.log": "42b42cf42f309df20aabddbf289f90c0553c5487dba10ec118cdaad0eea8e5aa",
+    "block-04-single_r1.log": "c7df69610f11f5ac6f1628453db7e27f7ffade190a987746ab9742f43bb69687",
+    "block-04-packed.log": "318fbbc87ab0eed6453920412401118822c27a4319ae9a028224656c0dab8b1a",
+    "block-04-packed_contiguous.log": "c9ebebb80b368fc02a4423b987e102bbd9d3736ae667628878619185706618c4",
+    "block-04-direct.log": "4e0d01b1cebd637925bf73861251b452445f036651aebad06849af0f77394dc3",
+    "block-05-single_r0.log": "1a9322ce9d814f7521ecc2af490bf42921cc831bb1d3e273850c43bbcf7e4396",
+    "block-05-single_r1.log": "c85bbf97be05d49048adf8c31c3508ce0a0862f5ee827efa6e08709c6e05aae2",
+    "block-05-packed.log": "2e6bec1f802b40ac457ae248ac73c5c0b5c339fa62385f72a859a70b60066eab",
+    "block-05-packed_contiguous.log": "122a000d448c98a657fe9169a442ce79c79ec76e40875a3d9ac54bc1799e8e47",
+    "block-05-direct.log": "6a115b19f2fe8192417892efcfca490b1530f533887ff3362acff209f0d0b877",
+    "block-06-single_r0.log": "2bfe6cbce75cbdfafaf7bb57e8a019d2aa30372e497d3ba94acfdedcbf964c07",
+    "block-06-single_r1.log": "1d66ed8beeb67da7a6cf60f6d111ef6db5a4c3ea0a85cdc87767ecf1c430d088",
+    "block-06-packed.log": "5a560b7ea4933ea712ed9efb2cf027445e07ac841fb0be828b391097b94d8e04",
+    "block-06-packed_contiguous.log": "9a09ecf6c036b031de46ddb565e5a0c11d67f0f539975b4290dddbe1de5e4542",
+    "block-06-direct.log": "f62f7196eb1f84ee853513eed4f65c801a708a9a77be4dafb2cacdef51c8c251",
+    "block-07-single_r0.log": "7d6bc290a5cabca6e6ff0da116024e920197f209f62aaa9187a881002175b5aa",
+    "block-07-single_r1.log": "bc9c18c32211c1147e8d8e16324609caa62a0e2c39f13bfc7c17bd817ba74617",
+    "block-07-packed.log": "fc9068f52d5f891ee66e161227954f528527e9bdfdca5273a12e94999344d699",
+    "block-07-packed_contiguous.log": "b8f4e0f9bbddd6e03730f4be0779031e0d62fc4db4ce7ebbc0f541c3b050207a",
+    "block-07-direct.log": "31fcfdca9290adb2cad465826a5e430804c3d95e098c49d1c6a0bd9cec4fde72",
+    "block-08-single_r0.log": "9c870c4559a3a8d4bfe2926f976767f4f3086ba0cf1c971e85e77a48d9e28f7b",
+    "block-08-single_r1.log": "885995f9a3d7a8c2b1efc2cfae0808572ca390b9a4ae7d86c0f8444f6018d772",
+    "block-08-packed.log": "d1c02180e710f514e62c97a732fcf34a17dab2b119393e210671db67937b335a",
+    "block-08-packed_contiguous.log": "9d70c06f8f400ba15193a6f16776b4bd57bdee8e4d626756145b8799e51c5e7a",
+    "block-08-direct.log": "1d9ed8f884679f007ece060e9443cba8ea2d7cb881f1bf30b1434c263a457f08",
+    "block-09-single_r0.log": "c82519b51d674b090ea9885f28e6c964f7be9590b39f1a1bb4b71cb6e4e78ad1",
+    "block-09-single_r1.log": "6e52edb8bef5219ea4991a81c43617f748821ea093c83f9727ec988f3d081eb6",
+    "block-09-packed.log": "41a8e76705a50d80de5c31af8f0dca31d84660eeeb51d4851e5c918de5a55a50",
+    "block-09-packed_contiguous.log": "83609bda8f6fec64a3ec2bc064acf9c9bc45826b4b7b3e14b384bc32ca7e797d",
+    "block-09-direct.log": "060bdeeefee2fc4a71678d692ce57b4a389f55dfdc13dbe34f449489d5a807d3",
+    "block-10-single_r0.log": "5676afd056052134b1fb2120dfaad7f98946bf549a480fe13b841c0339db9b98",
+    "block-10-single_r1.log": "387bda8554b54198e0280347ead9ad5bcfbd6f2a15b2632db32d051b7085e7e8",
+    "block-10-packed.log": "57a1decfa71a854116a1490672c224b82a71de4ef034108768a05129ccfd1dee",
+    "block-10-packed_contiguous.log": "5178122a3e905de3f02b57ab535bdb883f729f38a28589884c2d9699bdfae053",
+    "block-10-direct.log": "827b5db2a9af9e6ef285197c7340e6f6bcc53da44c1554978512e82ae21c6d23"
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "order": [
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct"
+      ],
+      "median_us": {
+        "single_r0": 1331160,
+        "single_r1": 1183071,
+        "packed": 1358825,
+        "packed_contiguous": 1339531,
+        "direct": 1233773
+      },
+      "packed_over_r0_throughput": 0.979640498224569,
+      "contiguous_over_r0_throughput": 0.9937507978538758,
+      "direct_over_r0_throughput": 1.0789342934235067,
+      "direct_over_r1_throughput": 0.9589049201109118,
+      "direct_over_contiguous_throughput": 1.0857191720032777,
+      "contiguous_over_packed_throughput": 1.0144035487047331,
+      "r1_over_r0_throughput": 1.1251733835078368
+    },
+    {
+      "block": 2,
+      "order": [
+        "single_r1",
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0"
+      ],
+      "median_us": {
+        "single_r0": 1360335,
+        "single_r1": 1411201,
+        "packed": 1358271,
+        "packed_contiguous": 1326608,
+        "direct": 1205443
+      },
+      "packed_over_r0_throughput": 1.0015195789352787,
+      "contiguous_over_r0_throughput": 1.0254234860637053,
+      "direct_over_r0_throughput": 1.128493840023958,
+      "direct_over_r1_throughput": 1.1706907750926423,
+      "direct_over_contiguous_throughput": 1.1005149144339468,
+      "contiguous_over_packed_throughput": 1.023867638367928,
+      "r1_over_r0_throughput": 0.9639555244079334
+    },
+    {
+      "block": 3,
+      "order": [
+        "packed",
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1"
+      ],
+      "median_us": {
+        "single_r0": 1388293,
+        "single_r1": 1404356,
+        "packed": 1373900,
+        "packed_contiguous": 1345558,
+        "direct": 1022145
+      },
+      "packed_over_r0_throughput": 1.0104760171773783,
+      "contiguous_over_r0_throughput": 1.0317600579090607,
+      "direct_over_r0_throughput": 1.3582153217009327,
+      "direct_over_r1_throughput": 1.3739303132138787,
+      "direct_over_contiguous_throughput": 1.3164061850324562,
+      "contiguous_over_packed_throughput": 1.0210633803968316,
+      "r1_over_r0_throughput": 0.9885620170384147
+    },
+    {
+      "block": 4,
+      "order": [
+        "packed_contiguous",
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed"
+      ],
+      "median_us": {
+        "single_r0": 1364584,
+        "single_r1": 1391975,
+        "packed": 1368018,
+        "packed_contiguous": 1371161,
+        "direct": 1117623
+      },
+      "packed_over_r0_throughput": 0.9974897991108305,
+      "contiguous_over_r0_throughput": 0.9952033349840026,
+      "direct_over_r0_throughput": 1.2209698619301859,
+      "direct_over_r1_throughput": 1.2454781263449302,
+      "direct_over_contiguous_throughput": 1.2268546728190097,
+      "contiguous_over_packed_throughput": 0.9977077819453734,
+      "r1_over_r0_throughput": 0.980322204062573
+    },
+    {
+      "block": 5,
+      "order": [
+        "direct",
+        "single_r0",
+        "single_r1",
+        "packed",
+        "packed_contiguous"
+      ],
+      "median_us": {
+        "single_r0": 1386569,
+        "single_r1": 1392507,
+        "packed": 1352097,
+        "packed_contiguous": 1380846,
+        "direct": 1199857
+      },
+      "packed_over_r0_throughput": 1.0254952122517837,
+      "contiguous_over_r0_throughput": 1.0041445606533965,
+      "direct_over_r0_throughput": 1.155611877082019,
+      "direct_over_r1_throughput": 1.1605608001620193,
+      "direct_over_contiguous_throughput": 1.1508421420219244,
+      "contiguous_over_packed_throughput": 0.9791801547746816,
+      "r1_over_r0_throughput": 0.9957357485456088
+    },
+    {
+      "block": 6,
+      "order": [
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0"
+      ],
+      "median_us": {
+        "single_r0": 1151630,
+        "single_r1": 1387986,
+        "packed": 1344710,
+        "packed_contiguous": 1359786,
+        "direct": 1210940
+      },
+      "packed_over_r0_throughput": 0.8564151378364109,
+      "contiguous_over_r0_throughput": 0.8469200300635541,
+      "direct_over_r0_throughput": 0.9510215204716996,
+      "direct_over_r1_throughput": 1.1462054271887956,
+      "direct_over_contiguous_throughput": 1.122917733331131,
+      "contiguous_over_packed_throughput": 0.9889129613042053,
+      "r1_over_r0_throughput": 0.8297129798139175
+    },
+    {
+      "block": 7,
+      "order": [
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed",
+        "single_r1"
+      ],
+      "median_us": {
+        "single_r0": 1158756,
+        "single_r1": 1130239,
+        "packed": 1189530,
+        "packed_contiguous": 1262230,
+        "direct": 1058378
+      },
+      "packed_over_r0_throughput": 0.9741292779501147,
+      "contiguous_over_r0_throughput": 0.9180228642957305,
+      "direct_over_r0_throughput": 1.0948413515776028,
+      "direct_over_r1_throughput": 1.0678972918938225,
+      "direct_over_contiguous_throughput": 1.1926079340273512,
+      "contiguous_over_packed_throughput": 0.9424035239219477,
+      "r1_over_r0_throughput": 1.0252309467289662
+    },
+    {
+      "block": 8,
+      "order": [
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous",
+        "packed"
+      ],
+      "median_us": {
+        "single_r0": 1126364,
+        "single_r1": 1159390,
+        "packed": 1286737,
+        "packed_contiguous": 1295231,
+        "direct": 1226924
+      },
+      "packed_over_r0_throughput": 0.8753645849928928,
+      "contiguous_over_r0_throughput": 0.8696240284551559,
+      "direct_over_r0_throughput": 0.9180389331368528,
+      "direct_over_r1_throughput": 0.9449566558319831,
+      "direct_over_contiguous_throughput": 1.055673375041975,
+      "contiguous_over_packed_throughput": 0.9934420964291312,
+      "r1_over_r0_throughput": 0.9715143308118924
+    },
+    {
+      "block": 9,
+      "order": [
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct",
+        "packed_contiguous"
+      ],
+      "median_us": {
+        "single_r0": 1352334,
+        "single_r1": 1405160,
+        "packed": 1354641,
+        "packed_contiguous": 1346474,
+        "direct": 1089559
+      },
+      "packed_over_r0_throughput": 0.9982969657643612,
+      "contiguous_over_r0_throughput": 1.0043521078015618,
+      "direct_over_r0_throughput": 1.2411755581845498,
+      "direct_over_r1_throughput": 1.2896593943054024,
+      "direct_over_contiguous_throughput": 1.2357972353952378,
+      "contiguous_over_packed_throughput": 1.0060654717432345,
+      "r1_over_r0_throughput": 0.962405704688434
+    },
+    {
+      "block": 10,
+      "order": [
+        "packed_contiguous",
+        "packed",
+        "single_r1",
+        "single_r0",
+        "direct"
+      ],
+      "median_us": {
+        "single_r0": 1361986,
+        "single_r1": 1392921,
+        "packed": 1437861,
+        "packed_contiguous": 1318637,
+        "direct": 1154105
+      },
+      "packed_over_r0_throughput": 0.9472306432958402,
+      "contiguous_over_r0_throughput": 1.0328740965102603,
+      "direct_over_r0_throughput": 1.1801231257121318,
+      "direct_over_r1_throughput": 1.2069274459429602,
+      "direct_over_contiguous_throughput": 1.1425624184974503,
+      "contiguous_over_packed_throughput": 1.0904145720164078,
+      "r1_over_r0_throughput": 0.977791274594898
+    }
+  ],
+  "comparisons": {
+    "packed_over_r0_throughput": {
+      "geometric_mean": 0.9650058984370492,
+      "block_bootstrap_95pct": [
+        0.9286754379149679,
+        0.9967727271465306
+      ],
+      "range": [
+        0.8564151378364109,
+        1.0254952122517837
+      ],
+      "blocks_above_one": 3
+    },
+    "contiguous_over_r0_throughput": {
+      "geometric_mean": 0.9699354529737004,
+      "block_bootstrap_95pct": [
+        0.9269619618149251,
+        1.0085915326743056
+      ],
+      "range": [
+        0.8469200300635541,
+        1.0328740965102603
+      ],
+      "blocks_above_one": 5
+    },
+    "direct_over_r0_throughput": {
+      "geometric_mean": 1.1256782964769498,
+      "block_bootstrap_95pct": [
+        1.0482115853983862,
+        1.20429798289619
+      ],
+      "range": [
+        0.9180389331368528,
+        1.3582153217009327
+      ],
+      "blocks_above_one": 8
+    },
+    "direct_over_r1_throughput": {
+      "geometric_mean": 1.149091593414828,
+      "block_bootstrap_95pct": [
+        1.0677736309821106,
+        1.2284404972188667
+      ],
+      "range": [
+        0.9449566558319831,
+        1.3739303132138787
+      ],
+      "blocks_above_one": 8
+    },
+    "direct_over_contiguous_throughput": {
+      "geometric_mean": 1.160570317360564,
+      "block_bootstrap_95pct": [
+        1.116578644367493,
+        1.2091924869008828
+      ],
+      "range": [
+        1.055673375041975,
+        1.3164061850324562
+      ],
+      "blocks_above_one": 10
+    },
+    "contiguous_over_packed_throughput": {
+      "geometric_mean": 1.0051083154461908,
+      "block_bootstrap_95pct": [
+        0.9842926064580285,
+        1.0287510660926198
+      ],
+      "range": [
+        0.9424035239219477,
+        1.0904145720164078
+      ],
+      "blocks_above_one": 5
+    },
+    "r1_over_r0_throughput": {
+      "geometric_mean": 0.9796245163814146,
+      "block_bootstrap_95pct": [
+        0.9352085642494523,
+        1.0221297851538618
+      ],
+      "range": [
+        0.8297129798139175,
+        1.1251733835078368
+      ],
+      "blocks_above_one": 2
+    }
+  },
+  "resources": {
+    "single_r0": {
+      "median_cpu_us_per_read": 240123.8333333333,
+      "median_peak_rss_kb": 530976.0,
+      "median_sum_per_rail_peak_registered_bytes": 268435456.0,
+      "median_sum_per_rail_peak_inflight_bytes": 268435456.0
+    },
+    "single_r1": {
+      "median_cpu_us_per_read": 240362.3333333333,
+      "median_peak_rss_kb": 531002.0,
+      "median_sum_per_rail_peak_registered_bytes": 268435456.0,
+      "median_sum_per_rail_peak_inflight_bytes": 268435456.0
+    },
+    "packed": {
+      "median_cpu_us_per_read": 460880.5,
+      "median_peak_rss_kb": 801368.0,
+      "median_sum_per_rail_peak_registered_bytes": 276824064.0,
+      "median_sum_per_rail_peak_inflight_bytes": 268435456.0
+    },
+    "packed_contiguous": {
+      "median_cpu_us_per_read": 433642.0833333333,
+      "median_peak_rss_kb": 801296.0,
+      "median_sum_per_rail_peak_registered_bytes": 276824064.0,
+      "median_sum_per_rail_peak_inflight_bytes": 268435456.0
+    },
+    "direct": {
+      "median_cpu_us_per_read": 259390.75,
+      "median_peak_rss_kb": 539252.0,
+      "median_sum_per_rail_peak_registered_bytes": 276824064.0,
+      "median_sum_per_rail_peak_inflight_bytes": 268435456.0
+    }
+  }
+}

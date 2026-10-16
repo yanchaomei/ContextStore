@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-16",
+  "source_commit": "eb75f83fcf177e27398b154f05956a019e803e91",
+  "generation_prompts": "image-generation-prompts-v4.json",
+  "final_cq_review_edit": "cq-review-correction.json",
+  "figures": [
+    {
+      "file": "assets/staging-layout.png",
+      "sha256": "2afd193f3e4b652bee7eb0c31df3671c174ed2af156095af024849118447cbec",
+      "report_section": "07",
+      "evidence_refs": [
+        "S05",
+        "S08"
+      ],
+      "type": "AI-generated mechanism illustration, not empirical data",
+      "requested_model": "gpt-image-2",
+      "actual_tool": "image_gen builtin",
+      "model_id_exposed_by_tool": false,
+      "review_note": "Kept final publication copy; separated dummy boxes from direct data arrows."
+    },
+    {
+      "file": "assets/publication-timeline.png",
+      "sha256": "d19e689ccc3cf03a3a133c66c2357e3e61bef3a5fa7bd17c855f725dae66dffd",
+      "report_section": "10",
+      "evidence_refs": [
+        "S04",
+        "S05",
+        "S08"
+      ],
+      "type": "AI-generated mechanism illustration, not empirical data",
+      "requested_model": "gpt-image-2",
+      "actual_tool": "image_gen builtin",
+      "model_id_exposed_by_tool": false,
+      "review_note": "Generic g / g+1 illustration; full identity and Placement, not a new measurement."
+    },
+    {
+      "file": "assets/budget-lifecycle.png",
+      "sha256": "61d56a5f867a0ed4341832b0d64f8fb94e2e5453b589c677ab30f7123f3a845b",
+      "report_section": "09",
+      "evidence_refs": [
+        "S05",
+        "S08"
+      ],
+      "type": "AI-generated mechanism illustration, not empirical data",
+      "requested_model": "gpt-image-2",
+      "actual_tool": "image_gen builtin",
+      "model_id_exposed_by_tool": false,
+      "review_note": "Reservation accounting per Reader; exact values checked; removed generated slogan."
+    },
+    {
+      "file": "assets/cq-reconnect-timeline.png",
+      "sha256": "cfabcc289aab5854aecfe60cb638fef752b2aedc510045fe4f0425ff90a58d3b",
+      "report_section": "16",
+      "evidence_refs": [
+        "S14",
+        "S16",
+        "S18"
+      ],
+      "type": "AI-generated mechanism illustration, not empirical data",
+      "requested_model": "gpt-image-2",
+      "actual_tool": "image_gen builtin",
+      "model_id_exposed_by_tool": false,
+      "review_note": "Controlled poll suppression; real WC; close stream and destroy QP, no explicit QPS_ERR claim."
+    }
+  ]
+}

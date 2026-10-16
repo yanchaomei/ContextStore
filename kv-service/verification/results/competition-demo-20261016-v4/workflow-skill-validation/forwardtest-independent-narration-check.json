@@ -1,0 +1,87 @@
+{
+  "all_fit": true,
+  "audio_total_seconds": 196.82399999999998,
+  "scene_total_seconds": 270.0,
+  "rows": [
+    {
+      "id": "intro",
+      "scene_seconds": 25.0,
+      "actual_audio_seconds": 21.24,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 3.460000000000001,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "architecture",
+      "scene_seconds": 30.0,
+      "actual_audio_seconds": 25.512,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 4.187999999999999,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "read",
+      "scene_seconds": 40.0,
+      "actual_audio_seconds": 25.68,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 14.020000000000003,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "performance",
+      "scene_seconds": 35.0,
+      "actual_audio_seconds": 25.752,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 8.948000000000004,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "version",
+      "scene_seconds": 35.0,
+      "actual_audio_seconds": 24.432,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 10.268000000000004,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "late",
+      "scene_seconds": 40.0,
+      "actual_audio_seconds": 27.648,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 12.052000000000003,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "put",
+      "scene_seconds": 35.0,
+      "actual_audio_seconds": 24.072,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 10.628000000000004,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    },
+    {
+      "id": "reproduce",
+      "scene_seconds": 30.0,
+      "actual_audio_seconds": 22.488,
+      "tail_margin_seconds": 0.3,
+      "remaining_after_margin_seconds": 7.212,
+      "fits": true,
+      "helper_duration_matches": true,
+      "sha256_matches": true
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "竞赛材料制作工作室"
+  short_description: "将真实项目证据制作成详细说明、配音演示与可审计提交包，核对交付和提交状态"
+  default_prompt: "使用 $competition-submission-studio，根据实际仓库与证据制作详细作品说明、配音演示和可审计提交包。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,8 @@
+{
+  "pages": 29,
+  "images": 8,
+  "all_paragraphs_code_and_captions_present": true,
+  "code_blocks": 10,
+  "pdf_sha256": "e0aafaa6cb96d9a927bb98a792bf72385a66ca906aa7cf2b1db176a384a56e0e",
+  "text_extraction_note": "Known three-line header/footer decoration removed before cross-page matching."
+}

@@ -1,0 +1,77 @@
+{
+  "archive_integrity": "pass",
+  "content_review": "not_assessed",
+  "internal_manifest_sha256": "91e50030f9a2ef3f02d5d421f71f6ad39987c66aada8a1d213a428d2cedf3ee4",
+  "operation": "independent_readback",
+  "payload_files": [
+    {
+      "archive": "competition-submission-studio/SKILL.md",
+      "sha256": "27e4b59dc005cee4265ae3a5fda9c8aacb7ff39f65b4a13858e7ee8612d68b1b",
+      "size_bytes": 6162,
+      "source": "SKILL.md"
+    },
+    {
+      "archive": "competition-submission-studio/agents/openai.yaml",
+      "sha256": "25877c04776c19695cd26e52d33b7816fa478488d9e7fb3b7fed8b147aa216c2",
+      "size_bytes": 382,
+      "source": "agents/openai.yaml"
+    },
+    {
+      "archive": "competition-submission-studio/references/delivery-qa.md",
+      "sha256": "5e8f7f3476cfb081fb0c7174b4fa98cea3cea7f97a1a99c821a66d53d2fb2a2c",
+      "size_bytes": 5652,
+      "source": "references/delivery-qa.md"
+    },
+    {
+      "archive": "competition-submission-studio/references/evidence-report.md",
+      "sha256": "a4e6427e69bb86a8214c27e68ed856525c22f19efb2e5fc49e21324a3d54e84e",
+      "size_bytes": 4009,
+      "source": "references/evidence-report.md"
+    },
+    {
+      "archive": "competition-submission-studio/references/media-production.md",
+      "sha256": "cca87b2135d62236b7d287298f21212bd86a00c938371608299759ec634882db",
+      "size_bytes": 5516,
+      "source": "references/media-production.md"
+    },
+    {
+      "archive": "competition-submission-studio/references/package.example.json",
+      "sha256": "b22042f3dffea8fc8127823659d691fdbd031f75f0ae18cdf426d2b793ef9402",
+      "size_bytes": 471,
+      "source": "references/package.example.json"
+    },
+    {
+      "archive": "competition-submission-studio/references/scenes.example.json",
+      "sha256": "a026d942a48d91b0b10843ef29b043f5bef491f4bdeb3774bd47011a9b02a7f0",
+      "size_bytes": 1229,
+      "source": "references/scenes.example.json"
+    },
+    {
+      "archive": "competition-submission-studio/scripts/_audit_common.py",
+      "sha256": "e30ca6b3ba36b66b19939e25da528cd1e53bb6dc0967582a6e07bdf3ac1ec08c",
+      "size_bytes": 4939,
+      "source": "scripts/_audit_common.py"
+    },
+    {
+      "archive": "competition-submission-studio/scripts/check_narration.py",
+      "sha256": "91f8e8ab3b91290e383a3fee6501cc9ecef74a9a5964e42db75f8cd409486561",
+      "size_bytes": 7404,
+      "source": "scripts/check_narration.py"
+    },
+    {
+      "archive": "competition-submission-studio/scripts/package_audit.py",
+      "sha256": "31f7b2b21f7161ebe21ef32e1f54edde839a1266d5a628442c18b547b57ebddd",
+      "size_bytes": 9704,
+      "source": "scripts/package_audit.py"
+    }
+  ],
+  "publication_status": "not_assessed",
+  "schema_version": 1,
+  "scope": "payload bytes, archive membership, paths, sizes and hashes only",
+  "secret_scan": "not_performed",
+  "subjective_audio_review": "not_assessed",
+  "submission_status": "not_assessed",
+  "visual_review": "not_assessed",
+  "zip_sha256": "7b847644add60ffbbd31b4e75fe9588c48eb9b3299ce24704a58d2a2788e601d",
+  "zip_size_bytes": 24227
+}

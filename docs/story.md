@@ -2,7 +2,7 @@
 
 The object stays in its existing disk stripes. A single Worker reads those stripes through two independently controlled RDMA paths and exposes the result only after every required byte, checksum and object-version check succeeds.
 
-The [October 16 V3 submission materials](../kv-service/verification/results/competition-demo-20261016-v3/) include a 27-page technical report, a 4:30 neural female narrated walkthrough, a presenter guide, and the independent content review. The underlying [real RXE terminal capture](../kv-service/verification/results/competition-demo-20261016-v2/) and frozen safety evidence remain separately traceable.
+The [October 16 V4 submission materials](../kv-service/verification/results/competition-demo-20261016-v4/) include a 29-page technical report with eight figures, a 4:30 neural female narrated walkthrough, a presenter guide, independently reviewed mechanism diagrams, and a reusable competition-submission skill. The underlying [real RXE terminal capture](../kv-service/verification/results/competition-demo-20261016-v2/) and frozen safety evidence remain separately traceable.
 
 ## 1. Conflict
 

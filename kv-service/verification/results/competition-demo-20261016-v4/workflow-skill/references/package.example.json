@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "project": "REPLACE_WITH_PROJECT",
+    "source_commit": "REPLACE_WITH_VERIFIED_COMMIT",
+    "evidence_scope": "REPLACE_WITH_OBSERVED_SCOPE"
+  },
+  "files": [
+    {"source": "report.pdf", "archive": "作品说明.pdf"},
+    {"source": "demo.mp4", "archive": "演示视频.mp4"},
+    {"source": "guide.pdf", "archive": "操作指南.pdf"},
+    {"source": "evidence/source-map.json", "archive": "evidence/source-map.json"}
+  ]
+}
