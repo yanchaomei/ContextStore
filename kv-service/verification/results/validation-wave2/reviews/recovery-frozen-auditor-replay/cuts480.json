@@ -1,0 +1,1968 @@
+{
+  "matrix_validation": {
+    "frozen_run": "cuts480",
+    "full_matrix_verified": true,
+    "expected_frames": 1280,
+    "expected_late_eof": 240,
+    "expected_held_success_ack": 160,
+    "fixed_control_key_hashes": {}
+  },
+  "client_log": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/client/cuts480/run.log.gz",
+  "client_sha256": "d73cae2d9c92a19601c5a78cd74088687d935e611d421604175773678c975081",
+  "server_log": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/server/small-server.log",
+  "server_sha256": "915e3791d432b50a4b06e390d301b13e9cefb882a4dff65e18a76aeb5070cd7a",
+  "operations": 480,
+  "mode_counts": {
+    "direct=false,pooled=false,control=-,cut=AckTimeout": 20,
+    "direct=false,pooled=false,control=-,cut=CancelInitial": 20,
+    "direct=false,pooled=false,control=-,cut=CancelRetry": 20,
+    "direct=false,pooled=false,control=-,cut=DeadlineRetryGate": 20,
+    "direct=false,pooled=false,control=-,cut=Overwrite": 20,
+    "direct=false,pooled=false,control=-,cut=Delete": 20,
+    "direct=false,pooled=true,control=-,cut=AckTimeout": 20,
+    "direct=false,pooled=true,control=-,cut=CancelInitial": 20,
+    "direct=false,pooled=true,control=-,cut=CancelRetry": 20,
+    "direct=false,pooled=true,control=-,cut=DeadlineRetryGate": 20,
+    "direct=false,pooled=true,control=-,cut=Overwrite": 20,
+    "direct=false,pooled=true,control=-,cut=Delete": 20,
+    "direct=true,pooled=false,control=-,cut=AckTimeout": 20,
+    "direct=true,pooled=false,control=-,cut=CancelInitial": 20,
+    "direct=true,pooled=false,control=-,cut=CancelRetry": 20,
+    "direct=true,pooled=false,control=-,cut=DeadlineRetryGate": 20,
+    "direct=true,pooled=false,control=-,cut=Overwrite": 20,
+    "direct=true,pooled=false,control=-,cut=Delete": 20,
+    "direct=true,pooled=true,control=-,cut=AckTimeout": 20,
+    "direct=true,pooled=true,control=-,cut=CancelInitial": 20,
+    "direct=true,pooled=true,control=-,cut=CancelRetry": 20,
+    "direct=true,pooled=true,control=-,cut=DeadlineRetryGate": 20,
+    "direct=true,pooled=true,control=-,cut=Overwrite": 20,
+    "direct=true,pooled=true,control=-,cut=Delete": 20
+  },
+  "native_frames": 1280,
+  "late_eof_requests": 240,
+  "exact_peer_and_key_wr_retirements": 240,
+  "server_success_ack_held_until_client_timeout": 160,
+  "server_not_found_used_as_late_write_proof": 0,
+  "proof": [
+    {
+      "op": 40,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:38960",
+      "server_terminal_line": 17363,
+      "server_wr_failure": "2026-10-28T20:33:11.878366Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:11.878577Z  WARN RDMA client 10.81.1.2:38960 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 41,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:52148",
+      "server_terminal_line": 17377,
+      "server_wr_failure": "2026-10-28T20:33:12.997425Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:12.997672Z  WARN RDMA client 10.82.1.2:52148 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 42,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:38986",
+      "server_terminal_line": 17391,
+      "server_wr_failure": "2026-10-28T20:33:14.110965Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:14.111198Z  WARN RDMA client 10.81.1.2:38986 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 43,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:52162",
+      "server_terminal_line": 17405,
+      "server_wr_failure": "2026-10-28T20:33:15.225775Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:15.225982Z  WARN RDMA client 10.82.1.2:52162 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 44,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:39022",
+      "server_terminal_line": 17419,
+      "server_wr_failure": "2026-10-28T20:33:16.403680Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:16.403884Z  WARN RDMA client 10.81.1.2:39022 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 45,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:52184",
+      "server_terminal_line": 17433,
+      "server_wr_failure": "2026-10-28T20:33:17.648299Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:17.648508Z  WARN RDMA client 10.82.1.2:52184 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 46,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:55204",
+      "server_terminal_line": 17447,
+      "server_wr_failure": "2026-10-28T20:33:18.830867Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:18.831086Z  WARN RDMA client 10.81.1.2:55204 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 47,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:56222",
+      "server_terminal_line": 17461,
+      "server_wr_failure": "2026-10-28T20:33:20.075871Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:20.076088Z  WARN RDMA client 10.82.1.2:56222 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 48,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:55222",
+      "server_terminal_line": 17475,
+      "server_wr_failure": "2026-10-28T20:33:21.192897Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:21.193126Z  WARN RDMA client 10.81.1.2:55222 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 49,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:56250",
+      "server_terminal_line": 17489,
+      "server_wr_failure": "2026-10-28T20:33:22.307148Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:22.307354Z  WARN RDMA client 10.82.1.2:56250 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 50,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:55248",
+      "server_terminal_line": 17503,
+      "server_wr_failure": "2026-10-28T20:33:23.511060Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:23.511292Z  WARN RDMA client 10.81.1.2:55248 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 51,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:56270",
+      "server_terminal_line": 17517,
+      "server_wr_failure": "2026-10-28T20:33:24.624805Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:24.625013Z  WARN RDMA client 10.82.1.2:56270 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 52,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:55284",
+      "server_terminal_line": 17531,
+      "server_wr_failure": "2026-10-28T20:33:25.910531Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:25.910755Z  WARN RDMA client 10.81.1.2:55284 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 53,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:56298",
+      "server_terminal_line": 17545,
+      "server_wr_failure": "2026-10-28T20:33:27.172648Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:27.172868Z  WARN RDMA client 10.82.1.2:56298 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 54,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:48586",
+      "server_terminal_line": 17559,
+      "server_wr_failure": "2026-10-28T20:33:28.374168Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:28.374372Z  WARN RDMA client 10.81.1.2:48586 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 55,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:36786",
+      "server_terminal_line": 17573,
+      "server_wr_failure": "2026-10-28T20:33:29.498217Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:29.498442Z  WARN RDMA client 10.82.1.2:36786 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 56,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:48618",
+      "server_terminal_line": 17587,
+      "server_wr_failure": "2026-10-28T20:33:30.780178Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:30.780383Z  WARN RDMA client 10.81.1.2:48618 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 57,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:36816",
+      "server_terminal_line": 17601,
+      "server_wr_failure": "2026-10-28T20:33:32.047845Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:32.048071Z  WARN RDMA client 10.82.1.2:36816 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 58,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.81.1.2:48642",
+      "server_terminal_line": 17615,
+      "server_wr_failure": "2026-10-28T20:33:33.199556Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:33.199772Z  WARN RDMA client 10.81.1.2:48642 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 59,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry",
+      "exact_peer": "10.82.1.2:36846",
+      "server_terminal_line": 17629,
+      "server_wr_failure": "2026-10-28T20:33:34.444595Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:34.444805Z  WARN RDMA client 10.82.1.2:36846 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 80,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:39990",
+      "server_terminal_line": 17803,
+      "server_wr_failure": "2026-10-28T20:33:43.509539Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:43.509771Z  WARN RDMA client 10.81.1.2:39990 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 81,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:35614",
+      "server_terminal_line": 17817,
+      "server_wr_failure": "2026-10-28T20:33:44.734379Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:44.734605Z  WARN RDMA client 10.82.1.2:35614 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 82,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:40026",
+      "server_terminal_line": 17831,
+      "server_wr_failure": "2026-10-28T20:33:45.957331Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:45.957584Z  WARN RDMA client 10.81.1.2:40026 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 83,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:35646",
+      "server_terminal_line": 17845,
+      "server_wr_failure": "2026-10-28T20:33:47.111652Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:47.111876Z  WARN RDMA client 10.82.1.2:35646 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 84,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:55958",
+      "server_terminal_line": 17859,
+      "server_wr_failure": "2026-10-28T20:33:48.396266Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:48.396492Z  WARN RDMA client 10.81.1.2:55958 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 85,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:33516",
+      "server_terminal_line": 17873,
+      "server_wr_failure": "2026-10-28T20:33:49.691105Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:49.691327Z  WARN RDMA client 10.82.1.2:33516 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 86,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:55982",
+      "server_terminal_line": 17887,
+      "server_wr_failure": "2026-10-28T20:33:50.853458Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:50.853691Z  WARN RDMA client 10.81.1.2:55982 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 87,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:33548",
+      "server_terminal_line": 17901,
+      "server_wr_failure": "2026-10-28T20:33:52.008127Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:52.008341Z  WARN RDMA client 10.82.1.2:33548 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 88,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:56000",
+      "server_terminal_line": 17915,
+      "server_wr_failure": "2026-10-28T20:33:53.297106Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:53.297327Z  WARN RDMA client 10.81.1.2:56000 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 89,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:33574",
+      "server_terminal_line": 17929,
+      "server_wr_failure": "2026-10-28T20:33:54.522685Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:54.522901Z  WARN RDMA client 10.82.1.2:33574 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 90,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:56016",
+      "server_terminal_line": 17943,
+      "server_wr_failure": "2026-10-28T20:33:55.679668Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:55.679888Z  WARN RDMA client 10.81.1.2:56016 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 91,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:33598",
+      "server_terminal_line": 17957,
+      "server_wr_failure": "2026-10-28T20:33:56.836596Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:56.836836Z  WARN RDMA client 10.82.1.2:33598 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 92,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:51516",
+      "server_terminal_line": 17971,
+      "server_wr_failure": "2026-10-28T20:33:58.059982Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:58.060191Z  WARN RDMA client 10.81.1.2:51516 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 93,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:59624",
+      "server_terminal_line": 17985,
+      "server_wr_failure": "2026-10-28T20:33:59.217325Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:33:59.217533Z  WARN RDMA client 10.82.1.2:59624 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 94,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:51534",
+      "server_terminal_line": 17999,
+      "server_wr_failure": "2026-10-28T20:34:00.504797Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:00.505007Z  WARN RDMA client 10.81.1.2:51534 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 95,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:59652",
+      "server_terminal_line": 18013,
+      "server_wr_failure": "2026-10-28T20:34:01.734769Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:01.735037Z  WARN RDMA client 10.82.1.2:59652 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 96,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:51562",
+      "server_terminal_line": 18027,
+      "server_wr_failure": "2026-10-28T20:34:02.957020Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:02.957250Z  WARN RDMA client 10.81.1.2:51562 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 97,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:59670",
+      "server_terminal_line": 18041,
+      "server_wr_failure": "2026-10-28T20:34:04.180489Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:04.180708Z  WARN RDMA client 10.82.1.2:59670 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 98,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.81.1.2:51576",
+      "server_terminal_line": 18055,
+      "server_wr_failure": "2026-10-28T20:34:05.340269Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:05.340480Z  WARN RDMA client 10.81.1.2:51576 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 99,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite",
+      "exact_peer": "10.82.1.2:59700",
+      "server_terminal_line": 18069,
+      "server_wr_failure": "2026-10-28T20:34:06.503320Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:06.503566Z  WARN RDMA client 10.82.1.2:59700 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 100,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:46364",
+      "server_terminal_line": 18083,
+      "server_wr_failure": "2026-10-28T20:34:07.665637Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:07.665863Z  WARN RDMA client 10.81.1.2:46364 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 101,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:45422",
+      "server_terminal_line": 18097,
+      "server_wr_failure": "2026-10-28T20:34:08.787105Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:08.787324Z  WARN RDMA client 10.82.1.2:45422 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 102,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:46378",
+      "server_terminal_line": 18111,
+      "server_wr_failure": "2026-10-28T20:34:10.034946Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:10.035157Z  WARN RDMA client 10.81.1.2:46378 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 103,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:45456",
+      "server_terminal_line": 18125,
+      "server_wr_failure": "2026-10-28T20:34:11.420790Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:11.421016Z  WARN RDMA client 10.82.1.2:45456 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 104,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:46406",
+      "server_terminal_line": 18139,
+      "server_wr_failure": "2026-10-28T20:34:12.544876Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:12.545092Z  WARN RDMA client 10.81.1.2:46406 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 105,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:45496",
+      "server_terminal_line": 18153,
+      "server_wr_failure": "2026-10-28T20:34:13.736601Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:13.736818Z  WARN RDMA client 10.82.1.2:45496 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 106,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:46448",
+      "server_terminal_line": 18167,
+      "server_wr_failure": "2026-10-28T20:34:14.855147Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:14.855355Z  WARN RDMA client 10.81.1.2:46448 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 107,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:45534",
+      "server_terminal_line": 18181,
+      "server_wr_failure": "2026-10-28T20:34:16.134838Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:16.135054Z  WARN RDMA client 10.82.1.2:45534 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 108,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:46478",
+      "server_terminal_line": 18195,
+      "server_wr_failure": "2026-10-28T20:34:17.325577Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:17.325844Z  WARN RDMA client 10.81.1.2:46478 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 109,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:35578",
+      "server_terminal_line": 18209,
+      "server_wr_failure": "2026-10-28T20:34:18.581673Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:18.581896Z  WARN RDMA client 10.82.1.2:35578 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 110,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:34746",
+      "server_terminal_line": 18223,
+      "server_wr_failure": "2026-10-28T20:34:19.700847Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:19.701087Z  WARN RDMA client 10.81.1.2:34746 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 111,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:35604",
+      "server_terminal_line": 18237,
+      "server_wr_failure": "2026-10-28T20:34:20.890195Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:20.890395Z  WARN RDMA client 10.82.1.2:35604 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 112,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:34770",
+      "server_terminal_line": 18251,
+      "server_wr_failure": "2026-10-28T20:34:22.010199Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:22.010419Z  WARN RDMA client 10.81.1.2:34770 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 113,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:35642",
+      "server_terminal_line": 18265,
+      "server_wr_failure": "2026-10-28T20:34:23.133442Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:23.133674Z  WARN RDMA client 10.82.1.2:35642 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 114,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:34794",
+      "server_terminal_line": 18279,
+      "server_wr_failure": "2026-10-28T20:34:24.253458Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:24.253702Z  WARN RDMA client 10.81.1.2:34794 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 115,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:35662",
+      "server_terminal_line": 18293,
+      "server_wr_failure": "2026-10-28T20:34:25.378203Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:25.378420Z  WARN RDMA client 10.82.1.2:35662 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 116,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:34830",
+      "server_terminal_line": 18307,
+      "server_wr_failure": "2026-10-28T20:34:26.495427Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:26.495871Z  WARN RDMA client 10.81.1.2:34830 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 117,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:48256",
+      "server_terminal_line": 18321,
+      "server_wr_failure": "2026-10-28T20:34:27.683937Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:27.684158Z  WARN RDMA client 10.82.1.2:48256 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 118,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.81.1.2:49574",
+      "server_terminal_line": 18335,
+      "server_wr_failure": "2026-10-28T20:34:28.801161Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:28.801385Z  WARN RDMA client 10.81.1.2:49574 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 119,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-false-Delete",
+      "exact_peer": "10.82.1.2:48282",
+      "server_terminal_line": 18349,
+      "server_wr_failure": "2026-10-28T20:34:29.923611Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:29.923823Z  WARN RDMA client 10.82.1.2:48282 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 160,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:39668",
+      "server_terminal_line": 18529,
+      "server_wr_failure": "2026-10-28T20:34:41.435659Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:41.435878Z  WARN RDMA client 10.81.1.2:39668 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 161,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:52250",
+      "server_terminal_line": 18537,
+      "server_wr_failure": "2026-10-28T20:34:42.550008Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:42.550248Z  WARN RDMA client 10.82.1.2:52250 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 162,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:39678",
+      "server_terminal_line": 18545,
+      "server_wr_failure": "2026-10-28T20:34:43.727299Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:43.727523Z  WARN RDMA client 10.81.1.2:39678 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 163,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:52256",
+      "server_terminal_line": 18553,
+      "server_wr_failure": "2026-10-28T20:34:44.908315Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:44.908538Z  WARN RDMA client 10.82.1.2:52256 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 164,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:39690",
+      "server_terminal_line": 18561,
+      "server_wr_failure": "2026-10-28T20:34:46.087211Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:46.087472Z  WARN RDMA client 10.81.1.2:39690 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 165,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:52260",
+      "server_terminal_line": 18569,
+      "server_wr_failure": "2026-10-28T20:34:47.201850Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:47.202068Z  WARN RDMA client 10.82.1.2:52260 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 166,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:39698",
+      "server_terminal_line": 18577,
+      "server_wr_failure": "2026-10-28T20:34:48.395599Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:48.395826Z  WARN RDMA client 10.81.1.2:39698 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 167,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:35430",
+      "server_terminal_line": 18585,
+      "server_wr_failure": "2026-10-28T20:34:49.591687Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:49.591904Z  WARN RDMA client 10.82.1.2:35430 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 168,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:48952",
+      "server_terminal_line": 18593,
+      "server_wr_failure": "2026-10-28T20:34:50.725606Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:50.725824Z  WARN RDMA client 10.81.1.2:48952 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 169,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:35444",
+      "server_terminal_line": 18601,
+      "server_wr_failure": "2026-10-28T20:34:51.852807Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:51.853046Z  WARN RDMA client 10.82.1.2:35444 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 170,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:48954",
+      "server_terminal_line": 18609,
+      "server_wr_failure": "2026-10-28T20:34:52.964711Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:52.964930Z  WARN RDMA client 10.81.1.2:48954 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 171,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:35452",
+      "server_terminal_line": 18617,
+      "server_wr_failure": "2026-10-28T20:34:54.082717Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:54.082935Z  WARN RDMA client 10.82.1.2:35452 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 172,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:48958",
+      "server_terminal_line": 18625,
+      "server_wr_failure": "2026-10-28T20:34:55.194931Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:55.195139Z  WARN RDMA client 10.81.1.2:48958 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 173,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:35466",
+      "server_terminal_line": 18633,
+      "server_wr_failure": "2026-10-28T20:34:56.375796Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:56.376021Z  WARN RDMA client 10.82.1.2:35466 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 174,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:48968",
+      "server_terminal_line": 18641,
+      "server_wr_failure": "2026-10-28T20:34:57.487849Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:57.488064Z  WARN RDMA client 10.81.1.2:48968 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 175,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:35470",
+      "server_terminal_line": 18649,
+      "server_wr_failure": "2026-10-28T20:34:58.667410Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:58.667623Z  WARN RDMA client 10.82.1.2:35470 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 176,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:49626",
+      "server_terminal_line": 18657,
+      "server_wr_failure": "2026-10-28T20:34:59.778765Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:34:59.779001Z  WARN RDMA client 10.81.1.2:49626 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 177,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:53926",
+      "server_terminal_line": 18665,
+      "server_wr_failure": "2026-10-28T20:35:00.892591Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:00.892887Z  WARN RDMA client 10.82.1.2:53926 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 178,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.81.1.2:49638",
+      "server_terminal_line": 18673,
+      "server_wr_failure": "2026-10-28T20:35:02.004699Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:02.004924Z  WARN RDMA client 10.81.1.2:49638 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 179,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry",
+      "exact_peer": "10.82.1.2:53938",
+      "server_terminal_line": 18681,
+      "server_wr_failure": "2026-10-28T20:35:03.119936Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:03.120144Z  WARN RDMA client 10.82.1.2:53938 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 200,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:56242",
+      "server_terminal_line": 18795,
+      "server_wr_failure": "2026-10-28T20:35:11.987650Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:11.987863Z  WARN RDMA client 10.81.1.2:56242 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 201,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:42342",
+      "server_terminal_line": 18803,
+      "server_wr_failure": "2026-10-28T20:35:13.178770Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:13.179020Z  WARN RDMA client 10.82.1.2:42342 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 202,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:56252",
+      "server_terminal_line": 18811,
+      "server_wr_failure": "2026-10-28T20:35:14.407527Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:14.407759Z  WARN RDMA client 10.81.1.2:56252 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 203,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:42350",
+      "server_terminal_line": 18819,
+      "server_wr_failure": "2026-10-28T20:35:15.562943Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:15.563160Z  WARN RDMA client 10.82.1.2:42350 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 204,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:56268",
+      "server_terminal_line": 18827,
+      "server_wr_failure": "2026-10-28T20:35:16.719918Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:16.720132Z  WARN RDMA client 10.81.1.2:56268 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 205,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:42356",
+      "server_terminal_line": 18835,
+      "server_wr_failure": "2026-10-28T20:35:17.943743Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:17.943963Z  WARN RDMA client 10.82.1.2:42356 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 206,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:36530",
+      "server_terminal_line": 18843,
+      "server_wr_failure": "2026-10-28T20:35:19.098243Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:19.098452Z  WARN RDMA client 10.81.1.2:36530 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 207,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:50452",
+      "server_terminal_line": 18851,
+      "server_wr_failure": "2026-10-28T20:35:20.253190Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:20.253411Z  WARN RDMA client 10.82.1.2:50452 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 208,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:36544",
+      "server_terminal_line": 18859,
+      "server_wr_failure": "2026-10-28T20:35:21.470920Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:21.471138Z  WARN RDMA client 10.81.1.2:36544 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 209,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:50456",
+      "server_terminal_line": 18867,
+      "server_wr_failure": "2026-10-28T20:35:22.693224Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:22.693443Z  WARN RDMA client 10.82.1.2:50456 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 210,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:36548",
+      "server_terminal_line": 18875,
+      "server_wr_failure": "2026-10-28T20:35:23.843725Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:23.843956Z  WARN RDMA client 10.81.1.2:36548 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 211,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:50468",
+      "server_terminal_line": 18883,
+      "server_wr_failure": "2026-10-28T20:35:24.996372Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:24.996594Z  WARN RDMA client 10.82.1.2:50468 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 212,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:36550",
+      "server_terminal_line": 18891,
+      "server_wr_failure": "2026-10-28T20:35:26.218324Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:26.218552Z  WARN RDMA client 10.81.1.2:36550 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 213,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:50476",
+      "server_terminal_line": 18899,
+      "server_wr_failure": "2026-10-28T20:35:27.508053Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:27.508568Z  WARN RDMA client 10.82.1.2:50476 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 214,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:36554",
+      "server_terminal_line": 18907,
+      "server_wr_failure": "2026-10-28T20:35:28.665694Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:28.665949Z  WARN RDMA client 10.81.1.2:36554 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 215,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:36084",
+      "server_terminal_line": 18915,
+      "server_wr_failure": "2026-10-28T20:35:29.883215Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:29.883437Z  WARN RDMA client 10.82.1.2:36084 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 216,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:37656",
+      "server_terminal_line": 18923,
+      "server_wr_failure": "2026-10-28T20:35:31.099976Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:31.100213Z  WARN RDMA client 10.81.1.2:37656 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 217,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:36100",
+      "server_terminal_line": 18931,
+      "server_wr_failure": "2026-10-28T20:35:32.316987Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:32.317217Z  WARN RDMA client 10.82.1.2:36100 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 218,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.81.1.2:37664",
+      "server_terminal_line": 18939,
+      "server_wr_failure": "2026-10-28T20:35:33.545024Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:33.545259Z  WARN RDMA client 10.81.1.2:37664 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 219,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite",
+      "exact_peer": "10.82.1.2:36108",
+      "server_terminal_line": 18947,
+      "server_wr_failure": "2026-10-28T20:35:34.827083Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:34.827300Z  WARN RDMA client 10.82.1.2:36108 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 220,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:37688",
+      "server_terminal_line": 18958,
+      "server_wr_failure": "2026-10-28T20:35:36.117503Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:36.117716Z  WARN RDMA client 10.81.1.2:37688 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 221,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:36122",
+      "server_terminal_line": 18966,
+      "server_wr_failure": "2026-10-28T20:35:37.233256Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:37.233470Z  WARN RDMA client 10.82.1.2:36122 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 222,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:37694",
+      "server_terminal_line": 18974,
+      "server_wr_failure": "2026-10-28T20:35:38.492201Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:38.492415Z  WARN RDMA client 10.81.1.2:37694 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 223,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:47276",
+      "server_terminal_line": 18982,
+      "server_wr_failure": "2026-10-28T20:35:39.607045Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:39.607254Z  WARN RDMA client 10.82.1.2:47276 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 224,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:39806",
+      "server_terminal_line": 18990,
+      "server_wr_failure": "2026-10-28T20:35:40.857818Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:40.858067Z  WARN RDMA client 10.81.1.2:39806 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 225,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:47284",
+      "server_terminal_line": 18998,
+      "server_wr_failure": "2026-10-28T20:35:42.107860Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:42.108064Z  WARN RDMA client 10.82.1.2:47284 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 226,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:39822",
+      "server_terminal_line": 19006,
+      "server_wr_failure": "2026-10-28T20:35:43.294985Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:43.295196Z  WARN RDMA client 10.81.1.2:39822 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 227,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:47290",
+      "server_terminal_line": 19014,
+      "server_wr_failure": "2026-10-28T20:35:44.410923Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:44.411133Z  WARN RDMA client 10.82.1.2:47290 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 228,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:39824",
+      "server_terminal_line": 19022,
+      "server_wr_failure": "2026-10-28T20:35:45.592545Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:45.592971Z  WARN RDMA client 10.81.1.2:39824 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 229,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:47298",
+      "server_terminal_line": 19030,
+      "server_wr_failure": "2026-10-28T20:35:46.709346Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:46.709579Z  WARN RDMA client 10.82.1.2:47298 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 230,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:39826",
+      "server_terminal_line": 19038,
+      "server_wr_failure": "2026-10-28T20:35:47.827293Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:47.827526Z  WARN RDMA client 10.81.1.2:39826 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 231,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:34142",
+      "server_terminal_line": 19046,
+      "server_wr_failure": "2026-10-28T20:35:49.011497Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:49.011729Z  WARN RDMA client 10.82.1.2:34142 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 232,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:41530",
+      "server_terminal_line": 19054,
+      "server_wr_failure": "2026-10-28T20:35:50.129379Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:50.129616Z  WARN RDMA client 10.81.1.2:41530 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 233,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:34154",
+      "server_terminal_line": 19062,
+      "server_wr_failure": "2026-10-28T20:35:51.245443Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:51.245674Z  WARN RDMA client 10.82.1.2:34154 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 234,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:41538",
+      "server_terminal_line": 19070,
+      "server_wr_failure": "2026-10-28T20:35:52.499400Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:52.499623Z  WARN RDMA client 10.81.1.2:41538 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 235,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:34168",
+      "server_terminal_line": 19078,
+      "server_wr_failure": "2026-10-28T20:35:53.681663Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:53.681871Z  WARN RDMA client 10.82.1.2:34168 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 236,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:41540",
+      "server_terminal_line": 19086,
+      "server_wr_failure": "2026-10-28T20:35:54.947288Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:54.947508Z  WARN RDMA client 10.81.1.2:41540 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 237,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:34182",
+      "server_terminal_line": 19094,
+      "server_wr_failure": "2026-10-28T20:35:56.131039Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:56.131249Z  WARN RDMA client 10.82.1.2:34182 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 238,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.81.1.2:41554",
+      "server_terminal_line": 19102,
+      "server_wr_failure": "2026-10-28T20:35:57.383954Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:57.384176Z  WARN RDMA client 10.81.1.2:41554 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 239,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-false-true-Delete",
+      "exact_peer": "10.82.1.2:34192",
+      "server_terminal_line": 19110,
+      "server_wr_failure": "2026-10-28T20:35:58.500278Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-false-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:35:58.500496Z  WARN RDMA client 10.82.1.2:34192 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 280,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:32922",
+      "server_terminal_line": 19524,
+      "server_wr_failure": "2026-10-28T20:36:10.055930Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:10.056157Z  WARN RDMA client 10.81.1.2:32922 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 281,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:33588",
+      "server_terminal_line": 19538,
+      "server_wr_failure": "2026-10-28T20:36:11.228977Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:11.229195Z  WARN RDMA client 10.82.1.2:33588 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 282,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:32950",
+      "server_terminal_line": 19552,
+      "server_wr_failure": "2026-10-28T20:36:12.341120Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:12.341343Z  WARN RDMA client 10.81.1.2:32950 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 283,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:33608",
+      "server_terminal_line": 19566,
+      "server_wr_failure": "2026-10-28T20:36:13.460361Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:13.460583Z  WARN RDMA client 10.82.1.2:33608 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 284,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:32986",
+      "server_terminal_line": 19580,
+      "server_wr_failure": "2026-10-28T20:36:14.563381Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:14.563609Z  WARN RDMA client 10.81.1.2:32986 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 285,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:33630",
+      "server_terminal_line": 19594,
+      "server_wr_failure": "2026-10-28T20:36:15.675856Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:15.676065Z  WARN RDMA client 10.82.1.2:33630 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 286,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:33010",
+      "server_terminal_line": 19608,
+      "server_wr_failure": "2026-10-28T20:36:16.784077Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:16.784290Z  WARN RDMA client 10.81.1.2:33010 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 287,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:37458",
+      "server_terminal_line": 19622,
+      "server_wr_failure": "2026-10-28T20:36:17.893179Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:17.893515Z  WARN RDMA client 10.82.1.2:37458 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 288,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:47832",
+      "server_terminal_line": 19636,
+      "server_wr_failure": "2026-10-28T20:36:19.002650Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:19.002887Z  WARN RDMA client 10.81.1.2:47832 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 289,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:37470",
+      "server_terminal_line": 19650,
+      "server_wr_failure": "2026-10-28T20:36:20.110160Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:20.110381Z  WARN RDMA client 10.82.1.2:37470 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 290,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:47852",
+      "server_terminal_line": 19664,
+      "server_wr_failure": "2026-10-28T20:36:21.220677Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:21.220896Z  WARN RDMA client 10.81.1.2:47852 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 291,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:37496",
+      "server_terminal_line": 19678,
+      "server_wr_failure": "2026-10-28T20:36:22.330786Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:22.331010Z  WARN RDMA client 10.82.1.2:37496 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 292,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:47876",
+      "server_terminal_line": 19692,
+      "server_wr_failure": "2026-10-28T20:36:23.444899Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:23.445138Z  WARN RDMA client 10.81.1.2:47876 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 293,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:37520",
+      "server_terminal_line": 19706,
+      "server_wr_failure": "2026-10-28T20:36:24.559719Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:24.559943Z  WARN RDMA client 10.82.1.2:37520 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 294,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:47898",
+      "server_terminal_line": 19720,
+      "server_wr_failure": "2026-10-28T20:36:25.732836Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:25.733071Z  WARN RDMA client 10.81.1.2:47898 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 295,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:37548",
+      "server_terminal_line": 19734,
+      "server_wr_failure": "2026-10-28T20:36:26.917102Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:26.917344Z  WARN RDMA client 10.82.1.2:37548 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 296,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:57884",
+      "server_terminal_line": 19748,
+      "server_wr_failure": "2026-10-28T20:36:28.090392Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:28.090625Z  WARN RDMA client 10.81.1.2:57884 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 297,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:43288",
+      "server_terminal_line": 19762,
+      "server_wr_failure": "2026-10-28T20:36:29.199106Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:29.199349Z  WARN RDMA client 10.82.1.2:43288 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 298,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.81.1.2:57904",
+      "server_terminal_line": 19776,
+      "server_wr_failure": "2026-10-28T20:36:30.303685Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:30.303919Z  WARN RDMA client 10.81.1.2:57904 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 299,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry",
+      "exact_peer": "10.82.1.2:43312",
+      "server_terminal_line": 19790,
+      "server_wr_failure": "2026-10-28T20:36:31.410901Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:31.411124Z  WARN RDMA client 10.82.1.2:43312 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 320,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:53658",
+      "server_terminal_line": 19964,
+      "server_wr_failure": "2026-10-28T20:36:40.297401Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:40.297639Z  WARN RDMA client 10.81.1.2:53658 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 321,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:46000",
+      "server_terminal_line": 19978,
+      "server_wr_failure": "2026-10-28T20:36:41.512607Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:41.512832Z  WARN RDMA client 10.82.1.2:46000 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 322,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:53682",
+      "server_terminal_line": 19992,
+      "server_wr_failure": "2026-10-28T20:36:42.658878Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:42.659104Z  WARN RDMA client 10.81.1.2:53682 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 323,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:46024",
+      "server_terminal_line": 20006,
+      "server_wr_failure": "2026-10-28T20:36:43.806092Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:43.806378Z  WARN RDMA client 10.82.1.2:46024 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 324,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:53700",
+      "server_terminal_line": 20020,
+      "server_wr_failure": "2026-10-28T20:36:44.952814Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:44.953043Z  WARN RDMA client 10.81.1.2:53700 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 325,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:46040",
+      "server_terminal_line": 20034,
+      "server_wr_failure": "2026-10-28T20:36:46.100558Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:46.100802Z  WARN RDMA client 10.82.1.2:46040 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 326,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:53730",
+      "server_terminal_line": 20048,
+      "server_wr_failure": "2026-10-28T20:36:47.245876Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:47.246095Z  WARN RDMA client 10.81.1.2:53730 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 327,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:54714",
+      "server_terminal_line": 20062,
+      "server_wr_failure": "2026-10-28T20:36:48.462064Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:48.462281Z  WARN RDMA client 10.82.1.2:54714 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 328,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:60624",
+      "server_terminal_line": 20076,
+      "server_wr_failure": "2026-10-28T20:36:49.676629Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:49.676853Z  WARN RDMA client 10.81.1.2:60624 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 329,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:54726",
+      "server_terminal_line": 20090,
+      "server_wr_failure": "2026-10-28T20:36:50.853689Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:50.853905Z  WARN RDMA client 10.82.1.2:54726 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 330,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:60654",
+      "server_terminal_line": 20104,
+      "server_wr_failure": "2026-10-28T20:36:52.065095Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:52.065307Z  WARN RDMA client 10.81.1.2:60654 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 331,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:54760",
+      "server_terminal_line": 20118,
+      "server_wr_failure": "2026-10-28T20:36:53.281567Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:53.281789Z  WARN RDMA client 10.82.1.2:54760 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 332,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:60678",
+      "server_terminal_line": 20132,
+      "server_wr_failure": "2026-10-28T20:36:54.430024Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:54.430240Z  WARN RDMA client 10.81.1.2:60678 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 333,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:54772",
+      "server_terminal_line": 20146,
+      "server_wr_failure": "2026-10-28T20:36:55.577956Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:55.578166Z  WARN RDMA client 10.82.1.2:54772 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 334,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:60696",
+      "server_terminal_line": 20160,
+      "server_wr_failure": "2026-10-28T20:36:56.856945Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:56.857168Z  WARN RDMA client 10.81.1.2:60696 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 335,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:49870",
+      "server_terminal_line": 20174,
+      "server_wr_failure": "2026-10-28T20:36:58.005550Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:58.005822Z  WARN RDMA client 10.82.1.2:49870 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 336,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:60642",
+      "server_terminal_line": 20188,
+      "server_wr_failure": "2026-10-28T20:36:59.285227Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:36:59.285455Z  WARN RDMA client 10.81.1.2:60642 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 337,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:49888",
+      "server_terminal_line": 20202,
+      "server_wr_failure": "2026-10-28T20:37:00.433119Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:00.433334Z  WARN RDMA client 10.82.1.2:49888 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 338,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.81.1.2:60672",
+      "server_terminal_line": 20216,
+      "server_wr_failure": "2026-10-28T20:37:01.579605Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:01.579826Z  WARN RDMA client 10.81.1.2:60672 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 339,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite",
+      "exact_peer": "10.82.1.2:49920",
+      "server_terminal_line": 20230,
+      "server_wr_failure": "2026-10-28T20:37:02.727679Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:02.727898Z  WARN RDMA client 10.82.1.2:49920 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 340,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:60714",
+      "server_terminal_line": 20244,
+      "server_wr_failure": "2026-10-28T20:37:03.877519Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:03.877749Z  WARN RDMA client 10.81.1.2:60714 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 341,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:49950",
+      "server_terminal_line": 20258,
+      "server_wr_failure": "2026-10-28T20:37:05.004724Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:05.004960Z  WARN RDMA client 10.82.1.2:49950 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 342,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:60746",
+      "server_terminal_line": 20272,
+      "server_wr_failure": "2026-10-28T20:37:06.188663Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:06.188891Z  WARN RDMA client 10.81.1.2:60746 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 343,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:49990",
+      "server_terminal_line": 20286,
+      "server_wr_failure": "2026-10-28T20:37:07.368843Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:07.369075Z  WARN RDMA client 10.82.1.2:49990 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 344,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:60394",
+      "server_terminal_line": 20300,
+      "server_wr_failure": "2026-10-28T20:37:08.547898Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:08.548126Z  WARN RDMA client 10.81.1.2:60394 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 345,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:37260",
+      "server_terminal_line": 20314,
+      "server_wr_failure": "2026-10-28T20:37:09.657027Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:09.657248Z  WARN RDMA client 10.82.1.2:37260 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 346,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:60414",
+      "server_terminal_line": 20328,
+      "server_wr_failure": "2026-10-28T20:37:10.766364Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:10.766592Z  WARN RDMA client 10.81.1.2:60414 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 347,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:37290",
+      "server_terminal_line": 20342,
+      "server_wr_failure": "2026-10-28T20:37:11.946744Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:11.946956Z  WARN RDMA client 10.82.1.2:37290 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 348,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:60450",
+      "server_terminal_line": 20356,
+      "server_wr_failure": "2026-10-28T20:37:13.120337Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:13.120548Z  WARN RDMA client 10.81.1.2:60450 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 349,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:37316",
+      "server_terminal_line": 20370,
+      "server_wr_failure": "2026-10-28T20:37:14.308342Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:14.308571Z  WARN RDMA client 10.82.1.2:37316 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 350,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:60478",
+      "server_terminal_line": 20384,
+      "server_wr_failure": "2026-10-28T20:37:15.506081Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:15.506381Z  WARN RDMA client 10.81.1.2:60478 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 351,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:37334",
+      "server_terminal_line": 20398,
+      "server_wr_failure": "2026-10-28T20:37:16.689873Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:16.690802Z  WARN RDMA client 10.82.1.2:37334 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 352,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:48748",
+      "server_terminal_line": 20412,
+      "server_wr_failure": "2026-10-28T20:37:17.804854Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:17.805064Z  WARN RDMA client 10.81.1.2:48748 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 353,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:57006",
+      "server_terminal_line": 20426,
+      "server_wr_failure": "2026-10-28T20:37:18.937294Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:18.937515Z  WARN RDMA client 10.82.1.2:57006 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 354,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:48776",
+      "server_terminal_line": 20440,
+      "server_wr_failure": "2026-10-28T20:37:20.109168Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:20.109392Z  WARN RDMA client 10.81.1.2:48776 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 355,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:57032",
+      "server_terminal_line": 20454,
+      "server_wr_failure": "2026-10-28T20:37:21.352989Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:21.353213Z  WARN RDMA client 10.82.1.2:57032 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 356,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:48800",
+      "server_terminal_line": 20468,
+      "server_wr_failure": "2026-10-28T20:37:22.546465Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:22.546688Z  WARN RDMA client 10.81.1.2:48800 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 357,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:57048",
+      "server_terminal_line": 20482,
+      "server_wr_failure": "2026-10-28T20:37:23.665650Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:23.665872Z  WARN RDMA client 10.82.1.2:57048 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 358,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.81.1.2:48826",
+      "server_terminal_line": 20496,
+      "server_wr_failure": "2026-10-28T20:37:24.775182Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:24.775393Z  WARN RDMA client 10.81.1.2:48826 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 359,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-false-Delete",
+      "exact_peer": "10.82.1.2:57070",
+      "server_terminal_line": 20510,
+      "server_wr_failure": "2026-10-28T20:37:25.885331Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-false-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:25.885688Z  WARN RDMA client 10.82.1.2:57070 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 400,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:59056",
+      "server_terminal_line": 20690,
+      "server_wr_failure": "2026-10-28T20:37:37.312752Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:37.312988Z  WARN RDMA client 10.81.1.2:59056 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 401,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:53726",
+      "server_terminal_line": 20698,
+      "server_wr_failure": "2026-10-28T20:37:38.416347Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:38.416563Z  WARN RDMA client 10.82.1.2:53726 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 402,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:40602",
+      "server_terminal_line": 20706,
+      "server_wr_failure": "2026-10-28T20:37:39.523478Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:39.523707Z  WARN RDMA client 10.81.1.2:40602 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 403,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:44326",
+      "server_terminal_line": 20714,
+      "server_wr_failure": "2026-10-28T20:37:40.695598Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:40.695816Z  WARN RDMA client 10.82.1.2:44326 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 404,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:40612",
+      "server_terminal_line": 20722,
+      "server_wr_failure": "2026-10-28T20:37:41.870632Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:41.870849Z  WARN RDMA client 10.81.1.2:40612 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 405,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:44328",
+      "server_terminal_line": 20730,
+      "server_wr_failure": "2026-10-28T20:37:43.111314Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:43.111531Z  WARN RDMA client 10.82.1.2:44328 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 406,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:40628",
+      "server_terminal_line": 20738,
+      "server_wr_failure": "2026-10-28T20:37:44.318268Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:44.318482Z  WARN RDMA client 10.81.1.2:40628 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 407,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:44332",
+      "server_terminal_line": 20746,
+      "server_wr_failure": "2026-10-28T20:37:45.443872Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:45.444155Z  WARN RDMA client 10.82.1.2:44332 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 408,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:40630",
+      "server_terminal_line": 20754,
+      "server_wr_failure": "2026-10-28T20:37:46.551675Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:46.551938Z  WARN RDMA client 10.81.1.2:40630 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 409,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:44338",
+      "server_terminal_line": 20762,
+      "server_wr_failure": "2026-10-28T20:37:47.657238Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:47.657633Z  WARN RDMA client 10.82.1.2:44338 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 410,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:35896",
+      "server_terminal_line": 20770,
+      "server_wr_failure": "2026-10-28T20:37:48.766862Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:48.767460Z  WARN RDMA client 10.81.1.2:35896 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 411,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:37520",
+      "server_terminal_line": 20778,
+      "server_wr_failure": "2026-10-28T20:37:49.942596Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:49.943241Z  WARN RDMA client 10.82.1.2:37520 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 412,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:35898",
+      "server_terminal_line": 20786,
+      "server_wr_failure": "2026-10-28T20:37:51.057699Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:51.057988Z  WARN RDMA client 10.81.1.2:35898 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 413,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:37522",
+      "server_terminal_line": 20794,
+      "server_wr_failure": "2026-10-28T20:37:52.163670Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:52.163896Z  WARN RDMA client 10.82.1.2:37522 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 414,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:35902",
+      "server_terminal_line": 20802,
+      "server_wr_failure": "2026-10-28T20:37:53.270604Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:53.270836Z  WARN RDMA client 10.81.1.2:35902 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 415,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:37530",
+      "server_terminal_line": 20810,
+      "server_wr_failure": "2026-10-28T20:37:54.439899Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:54.440120Z  WARN RDMA client 10.82.1.2:37530 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 416,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:35914",
+      "server_terminal_line": 20818,
+      "server_wr_failure": "2026-10-28T20:37:55.613300Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:55.613507Z  WARN RDMA client 10.81.1.2:35914 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 417,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:37544",
+      "server_terminal_line": 20826,
+      "server_wr_failure": "2026-10-28T20:37:56.782958Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:56.783210Z  WARN RDMA client 10.82.1.2:37544 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 418,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.81.1.2:35920",
+      "server_terminal_line": 20834,
+      "server_wr_failure": "2026-10-28T20:37:57.890207Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:57.890423Z  WARN RDMA client 10.81.1.2:35920 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 419,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry",
+      "exact_peer": "10.82.1.2:55866",
+      "server_terminal_line": 20842,
+      "server_wr_failure": "2026-10-28T20:37:58.998839Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-CancelRetry error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:37:58.999068Z  WARN RDMA client 10.82.1.2:55866 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 440,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:59550",
+      "server_terminal_line": 20956,
+      "server_wr_failure": "2026-10-28T20:38:07.794397Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:07.794611Z  WARN RDMA client 10.81.1.2:59550 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 441,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:51710",
+      "server_terminal_line": 20964,
+      "server_wr_failure": "2026-10-28T20:38:08.942361Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:08.942636Z  WARN RDMA client 10.82.1.2:51710 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 442,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:59562",
+      "server_terminal_line": 20972,
+      "server_wr_failure": "2026-10-28T20:38:10.101850Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:10.102110Z  WARN RDMA client 10.81.1.2:59562 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 443,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:51722",
+      "server_terminal_line": 20980,
+      "server_wr_failure": "2026-10-28T20:38:11.313207Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:11.313429Z  WARN RDMA client 10.82.1.2:51722 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 444,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:59566",
+      "server_terminal_line": 20988,
+      "server_wr_failure": "2026-10-28T20:38:12.472118Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:12.472329Z  WARN RDMA client 10.81.1.2:59566 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 445,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:51726",
+      "server_terminal_line": 20996,
+      "server_wr_failure": "2026-10-28T20:38:13.685545Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:13.685775Z  WARN RDMA client 10.82.1.2:51726 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 446,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:59576",
+      "server_terminal_line": 21004,
+      "server_wr_failure": "2026-10-28T20:38:14.831277Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:14.831489Z  WARN RDMA client 10.81.1.2:59576 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 447,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:51742",
+      "server_terminal_line": 21012,
+      "server_wr_failure": "2026-10-28T20:38:15.978383Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:15.978593Z  WARN RDMA client 10.82.1.2:51742 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 448,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:59584",
+      "server_terminal_line": 21020,
+      "server_wr_failure": "2026-10-28T20:38:17.120523Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:17.120733Z  WARN RDMA client 10.81.1.2:59584 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 449,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:51752",
+      "server_terminal_line": 21028,
+      "server_wr_failure": "2026-10-28T20:38:18.266464Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:18.266674Z  WARN RDMA client 10.82.1.2:51752 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 450,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:33340",
+      "server_terminal_line": 21036,
+      "server_wr_failure": "2026-10-28T20:38:19.483719Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:19.483941Z  WARN RDMA client 10.81.1.2:33340 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 451,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:46104",
+      "server_terminal_line": 21044,
+      "server_wr_failure": "2026-10-28T20:38:20.629059Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:20.629267Z  WARN RDMA client 10.82.1.2:46104 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 452,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:33350",
+      "server_terminal_line": 21052,
+      "server_wr_failure": "2026-10-28T20:38:21.774511Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:21.774736Z  WARN RDMA client 10.81.1.2:33350 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 453,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:46112",
+      "server_terminal_line": 21060,
+      "server_wr_failure": "2026-10-28T20:38:22.919692Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:22.919918Z  WARN RDMA client 10.82.1.2:46112 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 454,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:33364",
+      "server_terminal_line": 21068,
+      "server_wr_failure": "2026-10-28T20:38:24.062118Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:24.062331Z  WARN RDMA client 10.81.1.2:33364 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 455,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:46118",
+      "server_terminal_line": 21076,
+      "server_wr_failure": "2026-10-28T20:38:25.276248Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:25.276619Z  WARN RDMA client 10.82.1.2:46118 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 456,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:33380",
+      "server_terminal_line": 21084,
+      "server_wr_failure": "2026-10-28T20:38:26.487330Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:26.487545Z  WARN RDMA client 10.81.1.2:33380 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 457,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:46120",
+      "server_terminal_line": 21092,
+      "server_wr_failure": "2026-10-28T20:38:27.630910Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:27.631139Z  WARN RDMA client 10.82.1.2:46120 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 458,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.81.1.2:33388",
+      "server_terminal_line": 21100,
+      "server_wr_failure": "2026-10-28T20:38:28.773644Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:28.773863Z  WARN RDMA client 10.81.1.2:33388 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 459,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite",
+      "exact_peer": "10.82.1.2:33580",
+      "server_terminal_line": 21108,
+      "server_wr_failure": "2026-10-28T20:38:29.919071Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Overwrite error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:29.919286Z  WARN RDMA client 10.82.1.2:33580 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 460,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:58886",
+      "server_terminal_line": 21119,
+      "server_wr_failure": "2026-10-28T20:38:31.135800Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:31.136007Z  WARN RDMA client 10.81.1.2:58886 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 461,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:33594",
+      "server_terminal_line": 21127,
+      "server_wr_failure": "2026-10-28T20:38:32.246821Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:32.247043Z  WARN RDMA client 10.82.1.2:33594 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 462,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:58890",
+      "server_terminal_line": 21135,
+      "server_wr_failure": "2026-10-28T20:38:33.355593Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:33.355804Z  WARN RDMA client 10.81.1.2:58890 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 463,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:33604",
+      "server_terminal_line": 21143,
+      "server_wr_failure": "2026-10-28T20:38:34.465096Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:34.465314Z  WARN RDMA client 10.82.1.2:33604 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 464,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:58894",
+      "server_terminal_line": 21151,
+      "server_wr_failure": "2026-10-28T20:38:35.571927Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:35.572220Z  WARN RDMA client 10.81.1.2:58894 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 465,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:33620",
+      "server_terminal_line": 21159,
+      "server_wr_failure": "2026-10-28T20:38:36.683097Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:36.683325Z  WARN RDMA client 10.82.1.2:33620 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 466,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:58910",
+      "server_terminal_line": 21167,
+      "server_wr_failure": "2026-10-28T20:38:37.792310Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:37.792535Z  WARN RDMA client 10.81.1.2:58910 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 467,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:43654",
+      "server_terminal_line": 21175,
+      "server_wr_failure": "2026-10-28T20:38:38.921644Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:38.921900Z  WARN RDMA client 10.82.1.2:43654 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 468,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:51564",
+      "server_terminal_line": 21183,
+      "server_wr_failure": "2026-10-28T20:38:40.028866Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:40.029220Z  WARN RDMA client 10.81.1.2:51564 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 469,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:43668",
+      "server_terminal_line": 21191,
+      "server_wr_failure": "2026-10-28T20:38:41.140302Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:41.140537Z  WARN RDMA client 10.82.1.2:43668 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 470,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:51568",
+      "server_terminal_line": 21199,
+      "server_wr_failure": "2026-10-28T20:38:42.315384Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:42.315686Z  WARN RDMA client 10.81.1.2:51568 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 471,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:43682",
+      "server_terminal_line": 21207,
+      "server_wr_failure": "2026-10-28T20:38:43.439454Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:43.439698Z  WARN RDMA client 10.82.1.2:43682 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 472,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:51578",
+      "server_terminal_line": 21215,
+      "server_wr_failure": "2026-10-28T20:38:44.546143Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:44.546645Z  WARN RDMA client 10.81.1.2:51578 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 473,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:43696",
+      "server_terminal_line": 21223,
+      "server_wr_failure": "2026-10-28T20:38:45.660531Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:45.660763Z  WARN RDMA client 10.82.1.2:43696 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 474,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:51590",
+      "server_terminal_line": 21231,
+      "server_wr_failure": "2026-10-28T20:38:46.839307Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:46.839534Z  WARN RDMA client 10.81.1.2:51590 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 475,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:43704",
+      "server_terminal_line": 21239,
+      "server_wr_failure": "2026-10-28T20:38:47.957126Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:47.957342Z  WARN RDMA client 10.82.1.2:43704 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 476,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:35444",
+      "server_terminal_line": 21247,
+      "server_wr_failure": "2026-10-28T20:38:49.066873Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:49.067206Z  WARN RDMA client 10.81.1.2:35444 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 477,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:59262",
+      "server_terminal_line": 21255,
+      "server_wr_failure": "2026-10-28T20:38:50.177579Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:50.177786Z  WARN RDMA client 10.82.1.2:59262 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 478,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.81.1.2:35448",
+      "server_terminal_line": 21263,
+      "server_wr_failure": "2026-10-28T20:38:51.351485Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:51.351691Z  WARN RDMA client 10.81.1.2:35448 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    },
+    {
+      "op": 479,
+      "canonical_key": "17:recovery-campaignnative-cuts-2026102938-true-true-Delete",
+      "exact_peer": "10.82.1.2:59264",
+      "server_terminal_line": 21271,
+      "server_wr_failure": "2026-10-28T20:38:52.527332Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-cuts-2026102938-true-true-Delete error=poll final RDMA completions: poll_n timeout after 1000ms, got 0/2",
+      "server_terminal": "2026-10-28T20:38:52.527537Z  WARN RDMA client 10.82.1.2:59264 (nic_idx=1) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+    }
+  ]
+}

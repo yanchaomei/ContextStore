@@ -1,0 +1,11 @@
+{
+  "spec": "PASS",
+  "quality": "PASS",
+  "spec_reviewer": "/root/wave2_soak_spec_review",
+  "quality_reviewer": "/root/wave2_soak_quality_review",
+  "parent_launch_authorization": "Launch frozen 7200s v3 immediately after both reviewers independently passed closed 688-request smoke",
+  "rust_sha256": "6f7d8113f58a34a28faedda8692421e2f847b2f52d1e965f6bd836e083a9c512",
+  "runner_sha256": "60f815a95a7772d0bf8875452aa0caa3a10196a934befa630761435526777714",
+  "binary_sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df",
+  "recorded_unix": 1793215491.658936
+}

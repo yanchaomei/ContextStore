@@ -1,0 +1,7 @@
+changed_rustfmt 0
+make_build_release 0
+workspace_default 0
+workspace_rdma 0
+client_clippy_default 0
+client_clippy_rdma 0
+INTEGRATION_CHECKS_PASS_WITH_INHERITED_SERVER_CLIPPY_FAILURE

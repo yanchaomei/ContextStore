@@ -1,0 +1,1267 @@
+{
+  "state": "DIAGNOSTIC_ONLY",
+  "scope": "6 separate traced serial processes, 6 reads per process; first read versus next five; no headline latency comparison",
+  "connect_us_boundary": "transport connect_us includes pool lease acquire; R1 subsequent reads reuse; registration and teardown are separate",
+  "cells": [
+    {
+      "size_mib": 1,
+      "variant": "R0",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 13731,
+            "next_five_median": 12088,
+            "next_five_values": [
+              10539,
+              12335,
+              12088,
+              10557,
+              12457
+            ]
+          },
+          "allocation_us": {
+            "first_read": 752,
+            "next_five_median": 82,
+            "next_five_values": [
+              122,
+              39,
+              39,
+              82,
+              99
+            ]
+          },
+          "registration_us": {
+            "first_read": 111,
+            "next_five_median": 112,
+            "next_five_values": [
+              184,
+              103,
+              112,
+              144,
+              52
+            ]
+          },
+          "get_us": {
+            "first_read": 10110,
+            "next_five_median": 10004,
+            "next_five_values": [
+              9864,
+              9662,
+              11263,
+              11192,
+              10004
+            ]
+          },
+          "teardown_us": {
+            "first_read": 2132,
+            "next_five_median": 2064,
+            "next_five_values": [
+              2147,
+              2166,
+              1980,
+              1980,
+              2064
+            ]
+          },
+          "total_us": {
+            "first_read": 26841,
+            "next_five_median": 24307,
+            "next_five_values": [
+              22860,
+              24307,
+              25484,
+              23958,
+              24680
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 16,
+            "next_five_median": 7,
+            "next_five_values": [
+              7,
+              6,
+              7,
+              8,
+              7
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 27114,
+            "next_five_median": 24538,
+            "next_five_values": [
+              23170,
+              24538,
+              25786,
+              24242,
+              25003
+            ]
+          },
+          "assembly_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 326,
+            "next_five_median": 312,
+            "next_five_values": [
+              277,
+              312,
+              312,
+              312,
+              312
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 27462,
+            "next_five_median": 24861,
+            "next_five_values": [
+              23458,
+              24861,
+              26111,
+              24567,
+              25328
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 1549,
+            "next_five_median": 2041,
+            "next_five_values": [
+              2041,
+              1250,
+              2447,
+              1499,
+              2468
+            ]
+          },
+          "transfer_us": {
+            "first_read": 27779,
+            "next_five_median": 25015,
+            "next_five_values": [
+              23609,
+              25015,
+              26268,
+              24744,
+              25484
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 2853,
+            "next_five_median": 2939,
+            "next_five_values": [
+              3245,
+              2939,
+              3433,
+              2791,
+              1821
+            ]
+          },
+          "publish_us": {
+            "first_read": 279,
+            "next_five_median": 294,
+            "next_five_values": [
+              274,
+              317,
+              294,
+              293,
+              296
+            ]
+          },
+          "total_us": {
+            "first_read": 32463,
+            "next_five_median": 29523,
+            "next_five_values": [
+              29170,
+              29523,
+              32445,
+              29330,
+              30071
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 1,
+      "variant": "R1",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 9591,
+            "next_five_median": 10,
+            "next_five_values": [
+              9,
+              11,
+              10,
+              10,
+              10
+            ]
+          },
+          "allocation_us": {
+            "first_read": 495,
+            "next_five_median": 101,
+            "next_five_values": [
+              124,
+              101,
+              101,
+              101,
+              101
+            ]
+          },
+          "registration_us": {
+            "first_read": 111,
+            "next_five_median": 212,
+            "next_five_values": [
+              231,
+              246,
+              211,
+              212,
+              211
+            ]
+          },
+          "get_us": {
+            "first_read": 10767,
+            "next_five_median": 10029,
+            "next_five_values": [
+              10029,
+              10004,
+              9959,
+              10220,
+              10190
+            ]
+          },
+          "teardown_us": {
+            "first_read": 127,
+            "next_five_median": 140,
+            "next_five_values": [
+              137,
+              153,
+              141,
+              140,
+              139
+            ]
+          },
+          "total_us": {
+            "first_read": 21096,
+            "next_five_median": 10533,
+            "next_five_values": [
+              10533,
+              10518,
+              10425,
+              10686,
+              10655
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 10,
+            "next_five_median": 5,
+            "next_five_values": [
+              3,
+              3,
+              5,
+              5,
+              6
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 21260,
+            "next_five_median": 10852,
+            "next_five_values": [
+              10802,
+              10852,
+              10737,
+              10950,
+              11021
+            ]
+          },
+          "assembly_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 88,
+            "next_five_median": 292,
+            "next_five_values": [
+              179,
+              250,
+              292,
+              311,
+              312
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 21362,
+            "next_five_median": 11109,
+            "next_five_values": [
+              10986,
+              11109,
+              11039,
+              11271,
+              11344
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 1703,
+            "next_five_median": 1533,
+            "next_five_values": [
+              1533,
+              1471,
+              1500,
+              1818,
+              1777
+            ]
+          },
+          "transfer_us": {
+            "first_read": 21625,
+            "next_five_median": 11333,
+            "next_five_values": [
+              11184,
+              11333,
+              11276,
+              11535,
+              11619
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 1776,
+            "next_five_median": 1844,
+            "next_five_values": [
+              1661,
+              1935,
+              1872,
+              1844,
+              1586
+            ]
+          },
+          "publish_us": {
+            "first_read": 307,
+            "next_five_median": 298,
+            "next_five_values": [
+              298,
+              296,
+              297,
+              298,
+              300
+            ]
+          },
+          "total_us": {
+            "first_read": 25413,
+            "next_five_median": 15037,
+            "next_five_values": [
+              14678,
+              15037,
+              14948,
+              15498,
+              15285
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 8,
+      "variant": "R0",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 13295,
+            "next_five_median": 12303,
+            "next_five_values": [
+              12303,
+              11583,
+              12400,
+              12496,
+              10402
+            ]
+          },
+          "allocation_us": {
+            "first_read": 3659,
+            "next_five_median": 606,
+            "next_five_values": [
+              852,
+              449,
+              334,
+              776,
+              606
+            ]
+          },
+          "registration_us": {
+            "first_read": 288,
+            "next_five_median": 300,
+            "next_five_values": [
+              827,
+              300,
+              254,
+              240,
+              402
+            ]
+          },
+          "get_us": {
+            "first_read": 79952,
+            "next_five_median": 74657,
+            "next_five_values": [
+              74657,
+              73151,
+              76417,
+              76341,
+              74074
+            ]
+          },
+          "teardown_us": {
+            "first_read": 2703,
+            "next_five_median": 2397,
+            "next_five_values": [
+              2397,
+              2435,
+              2366,
+              2389,
+              2466
+            ]
+          },
+          "total_us": {
+            "first_read": 99904,
+            "next_five_median": 91039,
+            "next_five_values": [
+              91039,
+              87921,
+              91774,
+              92245,
+              87953
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 23,
+            "next_five_median": 11,
+            "next_five_values": [
+              12,
+              8,
+              19,
+              11,
+              11
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 100342,
+            "next_five_median": 91353,
+            "next_five_values": [
+              91353,
+              88163,
+              92026,
+              92554,
+              88255
+            ]
+          },
+          "assembly_us": {
+            "first_read": 1,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 2513,
+            "next_five_median": 2428,
+            "next_five_values": [
+              2521,
+              1824,
+              1917,
+              2428,
+              2509
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              1,
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 102884,
+            "next_five_median": 93893,
+            "next_five_values": [
+              93893,
+              90000,
+              93966,
+              94998,
+              90780
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 2556,
+            "next_five_median": 3108,
+            "next_five_values": [
+              2125,
+              1806,
+              3108,
+              4466,
+              3315
+            ]
+          },
+          "transfer_us": {
+            "first_read": 103263,
+            "next_five_median": 94055,
+            "next_five_values": [
+              94055,
+              90169,
+              94170,
+              95257,
+              91004
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 2547,
+            "next_five_median": 3785,
+            "next_five_values": [
+              2155,
+              1775,
+              4608,
+              3785,
+              4287
+            ]
+          },
+          "publish_us": {
+            "first_read": 1362,
+            "next_five_median": 2203,
+            "next_five_values": [
+              2352,
+              1342,
+              1830,
+              2203,
+              2206
+            ]
+          },
+          "total_us": {
+            "first_read": 109730,
+            "next_five_median": 100814,
+            "next_five_values": [
+              100690,
+              95096,
+              103718,
+              105714,
+              100814
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 8,
+      "variant": "R1",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 11786,
+            "next_five_median": 10,
+            "next_five_values": [
+              9,
+              11,
+              10,
+              9,
+              10
+            ]
+          },
+          "allocation_us": {
+            "first_read": 4042,
+            "next_five_median": 829,
+            "next_five_values": [
+              849,
+              844,
+              825,
+              824,
+              829
+            ]
+          },
+          "registration_us": {
+            "first_read": 474,
+            "next_five_median": 889,
+            "next_five_values": [
+              930,
+              1100,
+              876,
+              889,
+              862
+            ]
+          },
+          "get_us": {
+            "first_read": 77221,
+            "next_five_median": 75405,
+            "next_five_values": [
+              73636,
+              75405,
+              80567,
+              74323,
+              76096
+            ]
+          },
+          "teardown_us": {
+            "first_read": 550,
+            "next_five_median": 323,
+            "next_five_values": [
+              294,
+              323,
+              316,
+              323,
+              405
+            ]
+          },
+          "total_us": {
+            "first_read": 94080,
+            "next_five_median": 77687,
+            "next_five_values": [
+              75721,
+              77687,
+              82598,
+              76371,
+              78205
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 13,
+            "next_five_median": 12,
+            "next_five_values": [
+              12,
+              26,
+              12,
+              12,
+              12
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 94431,
+            "next_five_median": 78075,
+            "next_five_values": [
+              75980,
+              78075,
+              82894,
+              76710,
+              78549
+            ]
+          },
+          "assembly_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 2273,
+            "next_five_median": 2481,
+            "next_five_values": [
+              2481,
+              2507,
+              2479,
+              2540,
+              2370
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 96723,
+            "next_five_median": 80614,
+            "next_five_values": [
+              78479,
+              80614,
+              85390,
+              79268,
+              80937
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 3029,
+            "next_five_median": 1966,
+            "next_five_values": [
+              1966,
+              1832,
+              2024,
+              2127,
+              1851
+            ]
+          },
+          "transfer_us": {
+            "first_read": 97072,
+            "next_five_median": 80913,
+            "next_five_values": [
+              78751,
+              80913,
+              85685,
+              79593,
+              81239
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 2278,
+            "next_five_median": 2362,
+            "next_five_values": [
+              2502,
+              2317,
+              2362,
+              2560,
+              2068
+            ]
+          },
+          "publish_us": {
+            "first_read": 1405,
+            "next_five_median": 2369,
+            "next_five_values": [
+              1668,
+              2000,
+              2398,
+              2369,
+              2385
+            ]
+          },
+          "total_us": {
+            "first_read": 103786,
+            "next_five_median": 87064,
+            "next_five_values": [
+              84890,
+              87064,
+              92472,
+              86653,
+              87545
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 64,
+      "variant": "R0",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 14277,
+            "next_five_median": 12851,
+            "next_five_values": [
+              13114,
+              12509,
+              12851,
+              12877,
+              12660
+            ]
+          },
+          "allocation_us": {
+            "first_read": 29231,
+            "next_five_median": 30235,
+            "next_five_values": [
+              31220,
+              30235,
+              29604,
+              30348,
+              30011
+            ]
+          },
+          "registration_us": {
+            "first_read": 2892,
+            "next_five_median": 2833,
+            "next_five_values": [
+              2833,
+              2887,
+              2995,
+              2833,
+              2827
+            ]
+          },
+          "get_us": {
+            "first_read": 579951,
+            "next_five_median": 581728,
+            "next_five_values": [
+              583461,
+              581728,
+              578422,
+              577633,
+              584160
+            ]
+          },
+          "teardown_us": {
+            "first_read": 6339,
+            "next_five_median": 6307,
+            "next_five_values": [
+              6387,
+              6493,
+              6260,
+              6237,
+              6307
+            ]
+          },
+          "total_us": {
+            "first_read": 632700,
+            "next_five_median": 633854,
+            "next_five_values": [
+              637018,
+              633854,
+              630136,
+              629931,
+              635970
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 61,
+            "next_five_median": 42,
+            "next_five_values": [
+              77,
+              36,
+              62,
+              30,
+              42
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              0,
+              0,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 633112,
+            "next_five_median": 634191,
+            "next_five_values": [
+              637376,
+              634191,
+              630457,
+              630291,
+              636350
+            ]
+          },
+          "assembly_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              11,
+              1,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 16416,
+            "next_five_median": 12191,
+            "next_five_values": [
+              15619,
+              8498,
+              12191,
+              11959,
+              14274
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 649595,
+            "next_five_median": 642741,
+            "next_five_values": [
+              653079,
+              642741,
+              642715,
+              642284,
+              650671
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 11995,
+            "next_five_median": 4574,
+            "next_five_values": [
+              4574,
+              9913,
+              4536,
+              4332,
+              5522
+            ]
+          },
+          "transfer_us": {
+            "first_read": 649935,
+            "next_five_median": 642924,
+            "next_five_values": [
+              653257,
+              642903,
+              642924,
+              642470,
+              650870
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 4883,
+            "next_five_median": 5307,
+            "next_five_values": [
+              8943,
+              4569,
+              5307,
+              4738,
+              12908
+            ]
+          },
+          "publish_us": {
+            "first_read": 14801,
+            "next_five_median": 14837,
+            "next_five_values": [
+              17650,
+              14583,
+              14837,
+              13540,
+              17306
+            ]
+          },
+          "total_us": {
+            "first_read": 681615,
+            "next_five_median": 671970,
+            "next_five_values": [
+              684427,
+              671970,
+              667606,
+              665082,
+              686608
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 64,
+      "variant": "R1",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 13450,
+            "next_five_median": 11,
+            "next_five_values": [
+              12,
+              11,
+              11,
+              11,
+              12
+            ]
+          },
+          "allocation_us": {
+            "first_read": 28954,
+            "next_five_median": 38911,
+            "next_five_values": [
+              37620,
+              39310,
+              40077,
+              37542,
+              38911
+            ]
+          },
+          "registration_us": {
+            "first_read": 2793,
+            "next_five_median": 2886,
+            "next_five_values": [
+              3108,
+              2916,
+              2886,
+              2860,
+              2850
+            ]
+          },
+          "get_us": {
+            "first_read": 588514,
+            "next_five_median": 583461,
+            "next_five_values": [
+              579821,
+              583461,
+              587399,
+              582113,
+              591357
+            ]
+          },
+          "teardown_us": {
+            "first_read": 3967,
+            "next_five_median": 3689,
+            "next_five_values": [
+              2851,
+              3666,
+              3689,
+              3716,
+              3833
+            ]
+          },
+          "total_us": {
+            "first_read": 637687,
+            "next_five_median": 629367,
+            "next_five_values": [
+              623413,
+              629367,
+              634065,
+              626245,
+              636965
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 56,
+            "next_five_median": 47,
+            "next_five_values": [
+              54,
+              47,
+              71,
+              28,
+              16
+            ]
+          },
+          "reserve_us": {
+            "first_read": 2,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              1,
+              1,
+              0,
+              0
+            ]
+          },
+          "workers_us": {
+            "first_read": 638135,
+            "next_five_median": 629785,
+            "next_five_values": [
+              623747,
+              629785,
+              634532,
+              626621,
+              637359
+            ]
+          },
+          "assembly_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "checksum_us": {
+            "first_read": 12153,
+            "next_five_median": 15646,
+            "next_five_values": [
+              15090,
+              15646,
+              15791,
+              13449,
+              15743
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 650350,
+            "next_five_median": 645483,
+            "next_five_values": [
+              638896,
+              645483,
+              650401,
+              640102,
+              653123
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 11877,
+            "next_five_median": 8253,
+            "next_five_values": [
+              8253,
+              5293,
+              13200,
+              8735,
+              4626
+            ]
+          },
+          "transfer_us": {
+            "first_read": 650659,
+            "next_five_median": 645725,
+            "next_five_values": [
+              639036,
+              645725,
+              650636,
+              640328,
+              653349
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 4587,
+            "next_five_median": 4788,
+            "next_five_values": [
+              4788,
+              13121,
+              4684,
+              4750,
+              8922
+            ]
+          },
+          "publish_us": {
+            "first_read": 16973,
+            "next_five_median": 17189,
+            "next_five_values": [
+              17216,
+              16652,
+              17189,
+              17972,
+              15823
+            ]
+          },
+          "total_us": {
+            "first_read": 684099,
+            "next_five_median": 680794,
+            "next_five_values": [
+              669295,
+              680794,
+              685712,
+              671788,
+              682722
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

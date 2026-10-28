@@ -1,0 +1,53 @@
+{
+  "pid": 2769229,
+  "runner_pid": 2769228,
+  "command": [
+    "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v2/rail_runtime_soak",
+    "healthy_single_hca_two_hour_runtime",
+    "--ignored",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "duration_s": 60,
+  "started_unix": 1793214660.1549246,
+  "binary_sha256": "ac1d7f15a981fa87a31373e229a94bd7b374745ecfd75ded5bdc7aca8daa13d9",
+  "output_raw_budget_bytes": 500000000,
+  "timeout_policy": "No 2-hour kill; graceful final burst and cleanup required",
+  "exit_code": 0,
+  "wall_elapsed_s": 69.58258989453316,
+  "raw_bytes": 221919,
+  "budget_exceeded": false,
+  "watchdog_expired": false,
+  "counts": {
+    "object": 3,
+    "native": 15,
+    "contract": 1,
+    "request": 688,
+    "ok": 688,
+    "resources": 3,
+    "drop": 1,
+    "native_availability": 3,
+    "summary": 1
+  },
+  "summary": {
+    "event": "summary",
+    "status": "pass",
+    "duration_required_s": 60,
+    "steady_elapsed_s": 60.211199,
+    "steady_requests": 604,
+    "steady_bytes": 5066719232,
+    "errors": 0,
+    "rejections": 0,
+    "deadlines": 0,
+    "warm_rss_kib": 77908,
+    "max_sampled_rss_kib": 78572,
+    "final_rss_kib": 78572,
+    "rss_endpoint_slope_kib_s": 11.027849,
+    "max_sampled_fd": 23,
+    "max_sampled_threads": 10,
+    "drop_fd_restored": true,
+    "reopen_reads": 4
+  },
+  "status": "pass"
+}

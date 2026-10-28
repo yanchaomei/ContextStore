@@ -1,0 +1,16 @@
+{
+  "source": [
+    "ssh",
+    "-oBatchMode=yes",
+    "SKV_2",
+    "tar -chf - -C /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/release-frozen-bin contextstore-server"
+  ],
+  "destination": [
+    "ssh",
+    "-oBatchMode=yes",
+    "SKV_5",
+    "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin"
+  ],
+  "source_exit": 0,
+  "destination_exit": 0
+}

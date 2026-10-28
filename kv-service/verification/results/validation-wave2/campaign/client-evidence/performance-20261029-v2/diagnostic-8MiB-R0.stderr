@@ -1,0 +1,24 @@
+RAIL_TRANSPORT_TIMING rail=single bytes=8388608 connect_us=13295 allocation_us=3659 registration_us=288 get_us=79952 teardown_us=2703 total_us=99904
+RAIL_STAGED_TIMING bytes=8388608 rails=1 plan_us=23 reserve_us=1 workers_us=100342 assembly_us=1 checksum_us=2513 finish_us=0 total_us=102884
+RAIL_ACCEPTED_ID,namespace=rust-bench,object_key=wave2-perf-v1-8-0-0/__combined__,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rust-bench/wave2-perf-v1-8-0-0/__combined__ bytes=8388608 lookup_us=2556 transfer_us=103263 post_lookup_us=2547 publish_us=1362 total_us=109730
+RAIL_TRANSPORT_TIMING rail=single bytes=8388608 connect_us=12303 allocation_us=852 registration_us=827 get_us=74657 teardown_us=2397 total_us=91039
+RAIL_STAGED_TIMING bytes=8388608 rails=1 plan_us=12 reserve_us=1 workers_us=91353 assembly_us=0 checksum_us=2521 finish_us=1 total_us=93893
+RAIL_ACCEPTED_ID,namespace=rust-bench,object_key=wave2-perf-v1-8-0-0/__combined__,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rust-bench/wave2-perf-v1-8-0-0/__combined__ bytes=8388608 lookup_us=2125 transfer_us=94055 post_lookup_us=2155 publish_us=2352 total_us=100690
+RAIL_TRANSPORT_TIMING rail=single bytes=8388608 connect_us=11583 allocation_us=449 registration_us=300 get_us=73151 teardown_us=2435 total_us=87921
+RAIL_STAGED_TIMING bytes=8388608 rails=1 plan_us=8 reserve_us=1 workers_us=88163 assembly_us=0 checksum_us=1824 finish_us=0 total_us=90000
+RAIL_ACCEPTED_ID,namespace=rust-bench,object_key=wave2-perf-v1-8-0-0/__combined__,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rust-bench/wave2-perf-v1-8-0-0/__combined__ bytes=8388608 lookup_us=1806 transfer_us=90169 post_lookup_us=1775 publish_us=1342 total_us=95096
+RAIL_TRANSPORT_TIMING rail=single bytes=8388608 connect_us=12400 allocation_us=334 registration_us=254 get_us=76417 teardown_us=2366 total_us=91774
+RAIL_STAGED_TIMING bytes=8388608 rails=1 plan_us=19 reserve_us=1 workers_us=92026 assembly_us=0 checksum_us=1917 finish_us=0 total_us=93966
+RAIL_ACCEPTED_ID,namespace=rust-bench,object_key=wave2-perf-v1-8-0-0/__combined__,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rust-bench/wave2-perf-v1-8-0-0/__combined__ bytes=8388608 lookup_us=3108 transfer_us=94170 post_lookup_us=4608 publish_us=1830 total_us=103718
+RAIL_TRANSPORT_TIMING rail=single bytes=8388608 connect_us=12496 allocation_us=776 registration_us=240 get_us=76341 teardown_us=2389 total_us=92245
+RAIL_STAGED_TIMING bytes=8388608 rails=1 plan_us=11 reserve_us=1 workers_us=92554 assembly_us=0 checksum_us=2428 finish_us=1 total_us=94998
+RAIL_ACCEPTED_ID,namespace=rust-bench,object_key=wave2-perf-v1-8-0-0/__combined__,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rust-bench/wave2-perf-v1-8-0-0/__combined__ bytes=8388608 lookup_us=4466 transfer_us=95257 post_lookup_us=3785 publish_us=2203 total_us=105714
+RAIL_TRANSPORT_TIMING rail=single bytes=8388608 connect_us=10402 allocation_us=606 registration_us=402 get_us=74074 teardown_us=2466 total_us=87953
+RAIL_STAGED_TIMING bytes=8388608 rails=1 plan_us=11 reserve_us=1 workers_us=88255 assembly_us=0 checksum_us=2509 finish_us=0 total_us=90780
+RAIL_ACCEPTED_ID,namespace=rust-bench,object_key=wave2-perf-v1-8-0-0/__combined__,generation=1,layout_version=1
+RAIL_OUTER_TIMING key=rust-bench/wave2-perf-v1-8-0-0/__combined__ bytes=8388608 lookup_us=3315 transfer_us=91004 post_lookup_us=4287 publish_us=2206 total_us=100814

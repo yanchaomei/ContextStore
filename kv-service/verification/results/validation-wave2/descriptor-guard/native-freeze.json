@@ -1,0 +1,25 @@
+{
+  "state": "BUILT_NOT_RUN",
+  "utc": "2026-10-28T20:26:20.171732+00:00",
+  "profile": "debug",
+  "server_features": [
+    "rdma"
+  ],
+  "server_command": "cargo build --offline --locked -p contextstore-server --features rdma --bin contextstore-server",
+  "common_config_sha256": "efe67fda70283fa7e2bf5dea4812a7d13b095c86d8e6702aa8ae9c6cb1bf9ecc",
+  "probe_source_sha256": "c84a6ec2aaa5c24726ef796601d1a89cb102c31cbe2960c4328272648bdb51c2",
+  "fixed_client_source_sha256": "62a73733c9455677cb529f563a49f157c58cdf687e08de6d2ced3ac059328d3d",
+  "production_source_differences": [
+    "kv-service/server/src/rdma/server.rs"
+  ],
+  "binaries": {
+    "descriptor-guard-probe": "9e9511d97ae6415d3a7c7d7db550c1f01a79e2068087275c7c4d299ebb089b1d",
+    "candidate-server-debug-rdma": "580fd1cbf62c69dc4f2a1edc726b64b51a50934f6ca99b60ef8dee7805e2a418",
+    "baseline-server-debug-rdma": "4a6458a6a2183b9db110d893748673e4591839b97f087b6e57949c325ab77902"
+  },
+  "server_sources": {
+    "baseline": "a3b4e2675366aa233ea7c813bf72100891e8bc7fe3a905101b5322ddb1087346",
+    "candidate": "d7df834df7d4ffb86a04725a5055069cfadca2b253fc37ea092028fa50bd5b71"
+  },
+  "native_execution": "deferred until parent grants guest window"
+}

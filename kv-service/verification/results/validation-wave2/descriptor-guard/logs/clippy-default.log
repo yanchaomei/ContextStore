@@ -1,0 +1,676 @@
+    Checking cfg-if v1.0.4
+    Checking libc v0.2.186
+    Checking smallvec v1.15.2
+    Checking pin-project-lite v0.2.17
+    Checking bytes v1.12.1
+    Checking futures-core v0.3.32
+    Checking zerofrom v0.1.8
+    Checking stable_deref_trait v1.2.1
+    Checking scopeguard v1.2.0
+    Checking yoke v0.8.3
+    Checking lock_api v0.4.14
+    Checking memchr v2.8.3
+    Checking futures-sink v0.3.32
+    Checking once_cell v1.21.4
+    Checking zerovec v0.11.6
+    Checking futures-channel v0.3.32
+    Checking itoa v1.0.18
+    Checking futures-io v0.3.32
+    Checking futures-task v0.3.32
+    Checking slab v0.4.12
+    Checking equivalent v1.0.2
+    Checking tracing-core v0.1.36
+    Checking futures-util v0.3.32
+   Compiling anyhow v1.0.103
+    Checking parking_lot_core v0.9.12
+    Checking errno v0.3.14
+    Checking parking_lot v0.12.5
+    Checking signal-hook-registry v1.4.8
+    Checking mio v1.2.1
+    Checking socket2 v0.6.4
+   Compiling prost-derive v0.12.6
+    Checking tinystr v0.8.3
+    Checking tokio v1.52.3
+    Checking serde_core v1.0.228
+    Checking litemap v0.8.2
+    Checking hashbrown v0.17.1
+    Checking writeable v0.6.3
+    Checking fnv v1.0.7
+    Checking icu_locale_core v2.2.0
+    Checking http v0.2.12
+    Checking indexmap v2.14.0
+    Checking tracing v0.1.44
+    Checking zerocopy v0.8.54
+    Checking getrandom v0.2.17
+    Checking potential_utf v0.1.5
+    Checking zerotrie v0.2.4
+    Checking utf8_iter v1.0.4
+    Checking icu_collections v2.2.0
+    Checking icu_provider v2.2.0
+    Checking serde v1.0.228
+    Checking rand_core v0.6.4
+   Compiling bitflags v2.13.0
+    Checking tower-service v0.3.3
+   Compiling linux-raw-sys v0.12.1
+   Compiling rustix v1.1.4
+    Checking tokio-util v0.7.18
+   Compiling prost v0.12.6
+   Compiling getrandom v0.4.3
+    Checking icu_normalizer_data v2.2.0
+    Checking icu_properties_data v2.2.0
+    Checking http-body v0.4.6
+    Checking socket2 v0.5.10
+    Checking try-lock v0.2.5
+    Checking percent-encoding v2.3.2
+   Compiling fastrand v2.4.1
+    Checking typenum v1.20.1
+   Compiling petgraph v0.6.5
+   Compiling tempfile v3.27.0
+    Checking generic-array v0.14.7
+    Checking want v0.3.1
+    Checking icu_properties v2.2.0
+    Checking ppv-lite86 v0.2.21
+    Checking icu_normalizer v2.2.0
+    Checking num-traits v0.2.19
+    Checking rand_chacha v0.3.1
+   Compiling prost-types v0.12.6
+    Checking rand v0.8.7
+    Checking httparse v1.10.1
+    Checking h2 v0.3.27
+    Checking utf8parse v0.2.2
+    Checking tower-layer v0.3.3
+    Checking httpdate v1.0.3
+    Checking hashbrown v0.12.3
+    Checking anstyle-parse v1.0.0
+    Checking pin-project v1.1.13
+   Compiling prost-build v0.12.6
+    Checking indexmap v1.9.3
+    Checking idna_adapter v1.2.2
+    Checking colorchoice v1.0.5
+    Checking anstyle v1.0.14
+    Checking anstyle-query v1.1.5
+    Checking is_terminal_polyfill v1.70.2
+    Checking regex-syntax v0.8.11
+    Checking mime v0.3.17
+    Checking axum-core v0.3.4
+    Checking anstream v1.0.0
+   Compiling tonic-build v0.11.0
+    Checking regex-automata v0.4.15
+    Checking hyper v0.14.32
+    Checking tower v0.4.13
+    Checking idna v1.1.0
+    Checking num-integer v0.1.46
+    Checking crypto-common v0.1.7
+    Checking block-buffer v0.10.4
+    Checking form_urlencoded v1.2.2
+    Checking tokio-stream v0.1.18
+    Checking tokio-io-timeout v1.2.1
+    Checking toml_datetime v0.6.11
+    Checking serde_spanned v0.6.9
+    Checking clap_lex v1.1.0
+    Checking lazy_static v1.5.0
+    Checking log v0.4.33
+    Checking either v1.16.0
+    Checking allocator-api2 v0.2.21
+    Checking foldhash v0.1.5
+    Checking matchit v0.7.3
+    Checking strsim v0.11.1
+    Checking sync_wrapper v0.1.2
+    Checking toml_write v0.1.2
+    Checking bitflags v1.3.2
+    Checking winnow v0.7.15
+    Checking clap_builder v4.6.0
+    Checking hashbrown v0.15.5
+    Checking hyper-timeout v0.4.1
+    Checking axum v0.6.20
+    Checking itertools v0.13.0
+    Checking tracing-log v0.2.0
+    Checking toml_edit v0.22.27
+    Checking sharded-slab v0.1.7
+    Checking async-stream v0.3.6
+    Checking url v2.5.8
+    Checking digest v0.10.7
+    Checking matchers v0.2.0
+    Checking num-bigint v0.4.8
+    Checking crossbeam-utils v0.8.22
+    Checking zmij v1.0.22
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/src/kv-service/server)
+    Checking futures-executor v0.3.32
+    Checking arc-swap v1.9.2
+    Checking combine v4.6.7
+    Checking thread_local v1.1.10
+    Checking hashbrown v0.14.5
+    Checking static_assertions v1.1.0
+    Checking base64 v0.21.7
+    Checking sha1_smol v1.0.1
+    Checking ryu v1.0.23
+    Checking nu-ansi-term v0.50.3
+    Checking iana-time-zone v0.1.65
+    Checking chrono v0.4.45
+    Checking dashmap v5.5.3
+    Checking tracing-subscriber v0.3.23
+    Checking tonic v0.11.0
+    Checking twox-hash v1.6.3
+    Checking thiserror v1.0.69
+    Checking futures v0.3.32
+    Checking clap v4.6.1
+    Checking toml v0.8.23
+    Checking serde_json v1.0.150
+    Checking crossbeam-channel v0.5.16
+    Checking md-5 v0.10.6
+    Checking lru v0.12.5
+    Checking tokio-test v0.4.5
+    Checking redis v0.27.6
+error: use of `unwrap_or_else` to construct default value
+   --> kv-service/server/src/api/service.rs:672:48
+    |
+672 |             return segments.into_iter().next().unwrap_or_else(Bytes::new);
+    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `unwrap_or_default()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unwrap_or_default
+    = note: `-D clippy::unwrap-or-default` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::unwrap_or_default)]`
+
+error: this function has too many arguments (9/7)
+   --> kv-service/server/src/api/service.rs:682:5
+    |
+682 | /     async fn put_chunk_on_node(
+683 | |         ctx: Arc<KVServiceContext>,
+684 | |         node: DataNode,
+685 | |         key: InternalKey,
+...   |
+691 | |         data: Bytes,
+692 | |     ) -> Result<ChunkWriteResult, Status> {
+    | |_________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#too_many_arguments
+    = note: `-D clippy::too-many-arguments` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::too_many_arguments)]`
+
+error: this function has too many arguments (9/7)
+    --> kv-service/server/src/api/service.rs:993:5
+     |
+ 993 | /     async fn put_stripe_segments_on_node(
+ 994 | |         ctx: Arc<KVServiceContext>,
+ 995 | |         node: DataNode,
+ 996 | |         key: InternalKey,
+...    |
+1002 | |         segments: Vec<Bytes>,
+1003 | |     ) -> Result<ChunkWriteResult, Status> {
+     | |_________________________________________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#too_many_arguments
+
+error: the `Err`-variant returned from this function is very large
+    --> kv-service/server/src/api/service.rs:1923:56
+     |
+1923 | fn key_from_descriptor(desc: &pb::ObjectDescriptor) -> Result<InternalKey, Status> {
+     |                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 176 bytes
+     |
+     = help: try reducing the size of `tonic::Status`, for example by boxing large elements or replacing it with `Box<tonic::Status>`
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#result_large_err
+     = note: `-D clippy::result-large-err` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::result_large_err)]`
+
+error: the `Err`-variant returned from this function is very large
+    --> kv-service/server/src/api/service.rs:1931:74
+     |
+1931 | fn validate_descriptor(desc: &pb::ObjectDescriptor, meta: &BlockMeta) -> Result<(), Status> {
+     |                                                                          ^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 176 bytes
+     |
+     = help: try reducing the size of `tonic::Status`, for example by boxing large elements or replacing it with `Box<tonic::Status>`
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+    --> kv-service/server/src/api/service.rs:1948:6
+     |
+1948 | ) -> Result<(), Status> {
+     |      ^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 176 bytes
+     |
+     = help: try reducing the size of `tonic::Status`, for example by boxing large elements or replacing it with `Box<tonic::Status>`
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#result_large_err
+
+error: this `impl` can be derived
+   --> kv-service/server/src/config.rs:309:1
+    |
+309 | / impl Default for Config {
+310 | |     fn default() -> Self {
+311 | |         Self {
+312 | |             api: Default::default(),
+...   |
+324 | | }
+    | |_^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls
+    = note: `-D clippy::derivable-impls` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::derivable_impls)]`
+help: replace the manual implementation with a derive attribute
+    |
+ 12 + #[derive(Default)]
+ 13 ~ pub struct Config {
+    |
+
+error: unneeded `return` statement
+   --> kv-service/server/src/io_executor/tier_a.rs:346:13
+    |
+346 |             return Ok(());
+    |             ^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#needless_return
+    = note: `-D clippy::needless-return` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::needless_return)]`
+help: remove `return`
+    |
+346 -             return Ok(());
+346 +             Ok(())
+    |
+
+error: unneeded `return` statement
+   --> kv-service/server/src/io_executor/tier_a.rs:349:13
+    |
+349 |             return write_vec_impl_buffered(req, segments, &tmp);
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#needless_return
+help: remove `return`
+    |
+349 -             return write_vec_impl_buffered(req, segments, &tmp);
+349 +             write_vec_impl_buffered(req, segments, &tmp)
+    |
+
+error: unneeded `return` statement
+   --> kv-service/server/src/io_executor/tier_a.rs:351:19
+    |
+351 |         Err(e) => return Err(KVError::Io(e)),
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#needless_return
+help: remove `return`
+    |
+351 -         Err(e) => return Err(KVError::Io(e)),
+351 +         Err(e) => Err(KVError::Io(e)),
+    |
+
+error: doc list item without indentation
+   --> kv-service/server/src/io_executor/tier_a.rs:370:5
+    |
+370 | ///    Simplified variant: if len isn't a 4K multiple, fall back to buffered (no correctness loss;
+    |     ^^^
+    |
+    = help: if this is supposed to be its own paragraph, add a blank line
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#doc_lazy_continuation
+    = note: `-D clippy::doc-lazy-continuation` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::doc_lazy_continuation)]`
+help: indent this line
+    |
+370 | ///      Simplified variant: if len isn't a 4K multiple, fall back to buffered (no correctness loss;
+    |        ++
+
+error: doc list item without indentation
+   --> kv-service/server/src/io_executor/tier_a.rs:371:5
+    |
+371 | ///    in practice all 480MB stripes are 64MB integer 4K multiples, so the tail path almost
+    |     ^^^
+    |
+    = help: if this is supposed to be its own paragraph, add a blank line
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#doc_lazy_continuation
+help: indent this line
+    |
+371 | ///      in practice all 480MB stripes are 64MB integer 4K multiples, so the tail path almost
+    |        ++
+
+error: doc list item without indentation
+   --> kv-service/server/src/io_executor/tier_a.rs:372:5
+    |
+372 | ///    never triggers).
+    |     ^^^
+    |
+    = help: if this is supposed to be its own paragraph, add a blank line
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#doc_lazy_continuation
+help: indent this line
+    |
+372 | ///      never triggers).
+    |        ++
+
+error: manual implementation of `.is_multiple_of()`
+   --> kv-service/server/src/io_executor/tier_a.rs:385:8
+    |
+385 |     if (ptr as usize) % DIRECT_IO_ALIGN != 0 {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: replace with: `!(ptr as usize).is_multiple_of(DIRECT_IO_ALIGN)`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#manual_is_multiple_of
+    = note: `-D clippy::manual-is-multiple-of` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::manual_is_multiple_of)]`
+
+error: manual implementation of `.is_multiple_of()`
+   --> kv-service/server/src/io_executor/tier_a.rs:588:43
+    |
+588 |                 if total < aligned_len && total % DIRECT_IO_ALIGN != 0 {
+    |                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: replace with: `!total.is_multiple_of(DIRECT_IO_ALIGN)`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#manual_is_multiple_of
+
+error: items after a test module
+    --> kv-service/server/src/api/service.rs:78:1
+     |
+  78 |   mod tests {
+     |   ^^^^^^^^^
+...
+ 506 |   impl KVServiceImpl {
+     |   ^^^^^^^^^^^^^^^^^^
+...
+1525 |   fn pb_key_to_internal(k: &pb::ObjectKey) -> InternalKey {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1532 |   fn internal_key_to_pb(k: &InternalKey) -> pb::ObjectKey {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1539 |   fn meta_from_pb(m: Option<&pb::KvMetadata>, options: Option<&pb::PutOptions>) -> BlockMeta {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1582 |   fn meta_to_pb(m: &BlockMeta) -> pb::KvMetadata {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1595 |   fn put_options_if_not_exists(options: Option<&pb::PutOptions>) -> bool {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1599 |   fn grpc_uri(endpoint: &str) -> String {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1607 |   fn local_node(ctx: &KVServiceContext) -> DataNode {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1638 |   fn configured_data_nodes(ctx: &KVServiceContext) -> Vec<DataNode> {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1654 |   fn configured_node_id(node: &ClusterNodeConfig) -> &str {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1662 |   fn is_local_node(ctx: &KVServiceContext, node: &DataNode) -> bool {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1667 |   fn distributed_placement_enabled(ctx: &KVServiceContext, len: usize) -> bool {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1672 |   fn select_data_node(ctx: &KVServiceContext, key: &InternalKey, stripe_index: usize) -> DataNode {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1685 | / fn local_device_stripe_index(
+1686 | |     ctx: &KVServiceContext,
+1687 | |     key: &InternalKey,
+1688 | |     stripe_index: usize,
+1689 | | ) -> Option<usize> {
+     | |__________________^
+...
+1711 |   fn placement_policy_id(ctx: &KVServiceContext) -> String {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1715 |   fn placement_epoch(ctx: &KVServiceContext) -> u64 {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1732 |   fn chunk_location_to_pb(key: &InternalKey, loc: &ChunkLocation) -> pb::PlacementChunk {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1747 |   fn pb_chunk_to_location(chunk: &pb::PlacementChunk) -> ChunkLocation {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1761 |   fn object_handle(key: &InternalKey, meta: &BlockMeta) -> String {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1773 |   fn descriptor_from_meta(key: &InternalKey, meta: &BlockMeta) -> pb::ObjectDescriptor {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1791 | / fn placement_from_meta(
+1792 | |     ctx: &KVServiceContext,
+1793 | |     key: &InternalKey,
+1794 | |     meta: &BlockMeta,
+1795 | | ) -> pb::PlacementDescriptor {
+     | |____________________________^
+...
+1872 | / fn advertised_rails_for_chunks(
+1873 | |     ctx: &KVServiceContext,
+1874 | |     chunks: &[pb::PlacementChunk],
+1875 | | ) -> Vec<pb::RdmaRailEndpoint> {
+     | |______________________________^
+...
+1923 |   fn key_from_descriptor(desc: &pb::ObjectDescriptor) -> Result<InternalKey, Status> {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1931 |   fn validate_descriptor(desc: &pb::ObjectDescriptor, meta: &BlockMeta) -> Result<(), Status> {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1943 | / fn validate_placement_descriptor(
+1944 | |     ctx: &KVServiceContext,
+1945 | |     key: &InternalKey,
+1946 | |     meta: &BlockMeta,
+1947 | |     placement: Option<&pb::PlacementDescriptor>,
+1948 | | ) -> Result<(), Status> {
+     | |_______________________^
+...
+1970 |   impl pb::kv_service_server::KvService for KVServiceImpl {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#items_after_test_module
+     = note: `-D clippy::items-after-test-module` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::items_after_test_module)]`
+
+error: called `iter().cloned().collect()` on a slice to create a `Vec`. Calling `to_vec()` is both faster and more readable
+   --> kv-service/server/src/memory_tier.rs:160:50
+    |
+160 |                     let segments = entry.segments.iter().cloned().collect();
+    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `.to_vec()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#iter_cloned_collect
+    = note: `-D clippy::iter-cloned-collect` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::iter_cloned_collect)]`
+
+error: called `iter().cloned().collect()` on a slice to create a `Vec`. Calling `to_vec()` is both faster and more readable
+   --> kv-service/server/src/memory_tier.rs:196:46
+    |
+196 |                 let segments = entry.segments.iter().cloned().collect();
+    |                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `.to_vec()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#iter_cloned_collect
+
+error: called `iter().cloned().collect()` on a slice to create a `Vec`. Calling `to_vec()` is both faster and more readable
+   --> kv-service/server/src/memory_tier.rs:221:42
+    |
+221 |             let segments = entry.segments.iter().cloned().collect();
+    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `.to_vec()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#iter_cloned_collect
+
+error: very complex type used. Consider factoring parts into `type` definitions
+   --> kv-service/server/src/memory_tier.rs:407:26
+    |
+407 |         let mut results: Vec<Option<Result<Option<(Bytes, BlockMeta)>>>> =
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#type_complexity
+    = note: `-D clippy::type-complexity` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::type_complexity)]`
+
+error: this function has too many arguments (8/7)
+   --> kv-service/server/src/metrics.rs:705:9
+    |
+705 | /         pub fn record_storage_io(
+706 | |             &self,
+707 | |             _operation: &str,
+708 | |             _device: &str,
+...   |
+713 | |             _duration_seconds: f64,
+714 | |         ) {
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#too_many_arguments
+
+error: this method chain can be written more clearly with `if .. else ..`
+   --> kv-service/server/src/storage_tier.rs:641:24
+    |
+641 |           let checksum = self
+    |  ________________________^
+642 | |             .verify_stripe_checksums
+643 | |             .then(|| Self::checksum_bytes(&data))
+644 | |             .unwrap_or_default();
+    | |________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#obfuscated_if_else
+    = note: `-D clippy::obfuscated-if-else` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::obfuscated_if_else)]`
+help: try
+    |
+641 ~         let checksum = if self
+642 ~             .verify_stripe_checksums { Self::checksum_bytes(&data) } else { Default::default() };
+    |
+
+error: this method chain can be written more clearly with `if .. else ..`
+   --> kv-service/server/src/storage_tier.rs:680:24
+    |
+680 |           let checksum = self
+    |  ________________________^
+681 | |             .verify_stripe_checksums
+682 | |             .then(|| Self::checksum_segments(&segments))
+683 | |             .unwrap_or_default();
+    | |________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#obfuscated_if_else
+help: try
+    |
+680 ~         let checksum = if self
+681 ~             .verify_stripe_checksums { Self::checksum_segments(&segments) } else { Default::default() };
+    |
+
+error: manually reimplementing `div_ceil`
+    --> kv-service/server/src/storage_tier.rs:1367:17
+     |
+1367 |         let n = (total + chunk_size - 1) / chunk_size;
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using `.div_ceil()`: `total.div_ceil(chunk_size)`
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#manual_div_ceil
+     = note: `-D clippy::manual-div-ceil` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::manual_div_ceil)]`
+
+error: manually reimplementing `div_ceil`
+    --> kv-service/server/src/storage_tier.rs:1408:25
+     |
+1408 |         let n_stripes = (total + chunk_size - 1) / chunk_size;
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using `.div_ceil()`: `total.div_ceil(chunk_size)`
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#manual_div_ceil
+
+error: the loop variable `stripe_idx` is used to index `stripes`
+    --> kv-service/server/src/storage_tier.rs:1420:27
+     |
+1420 |         for stripe_idx in 0..n_stripes {
+     |                           ^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#needless_range_loop
+     = note: `-D clippy::needless-range-loop` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::needless_range_loop)]`
+help: consider using an iterator and enumerate()
+     |
+1420 -         for stripe_idx in 0..n_stripes {
+1420 +         for (stripe_idx, <item>) in stripes.iter_mut().enumerate().take(n_stripes) {
+     |
+
+error: very complex type used. Consider factoring parts into `type` definitions
+    --> kv-service/server/src/storage_tier.rs:1689:10
+     |
+1689 |     ) -> Result<crossbeam_channel::Receiver<(usize, usize, usize, usize, Result<usize>)>> {
+     |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#type_complexity
+
+error: this public function might dereference a raw pointer but is not marked `unsafe`
+    --> kv-service/server/src/storage_tier.rs:1730:43
+     |
+1730 |                 let stream_ptr = unsafe { ptr.add(source_offset) };
+     |                                           ^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#not_unsafe_ptr_arg_deref
+     = note: `#[deny(clippy::not_unsafe_ptr_arg_deref)]` on by default
+
+error: this public function might dereference a raw pointer but is not marked `unsafe`
+    --> kv-service/server/src/storage_tier.rs:2082:39
+     |
+2082 |             let stripe_ptr = unsafe { ptr.add(stripe_offset) };
+     |                                       ^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#not_unsafe_ptr_arg_deref
+
+error: this public function might dereference a raw pointer but is not marked `unsafe`
+    --> kv-service/server/src/storage_tier.rs:2148:39
+     |
+2148 |             let stripe_ptr = unsafe { ptr.add(stripe_offset) };
+     |                                       ^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#not_unsafe_ptr_arg_deref
+
+error: very complex type used. Consider factoring parts into `type` definitions
+    --> kv-service/server/src/storage_tier.rs:2202:10
+     |
+2202 |       ) -> Result<
+     |  __________^
+2203 | |         Option<(
+2204 | |             BlockMeta,
+2205 | |             crossbeam_channel::Receiver<(usize, usize, usize, Result<usize>)>,
+2206 | |         )>,
+2207 | |     > {
+     | |_____^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#type_complexity
+
+error: very complex type used. Consider factoring parts into `type` definitions
+    --> kv-service/server/src/storage_tier.rs:2230:10
+     |
+2230 |       ) -> Result<
+     |  __________^
+2231 | |         Option<(
+2232 | |             BlockMeta,
+2233 | |             crossbeam_channel::Receiver<(usize, usize, usize, Result<usize>)>,
+2234 | |         )>,
+2235 | |     > {
+     | |_____^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#type_complexity
+
+error: this public function might dereference a raw pointer but is not marked `unsafe`
+    --> kv-service/server/src/storage_tier.rs:2312:43
+     |
+2312 |                 let stream_ptr = unsafe { ptr.add(offset_in_value) };
+     |                                           ^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#not_unsafe_ptr_arg_deref
+
+error: very complex type used. Consider factoring parts into `type` definitions
+    --> kv-service/server/src/storage_tier.rs:2552:26
+     |
+2552 |         let mut results: Vec<Option<Result<Option<(Bytes, BlockMeta)>>>> =
+     |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#type_complexity
+
+error: could not compile `contextstore-server` (lib) due to 33 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: large size difference between variants
+   --> kv-service/server/src/metadata.rs:130:1
+    |
+130 | / enum MetadataBackend {
+131 | |     Redis(RedisMetadataBackend),
+    | |     --------------------------- the largest variant contains at least 280 bytes
+132 | |     #[cfg(test)]
+133 | |     Memory(MemoryMetadataBackend),
+    | |     ----------------------------- the second-largest variant contains at least 8 bytes
+134 | | }
+    | |_^ the entire enum is at least 280 bytes
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#large_enum_variant
+    = note: `-D clippy::large-enum-variant` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::large_enum_variant)]`
+help: consider boxing the large fields or introducing indirection in some other way to reduce the total size of the enum
+    |
+131 -     Redis(RedisMetadataBackend),
+131 +     Redis(Box<RedisMetadataBackend>),
+    |
+
+error: could not compile `contextstore-server` (lib test) due to 35 previous errors

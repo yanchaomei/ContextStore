@@ -1,0 +1,9 @@
+{
+  "source": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/descriptor-guard",
+  "files": {
+    "clippy-comparison.json": "1f2171781f0554cbfedfe1fc2816b01539500c86b8abf800e7ad9564040c4a26",
+    "receipt.json": "99ea47e377890f56b21b779e889e25d3b29e262ba147be6dd073ba0d2f6ed614"
+  },
+  "rerun": false,
+  "scope": "inherit server strict-Clippy unchanged-baseline failure, never full-repo lint green"
+}

@@ -1,0 +1,19 @@
+{
+  "state": "PASS",
+  "identity": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "128",
+    "chunk_size": "524288",
+    "handle_xxh3": "534580590ca386e4",
+    "etag_xxh3": "1b967b049baa8a2e",
+    "descriptor_xxh3": "606da65d8f104e84",
+    "placement_xxh3": "e2305fed7930b150"
+  },
+  "final_pool": {
+    "phase": "final",
+    "enabled": "false"
+  },
+  "sample_count": 35,
+  "steady_median_us": 92632.0
+}

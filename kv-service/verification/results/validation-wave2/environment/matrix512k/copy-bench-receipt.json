@@ -1,0 +1,16 @@
+{
+  "source": [
+    "ssh",
+    "-oBatchMode=yes",
+    "SKV_2",
+    "tar -chf - -C /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/pilot-frozen-bin-v3 cs-bench cs-rail-read-bench"
+  ],
+  "destination": [
+    "ssh",
+    "-oBatchMode=yes",
+    "SKV_1",
+    "ssh -oBatchMode=yes skv-node6 'tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin'"
+  ],
+  "source_exit": 0,
+  "destination_exit": 0
+}

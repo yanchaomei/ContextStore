@@ -1,0 +1,172 @@
+{
+  "state": "PASS_NATIVE_BRANCH_REGRESSION",
+  "scope": "Full-object descriptor GET cold-slab fallback retirement guard; native coverage is one 8192-byte unstriped object per variant, not all layouts or performance.",
+  "runtime_freeze": {
+    "state": "RUNTIME_CONFIG_FROZEN_BEFORE_EXECUTION",
+    "utc": "2026-10-28T21:03:01.674319+00:00",
+    "config_sha256": "aff9592c1690d3625997b09e7b4c93658eb2ca5195d07bd26a5fc12a72e2d896",
+    "server_environment": {
+      "CS_FORCE_DISK_READ": "1",
+      "CS_RDMA_SLAB_MB": "16",
+      "CS_RDMA_CQ_TIMEOUT_MS": "300",
+      "CS_RDMA_DEVICES": "rxe0:10.81.1.1:55453:1"
+    },
+    "client_environment": {
+      "CS_GUARD_GRPC_ENDPOINT": "http://10.81.1.1:55451",
+      "CS_GUARD_RDMA_ENDPOINT": "10.81.1.1:55453",
+      "CS_GUARD_RDMA_DEVICE": "rxe0",
+      "CS_GUARD_RDMA_GID": "1"
+    },
+    "actual_topology": "server10.81.1.1/client10.81.1.2;rxe0;GID1",
+    "template_adjustment": "Actual guest endpoint addresses replace prepared-template addresses. Both variants use the exact same runtime config and environment.",
+    "variant_order": [
+      "baseline",
+      "candidate"
+    ],
+    "scope": "Full-object descriptor cold-slab fallback guard; one private 8192-byte unstriped object per variant."
+  },
+  "payload": {
+    "bytes": 8192,
+    "definition": "byte[index] = index % 251",
+    "expected_sha256": "25df2449b2e5a35fea14e02a7158e283801a1069c9f84631b9a9dacb2f809a7f",
+    "verification": "Frozen native probe compares every byte of RegisteredBuffer against the complete expected payload before and after the controlled failure. expected-payload.bin is the expected vector, not a captured RDMA receive dump."
+  },
+  "variants": {
+    "baseline": {
+      "client_exit": 0,
+      "client_result": {
+        "private_target_bytes": 8192,
+        "controlled_eof": true,
+        "target_unchanged_after_server_close": true,
+        "fresh_exact_read_before": true,
+        "fresh_exact_read_after": true
+      },
+      "server_process": {
+        "pid": 20061,
+        "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/baseline-server-debug-rdma",
+        "cmdline": [
+          "/home/railtest/wave2-descriptor-guard/native-frozen-bin/baseline-server-debug-rdma",
+          "--config",
+          "/home/railtest/wave2-descriptor-guard/server.toml",
+          "--log-level",
+          "info",
+          ""
+        ],
+        "stat": "20061 (baseline-server) S 20048 20048 20048 0 -1 1077936128 5891 0 2 0 0 1 0 0 20 0 12 0 731746 877850624 9309 18446744073709551615 94190720665344 94190735934736 140735014739088 0 0 0 0 4103 1088 0 0 0 17 1 0 0 0 0 0 94190736883656 94190736902216 94191392903168 140735014747311 140735014747470 140735014747470 140735014748069 0\n",
+        "utc_unix": 1793221382.790485
+      },
+      "client_process": {
+        "pid": 21476,
+        "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/descriptor-guard-probe",
+        "cmdline": [
+          "/home/railtest/wave2-descriptor-guard/native-frozen-bin/descriptor-guard-probe",
+          "--ignored",
+          "--nocapture",
+          "--exact",
+          "descriptor_get_retirement_keeps_private_target_and_fresh_reads_correct",
+          ""
+        ],
+        "stat": "21476 (descriptor-guar) S 21473 21473 21473 0 -1 1077936128 596 0 0 0 0 0 0 0 20 0 3 0 731786 151199744 1813 18446744073709551615 94600386300496 94600390667440 140731615137552 0 0 0 0 4102 1088 0 0 0 17 0 0 0 0 0 0 94600391031656 94600391044720 94600709074944 140731615140997 140731615141177 140731615141177 140731615141801 0\n",
+        "utc_unix": 1793221383.3770273
+      },
+      "canonical_key": "16:descriptor-guarddescriptor-guard-1793221383353203862",
+      "namespace": "descriptor-guard",
+      "object_key": "descriptor-guard-1793221383353203862",
+      "fault_key_mapping": "The frozen probe captures and forwards the unchanged descriptor request between its two exact reads using the same descriptor. The only object key observed in this isolated server window is the matching key in both normal-read logs.",
+      "peers": {
+        "fresh_before": "10.81.1.2:40288",
+        "controlled_failure": "10.81.1.2:40302",
+        "fresh_after": "10.81.1.2:40312"
+      },
+      "server_full_log_lines": 26,
+      "server_full_log_sha256": "c912d4a735c50ce905dd985ccdbb4d8ebe7d714f3a59084ff81d61f3f19a0c55",
+      "fault_window_lines_1based": [
+        18,
+        22
+      ],
+      "fault_window": [
+        "2026-10-28T21:03:03.391967Z  INFO RDMA client connected: 10.81.1.2:40302 (nic_idx=0)",
+        "2026-10-28T21:03:03.392069Z  INFO RcQp created: qpn=17 psn=0xb7e8ce",
+        "2026-10-28T21:03:03.392141Z  INFO RDMA QP established: local_qpn=17 remote_qpn=17",
+        "2026-10-28T21:03:03.692830Z  WARN RDMA descriptor GET slab path failed, fallback to per-chunk reg_mr: RDMA connection retired after uncertain legacy GET: poll final RDMA completions: poll_n timeout after 300ms, got 0/1",
+        "2026-10-28T21:03:03.993321Z  WARN RDMA client 10.81.1.2:40302 (nic_idx=0) disconnected: poll_n timeout after 300ms, got 0/1"
+      ],
+      "terminal_event": "2026-10-28T21:03:03.993321Z  WARN RDMA client 10.81.1.2:40302 (nic_idx=0) disconnected: poll_n timeout after 300ms, got 0/1",
+      "fallback_events_in_entire_server_window": 1,
+      "source_of_retirement_type": "Server display of existing RetireLegacyGet marker; typed identity additionally covered by the unit regression's error-chain downcast, not inferred from client EOF alone.",
+      "server_window_start": "2026-10-28T21:03:02Z",
+      "server_window_stop": "2026-10-28T21:03:04Z"
+    },
+    "candidate": {
+      "client_exit": 0,
+      "client_result": {
+        "private_target_bytes": 8192,
+        "controlled_eof": true,
+        "target_unchanged_after_server_close": true,
+        "fresh_exact_read_before": true,
+        "fresh_exact_read_after": true
+      },
+      "server_process": {
+        "pid": 20252,
+        "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/candidate-server-debug-rdma",
+        "cmdline": [
+          "/home/railtest/wave2-descriptor-guard/native-frozen-bin/candidate-server-debug-rdma",
+          "--config",
+          "/home/railtest/wave2-descriptor-guard/server.toml",
+          "--log-level",
+          "info",
+          ""
+        ],
+        "stat": "20252 (candidate-serve) S 20239 20239 20239 0 -1 1077936128 6127 0 0 0 0 1 0 0 20 0 12 0 733333 877850624 9605 18446744073709551615 94222238443424 94222253713376 140737084353264 0 0 0 0 4103 1088 0 0 0 17 0 0 0 0 0 0 94222254662320 94222254680880 94222346694656 140737084357805 140737084357965 140737084357965 140737084358564 0\n",
+        "utc_unix": 1793221398.6579037
+      },
+      "client_process": {
+        "pid": 21591,
+        "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/descriptor-guard-probe",
+        "cmdline": [
+          "/home/railtest/wave2-descriptor-guard/native-frozen-bin/descriptor-guard-probe",
+          "--ignored",
+          "--nocapture",
+          "--exact",
+          "descriptor_get_retirement_keeps_private_target_and_fresh_reads_correct",
+          ""
+        ],
+        "stat": "21591 (descriptor-guar) S 21588 21588 21588 0 -1 1077936128 597 0 0 0 0 1 0 0 20 0 3 0 733340 151199744 1840 18446744073709551615 94641606433360 94641610800304 140727217143008 0 0 0 0 4102 1088 0 0 0 17 1 0 0 0 0 0 94641611164520 94641611177584 94641838116864 140727217151109 140727217151289 140727217151289 140727217151913 0\n",
+        "utc_unix": 1793221398.9196053
+      },
+      "canonical_key": "16:descriptor-guarddescriptor-guard-1793221398896451799",
+      "namespace": "descriptor-guard",
+      "object_key": "descriptor-guard-1793221398896451799",
+      "fault_key_mapping": "The frozen probe captures and forwards the unchanged descriptor request between its two exact reads using the same descriptor. The only object key observed in this isolated server window is the matching key in both normal-read logs.",
+      "peers": {
+        "fresh_before": "10.81.1.2:56572",
+        "controlled_failure": "10.81.1.2:56580",
+        "fresh_after": "10.81.1.2:56596"
+      },
+      "server_full_log_lines": 25,
+      "server_full_log_sha256": "9be76d49050706ed4dea395754d25434d1a505118c6dc0ff6f00765c9c11fe92",
+      "fault_window_lines_1based": [
+        18,
+        21
+      ],
+      "fault_window": [
+        "2026-10-28T21:03:18.934961Z  INFO RDMA client connected: 10.81.1.2:56580 (nic_idx=0)",
+        "2026-10-28T21:03:18.935059Z  INFO RcQp created: qpn=17 psn=0x271d65",
+        "2026-10-28T21:03:18.935137Z  INFO RDMA QP established: local_qpn=17 remote_qpn=17",
+        "2026-10-28T21:03:19.236306Z  WARN RDMA client 10.81.1.2:56580 (nic_idx=0) disconnected: RDMA connection retired after uncertain legacy GET: poll final RDMA completions: poll_n timeout after 300ms, got 0/1"
+      ],
+      "terminal_event": "2026-10-28T21:03:19.236306Z  WARN RDMA client 10.81.1.2:56580 (nic_idx=0) disconnected: RDMA connection retired after uncertain legacy GET: poll final RDMA completions: poll_n timeout after 300ms, got 0/1",
+      "fallback_events_in_entire_server_window": 0,
+      "source_of_retirement_type": "Server display of existing RetireLegacyGet marker; typed identity additionally covered by the unit regression's error-chain downcast, not inferred from client EOF alone.",
+      "server_window_start": "2026-10-28T21:03:18Z",
+      "server_window_stop": "2026-10-28T21:03:19Z"
+    }
+  },
+  "cleanup": {
+    "owned_server_redis_probe_processes": "No owned processes remain in post-run process listing.",
+    "private_listeners": "No listener remains on 55451, 55453, or 6396.",
+    "client_rdma": "No MRs or RC QPs; only rxe0/rxe1 kernel GSI QPs.",
+    "server_rdma": "Only pre-existing large/small fixture slab MRs owned by threads 965/1104 and kernel GSI QPs remain.",
+    "preexisting_fixture_processes": "PIDs 958 and 1097 plus Redis 953 and 1092 remain running with original command lines."
+  }
+}

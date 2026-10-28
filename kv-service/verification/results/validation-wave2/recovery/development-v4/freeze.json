@@ -1,0 +1,68 @@
+{
+  "phase": "development_v4_style_only",
+  "frozen_before_launch_utc": "2026-10-28T20:05:20.030205+00:00",
+  "core_revision": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "source_hashes": {
+    "Cargo.toml": "289fe5e3ccbee0945b73a6b40574fe64cb9e78652358983a8af40607773b0a62",
+    "Cargo.lock": "338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/tests.rs": "aad37340039b9ac4e801eec57a6ef89bc06ee37ebabb0e06b1866f1942d18b17",
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs": "b0670c77df08a67884ee4759175a2d55b7b75eb6d763901f4124161e6dcea087"
+  },
+  "binary_sha256": "714913de399181eb58e5289ef4d08b76cf9a1afea5a43d3b177b8a4364fc343c",
+  "native_fixture": {
+    "object_bytes": 1048576,
+    "stripes": 4,
+    "chunk_bytes": 262144,
+    "server_cq_timeout_ms": 1000,
+    "devices": [
+      "rxe0",
+      "rxe1"
+    ],
+    "gid": 1,
+    "pool_modes": [
+      "off",
+      "on"
+    ],
+    "staging_modes": [
+      "packed",
+      "direct"
+    ],
+    "io_timeout_seconds": 8,
+    "whole_deadline_seconds": 30
+  },
+  "runs": [
+    {
+      "name": "control-smoke12",
+      "test": "native_recovery_control_campaign",
+      "CS_RECOVERY_OPS": 12,
+      "CS_RECOVERY_SEED": 2026102935
+    },
+    {
+      "name": "publication-smoke8",
+      "test": "native_recovery_publication_gate_campaign",
+      "CS_PUBLICATION_REPEATS": 1,
+      "CS_RECOVERY_SEED": 2026102937
+    }
+  ],
+  "acceptance": {
+    "incorrect_publications": 0,
+    "unexpected_errors": 0,
+    "resource_overshoots": 0,
+    "missing_old_terminals": 0,
+    "retry_counts_and_bytes": "exact"
+  },
+  "timing_claim": "withheld; debug binary and fault evidence gate included; F1 parity pending",
+  "new_gates": [
+    "PUT success true",
+    "authoritative per-stripe expected payload checksum",
+    "test-only timeout env",
+    "postlookup HTTP2 real response interception"
+  ],
+  "publication_control": {
+    "whole_deadline_seconds": 3,
+    "post_lookup_delay_seconds": 4,
+    "capability_change": "explicit control-plane relay injection of valid rail capability; server unchanged"
+  },
+  "difference_from_v3": "FrameCapture type alias and three needless reference removals only; production core unchanged"
+}

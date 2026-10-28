@@ -1,0 +1,17 @@
+{
+  "label": "workspace_default",
+  "argv": [
+    "cargo",
+    "test",
+    "--workspace",
+    "--locked",
+    "--offline",
+    "-j",
+    "4",
+    "--",
+    "--nocapture"
+  ],
+  "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+  "started": "2026-10-28T21:20:56.663627+00:00",
+  "timeout_seconds": 900
+}

@@ -1,0 +1,16 @@
+make -C kv-service build
+make[1]: Entering directory '/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service'
+==> ContextStore KVService build configuration
+    profile: release
+    server features: io-uring,rdma,metrics
+    Rust client features: rdma
+    protoc (explicit): /usr/local/bin/protoc
+    protoc library path: system loader path
+==> Building contextstore-server (release, features: io-uring,rdma,metrics)
+cd server && cargo build --release --features io-uring,rdma,metrics
+==> Building contextstore-client-rs (release, features: rdma)
+cd client-rs && cargo build --release --features rdma
+cd rdma-ffi && cargo build --release
+==> Building cs-meta (release, features: io-uring,rdma,metrics)
+cd server && cargo build --release --features io-uring,rdma,metrics --bin cs-meta
+make[1]: Leaving directory '/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service'

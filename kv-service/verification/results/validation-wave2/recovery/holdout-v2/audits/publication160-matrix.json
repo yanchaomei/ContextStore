@@ -1,0 +1,8 @@
+{
+  "frozen_run": "publication160",
+  "full_matrix_verified": true,
+  "expected_frames": 480,
+  "expected_late_eof": 160,
+  "expected_held_success_ack": 0,
+  "fixed_control_key_hashes": {}
+}

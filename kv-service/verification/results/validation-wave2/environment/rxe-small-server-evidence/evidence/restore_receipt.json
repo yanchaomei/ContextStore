@@ -1,0 +1,69 @@
+{
+  "hostname": "csw1-rxe-server",
+  "role": "server",
+  "at": "2026-10-28T19:04:15.544474+00:00",
+  "kernel": "Linux csw1-rxe-server 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "rdma": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+  "ip": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 \nrail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 \nrail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 \n",
+  "packages": "ibverbs-providers:amd64\t39.0-1\nibverbs-utils\t39.0-1\niproute2\t5.15.0-1ubuntu2.2\nrdma-core\t39.0-1\nredis-server\t5:6.0.16-1ubuntu1.2\n",
+  "binaries": {
+    "contextstore-server": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+  },
+  "gids": {
+    "rxe0": {
+      "0": "fe80:0000:0000:0000:5054:00ff:fe29:5101",
+      "1": "0000:0000:0000:0000:0000:ffff:0a51:0101"
+    },
+    "rxe1": {
+      "0": "fe80:0000:0000:0000:5054:00ff:fe29:5201",
+      "1": "0000:0000:0000:0000:0000:ffff:0a52:0101"
+    }
+  },
+  "processes": {
+    "redis": {
+      "pid": 1092,
+      "start_ticks": "19095",
+      "command": [
+        "redis-server",
+        "--bind",
+        "127.0.0.1",
+        "--port",
+        "26479",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--dir",
+        "/home/railtest/cswave1/wave2/small/redis"
+      ],
+      "environment": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "LANG": "C"
+      },
+      "exe": "/usr/bin/redis-check-rdb",
+      "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a"
+    },
+    "server": {
+      "pid": 1097,
+      "start_ticks": "19105",
+      "command": [
+        "/home/railtest/cswave1/bin/contextstore-server",
+        "--config",
+        "/home/railtest/cswave1/wave2/small/server.toml",
+        "--log-level",
+        "info"
+      ],
+      "environment": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "LANG": "C",
+        "CS_RDMA_CQ_TIMEOUT_MS": "1000",
+        "CS_RDMA_SLAB_MB": "64",
+        "CS_FORCE_DISK_READ": "1",
+        "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25453:1,rxe1:10.82.1.1:25454:1"
+      },
+      "exe": "/home/railtest/cswave1/bin/contextstore-server",
+      "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+    }
+  },
+  "config_sha256": "730455a23ef32bbcab8b82c9ea1252d42572b72e0d5ca60447bb1741d19021e9"
+}

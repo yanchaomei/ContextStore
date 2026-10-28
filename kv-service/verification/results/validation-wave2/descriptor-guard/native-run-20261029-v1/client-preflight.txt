@@ -1,0 +1,9 @@
+csw1-rxe-client
+2026-10-28T21:00:02Z
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+mgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5002/64 fe80::5054:ff:fe29:5002/64 
+rail0            UP             10.81.1.2/24 fe80::5054:ff:fe29:5102/64 
+rail1            UP             10.82.1.2/24 fe80::5054:ff:fe29:5202/64 
+link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 
+link rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 
+    636       1    7115 /usr/bin/redis-server 127.0.0.1:6379

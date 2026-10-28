@@ -1,0 +1,10 @@
+   Compiling prost-derive v0.12.6
+   Compiling bindgen v0.71.1
+   Compiling prost v0.12.6
+    Checking tonic v0.11.0
+   Compiling prost-types v0.12.6
+   Compiling prost-build v0.12.6
+   Compiling tonic-build v0.11.0
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service/client-rs)
+   Compiling rdma-sys v0.3.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service/vendor/rdma-sys)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.00s

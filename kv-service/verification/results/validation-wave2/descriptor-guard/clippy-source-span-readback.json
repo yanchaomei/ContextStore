@@ -1,0 +1,47 @@
+{
+  "clippy-rdma-json.log": [
+    [
+      55,
+      "doc quote line without `>` marker"
+    ],
+    [
+      140,
+      "the loop variable `nic_idx` is used to index `rdma_ctxs`"
+    ],
+    [
+      763,
+      "this function has too many arguments (9/7)"
+    ],
+    [
+      1305,
+      "this function has too many arguments (8/7)"
+    ],
+    [
+      1592,
+      "this function has too many arguments (8/7)"
+    ]
+  ],
+  "baseline-clippy-rdma-json.log": [
+    [
+      55,
+      "doc quote line without `>` marker"
+    ],
+    [
+      140,
+      "the loop variable `nic_idx` is used to index `rdma_ctxs`"
+    ],
+    [
+      747,
+      "this function has too many arguments (9/7)"
+    ],
+    [
+      1289,
+      "this function has too many arguments (8/7)"
+    ],
+    [
+      1576,
+      "this function has too many arguments (8/7)"
+    ]
+  ],
+  "interpretation": "Clippy processed distinct source versions: legacy function diagnostics shift by the 16 inserted lines. The native shared-target freeze was independently rejected; no native result was produced from it."
+}

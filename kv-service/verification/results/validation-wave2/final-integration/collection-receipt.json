@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-28T21:23:02.491363+00:00",
+  "archive_sha256": "2c71bdfdf356968a2febdf14c698b8cefe128fd1880865b166990d87572180a3",
+  "archive_size": 32908,
+  "evidence_files": 48,
+  "state": "INTEGRATION_CHECKS_PASS_WITH_INHERITED_SERVER_CLIPPY_FAILURE"
+}

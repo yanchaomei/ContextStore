@@ -1,0 +1,456 @@
+{
+  "state": "READY_INDEPENDENT_SINGLE_HCA_PAIR_BASELINE_PASSED",
+  "at": "2026-10-28T19:14:04.559431+00:00",
+  "server": "SKV_5 / skv-node5",
+  "client": "SKV_6 / skv-node6",
+  "shared_root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+  "client_env": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/client.env",
+  "source_commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+  "grpc": "http://10.0.0.65:25551",
+  "rdma": "10.0.0.65:25553",
+  "redis": "127.0.0.1:26579 on SKV5",
+  "device_each_side": "mlx5_1",
+  "port": 1,
+  "gid_index": 3,
+  "single_listener": true,
+  "multi_hca": false,
+  "server_slab_mib": 64,
+  "force_disk_read": true,
+  "storage_stripe_bytes": 4194304,
+  "baseline_object_mib": 16,
+  "server_cq_timeout_ms": 30000,
+  "server_cq_timeout_source": "unset environment; frozen server default 30000ms",
+  "server_snapshot": {
+    "at": "2026-10-28T19:12:58.336344+00:00",
+    "hostname": "skv-node5",
+    "root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+    "hashes": {
+      "bin/contextstore-server": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+      "bin/redis-cli": "7cfe8d3412fce56ff14fb18de50c30ec317b0fc49c45ee6867d84914b4f59249",
+      "bin/redis-server": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c",
+      "lib/libhiredis.so.0.14": "62a783a9bca3f02ea0a5fdb3be3472c147cf0ed6b06f06d455af2a64e00c57c2",
+      "lib/libjemalloc.so.2": "04521d9fbbefac8c6dc5fba9546729c8401ffaf522d69e2a3e971bae5e9481f0",
+      "lib/liblua5.1.so.0": "9e254c93064b940a87b1917ec97f89fb8e5941bdff509d3ed14b9410b5af1b38",
+      "lib/liblua5.1-cjson.so.0": "4daeb9721c5504b9b185f077231ce68f0a3c6daac672d12184f0a6f7b30184dd",
+      "lib/liblua5.1-bitop.so.0": "c006d844030b4b6fa8a7c147e9d188bd74f798645444391aa82c679c2af9ef00",
+      "server.toml": "9d98ff03aba4a4f6da84ec5fc2c3c3743b448961b0c9dbd3f2da8cbb8ae8a945"
+    },
+    "processes": {
+      "server": {
+        "pid": 3940563,
+        "start_ticks": "313133088",
+        "command": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/contextstore-server --config /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/server.toml --log-level info",
+        "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+        "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/contextstore-server",
+        "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+        "environment": {
+          "PATH": "/usr/local/bin:/usr/bin:/bin",
+          "LANG": "C",
+          "CS_RDMA_SLAB_MB": "64",
+          "CS_FORCE_DISK_READ": "1",
+          "CS_RDMA_DEVICES": "mlx5_1:10.0.0.65:25553:3"
+        },
+        "environment_sha256": "f7a3ee301c48bb6f29b676670a499ebf065383def3ff0651a02c7398f10e9cd2"
+      },
+      "redis": {
+        "pid": 3940507,
+        "start_ticks": "313133078",
+        "command": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server 127.0.0.1:26579",
+        "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/redis",
+        "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+        "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c",
+        "environment": {},
+        "environment_sha256": "1171666c3e0af069667251bbb8dbac52aeff187a6866daa07c597c813aa289e0"
+      }
+    },
+    "free_disk_bytes": 26978140160,
+    "loadavg": [
+      6.9130859375,
+      6.93896484375,
+      6.83447265625
+    ],
+    "kernel": "Linux skv-node5 5.15.0-191-generic #201-Ubuntu SMP Fri Aug 7 18:39:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+    "glibc": "glibc 2.35\n",
+    "rdma": "link mlx5_0/1 state DOWN physical_state DISABLED netdev enp175s0f0np0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev enp175s0f1np1 \n"
+  },
+  "client_snapshot": {
+    "at": "2026-10-28T19:13:00.690867+00:00",
+    "hostname": "skv-node6",
+    "root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+    "hashes": {
+      "bin/rdma_e2e-8ac8901d52660419": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+      "bin/rail_read_e2e-d6145e305ed0b23e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26",
+      "client.env": "8577c53f1a619d050e969c78499d7192a06d47bdb2cf95e2692ee0c9c9651e4b"
+    },
+    "processes": {},
+    "free_disk_bytes": 3998842880,
+    "loadavg": [
+      0.87,
+      1.05,
+      1.16
+    ],
+    "kernel": "Linux skv-node6 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+    "glibc": "glibc 2.31\n",
+    "rdma": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens3f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens3f1 \n"
+  },
+  "initial_resource_probes": {
+    "SKV5": {
+      "at": "2026-10-28T19:09:02.663843+00:00",
+      "hostname": "skv-node5",
+      "kernel": {
+        "code": 0,
+        "stdout": "Linux skv-node5 5.15.0-191-generic #201-Ubuntu SMP Fri Aug 7 18:39:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "stderr": ""
+      },
+      "cpu_count": 80,
+      "loadavg": [
+        6.73193359375,
+        6.591796875,
+        6.712890625
+      ],
+      "cpu_idle_pct_1s": 91.28,
+      "meminfo": "MemTotal:       131588112 kB\nMemFree:        107696408 kB\nMemAvailable:   121936632 kB\nBuffers:          986800 kB\nCached:         13530268 kB\nSwapCached:        19836 kB\nActive:         11057044 kB\nInactive:        9116992 kB\nActive(anon):     993792 kB\nInactive(anon):  4679200 kB\nActive(file):   10063252 kB\nInactive(file):  4437792 kB\nUnevictable:       31084 kB\nMlocked:           28012 kB\nSwapTotal:       8388604 kB\nSwapFree:        8114888 kB\nDirty:               400 kB\nWriteback:             0 kB\nAnonPages:       5678736 kB\nMapped:           382132 kB\nShmem:              6972 kB\nKReclaimable:     833036 kB\nSlab:            1846340 kB\nSReclaimable:     833036 kB\nSUnreclaim:      1013304 kB\nKernelStack:       38320 kB\nPageTables:        45424 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    74182660 kB\nCommitted_AS:   20457792 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      211408 kB\nVmallocChunk:          0 kB\nPercpu:           257280 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     4806096 kB\nDirectMap2M:    41988096 kB\nDirectMap1G:    89128960 kB\n",
+      "disk": {
+        "total": 940211900416,
+        "used": 865227603968,
+        "free": 27148681216
+      },
+      "root_exists": false,
+      "ports": {
+        "code": 0,
+        "stdout": "Netid State  Recv-Q Send-Q      Local Address:Port  Peer Address:PortProcess                           \nudp   UNCONN 0      0           127.0.0.53%lo:53         0.0.0.0:*                                     \nudp   UNCONN 0      0      192.168.1.140%eno1:68         0.0.0.0:*                                     \nudp   UNCONN 0      0               127.0.0.1:323        0.0.0.0:*                                     \nudp   UNCONN 0      0               127.0.0.1:7890       0.0.0.0:*                                     \nudp   UNCONN 0      0               127.0.0.1:8891       0.0.0.0:*                                     \nudp   UNCONN 0      0                   [::1]:323           [::]:*                                     \nudp   UNCONN 0      0                       *:1053             *:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:52587      0.0.0.0:*                                     \ntcp   LISTEN 0      128               0.0.0.0:22         0.0.0.0:*                                     \ntcp   LISTEN 0      1024              0.0.0.0:11212      0.0.0.0:*                                     \ntcp   LISTEN 0      128             127.0.0.1:36143      0.0.0.0:*                                     \ntcp   LISTEN 0      128             127.0.0.1:46577      0.0.0.0:*                                     \ntcp   LISTEN 0      4096            10.0.0.65:9864       0.0.0.0:*                                     \ntcp   LISTEN 0      256             10.0.0.65:9866       0.0.0.0:*                                     \ntcp   LISTEN 0      256             10.0.0.65:9867       0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:7890       0.0.0.0:*                                     \ntcp   LISTEN 0      511             127.0.0.1:4173       0.0.0.0:*    users:((\"node\",pid=734381,fd=21))\ntcp   LISTEN 0      1024            127.0.0.1:11211      0.0.0.0:*                                     \ntcp   LISTEN 0      4096        127.0.0.53%lo:53         0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:8891       0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:8890       0.0.0.0:*                                     \ntcp   LISTEN 0      4096                    *:1053             *:*                                     \ntcp   LISTEN 0      128                  [::]:22            [::]:*                                     \ntcp   LISTEN 0      1024                 [::]:11212         [::]:*                                     \ntcp   LISTEN 0      4096                    *:9090             *:*                                     \n",
+        "stderr": ""
+      },
+      "glibc": {
+        "code": 0,
+        "stdout": "glibc 2.35\n",
+        "stderr": ""
+      },
+      "packages": {
+        "code": 1,
+        "stdout": "ibverbs-providers:amd64\t58mlnx43-1.58604\nlibibverbs1:amd64\t58mlnx43-1.58604\nrdma-core\t58mlnx43-1.58604\n",
+        "stderr": "dpkg-query: no packages found matching redis-server\n"
+      },
+      "rdma": {
+        "code": 0,
+        "stdout": "link mlx5_0/1 state DOWN physical_state DISABLED netdev enp175s0f0np0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev enp175s0f1np1 \n",
+        "stderr": ""
+      },
+      "ip": {
+        "code": 0,
+        "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.141/24 192.168.1.140/24 metric 100 fe80::3673:5aff:fe9c:4a94/64 \neno2             DOWN           \nenp94s0f0        DOWN           \neno3             DOWN           \nenp94s0f1        DOWN           \neno4             DOWN           \nenp175s0f0np0    DOWN           \nenp175s0f1np1    UP             10.0.0.65/24 fe80::63f:72ff:fee2:59cf/64 \nbr-daa415f7d750  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::8c59:5ff:fe67:a59d/64 \nbr-38aa5270f915  DOWN           172.22.0.1/16 fe80::4cde:51ff:fecc:4889/64 \nbr-e8ec3ba43a9f  DOWN           172.21.0.1/16 fe80::a077:b3ff:fe86:b40b/64 \nbr-a84d59913ee8  DOWN           172.23.0.1/16 fe80::98d6:75ff:feda:7d4c/64 \nbr-00dc0eef2ef6  DOWN           172.19.0.1/16 fe80::2822:4eff:fe27:b433/64 \nbr-bcf7ffb09219  UP             172.25.0.1/16 fe80::f0f0:dcff:feee:933d/64 \nvethd98b640@if2  UP             fe80::200e:9aff:fed1:3d8d/64 \nveth151b1ce@if2  UP             fe80::e866:92ff:fe0f:dbc9/64 \nveth94f9e9e@if2  UP             fe80::d4a2:73ff:fe70:13a2/64 \nveth27fcf2c@if2  UP             fe80::20af:a1ff:fe69:d1b1/64 \nvethcb14363@if2  UP             fe80::f067:32ff:fe64:638f/64 \nveth53d48e8@if2  UP             fe80::64fd:b0ff:fe50:2b36/64 \nveth0c650c0@if2  UP             fe80::e06f:deff:fe41:6d7f/64 \nveth347bf95@if2  UP             fe80::2c85:ddff:fea2:f235/64 \nveth2dae927@if2  UP             fe80::bc0b:ff:fe0d:c122/64 \nvetha521c97@if2  UP             fe80::e8d2:86ff:fea6:cc36/64 \nvethd88e78a@if2  UP             fe80::30db:59ff:fe6c:4298/64 \nbr-279b2de98da7  DOWN           172.24.0.1/16 fe80::f4cd:dcff:feb2:6f67/64 \nbr-02a34e3703ad  DOWN           172.20.0.1/16 fe80::c8e8:a6ff:fe79:3595/64 \n",
+        "stderr": ""
+      },
+      "top_cpu_processes": {
+        "code": 0,
+        "stdout": "    PID USER     %CPU %MEM COMMAND\n3704110 root     96.1  0.1 ec_proxy\n3695030 k8s      26.3  1.7 python3\n3704282 root     16.9  0.0 docker-proxy\n3703238 root      9.0  0.0 ec_node\n3703252 root      9.0  0.0 ec_node\n3703261 root      9.0  0.0 ec_node\n3703214 root      8.9  0.0 ec_node\n3703220 root      8.8  0.0 ec_node\n3703230 root      8.8  0.0 ec_node\n3703245 root      8.8  0.0 ec_node\n3703263 root      8.8  0.0 ec_node\n3703268 root      8.8  0.0 ec_node\n3703205 root      8.7  0.0 ec_node\n3860925 kvgroup   3.0  0.0 python3",
+        "stderr": ""
+      },
+      "gids": {
+        "mlx5_1": {
+          "pci": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+          "numa": "1",
+          "gid3": "0000:0000:0000:0000:0000:ffff:0a00:0041",
+          "gid3_type": "RoCE v2"
+        }
+      }
+    },
+    "SKV6": {
+      "at": "2026-10-28T19:09:03.371027+00:00",
+      "hostname": "skv-node6",
+      "kernel": {
+        "code": 0,
+        "stdout": "Linux skv-node6 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "stderr": ""
+      },
+      "cpu_count": 80,
+      "loadavg": [
+        1.12,
+        1.09,
+        1.21
+      ],
+      "cpu_idle_pct_1s": 99.81,
+      "meminfo": "MemTotal:       131621640 kB\nMemFree:         9781492 kB\nMemAvailable:   115517668 kB\nBuffers:         1812152 kB\nCached:         100629364 kB\nSwapCached:            0 kB\nActive:         78415436 kB\nInactive:       32417912 kB\nActive(anon):    8426760 kB\nInactive(anon):      436 kB\nActive(file):   69988676 kB\nInactive(file): 32417476 kB\nUnevictable:      702736 kB\nMlocked:          702736 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:               356 kB\nWriteback:             0 kB\nAnonPages:       9094860 kB\nMapped:           432088 kB\nShmem:             19220 kB\nKReclaimable:    4392320 kB\nSlab:            6821140 kB\nSReclaimable:    4392320 kB\nSUnreclaim:      2428820 kB\nKernelStack:       49248 kB\nPageTables:        53744 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    65810820 kB\nCommitted_AS:   25732508 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      181696 kB\nVmallocChunk:          0 kB\nPercpu:           498560 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:    32238592 kB\nDirectMap2M:    99491840 kB\nDirectMap1G:     4194304 kB\n",
+      "disk": {
+        "total": 469847130112,
+        "used": 441824526336,
+        "free": 4084297728
+      },
+      "root_exists": false,
+      "ports": {
+        "code": 0,
+        "stdout": "Netid   State    Recv-Q   Send-Q     Local Address:Port      Peer Address:Port  Process                                                                         \nudp     UNCONN   0        0                0.0.0.0:50476          0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:53715          0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:55009          0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:57021          0.0.0.0:*                                                                                     \nudp     UNCONN   0        0          127.0.0.53%lo:53             0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:111            0.0.0.0:*                                                                                     \nudp     UNCONN   0        0              127.0.0.1:323            0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:2049           0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:5353           0.0.0.0:*                                                                                     \nudp     UNCONN   0        0              127.0.0.1:7890           0.0.0.0:*                                                                                     \nudp     UNCONN   0        0              127.0.0.1:8891           0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                0.0.0.0:37196          0.0.0.0:*                                                                                     \nudp     UNCONN   0        0                   [::]:43903             [::]:*                                                                                     \nudp     UNCONN   0        0                   [::]:44987             [::]:*                                                                                     \nudp     UNCONN   0        0                   [::]:47347             [::]:*                                                                                     \nudp     UNCONN   0        0                   [::]:52110             [::]:*                                                                                     \nudp     UNCONN   0        0                   [::]:56353             [::]:*                                                                                     \nudp     UNCONN   0        0                   [::]:111               [::]:*                                                                                     \nudp     UNCONN   0        0                  [::1]:323               [::]:*                                                                                     \nudp     UNCONN   0        0                      *:1053                 *:*                                                                                     \nudp     UNCONN   0        0                   [::]:2049              [::]:*                                                                                     \nudp     UNCONN   0        0                   [::]:5353              [::]:*                                                                                     \ntcp     LISTEN   0        32768          127.0.0.1:7890           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128            127.0.0.1:32915          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        4096       127.0.0.53%lo:53             0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128              0.0.0.0:22             0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128              0.0.0.0:23             0.0.0.0:*                                                                                     \ntcp     LISTEN   0        32768          127.0.0.1:8890           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        32768          127.0.0.1:8891           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128            127.0.0.1:38241          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        64               0.0.0.0:2049           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128            127.0.0.1:33763          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        4096             0.0.0.0:38595          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        70             127.0.0.1:33060          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        64               0.0.0.0:39909          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128              0.0.0.0:487            0.0.0.0:*                                                                                     \ntcp     LISTEN   0        4096             0.0.0.0:57223          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        256            10.0.0.66:9000           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        32768          10.0.0.66:9864           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        256            10.0.0.66:9866           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        151            127.0.0.1:3306           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        256            10.0.0.66:9867           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        1024             0.0.0.0:11211          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128            10.0.0.66:9870           0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128            127.0.0.1:43087          0.0.0.0:*      users:((\"code-3c631b164c\",pid=1107596,fd=12))                                  \ntcp     LISTEN   0        4096             0.0.0.0:111            0.0.0.0:*                                                                                     \ntcp     LISTEN   0        128            127.0.0.1:38321          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        4096             0.0.0.0:58353          0.0.0.0:*                                                                                     \ntcp     LISTEN   0        64                  [::]:36499             [::]:*                                                                                     \ntcp     LISTEN   0        128                 [::]:22                [::]:*                                                                                     \ntcp     LISTEN   0        4096                [::]:36375             [::]:*                                                                                     \ntcp     LISTEN   0        32768                  *:1053                 *:*                                                                                     \ntcp     LISTEN   0        64                  [::]:2049              [::]:*                                                                                     \ntcp     LISTEN   0        4096                [::]:35617             [::]:*                                                                                     \ntcp     LISTEN   0        32768                  *:9090                 *:*                                                                                     \ntcp     LISTEN   0        4096                [::]:47081             [::]:*                                                                                     \ntcp     LISTEN   0        4096                [::]:111               [::]:*                                                                                     \n",
+        "stderr": ""
+      },
+      "glibc": {
+        "code": 0,
+        "stdout": "glibc 2.31\n",
+        "stderr": ""
+      },
+      "packages": {
+        "code": 0,
+        "stdout": "ibverbs-providers:amd64\t54mlnx1-1.54103\nlibibverbs1:amd64\t54mlnx1-1.54103\nrdma-core\t54mlnx1-1.54103\nredis-server\t6:7.2.3-1rl1~focal1\n",
+        "stderr": ""
+      },
+      "rdma": {
+        "code": 0,
+        "stdout": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens3f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens3f1 \n",
+        "stderr": ""
+      },
+      "ip": {
+        "code": 0,
+        "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.126/24 fe80::3673:5aff:fea1:dd3c/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \novs-system       DOWN           \nbr0              DOWN           \ngre0@NONE        DOWN           \ngretap0@NONE     DOWN           \nerspan0@NONE     DOWN           \ngre_sys@NONE     UNKNOWN        fe80::a461:1eff:feee:f3e4/64 \nens3f0           DOWN           \nens3f1           UP             10.0.0.66/24 fe80::1270:fdff:fe69:ba69/64 \ndocker0          DOWN           172.17.0.1/16 \n",
+        "stderr": ""
+      },
+      "top_cpu_processes": {
+        "code": 0,
+        "stdout": "    PID USER     %CPU %MEM COMMAND\n 637562 kvgroup   5.1  0.0 node\n1045091 kvgroup   5.0  0.1 node\n3380536 kvgroup   5.0  0.1 node\n3428853 kvgroup   5.0  0.0 node\n3721418 kvgroup   5.0  0.1 node\n   5024 root      4.9  0.5 ovs-vswitchd\n 853538 kvgroup   4.7  0.0 fetch\n2778294 kvgroup   4.0  0.0 python3\n2155871 k8s       1.5  1.5 java\n2778206 root      1.0  0.0 sshd\n2350284 k8s       0.9  1.8 java\n   6810 mysql     0.6  0.2 mysqld\n3541584 systemd+  0.6  0.0 systemd-resolve\n2778213 root      0.5  0.0 systemd-udevd",
+        "stderr": ""
+      },
+      "gids": {
+        "mlx5_1": {
+          "pci": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.1",
+          "numa": "0",
+          "gid3": "0000:0000:0000:0000:0000:ffff:0a00:0042",
+          "gid3_type": "RoCE v2"
+        }
+      },
+      "reach_server": {
+        "code": 0,
+        "stdout": "PING 10.0.0.65 (10.0.0.65) 56(84) bytes of data.\n64 bytes from 10.0.0.65: icmp_seq=1 ttl=64 time=0.188 ms\n64 bytes from 10.0.0.65: icmp_seq=2 ttl=64 time=0.190 ms\n64 bytes from 10.0.0.65: icmp_seq=3 ttl=64 time=0.152 ms\n\n--- 10.0.0.65 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2045ms\nrtt min/avg/max/mdev = 0.152/0.176/0.190/0.017 ms\n",
+        "stderr": ""
+      }
+    }
+  },
+  "initial_background_hca_counters": {
+    "SKV5": {
+      "hostname": "skv-node5",
+      "at": "2026-10-28T19:09:56.399711+00:00",
+      "seconds": 2.0028782561421394,
+      "before": {
+        "port_xmit_data": 24620581885,
+        "port_rcv_data": 259991158469,
+        "port_xmit_packets": 1090071853,
+        "port_rcv_packets": 1582714213
+      },
+      "after": {
+        "port_xmit_data": 24620581885,
+        "port_rcv_data": 259991158469,
+        "port_xmit_packets": 1090071853,
+        "port_rcv_packets": 1582714213
+      },
+      "data_bytes_per_second": {
+        "port_xmit_data": 0.0,
+        "port_rcv_data": 0.0
+      }
+    },
+    "SKV6": {
+      "hostname": "skv-node6",
+      "at": "2026-10-28T19:09:59.546877+00:00",
+      "seconds": 2.0033305548131466,
+      "before": {
+        "port_xmit_data": 51361210527920,
+        "port_rcv_data": 77322184743064,
+        "port_xmit_packets": 717208211686,
+        "port_rcv_packets": 768880104657
+      },
+      "after": {
+        "port_xmit_data": 51361210527920,
+        "port_rcv_data": 77322184743064,
+        "port_xmit_packets": 717208211686,
+        "port_rcv_packets": 768880104657
+      },
+      "data_bytes_per_second": {
+        "port_xmit_data": 0.0,
+        "port_rcv_data": 0.0
+      }
+    }
+  },
+  "baseline": {
+    "name": "single_real_rail_restores_verified_object",
+    "exit_code": 0,
+    "passed": 1,
+    "failed": 0,
+    "started": "2026-10-28T19:12:21Z",
+    "finished": "2026-10-28T19:12:22Z",
+    "log_sha256": "cd3f907c118309f96c97b7dbcfd40aae05131e6123d9985dc256b13f27f32cac",
+    "correctness": "test asserts full destination byte equality with deterministic16MiB payload, returned length, and per-rail byte counter"
+  },
+  "deployment": {
+    "built_or_compiled": false,
+    "host_installs_or_config_changes": false,
+    "redis_private_libraries": true,
+    "other_processes_killed": false,
+    "copy_receipt": {
+      "at": "2026-10-28T19:11:59.341157+00:00",
+      "transfers": [
+        {
+          "name": "server",
+          "source": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_4",
+            "tar -chf - -C /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029 bin/contextstore-server"
+          ],
+          "dest": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_5",
+            "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029"
+          ],
+          "source_exit": 0,
+          "dest_exit": 0
+        },
+        {
+          "name": "redis",
+          "source": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_4",
+            "tar -chf - -C /usr/bin redis-server redis-cli"
+          ],
+          "dest": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_5",
+            "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin"
+          ],
+          "source_exit": 0,
+          "dest_exit": 0
+        },
+        {
+          "name": "redis_private_libs",
+          "source": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_4",
+            "tar -chf - -C /lib/x86_64-linux-gnu liblua5.1-cjson.so.0 liblua5.1-bitop.so.0 liblua5.1.so.0 libjemalloc.so.2 libhiredis.so.0.14"
+          ],
+          "dest": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_5",
+            "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib"
+          ],
+          "source_exit": 0,
+          "dest_exit": 0
+        },
+        {
+          "name": "baseline_clients",
+          "source": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_2",
+            "tar -chf - -C /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-provider-baseline/debug/deps rail_read_e2e-d6145e305ed0b23e rdma_e2e-8ac8901d52660419"
+          ],
+          "dest": [
+            "ssh",
+            "-oBatchMode=yes",
+            "-oConnectTimeout=10",
+            "SKV_1",
+            "ssh -oBatchMode=yes skv-node6 'tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin'"
+          ],
+          "source_exit": 0,
+          "dest_exit": 0
+        }
+      ]
+    },
+    "startup": {
+      "at": "2026-10-28T19:12:01.966325+00:00",
+      "root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+      "source_commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+      "server_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+      "config_sha256": "9d98ff03aba4a4f6da84ec5fc2c3c3743b448961b0c9dbd3f2da8cbb8ae8a945",
+      "processes": {
+        "redis": {
+          "pid": 3940507,
+          "start_ticks": "313133078",
+          "command": [
+            "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "26579",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--dir",
+            "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/redis"
+          ],
+          "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/redis",
+          "environment": {},
+          "environment_sha256": "1171666c3e0af069667251bbb8dbac52aeff187a6866daa07c597c813aa289e0",
+          "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+          "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c"
+        },
+        "server": {
+          "pid": 3940563,
+          "start_ticks": "313133088",
+          "command": [
+            "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/contextstore-server",
+            "--config",
+            "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/server.toml",
+            "--log-level",
+            "info"
+          ],
+          "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+          "environment": {
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "LANG": "C",
+            "CS_RDMA_SLAB_MB": "64",
+            "CS_FORCE_DISK_READ": "1",
+            "CS_RDMA_DEVICES": "mlx5_1:10.0.0.65:25553:3"
+          },
+          "environment_sha256": "f7a3ee301c48bb6f29b676670a499ebf065383def3ff0651a02c7398f10e9cd2",
+          "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/contextstore-server",
+          "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+        }
+      },
+      "ldd": {
+        "contextstore-server": {
+          "code": 0,
+          "stdout": "\tlinux-vdso.so.1 (0x00007ffd8eaa3000)\n\tlibibverbs.so.1 => /lib/x86_64-linux-gnu/libibverbs.so.1 (0x00007f3403307000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f34032e7000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f34032e2000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f34031fb000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f34031f6000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f3402fcb000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f3404854000)\n\tlibnl-route-3.so.200 => /lib/x86_64-linux-gnu/libnl-route-3.so.200 (0x00007f3402f48000)\n\tlibnl-3.so.200 => /lib/x86_64-linux-gnu/libnl-3.so.200 (0x00007f3402f25000)\n",
+          "stderr": ""
+        },
+        "redis-server": {
+          "code": 0,
+          "stdout": "\tlinux-vdso.so.1 (0x00007fff56aca000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f9e2e564000)\n\tlibatomic.so.1 => /lib/x86_64-linux-gnu/libatomic.so.1 (0x00007f9e2e55a000)\n\tliblua5.1-cjson.so.0 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/liblua5.1-cjson.so.0 (0x00007f9e2e200000)\n\tliblua5.1-bitop.so.0 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/liblua5.1-bitop.so.0 (0x00007f9e2de00000)\n\tliblua5.1.so.0 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/liblua5.1.so.0 (0x00007f9e2e527000)\n\tlibjemalloc.so.2 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/libjemalloc.so.2 (0x00007f9e2db24000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f9e2e440000)\n\tlibrt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f9e2e43b000)\n\tlibhiredis.so.0.14 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/libhiredis.so.0.14 (0x00007f9e2e428000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f9e2e423000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f9e2d8fb000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f9e2d6cf000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f9e2e1e0000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f9e2e68b000)\n",
+          "stderr": ""
+        }
+      },
+      "kernel": "Linux skv-node5 5.15.0-191-generic #201-Ubuntu SMP Fri Aug 7 18:39:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+      "rdma": "link mlx5_0/1 state DOWN physical_state DISABLED netdev enp175s0f0np0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev enp175s0f1np1 \n",
+      "private_lib_sha256": {
+        "libhiredis.so.0.14": "62a783a9bca3f02ea0a5fdb3be3472c147cf0ed6b06f06d455af2a64e00c57c2",
+        "libjemalloc.so.2": "04521d9fbbefac8c6dc5fba9546729c8401ffaf522d69e2a3e971bae5e9481f0",
+        "liblua5.1.so.0": "9e254c93064b940a87b1917ec97f89fb8e5941bdff509d3ed14b9410b5af1b38",
+        "liblua5.1-cjson.so.0": "4daeb9721c5504b9b185f077231ce68f0a3c6daac672d12184f0a6f7b30184dd",
+        "liblua5.1-bitop.so.0": "c006d844030b4b6fa8a7c147e9d188bd74f798645444391aa82c679c2af9ef00"
+      },
+      "scope": "Independent SKV6-client to SKV5-server single-HCA fixture; one RDMA listener; not dual HCA"
+    }
+  },
+  "isolation": {
+    "no_shared_compute_hosts_or_HCA_with_SKV2_SKV4_soak": true,
+    "same_cluster_network_fabric": true,
+    "original_physical_and_RXE_fixtures_untouched": true,
+    "test_traffic_stopped_after_one_baseline": true
+  },
+  "resource_notes": [
+    "SKV6 has about3.8GiB filesystem free before copying about108MiB clients; keep benchmark log output bounded",
+    "SKV5 has about25.3GiB filesystem free; reuse test keys or bound benchmark data growth",
+    "Background HCA xmit/recv counters unchanged across2s initial samples; resample before measured runs",
+    "SKV5 private Redis copied from SKV4 with5 required shared libraries in task root/lib; no system packages installed"
+  ],
+  "setup_notes": [
+    "Initial probe tried reading GID3 type on inactive mlx5_0 and got EINVAL; reran only active mlx5_1. Failure stderr retained."
+  ]
+}

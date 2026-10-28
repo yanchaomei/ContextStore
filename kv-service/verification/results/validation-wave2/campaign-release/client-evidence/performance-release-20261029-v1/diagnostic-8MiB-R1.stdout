@@ -1,0 +1,20 @@
+object_identity,generation=1,layout_version=1,stripe_count=16,chunk_size=524288,handle_xxh3=71eca9b8c1188693,etag_xxh3=36bb0cdc337d6b1d,descriptor_xxh3=ff127867f5c760fa,placement_xxh3=3ab5bfd250f3854b
+mode,direct_staging=false
+mode,contiguous_schedule=false
+mode,connection_pool_size=1,recovery_timeout_ms=None,verify_pattern=true,warmup=0,iterations=6,concurrency=1
+plan_assignment,id=single,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],bytes=8388608
+expected_pattern,pattern=index_mod_251,bytes=8388608,xxh3=dc2ba4087a0c5c99
+route,id=single,device=mlx5_1,port=1,gid=3,weight=1,advertised=10.0.0.65:25553,listener=10.0.0.65:25553
+pool_stats,phase=before_warmup,enabled=true,created=0,reused=0,retired=0,rejected=0,live=0,connecting=0,active=0,idle=0,retiring=0
+pool_stats,phase=after_warmup,enabled=true,created=0,reused=0,retired=0,rejected=0,live=0,connecting=0,active=0,idle=0,retiring=0
+sample,environment=physical,rails=1,iteration=1,bytes=8388608,latency_us=23431,gib_per_s=0.333,xxh3=dc2ba4087a0c5c99
+sample,environment=physical,rails=1,iteration=2,bytes=8388608,latency_us=8122,gib_per_s=0.962,xxh3=dc2ba4087a0c5c99
+sample,environment=physical,rails=1,iteration=3,bytes=8388608,latency_us=8128,gib_per_s=0.961,xxh3=dc2ba4087a0c5c99
+sample,environment=physical,rails=1,iteration=4,bytes=8388608,latency_us=8502,gib_per_s=0.919,xxh3=dc2ba4087a0c5c99
+sample,environment=physical,rails=1,iteration=5,bytes=8388608,latency_us=8842,gib_per_s=0.883,xxh3=dc2ba4087a0c5c99
+sample,environment=physical,rails=1,iteration=6,bytes=8388608,latency_us=9047,gib_per_s=0.864,xxh3=dc2ba4087a0c5c99
+summary,environment=physical,rails=1,bytes_per_iter=8388608,iters=6,median_us=8842,cpu_user_us=17289,cpu_system_us=33857,peak_rss_kb=23776,rail_bytes=[50331648]
+mode_effective,one=6,packed_greedy=0,packed_contiguous=0,direct=0
+pool_stats,phase=final,enabled=true,created=1,reused=5,retired=0,rejected=0,live=1,connecting=0,active=0,idle=1,retiring=0
+rail_stats,id=single,device=mlx5_1,listener=10.0.0.65:25553,numa=Some(0),pci=Some("0000:5e:00.1"),healthy=true,cooldown_ms=0,reads_ok=6,reads_err=0,bytes=50331648,avg_us=6082,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=8388608,registered_bytes_reserved=0,peak_registered_bytes=8388608
+object_identity_after,generation=1,layout_version=1,stripe_count=16,chunk_size=524288,handle_xxh3=71eca9b8c1188693,etag_xxh3=36bb0cdc337d6b1d,descriptor_xxh3=ff127867f5c760fa,placement_xxh3=3ab5bfd250f3854b

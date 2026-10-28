@@ -1,0 +1,218 @@
+{
+  "collected/client/__pycache__/audit_recovery_campaign.cpython-310.pyc": {
+    "bytes": 13443,
+    "sha256": "904c9589ff87bb0019c2477967cfe004c629672f64cdcadb559d964a8bd9b082"
+  },
+  "collected/client/admission24/exit.json": {
+    "bytes": 562,
+    "sha256": "cf58ed548fbdf43ee8e8b5542faf67b85ea923e39883939114998b13dcf728de"
+  },
+  "collected/client/admission24/launch.json": {
+    "bytes": 824,
+    "sha256": "53aa9a8cd74febbdc853982466f19ebf876b82b4ca75689a3011d3165785d05a"
+  },
+  "collected/client/admission24/pid": {
+    "bytes": 6,
+    "sha256": "9f40e009ad604e162dbc1c8f9cd22461c9b25ef2ed2188330e4142ef136d117a"
+  },
+  "collected/client/admission24/resources.jsonl": {
+    "bytes": 3028,
+    "sha256": "488e723b266884aaec8fdee1cd1d2afec9f582ffe7f7b45f65c2e8f36ef572c9"
+  },
+  "collected/client/admission24/run.log": {
+    "bytes": 29338,
+    "sha256": "ad12931db1ee4d2f7e60e61854c236c24b8a519f979fcc25a9ba8312dc395e64"
+  },
+  "collected/client/admission24/run.log.gz": {
+    "bytes": 2020,
+    "sha256": "7361fb372d6c22cffded2e49382c29298f09d08e95cd592c116f456cf13aff99"
+  },
+  "collected/client/audit_recovery_campaign.py": {
+    "bytes": 14465,
+    "sha256": "2c74a030d62e6a17e51415492b1d7c9323c2644fe822851726286ce76bb7dda8"
+  },
+  "collected/client/cuts480/exit.json": {
+    "bytes": 569,
+    "sha256": "8015b8d3d5756cfc42618c00b198fbe507021c67d9e8dbf97a312cb51ef9ea41"
+  },
+  "collected/client/cuts480/launch.json": {
+    "bytes": 856,
+    "sha256": "6e1d6e4caeb4280f23901bf0ceabe9e315f2798345bd5718d00dc2c1be5aeac8"
+  },
+  "collected/client/cuts480/pid": {
+    "bytes": 6,
+    "sha256": "55de3da3a72b0a8a5fccf57a7685632678b8a5c29abba9c1356c6b28e3734cd0"
+  },
+  "collected/client/cuts480/resources.jsonl": {
+    "bytes": 61281,
+    "sha256": "c7b7373fb32272f54221583a148ae6f693cfae812784484dc1916725a1bd39ee"
+  },
+  "collected/client/cuts480/run.log": {
+    "bytes": 2042153,
+    "sha256": "52b0487445152a78216b049aee772870aa882d2cb80f11c5fd232086b3ae75c2"
+  },
+  "collected/client/cuts480/run.log.gz": {
+    "bytes": 99965,
+    "sha256": "d73cae2d9c92a19601c5a78cd74088687d935e611d421604175773678c975081"
+  },
+  "collected/client/f2-recovery1000/exit.json": {
+    "bytes": 570,
+    "sha256": "e3933456428e8f244500b19ccd65d03c34934ce272f51206abba61bfc9663687"
+  },
+  "collected/client/f2-recovery1000/launch.json": {
+    "bytes": 888,
+    "sha256": "b56906c2a67398e8abb7c293bb71fc4886a764ff4c12c9ed13cc04cd3d3a2981"
+  },
+  "collected/client/f2-recovery1000/pid": {
+    "bytes": 5,
+    "sha256": "756895a0e97b1fb3238968d9a2df7ba2bf4282d52105b65ba6db036c033c44f1"
+  },
+  "collected/client/f2-recovery1000/resources.jsonl": {
+    "bytes": 195779,
+    "sha256": "8fcaa439f5062d014ccb78bc9ed760fbd9d3f8ee20e47f33480cd5084902c3b4"
+  },
+  "collected/client/f2-recovery1000/run.log": {
+    "bytes": 4641142,
+    "sha256": "ef1d21ad242bdc9d28b23c3b50b4141cb3663b591d64979a6e729b9cf6a1f6e4"
+  },
+  "collected/client/f2-recovery1000/run.log.gz": {
+    "bytes": 177705,
+    "sha256": "c9352f98c243131e98674d43d897bddad6da1a2bef5a9128e3d2e83b50dd57ed"
+  },
+  "collected/client/freeze.json": {
+    "bytes": 6011,
+    "sha256": "21a4300ba6705873266b6973626b62457565379386ec89df0c1ea428f5752567"
+  },
+  "collected/client/guest-quiescence.json": {
+    "bytes": 553,
+    "sha256": "e91f3bc9919106decd327283a67cda9dfd9c064503e0e44b18993814bb00f147"
+  },
+  "collected/client/launcher.log": {
+    "bytes": 3965,
+    "sha256": "102285f7ddfbc76c28e6e48c0bfec2c08dc15d0ff7c902d0e49cfc3c96e71bbf"
+  },
+  "collected/client/lifetime2000/exit.json": {
+    "bytes": 569,
+    "sha256": "b69c3fa097326aaf40c8ca56df31bef60c7822d31caa681a997b1bc76473c059"
+  },
+  "collected/client/lifetime2000/launch.json": {
+    "bytes": 862,
+    "sha256": "1cd30ded2416797a19e180355e9b495b804e8dffb12f3d71a7a2b26a0257613b"
+  },
+  "collected/client/lifetime2000/pid": {
+    "bytes": 6,
+    "sha256": "1dc13a09e6680df453b518033fe639885ad19a91847c9033fba7b862216d9adf"
+  },
+  "collected/client/lifetime2000/resources.jsonl": {
+    "bytes": 23710,
+    "sha256": "d4c4a48a3430efa951c1a14129922f13657b58d486aff9f7e553b03ff0f126bc"
+  },
+  "collected/client/lifetime2000/run.log": {
+    "bytes": 6267058,
+    "sha256": "01d3eafcd4751d8ba5f1c8c5e106ab38dafaecdd4171bc5ef9376b010bd70146"
+  },
+  "collected/client/lifetime2000/run.log.gz": {
+    "bytes": 201038,
+    "sha256": "1b74cf81e034d19162fc706a2192b2ca11b118a9efec2b6acb70e01354ac755b"
+  },
+  "collected/client/matched-controls240/exit.json": {
+    "bytes": 566,
+    "sha256": "63c7e38cecb356bc1ee15925c636d80881c4ef4aefd50f84b08ca72cd25537b9"
+  },
+  "collected/client/matched-controls240/launch.json": {
+    "bytes": 892,
+    "sha256": "7acbe867243630b45c9b148ee3608dd21f84ce46cbaa683bf1dca271e0dfd158"
+  },
+  "collected/client/matched-controls240/pid": {
+    "bytes": 5,
+    "sha256": "0695477d4999a18530083ce2446e40462f7c9243531c5a330cc704a27cb5be56"
+  },
+  "collected/client/matched-controls240/resources.jsonl": {
+    "bytes": 46409,
+    "sha256": "3d22fade3530ad1c66e387b403dac26535009ce12b7aafcf199c7c23c5a0fb51"
+  },
+  "collected/client/matched-controls240/run.log": {
+    "bytes": 1114476,
+    "sha256": "3ac17d48dc718cd3731d3d5fa7a8ab6d4342dbab25c33f898a550dec0183727f"
+  },
+  "collected/client/matched-controls240/run.log.gz": {
+    "bytes": 44807,
+    "sha256": "3dffcb15cdfbdd40c1a252392e958812bc3afc58ea5b2c6b3081c06427c6b238"
+  },
+  "collected/client/publication160/exit.json": {
+    "bytes": 565,
+    "sha256": "5dbbf44906c16c9407edc130c2e557a1e73edcbc67835e94acf4e900e43cdb75"
+  },
+  "collected/client/publication160/launch.json": {
+    "bytes": 867,
+    "sha256": "0207d83316ff8e91b8e59a73dcb09187ec3e8cfdad4dcf71f16aa66b1f5abbb9"
+  },
+  "collected/client/publication160/pid": {
+    "bytes": 6,
+    "sha256": "2f68d9b30369043d1f58d211ba5734ad5cbe5cb5985c0a717e696bcb4c24d027"
+  },
+  "collected/client/publication160/resources.jsonl": {
+    "bytes": 87179,
+    "sha256": "22e37b10e2bed121b00e564ed5b2d8c2fb432abc54c4ae290861333f6f2c0394"
+  },
+  "collected/client/publication160/run.log": {
+    "bytes": 751033,
+    "sha256": "646d6f9cbb293cc9a917cdf1f1f876d39d706a5781a38e75a27333d0088e340a"
+  },
+  "collected/client/publication160/run.log.gz": {
+    "bytes": 28816,
+    "sha256": "8fc000e64d832ba9630a8f8a9430aaf91d2468cc199e0406fa611ae2b77b3694"
+  },
+  "collected/client/recovery-test": {
+    "bytes": 82590376,
+    "sha256": "714913de399181eb58e5289ef4d08b76cf9a1afea5a43d3b177b8a4364fc343c"
+  },
+  "collected/client/representative16mib4/exit.json": {
+    "bytes": 564,
+    "sha256": "d5af8d68699f4ac712897b063118ebc297d8d38cfd462dcb8d654651e28edcac"
+  },
+  "collected/client/representative16mib4/launch.json": {
+    "bytes": 887,
+    "sha256": "a64f98ee56469409328dd4d597570e3e5b1b7733f3547bd421bf0602ab30ae76"
+  },
+  "collected/client/representative16mib4/pid": {
+    "bytes": 6,
+    "sha256": "c4812e08dacc43ebc98b042a04f7722533538bfbcdb1fa9fb877906dd7adc3de"
+  },
+  "collected/client/representative16mib4/resources.jsonl": {
+    "bytes": 25042,
+    "sha256": "cca5a00e9df7f131886a3fed83860602987a5a11c6dbdea59d4230ce4d3b62e2"
+  },
+  "collected/client/representative16mib4/run.log": {
+    "bytes": 19128,
+    "sha256": "dbc2e7d6845245d2a8e32e815f70bbe031240a5e334cdb3f716a09385d1432de"
+  },
+  "collected/client/representative16mib4/run.log.gz": {
+    "bytes": 1830,
+    "sha256": "34b527f3c26705a958a9e7bf26099e75b70e479b039b90c6578f359f1d9ac653"
+  },
+  "collected/client/run-holdout.sh": {
+    "bytes": 3430,
+    "sha256": "3ccacb2b345befffca0bebc3a5cd5ca619013d2a30e86ae0639778ff3d45ff36"
+  },
+  "collected/client/run_recovery_campaign.py": {
+    "bytes": 5434,
+    "sha256": "641f13137038022b41d31ddf6377690ac9aa5473d6d455daf6eeb0ba159edc1f"
+  },
+  "collected/collected-binary-freeze.sha256": {
+    "bytes": 360,
+    "sha256": "b0e8aae6a1f39cfeba3f48581c8d0c17c5f53c0124f57786ae58e13b3e672515"
+  },
+  "collected/server/large-server.log": {
+    "bytes": 12676,
+    "sha256": "6687dddc3c7a3d2824f3698a31fd48b7561460af7b81608047c6831bd6bfb3c5"
+  },
+  "collected/server/server-cutoffs.json": {
+    "bytes": 1118,
+    "sha256": "f384c878829f6875eb40483c7e2dc0fb2c113632721235f9e716c84d2ba9d35e"
+  },
+  "collected/server/small-server.log": {
+    "bytes": 5393531,
+    "sha256": "915e3791d432b50a4b06e390d301b13e9cefb882a4dff65e18a76aeb5070cd7a"
+  }
+}

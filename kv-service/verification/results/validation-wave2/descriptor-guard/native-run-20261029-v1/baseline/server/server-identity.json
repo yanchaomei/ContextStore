@@ -1,0 +1,14 @@
+{
+  "pid": 20061,
+  "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/baseline-server-debug-rdma",
+  "cmdline": [
+    "/home/railtest/wave2-descriptor-guard/native-frozen-bin/baseline-server-debug-rdma",
+    "--config",
+    "/home/railtest/wave2-descriptor-guard/server.toml",
+    "--log-level",
+    "info",
+    ""
+  ],
+  "stat": "20061 (baseline-server) S 20048 20048 20048 0 -1 1077936128 5891 0 2 0 0 1 0 0 20 0 12 0 731746 877850624 9309 18446744073709551615 94190720665344 94190735934736 140735014739088 0 0 0 0 4103 1088 0 0 0 17 1 0 0 0 0 0 94190736883656 94190736902216 94191392903168 140735014747311 140735014747470 140735014747470 140735014748069 0\n",
+  "utc_unix": 1793221382.790485
+}

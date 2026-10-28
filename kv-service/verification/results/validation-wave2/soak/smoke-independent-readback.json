@@ -1,0 +1,22 @@
+[
+  {
+    "run": "smoke-v1",
+    "status": "pass",
+    "requests": 684,
+    "steady_requests": 600,
+    "unique_keys": 3,
+    "sequence_contiguous": true,
+    "every_request_full_byte_hash_identity_checks_passed": true,
+    "drop_fd_restored": true
+  },
+  {
+    "run": "smoke-v2",
+    "status": "pass",
+    "requests": 688,
+    "steady_requests": 604,
+    "unique_keys": 3,
+    "sequence_contiguous": true,
+    "every_request_full_byte_hash_identity_checks_passed": true,
+    "drop_fd_restored": true
+  }
+]

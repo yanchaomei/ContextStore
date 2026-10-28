@@ -1,0 +1,1 @@
+Initial cleanup correctly stopped server1882561 with SIGTERM, then raw Redis argv comparison rejected trailing NUL padding before Redis shutdown. Fresh Redis PID1881946/startticks313266067/normalized argv matched prestop receipt. Normalized empty trailing argv entries; rerun skips already absent server and only stops exact verified Redis.

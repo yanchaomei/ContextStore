@@ -1,0 +1,1983 @@
+{
+  "status": "PASS_SCOPED_SUPPLEMENTAL_TERMINAL_PROOF_ACCEPTED",
+  "audit_utc": "2026-10-28T21:16:29.232637+00:00",
+  "scope": "Seven sealed native RXE suites; correctness, atomicity, requested retry bytes. Original frozen auditor remains 6 PASS / 1 RED.",
+  "checks": {
+    "collected file size and SHA256": 54,
+    "producer analysis file size and SHA256": 34,
+    "freeze copies identical": 1,
+    "actual collected native binary hash": 1,
+    "runner or frozen auditor unchanged": 2,
+    "current source frozen hash": 5,
+    "source snapshot frozen hash": 3,
+    "core revision exact": 1,
+    "production certificate and reader unchanged at core revision": 4,
+    "environment frozen file hash": 4,
+    "sealed server cutoff size hash lines": 2,
+    "sealed server final line": 2,
+    "server immediate exact failure retirement adjacency": 1899,
+    "server native WR poll failure shape": 1899,
+    "terminal has preceding exact-peer open": 1899,
+    "terminal connection lane and order": 1899,
+    "historical hash known-answer vector": 5,
+    "raw gzip byte equality": 7,
+    "native exit success": 7,
+    "native test completed exactly one selected test": 7,
+    "native launch exact argv": 7,
+    "native frozen environment": 51,
+    "route device gid environment exact": 56,
+    "native suite watchdog and campaign deadline": 7,
+    "freeze precedes launch": 7,
+    "log sizes and limit": 7,
+    "resource sample PID and count": 7,
+    "last sample process exited": 7,
+    "resource sample gaps bounded observed": 7,
+    "sampled resource peaks recomputed": 7,
+    "protocol bounds": 275764,
+    "native descriptor SGE tag": 9508,
+    "protocol string bounds": 28524,
+    "protocol complete decode": 9508,
+    "wire stripe echo exact": 9508,
+    "wire segment echo exact": 9508,
+    "complete operation schedule length": 7,
+    "strict complete serial operation IDs": 7,
+    "no orphan frame IDs": 7,
+    "unique mutation records": 7,
+    "per-operation frozen schedule field": 25332,
+    "all operation frames before own receipt and after prior receipt": 3908,
+    "per-operation budget quiescent receipt": 3748,
+    "control exact requested retry bytes": 1244,
+    "control old terminal manual rearm and frame receipt": 1244,
+    "control independent generated payload hash": 1244,
+    "control exact terminal": 1244,
+    "unpooled control has no pool": 622,
+    "per-operation exact frame count": 3908,
+    "per-operation exact old terminal count": 3908,
+    "per-operation exact held success ACK count": 3908,
+    "frame lane sequence unique": 3908,
+    "per-operation immutable identity": 3900,
+    "full frame expected frozen object identity": 3900,
+    "cross-operation same key frozen identity": 3420,
+    "receipt generation binds wire": 1244,
+    "initial frames exactly cover all four stripes": 3900,
+    "frame control and actual lane peer": 9508,
+    "all native SGE sizes addresses keys": 9508,
+    "native stripe subset valid": 9508,
+    "only supported frame terminal states": 9508,
+    "initial lane stripe assignment exact": 7768,
+    "old frame exact failed lane": 1660,
+    "wire requested retry payload exact": 3900,
+    "all retries use healthy lane": 1644,
+    "retry sequence exact": 1644,
+    "F2 retry only failed frozen task": 1564,
+    "control exact pool creation reuse retirement counters": 622,
+    "direct retry reuses exact retired range": 782,
+    "all mutation receipts accounted": 7,
+    "all postlookup receipts accounted": 7,
+    "producer supplemental mapping independently reproduced": 7,
+    "suite totals independently reconciled": 7,
+    "all native frames reconciled to complete server request detail multiset": 7,
+    "server WR request counts match fixture chunking": 7,
+    "each operation complete server detail payload multiset": 3908,
+    "old terminal previous request detail belongs to same operation": 1660,
+    "no omitted server requests after operation mapping": 7,
+    "coarse walltime suite containment not latency or identity": 7,
+    "actual native server CQ timeout fixture": 7,
+    "unchanged frozen auditor expected original status": 7,
+    "frozen RED same exact cause": 1,
+    "F1 retries complete frozen object": 80,
+    "cut exact requested retry bytes and tasks": 480,
+    "cut independent payload and terminal state": 480,
+    "cut expected terminal": 480,
+    "held ACK exact failed lane": 160,
+    "mutation inside own operation": 160,
+    "mutation old generation binds frames": 160,
+    "overwrite real changed generation known B before release": 80,
+    "delete acknowledged before retry ACK release": 80,
+    "lifetime independent payload hash and exact publish": 2000,
+    "lifetime every exact pool counter": 2000,
+    "publication sentinel identity interception": 160,
+    "publication typed terminal": 160,
+    "actual postlookup relay per-operation receipt": 160,
+    "postlookup generation binds wire": 160,
+    "admission atomic zero retry": 24,
+    "admission expected typed error text": 24,
+    "native suites serial nonoverlapping launch intervals": 1,
+    "no foreign data requests inside entire formal server stream": 2,
+    "all server suite request groups serial and complete": 2,
+    "no extra old terminal or foreign old request before sealed cutoff": 2,
+    "one frozen campaign deadline": 1,
+    "launcher all seven native receipts same order": 1,
+    "matched 80 per-control bytes exact": 1,
+    "post-run guest owned processes and registered MR snapshot empty": 1,
+    "quiescence snapshot after whole recovery campaign": 1,
+    "collected evidence unmodified after replay": 54,
+    "formal totals": 1,
+    "producer summary reported totals agree with independent replay": 4,
+    "summary retains RED and no performance inference": 1
+  },
+  "totals": {
+    "operations": 3908,
+    "publications": 3244,
+    "atomic_rejections": 664,
+    "frames": 9508,
+    "old_terminals": 1660,
+    "held_success_ack": 160
+  },
+  "frozen_auditor": [
+    {
+      "suite": "f2-recovery1000",
+      "returncode": 1
+    },
+    {
+      "suite": "matched-controls240",
+      "returncode": 0
+    },
+    {
+      "suite": "cuts480",
+      "returncode": 0
+    },
+    {
+      "suite": "lifetime2000",
+      "returncode": 0
+    },
+    {
+      "suite": "publication160",
+      "returncode": 0
+    },
+    {
+      "suite": "admission24",
+      "returncode": 0
+    },
+    {
+      "suite": "representative16mib4",
+      "returncode": 0
+    }
+  ],
+  "suites": [
+    {
+      "suite": "f2-recovery1000",
+      "operations": 1000,
+      "publications": 1000,
+      "atomic_rejections": 0,
+      "frames": 3000,
+      "old_terminals": 1000,
+      "held_success_ack": 0,
+      "server_request_details": 3000,
+      "reused_key_peer_groups": [
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-0",
+          "peer": "10.81.1.2:54070",
+          "occurrences": [
+            {
+              "op": 118,
+              "client_frame_line": 477,
+              "key": "17:recovery-campaignnative-recovery-2026102934-0",
+              "peer": "10.81.1.2:54070",
+              "lane": 0,
+              "line": 4951,
+              "failure_line": 4950,
+              "time": 1793218312.98901,
+              "failure_time": 1793218312.9888,
+              "open_line": 4940,
+              "open_time": 1793218311.889571,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 852,
+              "client_frame_line": 3413,
+              "key": "17:recovery-campaignnative-recovery-2026102934-0",
+              "peer": "10.81.1.2:54070",
+              "lane": 0,
+              "line": 13115,
+              "failure_line": 13114,
+              "time": 1793219147.559531,
+              "failure_time": 1793219147.559309,
+              "open_line": 13101,
+              "open_time": 1793219145.395302,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-2",
+          "peer": "10.81.1.2:48176",
+          "occurrences": [
+            {
+              "op": 176,
+              "client_frame_line": 709,
+              "key": "17:recovery-campaignnative-recovery-2026102934-2",
+              "peer": "10.81.1.2:48176",
+              "lane": 0,
+              "line": 5763,
+              "failure_line": 5762,
+              "time": 1793218381.938941,
+              "failure_time": 1793218381.938723,
+              "open_line": 5752,
+              "open_time": 1793218380.906375,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 450,
+              "client_frame_line": 1805,
+              "key": "17:recovery-campaignnative-recovery-2026102934-2",
+              "peer": "10.81.1.2:48176",
+              "lane": 0,
+              "line": 8396,
+              "failure_line": 8395,
+              "time": 1793218697.362079,
+              "failure_time": 1793218697.361877,
+              "open_line": 8382,
+              "open_time": 1793218695.187494,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-2",
+          "peer": "10.81.1.2:48228",
+          "occurrences": [
+            {
+              "op": 180,
+              "client_frame_line": 725,
+              "key": "17:recovery-campaignnative-recovery-2026102934-2",
+              "peer": "10.81.1.2:48228",
+              "lane": 0,
+              "line": 5819,
+              "failure_line": 5818,
+              "time": 1793218386.732681,
+              "failure_time": 1793218386.732468,
+              "open_line": 5808,
+              "open_time": 1793218385.634348,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 736,
+              "client_frame_line": 2949,
+              "key": "17:recovery-campaignnative-recovery-2026102934-2",
+              "peer": "10.81.1.2:48228",
+              "lane": 0,
+              "line": 12106,
+              "failure_line": 12105,
+              "time": 1793219017.771332,
+              "failure_time": 1793219017.771118,
+              "open_line": 12095,
+              "open_time": 1793219016.749446,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-0",
+          "peer": "10.81.1.2:45656",
+          "occurrences": [
+            {
+              "op": 264,
+              "client_frame_line": 1061,
+              "key": "17:recovery-campaignnative-recovery-2026102934-0",
+              "peer": "10.81.1.2:45656",
+              "lane": 0,
+              "line": 6908,
+              "failure_line": 6907,
+              "time": 1793218486.116527,
+              "failure_time": 1793218486.116298,
+              "open_line": 6894,
+              "open_time": 1793218483.810346,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 566,
+              "client_frame_line": 2269,
+              "key": "17:recovery-campaignnative-recovery-2026102934-0",
+              "peer": "10.81.1.2:45656",
+              "lane": 0,
+              "line": 9726,
+              "failure_line": 9725,
+              "time": 1793218827.47114,
+              "failure_time": 1793218827.470923,
+              "open_line": 9715,
+              "open_time": 1793218826.449602,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-2",
+          "peer": "10.81.1.2:42542",
+          "occurrences": [
+            {
+              "op": 290,
+              "client_frame_line": 1165,
+              "key": "17:recovery-campaignnative-recovery-2026102934-2",
+              "peer": "10.81.1.2:42542",
+              "lane": 0,
+              "line": 7116,
+              "failure_line": 7115,
+              "time": 1793218515.288194,
+              "failure_time": 1793218515.287967,
+              "open_line": 7102,
+              "open_time": 1793218513.166073,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 716,
+              "client_frame_line": 2869,
+              "key": "17:recovery-campaignnative-recovery-2026102934-2",
+              "peer": "10.81.1.2:42542",
+              "lane": 0,
+              "line": 11826,
+              "failure_line": 11825,
+              "time": 1793218996.253514,
+              "failure_time": 1793218996.253291,
+              "open_line": 11814,
+              "open_time": 1793218995.231712,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-1",
+          "peer": "10.82.1.2:51350",
+          "occurrences": [
+            {
+              "op": 413,
+              "client_frame_line": 1657,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:51350",
+              "lane": 1,
+              "line": 8100,
+              "failure_line": 8099,
+              "time": 1793218655.987239,
+              "failure_time": 1793218655.987001,
+              "open_line": 8086,
+              "open_time": 1793218653.812698,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 583,
+              "client_frame_line": 2337,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:51350",
+              "lane": 1,
+              "line": 9964,
+              "failure_line": 9963,
+              "time": 1793218846.286741,
+              "failure_time": 1793218846.286531,
+              "open_line": 9952,
+              "open_time": 1793218845.264552,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-1",
+          "peer": "10.82.1.2:37692",
+          "occurrences": [
+            {
+              "op": 437,
+              "client_frame_line": 1753,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:37692",
+              "lane": 1,
+              "line": 8292,
+              "failure_line": 8291,
+              "time": 1793218682.538642,
+              "failure_time": 1793218682.538418,
+              "open_line": 8278,
+              "open_time": 1793218680.366822,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 687,
+              "client_frame_line": 2753,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:37692",
+              "lane": 1,
+              "line": 11420,
+              "failure_line": 11419,
+              "time": 1793218963.140552,
+              "failure_time": 1793218963.140321,
+              "open_line": 11408,
+              "open_time": 1793218961.984789,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-1",
+          "peer": "10.82.1.2:59744",
+          "occurrences": [
+            {
+              "op": 571,
+              "client_frame_line": 2289,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:59744",
+              "lane": 1,
+              "line": 9796,
+              "failure_line": 9795,
+              "time": 1793218833.028584,
+              "failure_time": 1793218833.028341,
+              "open_line": 9784,
+              "open_time": 1793218832.006719,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 663,
+              "client_frame_line": 2657,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:59744",
+              "lane": 1,
+              "line": 11084,
+              "failure_line": 11083,
+              "time": 1793218936.094239,
+              "failure_time": 1793218936.094012,
+              "open_line": 11072,
+              "open_time": 1793218935.072427,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-0",
+          "peer": "10.81.1.2:35796",
+          "occurrences": [
+            {
+              "op": 662,
+              "client_frame_line": 2653,
+              "key": "17:recovery-campaignnative-recovery-2026102934-0",
+              "peer": "10.81.1.2:35796",
+              "lane": 0,
+              "line": 11070,
+              "failure_line": 11069,
+              "time": 1793218935.023739,
+              "failure_time": 1793218935.023508,
+              "open_line": 11061,
+              "open_time": 1793218934.003907,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 760,
+              "client_frame_line": 3045,
+              "key": "17:recovery-campaignnative-recovery-2026102934-0",
+              "peer": "10.81.1.2:35796",
+              "lane": 0,
+              "line": 12379,
+              "failure_line": 12378,
+              "time": 1793219044.478831,
+              "failure_time": 1793219044.478621,
+              "open_line": 12365,
+              "open_time": 1793219042.254872,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-3",
+          "peer": "10.82.1.2:56566",
+          "occurrences": [
+            {
+              "op": 791,
+              "client_frame_line": 3169,
+              "key": "17:recovery-campaignnative-recovery-2026102934-3",
+              "peer": "10.82.1.2:56566",
+              "lane": 1,
+              "line": 12627,
+              "failure_line": 12626,
+              "time": 1793219080.430199,
+              "failure_time": 1793219080.429952,
+              "open_line": 12613,
+              "open_time": 1793219078.318089,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 887,
+              "client_frame_line": 3553,
+              "key": "17:recovery-campaignnative-recovery-2026102934-3",
+              "peer": "10.82.1.2:56566",
+              "lane": 1,
+              "line": 13395,
+              "failure_line": 13394,
+              "time": 1793219186.03367,
+              "failure_time": 1793219186.033429,
+              "open_line": 13381,
+              "open_time": 1793219183.926634,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-1",
+          "peer": "10.82.1.2:56582",
+          "occurrences": [
+            {
+              "op": 793,
+              "client_frame_line": 3177,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:56582",
+              "lane": 1,
+              "line": 12643,
+              "failure_line": 12642,
+              "time": 1793219082.572344,
+              "failure_time": 1793219082.572101,
+              "open_line": 12629,
+              "open_time": 1793219080.480117,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 889,
+              "client_frame_line": 3561,
+              "key": "17:recovery-campaignnative-recovery-2026102934-1",
+              "peer": "10.82.1.2:56582",
+              "lane": 1,
+              "line": 13411,
+              "failure_line": 13410,
+              "time": 1793219188.194442,
+              "failure_time": 1793219188.194228,
+              "open_line": 13397,
+              "open_time": 1793219186.082257,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        },
+        {
+          "key": "17:recovery-campaignnative-recovery-2026102934-3",
+          "peer": "10.82.1.2:33200",
+          "occurrences": [
+            {
+              "op": 819,
+              "client_frame_line": 3281,
+              "key": "17:recovery-campaignnative-recovery-2026102934-3",
+              "peer": "10.82.1.2:33200",
+              "lane": 1,
+              "line": 12851,
+              "failure_line": 12850,
+              "time": 1793219111.528237,
+              "failure_time": 1793219111.527761,
+              "open_line": 12837,
+              "open_time": 1793219109.368977,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            },
+            {
+              "op": 847,
+              "client_frame_line": 3393,
+              "key": "17:recovery-campaignnative-recovery-2026102934-3",
+              "peer": "10.82.1.2:33200",
+              "lane": 1,
+              "line": 13075,
+              "failure_line": 13074,
+              "time": 1793219142.066161,
+              "failure_time": 1793219142.065955,
+              "open_line": 13061,
+              "open_time": 1793219139.97711,
+              "failure": "poll final RDMA completions: poll_n timeout after 1000ms, got 0/2"
+            }
+          ]
+        }
+      ],
+      "negative_tests": {
+        "delete_each_terminal": 1000,
+        "duplicate_each_terminal": 1000,
+        "swap_each_adjacent_terminal": 999,
+        "swap_repeated_same_key_peer_occurrences": 12
+      },
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 125
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 125
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 26352,
+        "file_descriptors": 22,
+        "threads": 9
+      },
+      "sampled_hwm_kib": 26352,
+      "resource_samples": 1132,
+      "sample_max_gap": 1.002889404000598,
+      "started": 1793218177.3760717,
+      "finished": 1793219310.9611886,
+      "elapsed": 1133.5851168632507,
+      "watchdog": 2400
+    },
+    {
+      "suite": "matched-controls240",
+      "operations": 240,
+      "publications": 160,
+      "atomic_rejections": 80,
+      "frames": 720,
+      "old_terminals": 240,
+      "held_success_ack": 0,
+      "server_request_details": 720,
+      "reused_key_peer_groups": [],
+      "negative_tests": {
+        "delete_each_terminal": 240,
+        "duplicate_each_terminal": 240,
+        "swap_each_adjacent_terminal": 239
+      },
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F0",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F0",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F1",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F1",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F0",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F0",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F1",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F1",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F0",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F0",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F1",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F1",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F0",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F0",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F1",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F1",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "1"
+          },
+          "count": 10
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 25768,
+        "file_descriptors": 22,
+        "threads": 9
+      },
+      "sampled_hwm_kib": 25768,
+      "resource_samples": 268,
+      "sample_max_gap": 1.002048365000519,
+      "started": 1793219311.3875184,
+      "finished": 1793219579.7444856,
+      "elapsed": 268.35696721076965,
+      "watchdog": 900
+    },
+    {
+      "suite": "cuts480",
+      "operations": 480,
+      "publications": 80,
+      "atomic_rejections": 400,
+      "frames": 1280,
+      "old_terminals": 240,
+      "held_success_ack": 160,
+      "server_request_details": 1280,
+      "reused_key_peer_groups": [],
+      "negative_tests": {
+        "delete_each_terminal": 240,
+        "duplicate_each_terminal": 240,
+        "swap_each_adjacent_terminal": 239
+      },
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "AckTimeout",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "AckTimeout",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "CancelInitial",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "CancelInitial",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "CancelRetry",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "CancelRetry",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "Overwrite",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "Overwrite",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "Delete",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "Delete",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "AckTimeout",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "AckTimeout",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "CancelInitial",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "CancelInitial",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "CancelRetry",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "CancelRetry",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "Overwrite",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "Overwrite",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "Delete",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "Delete",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "AckTimeout",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "AckTimeout",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "CancelInitial",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "CancelInitial",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "CancelRetry",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "CancelRetry",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "Overwrite",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "Overwrite",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "Delete",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "Delete",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "AckTimeout",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "AckTimeout",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "CancelInitial",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "CancelInitial",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "CancelRetry",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "CancelRetry",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "DeadlineRetryGate",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "Overwrite",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "Overwrite",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "Delete",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "Delete",
+            "failed_lane": "1"
+          },
+          "count": 10
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 26712,
+        "file_descriptors": 22,
+        "threads": 10
+      },
+      "sampled_hwm_kib": 26712,
+      "resource_samples": 352,
+      "sample_max_gap": 1.0036713819999932,
+      "started": 1793219580.1564713,
+      "finished": 1793219932.7179224,
+      "elapsed": 352.56145119667053,
+      "watchdog": 1200
+    },
+    {
+      "suite": "lifetime2000",
+      "operations": 2000,
+      "publications": 2000,
+      "atomic_rejections": 0,
+      "frames": 4000,
+      "old_terminals": 0,
+      "held_success_ack": 0,
+      "server_request_details": 4000,
+      "reused_key_peer_groups": [],
+      "negative_tests": {},
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "close_each": "False"
+          },
+          "count": 500
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "close_each": "False"
+          },
+          "count": 500
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "close_each": "True"
+          },
+          "count": 500
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "close_each": "True"
+          },
+          "count": 500
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 22732,
+        "file_descriptors": 22,
+        "threads": 9
+      },
+      "sampled_hwm_kib": 22732,
+      "resource_samples": 136,
+      "sample_max_gap": 1.006686142000035,
+      "started": 1793219933.1444845,
+      "finished": 1793220069.5275671,
+      "elapsed": 136.38308262825012,
+      "watchdog": 1200
+    },
+    {
+      "suite": "publication160",
+      "operations": 160,
+      "publications": 0,
+      "atomic_rejections": 160,
+      "frames": 480,
+      "old_terminals": 160,
+      "held_success_ack": 0,
+      "server_request_details": 480,
+      "reused_key_peer_groups": [],
+      "negative_tests": {
+        "delete_each_terminal": 160,
+        "duplicate_each_terminal": 160,
+        "swap_each_adjacent_terminal": 159
+      },
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "capability_control_injection": "False",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "capability_control_injection": "False",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "capability_control_injection": "True",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "capability_control_injection": "True",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "capability_control_injection": "False",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "capability_control_injection": "False",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "capability_control_injection": "True",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "capability_control_injection": "True",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "capability_control_injection": "False",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "capability_control_injection": "False",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "capability_control_injection": "True",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "capability_control_injection": "True",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "capability_control_injection": "False",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "capability_control_injection": "False",
+            "failed_lane": "1"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "capability_control_injection": "True",
+            "failed_lane": "0"
+          },
+          "count": 10
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "capability_control_injection": "True",
+            "failed_lane": "1"
+          },
+          "count": 10
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 22692,
+        "file_descriptors": 25,
+        "threads": 10
+      },
+      "sampled_hwm_kib": 22692,
+      "resource_samples": 501,
+      "sample_max_gap": 1.0021031619999121,
+      "started": 1793220069.9586825,
+      "finished": 1793220571.546759,
+      "elapsed": 501.5880763530731,
+      "watchdog": 900
+    },
+    {
+      "suite": "admission24",
+      "operations": 24,
+      "publications": 0,
+      "atomic_rejections": 24,
+      "frames": 16,
+      "old_terminals": 16,
+      "held_success_ack": 0,
+      "server_request_details": 16,
+      "reused_key_peer_groups": [],
+      "negative_tests": {
+        "delete_each_terminal": 16,
+        "duplicate_each_terminal": 16,
+        "swap_each_adjacent_terminal": 15
+      },
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "single_available_path",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "registered_byte_cap",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "single_available_path",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "cut": "registered_byte_cap",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "single_available_path",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "registered_byte_cap",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "single_available_path",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "cut": "registered_byte_cap",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "single_available_path",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "registered_byte_cap",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "single_available_path",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "cut": "registered_byte_cap",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "single_available_path",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "registered_byte_cap",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "single_available_path",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "unsupported_alternate_owner",
+            "failed_lane": "1"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "cut": "registered_byte_cap",
+            "failed_lane": "1"
+          },
+          "count": 1
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 14172,
+        "file_descriptors": 14,
+        "threads": 6
+      },
+      "sampled_hwm_kib": 14276,
+      "resource_samples": 17,
+      "sample_max_gap": 1.0017380680001224,
+      "started": 1793220571.9624293,
+      "finished": 1793220588.9879432,
+      "elapsed": 17.025513887405396,
+      "watchdog": 300
+    },
+    {
+      "suite": "representative16mib4",
+      "operations": 4,
+      "publications": 4,
+      "atomic_rejections": 0,
+      "frames": 12,
+      "old_terminals": 4,
+      "held_success_ack": 0,
+      "server_request_details": 12,
+      "reused_key_peer_groups": [],
+      "negative_tests": {
+        "delete_each_terminal": 4,
+        "duplicate_each_terminal": 4,
+        "swap_each_adjacent_terminal": 3
+      },
+      "matrix": [
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "False",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "False",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 1
+        },
+        {
+          "fields": {
+            "direct": "True",
+            "pooled": "True",
+            "control": "F2",
+            "failed_lane": "0"
+          },
+          "count": 1
+        }
+      ],
+      "sampled_peaks": {
+        "rss_kib": 189564,
+        "file_descriptors": 19,
+        "threads": 8
+      },
+      "sampled_hwm_kib": 189564,
+      "resource_samples": 142,
+      "sample_max_gap": 1.0019279940006527,
+      "started": 1793220589.310433,
+      "finished": 1793220731.4659493,
+      "elapsed": 142.1555163860321,
+      "watchdog": 600
+    }
+  ],
+  "server_span_audit": {
+    "small-server.log": {
+      "first_formal_request_line": 3293,
+      "last_formal_request_line": 33150,
+      "formal_request_count": 9496,
+      "formal_terminal_count": 1656,
+      "foreign_requests_in_formal_span": 0,
+      "extra_old_terminals_until_cutoff": 0,
+      "scope": "Recorded fixture data-request stream; not a claim of global host process exclusivity."
+    },
+    "large-server.log": {
+      "first_formal_request_line": 43,
+      "last_formal_request_line": 86,
+      "formal_request_count": 12,
+      "formal_terminal_count": 4,
+      "foreign_requests_in_formal_span": 0,
+      "extra_old_terminals_until_cutoff": 0,
+      "scope": "Recorded fixture data-request stream; not a claim of global host process exclusivity."
+    }
+  },
+  "matched_requested_retry_bytes": {
+    "F0": 0,
+    "F1": 83886080,
+    "F2": 41943040
+  },
+  "independent_payload_hashes": {
+    "f2-recovery1000": {
+      "0": "8899c76d5211114d",
+      "1": "7d7c5a125d00d9be",
+      "2": "7122ccbf69ec7932",
+      "3": "2a55a589cb4b4d72"
+    },
+    "matched-controls240": {
+      "0": "e4d508693261d2c7",
+      "1": "b0bfa521705c9236",
+      "2": "f36d5f7f96ce7e8f",
+      "3": "d23ae903d3f61be0"
+    },
+    "cuts480": {
+      "0": "44a22a51b0c02da8"
+    },
+    "lifetime2000": {
+      "0": "8d407421a8fb5361"
+    },
+    "publication160": {
+      "0": "36bf80c7229fcecb"
+    },
+    "admission24": {
+      "0": "754747beb4cb2eec"
+    },
+    "representative16mib4": {
+      "2": "532c75f2d8b3e04e"
+    }
+  },
+  "full_operation_map": "recovery-final-operation-map.json",
+  "full_terminal_map": "recovery-final-terminal-map.json",
+  "hash_oracle_credit": "Imported unchanged campaign/hash-oracle/replay_twox_hash.py; MIT twox-hash 1.6.3 historical algorithm; five known-answer vectors rerun.",
+  "hash_oracle_sha256": "28d7d0849434ea320693840d8320391c75f1b132d19c539e1eb25947047e12ce",
+  "freeze_sha256": "21a4300ba6705873266b6973626b62457565379386ec89df0c1ea428f5752567",
+  "collected_manifest_sha256": "1c1dfeaf20906ea3b76fda4874fd2b7c9e458bc3c0d88746ede5be03fb4ccc1d"
+}

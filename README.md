@@ -471,8 +471,13 @@ and selected-stripe counts before a connection is reusable. Unstriped reads
 bypass the pool entirely, including checkout and pooled ownership checks, and
 retain legacy byte-count validation plus QP-before-MR teardown. Their ACK count
 reports server WRITE splits or segments, not the planner's single logical stripe.
-The full-descriptor server fallback's uncertain-CQ handling remains a separate
-unfixed issue; this wave does not claim terminal-ACK safety for pooling that path. Temporary target/dummy MRs are deregistered
+The full-object descriptor GET cold-slab path now propagates the original typed
+`RetireLegacyGet` error before attempting any fallback. The connection owner
+destroys the uncertain QP/CQ while its source extent stays pinned. Ordinary safe
+storage/allocation failures retain their existing fallback behavior. Client
+connection pooling remains restricted to the stripe-subset path.
+
+Temporary target/dummy MRs are deregistered
 before returning the healthy lease. Errors, absent/stale descriptors, incomplete
 ACKs, and caught transfer panics destroy the client QP before releasing those MRs.
 The pool never caches a caller buffer or its registration. Object checksums and

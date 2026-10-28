@@ -1,0 +1,6 @@
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service/server)
+    Finished `release` profile [optimized] target(s) in 1m 22s
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service/client-rs)
+    Finished `release` profile [optimized] target(s) in 34.12s
+    Finished `release` profile [optimized] target(s) in 0.10s
+    Finished `release` profile [optimized] target(s) in 0.17s

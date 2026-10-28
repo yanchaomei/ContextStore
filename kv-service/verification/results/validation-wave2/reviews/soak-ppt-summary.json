@@ -1,0 +1,81 @@
+{
+  "status": "PASS_SCOPED_CORRECTNESS_AND_SAMPLED_RESOURCE_STABILITY",
+  "headline_zh": "两小时连续读取完成：逐次内容与身份核对通过，资源采样满足预设边界",
+  "scope_zh": "单 HCA；Rust test profile；SKV2→SKV4 debug 服务；正确性与采样资源稳定性验证",
+  "steady_seconds": 7200.28935,
+  "steady_requests": 71960,
+  "steady_api_bytes": 603644231680,
+  "steady_api_gib": 562.1875,
+  "total_requests_with_warm_and_reopen": 72044,
+  "warmup_requests": 80,
+  "reopen_requests": 4,
+  "all_reads_full_bytes_hash_identity_ok": true,
+  "errors": 0,
+  "deadlines": 0,
+  "rejections": 0,
+  "concurrency": 4,
+  "pool_limit": 4,
+  "warm_active_samples": 1286,
+  "steady_active_samples": 1168687,
+  "steady_total_samples": 1854739,
+  "max_observed_pool_live": 4,
+  "curve_csv": "outputs/validation-wave2-20261029/reviews/soak-resource-curve.csv",
+  "curve_clock": "Rust steady Instant; 0 is warm baseline",
+  "curve_sampling_zh": "240 个主 Reader 静止点：每批4次读取完成后采样；活动期另有独立累计采样",
+  "rss_warm_mib": 76.25390625,
+  "rss_peak_mib": 85.0,
+  "rss_final_mib": 84.29296875,
+  "rss_final_delta_mib": 8.0390625,
+  "rss_limit_warm_plus_mib": 128,
+  "fd_main_sampled": 23,
+  "threads_main_sampled": 10,
+  "fd_before_reader": 11,
+  "fd_after_drop": 11,
+  "stage_resources": [
+    {
+      "phase": "before_reader",
+      "fd": 11,
+      "rss_kib": 58448,
+      "threads": 6
+    },
+    {
+      "phase": "warm",
+      "fd": 23,
+      "rss_kib": 78084,
+      "threads": 10
+    },
+    {
+      "phase": "steady_complete",
+      "fd": 23,
+      "rss_kib": 86316,
+      "threads": 10
+    },
+    {
+      "phase": "after_drop",
+      "fd": 11,
+      "rss_kib": 86312,
+      "threads": 10
+    },
+    {
+      "phase": "reopened",
+      "fd": 23,
+      "rss_kib": 86488,
+      "threads": 10
+    }
+  ],
+  "native_qp_cq_mr_pid_attribution": "unavailable",
+  "footer_zh": "逻辑读取字节，非线速吞吐；RSS/FD 为静止点采样；原生 QP/CQ/MR 归属不可用，不据此宣称零泄漏或发布版性能。",
+  "claim_boundaries": [
+    "API returned bytes are logical application bytes, not measured wire bytes.",
+    "Full-byte and complete descriptor/placement equality are per-request harness assertions; raw payload and every returned identity are not dumped. Expected payload XXH64 is independently regenerated offline.",
+    "All 241 persisted resource/reconciliation snapshots are quiescent; every burst is also checked in the frozen harness. Per-burst internal states are not individually logged.",
+    "Active pool samples are aggregate counts/maxima, separate from quiescent resource points. Resource diagnostics do not measure every transient peak.",
+    "Native PID-owned QP/CQ/MR are unavailable. No proof of zero native-resource leaks or exact MR deregistration follows from reserved byte counters.",
+    "RSS does not return to baseline and is not required to. Observed bounded RSS is not a mathematical no-leak proof.",
+    "Reopened Reader performs four correct reads and is explicitly dropped before normal exit; exact second-drop FD/native counts were not separately sampled.",
+    "v2 interrupted/superseded results contribute no duration or request count to this v3 success.",
+    "No per-request absolute timestamps are emitted; continuity is supported by monotonic steady loop, ordered bursts, advancing interval counters and active observations.",
+    "Warm baseline elapsed_s=0 is the harness-assigned baseline just before starting the steady Instant; Drop/reopen have no usable main-reader elapsed timestamp.",
+    "This run is not release performance, multi-HCA scaling, fault recovery, or FFI evidence."
+  ]
+}

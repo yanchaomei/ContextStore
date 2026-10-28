@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-28T20:46:09.885769+00:00",
+  "root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k",
+  "source_freeze": {
+    "state": "EXISTING_RELEASE_BINARY_FROZEN_NO_REBUILD",
+    "frozen_utc": "2026-10-28T20:45:02.853913+00:00",
+    "source_artifact": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/target/release/contextstore-server",
+    "frozen_binary": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/release-frozen-bin/contextstore-server",
+    "binary_sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8",
+    "binary_bytes": 9165120,
+    "profile": "release",
+    "server_features": [
+      "io-uring",
+      "rdma",
+      "metrics"
+    ],
+    "build_entrypoint": "make build",
+    "server_build_command": "cargo build --release --features io-uring,rdma,metrics",
+    "build_exit": 0,
+    "build_start": "2026-10-28T20:19:44Z",
+    "build_end": "2026-10-28T20:23:07Z",
+    "build_log": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/logs/make-build.log",
+    "source_head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+    "candidate_source_file": "kv-service/server/src/rdma/server.rs",
+    "candidate_source_sha256": "d7df834df7d4ffb86a04725a5055069cfadca2b253fc37ea092028fa50bd5b71",
+    "source_manifest": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/green-source-sha256.json",
+    "source_manifest_sha256": "a367169d5ee301f918192139b54d37bf8389af47d2b4106ddb88d41fc711a0fc",
+    "source_freeze": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/green-freeze.json",
+    "source_archive": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/green-source.tar.gz",
+    "source_archive_sha256": "73aea105fb899210a3cafe3e7369c7f160b4f0f43b143c027c96d5dc01686171",
+    "source_readback_all_65_files_match": true,
+    "runtime_config": "Not baked into this binary. S5 fixture must separately freeze its tier_a config and environment.",
+    "performance_scope": "Same release binary for every R0/R1 variant; existing debug matrix retained separately. No debug-vs-release attribution or guard speedup claim."
+  },
+  "server_sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8",
+  "config_sha256": "2a2e320557c6d65a233fc10523a9cda064b45b9153fecf065118ad6bfb750db3",
+  "processes": {
+    "redis": {
+      "pid": 1863490,
+      "start_ticks": "313697929",
+      "command": [
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+        "--bind",
+        "127.0.0.1",
+        "--port",
+        "26579",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--dir",
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/redis"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/redis",
+      "environment": {},
+      "environment_sha256": "1171666c3e0af069667251bbb8dbac52aeff187a6866daa07c597c813aa289e0",
+      "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+      "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c"
+    },
+    "server": {
+      "pid": 1863559,
+      "start_ticks": "313697929",
+      "command": [
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server",
+        "--config",
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/server.toml",
+        "--log-level",
+        "info"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k",
+      "environment": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "LANG": "C",
+        "CS_RDMA_SLAB_MB": "512",
+        "CS_FORCE_DISK_READ": "1",
+        "CS_RDMA_DEVICES": "mlx5_1:10.0.0.65:25553:3"
+      },
+      "environment_sha256": "4c20861cbe37055bab0270ae248382327dd94fda7ab407054a2080d922c4afb7",
+      "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server",
+      "exe_sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8"
+    }
+  },
+  "ldd": {
+    "contextstore-server": {
+      "code": 0,
+      "stdout": "\tlinux-vdso.so.1 (0x00007fff3afee000)\n\tlibibverbs.so.1 => /lib/x86_64-linux-gnu/libibverbs.so.1 (0x00007f888c056000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f888c036000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f888c031000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f888bf4a000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f888bf45000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f888bd1a000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f888c94c000)\n\tlibnl-route-3.so.200 => /lib/x86_64-linux-gnu/libnl-route-3.so.200 (0x00007f888bc97000)\n\tlibnl-3.so.200 => /lib/x86_64-linux-gnu/libnl-3.so.200 (0x00007f888bc74000)\n",
+      "stderr": ""
+    },
+    "redis-server": {
+      "code": 0,
+      "stdout": "\tlinux-vdso.so.1 (0x00007fff5c5df000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fb65147e000)\n\tlibatomic.so.1 => /lib/x86_64-linux-gnu/libatomic.so.1 (0x00007fb651474000)\n\tliblua5.1-cjson.so.0 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/liblua5.1-cjson.so.0 (0x00007fb651200000)\n\tliblua5.1-bitop.so.0 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/liblua5.1-bitop.so.0 (0x00007fb650e00000)\n\tliblua5.1.so.0 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/liblua5.1.so.0 (0x00007fb651441000)\n\tlibjemalloc.so.2 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/libjemalloc.so.2 (0x00007fb650b24000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fb651119000)\n\tlibrt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fb65143c000)\n\tlibhiredis.so.0.14 => /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib/libhiredis.so.0.14 (0x00007fb651429000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fb651424000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb6508fb000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fb6506cf000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fb6510f9000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007fb6515a5000)\n",
+      "stderr": ""
+    }
+  },
+  "kernel": "Linux skv-node5 5.15.0-191-generic #201-Ubuntu SMP Fri Aug 7 18:39:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "rdma": "link mlx5_0/1 state DOWN physical_state DISABLED netdev enp175s0f0np0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev enp175s0f1np1 \n",
+  "private_lib_sha256": {
+    "libhiredis.so.0.14": "62a783a9bca3f02ea0a5fdb3be3472c147cf0ed6b06f06d455af2a64e00c57c2",
+    "libjemalloc.so.2": "04521d9fbbefac8c6dc5fba9546729c8401ffaf522d69e2a3e971bae5e9481f0",
+    "liblua5.1.so.0": "9e254c93064b940a87b1917ec97f89fb8e5941bdff509d3ed14b9410b5af1b38",
+    "liblua5.1-cjson.so.0": "4daeb9721c5504b9b185f077231ce68f0a3c6daac672d12184f0a6f7b30184dd",
+    "liblua5.1-bitop.so.0": "c006d844030b4b6fa8a7c147e9d188bd74f798645444391aa82c679c2af9ef00"
+  },
+  "scope": "Independent SKV6-client to SKV5-server single-HCA fixture; one RDMA listener; not dual HCA"
+}

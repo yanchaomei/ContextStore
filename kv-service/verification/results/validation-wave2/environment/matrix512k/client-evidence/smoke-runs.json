@@ -1,0 +1,29 @@
+[
+  {
+    "size_mib": 1,
+    "phase": "seed",
+    "argv": [
+      "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/cs-bench",
+      "--endpoint",
+      "http://10.0.0.65:25551",
+      "--layers",
+      "1",
+      "--layer-mb",
+      "1",
+      "--concurrency",
+      "1",
+      "--combined",
+      "--combined-count",
+      "1",
+      "--stream",
+      "--stream-chunk-mb",
+      "2",
+      "--prefix-base",
+      "wave2-matrix512k-smoke-1-",
+      "--only-put"
+    ],
+    "started": "2026-10-28T19:33:43.850979+00:00",
+    "finished": "2026-10-28T19:33:43.884145+00:00",
+    "exit_code": 1
+  }
+]

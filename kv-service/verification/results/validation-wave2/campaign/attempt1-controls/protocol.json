@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-28T19:41:49.865918+00:00",
+  "matrix": {
+    "client": "SKV6, mlx5_1 port1 GID3",
+    "server": "SKV5, mlx5_1 port1 GID3",
+    "independent_from_soak_hosts": true,
+    "benchmark_sha256": "6d90ed413283a513d32cb3b70428ba47cf3c7311ab47752bdc810db726bf3ca0",
+    "seeder_sha256": "904dd6cbf4eb096de067b9f1c2252bdce785b119ca40b57f52c7608cdf218b44",
+    "server_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+    "source_configuration": "512 KiB stripes/threshold, 512 MiB server slab, CS_FORCE_DISK_READ=1; warm OS page cache is not purged; server fallback observations reported separately",
+    "variants": {
+      "R0": "same binary, pool disabled",
+      "R1": "same binary, pool limit equals concurrency"
+    },
+    "recovery": "disabled",
+    "object_sizes_mib": [
+      1,
+      8,
+      64
+    ],
+    "concurrency": [
+      1,
+      4
+    ],
+    "object_identities_per_size": 3,
+    "content": "known index modulo 251 bytes; different object keys, not different content distributions",
+    "paired_process_blocks_per_cell": 10,
+    "pair_order": "R0 then R1 on even block; R1 then R0 on odd block",
+    "object_rotation": "pair index modulo 3; both variants use the exact same frozen object identity",
+    "cli_warmup": 0,
+    "total_batches_per_process": 35,
+    "startup_batches_recorded_but_excluded_from_primary": 5,
+    "steady_batches_per_process": 30,
+    "primary_metric": "ordinary median of all steady per-request read_multi_rail_into durations within a process, then geometric mean of paired R0/R1 ratios",
+    "tail_metric": "per-process nearest-rank p95 over steady request durations, then paired ratios; descriptive small-sample evidence, no p99 claim",
+    "bootstrap": {
+      "unit": "paired process block",
+      "replicates": 20000,
+      "rng": "Python random.Random",
+      "seed_formula": "20261029 + size_mib * 10 + concurrency",
+      "percentile_indexes_zero_based": [
+        499,
+        19499
+      ],
+      "interval": "95 percent percentile"
+    },
+    "sensitivity": "paired log-ratio t interval df9; record slower blocks; do not select a more favorable method after data",
+    "timing_boundary": "per-request timing excludes later pattern-hash validation; concurrent batch wall time and CPU include batch coordination and post-read validation, serial CPU has the existing narrower timed-read scope; do not conflate these across concurrency",
+    "phase_diagnostics": "separate tracing-enabled six-read processes per size and variant, concurrency1, first read vs next five; no tracing in primary matrix",
+    "acceptance": [
+      "All scheduled slots present, no failure/outlier removal",
+      "all read sizes and full known-pattern hashes correct",
+      "initial/final descriptor and placement identity exact per object",
+      "R1 created <= concurrency, created+reused == all reads, no retirement/rejection, active/connecting/retiring zero at final; idle==live==created",
+      "source, binaries, server PID/startticks/config/env captured before and after"
+    ],
+    "adoption": "Both optimizations remain opt-in regardless of result; no forced positive performance threshold or dual-HCA/inference claim"
+  },
+  "per_process_timeout_s": 240,
+  "campaign_max_runtime_s": 5400,
+  "output_limit_bytes": 524288000,
+  "minimum_free_disk_bytes": 1073741824,
+  "schedule": "sizes1,8,64; each C1 thenC4; pairs0..9; alternated R0/R1",
+  "failure_policy": "stop and preserve original slot; no same-slot retry",
+  "code_sha256": {
+    "run_matrix.py": "5858ed5c14700581306dc42e98c260d3813b84c98b16c71c2d00020698c1475d",
+    "analyze_matrix.py": "5bf61d58edd18430c835e109aa897c44d5a2d57484d878f1b900bcfe18bc1e8b",
+    "matrix_snapshot.py": "1fed9657bf97b9641e233ed1ee57a2344c04b18b7c901a5d9fa196b0687c804d"
+  },
+  "source_runtime_head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "source_sha256": {
+    "kv-service/client-rs/src/bin/rail_read_bench.rs": "929cdb567327dce694a5d01b4f69660436276747896b4176eafabdd192853267",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs": "cf9dc48aa77b9320af5b5fb0bce405aeb47ebed87047c091558472845a7a03df",
+    "kv-service/client-rs/src/rdma.rs": "62a73733c9455677cb529f563a49f157c58cdf687e08de6d2ced3ac059328d3d",
+    "kv-service/client-rs/src/lib.rs": "e6c1c9f78ce0709fd90a247f42e627550b387c145e0ed77e02faa692a5569964",
+    "Cargo.lock": "338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd",
+    "Cargo.toml": "289fe5e3ccbee0945b73a6b40574fe64cb9e78652358983a8af40607773b0a62"
+  }
+}

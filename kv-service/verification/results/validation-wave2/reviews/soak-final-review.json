@@ -1,0 +1,203 @@
+{
+  "status": "PASS_SCOPED_CORRECTNESS_AND_SAMPLED_RESOURCE_STABILITY",
+  "scope": "SKV2 single mlx5_1 HCA -> SKV4 debug provider, Rust unoptimized test profile; healthy correctness/resource observation only",
+  "review_mode": "Independent offline full raw audit only; no Rust build or native workload rerun",
+  "library_commit": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "pid": 2780409,
+  "process_start_ticks": 1334490144,
+  "binary_sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df",
+  "harness_sha256": "6f7d8113f58a34a28faedda8692421e2f847b2f52d1e965f6bd836e083a9c512",
+  "runner_sha256": "60f815a95a7772d0bf8875452aa0caa3a10196a934befa630761435526777714",
+  "checks_passed": 18174,
+  "artifact_manifest_entries_verified": 41,
+  "both_local_evidence_copies_verified": true,
+  "base_archive_entries_compared": 2485,
+  "base_regular_files_compared": 2485,
+  "base_source_unchanged": true,
+  "phase_requests": {
+    "warmup": 80,
+    "steady": 71960,
+    "reopened": 4
+  },
+  "phase_api_bytes": {
+    "warmup": 671088640,
+    "steady": 603644231680,
+    "reopened": 33554432
+  },
+  "total_requests": 72044,
+  "total_api_bytes": 604348874752,
+  "key_requests": {
+    "soak-1793215494685644383-0": 24015,
+    "soak-1793215494685644383-1": 24015,
+    "soak-1793215494685644383-2": 24014
+  },
+  "independently_regenerated_xxh64": {
+    "soak-1793215494685644383-0": "c8ea541e2a830728",
+    "soak-1793215494685644383-1": "130f73893d9baf35",
+    "soak-1793215494685644383-2": "e7b0eaa5e1c40302"
+  },
+  "steady_elapsed_s": 7200.28935,
+  "process_wall_elapsed_s": 7209.636557215825,
+  "native_exit": 0,
+  "runner_campaign_exit": 0,
+  "postrun_freeze_exit": 0,
+  "log_metadata": {
+    "stdout": {
+      "compressed_bytes": 1532471,
+      "uncompressed_bytes": 22396763,
+      "sha256": "10f14c3c2a434cedfe1e05901f85e603391ef05005e505f56bc66ddc4dab78c6",
+      "crc32": "06372efa"
+    },
+    "stderr": {
+      "compressed_bytes": 31,
+      "uncompressed_bytes": 0,
+      "sha256": "0b3fffc8fafea86f3737b65ea341561f2af76c8aeb4ee44a0064a940dd98fa20",
+      "crc32": "00000000"
+    }
+  },
+  "events": {
+    "object": 3,
+    "native": 726,
+    "contract": 1,
+    "request": 72044,
+    "active_samples": 241,
+    "reconciled": 241,
+    "resources": 241,
+    "drop": 1,
+    "native_availability": 3,
+    "summary": 1,
+    "ok": 72044
+  },
+  "error_deadline_rejection_counts": [
+    0,
+    0,
+    0
+  ],
+  "interval_work": {
+    "observed_intervals": 239,
+    "minimum_completed_requests": 36,
+    "maximum_completed_requests": 304,
+    "minimum_seconds": 3.593308999999863,
+    "maximum_seconds": 30.426882999999975,
+    "all_intervals_positive_work": true
+  },
+  "active_observations": {
+    "warm": {
+      "event": "active_samples",
+      "phase": "warm",
+      "sample_count": 2035,
+      "active_sample_count": 1286,
+      "max_active": 4,
+      "max_live": 4
+    },
+    "steady": {
+      "event": "active_samples",
+      "phase": "steady_complete",
+      "sample_count": 1854739,
+      "active_sample_count": 1168687,
+      "max_active": 4,
+      "max_live": 4
+    },
+    "reopened": {
+      "event": "active_samples",
+      "phase": "reopened",
+      "sample_count": 106,
+      "active_sample_count": 72,
+      "max_active": 4,
+      "max_live": 4
+    }
+  },
+  "resource_curve": {
+    "file": "outputs/validation-wave2-20261029/reviews/soak-resource-curve.csv",
+    "main_reader_points": 240,
+    "periodic_steady_points": 238,
+    "sampling_phase": "quiescent after completed burst",
+    "rss_warm_kib": 78084,
+    "rss_min_kib": 78048,
+    "rss_peak_kib": 87040,
+    "rss_final_kib": 86316,
+    "rss_final_minus_warm_kib": 8232,
+    "rss_peak_minus_warm_kib": 8956,
+    "rss_endpoint_slope_kib_s": 1.1432873874714493,
+    "fd_values": [
+      23
+    ],
+    "thread_values": [
+      10
+    ],
+    "pool_live_values": [
+      4
+    ],
+    "quiescent_reserved_and_inflight_zero": true
+  },
+  "post_drop": {
+    "event": "drop",
+    "before_fd": 11,
+    "after_fd": 11,
+    "fd_delta_from_before": 0,
+    "before_rss_kib": 58448,
+    "warm_rss_kib": 78084,
+    "after_rss_kib": 86312,
+    "rss_delta_from_before_kib": 27864,
+    "rss_delta_from_warm_kib": 8228,
+    "before_threads": 6,
+    "warm_threads": 10,
+    "after_threads": 10,
+    "thread_delta_from_before": 4,
+    "thread_delta_from_warm": 0,
+    "settle_s": 0.002637,
+    "rss_guard": "warm_plus_131072_KiB_not_exact_baseline_return",
+    "thread_guard": "warm_plus_4"
+  },
+  "native_pid_resources": {
+    "qp": "unavailable",
+    "cq": "unavailable",
+    "mr": "unavailable"
+  },
+  "latency_diagnostic_us_not_performance": {
+    "min": 201435,
+    "median": 251271.0,
+    "p99_nearest_rank": 341213,
+    "max": 1283623,
+    "retained_by_producer": false
+  },
+  "main_reader_counter_end": {
+    "event": "resources",
+    "phase": "steady_complete",
+    "elapsed_s": 7200.28935,
+    "pid": 2780409,
+    "fd": 23,
+    "rss_kib": 86316,
+    "threads": 10,
+    "pool_live": 4,
+    "pool_idle": 4,
+    "pool_active": 0,
+    "pool_connecting": 0,
+    "pool_retiring": 0,
+    "created": 4,
+    "reused": 72036,
+    "retired": 0,
+    "rejected": 0,
+    "registered_bytes_reserved": 0,
+    "inflight_bytes": 0,
+    "inflight_requests": 0,
+    "rail_reads_ok": 72040,
+    "rail_reads_err": 0,
+    "rail_bytes": 604315320320
+  },
+  "native_normal_exit_and_reopen_drop": true,
+  "boundaries": [
+    "API returned bytes are logical application bytes, not measured wire bytes.",
+    "Full-byte and complete descriptor/placement equality are per-request harness assertions; raw payload and every returned identity are not dumped. Expected payload XXH64 is independently regenerated offline.",
+    "All 241 persisted resource/reconciliation snapshots are quiescent; every burst is also checked in the frozen harness. Per-burst internal states are not individually logged.",
+    "Active pool samples are aggregate counts/maxima, separate from quiescent resource points. Resource diagnostics do not measure every transient peak.",
+    "Native PID-owned QP/CQ/MR are unavailable. No proof of zero native-resource leaks or exact MR deregistration follows from reserved byte counters.",
+    "RSS does not return to baseline and is not required to. Observed bounded RSS is not a mathematical no-leak proof.",
+    "Reopened Reader performs four correct reads and is explicitly dropped before normal exit; exact second-drop FD/native counts were not separately sampled.",
+    "v2 interrupted/superseded results contribute no duration or request count to this v3 success.",
+    "No per-request absolute timestamps are emitted; continuity is supported by monotonic steady loop, ordered bursts, advancing interval counters and active observations.",
+    "Warm baseline elapsed_s=0 is the harness-assigned baseline just before starting the steady Instant; Drop/reopen have no usable main-reader elapsed timestamp.",
+    "This run is not release performance, multi-HCA scaling, fault recovery, or FFI evidence."
+  ],
+  "evidence_root": "work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/soak/long-v3-final"
+}

@@ -1,0 +1,8 @@
+{
+  "frozen_run": "lifetime2000",
+  "full_matrix_verified": true,
+  "expected_frames": 4000,
+  "expected_late_eof": 0,
+  "expected_held_success_ack": 0,
+  "fixed_control_key_hashes": {}
+}

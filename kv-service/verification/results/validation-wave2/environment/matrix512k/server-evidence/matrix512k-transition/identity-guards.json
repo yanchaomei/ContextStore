@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-28T19:33:09.148917+00:00",
+  "guards": {
+    "server": {
+      "pid": 3940563,
+      "start_ticks": "313133088",
+      "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+      "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+      "command": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/contextstore-server --config /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/server.toml --log-level info"
+    },
+    "redis": {
+      "pid": 3940507,
+      "start_ticks": "313133078",
+      "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c",
+      "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/redis",
+      "command": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server 127.0.0.1:26579"
+    }
+  },
+  "stops": {}
+}

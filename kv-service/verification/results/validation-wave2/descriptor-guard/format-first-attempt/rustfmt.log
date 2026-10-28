@@ -1,0 +1,48 @@
+Diff in /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/src/kv-service/server/src/rdma/server.rs:1735:
+             Ok(Some((bytes, _post_us, _poll_us))) => (true, bytes, 1u32),
+             Ok(None) => (false, 0u64, 0u32),
+             Err(e) => descriptor_get_fallback(e, || {
+-                Ok(match kv_ctx.storage.get_chunks_with_meta(&kv_key, &active_meta) {
+-                    Ok(Some((segments, _meta))) => {
+-                        let (found, bytes, chunks, _reg_post_us, _poll_us) = serve_get_fallback(
+-                            rdma,
+-                            qp,
+-                            client_cq,
+-                            &segments,
+-                            req.dst_addr,
+-                            req.dst_rkey,
+-                            req.max_size,
+-                        )?;
+-                        (found, bytes, chunks)
+-                    }
+-                    Ok(None) => (false, 0u64, 0u32),
+-                    Err(e2) => {
+-                        tracing::warn!("RDMA descriptor GET fallback failed: {}", e2);
+-                        (false, 0u64, 0u32)
+-                    }
+-                })
++                Ok(
++                    match kv_ctx.storage.get_chunks_with_meta(&kv_key, &active_meta) {
++                        Ok(Some((segments, _meta))) => {
++                            let (found, bytes, chunks, _reg_post_us, _poll_us) =
++                                serve_get_fallback(
++                                    rdma,
++                                    qp,
++                                    client_cq,
++                                    &segments,
++                                    req.dst_addr,
++                                    req.dst_rkey,
++                                    req.max_size,
++                                )?;
++                            (found, bytes, chunks)
++                        }
++                        Ok(None) => (false, 0u64, 0u32),
++                        Err(e2) => {
++                            tracing::warn!("RDMA descriptor GET fallback failed: {}", e2);
++                            (false, 0u64, 0u32)
++                        }
++                    },
++                )
+             })?,
+         },
+     };

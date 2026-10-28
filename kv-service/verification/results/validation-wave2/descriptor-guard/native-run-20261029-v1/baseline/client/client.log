@@ -1,0 +1,7 @@
+
+running 1 test
+{"private_target_bytes":8192,"controlled_eof":true,"target_unchanged_after_server_close":true,"fresh_exact_read_before":true,"fresh_exact_read_after":true}
+test descriptor_get_retirement_keeps_private_target_and_fresh_reads_correct ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+

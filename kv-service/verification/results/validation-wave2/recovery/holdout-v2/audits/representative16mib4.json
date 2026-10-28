@@ -1,0 +1,62 @@
+{
+  "matrix_validation": {
+    "frozen_run": "representative16mib4",
+    "full_matrix_verified": true,
+    "expected_frames": 12,
+    "expected_late_eof": 4,
+    "expected_held_success_ack": 0,
+    "fixed_control_key_hashes": {
+      "native-recovery-2026102946-2": "532c75f2d8b3e04e"
+    }
+  },
+  "client_log": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/client/representative16mib4/run.log.gz",
+  "client_sha256": "34b527f3c26705a958a9e7bf26099e75b70e479b039b90c6578f359f1d9ac653",
+  "server_log": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/server/large-server.log",
+  "server_sha256": "6687dddc3c7a3d2824f3698a31fd48b7561460af7b81608047c6831bd6bfb3c5",
+  "operations": 4,
+  "mode_counts": {
+    "direct=false,pooled=false,control=F2,cut=-": 1,
+    "direct=false,pooled=true,control=F2,cut=-": 1,
+    "direct=true,pooled=false,control=F2,cut=-": 1,
+    "direct=true,pooled=true,control=F2,cut=-": 1
+  },
+  "native_frames": 12,
+  "late_eof_requests": 4,
+  "exact_peer_and_key_wr_retirements": 4,
+  "server_success_ack_held_until_client_timeout": 0,
+  "server_not_found_used_as_late_write_proof": 0,
+  "proof": [
+    {
+      "op": 0,
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102946-2",
+      "exact_peer": "10.81.1.2:52088",
+      "server_terminal_line": 49,
+      "server_wr_failure": "2026-10-28T20:50:25.228862Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-recovery-2026102946-2 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+      "server_terminal": "2026-10-28T20:50:25.230360Z  WARN RDMA client 10.81.1.2:52088 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+    },
+    {
+      "op": 1,
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102946-2",
+      "exact_peer": "10.81.1.2:42130",
+      "server_terminal_line": 60,
+      "server_wr_failure": "2026-10-28T20:50:59.182998Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-recovery-2026102946-2 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+      "server_terminal": "2026-10-28T20:50:59.184266Z  WARN RDMA client 10.81.1.2:42130 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+    },
+    {
+      "op": 2,
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102946-2",
+      "exact_peer": "10.81.1.2:54980",
+      "server_terminal_line": 74,
+      "server_wr_failure": "2026-10-28T20:51:34.369386Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-recovery-2026102946-2 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+      "server_terminal": "2026-10-28T20:51:34.370647Z  WARN RDMA client 10.81.1.2:54980 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+    },
+    {
+      "op": 3,
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102946-2",
+      "exact_peer": "10.81.1.2:46752",
+      "server_terminal_line": 85,
+      "server_wr_failure": "2026-10-28T20:52:08.451715Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=17:recovery-campaignnative-recovery-2026102946-2 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+      "server_terminal": "2026-10-28T20:52:08.452904Z  WARN RDMA client 10.81.1.2:46752 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "frozen_run": "representative16mib4",
+  "full_matrix_verified": true,
+  "expected_frames": 12,
+  "expected_late_eof": 4,
+  "expected_held_success_ack": 0,
+  "fixed_control_key_hashes": {
+    "native-recovery-2026102946-2": "532c75f2d8b3e04e"
+  }
+}

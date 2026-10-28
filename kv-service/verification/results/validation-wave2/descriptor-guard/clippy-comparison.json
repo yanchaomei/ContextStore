@@ -1,0 +1,16 @@
+{
+  "default": {
+    "candidate_unique_diagnostics": 31,
+    "baseline_unique_diagnostics": 31,
+    "new_diagnostics": [],
+    "removed_diagnostics": [],
+    "comparison_complete": true
+  },
+  "rdma": {
+    "candidate_unique_diagnostics": 53,
+    "baseline_unique_diagnostics": 53,
+    "new_diagnostics": [],
+    "removed_diagnostics": [],
+    "comparison_complete": true
+  }
+}

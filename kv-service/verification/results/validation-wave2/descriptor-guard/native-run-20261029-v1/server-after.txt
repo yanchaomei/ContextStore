@@ -1,0 +1,15 @@
+2026-10-28T21:04:07Z
+    636       1 S    7361 /usr/bin/redis-server 127.0.0.1:6379
+    953       1 S    7329 redis-server 127.0.0.1:26379
+    958       1 S    7329 /home/railtest/cswave1/bin/contextstore-server --config /home/railtest/cswave1/wave2/server.toml --log-level info
+   1092       1 S    7192 redis-server 127.0.0.1:26479
+   1097       1 S    7191 /home/railtest/cswave1/bin/contextstore-server --config /home/railtest/cswave1/wave2/small/server.toml --log-level info
+dev rxe0 mrn 0 mrlen 67108864 pdn 1 pid 965 comm contextstore-se 
+dev rxe0 mrn 1 mrlen 67108864 pdn 2 pid 1104 comm contextstore-se 
+dev rxe1 mrn 0 mrlen 67108864 pdn 1 pid 965 comm contextstore-se 
+dev rxe1 mrn 1 mrlen 67108864 pdn 2 pid 1104 comm contextstore-se 
+link rxe0/1 lqpn 1 type GSI state RTS sq-psn 0 comm [ib_core] 
+link rxe1/1 lqpn 1 type GSI state RTS sq-psn 0 comm [ib_core] 
+4a6458a6a2183b9db110d893748673e4591839b97f087b6e57949c325ab77902  native-frozen-bin/baseline-server-debug-rdma
+580fd1cbf62c69dc4f2a1edc726b64b51a50934f6ca99b60ef8dee7805e2a418  native-frozen-bin/candidate-server-debug-rdma
+aff9592c1690d3625997b09e7b4c93658eb2ca5195d07bd26a5fc12a72e2d896  server.toml

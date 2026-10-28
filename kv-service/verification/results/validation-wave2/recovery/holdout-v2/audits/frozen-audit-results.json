@@ -1,0 +1,37 @@
+[
+  {
+    "suite": "f2-recovery1000",
+    "returncode": 1,
+    "log": "f2-recovery1000-frozen-audit.log"
+  },
+  {
+    "suite": "matched-controls240",
+    "returncode": 0,
+    "log": "matched-controls240-frozen-audit.log"
+  },
+  {
+    "suite": "cuts480",
+    "returncode": 0,
+    "log": "cuts480-frozen-audit.log"
+  },
+  {
+    "suite": "lifetime2000",
+    "returncode": 0,
+    "log": "lifetime2000-frozen-audit.log"
+  },
+  {
+    "suite": "publication160",
+    "returncode": 0,
+    "log": "publication160-frozen-audit.log"
+  },
+  {
+    "suite": "admission24",
+    "returncode": 0,
+    "log": "admission24-frozen-audit.log"
+  },
+  {
+    "suite": "representative16mib4",
+    "returncode": 0,
+    "log": "representative16mib4-frozen-audit.log"
+  }
+]

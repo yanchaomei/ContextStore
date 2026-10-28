@@ -1,0 +1,41 @@
+{
+  "matrix": {
+    "baseline_bad_tag_1m_2rails": 2,
+    "candidate_1m_8m_bad_tag_timeout_2rails": 8,
+    "candidate_put_cq_2rails": 2
+  },
+  "total_cases": 12,
+  "fixture": {
+    "type": "two KVM guests real RXE Verbs, same physical host; correctness only",
+    "servers": [
+      "10.81.1.1:25453",
+      "10.82.1.1:25454"
+    ],
+    "devices": [
+      "rxe0",
+      "rxe1"
+    ],
+    "gid_index": 1,
+    "server_cq_timeout_ms": 1000,
+    "original_server_cq_timeout_ms": 30000,
+    "put_probe_client_wait_seconds": [
+      30,
+      40
+    ],
+    "server_stream_chunk_bytes": 1048576,
+    "original_server_stream_chunk_bytes": 16777216
+  },
+  "negative_control": "Exact old baseline only in --unsafe-baseline bad_tag child; external MR and buffer kept registered/alive until server terminal reply or EOF. No UAF.",
+  "candidate_get": "Exit 0, exact sentinel hash, complete seed classic/external GET and one same native handle reconnect PUT/GET, strict error/reuse/forward/server terminal/check order.",
+  "candidate_put_cq": "Exit 0; delay actual provider WC until QP destroyed; first genuine status 0 WC observed before return; 3 same-MR same-handle PUT/GET rounds; 4 total status 0 WCs, no QPN inequality assumption.",
+  "rules": [
+    "No runtime/probe/Python source changes",
+    "No Rust build, git commit or server/network configuration changes",
+    "LD_PRELOAD only per PUT-CQ child",
+    "Initial baseline/candidate smoke must pass before remaining matrix",
+    "Original 12 raw cases remain untouched",
+    "No Python full suite rerun claim",
+    "Snapshot server PID, exe, config, relevant process environment and full appended log range before and after"
+  ],
+  "source_freeze": "freeze.json"
+}

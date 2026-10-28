@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-28T19:11:59.341157+00:00",
+  "transfers": [
+    {
+      "name": "server",
+      "source": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_4",
+        "tar -chf - -C /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029 bin/contextstore-server"
+      ],
+      "dest": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_5",
+        "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029"
+      ],
+      "source_exit": 0,
+      "dest_exit": 0
+    },
+    {
+      "name": "redis",
+      "source": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_4",
+        "tar -chf - -C /usr/bin redis-server redis-cli"
+      ],
+      "dest": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_5",
+        "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin"
+      ],
+      "source_exit": 0,
+      "dest_exit": 0
+    },
+    {
+      "name": "redis_private_libs",
+      "source": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_4",
+        "tar -chf - -C /lib/x86_64-linux-gnu liblua5.1-cjson.so.0 liblua5.1-bitop.so.0 liblua5.1.so.0 libjemalloc.so.2 libhiredis.so.0.14"
+      ],
+      "dest": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_5",
+        "tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib"
+      ],
+      "source_exit": 0,
+      "dest_exit": 0
+    },
+    {
+      "name": "baseline_clients",
+      "source": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_2",
+        "tar -chf - -C /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-provider-baseline/debug/deps rail_read_e2e-d6145e305ed0b23e rdma_e2e-8ac8901d52660419"
+      ],
+      "dest": [
+        "ssh",
+        "-oBatchMode=yes",
+        "-oConnectTimeout=10",
+        "SKV_1",
+        "ssh -oBatchMode=yes skv-node6 'tar -xf - -C /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin'"
+      ],
+      "source_exit": 0,
+      "dest_exit": 0
+    }
+  ]
+}

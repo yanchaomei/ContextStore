@@ -1,0 +1,6 @@
+/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v2/rail_runtime_soak: OK
+/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v2/run_runtime_soak.py: OK
+/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/source/kv-service/client-rs/tests/rail_runtime_soak.rs: OK
+/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/provider-client.env: OK
+/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/base-1c3.tar: OK
+/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-source-v2.tar.gz: OK

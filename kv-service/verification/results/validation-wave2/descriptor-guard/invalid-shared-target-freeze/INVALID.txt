@@ -1,0 +1,1 @@
+INVALID: shared Cargo target reused an identical binary across different source roots. Do not execute this pair. Fresh separate-target rebuild required.

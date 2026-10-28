@@ -1,0 +1,67 @@
+{
+  "hostname": "skv-node4",
+  "at": "2026-10-28T19:02:25.322806+00:00",
+  "kernel": "Linux skv-node4 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 \n",
+  "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.117/24 fe80::3673:5aff:fe9c:90fc/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \nens4f0           DOWN           \nveth3456c64@vethb1f3d38 DOWN           \nens4f1           UP             10.0.0.64/24 fe80::63f:72ff:fee2:59c7/64 \nvethb1f3d38@veth3456c64 LOWERLAYERDOWN \nvirbr0           DOWN           192.168.122.1/24 \nvetheffd0bc@vetha5cacc9 DOWN           \nvirbr0-nic       DOWN           \nvetha5cacc9@vetheffd0bc LOWERLAYERDOWN \nbr-94dabdf1da46  UP             172.21.0.1/16 fe80::42:4cff:fe34:4ce7/64 \nveth6b0e467@veth9b5fdaa DOWN           \nbr-be5fa901ab3b  DOWN           172.24.0.1/16 \nveth9b5fdaa@veth6b0e467 LOWERLAYERDOWN \nbr-2a535041007b  DOWN           172.20.0.1/16 \nveth7d382ec@veth22ce5ca DOWN           \nbr-46c15722b3e9  DOWN           172.19.0.1/16 \nveth22ce5ca@veth7d382ec LOWERLAYERDOWN \ndocker_gwbridge  DOWN           172.18.0.1/16 \ndocker0          UP             172.17.0.1/24 fe80::42:1eff:fe81:d407/64 \nbr-83da69e4fa49  UP             172.22.0.1/16 fe80::42:30ff:fe15:f91e/64 \nbr-8cb63b13892d  DOWN           172.16.0.1/16 \nveth4d9af9a@if18 UP             fe80::64ef:20ff:fe52:bd82/64 \nveth453c259@if20 UP             fe80::a41a:cbff:fe84:4909/64 \nvethee53980@if22 UP             fe80::78ac:b6ff:fed9:3c70/64 \nvethc2cdc37@if24 UP             fe80::5446:deff:fee1:8761/64 \nveth7efc451@if26 UP             fe80::d8cd:1dff:fe1f:64a7/64 \nvethcab473f@if28 UP             fe80::d847:88ff:fea2:8832/64 \nveth9f7e1d8@if30 UP             fe80::f82b:55ff:feba:4f31/64 \nveth33a72c3@if32 UP             fe80::6c46:f0ff:fea2:7616/64 \nveth90d2813@if34 UP             fe80::a476:1fff:fe86:7406/64 \nvethdf09900@if36 UP             fe80::e06d:7aff:fe62:77f7/64 \nveth3cca8ff@if38 UP             fe80::f476:b2ff:fedc:a072/64 \nveth7a2257c@if40 UP             fe80::3c48:35ff:fe7d:df93/64 \nveth507b132@if42 UP             fe80::9a:27ff:fe23:4899/64 \nvethc551221@if44 UP             fe80::4426:92ff:fe6a:8cc6/64 \nveth9c131e8@if48 UP             fe80::2ca5:b7ff:fec5:95fd/64 \nveth8a9c586@if50 UP             fe80::5075:5aff:fed2:58af/64 \nvethca9913e@if52 UP             fe80::b7:d5ff:fee0:63f/64 \nvethf80080b@if10461243 UP             fe80::64d9:cff:fe14:b52/64 \nvethb4c62db@if10461245 UP             fe80::44cb:d5ff:feb7:3cc9/64 \nvethbd5f2bc@if10461247 UP             fe80::e0fa:ebff:fe2c:a110/64 \nvetha619fda@if10461249 UP             fe80::7832:faff:fefc:19d6/64 \nveth7bfb111@if10461253 UP             fe80::81c:feff:fe2b:ac26/64 \nveth4b803aa@if10461255 UP             fe80::9037:ebff:fe6b:a9a/64 \nvethd9d6901@if84 UP             fe80::6c8d:eeff:fedb:572a/64 \nveth385ff39@if10461269 UP             fe80::b0da:f9ff:fe27:c215/64 \nflannel.1        UNKNOWN        10.244.2.0/32 fe80::308a:13ff:fe81:2aff/64 \nveth17c3d03@if10461273 UP             fe80::f8f3:dff:fe87:3687/64 \nveth03fa303@if10461275 UP             fe80::b897:1ff:fe3c:7383/64 \nvethf5da6a1@if10461277 UP             fe80::1cc1:42ff:feb8:bf9c/64 \nveth7b8adaa@if10461279 UP             fe80::40a3:50ff:fe10:8c38/64 \nvethdf3eb22@if10461289 UP             fe80::6468:aaff:febe:3352/64 \nveth077d787@if10461305 UP             fe80::b4c1:feff:fe3f:5d08/64 \n",
+  "devices": [
+    {
+      "name": "mlx5_1",
+      "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+      "numa_node": "1",
+      "ports": [
+        {
+          "id": "1",
+          "state": "4: ACTIVE",
+          "phys_state": "5: LinkUp",
+          "gids": {
+            "3": {
+              "value": "0000:0000:0000:0000:0000:ffff:0a00:0040",
+              "type": "RoCE v2",
+              "netdev": "ens4f1"
+            },
+            "1": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c7",
+              "type": "RoCE v2",
+              "netdev": "ens4f1"
+            },
+            "2": {
+              "value": "0000:0000:0000:0000:0000:ffff:0a00:0040",
+              "type": "IB/RoCE v1",
+              "netdev": "ens4f1"
+            },
+            "0": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c7",
+              "type": "IB/RoCE v1",
+              "netdev": "ens4f1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "mlx5_0",
+      "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+      "numa_node": "1",
+      "ports": [
+        {
+          "id": "1",
+          "state": "1: DOWN",
+          "phys_state": "3: Disabled",
+          "gids": {
+            "1": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c6",
+              "type": "RoCE v2",
+              "netdev": "ens4f0"
+            },
+            "0": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c6",
+              "type": "IB/RoCE v1",
+              "netdev": "ens4f0"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

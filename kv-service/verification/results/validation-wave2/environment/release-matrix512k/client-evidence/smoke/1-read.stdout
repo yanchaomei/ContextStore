@@ -1,0 +1,15 @@
+object_identity,generation=1,layout_version=1,stripe_count=2,chunk_size=524288,handle_xxh3=a2251d52ca7a75e2,etag_xxh3=5fce01eafd37f7a1,descriptor_xxh3=2732f9d88178dcf8,placement_xxh3=521a13b790c424ba
+mode,direct_staging=false
+mode,contiguous_schedule=false
+mode,connection_pool_size=0,recovery_timeout_ms=None,verify_pattern=true,warmup=0,iterations=1,concurrency=1
+plan_assignment,id=single,stripes=[0, 1],bytes=1048576
+expected_pattern,pattern=index_mod_251,bytes=1048576,xxh3=c061e1dcd62f6c77
+route,id=single,device=mlx5_1,port=1,gid=3,weight=1,advertised=10.0.0.65:25553,listener=10.0.0.65:25553
+pool_stats,phase=before_warmup,enabled=false
+pool_stats,phase=after_warmup,enabled=false
+sample,environment=physical,rails=1,iteration=1,bytes=1048576,latency_us=19622,gib_per_s=0.050,xxh3=c061e1dcd62f6c77
+summary,environment=physical,rails=1,bytes_per_iter=1048576,iters=1,median_us=19622,cpu_user_us=120,cpu_system_us=11374,peak_rss_kb=9364,rail_bytes=[1048576]
+mode_effective,one=1,packed_greedy=0,packed_contiguous=0,direct=0
+pool_stats,phase=final,enabled=false
+rail_stats,id=single,device=mlx5_1,listener=10.0.0.65:25553,numa=Some(0),pci=Some("0000:5e:00.1"),healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=1048576,avg_us=17742,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=1048576,registered_bytes_reserved=0,peak_registered_bytes=1048576
+object_identity_after,generation=1,layout_version=1,stripe_count=2,chunk_size=524288,handle_xxh3=a2251d52ca7a75e2,etag_xxh3=5fce01eafd37f7a1,descriptor_xxh3=2732f9d88178dcf8,placement_xxh3=521a13b790c424ba

@@ -1,0 +1,15 @@
+9e9511d97ae6415d3a7c7d7db550c1f01a79e2068087275c7c4d299ebb089b1d  native-frozen-bin/descriptor-guard-probe
+csw1-rxe-client
+Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+cb9dd8a8-8b57-459f-b5a6-b90f7a8a0407
+0000:0000:0000:0000:0000:ffff:0a51:0102
+	linux-vdso.so.1 (0x00007fff439ce000)
+	libibverbs.so.1 => /lib/x86_64-linux-gnu/libibverbs.so.1 (0x00007ff1de978000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007ff1de958000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007ff1de953000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ff1de86c000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007ff1de867000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ff1de63c000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007ff1df020000)
+	libnl-route-3.so.200 => /lib/x86_64-linux-gnu/libnl-route-3.so.200 (0x00007ff1de5b9000)
+	libnl-3.so.200 => /lib/x86_64-linux-gnu/libnl-3.so.200 (0x00007ff1de596000)

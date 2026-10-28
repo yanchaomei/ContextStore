@@ -1,0 +1,12 @@
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/src/kv-service/server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.81s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/target/debug/deps/contextstore_server-27874420ca6082fc)
+
+running 4 tests
+test rdma::server::tests::descriptor_get_allows_fallback_before_write_submission ... ok
+test rdma::server::tests::descriptor_get_retires_uncertain_write_without_fallback ... ok
+test rdma::wire::tests::descriptor_get_req_empty_stripes_keeps_legacy_tag ... ok
+test rdma::wire::tests::descriptor_get_req_stripe_subset_round_trips ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 100 filtered out; finished in 0.00s
+

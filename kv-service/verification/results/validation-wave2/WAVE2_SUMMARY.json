@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-29",
+  "status": "ACCEPTED_SCOPED_RUNTIME_EVALUATION",
+  "runtime_core_commit": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "source_binding": "This Git snapshot adds test-only validation code and the reviewed full-descriptor server guard. Each campaign records its exact measured source/binary/profile separately; final integration input manifest binds the current working tree.",
+  "release_performance": {
+    "independent_review": "reviews/release-performance-review.md",
+    "primary_results": "campaign-release/ppt-performance-table.json",
+    "primary_processes": 120,
+    "diagnostic_processes": 6,
+    "new_seed_processes": 9,
+    "primary_requests": 10500,
+    "steady_requests": 9000,
+    "startup_requests": 1500,
+    "diagnostic_requests": 36,
+    "scope": "Single physical HCA per endpoint, buffered tier_a, no OS page-cache flush, default release server. Pool toggle only within each pair. Three object keys per size have the same deterministic content distribution.",
+    "debug_results_retained_separately": "campaign/ppt-performance-table.json"
+  },
+  "native_recovery": {
+    "independent_review": "reviews/recovery-final-review.md",
+    "operations": 3908,
+    "exact_publications": 3244,
+    "expected_atomic_rejections": 664,
+    "frames": 9508,
+    "old_write_terminal_pairs": 1660,
+    "holdout_recoveries": 1000,
+    "matched_F1_requests_bytes": 83886080,
+    "matched_F2_requests_bytes": 41943040,
+    "scope": "Requested retry payload comparison, not wire bytes or latency improvement; capability is a valid control-plane response injection.",
+    "original_frozen_auditor": "6 PASS / 1 RED preserved; supplemental independent connection-instance audit accepted all 1000 holdout operations and resolved 12 normal TCP source-port reuse groups."
+  },
+  "soak": {
+    "independent_review": "reviews/soak-final-review.md",
+    "steady_seconds": 7200.28935,
+    "steady_reads": 71960,
+    "steady_logical_bytes": 603644231680,
+    "total_reads": 72044,
+    "error_count": 0,
+    "post_first_drop_fd": 11,
+    "baseline_fd": 11,
+    "warm_rss_kib": 78084,
+    "peak_quiescent_rss_kib": 87040,
+    "final_quiescent_rss_kib": 86316,
+    "scope": "One continuous Reader, test profile and debug provider; quiescent resource samples plus bounded active aggregates. Native PID-owned QP/CQ/MR attribution unavailable. Second Drop lacks a separate resource snapshot."
+  },
+  "descriptor_guard": {
+    "independent_review": "reviews/descriptor-guard-quality.md",
+    "source_sha256": "d7df834df7d4ffb86a04725a5055069cfadca2b253fc37ea092028fa50bd5b71",
+    "native_scope": "Safe fixed Rust client, matched debug+rdma servers, 8 KiB full-object Descriptor GET; baseline fallback once, candidate zero with original retirement error.",
+    "receipt": "descriptor-guard/native-run-20261029-v1/native-receipt.json"
+  },
+  "final_integration": {
+    "receipt": "final-integration/final-integration-receipt.json",
+    "state": "PASS_FINAL_INTEGRATION_WITH_KNOWN_SERVER_STRICT_CLIPPY_FAILURE",
+    "default_workspace_passed": 86,
+    "rdma_workspace_passed": 209,
+    "rdma_workspace_ignored": 36,
+    "client_strict_clippy": "PASS default and RDMA all-targets",
+    "server_strict_clippy": "FAIL with unchanged baseline diagnostics:31 default /53 full RDMA unique,new0; no whole-repository clean-lint claim"
+  },
+  "remaining_or_unavailable": [
+    "Legacy FFI 12-case rerun: executor safety block;0 accepted current cases, historical 2026-10-16 evidence preserved",
+    "Two independent ACTIVE physical paths on one worker unavailable across all seven inventoried SKV nodes",
+    "MR arena, adaptive scheduling, new Python multi-rail ABI and asynchronous retirement not implemented or experimentally claimed",
+    "8-24 hour endurance, real-consumer traces and GPU inference end-to-end not run"
+  ],
+  "publication_rule": "Do not call all roadmap experiments complete; this snapshot completes the scoped available-target evaluation of implemented pooling and recovery, with the above explicit gaps."
+}

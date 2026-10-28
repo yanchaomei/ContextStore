@@ -1,0 +1,231 @@
+{
+  "status": "SUPPLEMENTARY_EVIDENCE_PENDING_INDEPENDENT_REVIEW",
+  "frozen_auditor_preserved": true,
+  "frozen_generator_binary_and_thresholds_unchanged": true,
+  "original_auditor_failure": "auditor assumes one global server match per canonical key and peer; 12 such pairs occur twice after legitimate TCP source port reuse",
+  "original_contract": "raw server WR completion failure paired to exact peer and canonical key; no event double-counting",
+  "supplemental_test": "all 1000 captured old frames are paired in their strictly serial operation order with all 1000 matching-key server terminals in log/timestamp order; every pair independently requires exact key+peer equality and immediately preceding matching-key WR completion timeout; every server event used exactly once; no omissions/extras",
+  "source_snapshot": "recovery_campaign.rs",
+  "source_sha256": "b0670c77df08a67884ee4759175a2d55b7b75eb6d763901f4124161e6dcea087",
+  "source_barriers": [
+    {
+      "line": 896,
+      "reason": "control campaign executes its operations in a serial loop"
+    },
+    {
+      "line": 637,
+      "reason": "old-terminal flag is set only after old real server EOF and receipt record"
+    },
+    {
+      "line": 648,
+      "reason": "healthy retry relay awaits old-terminal before forwarding the retry request"
+    },
+    {
+      "line": 945,
+      "reason": "caller awaits old-terminal before final checks and next operation"
+    },
+    {
+      "line": 1008,
+      "reason": "operation counter advances only after terminal, bytes, identity and budget assertions"
+    }
+  ],
+  "full_stream_bijection_pairs": 1000,
+  "same_key_peer_reuse_groups": [
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-0",
+      "peer": "10.81.1.2:54070",
+      "occurrences": [
+        {
+          "op": 118,
+          "server_terminal_line": 4951,
+          "unix_seconds": 1793218312.98901
+        },
+        {
+          "op": 852,
+          "server_terminal_line": 13115,
+          "unix_seconds": 1793219147.559531
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-2",
+      "peer": "10.81.1.2:48176",
+      "occurrences": [
+        {
+          "op": 176,
+          "server_terminal_line": 5763,
+          "unix_seconds": 1793218381.938941
+        },
+        {
+          "op": 450,
+          "server_terminal_line": 8396,
+          "unix_seconds": 1793218697.362079
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-2",
+      "peer": "10.81.1.2:48228",
+      "occurrences": [
+        {
+          "op": 180,
+          "server_terminal_line": 5819,
+          "unix_seconds": 1793218386.732681
+        },
+        {
+          "op": 736,
+          "server_terminal_line": 12106,
+          "unix_seconds": 1793219017.771332
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-0",
+      "peer": "10.81.1.2:45656",
+      "occurrences": [
+        {
+          "op": 264,
+          "server_terminal_line": 6908,
+          "unix_seconds": 1793218486.116527
+        },
+        {
+          "op": 566,
+          "server_terminal_line": 9726,
+          "unix_seconds": 1793218827.47114
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-2",
+      "peer": "10.81.1.2:42542",
+      "occurrences": [
+        {
+          "op": 290,
+          "server_terminal_line": 7116,
+          "unix_seconds": 1793218515.288194
+        },
+        {
+          "op": 716,
+          "server_terminal_line": 11826,
+          "unix_seconds": 1793218996.253514
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-1",
+      "peer": "10.82.1.2:51350",
+      "occurrences": [
+        {
+          "op": 413,
+          "server_terminal_line": 8100,
+          "unix_seconds": 1793218655.987239
+        },
+        {
+          "op": 583,
+          "server_terminal_line": 9964,
+          "unix_seconds": 1793218846.286741
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-1",
+      "peer": "10.82.1.2:37692",
+      "occurrences": [
+        {
+          "op": 437,
+          "server_terminal_line": 8292,
+          "unix_seconds": 1793218682.538642
+        },
+        {
+          "op": 687,
+          "server_terminal_line": 11420,
+          "unix_seconds": 1793218963.140552
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-1",
+      "peer": "10.82.1.2:59744",
+      "occurrences": [
+        {
+          "op": 571,
+          "server_terminal_line": 9796,
+          "unix_seconds": 1793218833.028584
+        },
+        {
+          "op": 663,
+          "server_terminal_line": 11084,
+          "unix_seconds": 1793218936.094239
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-0",
+      "peer": "10.81.1.2:35796",
+      "occurrences": [
+        {
+          "op": 662,
+          "server_terminal_line": 11070,
+          "unix_seconds": 1793218935.023739
+        },
+        {
+          "op": 760,
+          "server_terminal_line": 12379,
+          "unix_seconds": 1793219044.478831
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-3",
+      "peer": "10.82.1.2:56566",
+      "occurrences": [
+        {
+          "op": 791,
+          "server_terminal_line": 12627,
+          "unix_seconds": 1793219080.430199
+        },
+        {
+          "op": 887,
+          "server_terminal_line": 13395,
+          "unix_seconds": 1793219186.03367
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-1",
+      "peer": "10.82.1.2:56582",
+      "occurrences": [
+        {
+          "op": 793,
+          "server_terminal_line": 12643,
+          "unix_seconds": 1793219082.572344
+        },
+        {
+          "op": 889,
+          "server_terminal_line": 13411,
+          "unix_seconds": 1793219188.194442
+        }
+      ]
+    },
+    {
+      "canonical_key": "17:recovery-campaignnative-recovery-2026102934-3",
+      "peer": "10.82.1.2:33200",
+      "occurrences": [
+        {
+          "op": 819,
+          "server_terminal_line": 12851,
+          "unix_seconds": 1793219111.528237
+        },
+        {
+          "op": 847,
+          "server_terminal_line": 13075,
+          "unix_seconds": 1793219142.066161
+        }
+      ]
+    }
+  ],
+  "proof_file": "audits/f2-recovery1000-ordered-terminal-bijection.json",
+  "frozen_failure_log": "audits/f2-recovery1000-frozen-audit.log",
+  "independent_review_required": true,
+  "forbidden_inference": "do not describe the original frozen auditor as passed, and do not treat source ports or QPN/rkey values as globally unique identifiers"
+}

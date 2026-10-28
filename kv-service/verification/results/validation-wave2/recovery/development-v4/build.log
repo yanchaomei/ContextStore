@@ -1,0 +1,3 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/recovery-source/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.49s
+  Executable unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/contextstore_client_rs-da9b35b4bb2023c7)

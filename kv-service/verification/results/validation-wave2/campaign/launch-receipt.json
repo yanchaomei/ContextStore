@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-28T19:43:40.124878+00:00",
+  "state": "LAUNCH_DISPATCHED",
+  "host": "skv-node6",
+  "session": "wave2_matrix_perf_v2",
+  "remote_control": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/performance-control-v2",
+  "remote_output": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/performance-20261029-v2",
+  "code_sha256": {
+    "run_matrix.py": "f5d42d23d3d18ee1aeb48d3f157b7ddbca0230a3b523095e8e47fbd4e30c81db",
+    "analyze_matrix.py": "5bf61d58edd18430c835e109aa897c44d5a2d57484d878f1b900bcfe18bc1e8b",
+    "matrix_snapshot.py": "1fed9657bf97b9641e233ed1ee57a2344c04b18b7c901a5d9fa196b0687c804d"
+  }
+}

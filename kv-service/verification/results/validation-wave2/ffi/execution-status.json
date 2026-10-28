@@ -1,0 +1,10 @@
+{
+  "status": "NOT_EXECUTED_EXECUTOR_SAFETY_BLOCK",
+  "requested_matrix_cases": 12,
+  "accepted_current_cases": 0,
+  "executor_response": "This content was flagged for possible cybersecurity risk.",
+  "boundary": "The executor did not identify a specific tool action. The task was not retried through another executor or through a bypass. The freeze and contract are preparation records, not execution receipts.",
+  "read_only_followup": "Checked the new RXE client guest process list; no ffi_rxe, run-rxe or ffi-matrix process remained. No experiment was launched in that check.",
+  "preserved_prior_evidence": "kv-service/verification/results/ffi-lifecycle-20261016 contains the original accepted 12-case campaign and exact-payload negative controls. They retain their original version/date and are not counted as new runs.",
+  "continuing_scope": "Independent fixed-runtime R0/R1 measurements, F0/F1/F2 tests, native cancellation/version/deadline cases, repeat cycles, and healthy stability soak continue under their own contracts."
+}

@@ -1,0 +1,1 @@
+Old processes exited; ss -lntp showed no listeners. Bare bind probe saw Redis TIME_WAIT after SHUTDOWN. Updated probe to SO_REUSEADDR, matching restart semantics. First seed attempt ran while no server was up and failed to connect; retained under S6 matrix512k. No benchmark reads completed in that failed attempt.

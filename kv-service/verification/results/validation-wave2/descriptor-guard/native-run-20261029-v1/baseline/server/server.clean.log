@@ -1,0 +1,26 @@
+2026-10-28T21:03:02.771350Z  INFO starting ContextStore KV Service v0.1.0...
+2026-10-28T21:03:02.771401Z  INFO config file: /home/railtest/wave2-descriptor-guard/server.toml
+2026-10-28T21:03:02.772882Z  INFO loaded config: 2 storage device(s), L1 capacity 16 MB, I/O executor = tier_a
+2026-10-28T21:03:02.782591Z  INFO gRPC listening on: 10.81.1.1:55451
+2026-10-28T21:03:02.782626Z  INFO CS_RDMA_SLAB_MB override rdma_slab_size_mb=16
+2026-10-28T21:03:02.782667Z  INFO CS_RDMA_DEVICES override: 1 NIC(s) ["rxe0@10.81.1.1:55453"]
+2026-10-28T21:03:02.782684Z  INFO RDMA tier enabled: 1 NIC(s), primary listener=10.81.1.1:55453
+2026-10-28T21:03:02.784937Z  INFO RdmaContext: opened device=rxe0 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 51, 01, 01]
+2026-10-28T21:03:02.784971Z  INFO opened NIC 0: dev=rxe0 port=1 gid_index=1
+2026-10-28T21:03:02.785033Z  INFO SlabBacking: mmap 16777216 bytes at 0x7faaa0dff000 (huge_pages=false)
+2026-10-28T21:03:02.790896Z  INFO RdmaSlab registered: 16777216 bytes (16 MB) on 1 NIC(s), lkeys=["0x48f"] rkeys=["0x48f"]
+2026-10-28T21:03:02.790948Z  INFO RDMA slab injected into MemoryTier (16 MB, 1 NIC)
+2026-10-28T21:03:02.790983Z  INFO RDMA server listening on 10.81.1.1:55453 (nic_idx=0 dev=rxe0 port=1 gid_index=1)
+2026-10-28T21:03:03.389877Z  INFO RDMA client connected: 10.81.1.2:40288 (nic_idx=0)
+2026-10-28T21:03:03.390119Z  INFO RcQp created: qpn=17 psn=0x9a0a22
+2026-10-28T21:03:03.390248Z  INFO RDMA QP established: local_qpn=17 remote_qpn=17
+2026-10-28T21:03:03.391090Z  INFO MISS_DETAIL wall_us=1793221383390621 key=16:descriptor-guarddescriptor-guard-1793221383353203862 bytes=8192 meta_us=0 alloc_us=37 stream_setup_us=87 first_stream_completion_us=148 last_stream_completion_us=148 post_done_us=180 poll_us=139 inject_us=0 n_writes=1
+2026-10-28T21:03:03.391967Z  INFO RDMA client connected: 10.81.1.2:40302 (nic_idx=0)
+2026-10-28T21:03:03.392069Z  INFO RcQp created: qpn=17 psn=0xb7e8ce
+2026-10-28T21:03:03.392141Z  INFO RDMA QP established: local_qpn=17 remote_qpn=17
+2026-10-28T21:03:03.692830Z  WARN RDMA descriptor GET slab path failed, fallback to per-chunk reg_mr: RDMA connection retired after uncertain legacy GET: poll final RDMA completions: poll_n timeout after 300ms, got 0/1
+2026-10-28T21:03:03.993321Z  WARN RDMA client 10.81.1.2:40302 (nic_idx=0) disconnected: poll_n timeout after 300ms, got 0/1
+2026-10-28T21:03:03.994202Z  INFO RDMA client connected: 10.81.1.2:40312 (nic_idx=0)
+2026-10-28T21:03:03.994360Z  INFO RcQp created: qpn=17 psn=0x9e1860
+2026-10-28T21:03:03.994453Z  INFO RDMA QP established: local_qpn=17 remote_qpn=17
+2026-10-28T21:03:03.995620Z  INFO MISS_DETAIL wall_us=1793221383995138 key=16:descriptor-guarddescriptor-guard-1793221383353203862 bytes=8192 meta_us=0 alloc_us=12 stream_setup_us=83 first_stream_completion_us=132 last_stream_completion_us=132 post_done_us=118 poll_us=251 inject_us=0 n_writes=1

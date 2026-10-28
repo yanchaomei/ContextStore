@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-10-28T20:10:53.052126+00:00",
+  "state": "RUNNING_NOT_COMPLETE",
+  "guest": "client",
+  "tmux": "cs-recovery-holdout-v2",
+  "guest_root": "/home/railtest/cswave1/wave2/recovery-holdout-v2",
+  "native_pid": 5485,
+  "native_startticks": 411189,
+  "runner_pid": 5484,
+  "runner_startticks": 411133,
+  "current_suite": "f2-recovery1000",
+  "last_completed_op": 50,
+  "completed_current_suite_observed": 51,
+  "planned_current_suite": 1000,
+  "latest_sample": {
+    "rss_kib": 23212,
+    "hwm_kib": 23316,
+    "threads": 7,
+    "file_descriptors": 19
+  },
+  "source_editing_released": true,
+  "final_receipt_requires": "all suite exit receipts, exact matrix and strict server key+peer terminal audit; formal counts not yet accepted"
+}

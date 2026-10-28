@@ -1,0 +1,49 @@
+{
+  "state": "IMPLEMENTATION_REMOTE_CHECKS_AND_NATIVE_BRANCH_REGRESSION_COMPLETE",
+  "utc": "2026-10-28T20:23:36.859246+00:00",
+  "head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "production_file": "kv-service/server/src/rdma/server.rs",
+  "production_sha256": "d7df834df7d4ffb86a04725a5055069cfadca2b253fc37ea092028fa50bd5b71",
+  "changes": [
+    "Full-object descriptor GET cold-slab failure returns the original typed RetireLegacyGet before any per-chunk fallback; the path is selected when the request has no stripe subset, including a full request for a striped layout.",
+    "The descriptor dispatch uses a narrow closure boundary so tests observe whether the fallback action occurs.",
+    "Ordinary pre-submission allocation and storage errors still invoke fallback.",
+    "QP-held source pins, RAII drop order, and striped-only client pool policy are unchanged."
+  ],
+  "red": {
+    "exit": 101,
+    "expected_failure": "an uncertain WRITE must not start another GET",
+    "source": "red-server.rs",
+    "raw_log": "logs/red.log"
+  },
+  "green": {
+    "focused_tests_passed": 4,
+    "focused_exit": 0,
+    "default_server_tests_passed": 82,
+    "default_redis_tests_included": 2,
+    "full_rdma_server_tests_passed": 114,
+    "rdma_redis_tests_included": 2,
+    "rustfmt_exit": 0,
+    "make_release_build_exit": 0
+  },
+  "clippy": {
+    "strict_status": "FAIL_WITH_UNCHANGED_BASELINE_DIAGNOSTICS",
+    "default_exit": 101,
+    "rdma_exit": 101,
+    "comparison": "clippy-comparison.json",
+    "new_unique_diagnostics": 0
+  },
+  "native": {
+    "probe_build_exit": 0,
+    "execution": "PASS_NATIVE_BRANCH_REGRESSION; independent parent review pending",
+    "profile": "debug + rdma, independently rebuilt for baseline and candidate",
+    "plan": "native-plan.json",
+    "freeze": "native-freeze.json",
+    "invalid_first_freeze": "invalid-shared-target-freeze; identical shared-target binaries rejected before any run",
+    "scope": "Full-object descriptor GET cold-slab fallback retirement guard; native coverage is one 8192-byte unstriped object per variant, not all layouts or performance.",
+    "receipt": "native-run-20261029-v1/native-receipt.json",
+    "runtime_config_sha256": "aff9592c1690d3625997b09e7b4c93658eb2ca5195d07bd26a5fc12a72e2d896"
+  },
+  "isolated_remote_root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard",
+  "scope": "No local Rust builds/tests, no guest traffic, no changes to shared fixtures, no commit/push."
+}

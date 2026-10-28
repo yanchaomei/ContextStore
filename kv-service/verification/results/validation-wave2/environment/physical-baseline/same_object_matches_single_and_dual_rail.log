@@ -1,0 +1,15 @@
+
+running 1 test
+test same_object_matches_single_and_dual_rail ... 
+thread 'same_object_matches_single_and_dual_rail' panicked at kv-service/client-rs/tests/rail_read_e2e.rs:528:10:
+dual reader: InvalidPlacement("rail IDs, listeners, and local ports must identify distinct paths")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    same_object_matches_single_and_dual_rail
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 19 filtered out; finished in 0.57s
+

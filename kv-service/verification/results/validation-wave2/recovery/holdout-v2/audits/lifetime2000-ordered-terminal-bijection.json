@@ -1,0 +1,10 @@
+{
+  "status": "LOCAL_BIJECTION_PASS_PENDING_INDEPENDENT_REVIEW",
+  "suite": "lifetime2000",
+  "frozen_auditor_returncode": 0,
+  "method": "complete serial old-frame sequence paired by occurrence rank with complete relevant server terminal sequence; every pair must match exact canonical key and peer; strict adjacent WR failure; no reused event; no omissions or extras",
+  "expected_old_requests": 0,
+  "matched_unique_server_terminals": 0,
+  "reused_key_peer_groups": [],
+  "proof": []
+}

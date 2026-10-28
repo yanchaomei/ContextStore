@@ -1,0 +1,247 @@
+{
+  "state": "PASS_FINAL_INTEGRATION_WITH_KNOWN_SERVER_STRICT_CLIPPY_FAILURE",
+  "completed_at": "2026-10-28T21:24:37.744127+00:00",
+  "source_head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "source_freeze": "local-source-freeze.json",
+  "input_manifest": "source-input-manifest.json",
+  "input_manifest_sha256": "5660f13e8ae4eb6bd000a3961a505536120e5805e2a9a092314e0aca94b693d4",
+  "input_files": 75,
+  "source_included_current_uncommitted_and_untracked": [
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs",
+    "kv-service/client-rs/tests/rail_runtime_soak.rs",
+    "kv-service/verification/audit_recovery_campaign.py",
+    "kv-service/verification/run_recovery_campaign.py",
+    "kv-service/verification/run_runtime_soak.py"
+  ],
+  "local_before_remote_before_remote_after_local_after_all_equal": true,
+  "steps": [
+    {
+      "label": "changed_rustfmt",
+      "argv": [
+        "rustfmt",
+        "--check",
+        "--edition",
+        "2021",
+        "kv-service/client-rs/src/rail_read/recovery_campaign.rs",
+        "kv-service/client-rs/src/rail_read/tests.rs",
+        "kv-service/client-rs/tests/rail_runtime_soak.rs",
+        "kv-service/server/src/rdma/server.rs"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+      "started": "2026-10-28T21:18:59.428877+00:00",
+      "timeout_seconds": 300,
+      "pid": 2918794,
+      "exit_code": 0,
+      "finished": "2026-10-28T21:18:59.644246+00:00"
+    },
+    {
+      "label": "make_build_release",
+      "argv": [
+        "make",
+        "build"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+      "started": "2026-10-28T21:18:59.644787+00:00",
+      "timeout_seconds": 1800,
+      "pid": 2918795,
+      "exit_code": 0,
+      "finished": "2026-10-28T21:20:56.662954+00:00"
+    },
+    {
+      "label": "workspace_default",
+      "argv": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--locked",
+        "--offline",
+        "-j",
+        "4",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+      "started": "2026-10-28T21:20:56.663627+00:00",
+      "timeout_seconds": 900,
+      "pid": 2921599,
+      "exit_code": 0,
+      "finished": "2026-10-28T21:21:13.103444+00:00"
+    },
+    {
+      "label": "workspace_rdma",
+      "argv": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--features",
+        "rdma",
+        "--locked",
+        "--offline",
+        "-j",
+        "4",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+      "started": "2026-10-28T21:21:13.104247+00:00",
+      "timeout_seconds": 900,
+      "pid": 2926725,
+      "exit_code": 0,
+      "finished": "2026-10-28T21:21:36.605590+00:00"
+    },
+    {
+      "label": "client_clippy_default",
+      "argv": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j",
+        "4",
+        "-p",
+        "contextstore-client-rs",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+      "started": "2026-10-28T21:21:36.606392+00:00",
+      "timeout_seconds": 600,
+      "pid": 2933611,
+      "exit_code": 0,
+      "finished": "2026-10-28T21:21:48.636776+00:00"
+    },
+    {
+      "label": "client_clippy_rdma",
+      "argv": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j",
+        "4",
+        "-p",
+        "contextstore-client-rs",
+        "--all-targets",
+        "--features",
+        "rdma",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+      "started": "2026-10-28T21:21:48.638793+00:00",
+      "timeout_seconds": 600,
+      "pid": 2934295,
+      "exit_code": 0,
+      "finished": "2026-10-28T21:21:57.715494+00:00"
+    }
+  ],
+  "tests": {
+    "workspace_default": {
+      "passed": 86,
+      "failed": 0,
+      "ignored": 0,
+      "result_blocks": 16,
+      "redis_metadata_tests_not_skipped": true,
+      "hardware_ignored_tests_not_enabled": true
+    },
+    "workspace_rdma": {
+      "passed": 209,
+      "failed": 0,
+      "ignored": 36,
+      "result_blocks": 18,
+      "redis_metadata_tests_not_skipped": true,
+      "hardware_ignored_tests_not_enabled": true
+    }
+  },
+  "strict_client_clippy": {
+    "default_all_targets_exit": 0,
+    "rdma_all_targets_exit": 0,
+    "includes_new_test_harnesses": true
+  },
+  "strict_server_clippy": {
+    "status": "FAIL_WITH_UNCHANGED_BASELINE_DIAGNOSTICS",
+    "rerun_this_round": false,
+    "default_unique": 31,
+    "full_rdma_unique": 53,
+    "new_unique": 0,
+    "inherited_evidence": "inherited-server-clippy/",
+    "not_full_repo_lint_green": true
+  },
+  "changed_rustfmt_files": [
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs",
+    "kv-service/client-rs/src/rail_read/tests.rs",
+    "kv-service/client-rs/tests/rail_runtime_soak.rs",
+    "kv-service/server/src/rdma/server.rs"
+  ],
+  "changed_rustfmt_exit": 0,
+  "build": {
+    "command": "make build",
+    "profile": "default release",
+    "server_features": [
+      "io-uring",
+      "rdma",
+      "metrics"
+    ],
+    "client_features": [
+      "rdma"
+    ],
+    "release_artifacts": {
+      "release/cs-rail-read-bench": "8c7cc1e8f3dd96cf01cfe291c87d1693e88720a0e91d1148df1f2de38c52bcf1",
+      "release/cs-kvservice-bench": "328f8dbcc6f3b04c5e9b956f52f262341b6bbee8becf91fc3b01866ecd7e2e8f",
+      "release/contextstore-server": "4aeacb800092ff917c3f87fd775cc03c046d86fd1635ec7fccaf9cd3fac23bd5",
+      "release/libcontextstore_rdma_ffi.so": "24fee1d08bf9c781e61f922ab72e5ff9230f23fc9ca00926c89c2d4a3dcd4d90",
+      "release/cs-rdma-bench": "6398e6e9e75e568f026faac811fed58716f31f315bf1d9b15b473eed6dfa7a30",
+      "release/cs-meta": "ebb73248b3459e462b5d7c59d1d0ccf3b49d4ca2ab1492812f09bf145dda0d33",
+      "release/cs-bench": "67152496f49f0654ceec0fd0e70e0938505cc719d5032a225982a26f7e72981d"
+    },
+    "target": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target",
+    "measurement_binaries_overwritten": false,
+    "note": "These are separate final-integration build artifacts; frozen measured binaries and their historical hashes remain unchanged."
+  },
+  "e2e_default_fixture": {
+    "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-default-fixture/debug/contextstore-server",
+    "sha256": "43e7602578ff971aeab80bdd2d4e4591d0cd3b0aaea5a00e89cd148cd5294b4f"
+  },
+  "e2e_default_fixture_unchanged": true,
+  "private_redis": {
+    "pid": 2918785,
+    "port": 38557,
+    "argv": [
+      "redis-server",
+      "--bind",
+      "127.0.0.1",
+      "--port",
+      "38557",
+      "--save",
+      "",
+      "--appendonly",
+      "no",
+      "--dir",
+      "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/redis"
+    ],
+    "start_ticks": "1335174606",
+    "exe": "/usr/local/bin/redis-server",
+    "exe_sha256": "a59ba77b9758fa0ad267a3ca6801f45858caba4f253149cbde89399a69d13296",
+    "shutdown_exit": 0,
+    "exit_code": 0,
+    "stopped": true
+  },
+  "private_redis_final_pid_absent": true,
+  "private_redis_final_port_free": true,
+  "runner_started": "2026-10-28T21:18:59.307561+00:00",
+  "runner_finished": "2026-10-28T21:21:58.365026+00:00",
+  "raw_evidence_archive": "final-integration-evidence.tar.gz",
+  "raw_evidence_archive_sha256": "2c71bdfdf356968a2febdf14c698b8cefe128fd1880865b166990d87572180a3",
+  "raw_evidence_files_locally_verified": 48,
+  "execution_boundaries": [
+    "All Rust builds/tests/lint/format checks ran on SKV2 in independent final-integration/src and independent copied target",
+    "4build jobs; never two source directories build into same target",
+    "No blocked legacyFFI12 execution; existing wave1native13 evidence keeps its original scope",
+    "No --ignored tests; no RXE traffic; no existing soak/recovery/nativeguard/performance binaries overwritten",
+    "No commit/push or production source edits by this task"
+  ],
+  "repository_evidence_directory": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/final-integration"
+}

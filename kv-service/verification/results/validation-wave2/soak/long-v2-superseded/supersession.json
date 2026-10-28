@@ -1,0 +1,14 @@
+{
+  "status": "LIMITED_SUPERSEDED",
+  "reason": "spec review requested active lease observations, complete post-Drop resources, and exact request/counter reconciliation; intentional stop is not runtime failure or 2-hour pass",
+  "pid": 2770380,
+  "runner_pid": 2770379,
+  "exe": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v2/rail_runtime_soak",
+  "sha256": "ac1d7f15a981fa87a31373e229a94bd7b374745ecfd75ded5bdc7aca8daa13d9",
+  "proc_start_ticks": 1334413784,
+  "proc_start_unix": 1793214730.84,
+  "startup_unix": 1793214731.0826843,
+  "verified_before_signal_unix": 1793215072.4780068,
+  "signal": "SIGTERM",
+  "command": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v2/rail_runtime_soak healthy_single_hca_two_hour_runtime --ignored --exact --nocapture --test-threads=1 "
+}

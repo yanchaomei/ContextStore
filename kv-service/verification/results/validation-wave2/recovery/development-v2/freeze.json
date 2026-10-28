@@ -1,0 +1,68 @@
+{
+  "phase": "development_v2",
+  "frozen_before_launch_utc": "2026-10-28T19:44:31.502975+00:00",
+  "core_revision": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "source_hashes": {
+    "Cargo.toml": "289fe5e3ccbee0945b73a6b40574fe64cb9e78652358983a8af40607773b0a62",
+    "Cargo.lock": "338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/tests.rs": "aad37340039b9ac4e801eec57a6ef89bc06ee37ebabb0e06b1866f1942d18b17",
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs": "24e3286ce5ff550b73f7d9cb0589b919b2f6b31de92f6bf2b5903447680780b7"
+  },
+  "binary_sha256": "40ececd102584fed727da61b8fb803a303e8b4ad92845ca16a2e8ec1e0e082d3",
+  "native_fixture": {
+    "object_bytes": 1048576,
+    "stripes": 4,
+    "chunk_bytes": 262144,
+    "server_cq_timeout_ms": 1000,
+    "devices": [
+      "rxe0",
+      "rxe1"
+    ],
+    "gid": 1,
+    "pool_modes": [
+      "off",
+      "on"
+    ],
+    "staging_modes": [
+      "packed",
+      "direct"
+    ]
+  },
+  "runs": [
+    {
+      "name": "control-smoke24",
+      "CS_RECOVERY_OPS": 24,
+      "CS_RECOVERY_SEED": 2026102915
+    },
+    {
+      "name": "cut-smoke48",
+      "CS_RECOVERY_CUT_REPEATS": 2,
+      "CS_RECOVERY_SEED": 2026102917
+    },
+    {
+      "name": "lifetime-smoke40",
+      "CS_LIFETIME_OPS": 20,
+      "CS_RECOVERY_SEED": 2026102919
+    },
+    {
+      "name": "publication-smoke16",
+      "CS_PUBLICATION_REPEATS": 2,
+      "CS_RECOVERY_SEED": 2026102921
+    }
+  ],
+  "acceptance": {
+    "incorrect_publications": 0,
+    "unexpected_errors": 0,
+    "resource_overshoots": 0,
+    "missing_old_terminals": 0,
+    "retry_counts_and_bytes": "exact"
+  },
+  "timing_claim": "withheld; debug binary and fault evidence gate included; F1 parity pending",
+  "new_gates": [
+    "PUT success true",
+    "authoritative per-stripe expected payload checksum",
+    "test-only timeout env",
+    "postlookup HTTP2 real response interception"
+  ]
+}

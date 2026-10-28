@@ -1,0 +1,1053 @@
+{
+  "state": "READY_BASELINES_PASSED_AND_SMALL_RXE_SMOKE_PASSED",
+  "at": "2026-10-28T19:07:01.245289+00:00",
+  "requested_candidate_repository_head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "fixture_source_commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+  "baseline_source_hashes_verified": 209,
+  "server_binary_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+  "baseline_test_binaries": {
+    "rdma_e2e": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+    "rail_read_e2e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26"
+  },
+  "physical": {
+    "state": "SINGLE_HCA_READY",
+    "client_env": "SKV_2:/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/provider-client.env",
+    "grpc": "http://10.0.0.64:25351",
+    "rdma": "10.0.0.64:25353",
+    "device": "mlx5_1",
+    "port": 1,
+    "gid_index": 3,
+    "object_mib": 16,
+    "stripe_bytes": 4194304,
+    "server_cq_timeout_ms": 30000,
+    "readback": {
+      "at": "2026-10-28T19:05:33.926656+00:00",
+      "hostname": "skv-node4",
+      "fixtures": [
+        {
+          "root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2",
+          "hashes": {
+            "server.toml": "50203f7373c83652ec26411d189284fa486854359e17fbd0284b84910bbf26a8"
+          },
+          "processes": {
+            "server": {
+              "pid": 1479087,
+              "start_ticks": "1531104895",
+              "command": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server --config /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/server.toml --log-level info",
+              "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2",
+              "exe": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server",
+              "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+              "environment": {
+                "PATH": "/usr/local/bin:/usr/bin:/bin",
+                "LANG": "C",
+                "CS_RDMA_SLAB_MB": "64",
+                "CS_FORCE_DISK_READ": "1",
+                "CS_RDMA_DEVICES": "mlx5_1:10.0.0.64:25353:3,mlx5_1:10.0.0.64:25354:3"
+              },
+              "environment_sha256": "67ab0ff0c47cbe0c95124567cc73edc75592cfe8f07a8302340a394b9032f05a"
+            },
+            "redis": {
+              "pid": 1479083,
+              "start_ticks": "1531104885",
+              "command": "redis-server 127.0.0.1:26379",
+              "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/redis",
+              "exe": "/usr/bin/redis-check-rdb",
+              "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c",
+              "environment": {},
+              "environment_sha256": "9e1736c43d19118e6ce4302118af337109491ecc52757dfb949bad6a7940b0c2"
+            }
+          }
+        }
+      ],
+      "ibverbs_provider_packages": "ibverbs-providers:amd64\t54mlnx1-1.54103\nlibibverbs1:amd64\t54mlnx1-1.54103\nlibrdmacm1:amd64\t54mlnx1-1.54103\nrdma-core\t54mlnx1-1.54103\n",
+      "ibv_devices": "    device          \t   node GUID\n    ------          \t----------------\n    mlx5_0          \t043f720300e259c6\n    mlx5_1          \t043f720300e259c7\n"
+    },
+    "baseline_cases": {
+      "rdma_put_and_get_round_trip": {
+        "exit_code": 0,
+        "log_sha256": "5c4e0a482d51ce432f6837b70755217776142dde8032bc0996ece4d40eab238a",
+        "log": "physical-baseline/rdma_put_and_get_round_trip.log"
+      },
+      "same_object_matches_single_and_dual_rail": {
+        "exit_code": 101,
+        "log_sha256": "ed1873f1641a9f4feab904c30e7d805c73272d68030dd7c68e174b2436c21953",
+        "log": "physical-baseline/same_object_matches_single_and_dual_rail.log"
+      },
+      "single_real_rail_restores_verified_object": {
+        "exit_code": 0,
+        "log_sha256": "35542b3d0ffa1fef296e0a0792989a9d34efab3408b1ae4fcaff35fb810f7aa0",
+        "log": "physical-baseline/single_real_rail_restores_verified_object.log"
+      }
+    },
+    "dual_same_path_expected_rejection": "InvalidPlacement: rail IDs, listeners, and local ports must identify distinct paths"
+  },
+  "rxe": {
+    "state": "DUAL_RXE_READY",
+    "host": "SKV_2",
+    "wrapper": "bash /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/guest_ssh.sh server|client",
+    "client_env": "/home/railtest/cswave1/wave2/client.env",
+    "grpc": "http://10.81.1.1:25351",
+    "rdma": [
+      "10.81.1.1:25353",
+      "10.82.1.1:25354"
+    ],
+    "object_mib": 16,
+    "stripe_bytes": 4194304,
+    "server_cq_timeout_ms": 30000,
+    "baseline_cases": {
+      "rdma_put_and_get_round_trip": {
+        "exit_code": 0,
+        "log_sha256": "0e041c9bac85bb7e8ecaf90c6b8e8e1ff4b2f2e5cefc7f9cbdf219d034be664c",
+        "log": "rxe-client-evidence/evidence/baseline/rdma_put_and_get_round_trip.log"
+      },
+      "same_object_matches_single_and_dual_rail": {
+        "exit_code": 0,
+        "log_sha256": "f70a1ae6010ea6b72460cc224018c5905700f7ef21cbb7eb4a7e99631918bd8e",
+        "log": "rxe-client-evidence/evidence/baseline/same_object_matches_single_and_dual_rail.log"
+      },
+      "single_real_rail_restores_verified_object": {
+        "exit_code": 0,
+        "log_sha256": "0337995a7ff8f4b35c716987386d9dd90399122263dace761a2cb5449add639a",
+        "log": "rxe-client-evidence/evidence/baseline/single_real_rail_restores_verified_object.log"
+      }
+    },
+    "readback": {
+      "at": "2026-10-28T19:06:31.539975+00:00",
+      "hostname": "csw1-rxe-server",
+      "fixtures": [
+        {
+          "root": "/home/railtest/cswave1/wave2",
+          "hashes": {
+            "server.toml": "9d7595cfa32e4f921c4a6d4791e520805443d5ef8d60182a406e56e3c017ecff"
+          },
+          "processes": {
+            "server": {
+              "pid": 958,
+              "start_ticks": "5399",
+              "command": "/home/railtest/cswave1/bin/contextstore-server --config /home/railtest/cswave1/wave2/server.toml --log-level info",
+              "cwd": "/home/railtest/cswave1/wave2",
+              "exe": "/home/railtest/cswave1/bin/contextstore-server",
+              "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+              "environment": {
+                "PATH": "/usr/local/bin:/usr/bin:/bin",
+                "LANG": "C",
+                "CS_RDMA_SLAB_MB": "64",
+                "CS_FORCE_DISK_READ": "1",
+                "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25353:1,rxe1:10.82.1.1:25354:1"
+              },
+              "environment_sha256": "f904bace81c0ce70008bda46111f3f7ef9410312cc643a9de0b87266d96d5b00"
+            },
+            "redis": {
+              "pid": 953,
+              "start_ticks": "5388",
+              "command": "redis-server 127.0.0.1:26379",
+              "cwd": "/home/railtest/cswave1/wave2/redis",
+              "exe": "/usr/bin/redis-check-rdb",
+              "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a",
+              "environment": {},
+              "environment_sha256": "9e1736c43d19118e6ce4302118af337109491ecc52757dfb949bad6a7940b0c2"
+            }
+          }
+        },
+        {
+          "root": "/home/railtest/cswave1/wave2/small",
+          "hashes": {
+            "server.toml": "730455a23ef32bbcab8b82c9ea1252d42572b72e0d5ca60447bb1741d19021e9"
+          },
+          "processes": {
+            "server": {
+              "pid": 1097,
+              "start_ticks": "19105",
+              "command": "/home/railtest/cswave1/bin/contextstore-server --config /home/railtest/cswave1/wave2/small/server.toml --log-level info",
+              "cwd": "/home/railtest/cswave1/wave2/small",
+              "exe": "/home/railtest/cswave1/bin/contextstore-server",
+              "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+              "environment": {
+                "PATH": "/usr/local/bin:/usr/bin:/bin",
+                "LANG": "C",
+                "CS_RDMA_CQ_TIMEOUT_MS": "1000",
+                "CS_RDMA_SLAB_MB": "64",
+                "CS_FORCE_DISK_READ": "1",
+                "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25453:1,rxe1:10.82.1.1:25454:1"
+              },
+              "environment_sha256": "214f745bd8b923e340c77ddfbd776f49c7cb2866b4a0c2ccd3db31c4082c1861"
+            },
+            "redis": {
+              "pid": 1092,
+              "start_ticks": "19095",
+              "command": "redis-server 127.0.0.1:26479",
+              "cwd": "/home/railtest/cswave1/wave2/small/redis",
+              "exe": "/usr/bin/redis-check-rdb",
+              "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a",
+              "environment": {},
+              "environment_sha256": "9e1736c43d19118e6ce4302118af337109491ecc52757dfb949bad6a7940b0c2"
+            }
+          }
+        }
+      ],
+      "ibverbs_provider_packages": {
+        "stdout": "ibverbs-providers:amd64\t39.0-1\nlibibverbs1:amd64\t39.0-1\nrdma-core\t39.0-1\n",
+        "stderr": "dpkg-query: no packages found matching librdmacm1\n",
+        "exit_code": 1
+      },
+      "ibv_devices": "    device          \t   node GUID\n    ------          \t----------------\n    rxe0            \t505400fffe295101\n    rxe1            \t505400fffe295201\n"
+    },
+    "qemu": {
+      "at": "2026-10-28T19:03:25.074780+00:00",
+      "qemu": {
+        "server": {
+          "pid": 2759196,
+          "start_ticks": "1334345715",
+          "exe": "/usr/bin/qemu-system-x86_64",
+          "exe_sha256": "f7e6f786e32eec895d231f2c41dc2764d34a94e2f13c66f1f0c13ac5b0a49811",
+          "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029",
+          "command": [
+            "/usr/bin/qemu-system-x86_64",
+            "-name",
+            "csw1-rxe-server-20261029",
+            "-uuid",
+            "3cf534ce-653d-4171-9574-bba582db6338",
+            "-enable-kvm",
+            "-runas",
+            "kvgroup",
+            "-cpu",
+            "host",
+            "-smp",
+            "2",
+            "-m",
+            "3072",
+            "-machine",
+            "q35",
+            "-drive",
+            "if=pflash,format=raw,readonly=on,file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/qemu/firmware/OVMF_CODE.fd",
+            "-drive",
+            "if=pflash,format=raw,file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/server/OVMF_VARS.fd",
+            "-drive",
+            "file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/server/disk.qcow2,if=virtio,format=qcow2",
+            "-drive",
+            "file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/server/seed.iso,media=cdrom,if=ide",
+            "-netdev",
+            "user,id=mgmt,hostfwd=tcp:127.0.0.1:22351-:22",
+            "-device",
+            "virtio-net-pci,netdev=mgmt,mac=52:54:00:29:50:01",
+            "-netdev",
+            "socket,id=rail0,udp=127.0.0.1:24361,localaddr=127.0.0.1:24351",
+            "-device",
+            "virtio-net-pci,netdev=rail0,mac=52:54:00:29:51:01",
+            "-netdev",
+            "socket,id=rail1,udp=127.0.0.1:24362,localaddr=127.0.0.1:24352",
+            "-device",
+            "virtio-net-pci,netdev=rail1,mac=52:54:00:29:52:01",
+            "-display",
+            "none",
+            "-monitor",
+            "none",
+            "-serial",
+            "file:/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/environment/vm-host/server/serial.log",
+            "-pidfile",
+            "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/environment/vm-host/server/qemu.pid"
+          ],
+          "command_sha256": "316599c929fbba4f852b1fb30094442736805da420640e15f7861850c9ba0150"
+        },
+        "client": {
+          "pid": 2759195,
+          "start_ticks": "1334345715",
+          "exe": "/usr/bin/qemu-system-x86_64",
+          "exe_sha256": "f7e6f786e32eec895d231f2c41dc2764d34a94e2f13c66f1f0c13ac5b0a49811",
+          "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029",
+          "command": [
+            "/usr/bin/qemu-system-x86_64",
+            "-name",
+            "csw1-rxe-client-20261029",
+            "-uuid",
+            "782360c4-1d34-4a3e-9746-d9f96612d2dc",
+            "-enable-kvm",
+            "-runas",
+            "kvgroup",
+            "-cpu",
+            "host",
+            "-smp",
+            "2",
+            "-m",
+            "3072",
+            "-machine",
+            "q35",
+            "-drive",
+            "if=pflash,format=raw,readonly=on,file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/qemu/firmware/OVMF_CODE.fd",
+            "-drive",
+            "if=pflash,format=raw,file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/client/OVMF_VARS.fd",
+            "-drive",
+            "file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/client/disk.qcow2,if=virtio,format=qcow2",
+            "-drive",
+            "file=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/client/seed.iso,media=cdrom,if=ide",
+            "-netdev",
+            "user,id=mgmt,hostfwd=tcp:127.0.0.1:22352-:22",
+            "-device",
+            "virtio-net-pci,netdev=mgmt,mac=52:54:00:29:50:02",
+            "-netdev",
+            "socket,id=rail0,udp=127.0.0.1:24351,localaddr=127.0.0.1:24361",
+            "-device",
+            "virtio-net-pci,netdev=rail0,mac=52:54:00:29:51:02",
+            "-netdev",
+            "socket,id=rail1,udp=127.0.0.1:24352,localaddr=127.0.0.1:24362",
+            "-device",
+            "virtio-net-pci,netdev=rail1,mac=52:54:00:29:52:02",
+            "-display",
+            "none",
+            "-monitor",
+            "none",
+            "-serial",
+            "file:/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/environment/vm-host/client/serial.log",
+            "-pidfile",
+            "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/environment/vm-host/client/qemu.pid"
+          ],
+          "command_sha256": "d2f6fb819d3cc609cccb4d72e4a2184ec641d7c1990a44bf0abcd2a08e29e1ee"
+        }
+      },
+      "server_guest_archive_sha256": "990b903d814d413238840702223b9ecf617fec6f113b0fbb5ba28c6026da13bd",
+      "client_guest_archive_sha256": "dfaf9610a175f306019080343d25874694380067f096347c7d81efe39df0a7ef"
+    },
+    "server_provider": {
+      "hostname": "csw1-rxe-server",
+      "role": "server",
+      "at": "2026-10-28T19:01:57.973329+00:00",
+      "kernel": "Linux csw1-rxe-server 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+      "rdma": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+      "ip": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 \nrail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 \nrail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 \n",
+      "packages": "ibverbs-providers:amd64\t39.0-1\nibverbs-utils\t39.0-1\niproute2\t5.15.0-1ubuntu2.2\nrdma-core\t39.0-1\nredis-server\t5:6.0.16-1ubuntu1.2\n",
+      "binaries": {
+        "contextstore-server": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+      },
+      "gids": {
+        "rxe0": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5101",
+          "1": "0000:0000:0000:0000:0000:ffff:0a51:0101"
+        },
+        "rxe1": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5201",
+          "1": "0000:0000:0000:0000:0000:ffff:0a52:0101"
+        }
+      },
+      "processes": {
+        "redis": {
+          "pid": 953,
+          "start_ticks": "5388",
+          "command": [
+            "redis-server",
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "26379",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--dir",
+            "/home/railtest/cswave1/wave2/redis"
+          ],
+          "environment": {
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "LANG": "C"
+          },
+          "exe": "/usr/bin/redis-check-rdb",
+          "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a"
+        },
+        "server": {
+          "pid": 958,
+          "start_ticks": "5399",
+          "command": [
+            "/home/railtest/cswave1/bin/contextstore-server",
+            "--config",
+            "/home/railtest/cswave1/wave2/server.toml",
+            "--log-level",
+            "info"
+          ],
+          "environment": {
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "LANG": "C",
+            "CS_RDMA_SLAB_MB": "64",
+            "CS_FORCE_DISK_READ": "1",
+            "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25353:1,rxe1:10.82.1.1:25354:1"
+          },
+          "exe": "/home/railtest/cswave1/bin/contextstore-server",
+          "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+        }
+      },
+      "config_sha256": "9d7595cfa32e4f921c4a6d4791e520805443d5ef8d60182a406e56e3c017ecff"
+    },
+    "client_provider": {
+      "hostname": "csw1-rxe-client",
+      "role": "client",
+      "at": "2026-10-28T19:02:08.714969+00:00",
+      "kernel": "Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+      "rdma": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+      "ip": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5002/64 fe80::5054:ff:fe29:5002/64 \nrail0            UP             10.81.1.2/24 fe80::5054:ff:fe29:5102/64 \nrail1            UP             10.82.1.2/24 fe80::5054:ff:fe29:5202/64 \n",
+      "packages": "ibverbs-providers:amd64\t39.0-1\nibverbs-utils\t39.0-1\niproute2\t5.15.0-1ubuntu2.2\nrdma-core\t39.0-1\nredis-server\t5:6.0.16-1ubuntu1.2\n",
+      "binaries": {
+        "rdma_e2e": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+        "rail_read_e2e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26"
+      },
+      "gids": {
+        "rxe0": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5102",
+          "1": "0000:0000:0000:0000:0000:ffff:0a51:0102"
+        },
+        "rxe1": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5202",
+          "1": "0000:0000:0000:0000:0000:ffff:0a52:0102"
+        }
+      },
+      "client_env_sha256": "ab1407bbab04e90fa5e84994f91a1494cdfe67481adb3f920a79e6000ac6b430"
+    }
+  },
+  "small_rxe": {
+    "state": "SMOKE_PASSED",
+    "client_env": "/home/railtest/cswave1/wave2/small/client.env",
+    "server_config": "/home/railtest/cswave1/wave2/small/server.toml",
+    "grpc": "http://10.81.1.1:25451",
+    "rdma": [
+      "10.81.1.1:25453",
+      "10.82.1.1:25454"
+    ],
+    "redis_port": 26479,
+    "object_mib": 1,
+    "stripe_bytes": 262144,
+    "stripe_count": 4,
+    "server_cq_timeout_ms": 1000,
+    "timeout_verified_in_proc": true,
+    "smoke": {
+      "smoke": {
+        "exit_code": 0,
+        "log_sha256": "49dc7941ed7de3738c733c627a30dcaabafeb539a1a664a72199c694ff827bce",
+        "log": "rxe-small-client-evidence/evidence/smoke.log"
+      }
+    },
+    "is_striped_evidence": "Passed single_real_rail_restores_verified_object asserts lookup.descriptor.is_striped",
+    "stripe_count_evidence": "Redis metadata has exactly 4 chunk_paths and 4 checksums for same seed",
+    "seed_metadata": {
+      "device_id": 1,
+      "file_path": "",
+      "size": 1048576,
+      "object_handle": "ctxobj-v1-17de47c063f62b8b5d68fa61aa3ab45f-g1-l1-83be3b848942800a",
+      "object_generation": 1,
+      "content_etag": "18689de1a230d821",
+      "layout_version": 1,
+      "created_at": 1793214274,
+      "last_accessed_at": 1793214274,
+      "ttl_seconds": 0,
+      "num_tokens": 0,
+      "num_layers": 0,
+      "dtype": "bfloat16",
+      "compressed": false,
+      "striping": {
+        "chunk_size": 262144,
+        "chunk_devices": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "chunk_paths": [
+          "/home/railtest/cswave1/wave2/small/data/stripe1/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk0.bin",
+          "/home/railtest/cswave1/wave2/small/data/stripe0/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk1.bin",
+          "/home/railtest/cswave1/wave2/small/data/stripe1/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk2.bin",
+          "/home/railtest/cswave1/wave2/small/data/stripe0/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk3.bin"
+        ],
+        "total_size": 1048576,
+        "chunk_locations": [],
+        "chunk_checksums": [
+          "3904eb60ee680655",
+          "60fc1f2afe31d9e6",
+          "8e9adcdabbe92e88",
+          "19dc88d142ec2838"
+        ]
+      }
+    },
+    "server": {
+      "hostname": "csw1-rxe-server",
+      "role": "server",
+      "at": "2026-10-28T19:04:15.544474+00:00",
+      "kernel": "Linux csw1-rxe-server 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+      "rdma": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+      "ip": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 \nrail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 \nrail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 \n",
+      "packages": "ibverbs-providers:amd64\t39.0-1\nibverbs-utils\t39.0-1\niproute2\t5.15.0-1ubuntu2.2\nrdma-core\t39.0-1\nredis-server\t5:6.0.16-1ubuntu1.2\n",
+      "binaries": {
+        "contextstore-server": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+      },
+      "gids": {
+        "rxe0": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5101",
+          "1": "0000:0000:0000:0000:0000:ffff:0a51:0101"
+        },
+        "rxe1": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5201",
+          "1": "0000:0000:0000:0000:0000:ffff:0a52:0101"
+        }
+      },
+      "processes": {
+        "redis": {
+          "pid": 1092,
+          "start_ticks": "19095",
+          "command": [
+            "redis-server",
+            "--bind",
+            "127.0.0.1",
+            "--port",
+            "26479",
+            "--save",
+            "",
+            "--appendonly",
+            "no",
+            "--dir",
+            "/home/railtest/cswave1/wave2/small/redis"
+          ],
+          "environment": {
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "LANG": "C"
+          },
+          "exe": "/usr/bin/redis-check-rdb",
+          "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a"
+        },
+        "server": {
+          "pid": 1097,
+          "start_ticks": "19105",
+          "command": [
+            "/home/railtest/cswave1/bin/contextstore-server",
+            "--config",
+            "/home/railtest/cswave1/wave2/small/server.toml",
+            "--log-level",
+            "info"
+          ],
+          "environment": {
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "LANG": "C",
+            "CS_RDMA_CQ_TIMEOUT_MS": "1000",
+            "CS_RDMA_SLAB_MB": "64",
+            "CS_FORCE_DISK_READ": "1",
+            "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25453:1,rxe1:10.82.1.1:25454:1"
+          },
+          "exe": "/home/railtest/cswave1/bin/contextstore-server",
+          "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+        }
+      },
+      "config_sha256": "730455a23ef32bbcab8b82c9ea1252d42572b72e0d5ca60447bb1741d19021e9"
+    },
+    "client": {
+      "hostname": "csw1-rxe-client",
+      "role": "client",
+      "at": "2026-10-28T19:04:23.362408+00:00",
+      "kernel": "Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+      "rdma": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+      "ip": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5002/64 fe80::5054:ff:fe29:5002/64 \nrail0            UP             10.81.1.2/24 fe80::5054:ff:fe29:5102/64 \nrail1            UP             10.82.1.2/24 fe80::5054:ff:fe29:5202/64 \n",
+      "packages": "ibverbs-providers:amd64\t39.0-1\nibverbs-utils\t39.0-1\niproute2\t5.15.0-1ubuntu2.2\nrdma-core\t39.0-1\nredis-server\t5:6.0.16-1ubuntu1.2\n",
+      "binaries": {
+        "rdma_e2e": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+        "rail_read_e2e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26"
+      },
+      "gids": {
+        "rxe0": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5102",
+          "1": "0000:0000:0000:0000:0000:ffff:0a51:0102"
+        },
+        "rxe1": {
+          "0": "fe80:0000:0000:0000:5054:00ff:fe29:5202",
+          "1": "0000:0000:0000:0000:0000:ffff:0a52:0102"
+        }
+      },
+      "client_env_sha256": "5dde05bdb101096295daf379ac51578e43c7c2da8a839283e11ac8ab253066ed"
+    }
+  },
+  "dual_physical_hardware": {
+    "state": "HARDWARE_UNAVAILABLE",
+    "observation": "All 7 nodes: mlx5_1/port1 ACTIVE, mlx5_0/port1 DOWN. No existing dual active physical paths. No host changes.",
+    "topology": {
+      "SKV_1": {
+        "hostname": "skv-node1",
+        "at": "2026-10-28T19:02:24.668215+00:00",
+        "kernel": "Linux skv-node1 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.116/24 fe80::3648:edff:fef9:6ddc/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \nens4f0           DOWN           \nens4f1           UP             10.0.0.61/24 fe80::63f:72ff:fee2:59f7/64 \nvirbr0           DOWN           192.168.122.1/24 \nvirbr0-nic       DOWN           \ndocker0          UP             172.17.0.1/16 fe80::42:b7ff:fe37:2ae4/64 \nbr-d1e5e497714e  DOWN           172.21.0.1/16 \nflannel.1        UNKNOWN        10.244.0.0/32 fe80::2899:25ff:fe5b:5952/64 \ncni0             UP             10.244.0.1/24 fe80::5445:82ff:fe9c:b231/64 \nveth06200182@if2 UP             fe80::9862:feff:fe16:11d1/64 \nvethc18e4356@if2 UP             fe80::5408:d5ff:fe86:c0ef/64 \ncsrb0            UP             fe80::cad:c1ff:feb8:7aab/64 \ncsrb1            UP             fe80::9839:abff:feb8:e6ea/64 \ncsrs0            UP             fe80::cad:c1ff:feb8:7aab/64 \ncsrc0            UP             fe80::2830:38ff:fe56:78f7/64 \ncsrs1            UP             fe80::d4bb:22ff:feae:84bc/64 \ncsrc1            UP             fe80::9839:abff:feb8:e6ea/64 \nvethd7a654d@if136 UP             fe80::406:2aff:fe05:837d/64 \n",
+        "devices": [
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59f6",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59f6",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f0"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:003d",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59f7",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:003d",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59f7",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "SKV_2": {
+        "hostname": "skv-node2",
+        "at": "2026-10-28T19:02:24.568536+00:00",
+        "kernel": "Linux skv-node2 5.15.167 #1 SMP Sat Sep 28 16:50:31 CST 2024 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             \neno2             DOWN           \nens2f0           DOWN           \neno3             DOWN           \nens2f1           DOWN           \neno4             DOWN           \nbr0              UP             192.168.1.102/24 fe80::3648:edff:fef9:cdb4/64 \nlxcbr0           DOWN           10.0.3.1/24 \nvirbr0           DOWN           192.168.100.1/24 \nvirbr0-nic       DOWN           \ndocker0          UP             172.17.0.1/16 fe80::42:1bff:fe70:949f/64 \nvethf0e508a@if19 UP             fe80::a0c2:46ff:fee5:7b1d/64 \nveth8c5cf9e@if449 UP             fe80::14da:5cff:fef1:3c99/64 \nens4f0           DOWN           \nens4f1           UP             10.0.0.62/24 fe80::63f:72ff:fee2:59d7/64 \nbr-b72d5baabc19  DOWN           172.30.52.1/24 fe80::42:30ff:fe45:e839/64 \n",
+        "devices": [
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d6",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d6",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f0"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:003e",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d7",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:003e",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d7",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "SKV_3": {
+        "hostname": "skv-node3",
+        "at": "2026-10-28T19:02:25.195117+00:00",
+        "kernel": "Linux skv-node3 5.15.167-swiftbaton-k1 #5 SMP Sun Sep 27 23:58:40 CST 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.103/24 fe80::3673:5aff:fe9c:6fe4/64 \neno2             DOWN           \neno3             DOWN           \nens2f0           DOWN           \neno4             DOWN           \nens2f1           DOWN           \nens4f0           DOWN           \nens4f1           UP             10.0.0.63/24 fe80::63f:72ff:fee2:59e7/64 \novs-system       DOWN           \nbr0              DOWN           \nvirbr0           UP             192.168.122.1/24 \nvirbr0-nic       DOWN           \ndocker0          UP             172.17.0.1/24 fe80::42:5ff:fe01:a337/64 \nbr-6f05619658a6  DOWN           172.30.52.1/24 fe80::42:bbff:fefe:5f71/64 \nbr-a697a598f764  DOWN           172.22.0.1/16 \nveth57617bd@if17 UP             fe80::8038:3ff:fe5d:7ba0/64 \nvnet0            UNKNOWN        fe80::fc54:ff:fe77:903a/64 \n",
+        "devices": [
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59e6",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59e6",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f0"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:003f",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59e7",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:003f",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59e7",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "SKV_4": {
+        "hostname": "skv-node4",
+        "at": "2026-10-28T19:02:25.322806+00:00",
+        "kernel": "Linux skv-node4 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.117/24 fe80::3673:5aff:fe9c:90fc/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \nens4f0           DOWN           \nveth3456c64@vethb1f3d38 DOWN           \nens4f1           UP             10.0.0.64/24 fe80::63f:72ff:fee2:59c7/64 \nvethb1f3d38@veth3456c64 LOWERLAYERDOWN \nvirbr0           DOWN           192.168.122.1/24 \nvetheffd0bc@vetha5cacc9 DOWN           \nvirbr0-nic       DOWN           \nvetha5cacc9@vetheffd0bc LOWERLAYERDOWN \nbr-94dabdf1da46  UP             172.21.0.1/16 fe80::42:4cff:fe34:4ce7/64 \nveth6b0e467@veth9b5fdaa DOWN           \nbr-be5fa901ab3b  DOWN           172.24.0.1/16 \nveth9b5fdaa@veth6b0e467 LOWERLAYERDOWN \nbr-2a535041007b  DOWN           172.20.0.1/16 \nveth7d382ec@veth22ce5ca DOWN           \nbr-46c15722b3e9  DOWN           172.19.0.1/16 \nveth22ce5ca@veth7d382ec LOWERLAYERDOWN \ndocker_gwbridge  DOWN           172.18.0.1/16 \ndocker0          UP             172.17.0.1/24 fe80::42:1eff:fe81:d407/64 \nbr-83da69e4fa49  UP             172.22.0.1/16 fe80::42:30ff:fe15:f91e/64 \nbr-8cb63b13892d  DOWN           172.16.0.1/16 \nveth4d9af9a@if18 UP             fe80::64ef:20ff:fe52:bd82/64 \nveth453c259@if20 UP             fe80::a41a:cbff:fe84:4909/64 \nvethee53980@if22 UP             fe80::78ac:b6ff:fed9:3c70/64 \nvethc2cdc37@if24 UP             fe80::5446:deff:fee1:8761/64 \nveth7efc451@if26 UP             fe80::d8cd:1dff:fe1f:64a7/64 \nvethcab473f@if28 UP             fe80::d847:88ff:fea2:8832/64 \nveth9f7e1d8@if30 UP             fe80::f82b:55ff:feba:4f31/64 \nveth33a72c3@if32 UP             fe80::6c46:f0ff:fea2:7616/64 \nveth90d2813@if34 UP             fe80::a476:1fff:fe86:7406/64 \nvethdf09900@if36 UP             fe80::e06d:7aff:fe62:77f7/64 \nveth3cca8ff@if38 UP             fe80::f476:b2ff:fedc:a072/64 \nveth7a2257c@if40 UP             fe80::3c48:35ff:fe7d:df93/64 \nveth507b132@if42 UP             fe80::9a:27ff:fe23:4899/64 \nvethc551221@if44 UP             fe80::4426:92ff:fe6a:8cc6/64 \nveth9c131e8@if48 UP             fe80::2ca5:b7ff:fec5:95fd/64 \nveth8a9c586@if50 UP             fe80::5075:5aff:fed2:58af/64 \nvethca9913e@if52 UP             fe80::b7:d5ff:fee0:63f/64 \nvethf80080b@if10461243 UP             fe80::64d9:cff:fe14:b52/64 \nvethb4c62db@if10461245 UP             fe80::44cb:d5ff:feb7:3cc9/64 \nvethbd5f2bc@if10461247 UP             fe80::e0fa:ebff:fe2c:a110/64 \nvetha619fda@if10461249 UP             fe80::7832:faff:fefc:19d6/64 \nveth7bfb111@if10461253 UP             fe80::81c:feff:fe2b:ac26/64 \nveth4b803aa@if10461255 UP             fe80::9037:ebff:fe6b:a9a/64 \nvethd9d6901@if84 UP             fe80::6c8d:eeff:fedb:572a/64 \nveth385ff39@if10461269 UP             fe80::b0da:f9ff:fe27:c215/64 \nflannel.1        UNKNOWN        10.244.2.0/32 fe80::308a:13ff:fe81:2aff/64 \nveth17c3d03@if10461273 UP             fe80::f8f3:dff:fe87:3687/64 \nveth03fa303@if10461275 UP             fe80::b897:1ff:fe3c:7383/64 \nvethf5da6a1@if10461277 UP             fe80::1cc1:42ff:feb8:bf9c/64 \nveth7b8adaa@if10461279 UP             fe80::40a3:50ff:fe10:8c38/64 \nvethdf3eb22@if10461289 UP             fe80::6468:aaff:febe:3352/64 \nveth077d787@if10461305 UP             fe80::b4c1:feff:fe3f:5d08/64 \n",
+        "devices": [
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0040",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c7",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0040",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c7",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f1"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c6",
+                    "type": "RoCE v2",
+                    "netdev": "ens4f0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59c6",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens4f0"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "SKV_5": {
+        "hostname": "skv-node5",
+        "at": "2026-10-28T19:02:25.409424+00:00",
+        "kernel": "Linux skv-node5 5.15.0-191-generic #201-Ubuntu SMP Fri Aug 7 18:39:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev enp175s0f0np0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev enp175s0f1np1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.141/24 192.168.1.140/24 metric 100 fe80::3673:5aff:fe9c:4a94/64 \neno2             DOWN           \nenp94s0f0        DOWN           \neno3             DOWN           \nenp94s0f1        DOWN           \neno4             DOWN           \nenp175s0f0np0    DOWN           \nenp175s0f1np1    UP             10.0.0.65/24 fe80::63f:72ff:fee2:59cf/64 \nbr-daa415f7d750  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::8c59:5ff:fe67:a59d/64 \nbr-38aa5270f915  DOWN           172.22.0.1/16 fe80::4cde:51ff:fecc:4889/64 \nbr-e8ec3ba43a9f  DOWN           172.21.0.1/16 fe80::a077:b3ff:fe86:b40b/64 \nbr-a84d59913ee8  DOWN           172.23.0.1/16 fe80::98d6:75ff:feda:7d4c/64 \nbr-33f45cb8cdaf  UP             172.25.0.1/16 fe80::a8f4:8fff:fed0:d748/64 \nvethc9dfa1f@if2  UP             fe80::a8cc:6fff:fe0e:7c26/64 \nveth036d6c7@if2  UP             fe80::3444:a9ff:feda:59d7/64 \nvethd068e15@if2  UP             fe80::5caf:74ff:fe56:be53/64 \nveth96f44d8@if2  UP             fe80::a899:fbff:fec0:4d2a/64 \nveth47be083@if2  UP             fe80::ecce:87ff:fe56:f56d/64 \nveth9dc9605@if2  UP             fe80::6040:6aff:fe28:d13/64 \nveth564a15d@if2  UP             fe80::8011:ebff:fef9:e859/64 \nvethe66e054@if2  UP             fe80::6075:98ff:fe4f:38/64 \nvethca0ab36@if2  UP             fe80::7805:7aff:feea:dc8/64 \nvethd5bf4b5@if2  UP             fe80::e0c2:cbff:febb:dbeb/64 \nbr-00dc0eef2ef6  DOWN           172.19.0.1/16 fe80::2822:4eff:fe27:b433/64 \nbr-279b2de98da7  DOWN           172.24.0.1/16 fe80::f4cd:dcff:feb2:6f67/64 \nbr-02a34e3703ad  DOWN           172.20.0.1/16 fe80::c8e8:a6ff:fe79:3595/64 \n",
+        "devices": [
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0041",
+                    "type": "RoCE v2",
+                    "netdev": "enp175s0f1np1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59cf",
+                    "type": "RoCE v2",
+                    "netdev": "enp175s0f1np1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0041",
+                    "type": "IB/RoCE v1",
+                    "netdev": "enp175s0f1np1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59cf",
+                    "type": "IB/RoCE v1",
+                    "netdev": "enp175s0f1np1"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+            "numa_node": "1",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59ce",
+                    "type": "RoCE v2",
+                    "netdev": "enp175s0f0np0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:063f:72ff:fee2:59ce",
+                    "type": "IB/RoCE v1",
+                    "netdev": "enp175s0f0np0"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "SKV_6": {
+        "hostname": "skv-node6",
+        "at": "2026-10-28T19:02:25.929258+00:00",
+        "kernel": "Linux skv-node6 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens3f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens3f1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.126/24 fe80::3673:5aff:fea1:dd3c/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \novs-system       DOWN           \nbr0              DOWN           \ngre0@NONE        DOWN           \ngretap0@NONE     DOWN           \nerspan0@NONE     DOWN           \ngre_sys@NONE     UNKNOWN        fe80::a461:1eff:feee:f3e4/64 \nens3f0           DOWN           \nens3f1           UP             10.0.0.66/24 fe80::1270:fdff:fe69:ba69/64 \ndocker0          DOWN           172.17.0.1/16 \n",
+        "devices": [
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.0",
+            "numa_node": "0",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba68",
+                    "type": "RoCE v2",
+                    "netdev": "ens3f0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba68",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens3f0"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.1",
+            "numa_node": "0",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0042",
+                    "type": "RoCE v2",
+                    "netdev": "ens3f1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba69",
+                    "type": "RoCE v2",
+                    "netdev": "ens3f1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0042",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens3f1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba69",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens3f1"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "SKV_7": {
+        "hostname": "skv-node7",
+        "at": "2026-10-28T19:02:26.435485+00:00",
+        "kernel": "Linux skv-node7 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+        "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens3f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens3f1 \n",
+        "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.127/24 fe80::3673:5aff:fea1:afd4/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \nens3f0           DOWN           \nens3f1           UP             10.0.0.67/24 fe80::1270:fdff:fe69:ba95/64 \n",
+        "devices": [
+          {
+            "name": "mlx5_1",
+            "device_path": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.1",
+            "numa_node": "0",
+            "ports": [
+              {
+                "id": "1",
+                "state": "4: ACTIVE",
+                "phys_state": "5: LinkUp",
+                "gids": {
+                  "3": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0043",
+                    "type": "RoCE v2",
+                    "netdev": "ens3f1"
+                  },
+                  "1": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba95",
+                    "type": "RoCE v2",
+                    "netdev": "ens3f1"
+                  },
+                  "2": {
+                    "value": "0000:0000:0000:0000:0000:ffff:0a00:0043",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens3f1"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba95",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens3f1"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "mlx5_0",
+            "device_path": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.0",
+            "numa_node": "0",
+            "ports": [
+              {
+                "id": "1",
+                "state": "1: DOWN",
+                "phys_state": "3: Disabled",
+                "gids": {
+                  "1": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba94",
+                    "type": "RoCE v2",
+                    "netdev": "ens3f0"
+                  },
+                  "0": {
+                    "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba94",
+                    "type": "IB/RoCE v1",
+                    "netdev": "ens3f0"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "preserved": [
+    "Wave1 source/log/config/snapshot files unchanged",
+    "Original VM UUIDs and overlay hashes checked before start",
+    "New VM logs under wave2",
+    "16MiB fixture retains default 30s server CQ timeout",
+    "Host networking/drivers/groups unchanged; no old SKV1 VM touched"
+  ],
+  "limitations": [
+    "RXE evidence is software RDMA correctness, not physical dual-HCA performance",
+    "Concurrent physical/RXE work cannot support comparative performance claims",
+    "Environment task ran only finite baseline/smoke checks; long soak and 1000-cycle runs are parent-owned"
+  ],
+  "setup_notes": [
+    "First provider attempt failed before launch because remote Python3.8 lacks dict union; compatible dict expansion used",
+    "Early guest SSH timed out during boot, then hostname/RXE/baselines passed",
+    "QEMU pid/exe metadata read with exact-path sudo; permissions unchanged",
+    "Guest optional librdmacm1 package missing is recorded; required ibverbs providers present and baseline RDMA passed"
+  ]
+}

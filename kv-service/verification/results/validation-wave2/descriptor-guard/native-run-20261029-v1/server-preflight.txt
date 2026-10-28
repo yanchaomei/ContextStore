@@ -1,0 +1,13 @@
+csw1-rxe-server
+2026-10-28T21:00:01Z
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+mgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 
+rail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 
+rail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 
+link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 
+link rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 
+    636       1    7115 /usr/bin/redis-server 127.0.0.1:6379
+    953       1    7083 redis-server 127.0.0.1:26379
+    958       1    7083 /home/railtest/cswave1/bin/contextstore-server --config /home/railtest/cswave1/wave2/server.toml --log-level info
+   1092       1    6946 redis-server 127.0.0.1:26479
+   1097       1    6945 /home/railtest/cswave1/bin/contextstore-server --config /home/railtest/cswave1/wave2/small/server.toml --log-level info

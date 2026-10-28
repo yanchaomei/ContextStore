@@ -1,0 +1,81 @@
+{
+  "checked_unix": 1793223039.2162185,
+  "native_pid_absent": true,
+  "runner_pid_absent": true,
+  "freeze_checks": [
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v3/rail_runtime_soak",
+      "expected_sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df",
+      "actual_sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df",
+      "matches": true
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin-v3/run_runtime_soak.py",
+      "expected_sha256": "60f815a95a7772d0bf8875452aa0caa3a10196a934befa630761435526777714",
+      "actual_sha256": "60f815a95a7772d0bf8875452aa0caa3a10196a934befa630761435526777714",
+      "matches": true
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/source-v3/kv-service/client-rs/tests/rail_runtime_soak.rs",
+      "expected_sha256": "6f7d8113f58a34a28faedda8692421e2f847b2f52d1e965f6bd836e083a9c512",
+      "actual_sha256": "6f7d8113f58a34a28faedda8692421e2f847b2f52d1e965f6bd836e083a9c512",
+      "matches": true
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/provider-client.env",
+      "expected_sha256": "bbd6020dc4ae2be81683691a371785744bea25a1b5f070cfe69b9c4957e28938",
+      "actual_sha256": "bbd6020dc4ae2be81683691a371785744bea25a1b5f070cfe69b9c4957e28938",
+      "matches": true
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/base-1c3.tar",
+      "expected_sha256": "b956e007b0471c1c457a2beb706cef285ac016d4613aa9088fb3a8526d0161c8",
+      "actual_sha256": "b956e007b0471c1c457a2beb706cef285ac016d4613aa9088fb3a8526d0161c8",
+      "matches": true
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-source-v3.tar.gz",
+      "expected_sha256": "dcded12dfbd5554224f9accc7522864cf9e60274656d26493d86ab76fde9b253",
+      "actual_sha256": "dcded12dfbd5554224f9accc7522864cf9e60274656d26493d86ab76fde9b253",
+      "matches": true
+    }
+  ],
+  "run_files": [
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/latest.json",
+      "bytes": 775,
+      "sha256": "8c5e3b87a62f49fe9748263f2ddd9ec59bf362241612f10e7c26e38b2768ed2f"
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/progress.json",
+      "bytes": 255,
+      "sha256": "bdc04a62defd906a82f6e4684eabdda6c2dc6706dd95479050fa23a8240c95f4"
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/result.json",
+      "bytes": 1498,
+      "sha256": "6c5391ad0ef5a321d07e54a1cc1810f589a2050c3e29d3f8bb0bc94ad4289454"
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/startup-observations.json",
+      "bytes": 4101,
+      "sha256": "ae96d0e6e79a1ab97dd29bdcfff99339acc570723075bfcf6e6e17b9ce94f8f7"
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/startup.json",
+      "bytes": 595,
+      "sha256": "b0d0d9bdee1a308e4975277a34035a9f55d12af10ca2ff5d77790d825713e13d"
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/stderr.log.gz",
+      "bytes": 31,
+      "sha256": "0b3fffc8fafea86f3737b65ea341561f2af76c8aeb4ee44a0064a940dd98fa20"
+    },
+    {
+      "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-long-v3-7200s/stdout.log.gz",
+      "bytes": 1532471,
+      "sha256": "10f14c3c2a434cedfe1e05901f85e603391ef05005e505f56bc66ddc4dab78c6"
+    }
+  ],
+  "closed_gzip_validation": "pass"
+}

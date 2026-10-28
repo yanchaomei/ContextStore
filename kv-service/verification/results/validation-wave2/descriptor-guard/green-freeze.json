@@ -1,0 +1,8 @@
+{
+  "head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "server_sha256": "d7df834df7d4ffb86a04725a5055069cfadca2b253fc37ea092028fa50bd5b71",
+  "source_manifest_sha256": "a367169d5ee301f918192139b54d37bf8389af47d2b4106ddb88d41fc711a0fc",
+  "utc": "2026-10-28T20:15:53.794174+00:00",
+  "scope": "typed descriptor GET retirement guard; no client pool policy change",
+  "native_status": "not run; awaiting independent guest window"
+}

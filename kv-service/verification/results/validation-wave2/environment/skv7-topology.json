@@ -1,0 +1,67 @@
+{
+  "hostname": "skv-node7",
+  "at": "2026-10-28T19:02:26.435485+00:00",
+  "kernel": "Linux skv-node7 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens3f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens3f1 \n",
+  "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.127/24 fe80::3673:5aff:fea1:afd4/64 \neno2             DOWN           \neno3             DOWN           \neno4             DOWN           \nens3f0           DOWN           \nens3f1           UP             10.0.0.67/24 fe80::1270:fdff:fe69:ba95/64 \n",
+  "devices": [
+    {
+      "name": "mlx5_1",
+      "device_path": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.1",
+      "numa_node": "0",
+      "ports": [
+        {
+          "id": "1",
+          "state": "4: ACTIVE",
+          "phys_state": "5: LinkUp",
+          "gids": {
+            "3": {
+              "value": "0000:0000:0000:0000:0000:ffff:0a00:0043",
+              "type": "RoCE v2",
+              "netdev": "ens3f1"
+            },
+            "1": {
+              "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba95",
+              "type": "RoCE v2",
+              "netdev": "ens3f1"
+            },
+            "2": {
+              "value": "0000:0000:0000:0000:0000:ffff:0a00:0043",
+              "type": "IB/RoCE v1",
+              "netdev": "ens3f1"
+            },
+            "0": {
+              "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba95",
+              "type": "IB/RoCE v1",
+              "netdev": "ens3f1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "mlx5_0",
+      "device_path": "/sys/devices/pci0000:5d/0000:5d:00.0/0000:5e:00.0",
+      "numa_node": "0",
+      "ports": [
+        {
+          "id": "1",
+          "state": "1: DOWN",
+          "phys_state": "3: Disabled",
+          "gids": {
+            "1": {
+              "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba94",
+              "type": "RoCE v2",
+              "netdev": "ens3f0"
+            },
+            "0": {
+              "value": "fe80:0000:0000:0000:1270:fdff:fe69:ba94",
+              "type": "IB/RoCE v1",
+              "netdev": "ens3f0"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

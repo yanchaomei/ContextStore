@@ -1,0 +1,25 @@
+{
+  "matrix_validation": {
+    "frozen_run": "lifetime2000",
+    "full_matrix_verified": true,
+    "expected_frames": 4000,
+    "expected_late_eof": 0,
+    "expected_held_success_ack": 0,
+    "fixed_control_key_hashes": {}
+  },
+  "client_log": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/client/lifetime2000/run.log.gz",
+  "client_sha256": "1b74cf81e034d19162fc706a2192b2ca11b118a9efec2b6acb70e01354ac755b",
+  "server_log": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/server/small-server.log",
+  "server_sha256": "915e3791d432b50a4b06e390d301b13e9cefb882a4dff65e18a76aeb5070cd7a",
+  "operations": 2000,
+  "mode_counts": {
+    "direct=false,pooled=true,control=-,cut=-": 1000,
+    "direct=true,pooled=true,control=-,cut=-": 1000
+  },
+  "native_frames": 4000,
+  "late_eof_requests": 0,
+  "exact_peer_and_key_wr_retirements": 0,
+  "server_success_ack_held_until_client_timeout": 0,
+  "server_not_found_used_as_late_write_proof": 0,
+  "proof": []
+}

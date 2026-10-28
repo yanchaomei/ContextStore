@@ -1,0 +1,33 @@
+{
+  "items": [
+    {
+      "path": "kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/client/recovery-test",
+      "bytes": 82590376,
+      "sha256": "714913de399181eb58e5289ef4d08b76cf9a1afea5a43d3b177b8a4364fc343c",
+      "retained_local_path": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/recovery/holdout-v2/collected/client/recovery-test",
+      "policy": "Retained in full evidence bundle and original remote campaign; excluded from normal Git blobs to avoid duplicate source archives and large debug executables."
+    },
+    {
+      "path": "kv-service/verification/results/validation-wave2/soak/long-v3-final/freeze/soak-frozen-source-v3.tar.gz",
+      "bytes": 77428232,
+      "sha256": "dcded12dfbd5554224f9accc7522864cf9e60274656d26493d86ab76fde9b253",
+      "retained_local_path": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/soak/long-v3-final/freeze/soak-frozen-source-v3.tar.gz",
+      "policy": "Retained in full evidence bundle and original remote campaign; excluded from normal Git blobs to avoid duplicate source archives and large debug executables."
+    },
+    {
+      "path": "kv-service/verification/results/validation-wave2/soak/long-v3-final/freeze/base-1c3.tar",
+      "bytes": 97034240,
+      "sha256": "b956e007b0471c1c457a2beb706cef285ac016d4613aa9088fb3a8526d0161c8",
+      "retained_local_path": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/soak/long-v3-final/freeze/base-1c3.tar",
+      "policy": "Retained in full evidence bundle and original remote campaign; excluded from normal Git blobs to avoid duplicate source archives and large debug executables."
+    },
+    {
+      "path": "kv-service/verification/results/validation-wave2/soak/long-v3-final/freeze/rail_runtime_soak",
+      "bytes": 56149648,
+      "sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df",
+      "retained_local_path": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1/kv-service/verification/results/validation-wave2/soak/long-v3-final/freeze/rail_runtime_soak",
+      "policy": "Retained in full evidence bundle and original remote campaign; excluded from normal Git blobs to avoid duplicate source archives and large debug executables."
+    }
+  ],
+  "all_raw_logs_and_validation_scripts_remain_in_git": true
+}

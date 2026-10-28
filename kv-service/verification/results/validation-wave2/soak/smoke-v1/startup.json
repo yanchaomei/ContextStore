@@ -1,0 +1,17 @@
+{
+  "pid": 2766858,
+  "runner_pid": 2766857,
+  "command": [
+    "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/soak-frozen-bin/rail_runtime_soak",
+    "healthy_single_hca_two_hour_runtime",
+    "--ignored",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "duration_s": 60,
+  "started_unix": 1793214499.5312016,
+  "binary_sha256": "5b758f1d531a2f0daad783e942c274dbfc32bd26f5e9ca7a33582720d9d2dcdc",
+  "output_raw_budget_bytes": 500000000,
+  "timeout_policy": "No 2-hour kill; graceful final burst and cleanup required"
+}

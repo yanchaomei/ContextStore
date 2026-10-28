@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-28T19:04:56.745874+00:00",
+  "server_pid": 1097,
+  "server_start_ticks": "19105",
+  "server_CS_environment": {
+    "CS_RDMA_CQ_TIMEOUT_MS": "1000",
+    "CS_RDMA_SLAB_MB": "64",
+    "CS_FORCE_DISK_READ": "1",
+    "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25453:1,rxe1:10.82.1.1:25454:1"
+  },
+  "records": [
+    {
+      "key": "contextstore:wave2-small-rxe-20261029:block_meta:8:rail-e2erail-e2e-1793214274130909071",
+      "type": "string",
+      "value": "{\"device_id\":1,\"file_path\":\"\",\"size\":1048576,\"object_handle\":\"ctxobj-v1-17de47c063f62b8b5d68fa61aa3ab45f-g1-l1-83be3b848942800a\",\"object_generation\":1,\"content_etag\":\"18689de1a230d821\",\"layout_version\":1,\"created_at\":1793214274,\"last_accessed_at\":1793214274,\"ttl_seconds\":0,\"num_tokens\":0,\"num_layers\":0,\"dtype\":\"bfloat16\",\"compressed\":false,\"striping\":{\"chunk_size\":262144,\"chunk_devices\":[1,0,1,0],\"chunk_paths\":[\"/home/railtest/cswave1/wave2/small/data/stripe1/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk0.bin\",\"/home/railtest/cswave1/wave2/small/data/stripe0/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk1.bin\",\"/home/railtest/cswave1/wave2/small/data/stripe1/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk2.bin\",\"/home/railtest/cswave1/wave2/small/data/stripe0/contextstore/data/rail-e2e/17/de/47c063f62b8b5d68fa61aa3ab45f.g1.l1.chunk3.bin\"],\"total_size\":1048576,\"chunk_locations\":[],\"chunk_checksums\":[\"3904eb60ee680655\",\"60fc1f2afe31d9e6\",\"8e9adcdabbe92e88\",\"19dc88d142ec2838\"]}}\n"
+    },
+    {
+      "key": "contextstore:wave2-small-rxe-20261029:generation:8:rail-e2erail-e2e-1793214274130909071",
+      "type": "string",
+      "value": "1\n"
+    }
+  ]
+}

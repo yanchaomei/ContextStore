@@ -1,0 +1,10 @@
+{
+  "status": "LOCAL_VALIDATION_PASS_PENDING_INDEPENDENT_REVIEW",
+  "operations": 3908,
+  "exact_publications": 3244,
+  "expected_atomic_rejections": 664,
+  "native_frames": 9508,
+  "late_write_terminal_pairs": 1660,
+  "frozen_auditor_failed_suites": 1,
+  "collected_files": 54
+}

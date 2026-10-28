@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/home/railtest/cswave1/wave2/recovery-holdout-v2/recovery-test",
+    "--ignored",
+    "--nocapture",
+    "--exact",
+    "rail_read::tests::recovery_campaign::native_recovery_control_campaign"
+  ],
+  "environment": {
+    "CS_RECOVERY_CONTROLS": "F2",
+    "CS_RAIL_OBJECT_MIB": "16",
+    "CS_RECOVERY_SEED": "2026102946",
+    "CS_RECOVERY_RUN_TIMEOUT_SECS": "600",
+    "CS_RECOVERY_RSS_MAX_KIB": "1048576",
+    "CS_RECOVERY_OPS": "4",
+    "CS_RECOVERY_DEADLINE_SECS": "120",
+    "CS_RECOVERY_IO_SECS": "90",
+    "CS_RAIL_COORDINATOR": "http://10.81.1.1:25351",
+    "CS_RAIL_DEVICE1": "rxe1",
+    "CS_RAIL_DEVICE0": "rxe0",
+    "CS_RAIL_LISTENER1": "10.82.1.1:25354",
+    "CS_RAIL_LISTENER0": "10.81.1.1:25353",
+    "CS_RECOVERY_CAMPAIGN_DEADLINE_UNIX": "1793223576",
+    "CS_RAIL_GID1": "1",
+    "CS_RAIL_GID0": "1"
+  },
+  "started_unix_seconds": 1793220589.310433
+}

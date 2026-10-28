@@ -1,0 +1,1857 @@
+{
+  "state": "PASS_WITH_SCOPE_LIMITATIONS",
+  "audit_utc": "2026-10-28T20:12:08.313339+00:00",
+  "script_sha256": "2c21cad4dc19f11feb783ebc2fd3029b572b2055e3b6ecacbb1ae0b691daffad",
+  "checks": {
+    "frozen matrix exact": 1,
+    "protocol copies exact": 1,
+    "protocol precedes campaign": 1,
+    "completed 135 record manifest": 1,
+    "all phases counted": 1,
+    "unique process names": 1,
+    "raw hash verified": 675,
+    "frozen control hash verified": 3,
+    "current runtime source hash verified": 7,
+    "runtime source revision verified": 1,
+    "source before after exact": 1,
+    "client binaries before after exact": 1,
+    "server unchanged pid": 1,
+    "server unchanged start_ticks": 1,
+    "server unchanged exe": 1,
+    "server unchanged exe_sha256": 1,
+    "server unchanged command": 1,
+    "server unchanged environment": 1,
+    "server binary frozen": 1,
+    "server config before after exact": 1,
+    "server config raw hash exact": 1,
+    "server environment scope": 1,
+    "512KiB server striping": 1,
+    "client snapshot binaries exact": 1,
+    "client env fabric unchanged": 1,
+    "physical host pair verified": 1,
+    "server fabric stable": 1,
+    "replay command coverage exact": 1,
+    "exact full schedule and alternating order": 1,
+    "no unindexed process exits": 1,
+    "v2 no failure artifact": 1,
+    "start exit records agree": 135,
+    "index exit records agree": 135,
+    "zero exit within timeout": 135,
+    "sequential process timestamps": 135,
+    "inherited seed unchanged": 36,
+    "seed inheritance explicit": 9,
+    "no v1 measurement reuse": 126,
+    "exact argv and selected object": 126,
+    "exact process environment": 126,
+    "valid unique log fields": 102645,
+    "primary stderr empty tracing disabled": 120,
+    "no diagnostic warning error": 126,
+    "every request sampled": 126,
+    "one object_identity": 126,
+    "one object_identity_after": 126,
+    "process identity stable": 126,
+    "cross process identity stable": 126,
+    "identity layout valid": 126,
+    "one expected_pattern": 126,
+    "expected full known pattern": 126,
+    "opt in modes exact": 126,
+    "one route": 126,
+    "one HCA route": 126,
+    "one plan_assignment": 126,
+    "full stripe plan parser checked": 126,
+    "all samples size hash path positive latency": 10536,
+    "sample concurrency exact": 10536,
+    "sample batch worker order complete": 126,
+    "three pool snapshots": 126,
+    "R0 pool disabled": 63,
+    "one mode_effective": 126,
+    "single task effective mode": 126,
+    "one summary": 66,
+    "summary rail byte accounting": 126,
+    "CLI upper median matches raw": 126,
+    "one rail_stats": 66,
+    "serial rail completed counters": 66,
+    "serial zero outstanding resources": 66,
+    "per process receipt present": 126,
+    "cold pool zero": 126,
+    "pool creation reuse accounting": 63,
+    "pool quiescence ownership": 63,
+    "one summary_concurrent": 60,
+    "concurrent batches complete": 60,
+    "batch contains request time": 60,
+    "six diagnostic timing records per stage": 18,
+    "exact read totals": 1,
+    "three distinct identities each size": 1,
+    "nine server metadata objects": 1,
+    "server metadata layout and file coverage": 9,
+    "all phase diagnostics independently recomputed": 1,
+    "server log byte window complete": 1,
+    "server detail lines equal every read": 1,
+    "server connection lines equal pool accounting": 1,
+    "server zero fallback warning error observations": 1,
+    "v1 failed campaign preserved": 1,
+    "v1 failure reason retained": 1,
+    "v1 one failed validator slot retained": 1,
+    "PPT field independently reproduced size_mib": 6,
+    "PPT field independently reproduced concurrency": 6,
+    "PPT field independently reproduced independent_pairs": 6,
+    "PPT field independently reproduced R0_geomean_process_median_us": 6,
+    "PPT field independently reproduced R1_geomean_process_median_us": 6,
+    "PPT field independently reproduced R0_over_R1": 6,
+    "PPT field independently reproduced bootstrap95_lower": 6,
+    "PPT field independently reproduced bootstrap95_upper": 6,
+    "PPT field independently reproduced log_t95_lower": 6,
+    "PPT field independently reproduced log_t95_upper": 6,
+    "PPT field independently reproduced R1_slower_pairs": 6,
+    "PPT field independently reproduced median_latency_reduction_percent": 6,
+    "PPT field independently reproduced p95_ratio_descriptive": 6,
+    "all process medians p95 exact": 6,
+    "historical hash oracle full data replay": 1
+  },
+  "counts": {
+    "server_connections_expected": 5421,
+    "main_reads": 10500,
+    "steady_reads": 9000,
+    "startup_reads": 1500,
+    "diagnostic_reads": 36
+  },
+  "cells": [
+    {
+      "size_mib": 1,
+      "concurrency": 1,
+      "independent_pairs": 10,
+      "R0_geomean_process_median_us": 28311.015902510302,
+      "R1_geomean_process_median_us": 15208.705200898314,
+      "R0_over_R1": 1.86150073451605,
+      "bootstrap95_lower": 1.7883801259322862,
+      "bootstrap95_upper": 1.9167406615712146,
+      "log_t95_lower": 1.781723055101496,
+      "log_t95_upper": 1.9448505056283278,
+      "R1_slower_pairs": 0,
+      "median_latency_reduction_percent": 46.279903012771115,
+      "p95_ratio_descriptive": 1.7890304079482355,
+      "paired_ratios": [
+        1.8089030206677266,
+        1.9731020874441791,
+        1.8411945021259766,
+        1.889544992290785,
+        1.918518016797616,
+        1.5898700919573785,
+        1.8972342642067412,
+        1.9530677424777274,
+        1.9125266382525306,
+        1.8613887778222045
+      ],
+      "R0_process_medians_us": [
+        28445.0,
+        28498.5,
+        27930.0,
+        28799.5,
+        28325.0,
+        27230.5,
+        28228.0,
+        29047.0,
+        28718.5,
+        27932.0
+      ],
+      "R1_process_medians_us": [
+        15725.0,
+        14443.5,
+        15169.5,
+        15241.5,
+        14764.0,
+        17127.5,
+        14878.5,
+        14872.5,
+        15016.0,
+        15006.0
+      ],
+      "R0_process_p95_us": [
+        31838,
+        33769,
+        32836,
+        32249,
+        30542,
+        28936,
+        30527,
+        32552,
+        31764,
+        31961
+      ],
+      "R1_process_p95_us": [
+        17866,
+        16007,
+        18648,
+        17563,
+        15218,
+        20363,
+        18282,
+        18701,
+        17170,
+        17737
+      ]
+    },
+    {
+      "size_mib": 1,
+      "concurrency": 4,
+      "independent_pairs": 10,
+      "R0_geomean_process_median_us": 26092.588964485938,
+      "R1_geomean_process_median_us": 16119.694861409396,
+      "R0_over_R1": 1.6186775983552701,
+      "bootstrap95_lower": 1.5900636543268527,
+      "bootstrap95_upper": 1.6448018436464167,
+      "log_t95_lower": 1.585403291081971,
+      "log_t95_upper": 1.6526502639142786,
+      "R1_slower_pairs": 0,
+      "median_latency_reduction_percent": 38.22117504955311,
+      "p95_ratio_descriptive": 1.544783789934446,
+      "paired_ratios": [
+        1.639234390099442,
+        1.5422255483276726,
+        1.5873290314612987,
+        1.6386386067687606,
+        1.6098283931357253,
+        1.6580199980832508,
+        1.5442635387488328,
+        1.6642139612259261,
+        1.6561826252377934,
+        1.6529370762309106
+      ],
+      "R0_process_medians_us": [
+        26292.5,
+        26790.0,
+        25706.0,
+        25734.0,
+        25797.5,
+        25950.5,
+        26462.5,
+        26010.0,
+        26118.0,
+        26085.0
+      ],
+      "R1_process_medians_us": [
+        16039.5,
+        17371.0,
+        16194.5,
+        15704.5,
+        16025.0,
+        15651.5,
+        17136.0,
+        15629.0,
+        15770.0,
+        15781.0
+      ],
+      "R0_process_p95_us": [
+        29653,
+        34736,
+        28274,
+        28508,
+        28449,
+        29624,
+        29147,
+        28567,
+        28317,
+        28230
+      ],
+      "R1_process_p95_us": [
+        19617,
+        21203,
+        20941,
+        18347,
+        18000,
+        17876,
+        22210,
+        16501,
+        17288,
+        18472
+      ]
+    },
+    {
+      "size_mib": 8,
+      "concurrency": 1,
+      "independent_pairs": 10,
+      "R0_geomean_process_median_us": 99299.55793012104,
+      "R1_geomean_process_median_us": 85992.12380935854,
+      "R0_over_R1": 1.1547517787822588,
+      "bootstrap95_lower": 1.149198247050169,
+      "bootstrap95_upper": 1.1592609011227528,
+      "log_t95_lower": 1.1485908481962928,
+      "log_t95_upper": 1.1609457560059766,
+      "R1_slower_pairs": 0,
+      "median_latency_reduction_percent": 13.401302481252896,
+      "p95_ratio_descriptive": 1.1316126537668072,
+      "paired_ratios": [
+        1.1537474451876626,
+        1.1563773075400983,
+        1.1589306016380891,
+        1.162983105762555,
+        1.1487351381654247,
+        1.1347958239725122,
+        1.1630955220580963,
+        1.1563560015907548,
+        1.162067598143267,
+        1.1507189909555735
+      ],
+      "R0_process_medians_us": [
+        99351.5,
+        99349.0,
+        99897.5,
+        100505.0,
+        98357.0,
+        98750.5,
+        99960.5,
+        98861.5,
+        99638.0,
+        98348.5
+      ],
+      "R1_process_medians_us": [
+        86112.0,
+        85914.0,
+        86198.0,
+        86420.0,
+        85622.0,
+        87020.5,
+        85943.5,
+        85494.0,
+        85742.0,
+        85467.0
+      ],
+      "R0_process_p95_us": [
+        102686,
+        101831,
+        102291,
+        104084,
+        101393,
+        102325,
+        101935,
+        102655,
+        104889,
+        101846
+      ],
+      "R1_process_p95_us": [
+        87886,
+        89297,
+        89426,
+        92633,
+        89527,
+        92090,
+        91670,
+        95677,
+        89917,
+        88710
+      ]
+    },
+    {
+      "size_mib": 8,
+      "concurrency": 4,
+      "independent_pairs": 10,
+      "R0_geomean_process_median_us": 102146.4686769153,
+      "R1_geomean_process_median_us": 90544.34735796963,
+      "R0_over_R1": 1.1281374448818577,
+      "bootstrap95_lower": 1.1230682673294543,
+      "bootstrap95_upper": 1.132733262199001,
+      "log_t95_lower": 1.1221902096828644,
+      "log_t95_upper": 1.1341161984510943,
+      "R1_slower_pairs": 0,
+      "median_latency_reduction_percent": 11.358318568645398,
+      "p95_ratio_descriptive": 1.0961511398016475,
+      "paired_ratios": [
+        1.11175127252717,
+        1.1356133120623948,
+        1.1266894032474009,
+        1.1230640549745519,
+        1.1357974576553933,
+        1.132387076711203,
+        1.1321779298928483,
+        1.120570273762327,
+        1.1249671412924425,
+        1.138633301251203
+      ],
+      "R0_process_medians_us": [
+        101016.5,
+        102505.0,
+        102246.5,
+        102716.0,
+        102127.5,
+        101959.0,
+        101223.5,
+        101471.0,
+        102709.5,
+        103516.0
+      ],
+      "R1_process_medians_us": [
+        90862.5,
+        90264.0,
+        90749.5,
+        91460.5,
+        89917.0,
+        90039.0,
+        89406.0,
+        90553.0,
+        91300.0,
+        90912.5
+      ],
+      "R0_process_p95_us": [
+        110086,
+        110334,
+        108210,
+        111513,
+        108224,
+        108057,
+        108461,
+        107731,
+        109170,
+        109021
+      ],
+      "R1_process_p95_us": [
+        98647,
+        98403,
+        99611,
+        98315,
+        99106,
+        99761,
+        98088,
+        100812,
+        101846,
+        100550
+      ]
+    },
+    {
+      "size_mib": 64,
+      "concurrency": 1,
+      "independent_pairs": 10,
+      "R0_geomean_process_median_us": 681884.0457556813,
+      "R1_geomean_process_median_us": 674983.0955781335,
+      "R0_over_R1": 1.0102238859354504,
+      "bootstrap95_lower": 1.0069027843856917,
+      "bootstrap95_upper": 1.0140525129240305,
+      "log_t95_lower": 1.0058139793009797,
+      "log_t95_upper": 1.0146531274339468,
+      "R1_slower_pairs": 0,
+      "median_latency_reduction_percent": 1.0120415957085904,
+      "p95_ratio_descriptive": 1.0101235128062676,
+      "paired_ratios": [
+        1.0231983787635845,
+        1.0089583186768023,
+        1.01049200223486,
+        1.0037576177428833,
+        1.0064526337606612,
+        1.018097064455034,
+        1.0035052214037077,
+        1.0067621888398368,
+        1.010447555725878,
+        1.010738220244222
+      ],
+      "R0_process_medians_us": [
+        689185.5,
+        681231.0,
+        682746.5,
+        678099.5,
+        677401.5,
+        686455.0,
+        681796.5,
+        680610.0,
+        678947.5,
+        682455.5
+      ],
+      "R1_process_medians_us": [
+        673560.0,
+        675182.5,
+        675657.5,
+        675561.0,
+        673058.5,
+        674253.0,
+        679415.0,
+        676038.5,
+        671927.5,
+        675205.0
+      ],
+      "R0_process_p95_us": [
+        721675,
+        697434,
+        715322,
+        688949,
+        700350,
+        699180,
+        693387,
+        700233,
+        691121,
+        696236
+      ],
+      "R1_process_p95_us": [
+        690619,
+        694320,
+        684489,
+        700065,
+        692580,
+        698698,
+        699694,
+        696552,
+        687953,
+        688238
+      ]
+    },
+    {
+      "size_mib": 64,
+      "concurrency": 4,
+      "independent_pairs": 10,
+      "R0_geomean_process_median_us": 711207.6648927864,
+      "R1_geomean_process_median_us": 705204.1707204252,
+      "R0_over_R1": 1.008513129135676,
+      "bootstrap95_lower": 1.006042425886989,
+      "bootstrap95_upper": 1.0109903107284175,
+      "log_t95_lower": 1.0054661016412303,
+      "log_t95_upper": 1.0115693905332206,
+      "R1_slower_pairs": 0,
+      "median_latency_reduction_percent": 0.844126753508101,
+      "p95_ratio_descriptive": 1.0064942852404988,
+      "paired_ratios": [
+        1.0084851888567898,
+        1.00164558584343,
+        1.0053697642494102,
+        1.010467898703789,
+        1.0052300401005247,
+        1.0108464983004344,
+        1.011808767172915,
+        1.0157639984206013,
+        1.0044638886025763,
+        1.0111308589258388
+      ],
+      "R0_process_medians_us": [
+        711094.0,
+        707293.5,
+        708938.5,
+        713020.0,
+        707788.0,
+        714018.5,
+        714980.5,
+        711305.5,
+        711400.5,
+        712279.0
+      ],
+      "R1_process_medians_us": [
+        705111.0,
+        706131.5,
+        705152.0,
+        705633.5,
+        704105.5,
+        706357.0,
+        706636.0,
+        700266.5,
+        708239.0,
+        704438.0
+      ],
+      "R0_process_p95_us": [
+        757724,
+        743837,
+        731214,
+        740889,
+        739572,
+        749298,
+        752276,
+        751904,
+        748113,
+        743380
+      ],
+      "R1_process_p95_us": [
+        746049,
+        747943,
+        732176,
+        745854,
+        734178,
+        741412,
+        747281,
+        732575,
+        747009,
+        735526
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "size_mib": 1,
+      "variant": "R0",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 13731,
+            "next_five_median": 12088,
+            "next_five_values": [
+              10539,
+              12335,
+              12088,
+              10557,
+              12457
+            ]
+          },
+          "allocation_us": {
+            "first_read": 752,
+            "next_five_median": 82,
+            "next_five_values": [
+              122,
+              39,
+              39,
+              82,
+              99
+            ]
+          },
+          "registration_us": {
+            "first_read": 111,
+            "next_five_median": 112,
+            "next_five_values": [
+              184,
+              103,
+              112,
+              144,
+              52
+            ]
+          },
+          "get_us": {
+            "first_read": 10110,
+            "next_five_median": 10004,
+            "next_five_values": [
+              9864,
+              9662,
+              11263,
+              11192,
+              10004
+            ]
+          },
+          "teardown_us": {
+            "first_read": 2132,
+            "next_five_median": 2064,
+            "next_five_values": [
+              2147,
+              2166,
+              1980,
+              1980,
+              2064
+            ]
+          },
+          "total_us": {
+            "first_read": 26841,
+            "next_five_median": 24307,
+            "next_five_values": [
+              22860,
+              24307,
+              25484,
+              23958,
+              24680
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 16,
+            "next_five_median": 7,
+            "next_five_values": [
+              7,
+              6,
+              7,
+              8,
+              7
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 27114,
+            "next_five_median": 24538,
+            "next_five_values": [
+              23170,
+              24538,
+              25786,
+              24242,
+              25003
+            ]
+          },
+          "assembly_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 326,
+            "next_five_median": 312,
+            "next_five_values": [
+              277,
+              312,
+              312,
+              312,
+              312
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 27462,
+            "next_five_median": 24861,
+            "next_five_values": [
+              23458,
+              24861,
+              26111,
+              24567,
+              25328
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 1549,
+            "next_five_median": 2041,
+            "next_five_values": [
+              2041,
+              1250,
+              2447,
+              1499,
+              2468
+            ]
+          },
+          "transfer_us": {
+            "first_read": 27779,
+            "next_five_median": 25015,
+            "next_five_values": [
+              23609,
+              25015,
+              26268,
+              24744,
+              25484
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 2853,
+            "next_five_median": 2939,
+            "next_five_values": [
+              3245,
+              2939,
+              3433,
+              2791,
+              1821
+            ]
+          },
+          "publish_us": {
+            "first_read": 279,
+            "next_five_median": 294,
+            "next_five_values": [
+              274,
+              317,
+              294,
+              293,
+              296
+            ]
+          },
+          "total_us": {
+            "first_read": 32463,
+            "next_five_median": 29523,
+            "next_five_values": [
+              29170,
+              29523,
+              32445,
+              29330,
+              30071
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 1,
+      "variant": "R1",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 9591,
+            "next_five_median": 10,
+            "next_five_values": [
+              9,
+              11,
+              10,
+              10,
+              10
+            ]
+          },
+          "allocation_us": {
+            "first_read": 495,
+            "next_five_median": 101,
+            "next_five_values": [
+              124,
+              101,
+              101,
+              101,
+              101
+            ]
+          },
+          "registration_us": {
+            "first_read": 111,
+            "next_five_median": 212,
+            "next_five_values": [
+              231,
+              246,
+              211,
+              212,
+              211
+            ]
+          },
+          "get_us": {
+            "first_read": 10767,
+            "next_five_median": 10029,
+            "next_five_values": [
+              10029,
+              10004,
+              9959,
+              10220,
+              10190
+            ]
+          },
+          "teardown_us": {
+            "first_read": 127,
+            "next_five_median": 140,
+            "next_five_values": [
+              137,
+              153,
+              141,
+              140,
+              139
+            ]
+          },
+          "total_us": {
+            "first_read": 21096,
+            "next_five_median": 10533,
+            "next_five_values": [
+              10533,
+              10518,
+              10425,
+              10686,
+              10655
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 10,
+            "next_five_median": 5,
+            "next_five_values": [
+              3,
+              3,
+              5,
+              5,
+              6
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 21260,
+            "next_five_median": 10852,
+            "next_five_values": [
+              10802,
+              10852,
+              10737,
+              10950,
+              11021
+            ]
+          },
+          "assembly_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 88,
+            "next_five_median": 292,
+            "next_five_values": [
+              179,
+              250,
+              292,
+              311,
+              312
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 21362,
+            "next_five_median": 11109,
+            "next_five_values": [
+              10986,
+              11109,
+              11039,
+              11271,
+              11344
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 1703,
+            "next_five_median": 1533,
+            "next_five_values": [
+              1533,
+              1471,
+              1500,
+              1818,
+              1777
+            ]
+          },
+          "transfer_us": {
+            "first_read": 21625,
+            "next_five_median": 11333,
+            "next_five_values": [
+              11184,
+              11333,
+              11276,
+              11535,
+              11619
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 1776,
+            "next_five_median": 1844,
+            "next_five_values": [
+              1661,
+              1935,
+              1872,
+              1844,
+              1586
+            ]
+          },
+          "publish_us": {
+            "first_read": 307,
+            "next_five_median": 298,
+            "next_five_values": [
+              298,
+              296,
+              297,
+              298,
+              300
+            ]
+          },
+          "total_us": {
+            "first_read": 25413,
+            "next_five_median": 15037,
+            "next_five_values": [
+              14678,
+              15037,
+              14948,
+              15498,
+              15285
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 8,
+      "variant": "R0",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 13295,
+            "next_five_median": 12303,
+            "next_five_values": [
+              12303,
+              11583,
+              12400,
+              12496,
+              10402
+            ]
+          },
+          "allocation_us": {
+            "first_read": 3659,
+            "next_five_median": 606,
+            "next_five_values": [
+              852,
+              449,
+              334,
+              776,
+              606
+            ]
+          },
+          "registration_us": {
+            "first_read": 288,
+            "next_five_median": 300,
+            "next_five_values": [
+              827,
+              300,
+              254,
+              240,
+              402
+            ]
+          },
+          "get_us": {
+            "first_read": 79952,
+            "next_five_median": 74657,
+            "next_five_values": [
+              74657,
+              73151,
+              76417,
+              76341,
+              74074
+            ]
+          },
+          "teardown_us": {
+            "first_read": 2703,
+            "next_five_median": 2397,
+            "next_five_values": [
+              2397,
+              2435,
+              2366,
+              2389,
+              2466
+            ]
+          },
+          "total_us": {
+            "first_read": 99904,
+            "next_five_median": 91039,
+            "next_five_values": [
+              91039,
+              87921,
+              91774,
+              92245,
+              87953
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 23,
+            "next_five_median": 11,
+            "next_five_values": [
+              12,
+              8,
+              19,
+              11,
+              11
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 100342,
+            "next_five_median": 91353,
+            "next_five_values": [
+              91353,
+              88163,
+              92026,
+              92554,
+              88255
+            ]
+          },
+          "assembly_us": {
+            "first_read": 1,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 2513,
+            "next_five_median": 2428,
+            "next_five_values": [
+              2521,
+              1824,
+              1917,
+              2428,
+              2509
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              1,
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 102884,
+            "next_five_median": 93893,
+            "next_five_values": [
+              93893,
+              90000,
+              93966,
+              94998,
+              90780
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 2556,
+            "next_five_median": 3108,
+            "next_five_values": [
+              2125,
+              1806,
+              3108,
+              4466,
+              3315
+            ]
+          },
+          "transfer_us": {
+            "first_read": 103263,
+            "next_five_median": 94055,
+            "next_five_values": [
+              94055,
+              90169,
+              94170,
+              95257,
+              91004
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 2547,
+            "next_five_median": 3785,
+            "next_five_values": [
+              2155,
+              1775,
+              4608,
+              3785,
+              4287
+            ]
+          },
+          "publish_us": {
+            "first_read": 1362,
+            "next_five_median": 2203,
+            "next_five_values": [
+              2352,
+              1342,
+              1830,
+              2203,
+              2206
+            ]
+          },
+          "total_us": {
+            "first_read": 109730,
+            "next_five_median": 100814,
+            "next_five_values": [
+              100690,
+              95096,
+              103718,
+              105714,
+              100814
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 8,
+      "variant": "R1",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 11786,
+            "next_five_median": 10,
+            "next_five_values": [
+              9,
+              11,
+              10,
+              9,
+              10
+            ]
+          },
+          "allocation_us": {
+            "first_read": 4042,
+            "next_five_median": 829,
+            "next_five_values": [
+              849,
+              844,
+              825,
+              824,
+              829
+            ]
+          },
+          "registration_us": {
+            "first_read": 474,
+            "next_five_median": 889,
+            "next_five_values": [
+              930,
+              1100,
+              876,
+              889,
+              862
+            ]
+          },
+          "get_us": {
+            "first_read": 77221,
+            "next_five_median": 75405,
+            "next_five_values": [
+              73636,
+              75405,
+              80567,
+              74323,
+              76096
+            ]
+          },
+          "teardown_us": {
+            "first_read": 550,
+            "next_five_median": 323,
+            "next_five_values": [
+              294,
+              323,
+              316,
+              323,
+              405
+            ]
+          },
+          "total_us": {
+            "first_read": 94080,
+            "next_five_median": 77687,
+            "next_five_values": [
+              75721,
+              77687,
+              82598,
+              76371,
+              78205
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 13,
+            "next_five_median": 12,
+            "next_five_values": [
+              12,
+              26,
+              12,
+              12,
+              12
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 94431,
+            "next_five_median": 78075,
+            "next_five_values": [
+              75980,
+              78075,
+              82894,
+              76710,
+              78549
+            ]
+          },
+          "assembly_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 2273,
+            "next_five_median": 2481,
+            "next_five_values": [
+              2481,
+              2507,
+              2479,
+              2540,
+              2370
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 96723,
+            "next_five_median": 80614,
+            "next_five_values": [
+              78479,
+              80614,
+              85390,
+              79268,
+              80937
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 3029,
+            "next_five_median": 1966,
+            "next_five_values": [
+              1966,
+              1832,
+              2024,
+              2127,
+              1851
+            ]
+          },
+          "transfer_us": {
+            "first_read": 97072,
+            "next_five_median": 80913,
+            "next_five_values": [
+              78751,
+              80913,
+              85685,
+              79593,
+              81239
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 2278,
+            "next_five_median": 2362,
+            "next_five_values": [
+              2502,
+              2317,
+              2362,
+              2560,
+              2068
+            ]
+          },
+          "publish_us": {
+            "first_read": 1405,
+            "next_five_median": 2369,
+            "next_five_values": [
+              1668,
+              2000,
+              2398,
+              2369,
+              2385
+            ]
+          },
+          "total_us": {
+            "first_read": 103786,
+            "next_five_median": 87064,
+            "next_five_values": [
+              84890,
+              87064,
+              92472,
+              86653,
+              87545
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 64,
+      "variant": "R0",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 14277,
+            "next_five_median": 12851,
+            "next_five_values": [
+              13114,
+              12509,
+              12851,
+              12877,
+              12660
+            ]
+          },
+          "allocation_us": {
+            "first_read": 29231,
+            "next_five_median": 30235,
+            "next_five_values": [
+              31220,
+              30235,
+              29604,
+              30348,
+              30011
+            ]
+          },
+          "registration_us": {
+            "first_read": 2892,
+            "next_five_median": 2833,
+            "next_five_values": [
+              2833,
+              2887,
+              2995,
+              2833,
+              2827
+            ]
+          },
+          "get_us": {
+            "first_read": 579951,
+            "next_five_median": 581728,
+            "next_five_values": [
+              583461,
+              581728,
+              578422,
+              577633,
+              584160
+            ]
+          },
+          "teardown_us": {
+            "first_read": 6339,
+            "next_five_median": 6307,
+            "next_five_values": [
+              6387,
+              6493,
+              6260,
+              6237,
+              6307
+            ]
+          },
+          "total_us": {
+            "first_read": 632700,
+            "next_five_median": 633854,
+            "next_five_values": [
+              637018,
+              633854,
+              630136,
+              629931,
+              635970
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 61,
+            "next_five_median": 42,
+            "next_five_values": [
+              77,
+              36,
+              62,
+              30,
+              42
+            ]
+          },
+          "reserve_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              0,
+              0,
+              1
+            ]
+          },
+          "workers_us": {
+            "first_read": 633112,
+            "next_five_median": 634191,
+            "next_five_values": [
+              637376,
+              634191,
+              630457,
+              630291,
+              636350
+            ]
+          },
+          "assembly_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              11,
+              1,
+              0,
+              0
+            ]
+          },
+          "checksum_us": {
+            "first_read": 16416,
+            "next_five_median": 12191,
+            "next_five_values": [
+              15619,
+              8498,
+              12191,
+              11959,
+              14274
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 649595,
+            "next_five_median": 642741,
+            "next_five_values": [
+              653079,
+              642741,
+              642715,
+              642284,
+              650671
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 11995,
+            "next_five_median": 4574,
+            "next_five_values": [
+              4574,
+              9913,
+              4536,
+              4332,
+              5522
+            ]
+          },
+          "transfer_us": {
+            "first_read": 649935,
+            "next_five_median": 642924,
+            "next_five_values": [
+              653257,
+              642903,
+              642924,
+              642470,
+              650870
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 4883,
+            "next_five_median": 5307,
+            "next_five_values": [
+              8943,
+              4569,
+              5307,
+              4738,
+              12908
+            ]
+          },
+          "publish_us": {
+            "first_read": 14801,
+            "next_five_median": 14837,
+            "next_five_values": [
+              17650,
+              14583,
+              14837,
+              13540,
+              17306
+            ]
+          },
+          "total_us": {
+            "first_read": 681615,
+            "next_five_median": 671970,
+            "next_five_values": [
+              684427,
+              671970,
+              667606,
+              665082,
+              686608
+            ]
+          }
+        }
+      }
+    },
+    {
+      "size_mib": 64,
+      "variant": "R1",
+      "stages": {
+        "RAIL_TRANSPORT_TIMING": {
+          "connect_us": {
+            "first_read": 13450,
+            "next_five_median": 11,
+            "next_five_values": [
+              12,
+              11,
+              11,
+              11,
+              12
+            ]
+          },
+          "allocation_us": {
+            "first_read": 28954,
+            "next_five_median": 38911,
+            "next_five_values": [
+              37620,
+              39310,
+              40077,
+              37542,
+              38911
+            ]
+          },
+          "registration_us": {
+            "first_read": 2793,
+            "next_five_median": 2886,
+            "next_five_values": [
+              3108,
+              2916,
+              2886,
+              2860,
+              2850
+            ]
+          },
+          "get_us": {
+            "first_read": 588514,
+            "next_five_median": 583461,
+            "next_five_values": [
+              579821,
+              583461,
+              587399,
+              582113,
+              591357
+            ]
+          },
+          "teardown_us": {
+            "first_read": 3967,
+            "next_five_median": 3689,
+            "next_five_values": [
+              2851,
+              3666,
+              3689,
+              3716,
+              3833
+            ]
+          },
+          "total_us": {
+            "first_read": 637687,
+            "next_five_median": 629367,
+            "next_five_values": [
+              623413,
+              629367,
+              634065,
+              626245,
+              636965
+            ]
+          }
+        },
+        "RAIL_STAGED_TIMING": {
+          "plan_us": {
+            "first_read": 56,
+            "next_five_median": 47,
+            "next_five_values": [
+              54,
+              47,
+              71,
+              28,
+              16
+            ]
+          },
+          "reserve_us": {
+            "first_read": 2,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              1,
+              1,
+              0,
+              0
+            ]
+          },
+          "workers_us": {
+            "first_read": 638135,
+            "next_five_median": 629785,
+            "next_five_values": [
+              623747,
+              629785,
+              634532,
+              626621,
+              637359
+            ]
+          },
+          "assembly_us": {
+            "first_read": 1,
+            "next_five_median": 1,
+            "next_five_values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "checksum_us": {
+            "first_read": 12153,
+            "next_five_median": 15646,
+            "next_five_values": [
+              15090,
+              15646,
+              15791,
+              13449,
+              15743
+            ]
+          },
+          "finish_us": {
+            "first_read": 0,
+            "next_five_median": 0,
+            "next_five_values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "total_us": {
+            "first_read": 650350,
+            "next_five_median": 645483,
+            "next_five_values": [
+              638896,
+              645483,
+              650401,
+              640102,
+              653123
+            ]
+          }
+        },
+        "RAIL_OUTER_TIMING": {
+          "lookup_us": {
+            "first_read": 11877,
+            "next_five_median": 8253,
+            "next_five_values": [
+              8253,
+              5293,
+              13200,
+              8735,
+              4626
+            ]
+          },
+          "transfer_us": {
+            "first_read": 650659,
+            "next_five_median": 645725,
+            "next_five_values": [
+              639036,
+              645725,
+              650636,
+              640328,
+              653349
+            ]
+          },
+          "post_lookup_us": {
+            "first_read": 4587,
+            "next_five_median": 4788,
+            "next_five_values": [
+              4788,
+              13121,
+              4684,
+              4750,
+              8922
+            ]
+          },
+          "publish_us": {
+            "first_read": 16973,
+            "next_five_median": 17189,
+            "next_five_values": [
+              17216,
+              16652,
+              17189,
+              17972,
+              15823
+            ]
+          },
+          "total_us": {
+            "first_read": 684099,
+            "next_five_median": 680794,
+            "next_five_values": [
+              669295,
+              680794,
+              685712,
+              671788,
+              682722
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "hash_oracle": {
+    "status": "PASS",
+    "audit_utc": "2026-10-28T20:12:08.133527+00:00",
+    "method": "Independent Python integer transcription of twox-hash 1.6.3 long-input 64-bit hash; secret extracted from copied pinned crate source; explicit 64-bit wrapping, scalar accumulate/scramble/merge; verified 5 existing crate long-input known-answer vectors before deterministic payloads. No Rust build or benchmark run.",
+    "crate_source_sha256": "1c1489aab48f78ccca0330f11e76d14c703a06910d2482c6d93ce88ac6541686",
+    "source_reference": "twox-hash-1.6.3/src/xxh3.rs: long-key loop, generic scalar accumulate512/scramble_acc, merge_accs, avalanche",
+    "known_answer_vectors_passed": {
+      "403": "4834389b15d981e8",
+      "512": "6a1b982631f059a8",
+      "2048": "efefd4449323cdd4",
+      "2240": "998c0437486672c7",
+      "2243": "a559d20581d742d3"
+    },
+    "deterministic_pattern_i_mod_251_hashes": {
+      "16": "614d9758e87638c7",
+      "64": "a0a4cbfa5cad46af",
+      "1": "c061e1dcd62f6c77",
+      "8": "dc2ba4087a0c5c99"
+    },
+    "modern_xxhash_mismatch_resolution": "twox-hash 1.6.3 documents an in-progress historical XXH3 algorithm; modern xxhash.xxh3_64 is not a compatible oracle. Independent transcription reproduces both pilot expected hashes exactly.",
+    "replay_script_sha256": "28d7d0849434ea320693840d8320391c75f1b132d19c539e1eb25947047e12ce"
+  },
+  "raw_manifest_sha256": "dcbc4ebb18a04ad32eec0cec0c9e79d22b472d56fb8c6e88952de874f54ba4c4",
+  "protocol_sha256": "64894e9f184e157870e3f08de16f3aee82df94665410c0b23c8711f4b9535923",
+  "source_revision": "1c3ee135d19fece67507b51acd1fc51ae9541208"
+}

@@ -1,0 +1,1 @@
+Redis PID/startticks/exe hash matched, but cwd was root/redis due to Redis chdir. Initial guard refused before any stop. Corrected expected Redis cwd after fresh proc readback. Concurrent new-fixture start failed binding occupied original ports before launching processes. No old logs overwritten.

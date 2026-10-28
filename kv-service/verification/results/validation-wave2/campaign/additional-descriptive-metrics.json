@@ -1,0 +1,1616 @@
+[
+  {
+    "size_mib": 1,
+    "concurrency": 1,
+    "p95_paired_ratios": [
+      1.7820441061233627,
+      2.109639532704442,
+      1.7608322608322609,
+      1.8361897170187325,
+      2.0069654356682873,
+      1.4210086922359182,
+      1.6697844874740182,
+      1.7406555799155126,
+      1.8499708794408853,
+      1.8019394486102498
+    ],
+    "cpu_scope": "all 35 batches, including startup; compare R0/R1 only within this concurrency. Serial excludes later pattern hash; concurrent includes coordination and hash",
+    "variants": {
+      "R0": {
+        "cpu_user_plus_system_us_per_process": [
+          369699,
+          354500,
+          362387,
+          375587,
+          366273,
+          357696,
+          368895,
+          361819,
+          362954,
+          362980
+        ],
+        "peak_rss_kib_per_process": [
+          9496,
+          9684,
+          9536,
+          9748,
+          9728,
+          9792,
+          9532,
+          9556,
+          9792,
+          9604
+        ],
+        "startup_5batch_medians_us": [
+          27766,
+          30474,
+          31577,
+          29046,
+          29749,
+          26815,
+          28049,
+          26366,
+          28449,
+          30403
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          }
+        ]
+      },
+      "R1": {
+        "cpu_user_plus_system_us_per_process": [
+          113433,
+          107935,
+          116195,
+          113698,
+          106177,
+          117667,
+          110938,
+          110530,
+          108758,
+          113448
+        ],
+        "peak_rss_kib_per_process": [
+          9380,
+          9476,
+          9488,
+          9556,
+          9424,
+          9464,
+          9564,
+          9588,
+          9752,
+          9528
+        ],
+        "startup_5batch_medians_us": [
+          14323,
+          15140,
+          17754,
+          18484,
+          15896,
+          16183,
+          14827,
+          16862,
+          14413,
+          14946
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "size_mib": 1,
+    "concurrency": 4,
+    "p95_paired_ratios": [
+      1.5115970841616966,
+      1.6382587369711834,
+      1.3501742992216226,
+      1.5538235133809342,
+      1.5805,
+      1.657194003132692,
+      1.3123367852318775,
+      1.7312284103993698,
+      1.637956964368348,
+      1.5282589865742746
+    ],
+    "cpu_scope": "all 35 batches, including startup; compare R0/R1 only within this concurrency. Serial excludes later pattern hash; concurrent includes coordination and hash",
+    "variants": {
+      "R0": {
+        "cpu_user_plus_system_us_per_process": [
+          1261888,
+          1275801,
+          1219250,
+          1245275,
+          1254651,
+          1235837,
+          1270143,
+          1240889,
+          1268909,
+          1276506
+        ],
+        "peak_rss_kib_per_process": [
+          16912,
+          17064,
+          17044,
+          16848,
+          16908,
+          16900,
+          16904,
+          16884,
+          16980,
+          17148
+        ],
+        "startup_5batch_medians_us": [
+          26700.0,
+          26453.0,
+          25280.5,
+          26592.0,
+          26147.0,
+          26812.0,
+          26448.5,
+          25293.0,
+          26702.0,
+          27886.5
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          }
+        ]
+      },
+      "R1": {
+        "cpu_user_plus_system_us_per_process": [
+          375324,
+          400720,
+          386661,
+          392541,
+          382111,
+          387431,
+          393996,
+          383797,
+          391780,
+          398263
+        ],
+        "peak_rss_kib_per_process": [
+          16796,
+          16824,
+          16864,
+          16984,
+          16820,
+          16908,
+          16996,
+          16708,
+          16856,
+          16800
+        ],
+        "startup_5batch_medians_us": [
+          19975.5,
+          15848.5,
+          16211.0,
+          17244.0,
+          15417.0,
+          15551.5,
+          15840.0,
+          16570.0,
+          15560.0,
+          15691.5
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "size_mib": 8,
+    "concurrency": 1,
+    "p95_paired_ratios": [
+      1.1683999726918963,
+      1.140363058109455,
+      1.1438619640820342,
+      1.1236168536050868,
+      1.1325410211444593,
+      1.1111412748398306,
+      1.1119777462637723,
+      1.072932888782048,
+      1.1665091139606527,
+      1.1480780069890655
+    ],
+    "cpu_scope": "all 35 batches, including startup; compare R0/R1 only within this concurrency. Serial excludes later pattern hash; concurrent includes coordination and hash",
+    "variants": {
+      "R0": {
+        "cpu_user_plus_system_us_per_process": [
+          589240,
+          597486,
+          602375,
+          598512,
+          583787,
+          599179,
+          592815,
+          603349,
+          600249,
+          574892
+        ],
+        "peak_rss_kib_per_process": [
+          24096,
+          23948,
+          23912,
+          24016,
+          23828,
+          23960,
+          23864,
+          24012,
+          23808,
+          23804
+        ],
+        "startup_5batch_medians_us": [
+          99082,
+          99953,
+          99204,
+          99967,
+          99575,
+          99015,
+          99432,
+          100685,
+          99627,
+          99086
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          }
+        ]
+      },
+      "R1": {
+        "cpu_user_plus_system_us_per_process": [
+          319932,
+          329215,
+          331367,
+          332170,
+          318323,
+          326928,
+          325891,
+          341653,
+          327676,
+          331791
+        ],
+        "peak_rss_kib_per_process": [
+          23968,
+          24056,
+          24120,
+          23820,
+          24008,
+          23852,
+          23812,
+          23788,
+          24108,
+          23756
+        ],
+        "startup_5batch_medians_us": [
+          85426,
+          85361,
+          84550,
+          86076,
+          85189,
+          89385,
+          86922,
+          87905,
+          86029,
+          88259
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "size_mib": 8,
+    "concurrency": 4,
+    "p95_paired_ratios": [
+      1.1159589242450354,
+      1.1212463034663578,
+      1.08632580739075,
+      1.134241977317805,
+      1.0920025023711986,
+      1.0831587494110926,
+      1.105751977815839,
+      1.068632702456057,
+      1.0719124953360957,
+      1.0842466434609648
+    ],
+    "cpu_scope": "all 35 batches, including startup; compare R0/R1 only within this concurrency. Serial excludes later pattern hash; concurrent includes coordination and hash",
+    "variants": {
+      "R0": {
+        "cpu_user_plus_system_us_per_process": [
+          2604577,
+          2564207,
+          2603292,
+          2575083,
+          2553671,
+          2531889,
+          2586843,
+          2526740,
+          2521677,
+          2631331
+        ],
+        "peak_rss_kib_per_process": [
+          74276,
+          74116,
+          74196,
+          74232,
+          74096,
+          74428,
+          74176,
+          74428,
+          74196,
+          74108
+        ],
+        "startup_5batch_medians_us": [
+          102238.5,
+          102933.5,
+          103043.0,
+          103023.5,
+          102212.5,
+          103785.0,
+          105347.0,
+          103737.0,
+          108509.5,
+          102097.5
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          }
+        ]
+      },
+      "R1": {
+        "cpu_user_plus_system_us_per_process": [
+          1534538,
+          1568773,
+          1554144,
+          1606138,
+          1563237,
+          1546452,
+          1542534,
+          1547017,
+          1569129,
+          1593019
+        ],
+        "peak_rss_kib_per_process": [
+          74208,
+          74068,
+          73996,
+          74372,
+          74060,
+          74248,
+          74252,
+          74096,
+          74176,
+          74028
+        ],
+        "startup_5batch_medians_us": [
+          90495.5,
+          92959.5,
+          89589.0,
+          95470.0,
+          90024.5,
+          94022.0,
+          98922.5,
+          89554.0,
+          89010.0,
+          93570.0
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "size_mib": 64,
+    "concurrency": 1,
+    "p95_paired_ratios": [
+      1.0449683544762018,
+      1.004484963705496,
+      1.0450452819548597,
+      0.9841214744345168,
+      1.0112189205579138,
+      1.0006898545580494,
+      0.9909860596203484,
+      1.0052846018674844,
+      1.0046049657462064,
+      1.0116209799517029
+    ],
+    "cpu_scope": "all 35 batches, including startup; compare R0/R1 only within this concurrency. Serial excludes later pattern hash; concurrent includes coordination and hash",
+    "variants": {
+      "R0": {
+        "cpu_user_plus_system_us_per_process": [
+          2876675,
+          2863037,
+          2873666,
+          2821539,
+          2855386,
+          2859091,
+          2857313,
+          2885080,
+          2810561,
+          2825352
+        ],
+        "peak_rss_kib_per_process": [
+          138908,
+          139204,
+          139288,
+          139112,
+          139172,
+          138992,
+          139044,
+          139252,
+          139064,
+          138868
+        ],
+        "startup_5batch_medians_us": [
+          683781,
+          694045,
+          683249,
+          681670,
+          683387,
+          687451,
+          681962,
+          686223,
+          683976,
+          681728
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          }
+        ]
+      },
+      "R1": {
+        "cpu_user_plus_system_us_per_process": [
+          2801909,
+          2849114,
+          2866172,
+          2868544,
+          2789713,
+          2803886,
+          2808227,
+          2798238,
+          2803151,
+          2842713
+        ],
+        "peak_rss_kib_per_process": [
+          139144,
+          138836,
+          138776,
+          138920,
+          139132,
+          139084,
+          139116,
+          138756,
+          138820,
+          138936
+        ],
+        "startup_5batch_medians_us": [
+          677051,
+          678578,
+          674138,
+          676975,
+          673363,
+          673471,
+          680992,
+          678710,
+          677193,
+          677670
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "1",
+            "reused": "34",
+            "retired": "0",
+            "rejected": "0",
+            "live": "1",
+            "connecting": "0",
+            "active": "0",
+            "idle": "1",
+            "retiring": "0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "size_mib": 64,
+    "concurrency": 4,
+    "p95_paired_ratios": [
+      1.0156491061579065,
+      0.9945102768526478,
+      0.9986861082581238,
+      0.9933432012163238,
+      1.0073469921463187,
+      1.0106364612388254,
+      1.006684232571148,
+      1.0263850117735385,
+      1.0014778938406366,
+      1.0106780725630364
+    ],
+    "cpu_scope": "all 35 batches, including startup; compare R0/R1 only within this concurrency. Serial excludes later pattern hash; concurrent includes coordination and hash",
+    "variants": {
+      "R0": {
+        "cpu_user_plus_system_us_per_process": [
+          12990729,
+          12857215,
+          13013640,
+          12975126,
+          12939749,
+          12944042,
+          12996855,
+          12961358,
+          12909039,
+          13111167
+        ],
+        "peak_rss_kib_per_process": [
+          536256,
+          535852,
+          536268,
+          535988,
+          536364,
+          536128,
+          536116,
+          536272,
+          535596,
+          535972
+        ],
+        "startup_5batch_medians_us": [
+          714463.5,
+          710901.5,
+          716968.5,
+          715706.0,
+          710367.0,
+          715580.5,
+          709883.0,
+          711349.0,
+          721112.0,
+          711513.0
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          },
+          {
+            "phase": "final",
+            "enabled": "false"
+          }
+        ]
+      },
+      "R1": {
+        "cpu_user_plus_system_us_per_process": [
+          12976336,
+          12883456,
+          13016533,
+          12790602,
+          12866766,
+          12591508,
+          13018454,
+          12747250,
+          12821557,
+          12936507
+        ],
+        "peak_rss_kib_per_process": [
+          535604,
+          535512,
+          536020,
+          535512,
+          536020,
+          536216,
+          535576,
+          535532,
+          536640,
+          535768
+        ],
+        "startup_5batch_medians_us": [
+          702039.5,
+          718461.5,
+          702441.5,
+          708299.0,
+          705822.5,
+          718138.5,
+          714967.0,
+          709777.0,
+          710415.5,
+          714334.0
+        ],
+        "final_pool_per_process": [
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          },
+          {
+            "phase": "final",
+            "enabled": "true",
+            "created": "4",
+            "reused": "136",
+            "retired": "0",
+            "rejected": "0",
+            "live": "4",
+            "connecting": "0",
+            "active": "0",
+            "idle": "4",
+            "retiring": "0"
+          }
+        ]
+      }
+    }
+  }
+]

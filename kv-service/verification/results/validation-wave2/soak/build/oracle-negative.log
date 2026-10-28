@@ -1,0 +1,16 @@
+
+running 1 test
+
+thread 'negative_control_corrupt_payload_must_fail' panicked at kv-service/client-rs/tests/rail_runtime_soak.rs:62:5:
+assertion failed: exact_payload(&[1, 4, 8, 16, 25], &[1, 4, 9, 16, 25],
+    hash(&[1, 4, 9, 16, 25]))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test negative_control_corrupt_payload_must_fail ... FAILED
+
+failures:
+
+failures:
+    negative_control_corrupt_payload_must_fail
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+

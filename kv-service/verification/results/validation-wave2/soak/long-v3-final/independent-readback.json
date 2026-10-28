@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "role": "implementer raw-log readback; parent independent review pending",
+  "requests_checked": 72044,
+  "unique_sequence_ids": 72044,
+  "events_checked": 73502,
+  "gzip_crc_and_lengths_verified": true,
+  "remote_to_local_file_hashes_verified": true,
+  "frozen_binary_source_runner_config_verified": true,
+  "archived_base_files_compared": 2485,
+  "all_cumulative_resource_counters_reconciled": true,
+  "all_sampled_guards_checked": true,
+  "scope_and_native_limitations_preserved": true
+}

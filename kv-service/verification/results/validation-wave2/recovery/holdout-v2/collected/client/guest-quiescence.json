@@ -1,0 +1,17 @@
+{
+  "observed_unix_seconds": 1793220974.7222009,
+  "owned_processes_remaining": [],
+  "owned_process_count": 0,
+  "native_pids": {
+    "cuts480": 10670,
+    "admission24": 19663,
+    "lifetime2000": 12599,
+    "f2-recovery1000": 5485,
+    "matched-controls240": 9568,
+    "publication160": 18617,
+    "representative16mib4": 19747
+  },
+  "tmux_has_session_returncode": 1,
+  "rdma_qp_readback": "link rxe0/1 lqpn 1 type GSI state RTS sq-psn 0 comm [ib_core] \nlink rxe1/1 lqpn 1 type GSI state RTS sq-psn 0 comm [ib_core] \n",
+  "rdma_mr_readback": ""
+}

@@ -1,0 +1,43 @@
+{
+  "name": "seed-8-0",
+  "argv": [
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/cs-bench",
+    "--endpoint",
+    "http://10.0.0.65:25551",
+    "--layers",
+    "1",
+    "--layer-mb",
+    "8",
+    "--concurrency",
+    "1",
+    "--combined",
+    "--combined-count",
+    "1",
+    "--stream",
+    "--stream-chunk-mb",
+    "2",
+    "--prefix-base",
+    "wave2-perf-v1-8-0-",
+    "--only-put"
+  ],
+  "started": "2026-10-28T19:42:00.496009+00:00",
+  "started_unix_ns": 1793216520496032553,
+  "timeout_seconds": 240,
+  "environment": {
+    "PATH": "/usr/local/bin:/usr/bin:/bin",
+    "LANG": "C",
+    "CS_GRPC_ENDPOINT": "http://10.0.0.65:25551",
+    "CS_RDMA_ENDPOINT": "10.0.0.65:25553",
+    "CS_RDMA_DEVICE": "mlx5_1",
+    "CS_RDMA_PORT": "1",
+    "CS_RDMA_GID_INDEX": "3",
+    "CS_RAIL_COORDINATOR": "http://10.0.0.65:25551",
+    "CS_RAIL_LISTENER0": "10.0.0.65:25553",
+    "CS_RAIL_DEVICE0": "mlx5_1",
+    "CS_RAIL_GID0": "3",
+    "CS_RAIL_OBJECT_MIB": "16"
+  },
+  "phase": "seed",
+  "size_mib": 8,
+  "object_index": 0
+}

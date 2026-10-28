@@ -1,0 +1,37 @@
+{
+  "started_at": "2026-10-28T20:29:58.257657+00:00",
+  "stops": {
+    "server": {
+      "pid": 1882561,
+      "start_ticks": "313266078",
+      "action": "SIGTERM in prior attempt",
+      "final_state": "absent",
+      "note": "Prior attempt stopped server, then refused Redis raw cmdline padding; no second server signal"
+    },
+    "redis": {
+      "pid": 1881946,
+      "start_ticks": "313266067",
+      "action": "SHUTDOWN SAVE",
+      "final_state": "absent"
+    }
+  },
+  "task_tcp_listeners_after": [],
+  "preserved_paths": {
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k": true,
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/data": true,
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/redis/dump.rdb": true,
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/server.toml": true,
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/evidence/server.log": true,
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/contextstore-server": true,
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib": true
+  },
+  "snapshot_sha256": "99d66a0b1a14a6c42fd5abbc48b542fd9117097297b12da27a5f1c8d8be4eaa3",
+  "server_log_sha256": "05ce8bba060cf6fac368b1ce0e7dd561329ef7e6d42a6b0b960880256e5a858c",
+  "server_log_bytes": 4236469,
+  "data_file_count": 568,
+  "data_bytes": 297795584,
+  "archive_sha256": "4e2ec0187f41a0aa84b7ab9b93c486dc0750fca77654905d3d0ef28b77f00bae",
+  "archive_size": 420465,
+  "finished_at": "2026-10-28T20:29:58.454613+00:00",
+  "scope": "Only SKV5 matrix512k owned server and Redis stopped. All directories/data preserved. No SKV2/SKV4/RXE/source/build actions."
+}

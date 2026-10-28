@@ -1,0 +1,35 @@
+{
+  "state": "PREPARED_NOT_RUN",
+  "fixture": "New private 8 KiB unstriped object only; no existing fixture restart or mutation",
+  "guest_window": "Parent must grant the RXE guest window; never execute during recovery holdout",
+  "server_directory": "/home/railtest/wave2-descriptor-guard",
+  "server_config_sha256": "efe67fda70283fa7e2bf5dea4812a7d13b095c86d8e6702aa8ae9c6cb1bf9ecc",
+  "probe_source_sha256": "c84a6ec2aaa5c24726ef796601d1a89cb102c31cbe2960c4328272648bdb51c2",
+  "server_environment": {
+    "CS_FORCE_DISK_READ": "1",
+    "CS_RDMA_SLAB_MB": "16",
+    "CS_RDMA_CQ_TIMEOUT_MS": "300",
+    "CS_RDMA_DEVICES": "rxe_s0:10.31.0.2:55453:1"
+  },
+  "client_environment": {
+    "CS_GUARD_GRPC_ENDPOINT": "http://10.31.0.2:55451",
+    "CS_GUARD_RDMA_ENDPOINT": "10.31.0.2:55453",
+    "CS_GUARD_RDMA_DEVICE": "rxe_c0",
+    "CS_GUARD_RDMA_GID": "1"
+  },
+  "private_ports": {
+    "redis": 6396,
+    "grpc": 55451,
+    "rdma": 55453
+  },
+  "procedure": [
+    "Compile the ignored probe against the current fixed Rust client in a separate probe-src snapshot.",
+    "After parent grants the window, verify the private ports are unused. Create only the private directory and a dedicated Redis process.",
+    "Start candidate server under its own PID and log, with native-server.toml and the frozen environment.",
+    "Run the one ignored native probe. It verifies an exact fresh read before the controlled error, fully registers a private 8192-byte target, captures its descriptor frame, returns control EOF, waits for the fixed client call to return after QP retirement, then forwards the frame and waits for server EOF. It checks the still-registered target and a later fresh exact read.",
+    "Retain server/client raw logs and binary/source/config hashes. Candidate server must report the typed retirement and must not print the descriptor per-chunk fallback warning.",
+    "If running the already-authorized frozen baseline comparison, use a separately named private fixture and the same fixed client probe; preserve its unsafe fallback warning as branch evidence only.",
+    "Terminate only the owned server/Redis processes."
+  ],
+  "scope_limit": "No old unsafe FFI library, provider return-code injection, memory reuse/corruption oracle, multi-rail scaling claim, or unstriped client connection pooling."
+}

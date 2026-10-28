@@ -1,0 +1,251 @@
+{
+  "status": "IMPLEMENTER_READBACK_PASS_PARENT_REVIEW_PENDING",
+  "two_hour_native_run_completed": true,
+  "library_commit": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "pid": 2780409,
+  "process_start_ticks": 1334490144,
+  "binary_sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df",
+  "native_and_runner_absent_at_collection": true,
+  "process_started_at_utc8": "2026-10-29T03:24:54.683858+08:00",
+  "process_finished_at_utc8_approx": "2026-10-29T05:25:04.320415+08:00",
+  "steady_elapsed_seconds": 7200.28935,
+  "process_wall_elapsed_seconds": 7209.636557215825,
+  "native_exit_code": 0,
+  "campaign_exit_code": 0,
+  "postrun_freeze_exit_code": 0,
+  "phase_requests": {
+    "warmup": 80,
+    "steady": 71960,
+    "reopened": 4
+  },
+  "phase_bytes": {
+    "warmup": 671088640,
+    "steady": 603644231680,
+    "reopened": 33554432
+  },
+  "total_requests": 72044,
+  "total_bytes": 604348874752,
+  "steady_gib": 562.1875,
+  "request_outcomes": {
+    "ok": 72044,
+    "error": 0,
+    "deadline": 0,
+    "rejection": 0
+  },
+  "key_requests": {
+    "soak-1793215494685644383-0": 24015,
+    "soak-1793215494685644383-1": 24015,
+    "soak-1793215494685644383-2": 24014
+  },
+  "per_request_record_checks": {
+    "unique_contiguous_sequences": true,
+    "fixed_three_keys": true,
+    "expected_byte_count": true,
+    "recorded_exact_content": true,
+    "actual_expected_object_hash_agreement": true,
+    "recorded_descriptor_placement_identity": true,
+    "no_identity_errors": true
+  },
+  "cumulative_reconciliation": {
+    "snapshots_checked": 241,
+    "main_completed_requests": 72040,
+    "main_completed_bytes": 604315320320,
+    "pool_created": 4,
+    "pool_reused": 72036,
+    "pool_retired": 0,
+    "pool_live": 4,
+    "created_plus_reused_equals_completed": true,
+    "created_minus_retired_equals_live": true,
+    "rail_reads_and_bytes_equal_completed": true
+  },
+  "active_pool_sampling": {
+    "event": "active_samples",
+    "phase": "steady_complete",
+    "sample_count": 1854739,
+    "active_sample_count": 1168687,
+    "max_active": 4,
+    "max_live": 4
+  },
+  "process_baseline": {
+    "fd": 11,
+    "rss_kib": 58448,
+    "threads": 6
+  },
+  "warm": {
+    "event": "resources",
+    "phase": "warm",
+    "elapsed_s": 0.0,
+    "pid": 2780409,
+    "fd": 23,
+    "rss_kib": 78084,
+    "threads": 10,
+    "pool_live": 4,
+    "pool_idle": 4,
+    "pool_active": 0,
+    "pool_connecting": 0,
+    "pool_retiring": 0,
+    "created": 4,
+    "reused": 76,
+    "retired": 0,
+    "rejected": 0,
+    "registered_bytes_reserved": 0,
+    "inflight_bytes": 0,
+    "inflight_requests": 0,
+    "rail_reads_ok": 80,
+    "rail_reads_err": 0,
+    "rail_bytes": 671088640
+  },
+  "steady_end": {
+    "event": "resources",
+    "phase": "steady_complete",
+    "elapsed_s": 7200.28935,
+    "pid": 2780409,
+    "fd": 23,
+    "rss_kib": 86316,
+    "threads": 10,
+    "pool_live": 4,
+    "pool_idle": 4,
+    "pool_active": 0,
+    "pool_connecting": 0,
+    "pool_retiring": 0,
+    "created": 4,
+    "reused": 72036,
+    "retired": 0,
+    "rejected": 0,
+    "registered_bytes_reserved": 0,
+    "inflight_bytes": 0,
+    "inflight_requests": 0,
+    "rail_reads_ok": 72040,
+    "rail_reads_err": 0,
+    "rail_bytes": 604315320320
+  },
+  "after_drop": {
+    "event": "drop",
+    "before_fd": 11,
+    "after_fd": 11,
+    "fd_delta_from_before": 0,
+    "before_rss_kib": 58448,
+    "warm_rss_kib": 78084,
+    "after_rss_kib": 86312,
+    "rss_delta_from_before_kib": 27864,
+    "rss_delta_from_warm_kib": 8228,
+    "before_threads": 6,
+    "warm_threads": 10,
+    "after_threads": 10,
+    "thread_delta_from_before": 4,
+    "thread_delta_from_warm": 0,
+    "settle_s": 0.002637,
+    "rss_guard": "warm_plus_131072_KiB_not_exact_baseline_return",
+    "thread_guard": "warm_plus_4"
+  },
+  "reopened": {
+    "event": "resources",
+    "phase": "reopened",
+    "elapsed_s": 0.0,
+    "pid": 2780409,
+    "fd": 23,
+    "rss_kib": 86488,
+    "threads": 10,
+    "pool_live": 4,
+    "pool_idle": 4,
+    "pool_active": 0,
+    "pool_connecting": 0,
+    "pool_retiring": 0,
+    "created": 4,
+    "reused": 0,
+    "retired": 0,
+    "rejected": 0,
+    "registered_bytes_reserved": 0,
+    "inflight_bytes": 0,
+    "inflight_requests": 0,
+    "rail_reads_ok": 4,
+    "rail_reads_err": 0,
+    "rail_bytes": 33554432
+  },
+  "resource_curve": {
+    "file": "resource-curve-quiescent.csv",
+    "scope": "All main-reader points are quiescent after completed four-read bursts. Reopened elapsed_s=0 belongs to a separate Reader; exclude it from the continuous-reader time axis. Drop is a categorical post-steady event without an invented timestamp.",
+    "main_points": 240,
+    "periodic_points": 238,
+    "start_s": 0.0,
+    "end_s": 7200.28935,
+    "nominal_interval_seconds": 30,
+    "observed_interval_min_s": 3.593308999999863,
+    "observed_interval_max_s": 30.426882999999975,
+    "rss_warm_kib": 78084,
+    "rss_min_sampled_kib": 78048,
+    "rss_max_sampled_kib": 87040,
+    "rss_final_kib": 86316,
+    "rss_final_minus_warm_kib": 8232,
+    "rss_peak_minus_warm_kib": 8956,
+    "rss_endpoint_slope_kib_per_second": 1.143287,
+    "fd_sampled_values": [
+      23
+    ],
+    "thread_sampled_values": [
+      10
+    ],
+    "idle_pool_sampled_values": [
+      4
+    ],
+    "quiescent_reserved_registration_and_inflight_zero": true,
+    "periodic_interval_min_s": 30.006021000000146,
+    "periodic_interval_max_s": 30.426882999999975,
+    "final_tail_interval_s": 3.593308999999863
+  },
+  "native_resources": {
+    "pid_attribution": "unavailable",
+    "raw_observations": 726,
+    "file": "native-observations.ndjson",
+    "cannot_claim": "No proof of zero native QP/CQ/MR leaks; missing PID fields are not zero counts. registered_bytes_reserved is not an actual pinned-MR counter."
+  },
+  "limits": {
+    "rss_diagnostic_guard_warm_plus_kib": 131072,
+    "fd_guard_warm_plus": 8,
+    "threads_guard_warm_plus": 4,
+    "all_sampled_and_drop_guards_pass": true,
+    "no_formal_no_leak_claim": true,
+    "not_a_speed_benchmark": true,
+    "reopen_four_reads_pass": true,
+    "second_drop": "Reopened Reader was dropped before normal process exit; exact second-drop FD/native restoration was not separately sampled."
+  },
+  "logs": {
+    "stdout_uncompressed_bytes": 22396763,
+    "stderr_uncompressed_bytes": 0,
+    "raw_output_budget_bytes": 500000000,
+    "budget_exceeded": false,
+    "watchdog_expired": false,
+    "closed_gzip_crc_valid": true
+  },
+  "freeze": {
+    "base_files_compared": 2485,
+    "all_base_source_unchanged": true,
+    "local_and_remote_hashes_match": true,
+    "files": [
+      {
+        "file": "freeze/rail_runtime_soak",
+        "sha256": "5aa06344cb6d56c55de119d3ffd01a8c654423bf98084e25590f73ff97ebe1df"
+      },
+      {
+        "file": "freeze/run_runtime_soak.py",
+        "sha256": "60f815a95a7772d0bf8875452aa0caa3a10196a934befa630761435526777714"
+      },
+      {
+        "file": "freeze/rail_runtime_soak.rs",
+        "sha256": "6f7d8113f58a34a28faedda8692421e2f847b2f52d1e965f6bd836e083a9c512"
+      },
+      {
+        "file": "freeze/provider-client.env",
+        "sha256": "bbd6020dc4ae2be81683691a371785744bea25a1b5f070cfe69b9c4957e28938"
+      },
+      {
+        "file": "freeze/base-1c3.tar",
+        "sha256": "b956e007b0471c1c457a2beb706cef285ac016d4613aa9088fb3a8526d0161c8"
+      },
+      {
+        "file": "freeze/soak-frozen-source-v3.tar.gz",
+        "sha256": "dcded12dfbd5554224f9accc7522864cf9e60274656d26493d86ab76fde9b253"
+      }
+    ]
+  }
+}

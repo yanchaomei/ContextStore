@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-29",
+  "status": "FROZEN_BEFORE_RELEASE_PROFILE_MEASUREMENTS",
+  "reason": "The completed matrix used a frozen debug server inherited from correctness setup. Complete the deployment-profile evaluation using the repository's default release build, keeping the debug matrix as a separately reported result.",
+  "selection_rule": "Use the release-profile matrix as the main deployment-build result regardless of effect direction or magnitude. Do not choose a profile or statistic after seeing the release data.",
+  "server_change": "Default make build release server with io-uring,rdma,metrics compiled; configured tier_a remains the same. Source includes the reviewed descriptor retirement guard; all measured objects remain striped and do not use the changed branch. Exact binary and source SHA must be captured before launch.",
+  "comparison": "Within the new matrix, R0 and R1 use the same release server, same already-frozen release client, same data and limits. Only client connection pooling differs. Do not attribute differences between debug and release campaigns solely to compiler optimization or the guard fix because build features/source snapshot also differ.",
+  "unchanged_protocol": "campaign-freeze.json R_matrix: sizes1/8/64MiB, concurrency1/4,10pairedprocessblocks,3fixedkeysper-size,same index-mod251 content,35batches with first5 startup retained but excluded from primary,last30 steady, ordinarymedian,p95 descriptive,20000 pairedbootstrap and fixed RNG/indexes,all failures retained",
+  "configuration": "New isolated SKV5 directory and Redis metadata/data,512KiB stripes/threshold,512MiB slab,CS_FORCE_DISK_READ=1,tier_a4workers,one physical HCA per endpoint; SKV6 client. No page-cache flushing.",
+  "storage_interpretation": "Current tier_a pointer stream calls read_into_ptr_impl, which opens std::fs::File and read_exact (buffered). Forced storage path bypasses application L1; it does not prove every read reaches physical media. No NVMe/physical-disk-bandwidth claim.",
+  "expected_completeness": "120primaryprocesses10500requests plus6separatephase-diagnosticprocesses36requests;9newseedrecords; record all startup samples, identities, connection counters, source/bin/config/PID/startticks/env before/after.",
+  "independence": "Performance hosts SKV6/SKV5 remain separate from the SKV2/SKV4 soak and the SKV2-hosted RXE correctness tests.",
+  "frozen_finality": "Prior debug dataset and its audit remain unchanged and are not pooled with the new dataset. Defaults remain off; no requirement that the new result must be positive."
+}

@@ -1,0 +1,8 @@
+{
+  "frozen_run": "cuts480",
+  "full_matrix_verified": true,
+  "expected_frames": 1280,
+  "expected_late_eof": 240,
+  "expected_held_success_ack": 160,
+  "fixed_control_key_hashes": {}
+}

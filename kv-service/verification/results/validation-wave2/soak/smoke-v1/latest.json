@@ -1,0 +1,33 @@
+{
+  "last_event": {
+    "event": "summary",
+    "status": "pass",
+    "duration_required_s": 60,
+    "steady_elapsed_s": 60.025614,
+    "steady_requests": 600,
+    "steady_bytes": 5033164800,
+    "errors": 0,
+    "rejections": 0,
+    "deadlines": 0,
+    "warm_rss_kib": 76020,
+    "max_sampled_rss_kib": 76096,
+    "final_rss_kib": 76096,
+    "rss_endpoint_slope_kib_s": 1.266126,
+    "max_sampled_fd": 23,
+    "max_sampled_threads": 10,
+    "drop_fd_restored": true,
+    "reopen_reads": 4
+  },
+  "counts": {
+    "object": 3,
+    "native": 15,
+    "contract": 1,
+    "request": 684,
+    "ok": 684,
+    "resources": 3,
+    "drop": 1,
+    "native_availability": 3,
+    "summary": 1
+  },
+  "raw_bytes": 220617
+}

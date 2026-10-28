@@ -1,0 +1,23 @@
+{
+  "head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "source_paths": {
+    "ffi_rxe_late_write.py": "kv-service/verification/ffi_rxe_late_write.py",
+    "ffi_rxe_put_reconnect.py": "kv-service/verification/ffi_rxe_put_reconnect.py",
+    "verbs_cq_delay_shim.c": "kv-service/verification/verbs_cq_delay_shim.c",
+    "rdma_client.py": "src/contextstore/storage/rdma_client.py",
+    "original-driver.py": "kv-service/verification/results/ffi-lifecycle-20261016/rxe-final/run-rxe-verified.py"
+  },
+  "source_sha256": {
+    "ffi_rxe_late_write.py": "7c60c214a5fc920321a1ec560fbeb49cf597c7193e545b5cf0d82d886b97448a",
+    "ffi_rxe_put_reconnect.py": "c207af313b1a19003795b2a9f6251043b377708f64d89b4b056440584d98628e",
+    "verbs_cq_delay_shim.c": "950e0c59f219c1f28d40bb1c953185547c4a46731ded2eaf884815b17d676648",
+    "rdma_client.py": "c3a2bf556b96ab8d5052de686557a304d99ec1e32b26233ce29b893cba47b13b",
+    "original-driver.py": "b2a51424cd12a5adbe55f5e72b8fc0273199d07fb28e70539f344529f3afdf55"
+  },
+  "library_sha256": {
+    "baseline.so": "6f17158aec8edf75cfc923a06a502ac525c78a54b77d42c80986bfc7d6d961d1",
+    "candidate.so": "f25cad4e1721ca8a380b392e83acaa365f01901c153db7f68f0be87faf26f30c",
+    "verbs_cq_delay.so": "66a4f8126102e9d8744a1b14b53ab7da04921ddb9aa66bad1fb4e127223cc553"
+  },
+  "archive_sha256": "fce5e556ded9bcb7bcbb9decfc189df68cb243576d8fd5c145eb8158db249634"
+}

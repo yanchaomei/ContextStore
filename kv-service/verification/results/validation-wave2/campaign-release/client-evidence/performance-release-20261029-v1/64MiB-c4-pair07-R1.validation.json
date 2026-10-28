@@ -1,0 +1,28 @@
+{
+  "state": "PASS",
+  "identity": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "128",
+    "chunk_size": "524288",
+    "handle_xxh3": "534580590ca386e4",
+    "etag_xxh3": "1b967b049baa8a2e",
+    "descriptor_xxh3": "606da65d8f104e84",
+    "placement_xxh3": "e2305fed7930b150"
+  },
+  "final_pool": {
+    "phase": "final",
+    "enabled": "true",
+    "created": "4",
+    "reused": "136",
+    "retired": "0",
+    "rejected": "0",
+    "live": "4",
+    "connecting": "0",
+    "active": "0",
+    "idle": "4",
+    "retiring": "0"
+  },
+  "sample_count": 140,
+  "steady_median_us": 108729.5
+}

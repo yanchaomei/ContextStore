@@ -1,0 +1,8 @@
+{
+  "attempt": "execute guest_ssh.sh directly",
+  "exit_code": 126,
+  "reason": "wrapper is an existing mode 0644 shell script",
+  "guest_commands_executed": false,
+  "established_campaign_invocation": "bash guest_ssh.sh <role> <command>",
+  "retry_state": "Used existing bash wrapper convention confirmed by recovery execution owner; no chmod or policy override."
+}

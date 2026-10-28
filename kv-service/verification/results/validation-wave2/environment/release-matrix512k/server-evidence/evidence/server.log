@@ -1,0 +1,21 @@
+[2m2026-10-28T20:46:09.758876Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-28T20:46:09.758901Z[0m [32m INFO[0m config file: /home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/server.toml
+[2m2026-10-28T20:46:09.759074Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 0 MB, I/O executor = tier_a
+[2m2026-10-28T20:46:09.761847Z[0m [32m INFO[0m gRPC listening on: 10.0.0.65:25551
+[2m2026-10-28T20:46:09.761864Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=512
+[2m2026-10-28T20:46:09.761869Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 1 NIC(s) ["mlx5_1@10.0.0.65:25553"]
+[2m2026-10-28T20:46:09.761873Z[0m [32m INFO[0m RDMA tier enabled: 1 NIC(s), primary listener=10.0.0.65:25553
+[2m2026-10-28T20:46:09.782900Z[0m [32m INFO[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 41]
+[2m2026-10-28T20:46:09.782915Z[0m [32m INFO[0m opened NIC 0: dev=mlx5_1 port=1 gid_index=3
+[2m2026-10-28T20:46:09.782952Z[0m [32m INFO[0m SlabBacking: mmap 536870912 bytes at 0x7fde04000000 (huge_pages=false)
+[2m2026-10-28T20:46:09.959086Z[0m [32m INFO[0m RdmaSlab registered: 536870912 bytes (512 MB) on 1 NIC(s), lkeys=["0x43232"] rkeys=["0x43232"]
+[2m2026-10-28T20:46:09.959111Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (512 MB, 1 NIC)
+[2m2026-10-28T20:46:09.959136Z[0m [32m INFO[0m RDMA server listening on 10.0.0.65:25553 (nic_idx=0 dev=mlx5_1 port=1 gid_index=3)
+[2m2026-10-28T20:46:25.674256Z[0m [32m INFO[0m RDMA client connected: 10.0.0.66:58002 (nic_idx=0)
+[2m2026-10-28T20:46:25.675504Z[0m [32m INFO[0m RcQp created: qpn=9153 psn=0x2d5f66
+[2m2026-10-28T20:46:25.676395Z[0m [32m INFO[0m RDMA QP established: local_qpn=9153 remote_qpn=27844
+[2m2026-10-28T20:46:25.677612Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchwave2-release-matrix512k-smoke-1-0/__combined__ bytes=1048576 stripes=2 requests=2 alloc_us=3 stream_setup_us=48 first_io_us=648 last_io_us=726 poll_us=64 total_us=786
+[2m2026-10-28T20:46:26.334423Z[0m [32m INFO[0m RDMA client connected: 10.0.0.66:58020 (nic_idx=0)
+[2m2026-10-28T20:46:26.334928Z[0m [32m INFO[0m RcQp created: qpn=9154 psn=0x7b69a5
+[2m2026-10-28T20:46:26.335694Z[0m [32m INFO[0m RDMA QP established: local_qpn=9154 remote_qpn=27845
+[2m2026-10-28T20:46:26.382789Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=10:rust-benchwave2-release-matrix512k-smoke-64-0/__combined__ bytes=67108864 stripes=128 requests=128 alloc_us=3 stream_setup_us=78 first_io_us=595 last_io_us=15480 poll_us=43 total_us=15537

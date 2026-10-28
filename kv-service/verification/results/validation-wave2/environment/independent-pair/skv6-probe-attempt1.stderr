@@ -1,0 +1,8 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+Traceback (most recent call last):
+  File "<stdin>", line 11, in <module>
+  File "/usr/lib/python3.8/pathlib.py", line 1237, in read_text
+    return f.read()
+OSError: [Errno 22] Invalid argument

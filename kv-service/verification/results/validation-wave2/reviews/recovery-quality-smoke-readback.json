@@ -1,0 +1,96 @@
+{
+  "source_sha256": "df69cd3250e30bcb4eab3d2be37902d6f5b4c06e4892e4e5c3a4168b2d8d7099",
+  "total_operations": 152,
+  "total_frames": 344,
+  "unique_immediate_terminals": 80,
+  "suites": [
+    {
+      "name": "control-smoke24",
+      "operations": 24,
+      "frames": 72,
+      "late_requests": 24,
+      "immediate_exact_key_peer_retirements": 24,
+      "missing_frame_negative_control_rejected": true,
+      "matrix": {
+        "frozen_run": "control-smoke24",
+        "full_matrix_verified": true,
+        "expected_frames": 72,
+        "expected_late_eof": 24,
+        "expected_held_success_ack": 0,
+        "fixed_control_key_hashes": {
+          "native-recovery-2026102925-1": "4e97d2af85e8ae18",
+          "native-recovery-2026102925-2": "56985ea3906f1d87"
+        }
+      },
+      "client_sha256": "2672a8c52b5ef01294fc8de8848350c68fba018867afc34f3ecc9c974c7a79ba"
+    },
+    {
+      "name": "cut-smoke48",
+      "operations": 48,
+      "frames": 128,
+      "late_requests": 24,
+      "immediate_exact_key_peer_retirements": 24,
+      "missing_frame_negative_control_rejected": true,
+      "matrix": {
+        "frozen_run": "cut-smoke48",
+        "full_matrix_verified": true,
+        "expected_frames": 128,
+        "expected_late_eof": 24,
+        "expected_held_success_ack": 16,
+        "fixed_control_key_hashes": {}
+      },
+      "client_sha256": "420fd12075983ad6d641a90b9cf78e31d462ca0be6d18a6c0eec9a94bd986311"
+    },
+    {
+      "name": "lifetime-smoke40",
+      "operations": 40,
+      "frames": 80,
+      "late_requests": 0,
+      "immediate_exact_key_peer_retirements": 0,
+      "missing_frame_negative_control_rejected": true,
+      "matrix": {
+        "frozen_run": "lifetime-smoke40",
+        "full_matrix_verified": true,
+        "expected_frames": 80,
+        "expected_late_eof": 0,
+        "expected_held_success_ack": 0,
+        "fixed_control_key_hashes": {}
+      },
+      "client_sha256": "5a9eac3c7294fb1cd5853c092278e6c2b291a5cc5f30d5328f522e6a19b175a9"
+    },
+    {
+      "name": "publication-smoke16",
+      "operations": 16,
+      "frames": 48,
+      "late_requests": 16,
+      "immediate_exact_key_peer_retirements": 16,
+      "missing_frame_negative_control_rejected": true,
+      "matrix": {
+        "frozen_run": "publication-smoke16",
+        "full_matrix_verified": true,
+        "expected_frames": 48,
+        "expected_late_eof": 16,
+        "expected_held_success_ack": 0,
+        "fixed_control_key_hashes": {}
+      },
+      "client_sha256": "60149dc1d01477ee6db186600f8c30a51fc9f3ed1967c1d97c429df577f0a664"
+    },
+    {
+      "name": "admission-smoke24",
+      "operations": 24,
+      "frames": 16,
+      "late_requests": 16,
+      "immediate_exact_key_peer_retirements": 16,
+      "missing_frame_negative_control_rejected": true,
+      "matrix": {
+        "frozen_run": "admission-smoke24",
+        "full_matrix_verified": true,
+        "expected_frames": 16,
+        "expected_late_eof": 16,
+        "expected_held_success_ack": 0,
+        "fixed_control_key_hashes": {}
+      },
+      "client_sha256": "cdf9bba95c23bbbff40d4dda83d671ce2f75dc0eb4a01911062eba861ece5934"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[2m2026-10-28T19:04:16.359517Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-28T19:04:16.359573Z[0m [32m INFO[0m config file: /home/railtest/cswave1/wave2/small/server.toml
+[2m2026-10-28T19:04:16.360839Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 0 MB, I/O executor = tier_a
+[2m2026-10-28T19:04:16.365371Z[0m [32m INFO[0m gRPC listening on: 10.81.1.1:25451
+[2m2026-10-28T19:04:16.365406Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=64
+[2m2026-10-28T19:04:16.365441Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 2 NIC(s) ["rxe0@10.81.1.1:25453", "rxe1@10.82.1.1:25454"]
+[2m2026-10-28T19:04:16.365461Z[0m [32m INFO[0m RDMA tier enabled: 2 NIC(s), primary listener=10.81.1.1:25453
+[2m2026-10-28T19:04:16.367260Z[0m [32m INFO[0m RdmaContext: opened device=rxe0 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 51, 01, 01]
+[2m2026-10-28T19:04:16.367298Z[0m [32m INFO[0m opened NIC 0: dev=rxe0 port=1 gid_index=1
+[2m2026-10-28T19:04:16.367477Z[0m [32m INFO[0m RdmaContext: opened device=rxe1 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 52, 01, 01]
+[2m2026-10-28T19:04:16.367495Z[0m [32m INFO[0m opened NIC 1: dev=rxe1 port=1 gid_index=1
+[2m2026-10-28T19:04:16.367588Z[0m [32m INFO[0m SlabBacking: mmap 67108864 bytes at 0x7f074c000000 (huge_pages=false)
+[2m2026-10-28T19:04:16.392463Z[0m [32m INFO[0m RdmaSlab registered: 67108864 bytes (64 MB) on 2 NIC(s), lkeys=["0x302", "0x346"] rkeys=["0x302", "0x346"]
+[2m2026-10-28T19:04:16.392542Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (64 MB, 2 NICs)
+[2m2026-10-28T19:04:16.392671Z[0m [32m INFO[0m RDMA server listening on 10.81.1.1:25453 (nic_idx=0 dev=rxe0 port=1 gid_index=1)
+[2m2026-10-28T19:04:16.392754Z[0m [32m INFO[0m RDMA server listening on 10.82.1.1:25454 (nic_idx=1 dev=rxe1 port=1 gid_index=1)
+[2m2026-10-28T19:04:34.433464Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:38560 (nic_idx=0)
+[2m2026-10-28T19:04:34.433680Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xc74753
+[2m2026-10-28T19:04:34.433784Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T19:04:34.654816Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793214274130909071 bytes=1048576 stripes=4 requests=4 alloc_us=20 stream_setup_us=385 first_io_us=3000 last_io_us=10925 poll_us=200762 total_us=211750

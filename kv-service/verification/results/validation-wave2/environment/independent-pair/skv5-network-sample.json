@@ -1,0 +1,21 @@
+{
+  "hostname": "skv-node5",
+  "at": "2026-10-28T19:09:56.399711+00:00",
+  "seconds": 2.0028782561421394,
+  "before": {
+    "port_xmit_data": 24620581885,
+    "port_rcv_data": 259991158469,
+    "port_xmit_packets": 1090071853,
+    "port_rcv_packets": 1582714213
+  },
+  "after": {
+    "port_xmit_data": 24620581885,
+    "port_rcv_data": 259991158469,
+    "port_xmit_packets": 1090071853,
+    "port_rcv_packets": 1582714213
+  },
+  "data_bytes_per_second": {
+    "port_xmit_data": 0.0,
+    "port_rcv_data": 0.0
+  }
+}

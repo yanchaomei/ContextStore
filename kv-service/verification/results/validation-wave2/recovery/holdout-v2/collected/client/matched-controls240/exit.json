@@ -1,0 +1,23 @@
+{
+  "returncode": 0,
+  "native_returncode": 0,
+  "state": "FINISHED",
+  "run_timeout_seconds": 900,
+  "campaign_deadline_unix_seconds": 1793223576.0,
+  "effective_budget_seconds": 900.0,
+  "elapsed_seconds": 268.35696721076965,
+  "raw_log_bytes": 1114476,
+  "gzip_log_bytes": 44807,
+  "resource_sample_count": 268,
+  "process_resource_peaks": {
+    "rss_kib": 25768,
+    "file_descriptors": 22,
+    "threads": 9
+  },
+  "process_resource_limits": {
+    "rss_kib": 524288,
+    "file_descriptors": 128,
+    "threads": 64
+  },
+  "within_process_resource_limits": true
+}

@@ -1,0 +1,13 @@
+{
+  "frozen_run": "f2-recovery1000",
+  "full_matrix_verified": true,
+  "expected_frames": 3000,
+  "expected_late_eof": 1000,
+  "expected_held_success_ack": 0,
+  "fixed_control_key_hashes": {
+    "native-recovery-2026102934-2": "7122ccbf69ec7932",
+    "native-recovery-2026102934-3": "2a55a589cb4b4d72",
+    "native-recovery-2026102934-0": "8899c76d5211114d",
+    "native-recovery-2026102934-1": "7d7c5a125d00d9be"
+  }
+}

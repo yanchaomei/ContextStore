@@ -1,0 +1,31 @@
+{
+  "state": "EXISTING_RELEASE_BINARY_FROZEN_NO_REBUILD",
+  "frozen_utc": "2026-10-28T20:45:02.853913+00:00",
+  "source_artifact": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/target/release/contextstore-server",
+  "frozen_binary": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/release-frozen-bin/contextstore-server",
+  "binary_sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8",
+  "binary_bytes": 9165120,
+  "profile": "release",
+  "server_features": [
+    "io-uring",
+    "rdma",
+    "metrics"
+  ],
+  "build_entrypoint": "make build",
+  "server_build_command": "cargo build --release --features io-uring,rdma,metrics",
+  "build_exit": 0,
+  "build_start": "2026-10-28T20:19:44Z",
+  "build_end": "2026-10-28T20:23:07Z",
+  "build_log": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/logs/make-build.log",
+  "source_head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "candidate_source_file": "kv-service/server/src/rdma/server.rs",
+  "candidate_source_sha256": "d7df834df7d4ffb86a04725a5055069cfadca2b253fc37ea092028fa50bd5b71",
+  "source_manifest": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/green-source-sha256.json",
+  "source_manifest_sha256": "a367169d5ee301f918192139b54d37bf8389af47d2b4106ddb88d41fc711a0fc",
+  "source_freeze": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/green-freeze.json",
+  "source_archive": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/descriptor-guard/green-source.tar.gz",
+  "source_archive_sha256": "73aea105fb899210a3cafe3e7369c7f160b4f0f43b143c027c96d5dc01686171",
+  "source_readback_all_65_files_match": true,
+  "runtime_config": "Not baked into this binary. S5 fixture must separately freeze its tier_a config and environment.",
+  "performance_scope": "Same release binary for every R0/R1 variant; existing debug matrix retained separately. No debug-vs-release attribution or guard speedup claim."
+}

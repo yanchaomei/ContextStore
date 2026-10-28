@@ -1,0 +1,49 @@
+# Frozen server fixture: source commit 3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b.
+# Two independent guest RXE devices on isolated Ethernet links. This is Soft-RoCE correctness only.
+[api]
+listen = "10.81.1.1:25351"
+max_connections = 100
+
+[cluster]
+node_id = "wave2-rxe-server"
+grpc_advertise = "10.81.1.1:25351"
+rdma_advertise = "10.81.1.1:25353"
+data_nodes = []
+
+[storage]
+devices = ["/home/railtest/cswave1/wave2/data/stripe0", "/home/railtest/cswave1/wave2/data/stripe1"]
+data_subdir = "contextstore"
+striping_threshold = 4194304
+striping_chunk_size = 4194304
+rdma_stream_chunk_size = 1048576
+verify_stripe_checksums = true
+
+[memory_tier]
+capacity_mb = 0
+slab_size_mb = 4
+use_pinned_memory = false
+
+[io_executor]
+kind = "tier_a"
+thread_pool_size = 4
+io_uring_depth = 32
+
+[router]
+strategy = "object_hash"
+
+[metadata]
+redis_url = "redis://127.0.0.1:26379/"
+redis_key_prefix = "contextstore:wave2-rxe-20261029:"
+redis_connect_timeout_ms = 1000
+redis_command_timeout_ms = 1000
+
+[gc]
+enabled = false
+interval_seconds = 300
+grace_seconds = 600
+max_tasks_per_run = 1000
+task_lease_seconds = 300
+
+[metrics]
+enabled = false
+listen = "127.0.0.1:25390"

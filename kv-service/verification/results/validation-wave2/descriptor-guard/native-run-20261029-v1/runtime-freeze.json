@@ -1,0 +1,24 @@
+{
+  "state": "RUNTIME_CONFIG_FROZEN_BEFORE_EXECUTION",
+  "utc": "2026-10-28T21:03:01.674319+00:00",
+  "config_sha256": "aff9592c1690d3625997b09e7b4c93658eb2ca5195d07bd26a5fc12a72e2d896",
+  "server_environment": {
+    "CS_FORCE_DISK_READ": "1",
+    "CS_RDMA_SLAB_MB": "16",
+    "CS_RDMA_CQ_TIMEOUT_MS": "300",
+    "CS_RDMA_DEVICES": "rxe0:10.81.1.1:55453:1"
+  },
+  "client_environment": {
+    "CS_GUARD_GRPC_ENDPOINT": "http://10.81.1.1:55451",
+    "CS_GUARD_RDMA_ENDPOINT": "10.81.1.1:55453",
+    "CS_GUARD_RDMA_DEVICE": "rxe0",
+    "CS_GUARD_RDMA_GID": "1"
+  },
+  "actual_topology": "server10.81.1.1/client10.81.1.2;rxe0;GID1",
+  "template_adjustment": "Actual guest endpoint addresses replace prepared-template addresses. Both variants use the exact same runtime config and environment.",
+  "variant_order": [
+    "baseline",
+    "candidate"
+  ],
+  "scope": "Full-object descriptor cold-slab fallback guard; one private 8192-byte unstriped object per variant."
+}

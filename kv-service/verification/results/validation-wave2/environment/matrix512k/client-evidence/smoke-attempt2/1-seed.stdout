@@ -1,0 +1,2 @@
+== Rust combined bench: 1 prefixes x 1 MB (single value, simulates __combined__ striping), concurrency=1, mode=stream(chunk=2MB) ==
+[PUT combined    ] 1 x 1MB = 1MB     57.3ms  0.02 GB/s

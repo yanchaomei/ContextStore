@@ -1,0 +1,31 @@
+{
+  "state": "LOCAL_ACCEPTANCE_PASS_PENDING_INDEPENDENT_REVIEW",
+  "at": "2026-10-28T20:06:12.136596+00:00",
+  "checks": {
+    "analysis_all_120_slots_and_hashes_valid": true,
+    "manifest_completed": true,
+    "raw_evidence_matches_remote_sha_manifest": true,
+    "R_matrix_matches_parent_frozen_contract": true,
+    "binaries_unchanged": true,
+    "server_pid_startticks_unchanged": true,
+    "server_config_unchanged": true,
+    "server_environment_unchanged": true,
+    "runtime_source_unchanged": true,
+    "runner_analyzer_snapshot_match_freeze": true,
+    "known_hashes_independent_KAT_replay": true,
+    "three_identities_per_size": true,
+    "all_nine_server_objects_correct_stripe_layout": true,
+    "primary_no_tracing_environment_or_output": true,
+    "all_primary_and_diagnostic_processes_have_per_process_PASS_receipt": true,
+    "all_original_v1_evidence_retained": true,
+    "no_primary_process_mixed_from_v1": true
+  },
+  "issues": [],
+  "measurement_processes": 120,
+  "primary_steady_request_subsamples": 9000,
+  "startup_request_subsamples": 1500,
+  "diagnostic_reads": 36,
+  "object_count": 9,
+  "v1_status": "VALIDATOR_HASH_VERSION_MISMATCH; preserved and superseded in full",
+  "independent_performance_review": "pending"
+}

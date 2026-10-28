@@ -1,0 +1,14 @@
+{
+  "pid": 21476,
+  "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/descriptor-guard-probe",
+  "cmdline": [
+    "/home/railtest/wave2-descriptor-guard/native-frozen-bin/descriptor-guard-probe",
+    "--ignored",
+    "--nocapture",
+    "--exact",
+    "descriptor_get_retirement_keeps_private_target_and_fresh_reads_correct",
+    ""
+  ],
+  "stat": "21476 (descriptor-guar) S 21473 21473 21473 0 -1 1077936128 596 0 0 0 0 0 0 0 20 0 3 0 731786 151199744 1813 18446744073709551615 94600386300496 94600390667440 140731615137552 0 0 0 0 4102 1088 0 0 0 17 0 0 0 0 0 0 94600391031656 94600391044720 94600709074944 140731615140997 140731615141177 140731615141177 140731615141801 0\n",
+  "utc_unix": 1793221383.3770273
+}

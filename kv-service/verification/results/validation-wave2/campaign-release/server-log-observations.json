@@ -1,0 +1,7 @@
+{
+  "scope": "server log byte window includes v2 primary and traced diagnostics only; forced application storage path, buffered tier_a file reads, warm OS page cache; independent from client primary timing",
+  "server_detail_lines": 10536,
+  "connection_lines": 5421,
+  "fallback_warn_error_count": 0,
+  "fallback_warn_error_lines": []
+}

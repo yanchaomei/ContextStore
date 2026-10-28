@@ -2449,3 +2449,6 @@ fn recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry() {
         }
     }
 }
+
+#[path = "recovery_campaign.rs"]
+mod recovery_campaign;

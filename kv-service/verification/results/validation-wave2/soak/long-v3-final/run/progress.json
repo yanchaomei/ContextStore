@@ -1,0 +1,1 @@
+{"pid": 2780409, "elapsed_s": 7209.514262923971, "counts": {"object": 3, "native": 726, "contract": 1, "request": 72041, "ok": 72041, "active_samples": 240, "reconciled": 240, "resources": 240, "drop": 1, "native_availability": 3}, "raw_bytes": 22394683}

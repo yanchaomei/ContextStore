@@ -1,0 +1,92 @@
+{
+  "(1, 0)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "2",
+    "chunk_size": "524288",
+    "handle_xxh3": "a856809f6d74e348",
+    "etag_xxh3": "a50cc80c9de5c970",
+    "descriptor_xxh3": "01a618ccdffb4370",
+    "placement_xxh3": "a4bed8b3a162077c"
+  },
+  "(1, 1)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "2",
+    "chunk_size": "524288",
+    "handle_xxh3": "b3d6cb4dbf1bfa04",
+    "etag_xxh3": "a490096c6ca351c3",
+    "descriptor_xxh3": "0ea0b2d64aa3ff70",
+    "placement_xxh3": "910538b78913b11d"
+  },
+  "(1, 2)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "2",
+    "chunk_size": "524288",
+    "handle_xxh3": "5cf01c59d089d9b1",
+    "etag_xxh3": "1ed84902e2047f0b",
+    "descriptor_xxh3": "5660438439577593",
+    "placement_xxh3": "3ce0d402e0094046"
+  },
+  "(8, 0)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "16",
+    "chunk_size": "524288",
+    "handle_xxh3": "71eca9b8c1188693",
+    "etag_xxh3": "36bb0cdc337d6b1d",
+    "descriptor_xxh3": "ff127867f5c760fa",
+    "placement_xxh3": "3ab5bfd250f3854b"
+  },
+  "(8, 1)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "16",
+    "chunk_size": "524288",
+    "handle_xxh3": "5b6f7bd70a6b0067",
+    "etag_xxh3": "2ec1be04b7558dc7",
+    "descriptor_xxh3": "09017ed478b6b3d7",
+    "placement_xxh3": "83d1d2fd8040ba18"
+  },
+  "(8, 2)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "16",
+    "chunk_size": "524288",
+    "handle_xxh3": "070fcbcffaa582a0",
+    "etag_xxh3": "5de900fa831d8e1a",
+    "descriptor_xxh3": "65f9c657e4f1fe84",
+    "placement_xxh3": "8ee50b9713a1019f"
+  },
+  "(64, 0)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "128",
+    "chunk_size": "524288",
+    "handle_xxh3": "bf844348bd4b82b5",
+    "etag_xxh3": "af6808a20c6aea76",
+    "descriptor_xxh3": "77755c6e1760d728",
+    "placement_xxh3": "6029e673bd25f0ae"
+  },
+  "(64, 1)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "128",
+    "chunk_size": "524288",
+    "handle_xxh3": "534580590ca386e4",
+    "etag_xxh3": "1b967b049baa8a2e",
+    "descriptor_xxh3": "606da65d8f104e84",
+    "placement_xxh3": "e2305fed7930b150"
+  },
+  "(64, 2)": {
+    "generation": "1",
+    "layout_version": "1",
+    "stripe_count": "128",
+    "chunk_size": "524288",
+    "handle_xxh3": "ea7eac35e25dc48c",
+    "etag_xxh3": "137795d388c66073",
+    "descriptor_xxh3": "ed35270d1cd50ddb",
+    "placement_xxh3": "de9e1d1001a5d24c"
+  }
+}

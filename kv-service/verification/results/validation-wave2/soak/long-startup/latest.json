@@ -1,0 +1,20 @@
+{
+  "last_event": {
+    "event": "native",
+    "phase": "warm",
+    "kind": "mr",
+    "pid": 2770380,
+    "pid_matches": 0,
+    "availability": "requires_positive_control",
+    "raw": ""
+  },
+  "counts": {
+    "object": 3,
+    "native": 6,
+    "contract": 1,
+    "request": 80,
+    "ok": 80,
+    "resources": 1
+  },
+  "raw_bytes": 32952
+}

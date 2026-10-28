@@ -1,0 +1,15 @@
+object_identity,generation=1,layout_version=1,stripe_count=128,chunk_size=524288,handle_xxh3=ccbe8dffae882534,etag_xxh3=79dc804c0e3e0c9a,descriptor_xxh3=a34815decb21a57f,placement_xxh3=3bd464902c1aa025
+mode,direct_staging=false
+mode,contiguous_schedule=false
+mode,connection_pool_size=0,recovery_timeout_ms=None,verify_pattern=true,warmup=0,iterations=1,concurrency=1
+plan_assignment,id=single,stripes=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127],bytes=67108864
+expected_pattern,pattern=index_mod_251,bytes=67108864,xxh3=a0a4cbfa5cad46af
+route,id=single,device=mlx5_1,port=1,gid=3,weight=1,advertised=10.0.0.65:25553,listener=10.0.0.65:25553
+pool_stats,phase=before_warmup,enabled=false
+pool_stats,phase=after_warmup,enabled=false
+sample,environment=physical,rails=1,iteration=1,bytes=67108864,latency_us=99461,gib_per_s=0.628,xxh3=a0a4cbfa5cad46af
+summary,environment=physical,rails=1,bytes_per_iter=67108864,iters=1,median_us=99461,cpu_user_us=45447,cpu_system_us=30543,peak_rss_kb=138504,rail_bytes=[67108864]
+mode_effective,one=1,packed_greedy=0,packed_contiguous=0,direct=0
+pool_stats,phase=final,enabled=false
+rail_stats,id=single,device=mlx5_1,listener=10.0.0.65:25553,numa=Some(0),pci=Some("0000:5e:00.1"),healthy=true,cooldown_ms=0,reads_ok=1,reads_err=0,bytes=67108864,avg_us=64412,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=67108864,registered_bytes_reserved=0,peak_registered_bytes=67108864
+object_identity_after,generation=1,layout_version=1,stripe_count=128,chunk_size=524288,handle_xxh3=ccbe8dffae882534,etag_xxh3=79dc804c0e3e0c9a,descriptor_xxh3=a34815decb21a57f,placement_xxh3=3bd464902c1aa025

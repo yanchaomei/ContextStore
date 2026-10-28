@@ -1,0 +1,68 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service/client-rs)
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src/kv-service/server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 20.89s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/contextstore_client_rs-590259ae1d42c301)
+
+thread 'rail_read::connection_pool::tests::failure_and_panic_destroy_qp_before_both_mrs' panicked at kv-service/client-rs/src/rail_read/connection_pool.rs:378:21:
+injected transfer panic
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'rail_read::connection_pool::tests::failed_and_panicking_connect_release_the_reserved_slot' panicked at kv-service/client-rs/src/rail_read/connection_pool.rs:431:48:
+dial panicked
+
+thread '<unnamed>' panicked at kv-service/client-rs/src/rail_read/tests.rs:1372:13:
+injected worker panic
+
+thread '<unnamed>' panicked at kv-service/client-rs/src/rail_read/tests.rs:1871:30:
+mock worker panic
+
+thread '<unnamed>' panicked at kv-service/client-rs/src/rail_read/tests.rs:1871:30:
+mock worker panic
+     Running unittests src/bin/bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/cs_bench-a19eeff96a9a9635)
+     Running unittests src/bin/rail_read_bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/cs_rail_read_bench-d893c4e5b941d69b)
+     Running unittests src/bin/rdma_bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/cs_rdma_bench-226994dd59032e46)
+     Running tests/local_cluster_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/local_cluster_e2e-579755faba424b95)
+e2e scenario=node_restart_recovery event=cluster_ready redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=distributed_delete event=cluster_ready redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=cross_node_get event=cluster_ready redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=four_way_placement event=cluster_ready redis=127.0.0.1:36151 node_a=127.0.0.1:43449 node_b=127.0.0.1:35419 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmprVTPbi
+e2e scenario=node_restart_recovery event=node-a_client_connect redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=distributed_delete event=node-a_client_connect redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=node_restart_recovery event=streaming_put_begin redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=distributed_delete event=streaming_put_begin redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=cross_node_get event=node-a_client_connect redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=cross_node_get event=streaming_put_begin redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=four_way_placement event=node-a_client_connect redis=127.0.0.1:36151 node_a=127.0.0.1:43449 node_b=127.0.0.1:35419 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmprVTPbi
+e2e scenario=four_way_placement event=streaming_put_begin redis=127.0.0.1:36151 node_a=127.0.0.1:43449 node_b=127.0.0.1:35419 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmprVTPbi
+e2e scenario=node_restart_recovery event=streaming_put_complete redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=node_restart_recovery event=placement_lookup_begin redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=node_restart_recovery event=placement_verified redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=node_restart_recovery event=node_b_restart_begin redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=four_way_placement event=streaming_put_complete redis=127.0.0.1:36151 node_a=127.0.0.1:43449 node_b=127.0.0.1:35419 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmprVTPbi
+e2e scenario=four_way_placement event=placement_lookup_begin redis=127.0.0.1:36151 node_a=127.0.0.1:43449 node_b=127.0.0.1:35419 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmprVTPbi
+e2e scenario=four_way_placement event=placement_verified redis=127.0.0.1:36151 node_a=127.0.0.1:43449 node_b=127.0.0.1:35419 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmprVTPbi
+e2e scenario=cross_node_get event=streaming_put_complete redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=cross_node_get event=node-b_client_connect redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=cross_node_get event=cross_node_get_begin redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=distributed_delete event=streaming_put_complete redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=distributed_delete event=placement_lookup_begin redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=distributed_delete event=placement_verified redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=distributed_delete event=distributed_delete_begin redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+e2e scenario=node_restart_recovery event=node_b_restart_complete redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=node_restart_recovery event=post_restart_get_begin redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=cross_node_get event=cross_node_get_verified redis=127.0.0.1:41259 node_a=127.0.0.1:44233 node_b=127.0.0.1:35617 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmp21F6D5
+e2e scenario=node_restart_recovery event=post_restart_get_verified redis=127.0.0.1:39737 node_a=127.0.0.1:37375 node_b=127.0.0.1:35205 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmptLEkYz
+e2e scenario=distributed_delete event=distributed_delete_reclaimed redis=127.0.0.1:35555 node_a=127.0.0.1:42247 node_b=127.0.0.1:39157 root=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/tmp/.tmpkHv3Bg
+     Running tests/rail_read_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/rail_read_e2e-9a5964de5402b3f2)
+     Running tests/rail_runtime_soak.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/rail_runtime_soak-c51086b323dcb87b)
+     Running tests/rdma_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/rdma_e2e-9e2260d89059c975)
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/contextstore_rdma_ffi-3724391774693f92)
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/contextstore_server-27874420ca6082fc)
+     Running unittests src/main.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/contextstore_server-aeda4a861b19f5a4)
+     Running unittests src/bin/cs_kvservice_bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/cs_kvservice_bench-5f4fc776c48384d7)
+     Running unittests src/bin/cs_meta.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/cs_meta-0810c34777e69ddf)
+     Running tests/gds_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/gds_e2e-2c3692bde41085de)
+     Running tests/redis_metadata_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/target/debug/deps/redis_metadata_e2e-8b200a6e8ea55257)
+   Doc-tests contextstore_client_rs
+   Doc-tests contextstore_rdma_ffi
+   Doc-tests contextstore_server

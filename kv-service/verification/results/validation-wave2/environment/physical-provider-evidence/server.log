@@ -1,0 +1,24 @@
+[2m2026-10-28T19:00:50.893307Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-28T19:00:50.893350Z[0m [32m INFO[0m config file: /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/server.toml
+[2m2026-10-28T19:00:50.894618Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 0 MB, I/O executor = tier_a
+[2m2026-10-28T19:00:50.897479Z[0m [32m INFO[0m gRPC listening on: 10.0.0.64:25351
+[2m2026-10-28T19:00:50.897499Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=64
+[2m2026-10-28T19:00:50.897532Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 2 NIC(s) ["mlx5_1@10.0.0.64:25353", "mlx5_1@10.0.0.64:25354"]
+[2m2026-10-28T19:00:50.897547Z[0m [32m INFO[0m RDMA tier enabled: 2 NIC(s), primary listener=10.0.0.64:25353
+[2m2026-10-28T19:00:50.923805Z[0m [32m INFO[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 40]
+[2m2026-10-28T19:00:50.923833Z[0m [32m INFO[0m opened NIC 0: dev=mlx5_1 port=1 gid_index=3
+[2m2026-10-28T19:00:50.926482Z[0m [32m INFO[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 40]
+[2m2026-10-28T19:00:50.926504Z[0m [32m INFO[0m opened NIC 1: dev=mlx5_1 port=1 gid_index=3
+[2m2026-10-28T19:00:50.926644Z[0m [32m INFO[0m SlabBacking: mmap 67108864 bytes at 0x7fbe8c000000 (huge_pages=false)
+[2m2026-10-28T19:00:50.951660Z[0m [32m INFO[0m RdmaSlab registered: 67108864 bytes (64 MB) on 2 NIC(s), lkeys=["0x4514e", "0x67b7b"] rkeys=["0x4514e", "0x67b7b"]
+[2m2026-10-28T19:00:50.951709Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (64 MB, 2 NICs)
+[2m2026-10-28T19:00:50.951823Z[0m [32m INFO[0m RDMA server listening on 10.0.0.64:25353 (nic_idx=0 dev=mlx5_1 port=1 gid_index=3)
+[2m2026-10-28T19:00:50.951953Z[0m [32m INFO[0m RDMA server listening on 10.0.0.64:25354 (nic_idx=1 dev=mlx5_1 port=1 gid_index=3)
+[2m2026-10-28T19:01:03.947526Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:58718 (nic_idx=0)
+[2m2026-10-28T19:01:03.948516Z[0m [32m INFO[0m RcQp created: qpn=49992 psn=0xe2951e
+[2m2026-10-28T19:01:03.949154Z[0m [32m INFO[0m RDMA QP established: local_qpn=49992 remote_qpn=18646
+[2m2026-10-28T19:01:03.949801Z[0m [32m INFO[0m MISS_DETAIL wall_us=1793214063949581 key=12:rdma-sdk-e2eread-1793214063914289768 bytes=8192 meta_us=0 alloc_us=16 stream_setup_us=99 first_stream_completion_us=152 last_stream_completion_us=152 post_done_us=57 poll_us=9 inject_us=0 n_writes=1
+[2m2026-10-28T19:01:04.921072Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:58734 (nic_idx=0)
+[2m2026-10-28T19:01:04.921625Z[0m [32m INFO[0m RcQp created: qpn=49993 psn=0xe32336
+[2m2026-10-28T19:01:04.922066Z[0m [32m INFO[0m RDMA QP established: local_qpn=49993 remote_qpn=18647
+[2m2026-10-28T19:01:05.179125Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793214064289091266 bytes=16777216 stripes=4 requests=16 alloc_us=16 stream_setup_us=108 first_io_us=31614 last_io_us=118401 poll_us=382 total_us=118811

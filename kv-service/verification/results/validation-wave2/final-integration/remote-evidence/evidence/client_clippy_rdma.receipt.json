@@ -1,0 +1,25 @@
+{
+  "label": "client_clippy_rdma",
+  "argv": [
+    "cargo",
+    "clippy",
+    "--locked",
+    "--offline",
+    "-j",
+    "4",
+    "-p",
+    "contextstore-client-rs",
+    "--all-targets",
+    "--features",
+    "rdma",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+  "started": "2026-10-28T21:21:48.638793+00:00",
+  "timeout_seconds": 600,
+  "pid": 2934295,
+  "exit_code": 0,
+  "finished": "2026-10-28T21:21:57.715494+00:00"
+}

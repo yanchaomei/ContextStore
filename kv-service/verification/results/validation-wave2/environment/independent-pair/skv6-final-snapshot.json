@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-28T19:13:00.690867+00:00",
+  "hostname": "skv-node6",
+  "root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029",
+  "hashes": {
+    "bin/rdma_e2e-8ac8901d52660419": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+    "bin/rail_read_e2e-d6145e305ed0b23e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26",
+    "client.env": "8577c53f1a619d050e969c78499d7192a06d47bdb2cf95e2692ee0c9c9651e4b"
+  },
+  "processes": {},
+  "free_disk_bytes": 3998842880,
+  "loadavg": [
+    0.87,
+    1.05,
+    1.16
+  ],
+  "kernel": "Linux skv-node6 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "glibc": "glibc 2.31\n",
+  "rdma": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens3f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens3f1 \n"
+}

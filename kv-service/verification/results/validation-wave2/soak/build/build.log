@@ -1,0 +1,4 @@
+   Compiling rdma-sys v0.3.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/source/kv-service/vendor/rdma-sys)
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/source/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.75s
+  Executable tests/rail_runtime_soak.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/rail_runtime_soak-fca396578ba06a72)

@@ -1,0 +1,43 @@
+{
+  "state": "STOPPED_FAILURE_OR_INCOMPLETE",
+  "started": "2026-10-28T19:42:00.067948+00:00",
+  "timeout_seconds_per_process": 240,
+  "maximum_runtime_seconds": 5400,
+  "environment": {
+    "PATH": "/usr/local/bin:/usr/bin:/bin",
+    "LANG": "C",
+    "CS_GRPC_ENDPOINT": "http://10.0.0.65:25551",
+    "CS_RDMA_ENDPOINT": "10.0.0.65:25553",
+    "CS_RDMA_DEVICE": "mlx5_1",
+    "CS_RDMA_PORT": "1",
+    "CS_RDMA_GID_INDEX": "3",
+    "CS_RAIL_COORDINATOR": "http://10.0.0.65:25551",
+    "CS_RAIL_LISTENER0": "10.0.0.65:25553",
+    "CS_RAIL_DEVICE0": "mlx5_1",
+    "CS_RAIL_GID0": "3",
+    "CS_RAIL_OBJECT_MIB": "16"
+  },
+  "binary_sha256": {
+    "cs-rail-read-bench": "6d90ed413283a513d32cb3b70428ba47cf3c7311ab47752bdc810db726bf3ca0",
+    "cs-bench": "904dd6cbf4eb096de067b9f1c2252bdce785b119ca40b57f52c7608cdf218b44"
+  },
+  "control_sha256": {
+    "run_matrix.py": "5858ed5c14700581306dc42e98c260d3813b84c98b16c71c2d00020698c1475d",
+    "analyze_matrix.py": "5bf61d58edd18430c835e109aa897c44d5a2d57484d878f1b900bcfe18bc1e8b",
+    "runner.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "protocol.json": "517c100e83119d3ef88c55ff5d12478ab96d15e0efa476abdcd7e9c520b1a19b",
+    "server-before.json": "34492bdbd951961c58a671d0a890eb67f83a836fc1543d7bee55dbd152b85217",
+    "matrix_snapshot.py": "1fed9657bf97b9641e233ed1ee57a2344c04b18b7c901a5d9fa196b0687c804d"
+  },
+  "output_limit_bytes": 524288000,
+  "processes_planned": 120,
+  "diagnostics_planned": 6,
+  "error": "AssertionError(('expected_pattern', {'pattern': 'index_mod_251', 'bytes': '1048576', 'xxh3': 'c061e1dcd62f6c77'}))",
+  "ended": "2026-10-28T19:42:05.429762+00:00",
+  "binary_sha256_after": {
+    "cs-rail-read-bench": "6d90ed413283a513d32cb3b70428ba47cf3c7311ab47752bdc810db726bf3ca0",
+    "cs-bench": "904dd6cbf4eb096de067b9f1c2252bdce785b119ca40b57f52c7608cdf218b44"
+  },
+  "binaries_unchanged": true,
+  "run_count": 10
+}

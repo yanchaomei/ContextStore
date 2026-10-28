@@ -569,6 +569,21 @@ impl std::fmt::Display for RetireLegacyGet {
 
 impl std::error::Error for RetireLegacyGet {}
 
+fn descriptor_get_fallback(
+    error: anyhow::Error,
+    fallback: impl FnOnce() -> Result<(bool, u64, u32)>,
+) -> Result<(bool, u64, u32)> {
+    if error.downcast_ref::<RetireLegacyGet>().is_some() {
+        // Keep the original error and let QP teardown release its pinned source.
+        return Err(error);
+    }
+    tracing::warn!(
+        "RDMA descriptor GET slab path failed, fallback to per-chunk reg_mr: {}",
+        error
+    );
+    fallback()
+}
+
 impl Drop for CqGuard {
     fn drop(&mut self) {
         unsafe {
@@ -743,7 +758,8 @@ fn serve_get_fallback(
 /// Returns:
 /// - Ok(Some((bytes, post_us, poll_us))): RDMA WRITE succeeded
 /// - Ok(None): the supplied metadata became unavailable or expired
-/// - Err(e): slab full / I/O error / protocol error → caller falls back to fallback
+/// - Err(RetireLegacyGet): an uncertain WRITE requires connection teardown without fallback
+/// - Other Err(e): slab allocation / storage failure allows the per-chunk fallback
 fn try_serve_get_via_slab_with_meta(
     kv_ctx: &Arc<KVServiceContext>,
     qp: &RcQp,
@@ -1718,12 +1734,8 @@ fn handle_descriptor_get(
         ) {
             Ok(Some((bytes, _post_us, _poll_us))) => (true, bytes, 1u32),
             Ok(None) => (false, 0u64, 0u32),
-            Err(e) => {
-                tracing::warn!(
-                    "RDMA descriptor GET slab path failed, fallback to per-chunk reg_mr: {}",
-                    e
-                );
-                match kv_ctx.storage.get_chunks_with_meta(&kv_key, &active_meta) {
+            Err(e) => descriptor_get_fallback(e, || {
+                let outcome = match kv_ctx.storage.get_chunks_with_meta(&kv_key, &active_meta) {
                     Ok(Some((segments, _meta))) => {
                         let (found, bytes, chunks, _reg_post_us, _poll_us) = serve_get_fallback(
                             rdma,
@@ -1741,8 +1753,9 @@ fn handle_descriptor_get(
                         tracing::warn!("RDMA descriptor GET fallback failed: {}", e2);
                         (false, 0u64, 0u32)
                     }
-                }
-            }
+                };
+                Ok(outcome)
+            })?,
         },
     };
 
@@ -2145,6 +2158,43 @@ fn handle_put(
 mod tests {
     use super::*;
     use crate::metadata::ChunkLocation;
+
+    #[test]
+    fn descriptor_get_retires_uncertain_write_without_fallback() {
+        let error = anyhow!(RetireLegacyGet("completion uncertain".to_string()))
+            .context("descriptor cold read failed");
+        let original_marker = error.downcast_ref::<RetireLegacyGet>().unwrap() as *const _;
+        let fallback_called = std::cell::Cell::new(false);
+
+        let result = descriptor_get_fallback(error, || {
+            fallback_called.set(true);
+            Ok((true, 8192, 1))
+        });
+
+        assert!(
+            !fallback_called.get(),
+            "an uncertain WRITE must not start another GET"
+        );
+        let returned = result.unwrap_err();
+        let returned_marker = returned
+            .chain()
+            .find_map(|cause| cause.downcast_ref::<RetireLegacyGet>())
+            .expect("the retirement marker must survive the descriptor handler");
+        assert!(std::ptr::eq(original_marker, returned_marker));
+        assert_eq!(returned.to_string(), "descriptor cold read failed");
+    }
+
+    #[test]
+    fn descriptor_get_allows_fallback_before_write_submission() {
+        for error in [
+            anyhow!("slab full before WRITE submission"),
+            anyhow!(std::io::Error::from(std::io::ErrorKind::NotFound))
+                .context("storage read failed before WRITE submission"),
+        ] {
+            let result = descriptor_get_fallback(error, || Ok((true, 8192, 2)));
+            assert_eq!(result.unwrap(), (true, 8192, 2));
+        }
+    }
 
     fn striped_meta(node_ids: &[&str]) -> BlockMeta {
         let chunk_locations = node_ids

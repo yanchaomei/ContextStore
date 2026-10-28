@@ -1,0 +1,61 @@
+{
+  "at": "2026-10-28T20:44:22.095893+00:00",
+  "hostname": "skv-node5",
+  "kernel": {
+    "code": 0,
+    "stdout": "Linux skv-node5 5.15.0-191-generic #201-Ubuntu SMP Fri Aug 7 18:39:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+    "stderr": ""
+  },
+  "cpu_count": 80,
+  "loadavg": [
+    9.2509765625,
+    7.64697265625,
+    7.69482421875
+  ],
+  "cpu_idle_pct_1s": 90.47,
+  "meminfo": "MemTotal:       131588112 kB\nMemFree:        102506576 kB\nMemAvailable:   117942608 kB\nBuffers:         1000168 kB\nCached:         14679896 kB\nSwapCached:        19836 kB\nActive:         11441972 kB\nInactive:       13827588 kB\nActive(anon):     993752 kB\nInactive(anon):  8611768 kB\nActive(file):   10448220 kB\nInactive(file):  5215820 kB\nUnevictable:       31084 kB\nMlocked:           28012 kB\nSwapTotal:       8388604 kB\nSwapFree:        8114888 kB\nDirty:               340 kB\nWriteback:             0 kB\nAnonPages:       9611088 kB\nMapped:           384412 kB\nShmem:              6972 kB\nKReclaimable:     865848 kB\nSlab:            1886624 kB\nSReclaimable:     865848 kB\nSUnreclaim:      1020776 kB\nKernelStack:       40512 kB\nPageTables:        53476 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    74182660 kB\nCommitted_AS:   24486696 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      212672 kB\nVmallocChunk:          0 kB\nPercpu:           262720 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:     22528 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     5027280 kB\nDirectMap2M:    42815488 kB\nDirectMap1G:    88080384 kB\n",
+  "disk": {
+    "total": 940211900416,
+    "used": 865700384768,
+    "free": 26675900416
+  },
+  "root_exists": false,
+  "ports": {
+    "code": 0,
+    "stdout": "Netid State  Recv-Q Send-Q      Local Address:Port  Peer Address:PortProcess                           \nudp   UNCONN 0      0           127.0.0.53%lo:53         0.0.0.0:*                                     \nudp   UNCONN 0      0      192.168.1.140%eno1:68         0.0.0.0:*                                     \nudp   UNCONN 0      0               127.0.0.1:323        0.0.0.0:*                                     \nudp   UNCONN 0      0               127.0.0.1:7890       0.0.0.0:*                                     \nudp   UNCONN 0      0               127.0.0.1:8891       0.0.0.0:*                                     \nudp   UNCONN 0      0                   [::1]:323           [::]:*                                     \nudp   UNCONN 0      0                       *:1053             *:*                                     \ntcp   LISTEN 0      128               0.0.0.0:22         0.0.0.0:*                                     \ntcp   LISTEN 0      1024              0.0.0.0:11212      0.0.0.0:*                                     \ntcp   LISTEN 0      128             127.0.0.1:36143      0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:42235      0.0.0.0:*                                     \ntcp   LISTEN 0      128             127.0.0.1:46577      0.0.0.0:*                                     \ntcp   LISTEN 0      4096            10.0.0.65:9864       0.0.0.0:*                                     \ntcp   LISTEN 0      256             10.0.0.65:9866       0.0.0.0:*                                     \ntcp   LISTEN 0      256             10.0.0.65:9867       0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:7890       0.0.0.0:*                                     \ntcp   LISTEN 0      511             127.0.0.1:4173       0.0.0.0:*    users:((\"node\",pid=734381,fd=21))\ntcp   LISTEN 0      1024            127.0.0.1:11211      0.0.0.0:*                                     \ntcp   LISTEN 0      4096        127.0.0.53%lo:53         0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:8891       0.0.0.0:*                                     \ntcp   LISTEN 0      4096            127.0.0.1:8890       0.0.0.0:*                                     \ntcp   LISTEN 0      4096                    *:1053             *:*                                     \ntcp   LISTEN 0      128                  [::]:22            [::]:*                                     \ntcp   LISTEN 0      1024                 [::]:11212         [::]:*                                     \ntcp   LISTEN 0      4096                    *:9090             *:*                                     \n",
+    "stderr": ""
+  },
+  "glibc": {
+    "code": 0,
+    "stdout": "glibc 2.35\n",
+    "stderr": ""
+  },
+  "packages": {
+    "code": 1,
+    "stdout": "ibverbs-providers:amd64\t58mlnx43-1.58604\nlibibverbs1:amd64\t58mlnx43-1.58604\nrdma-core\t58mlnx43-1.58604\n",
+    "stderr": "dpkg-query: no packages found matching redis-server\n"
+  },
+  "rdma": {
+    "code": 0,
+    "stdout": "link mlx5_0/1 state DOWN physical_state DISABLED netdev enp175s0f0np0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev enp175s0f1np1 \n",
+    "stderr": ""
+  },
+  "ip": {
+    "code": 0,
+    "stdout": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             192.168.1.141/24 192.168.1.140/24 metric 100 fe80::3673:5aff:fe9c:4a94/64 \neno2             DOWN           \nenp94s0f0        DOWN           \neno3             DOWN           \nenp94s0f1        DOWN           \neno4             DOWN           \nenp175s0f0np0    DOWN           \nenp175s0f1np1    UP             10.0.0.65/24 fe80::63f:72ff:fee2:59cf/64 \nbr-daa415f7d750  DOWN           172.18.0.1/16 \ndocker0          DOWN           172.17.0.1/16 fe80::8c59:5ff:fe67:a59d/64 \nbr-38aa5270f915  DOWN           172.22.0.1/16 fe80::4cde:51ff:fecc:4889/64 \nbr-e8ec3ba43a9f  DOWN           172.21.0.1/16 fe80::a077:b3ff:fe86:b40b/64 \nbr-a84d59913ee8  DOWN           172.23.0.1/16 fe80::98d6:75ff:feda:7d4c/64 \nbr-00dc0eef2ef6  DOWN           172.19.0.1/16 fe80::2822:4eff:fe27:b433/64 \nbr-2a9781d5549d  UP             172.25.0.1/16 fe80::7c35:63ff:fed4:2631/64 \nveth4b869c6@if2  UP             fe80::6c3c:a2ff:fe46:1de1/64 \nveth955dba1@if2  UP             fe80::6cc9:1ff:fe69:2322/64 \nveth50ece31@if2  UP             fe80::4498:2ff:febd:e79c/64 \nvethc3823af@if2  UP             fe80::40e8:11ff:fe05:b4e3/64 \nvethb4ee836@if2  UP             fe80::6c02:dbff:fe33:e6dc/64 \nvethf18e91f@if2  UP             fe80::e434:38ff:fe35:e6f6/64 \nvethc2fac73@if2  UP             fe80::1c22:ff:fe40:5c42/64 \nveth860b741@if2  UP             fe80::9c0a:9ff:fe78:ac5e/64 \nveth3f6bcf7@if2  UP             fe80::7099:b3ff:fe38:c80d/64 \nveth2c96a98@if2  UP             fe80::9c24:41ff:fe15:c938/64 \nveth8e45851@if2  UP             fe80::5034:b9ff:fe50:bd89/64 \nbr-279b2de98da7  DOWN           172.24.0.1/16 fe80::f4cd:dcff:feb2:6f67/64 \nbr-02a34e3703ad  DOWN           172.20.0.1/16 fe80::c8e8:a6ff:fe79:3595/64 \n",
+    "stderr": ""
+  },
+  "top_cpu_processes": {
+    "code": 0,
+    "stdout": "    PID USER     %CPU %MEM COMMAND\n3853753 root     96.1  0.6 ec_proxy\n3844927 k8s      21.5  1.7 python3\n3853819 root     17.3  0.0 docker-proxy\n3852810 root      9.4  0.3 ec_node\n3852768 root      9.1  0.3 ec_node\n3852773 root      9.1  0.3 ec_node\n3852803 root      9.1  0.3 ec_node\n3852822 root      9.1  0.3 ec_node\n3852826 root      9.1  0.3 ec_node\n3852785 root      9.0  0.3 ec_node\n3852795 root      9.0  0.3 ec_node\n3852832 root      9.0  0.3 ec_node\n3852843 root      9.0  0.3 ec_node\n1181792 kvgroup   2.0  0.0 python3",
+    "stderr": ""
+  },
+  "gids": {
+    "mlx5_1": {
+      "pci": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+      "numa": "1",
+      "gid3": "0000:0000:0000:0000:0000:ffff:0a00:0041",
+      "gid3_type": "RoCE v2"
+    }
+  }
+}

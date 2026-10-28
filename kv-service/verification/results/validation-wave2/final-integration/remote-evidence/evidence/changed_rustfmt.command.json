@@ -1,0 +1,16 @@
+{
+  "label": "changed_rustfmt",
+  "argv": [
+    "rustfmt",
+    "--check",
+    "--edition",
+    "2021",
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs",
+    "kv-service/client-rs/src/rail_read/tests.rs",
+    "kv-service/client-rs/tests/rail_runtime_soak.rs",
+    "kv-service/server/src/rdma/server.rs"
+  ],
+  "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+  "started": "2026-10-28T21:18:59.428877+00:00",
+  "timeout_seconds": 300
+}

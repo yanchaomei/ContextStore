@@ -1,0 +1,67 @@
+{
+  "hostname": "skv-node2",
+  "at": "2026-10-28T19:02:24.568536+00:00",
+  "kernel": "Linux skv-node2 5.15.167 #1 SMP Sat Sep 28 16:50:31 CST 2024 x86_64 x86_64 x86_64 GNU/Linux\n",
+  "rdma_links": "link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 \nlink mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 \n",
+  "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1             UP             \neno2             DOWN           \nens2f0           DOWN           \neno3             DOWN           \nens2f1           DOWN           \neno4             DOWN           \nbr0              UP             192.168.1.102/24 fe80::3648:edff:fef9:cdb4/64 \nlxcbr0           DOWN           10.0.3.1/24 \nvirbr0           DOWN           192.168.100.1/24 \nvirbr0-nic       DOWN           \ndocker0          UP             172.17.0.1/16 fe80::42:1bff:fe70:949f/64 \nvethf0e508a@if19 UP             fe80::a0c2:46ff:fee5:7b1d/64 \nveth8c5cf9e@if449 UP             fe80::14da:5cff:fef1:3c99/64 \nens4f0           DOWN           \nens4f1           UP             10.0.0.62/24 fe80::63f:72ff:fee2:59d7/64 \nbr-b72d5baabc19  DOWN           172.30.52.1/24 fe80::42:30ff:fe45:e839/64 \n",
+  "devices": [
+    {
+      "name": "mlx5_0",
+      "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0",
+      "numa_node": "1",
+      "ports": [
+        {
+          "id": "1",
+          "state": "1: DOWN",
+          "phys_state": "3: Disabled",
+          "gids": {
+            "1": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d6",
+              "type": "RoCE v2",
+              "netdev": "ens4f0"
+            },
+            "0": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d6",
+              "type": "IB/RoCE v1",
+              "netdev": "ens4f0"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "mlx5_1",
+      "device_path": "/sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.1",
+      "numa_node": "1",
+      "ports": [
+        {
+          "id": "1",
+          "state": "4: ACTIVE",
+          "phys_state": "5: LinkUp",
+          "gids": {
+            "3": {
+              "value": "0000:0000:0000:0000:0000:ffff:0a00:003e",
+              "type": "RoCE v2",
+              "netdev": "ens4f1"
+            },
+            "1": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d7",
+              "type": "RoCE v2",
+              "netdev": "ens4f1"
+            },
+            "2": {
+              "value": "0000:0000:0000:0000:0000:ffff:0a00:003e",
+              "type": "IB/RoCE v1",
+              "netdev": "ens4f1"
+            },
+            "0": {
+              "value": "fe80:0000:0000:0000:063f:72ff:fee2:59d7",
+              "type": "IB/RoCE v1",
+              "netdev": "ens4f1"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

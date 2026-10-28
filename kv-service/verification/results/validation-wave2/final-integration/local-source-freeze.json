@@ -1,0 +1,25 @@
+{
+  "state": "FROZEN_FROM_CURRENT_WORKING_FILES_NOT_GIT_ARCHIVE",
+  "at": "2026-10-28T21:16:33.396090+00:00",
+  "repo": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/work/ContextStore-runtime-wave1",
+  "head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "status": " M README.md\n M kv-service/client-rs/src/rail_read/tests.rs\n M kv-service/server/src/rdma/server.rs\n?? kv-service/client-rs/src/rail_read/recovery_campaign.rs\n?? kv-service/client-rs/tests/rail_runtime_soak.rs\n?? kv-service/verification/audit_recovery_campaign.py\n?? kv-service/verification/results/validation-wave2/\n?? kv-service/verification/run_recovery_campaign.py\n?? kv-service/verification/run_runtime_soak.py\n",
+  "included_files": 75,
+  "included_bytes": 1754063,
+  "input_manifest_sha256": "5660f13e8ae4eb6bd000a3961a505536120e5805e2a9a092314e0aca94b693d4",
+  "source_archive_sha256": "6dafbc5bef6ec6749c956ef3f8c664597f12ebcb5a489152f7dfe988b6a5f619",
+  "untracked_included": [
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs",
+    "kv-service/client-rs/tests/rail_runtime_soak.rs",
+    "kv-service/verification/audit_recovery_campaign.py",
+    "kv-service/verification/run_recovery_campaign.py",
+    "kv-service/verification/run_runtime_soak.py"
+  ],
+  "changed_rust": [
+    "kv-service/client-rs/src/rail_read/recovery_campaign.rs",
+    "kv-service/client-rs/src/rail_read/tests.rs",
+    "kv-service/client-rs/tests/rail_runtime_soak.rs",
+    "kv-service/server/src/rdma/server.rs"
+  ],
+  "scope": "Root workspace cargo/lock and Makefiles; all3workspace crates and vendor/proto/configs/.cargo; current README; current verification runners/auditor. Existing results/media excluded. No local compilation/tests."
+}

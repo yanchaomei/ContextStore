@@ -1,0 +1,8 @@
+{
+  "frozen_run": "admission24",
+  "full_matrix_verified": true,
+  "expected_frames": 16,
+  "expected_late_eof": 16,
+  "expected_held_success_ack": 0,
+  "fixed_control_key_hashes": {}
+}

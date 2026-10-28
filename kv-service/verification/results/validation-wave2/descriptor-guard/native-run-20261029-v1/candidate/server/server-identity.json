@@ -1,0 +1,14 @@
+{
+  "pid": 20252,
+  "exe": "/home/railtest/wave2-descriptor-guard/native-frozen-bin/candidate-server-debug-rdma",
+  "cmdline": [
+    "/home/railtest/wave2-descriptor-guard/native-frozen-bin/candidate-server-debug-rdma",
+    "--config",
+    "/home/railtest/wave2-descriptor-guard/server.toml",
+    "--log-level",
+    "info",
+    ""
+  ],
+  "stat": "20252 (candidate-serve) S 20239 20239 20239 0 -1 1077936128 6127 0 0 0 0 1 0 0 20 0 12 0 733333 877850624 9605 18446744073709551615 94222238443424 94222253713376 140737084353264 0 0 0 0 4103 1088 0 0 0 17 0 0 0 0 0 0 94222254662320 94222254680880 94222346694656 140737084357805 140737084357965 140737084357965 140737084358564 0\n",
+  "utc_unix": 1793221398.6579037
+}

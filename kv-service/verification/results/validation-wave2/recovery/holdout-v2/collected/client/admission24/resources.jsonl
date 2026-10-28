@@ -1,0 +1,18 @@
+{"monotonic_seconds": 6506.483376849, "pid": 19663, "VmRSS": "420 kB", "VmHWM": "420 kB", "VmSize": "13376 kB", "Threads": "1", "file_descriptors": 4, "task_count": 1}
+{"monotonic_seconds": 6507.484791586, "pid": 19663, "VmRSS": "12652 kB", "VmHWM": "12652 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6508.485909358, "pid": 19663, "VmRSS": "13856 kB", "VmHWM": "13960 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6509.486852302, "pid": 19663, "VmRSS": "13876 kB", "VmHWM": "13980 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6510.488306664, "pid": 19663, "VmRSS": "13896 kB", "VmHWM": "14000 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6511.489655268, "pid": 19663, "VmRSS": "13904 kB", "VmHWM": "14008 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6512.490803611, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6513.492112353, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6514.493850421, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6515.494443977, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6516.496086792, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6517.497344955, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6518.498803809, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6519.500116414, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6520.501298192, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6521.502522713, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6522.503653151, "pid": 19663, "VmRSS": "14172 kB", "VmHWM": "14276 kB", "VmSize": "425204 kB", "Threads": "6", "file_descriptors": 14, "task_count": 6}
+{"monotonic_seconds": 6523.505187671, "pid": 19663, "process_exited": true}

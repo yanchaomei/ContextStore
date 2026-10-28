@@ -1,0 +1,6 @@
+# Large replay binaries and duplicate source archives are retained offline.
+# Their exact locations and hashes are in LARGE_ARTIFACTS.json.
+/recovery/holdout-v2/collected/client/recovery-test
+/soak/long-v3-final/freeze/soak-frozen-source-v3.tar.gz
+/soak/long-v3-final/freeze/base-1c3.tar
+/soak/long-v3-final/freeze/rail_runtime_soak

@@ -1,0 +1,21 @@
+{
+  "state": "VALIDATOR_HASH_VERSION_MISMATCH",
+  "failed_campaign": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/matrix512k/performance-20261029-v1",
+  "failed_slot": "1MiB-c1-pair00-R0",
+  "benchmark_exit": 0,
+  "read_samples": 35,
+  "reason": "External system libxxhash 0.7.3 expected hash differed from frozen twox-hash 1.6.3 implementation. CLI computes full independent index_mod_251 expected buffer and validates every sample against it; sample and CLI expectation agree. No runtime defect observed.",
+  "system_libxxhash_0_7_3_hashes": {
+    "1": "f200297ce44ea4d7",
+    "8": "3e4078e898678079",
+    "64": "e610245a1a19a90f"
+  },
+  "frozen_benchmark_expected_hashes": {
+    "1": "c061e1dcd62f6c77",
+    "8": "dc2ba4087a0c5c99",
+    "64": "a0a4cbfa5cad46af"
+  },
+  "correction": "v2 uses frozen benchmark known-pattern hashes, preserving CLI full expected-pattern validation; old failed primary slot excluded by explicit full campaign supersession, no mixed blocks. Nine existing object seeds reused without overwrite.",
+  "independent_oracle": "independent-hash-replay.json",
+  "adjudicated_at": "2026-10-28T19:46:20.244321+00:00"
+}

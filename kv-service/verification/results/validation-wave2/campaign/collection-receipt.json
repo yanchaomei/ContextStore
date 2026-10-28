@@ -1,0 +1,23 @@
+{
+  "state": "COLLECTED_PENDING_REVIEW",
+  "at": "2026-10-28T20:06:00.340766+00:00",
+  "server_same_pid_startticks": true,
+  "server_same_config": true,
+  "server_same_environment": true,
+  "source_sha256_after": {
+    "kv-service/client-rs/src/bin/rail_read_bench.rs": "929cdb567327dce694a5d01b4f69660436276747896b4176eafabdd192853267",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs": "cf9dc48aa77b9320af5b5fb0bce405aeb47ebed87047c091558472845a7a03df",
+    "kv-service/client-rs/src/rdma.rs": "62a73733c9455677cb529f563a49f157c58cdf687e08de6d2ced3ac059328d3d",
+    "kv-service/client-rs/src/lib.rs": "e6c1c9f78ce0709fd90a247f42e627550b387c145e0ed77e02faa692a5569964",
+    "Cargo.lock": "338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd",
+    "Cargo.toml": "289fe5e3ccbee0945b73a6b40574fe64cb9e78652358983a8af40607773b0a62"
+  },
+  "source_unchanged": true,
+  "head_after": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "server_log_window_offsets": [
+    21976,
+    4236469
+  ],
+  "client_archive_sha256": "7adfadba8f00d27428b5c6e30edf7e22bc8e94e98d41ac925f2eecdf6a3c65ec"
+}

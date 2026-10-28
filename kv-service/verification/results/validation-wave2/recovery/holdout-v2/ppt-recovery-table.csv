@@ -1,0 +1,8 @@
+suite,operations,exact_publications,expected_atomic_rejections,native_frames,late_write_terminal_pairs,frozen_auditor_returncode,full_matrix_pass,ordered_terminal_bijection_pass,seed,object_mib,elapsed_seconds_including_fault_gates,resource_samples
+f2-recovery1000,1000,1000,0,3000,1000,1,True,True,2026102934,1,1133.5851168632507,1132
+matched-controls240,240,160,80,720,240,0,True,True,2026102936,1,268.35696721076965,268
+cuts480,480,80,400,1280,240,0,True,True,2026102938,1,352.56145119667053,352
+lifetime2000,2000,2000,0,4000,0,0,True,True,2026102940,1,136.38308262825012,136
+publication160,160,0,160,480,160,0,True,True,2026102942,1,501.5880763530731,501
+admission24,24,0,24,16,16,0,True,True,2026102944,1,17.025513887405396,17
+representative16mib4,4,4,0,12,4,0,True,True,2026102946,16,142.1555163860321,142

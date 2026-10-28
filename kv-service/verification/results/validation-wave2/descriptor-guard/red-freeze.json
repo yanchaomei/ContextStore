@@ -1,0 +1,8 @@
+{
+  "head": "1c3ee135d19fece67507b51acd1fc51ae9541208",
+  "stage": "red: behavior-preserving fallback extraction plus regression",
+  "source_manifest_sha256": "957b7e1d5dba2497c2a7f3fbb451327f7e227e7429e7331986ce66c52d799193",
+  "server_sha256": "8aa32e0f376c679d5dd805a8d4dda90a934cd200325a640ff8b9232f0cb0c09b",
+  "utc": "2026-10-28T20:13:30.385331+00:00",
+  "native_guest_traffic": "none; awaiting parent authorization"
+}

@@ -1,0 +1,17 @@
+{
+  "client-final-receipt.json": "09a5868154aabe6907dcfa9a91aaa3bebf25cf9e09ca058095fd35a9772b240d",
+  "client-final-results.tar.gz": "e89adb30f27b31916f3cd7c552919693e7f498e247a3208c9eb234668fcc2859",
+  "server-stop-receipt.json": "6d638667ffd257281459630966127a37516a001c52370126c326583dfb25f035",
+  "verify_client_final.py": "75979f6ec021ea014e4e5a4a4335cf29719f768dc3b5ca46db2e4f7f842ef119",
+  "server-prestop-evidence-and-snapshot.tar.gz": "b0bad7d21800a61c54d1280cb9cb691ddfa730e1a7362fe29f438f6b8d6b1918",
+  "stop_server.py": "15c501e0b0c9ec48e46b089109da7a7fbba824efced0c7d9d08fff7f54142148",
+  "collect_client.py": "e2168781ba8c2166fcf0e8792a668db997b30d57ec9244601df101031c2d3680",
+  "redis-cmdline-guard-refusal.txt": "a32b2f3abd90a2d4b84a568e8d644ddfff47ed569c06d1d7c4e1dcf18d2ca74b",
+  "server-final-readback.json": "107a9a7e7c2fa916c8b683721b0cfa4024d4168a48f9ee415680a566e7c7c699",
+  "collect_server.py": "b94f0ce7303cec2f49824d81360ac178fa639433da01b6c450e545345091b52b",
+  "cleanup-receipt.json": "db5a35ba2e98bab8518364007c9be54c5fdf531247dd003d2cfa3467de8e3851",
+  "server-poststop-evidence-and-snapshot.tar.gz": "4e2ec0187f41a0aa84b7ab9b93c486dc0750fca77654905d3d0ef28b77f00bae",
+  "client-final-readback.json": "905ab54ec0d876e5c57613b0edce343c3d3e68fcbff4367de63d70bd7b1fa4e8",
+  "prestop-local-verification.json": "5b6d00b60325718c689cfea3f695d731e1726f9312ec943cd1b3fdd2b120dbe8",
+  "server-prestop-receipt.json": "7f36a84085f99dc25634fc5be406dcd29297de2573e7f6499aaca82342f0205a"
+}

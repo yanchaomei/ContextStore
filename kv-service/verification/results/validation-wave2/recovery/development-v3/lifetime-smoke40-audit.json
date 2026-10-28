@@ -1,0 +1,17 @@
+{
+  "client_log": "kv-service/verification/results/validation-wave2/recovery/development-v3/lifetime-smoke40.log",
+  "client_sha256": "5a9eac3c7294fb1cd5853c092278e6c2b291a5cc5f30d5328f522e6a19b175a9",
+  "server_log": "kv-service/verification/results/validation-wave2/recovery/development-v3/server-after-smoke.log",
+  "server_sha256": "d9470051618c65c68f571ca733ac92a4933aacd9087982cc93b00da2f6ab6e33",
+  "operations": 40,
+  "mode_counts": {
+    "direct=false,pooled=true,control=-,cut=-": 20,
+    "direct=true,pooled=true,control=-,cut=-": 20
+  },
+  "native_frames": 80,
+  "late_eof_requests": 0,
+  "exact_peer_and_key_wr_retirements": 0,
+  "server_success_ack_held_until_client_timeout": 0,
+  "server_not_found_used_as_late_write_proof": 0,
+  "proof": []
+}

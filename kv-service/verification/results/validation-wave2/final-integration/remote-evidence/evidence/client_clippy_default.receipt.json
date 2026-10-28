@@ -1,0 +1,23 @@
+{
+  "label": "client_clippy_default",
+  "argv": [
+    "cargo",
+    "clippy",
+    "--locked",
+    "--offline",
+    "-j",
+    "4",
+    "-p",
+    "contextstore-client-rs",
+    "--all-targets",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/final-integration/src",
+  "started": "2026-10-28T21:21:36.606392+00:00",
+  "timeout_seconds": 600,
+  "pid": 2933611,
+  "exit_code": 0,
+  "finished": "2026-10-28T21:21:48.636776+00:00"
+}
