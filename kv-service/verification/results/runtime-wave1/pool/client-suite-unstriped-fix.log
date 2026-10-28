@@ -1,0 +1,157 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.84s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/contextstore_client_rs-da9b35b4bb2023c7)
+
+running 74 tests
+test rail_read::connection_pool::tests::active_connection_limit_fails_fast_without_opening_another_client ... ok
+test rail_read::connection_pool::tests::deregistration_runs_while_lease_is_still_active ... ok
+test rail_read::connection_pool::tests::dropping_reader_pool_drains_all_idle_clients ... ok
+test rail_read::connection_pool::tests::healthy_connection_is_reused_exclusively ... ok
+test rail_read::connection_pool::tests::connecting_slot_counts_toward_capacity_without_holding_pool_lock ... ok
+test rail_read::connection_pool::tests::failed_and_panicking_connect_release_the_reserved_slot ... ok
+test rail_read::connection_pool::tests::failure_and_panic_destroy_qp_before_both_mrs ... ok
+test rail_read::connection_pool::tests::healthy_transfer_deregisters_mr_before_making_connection_idle ... ok
+test rail_read::connection_pool::tests::idle_other_route_is_evicted_before_opening_new_route ... ok
+test rail_read::connection_pool::tests::legacy_success_still_destroys_qp_before_mr ... ok
+test rail_read::connection_pool::tests::concurrent_acquisition_never_exceeds_reader_bound ... ok
+test rail_read::tests::cancellation_before_publish_preserves_caller_buffer ... ok
+test rail_read::tests::changed_generation_cannot_publish_completed_rail_bytes ... ok
+test rail_read::connection_pool::tests::retiring_slot_remains_charged_until_client_destruction_returns ... ok
+test rail_read::tests::cancellation_and_publish_have_one_order ... ok
+test rail_read::tests::connection_keys_separate_route_owner_device_listener_and_generation ... ok
+test rail_read::tests::descriptor_identity_rejects_generation_and_layout_changes ... ok
+test rail_read::tests::connection_pool_is_opt_in_and_rejects_zero_capacity ... ok
+test rail_read::tests::advertised_rails_resolve_local_fabrics_and_restore_one_object ... ok
+test rail_read::tests::completed_payload_keeps_staging_and_active_read_reserved_until_drop ... ok
+test rail_read::tests::checksum_failure_keeps_destination_unchanged ... ok
+test rail_read::tests::active_read_limit_rejects_concurrent_second_request ... ok
+test rail_read::tests::direct_staging_sge_uses_the_owned_slice_and_separate_dummy_mr ... ok
+test rail_read::tests::discovered_reader_rejects_a_changed_storage_owner_before_transport ... ok
+test rail_read::tests::discovered_reader_rejects_a_changed_listener_before_transport ... ok
+test rail_read::tests::discovery_rejects_a_capability_for_another_owner ... ok
+test rail_read::tests::direct_staging_partial_second_rail_failure_never_publishes ... ok
+test rail_read::tests::discovery_rejects_one_listener_claimed_by_two_owners ... ok
+test rail_read::tests::discovery_rejects_duplicate_fabrics_and_legacy_absence ... ok
+test rail_read::tests::direct_staging_checksum_failure_preserves_caller_sentinel ... ok
+test rail_read::tests::discovery_maps_one_local_fabric_to_each_actual_storage_owner ... ok
+test rail_read::tests::direct_staging_reserves_one_object_buffer_and_keeps_it_until_drop ... ok
+test rail_read::tests::incomplete_ack_never_returns_connection_to_pool ... ok
+test rail_read::tests::disabled_second_rail_falls_back_to_first_listener ... ok
+test rail_read::tests::direct_staging_assigns_disjoint_ordered_slices_and_restores_the_object ... ok
+test rail_read::tests::direct_staging_weighted_ranges_and_multi_owner_fallback_are_explicit ... ok
+test rail_read::tests::fixed_task_cap_preserves_nine_routes_and_rejects_excess ... ok
+test rail_read::tests::duplicate_stripe_is_rejected_before_transport ... ok
+test rail_read::tests::missing_or_out_of_bounds_stripe_is_rejected_before_dispatch ... ok
+test rail_read::tests::matching_stripe_checksums_allow_complete_read ... ok
+test rail_read::tests::panicked_worker_releases_inflight_metrics_and_preserves_buffer ... ok
+test rail_read::tests::one_rail_restores_the_same_object_layout ... ok
+test rail_read::tests::one_complete_rail_hands_off_its_receive_allocation_without_reassembly ... ok
+test rail_read::tests::partially_populated_checksums_are_rejected_before_dispatch ... ok
+test rail_read::tests::per_rail_inflight_limit_counts_concurrent_requests ... ok
+test rail_read::tests::process_memlock_headroom_caps_registered_bytes_before_dispatch ... ok
+test rail_read::tests::pooled_transport_rejects_ambiguous_placement_owner_before_opening_connections ... ok
+test rail_read::tests::per_rail_task_limit_counts_concurrent_requests ... ok
+test rail_read::tests::placement_for_another_object_is_rejected_before_dispatch ... ok
+test rail_read::tests::packed_contiguous_control_uses_the_same_rail_ranges_as_direct_staging ... ok
+test rail_read::tests::one_rail_checksum_failure_preserves_caller_buffer ... ok
+test rail_read::tests::software_only_mock_benchmark ... ignored, software-only Mock measurement; this is not RDMA bandwidth
+test rail_read::tests::partial_rail_failure_leaves_caller_buffer_unchanged ... ok
+test rail_read::tests::sge_map_keeps_every_stripe_inside_its_registered_region ... ok
+test rail_read::tests::registration_budget_rejects_before_transport ... ok
+test rail_read::tests::striped_ack_still_requires_exact_selected_stripe_count ... ok
+test rail_read::tests::two_rails_for_one_node_require_distinct_local_ports ... ok
+test rail_read::tests::unstriped_ack_accepts_multiple_server_writes_for_the_complete_object ... ok
+test rail_read::tests::stale_descriptor_does_not_mark_healthy_transport_as_down ... ok
+test rail_read::tests::unstriped_reads_bypass_pooled_owner_constraints_and_keep_legacy_byte_validation ... ok
+test rdma::tests::canonical_key_preserves_namespace_boundary ... ok
+test rdma::tests::config_uses_roce_defaults ... ok
+test rail_read::tests::two_independent_listeners_restore_one_unmodified_placement ... ok
+test rail_read::tests::weighted_scheduler_assigns_more_stripes_to_faster_rail ... ok
+test rail_read::tests::runtime_disable_and_enable_replans_without_changing_placement ... ok
+test rail_read::tests::topology_reads_numa_and_pci_address_from_sysfs_shape ... ok
+test rdma::tests::descriptor_request_contains_identity_and_destination ... ok
+test rail_read::tests::virtual_soft_roce_device_is_not_reported_as_pci_hardware ... ok
+test rdma::tests::request_rejects_oversized_wire_string ... ok
+test rdma::tests::descriptor_reply_preserves_server_chunk_count ... ok
+test rdma::tests::descriptor_reply_rejects_invalid_success_status ... ok
+test rail_read::tests::failed_rail_cools_down_then_recovers_on_next_request ... ok
+test rail_read::tests::cancellation_waits_for_started_mock_transfer_and_preserves_buffer ... ok
+test rdma::tests::control_socket_timeout_bounds_missing_get_reply ... ok
+
+test result: ok. 73 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running unittests src/bin/bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/cs_bench-12a83e6c20178554)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/rail_read_bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/cs_rail_read_bench-6721c12fb06b1c02)
+
+running 3 tests
+test tests::local_rail_spec_names_a_fabric_without_hardcoding_a_listener ... ok
+test tests::rail_spec_accepts_a_capacity_weight ... ok
+test tests::rail_spec_keeps_advertised_owner_separate_from_listener ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/rdma_bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/cs_rdma_bench-f44fa1671e6a0da2)
+
+running 2 tests
+test tests::readable_selector_encodes_canonical_key ... ok
+test tests::raw_object_key_explains_readable_selector ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/local_cluster_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/local_cluster_e2e-5a5b91fca4c9a5ca)
+
+running 4 tests
+test two_node_streaming_put_places_stripes_on_all_devices ... ok
+test two_node_cross_node_get_returns_original_payload ... ok
+test two_node_restart_recovers_shared_metadata_and_stripes ... ok
+test two_node_distributed_delete_retires_then_reclaims_all_stripe_files ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.17s
+
+     Running tests/rail_read_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/rail_read_e2e-d6145e305ed0b23e)
+
+running 23 tests
+test advertised_second_link_down_cannot_publish_partial_object ... ignored, requires advertised rails; externally disable the second client RXE link
+test advertised_two_rails_restore_one_object ... ignored, requires two real rails and server-advertised fabric/listener capabilities
+test cancellation_after_real_transfer_starts_cannot_write_reused_buffer ... ignored, requires one reachable HCA or RXE listener and a large striped object
+test cancellation_during_direct_staging_preserves_reused_buffer ... ignored, requires two real rails and a large striped object
+test cancellation_during_two_rail_transfer_preserves_reused_buffer ... ignored, requires two real rails and a large striped object
+test concurrent_rewrites_never_publish_mixed_direct_staging_bytes ... ignored, requires two RXE/HCA Rails, a striped KVService, and repeated writes
+test corrupt_stripe_on_second_rail_cannot_publish_partial_object ... ignored, requires two real rails and a deliberately corrupted stripe 1 on an isolated object
+test corrupted_real_stripe_does_not_publish_bytes ... ignored, requires an existing striped object with one deliberately corrupted physical stripe
+test dead_single_real_rail_leaves_destination_unchanged ... ignored, requires a striped KVService and an injected dead RDMA listener
+test failed_second_rail_direct_staging_does_not_publish_partial_bytes ... ignored, requires one reachable RDMA listener and one injected dead listener
+test failed_second_rail_does_not_publish_partial_bytes ... ignored, requires one reachable RDMA listener and one injected dead listener
+test late_second_rail_after_first_completion_cannot_publish_or_corrupt ... ignored, requires two real rails and a three-second pre-WRITE delay on server nic_idx=1
+test late_second_rail_direct_staging_cannot_publish_or_corrupt ... ignored, requires two real rails and a three-second pre-WRITE delay on server nic_idx=1
+test late_server_write_after_timeout_cannot_corrupt_reused_buffer ... ignored, requires CS_RDMA_TEST_PRE_WRITE_DELAY_MS=3000 on an isolated real RDMA server
+test legacy_get_timeout_retires_qp_before_buffer_reuse ... ignored, requires an isolated RXE server with CS_FORCE_DISK_READ=1 and a 64 MiB object
+test old_generation_is_rejected_without_publishing_bytes ... ignored, requires two reachable RDMA listeners and a striped KVService
+test pooled_real_rail_parallel_reads_preserve_exclusive_leases ... ignored, requires one reachable HCA or RXE listener and a striped KVService
+test pooled_real_rail_reuses_healthy_connection_and_retires_stale_read ... ignored, requires one reachable HCA or RXE listener and a striped KVService
+test same_object_matches_single_and_dual_rail ... ignored, requires two reachable RDMA listeners on the same storage node
+test single_real_rail_restores_verified_object ... ignored, requires one reachable HCA or RXE listener and a striped KVService
+test uncertain_completion_retires_old_server_connection ... ignored, requires a three-second delay on server nic_idx=1 and a two-second CQ deadline
+test unique_generations_survive_concurrent_direct_rail_reads ... ignored, requires two real Rails, striped writes, and CS_RAIL_TIMING=1
+test unstriped_real_read_bypasses_enabled_connection_pool ... ignored, requires one reachable HCA or RXE listener and a KVService accepting unstriped objects
+
+test result: ok. 0 passed; 0 failed; 23 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/rdma_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/rdma_e2e-8ac8901d52660419)
+
+running 1 test
+test rdma_put_and_get_round_trip ... ignored, requires an RDMA-enabled ContextStore server and an HCA
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests contextstore_client_rs
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

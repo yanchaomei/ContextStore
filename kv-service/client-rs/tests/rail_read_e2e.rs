@@ -6,7 +6,7 @@
 #![cfg(feature = "rdma")]
 
 use contextstore_client_rs::rail_read::{
-    LocalRailPath, RailCancel, RailLimits, RailReader, RailRoute,
+    LocalRailPath, RailCancel, RailConnectionPoolOptions, RailLimits, RailReader, RailRoute,
 };
 use contextstore_client_rs::rdma::{RdmaClient, RdmaClientConfig};
 use contextstore_client_rs::KvClient;
@@ -1166,5 +1166,213 @@ async fn unique_generations_survive_concurrent_direct_rail_reads() {
         "UNIQUE_SUMMARY,attempts={},accepted={},rejected={rejected},missing={missing},put_overlapping={put_overlaps},round_overlapping={round_overlaps},first_generation=1,last_generation=16",
         read_intervals.len(),
         accepted_generations.len(),
+    );
+}
+
+#[tokio::test]
+#[ignore = "requires one reachable HCA or RXE listener and a striped KVService"]
+async fn pooled_real_rail_reuses_healthy_connection_and_retires_stale_read() {
+    let (mut client, key, payload, advertised) = seeded_object().await;
+    let listener = setting("CS_RAIL_LISTENER0", &advertised);
+    let reader = Arc::new(
+        RailReader::new(
+            vec![route(&advertised, 0, &listener)],
+            RailLimits {
+                rail_cooldown: Duration::ZERO,
+                ..RailLimits::default()
+            },
+        )
+        .unwrap()
+        .with_connection_pool(RailConnectionPoolOptions {
+            max_live_connections: 1,
+            configuration_generation: 1,
+        })
+        .unwrap(),
+    );
+    for _ in 0..2 {
+        let mut destination = vec![0xA5; payload.len()];
+        assert_eq!(
+            client
+                .read_multi_rail_into(
+                    Arc::clone(&reader),
+                    "rail-e2e",
+                    &key,
+                    &mut destination,
+                    None
+                )
+                .await
+                .expect("pooled real rail read"),
+            Some(payload.len())
+        );
+        assert_eq!(destination, payload);
+    }
+    let snapshot = reader.connection_pool_snapshot().unwrap();
+    assert_eq!(snapshot.created, 1);
+    assert_eq!(snapshot.reused, 1);
+    assert_eq!(snapshot.idle, 1);
+    assert_eq!(snapshot.active, 0);
+    let lookup = client
+        .lookup_object("rail-e2e", &key)
+        .await
+        .unwrap()
+        .unwrap();
+    let mut stale = lookup.descriptor.clone();
+    stale.object_generation += 1;
+    let mut destination = vec![0xA5; payload.len()];
+    assert!(reader
+        .read_into(
+            &stale,
+            lookup.placement.as_ref().unwrap(),
+            &mut destination,
+            None
+        )
+        .is_err());
+    assert!(destination.iter().all(|byte| *byte == 0xA5));
+    let snapshot = reader.connection_pool_snapshot().unwrap();
+    assert_eq!(snapshot.retired, 1);
+    assert_eq!(snapshot.live, 0);
+    assert_eq!(snapshot.idle, 0);
+    assert_eq!(
+        client
+            .read_multi_rail_into(
+                Arc::clone(&reader),
+                "rail-e2e",
+                &key,
+                &mut destination,
+                None
+            )
+            .await
+            .expect("fresh connection after retired stale read"),
+        Some(payload.len())
+    );
+    assert_eq!(destination, payload);
+    let snapshot = reader.connection_pool_snapshot().unwrap();
+    assert_eq!(snapshot.created, 2);
+    assert_eq!(snapshot.reused, 2);
+    assert_eq!(snapshot.retired, 1);
+    assert_eq!(snapshot.live, 1);
+    assert_eq!(snapshot.idle, 1);
+    eprintln!("POOLED_REAL_RAIL_FINAL {snapshot:?}");
+    drop(reader);
+}
+
+#[tokio::test]
+#[ignore = "requires one reachable HCA or RXE listener and a striped KVService"]
+async fn pooled_real_rail_parallel_reads_preserve_exclusive_leases() {
+    let (client, key, payload, advertised) = seeded_object().await;
+    let listener = setting("CS_RAIL_LISTENER0", &advertised);
+    let reader = Arc::new(
+        RailReader::new(
+            vec![route(&advertised, 0, &listener)],
+            RailLimits::default(),
+        )
+        .unwrap()
+        .with_connection_pool(RailConnectionPoolOptions {
+            max_live_connections: 4,
+            configuration_generation: 1,
+        })
+        .unwrap(),
+    );
+    for _ in 0..2 {
+        let mut reads = Vec::new();
+        for _ in 0..4 {
+            let mut client = client.clone();
+            let reader = Arc::clone(&reader);
+            let key = key.clone();
+            let size = payload.len();
+            reads.push(tokio::spawn(async move {
+                let mut destination = vec![0xA5; size];
+                let result = client
+                    .read_multi_rail_into(reader, "rail-e2e", &key, &mut destination, None)
+                    .await;
+                (result, destination)
+            }));
+        }
+        for read in reads {
+            let (result, destination) = read.await.unwrap();
+            assert_eq!(result.expect("concurrent pooled read"), Some(payload.len()));
+            assert_eq!(destination, payload);
+        }
+        let snapshot = reader.connection_pool_snapshot().unwrap();
+        assert!(snapshot.created <= 4);
+        assert!(snapshot.live <= 4);
+        assert_eq!(snapshot.active, 0);
+        assert_eq!(snapshot.connecting, 0);
+        assert_eq!(snapshot.retiring, 0);
+        assert_eq!(snapshot.rejected, 0);
+        assert_eq!(snapshot.retired, 0);
+        assert_eq!(snapshot.idle, snapshot.live);
+    }
+    let snapshot = reader.connection_pool_snapshot().unwrap();
+    assert_eq!(snapshot.created + snapshot.reused, 8);
+    assert!(snapshot.reused >= 4);
+    eprintln!("POOLED_REAL_RAIL_PARALLEL_FINAL {snapshot:?}");
+}
+
+#[tokio::test]
+#[ignore = "requires one reachable HCA or RXE listener and a KVService accepting unstriped objects"]
+async fn unstriped_real_read_bypasses_enabled_connection_pool() {
+    let mut client = KvClient::connect(setting("CS_RAIL_COORDINATOR", "http://127.0.0.1:50051"))
+        .await
+        .unwrap();
+    let key = format!(
+        "pool-unstriped-{}",
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    );
+    let payload: Vec<u8> = (0..8192).map(|offset| (offset % 251) as u8).collect();
+    assert!(client.put("rail-e2e", &key, payload.clone()).await.unwrap());
+    let lookup = client
+        .lookup_object("rail-e2e", &key)
+        .await
+        .unwrap()
+        .unwrap();
+    assert!(
+        !lookup.descriptor.is_striped,
+        "test requires an unstriped object"
+    );
+    let advertised = &lookup
+        .placement
+        .as_ref()
+        .expect("unstriped placement")
+        .chunks[0]
+        .rdma_endpoint;
+    let listener = setting("CS_RAIL_LISTENER0", advertised);
+    let reader = Arc::new(
+        RailReader::new(vec![route(advertised, 0, &listener)], RailLimits::default())
+            .unwrap()
+            .with_connection_pool(RailConnectionPoolOptions {
+                max_live_connections: 1,
+                configuration_generation: 1,
+            })
+            .unwrap(),
+    );
+    for _ in 0..2 {
+        let mut destination = vec![0xA5; payload.len()];
+        assert_eq!(
+            client
+                .read_multi_rail_into(
+                    Arc::clone(&reader),
+                    "rail-e2e",
+                    &key,
+                    &mut destination,
+                    None
+                )
+                .await
+                .expect("legacy unstriped read with pool configured"),
+            Some(payload.len())
+        );
+        assert_eq!(destination, payload);
+        assert_eq!(
+            reader.connection_pool_snapshot().unwrap(),
+            Default::default(),
+            "unstriped requests must not acquire or create pooled connections"
+        );
+    }
+    eprintln!(
+        "UNSTRIPED_POOL_BYPASS_FINAL {:?}",
+        reader.connection_pool_snapshot().unwrap()
     );
 }

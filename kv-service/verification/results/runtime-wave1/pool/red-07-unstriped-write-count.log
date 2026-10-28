@@ -1,0 +1,23 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.36s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/contextstore_client_rs-da9b35b4bb2023c7)
+
+running 5 tests
+
+thread 'rail_read::tests::unstriped_ack_accepts_multiple_server_writes_for_the_complete_object' panicked at kv-service/client-rs/src/rail_read/tests.rs:1533:9:
+complete-object ACK counts server WRITEs, not planner stripes
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test rail_read::tests::striped_ack_still_requires_exact_selected_stripe_count ... ok
+test rail_read::tests::incomplete_ack_never_returns_connection_to_pool ... ok
+test rail_read::tests::unstriped_ack_accepts_multiple_server_writes_for_the_complete_object ... FAILED
+test rail_read::tests::disabled_second_rail_falls_back_to_first_listener ... ok
+test rail_read::tests::direct_staging_weighted_ranges_and_multi_owner_fallback_are_explicit ... ok
+
+failures:
+
+failures:
+    rail_read::tests::unstriped_ack_accepts_multiple_server_writes_for_the_complete_object
+
+test result: FAILED. 4 passed; 1 failed; 0 ignored; 0 measured; 68 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p contextstore-client-rs --lib`

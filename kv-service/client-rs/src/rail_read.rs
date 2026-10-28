@@ -9,6 +9,10 @@ use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
+mod connection_pool;
+use connection_pool::{finish_transfer, ConnectionPool, Lease};
+pub use connection_pool::{RailConnectionPoolOptions, RailConnectionPoolSnapshot};
+
 /// One local RDMA device and one listener on the node advertised by placement.
 #[derive(Clone, Debug)]
 pub struct RailRoute {
@@ -694,6 +698,8 @@ pub struct RailReader {
     counters: Vec<RailCounters>,
     mode_counts: [AtomicU64; 4],
     budget: Arc<Mutex<BudgetState>>,
+    connection_pool: Option<ConnectionPool<ConnectionKey, RdmaClient>>,
+    configuration_generation: u64,
 }
 
 /// Counts admitted reads by the plan actually selected after route filtering.
@@ -948,6 +954,8 @@ impl RailReader {
             effective_registered_budget(limits.max_registered_bytes, process_memlock_limit());
         Ok(Self {
             routes,
+            connection_pool: None,
+            configuration_generation: 0,
             discovered_capabilities: None,
             discovered_owners: None,
             topologies,
@@ -960,6 +968,31 @@ impl RailReader {
                 ..BudgetState::default()
             })),
         })
+    }
+
+    /// Opt in to bounded persistent connections for striped reads only.
+    /// Unstriped reads retain per-request QP teardown and do not use the pool.
+    /// Routes and their generation
+    /// remain immutable; rebuilding the reader creates a separate pool.
+    /// Admission fails immediately when every slot is active or retiring.
+    /// Idle connections for other routes may be destroyed to make room.
+    pub fn with_connection_pool(
+        mut self,
+        options: RailConnectionPoolOptions,
+    ) -> Result<Self, RailReadError> {
+        if options.max_live_connections == 0 {
+            return Err(RailReadError::ResourceExhausted(
+                "RDMA connection pool needs a positive live connection limit".into(),
+            ));
+        }
+        self.connection_pool = Some(ConnectionPool::new(options.max_live_connections));
+        self.configuration_generation = options.configuration_generation;
+        Ok(self)
+    }
+
+    /// Return typed connection lifecycle observations, or `None` in legacy mode.
+    pub fn connection_pool_snapshot(&self) -> Option<RailConnectionPoolSnapshot> {
+        self.connection_pool.as_ref().map(ConnectionPool::snapshot)
     }
 
     /// The resolved route map used by this reader, including discovered listeners.
@@ -1355,8 +1388,8 @@ impl RailReader {
                 .iter()
                 .all(|stripe| stripe.packed_offset == stripe.object_offset);
         let staged = if single_ordered {
-            // The sole QP/MR has already retired in fetch, and this private
-            // receive buffer is exactly the complete object in object order.
+            // The transfer has completed and its temporary MR is deregistered.
+            // This private buffer is exactly the object in descriptor order.
             let packed = results.into_iter().next().expect("one planned task")?;
             if packed.len() != plan.size {
                 return Err(RailReadError::Incomplete {
@@ -1456,7 +1489,8 @@ impl RailReader {
         placement: &pb::PlacementDescriptor,
         cancel: Option<&RailCancel>,
     ) -> Result<StagedRailRead, RailReadError> {
-        self.read_staged_with(descriptor, placement, &VerbsTransport, cancel)
+        let transport = VerbsTransport::new(self, placement, descriptor)?;
+        self.read_staged_with(descriptor, placement, &transport, cancel)
     }
 
     /// Copy a completed read into the caller's buffer. This low-level method
@@ -1469,7 +1503,8 @@ impl RailReader {
         destination: &mut [u8],
         cancel: Option<&RailCancel>,
     ) -> Result<usize, RailReadError> {
-        self.read_into_with(descriptor, placement, destination, &VerbsTransport, cancel)
+        let transport = VerbsTransport::new(self, placement, descriptor)?;
+        self.read_into_with(descriptor, placement, destination, &transport, cancel)
     }
 }
 
@@ -1579,9 +1614,129 @@ fn build_sge_segments_direct(
     Ok(segments)
 }
 
-struct VerbsTransport;
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct ConnectionKey {
+    route_id: String,
+    advertised_endpoint: String,
+    owner_node_id: String,
+    listener: String,
+    device: String,
+    port: u8,
+    gid_index: u8,
+    configuration_generation: u64,
+}
 
-impl RailTransport for VerbsTransport {
+impl ConnectionKey {
+    fn new(route: &RailRoute, owner: &str, configuration_generation: u64) -> Self {
+        Self {
+            route_id: route.id.clone(),
+            advertised_endpoint: route.advertised_endpoint.clone(),
+            owner_node_id: owner.into(),
+            listener: route.connection.endpoint.clone(),
+            device: route.connection.device.clone(),
+            port: route.connection.port,
+            gid_index: route.connection.gid_index,
+            configuration_generation,
+        }
+    }
+}
+
+struct VerbsTransport<'a> {
+    pool: Option<&'a ConnectionPool<ConnectionKey, RdmaClient>>,
+    configuration_generation: u64,
+    owners: HashMap<&'a str, &'a str>,
+}
+
+impl<'a> VerbsTransport<'a> {
+    fn new(
+        reader: &'a RailReader,
+        placement: &'a pb::PlacementDescriptor,
+        descriptor: &pb::ObjectDescriptor,
+    ) -> Result<Self, RailReadError> {
+        // Full-descriptor GET reports server WRITE/segment counts, and its
+        // server fallback has not established the terminal-ACK guarantee
+        // required for reuse. Keep that entire path on legacy QP-before-MR
+        // teardown, including bypassing pooled ownership/admission checks.
+        let pool = reader
+            .connection_pool
+            .as_ref()
+            .filter(|_| descriptor.is_striped);
+        let mut owners = HashMap::new();
+        if pool.is_some() {
+            for chunk in &placement.chunks {
+                let owner = chunk.node_id.as_str();
+                if owner.trim().is_empty()
+                    || owners
+                        .insert(chunk.rdma_endpoint.as_str(), owner)
+                        .is_some_and(|previous| previous != owner)
+                {
+                    return Err(RailReadError::InvalidPlacement(
+                        "pooled routes require one nonempty owner per advertised endpoint".into(),
+                    ));
+                }
+            }
+        }
+        Ok(Self {
+            pool,
+            configuration_generation: reader.configuration_generation,
+            owners,
+        })
+    }
+
+    fn acquire(
+        &self,
+        route: &RailRoute,
+        timeout: Duration,
+    ) -> Result<Lease<ConnectionKey, RdmaClient>, RailReadError> {
+        let open = || {
+            RdmaClient::connect(route.connection.clone().with_io_timeout(timeout))
+                .map_err(|error| RailReadError::Transport(error.to_string()))
+        };
+        if let Some(pool) = self.pool {
+            let owner = self
+                .owners
+                .get(route.advertised_endpoint.as_str())
+                .ok_or_else(|| {
+                    RailReadError::InvalidPlacement("pooled route has no placement owner".into())
+                })?;
+            let mut lease = pool.acquire(
+                ConnectionKey::new(route, owner, self.configuration_generation),
+                open,
+            )?;
+            // Refresh both socket timeouts on every lease, including reused QPs.
+            // These remain per-operation TCP timeouts, not a wall-clock deadline.
+            lease
+                .client()
+                .set_io_timeout(timeout)
+                .map_err(|error| RailReadError::Transport(error.to_string()))?;
+            Ok(lease)
+        } else {
+            open().map(Lease::unpooled)
+        }
+    }
+}
+
+fn validate_outcome(
+    result: anyhow::Result<Option<RdmaReadOutcome>>,
+    task: &RailTask,
+    descriptor: &pb::ObjectDescriptor,
+) -> Result<(), RailReadError> {
+    let outcome = result
+        .map_err(|error| RailReadError::Transport(error.to_string()))?
+        .ok_or(RailReadError::StaleDescriptor)?;
+    // Stripe-subset ACKs count selected stripes. Full-descriptor ACKs instead
+    // count server WRITE splits/segments; preserve their legacy byte check.
+    let incomplete_stripes = descriptor.is_striped && outcome.chunks != task.stripes.len() as u32;
+    if outcome.bytes != task.packed_len || incomplete_stripes {
+        return Err(RailReadError::Incomplete {
+            expected: task.packed_len,
+            actual: outcome.bytes,
+        });
+    }
+    Ok(())
+}
+
+impl RailTransport for VerbsTransport<'_> {
     fn fetch(
         &self,
         route: &RailRoute,
@@ -1590,8 +1745,7 @@ impl RailTransport for VerbsTransport {
         timeout: Duration,
     ) -> Result<Vec<u8>, RailReadError> {
         let timing_start = Instant::now();
-        let mut client = RdmaClient::connect(route.connection.clone().with_io_timeout(timeout))
-            .map_err(|error| RailReadError::Transport(error.to_string()))?;
+        let mut lease = self.acquire(route, timeout)?;
         let connect_us = timing_start.elapsed().as_micros();
         let allocation_start = Instant::now();
         let capacity = task
@@ -1605,40 +1759,32 @@ impl RailTransport for VerbsTransport {
         packed.resize(capacity, 0u8);
         let allocation_us = allocation_start.elapsed().as_micros();
         let registration_start = Instant::now();
-        let registered = client
+        let registered = lease
+            .client()
             .register_buffer(&mut packed)
             .map_err(|error| RailReadError::Transport(error.to_string()))?;
         let registration_us = registration_start.elapsed().as_micros();
         let get_start = Instant::now();
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-            if descriptor.is_striped {
-                let view = registered.view();
-                let segments = build_sge_segments(task, descriptor, view.addr(), view.rkey())
-                    .map_err(|error| anyhow::anyhow!(error.to_string()))?;
-                let indices: Vec<u32> = task.stripes.iter().map(|stripe| stripe.index).collect();
-                client.get_descriptor_stripes_sge_detailed(descriptor, &indices, &segments)
-            } else {
-                client
-                    .get_descriptor_into(descriptor, &registered, 0)
-                    .map(|outcome| outcome.map(|bytes| RdmaReadOutcome { bytes, chunks: 1 }))
-            }
+            let result = (|| {
+                let client = lease.client();
+                if descriptor.is_striped {
+                    let view = registered.view();
+                    let segments = build_sge_segments(task, descriptor, view.addr(), view.rkey())
+                        .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+                    let indices: Vec<u32> =
+                        task.stripes.iter().map(|stripe| stripe.index).collect();
+                    client.get_descriptor_stripes_sge_detailed(descriptor, &indices, &segments)
+                } else {
+                    client.get_descriptor_into_detailed(descriptor, &registered, 0)
+                }
+            })();
+            validate_outcome(result, task, descriptor)
         }));
         let get_us = get_start.elapsed().as_micros();
         let teardown_start = Instant::now();
-        drop(client);
-        drop(registered);
+        finish_transfer(lease, registered, result)?;
         let teardown_us = teardown_start.elapsed().as_micros();
-        let result = match result {
-            Ok(result) => result.map_err(|error| RailReadError::Transport(error.to_string()))?,
-            Err(panic) => std::panic::resume_unwind(panic),
-        };
-        let outcome = result.ok_or(RailReadError::StaleDescriptor)?;
-        if outcome.bytes != task.packed_len || outcome.chunks != task.stripes.len() as u32 {
-            return Err(RailReadError::Incomplete {
-                expected: task.packed_len,
-                actual: outcome.bytes,
-            });
-        }
         packed.truncate(task.packed_len);
         if crate::rail_timing_enabled() {
             eprintln!(
@@ -1670,17 +1816,17 @@ impl RailTransport for VerbsTransport {
             .try_reserve_exact(task.dummy_len)
             .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
         dummy.resize(task.dummy_len, 0);
-        let mut client = RdmaClient::connect(route.connection.clone().with_io_timeout(timeout))
-            .map_err(|error| RailReadError::Transport(error.to_string()))?;
+        let mut lease = self.acquire(route, timeout)?;
         let connect_us = timing_start.elapsed().as_micros();
         let registration_start = Instant::now();
-        let registered_target = client
+        let registered_target = lease
+            .client()
             .register_buffer(target)
             .map_err(|error| RailReadError::Transport(error.to_string()))?;
-        let registered_dummy = match client.register_buffer(&mut dummy) {
+        let registered_dummy = match lease.client().register_buffer(&mut dummy) {
             Ok(registered) => registered,
             Err(error) => {
-                drop(client);
+                drop(lease);
                 drop(registered_target);
                 return Err(RailReadError::Transport(error.to_string()));
             }
@@ -1688,43 +1834,35 @@ impl RailTransport for VerbsTransport {
         let registration_us = registration_start.elapsed().as_micros();
         let get_start = Instant::now();
         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-            let target_view = registered_target.view();
-            let dummy_view = registered_dummy.view();
-            let segments = build_sge_segments_direct(
-                task,
-                descriptor,
-                SgeRegion {
-                    addr: target_view.addr(),
-                    rkey: target_view.rkey(),
-                    len: registered_target.len(),
-                },
-                SgeRegion {
-                    addr: dummy_view.addr(),
-                    rkey: dummy_view.rkey(),
-                    len: registered_dummy.len(),
-                },
-            )
-            .map_err(|error| anyhow::anyhow!(error.to_string()))?;
-            let indices: Vec<u32> = task.stripes.iter().map(|stripe| stripe.index).collect();
-            client.get_descriptor_stripes_sge_detailed(descriptor, &indices, &segments)
+            let result = (|| {
+                let target_view = registered_target.view();
+                let dummy_view = registered_dummy.view();
+                let segments = build_sge_segments_direct(
+                    task,
+                    descriptor,
+                    SgeRegion {
+                        addr: target_view.addr(),
+                        rkey: target_view.rkey(),
+                        len: registered_target.len(),
+                    },
+                    SgeRegion {
+                        addr: dummy_view.addr(),
+                        rkey: dummy_view.rkey(),
+                        len: registered_dummy.len(),
+                    },
+                )
+                .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+                let indices: Vec<u32> = task.stripes.iter().map(|stripe| stripe.index).collect();
+                lease
+                    .client()
+                    .get_descriptor_stripes_sge_detailed(descriptor, &indices, &segments)
+            })();
+            validate_outcome(result, task, descriptor)
         }));
         let get_us = get_start.elapsed().as_micros();
         let teardown_start = Instant::now();
-        drop(client);
-        drop(registered_dummy);
-        drop(registered_target);
+        finish_transfer(lease, (registered_dummy, registered_target), result)?;
         let teardown_us = teardown_start.elapsed().as_micros();
-        let outcome = match result {
-            Ok(result) => result.map_err(|error| RailReadError::Transport(error.to_string()))?,
-            Err(panic) => std::panic::resume_unwind(panic),
-        }
-        .ok_or(RailReadError::StaleDescriptor)?;
-        if outcome.bytes != task.packed_len || outcome.chunks != task.stripes.len() as u32 {
-            return Err(RailReadError::Incomplete {
-                expected: task.packed_len,
-                actual: outcome.bytes,
-            });
-        }
         if crate::rail_timing_enabled() {
             eprintln!(
                 "RAIL_TRANSPORT_DIRECT_TIMING rail={} bytes={} connect_us={connect_us} registration_us={registration_us} get_us={get_us} teardown_us={teardown_us} total_us={}",

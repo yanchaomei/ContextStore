@@ -402,6 +402,49 @@ On Linux, the reader caps its registered-memory budget at 80% of the process's
 soft `RLIMIT_MEMLOCK` when finite, rejecting excess reads before dispatch.
 Multiple independent RailReader instances still need a deployment-wide
 budget. No in-request transparent retry is attempted.
+
+Persistent connections for **striped reads only** are **off by default**. Opt in on a newly constructed
+manual or discovered reader with
+`reader.with_connection_pool(RailConnectionPoolOptions { max_live_connections: 8, configuration_generation: 1 })?`.
+The pool is private to that reader and keys connections by route ID, advertised
+endpoint, placement owner node ID, listener, device, port, GID index, and route
+configuration generation. Pooled placements must identify exactly one nonempty
+owner per advertised endpoint. Routes are immutable; rebuild the reader after a
+configuration change. The configured positive limit includes connecting,
+active, idle, and retiring clients. Each task owns an exclusive lease. A full
+pool evicts an idle connection for another route, or rejects admission immediately
+if all slots are active, connecting, or retiring. It does not queue or hold tasks
+waiting for another lease. Size the pool for the selected rails times the intended
+object concurrency; a smaller pool may reject a whole read without publishing it.
+
+A fully framed stripe-subset success ACK must report the exact requested byte
+and selected-stripe counts before a connection is reusable. Unstriped reads
+bypass the pool entirely, including checkout and pooled ownership checks, and
+retain legacy byte-count validation plus QP-before-MR teardown. Their ACK count
+reports server WRITE splits or segments, not the planner's single logical stripe.
+The full-descriptor server fallback's uncertain-CQ handling remains a separate
+unfixed issue; this wave does not claim terminal-ACK safety for pooling that path. Temporary target/dummy MRs are deregistered
+before returning the healthy lease. Errors, absent/stale descriptors, incomplete
+ACKs, and caught transfer panics destroy the client QP before releasing those MRs.
+The pool never caches a caller buffer or its registration. Object checksums and
+the post-transfer descriptor/placement lookup still gate publication. Dropping
+the reader drains idle clients; retired clients retain their capacity slot until
+destruction finishes. No pool mutex is held across connection setup, GET, or QP
+destruction.
+
+`connection_pool_snapshot()` returns `None` for legacy readers, otherwise typed
+counts: cumulative `created` (successful connections), `reused` (idle checkouts),
+`retired` (completed destruction after failure/eviction/abandonment), and `rejected`
+(capacity rejections), plus current `connecting`, `active`, `idle`, `retiring`,
+and `live` (their sum). Unstriped reads do not affect any pool counters.
+Failed connection attempts release their reserved slot
+without increasing `created` or `retired`. Final reader destruction has no
+post-drop snapshot. Both TCP read and write timeouts are refreshed on every
+checkout. They bound individual socket operations, not the complete object read,
+DNS resolution, or provider teardown; cancellation still waits for started
+workers to quiesce. This wave provides no idle health probe, idle expiry,
+persistent MR arena, asynchronous CQ sharing, or reconnect within a failed read.
+
 The server's stripe-subset fallback also honors tag-15 scatter destinations
 when its registered slab cannot provide staging space. A fallback WRITE with
 uncertain completion retains its source and MR until its QP is destroyed.

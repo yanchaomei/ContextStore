@@ -1424,3 +1424,192 @@ fn software_only_mock_benchmark() {
             process_usage().2
         );
 }
+
+#[test]
+fn connection_pool_is_opt_in_and_rejects_zero_capacity() {
+    let reader = RailReader::new(routes(), RailLimits::default()).unwrap();
+    assert!(reader.connection_pool_snapshot().is_none());
+    assert!(reader
+        .with_connection_pool(RailConnectionPoolOptions {
+            max_live_connections: 0,
+            configuration_generation: 1,
+        })
+        .is_err());
+}
+
+#[test]
+fn connection_keys_separate_route_owner_device_listener_and_generation() {
+    let route = routes().remove(0);
+    let key = ConnectionKey::new(&route, "node-a", 7);
+    let pool = ConnectionPool::new(1);
+    pool.acquire(key.clone(), || Ok(0))
+        .unwrap()
+        .release_healthy();
+    let mut variants = Vec::new();
+    let mut changed = route.clone();
+    changed.id = "other-route".into();
+    variants.push(ConnectionKey::new(&changed, "node-a", 7));
+    let mut changed = route.clone();
+    changed.advertised_endpoint = "other-owner:1".into();
+    variants.push(ConnectionKey::new(&changed, "node-a", 7));
+    let mut changed = route.clone();
+    changed.connection.endpoint = "other-listener:1".into();
+    variants.push(ConnectionKey::new(&changed, "node-a", 7));
+    let mut changed = route.clone();
+    changed.connection.device = "other-device".into();
+    variants.push(ConnectionKey::new(&changed, "node-a", 7));
+    let mut changed = route.clone();
+    changed.connection.port += 1;
+    variants.push(ConnectionKey::new(&changed, "node-a", 7));
+    let mut changed = route.clone();
+    changed.connection.gid_index += 1;
+    variants.push(ConnectionKey::new(&changed, "node-a", 7));
+    variants.push(ConnectionKey::new(&route, "node-b", 7));
+    variants.push(ConnectionKey::new(&route, "node-a", 8));
+    for (index, variant) in variants.into_iter().enumerate() {
+        assert_ne!(variant, key);
+        let mut lease = pool.acquire(variant, || Ok(index + 1)).unwrap();
+        assert_eq!(*lease.client(), index + 1);
+        lease.release_healthy();
+    }
+    assert_eq!(pool.snapshot().created, 9);
+    assert_eq!(pool.snapshot().reused, 0);
+    assert_eq!(pool.snapshot().retired, 8);
+}
+
+#[test]
+fn pooled_transport_rejects_ambiguous_placement_owner_before_opening_connections() {
+    let (descriptor, mut placement) = fixture(16, 4);
+    placement.chunks[1].node_id = "different-owner".into();
+    let reader = RailReader::new(routes(), RailLimits::default()).unwrap();
+    assert!(VerbsTransport::new(&reader, &placement, &descriptor).is_ok());
+    let reader = reader
+        .with_connection_pool(RailConnectionPoolOptions {
+            max_live_connections: 2,
+            configuration_generation: 1,
+        })
+        .unwrap();
+    assert!(matches!(
+        VerbsTransport::new(&reader, &placement, &descriptor),
+        Err(RailReadError::InvalidPlacement(_))
+    ));
+    assert_eq!(reader.connection_pool_snapshot().unwrap().created, 0);
+}
+
+#[test]
+fn incomplete_ack_never_returns_connection_to_pool() {
+    let (descriptor, placement) = fixture(16, 4);
+    let plan = RailPlan::build(&descriptor, &placement, &routes()).unwrap();
+    let task = &plan.tasks[0];
+    for outcome in [
+        Some(RdmaReadOutcome {
+            bytes: task.packed_len - 1,
+            chunks: task.stripes.len() as u32,
+        }),
+        Some(RdmaReadOutcome {
+            bytes: task.packed_len,
+            chunks: task.stripes.len() as u32 + 1,
+        }),
+        None,
+    ] {
+        let pool = ConnectionPool::new(1);
+        let lease = pool.acquire("route", || Ok(1)).unwrap();
+        let result = validate_outcome(Ok(outcome), task, &descriptor);
+        assert!(finish_transfer(lease, (), Ok(result)).is_err());
+        assert_eq!(pool.snapshot().idle, 0);
+        assert_eq!(pool.snapshot().retired, 1);
+        assert_eq!(pool.snapshot().live, 0);
+    }
+}
+
+#[test]
+fn unstriped_ack_accepts_multiple_server_writes_for_the_complete_object() {
+    let (mut descriptor, placement) = fixture(16, 16);
+    descriptor.is_striped = false;
+    let plan = RailPlan::build(&descriptor, &placement, &routes()).unwrap();
+    let task = &plan.tasks[0];
+    assert_eq!(task.stripes.len(), 1);
+    for writes in [2, 7] {
+        assert!(
+            validate_outcome(
+                Ok(Some(RdmaReadOutcome {
+                    bytes: 16,
+                    chunks: writes
+                })),
+                task,
+                &descriptor,
+            )
+            .is_ok(),
+            "complete-object ACK counts server WRITEs, not planner stripes"
+        );
+    }
+}
+
+#[test]
+fn striped_ack_still_requires_exact_selected_stripe_count() {
+    let (descriptor, placement) = fixture(16, 16);
+    let plan = RailPlan::build(&descriptor, &placement, &routes()).unwrap();
+    let task = &plan.tasks[0];
+    assert!(validate_outcome(
+        Ok(Some(RdmaReadOutcome {
+            bytes: 16,
+            chunks: 1
+        })),
+        task,
+        &descriptor,
+    )
+    .is_ok());
+    for chunks in [0, 2] {
+        assert!(matches!(
+            validate_outcome(
+                Ok(Some(RdmaReadOutcome { bytes: 16, chunks })),
+                task,
+                &descriptor,
+            ),
+            Err(RailReadError::Incomplete { .. })
+        ));
+    }
+}
+
+#[test]
+fn unstriped_reads_bypass_pooled_owner_constraints_and_keep_legacy_byte_validation() {
+    let (mut descriptor, mut placement) = fixture(16, 16);
+    descriptor.is_striped = false;
+    placement.chunks[0].node_id.clear();
+    let reader = RailReader::new(routes(), RailLimits::default())
+        .unwrap()
+        .with_connection_pool(RailConnectionPoolOptions {
+            max_live_connections: 1,
+            configuration_generation: 1,
+        })
+        .unwrap();
+    let transport = VerbsTransport::new(&reader, &placement, &descriptor).unwrap();
+    assert!(transport.pool.is_none());
+    let plan = RailPlan::build(&descriptor, &placement, reader.routes()).unwrap();
+    let task = &plan.tasks[0];
+    // A nonstriped reply's diagnostic count was never a legacy success gate.
+    assert!(validate_outcome(
+        Ok(Some(RdmaReadOutcome {
+            bytes: 16,
+            chunks: 0
+        })),
+        task,
+        &descriptor
+    )
+    .is_ok());
+    assert!(matches!(
+        validate_outcome(
+            Ok(Some(RdmaReadOutcome {
+                bytes: 15,
+                chunks: 7
+            })),
+            task,
+            &descriptor
+        ),
+        Err(RailReadError::Incomplete { .. })
+    ));
+    assert_eq!(
+        reader.connection_pool_snapshot().unwrap(),
+        Default::default()
+    );
+}

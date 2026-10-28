@@ -1,0 +1,19 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.36s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/contextstore_client_rs-da9b35b4bb2023c7)
+
+running 1 test
+
+thread 'rdma::tests::descriptor_reply_rejects_invalid_success_status' panicked at kv-service/client-rs/src/rdma.rs:1450:9:
+assertion failed: read_get_response_detailed(&mut stream).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test rdma::tests::descriptor_reply_rejects_invalid_success_status ... FAILED
+
+failures:
+
+failures:
+    rdma::tests::descriptor_reply_rejects_invalid_success_status
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 70 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p contextstore-client-rs --lib`

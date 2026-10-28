@@ -1,0 +1,38 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+warning: struct `RailConnectionPoolOptions` is never constructed
+ --> kv-service/client-rs/src/rail_read/connection_pool.rs:8:12
+  |
+8 | pub struct RailConnectionPoolOptions {
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: associated function `unpooled` is never used
+   --> kv-service/client-rs/src/rail_read/connection_pool.rs:149:19
+    |
+148 | impl<K, C> Lease<K, C> {
+    | ---------------------- associated function in this implementation
+149 |     pub(super) fn unpooled(client: C) -> Self {
+    |                   ^^^^^^^^
+
+warning: `contextstore-client-rs` (lib test) generated 2 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.26s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/contextstore_client_rs-da9b35b4bb2023c7)
+
+running 1 test
+
+thread 'rail_read::connection_pool::tests::healthy_transfer_deregisters_mr_before_making_connection_idle' panicked at kv-service/client-rs/src/rail_read/connection_pool.rs:260:9:
+assertion `left == right` failed
+  left: ["QP", "MR"]
+ right: ["MR"]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test rail_read::connection_pool::tests::healthy_transfer_deregisters_mr_before_making_connection_idle ... FAILED
+
+failures:
+
+failures:
+    rail_read::connection_pool::tests::healthy_transfer_deregisters_mr_before_making_connection_idle
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 57 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p contextstore-client-rs --lib`

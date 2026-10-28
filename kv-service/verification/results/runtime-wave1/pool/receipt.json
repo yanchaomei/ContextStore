@@ -1,0 +1,77 @@
+{
+  "base_revision": "3fe4b26",
+  "branch": "feat/rail-runtime-recovery",
+  "client_host": "SKV_2",
+  "remote_root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029",
+  "environment": "source remote_root/env.sh; CARGO_TARGET_DIR=remote_root/target-candidate",
+  "provider_environment": "source remote_root/provider-client.env; client mlx5_1 port1 gid3; server SKV_4 10.0.0.64:25353; single physical HCA per node",
+  "provider_server_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+  "build_policy": "all Rust builds/tests/clippy/format executed remotely; no dependencies added; frozen src-baseline untouched",
+  "red_green": [
+    {
+      "red": "red-01-reuse.log",
+      "green": "green-01-reuse.log",
+      "failure": "second request opened client 2 instead of reusing client 1"
+    },
+    {
+      "red": "red-02-bound.log",
+      "green": "green-02-bound.log",
+      "failure": "active slot cap did not reject second lease"
+    },
+    {
+      "red": "red-03-eviction.log",
+      "green": "green-03-eviction.log",
+      "failure": "new route rejected while pool held an idle old-route connection"
+    },
+    {
+      "red": "red-04-cleanup.log",
+      "green": "green-04-cleanup.log",
+      "failure": "healthy path destroyed QP before MR instead of retaining QP"
+    },
+    {
+      "red": "red-06-status-behavior.log",
+      "green": "green-06-pool-lifecycle.log",
+      "failure": "GET status 2 incorrectly accepted as success"
+    }
+  ],
+  "additional_failed_compile": "red-06-status.log records test-only closure capture compile errors before corrected behavioral red; retained without claiming behavioral coverage",
+  "commands": [
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --lib <test-filter> -- --nocapture",
+    "cargo clippy --locked --offline -j 4 -p contextstore-client-rs --features rdma --all-targets -- -D warnings",
+    "CS_E2E_SERVER_BIN=remote_root/target-provider-baseline/debug/contextstore-server cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma",
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --test rail_read_e2e pooled_real_rail_reuses_healthy_connection_and_retires_stale_read -- --ignored --exact --nocapture",
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --test rail_read_e2e pooled_real_rail_parallel_reads_preserve_exclusive_leases -- --ignored --exact --nocapture"
+  ],
+  "results": {
+    "client_suite": {
+      "passed": 79,
+      "failed": 0,
+      "ignored": 24
+    },
+    "clippy_exit": 0,
+    "provider_reuse_stale": {
+      "passed": 1,
+      "created": 2,
+      "reused": 2,
+      "retired": 1,
+      "live": 1,
+      "idle": 1,
+      "active": 0
+    },
+    "provider_parallel": {
+      "passed": 1,
+      "created": 4,
+      "reused": 4,
+      "retired": 0,
+      "rejected": 0,
+      "live": 4,
+      "idle": 4,
+      "active": 0
+    }
+  },
+  "boundaries": [
+    "Unit resource probes prove ownership/admission/drop order only, not native provider behavior.",
+    "Real provider tests are single-HCA correctness tests; no dual-HCA, performance, fault-delay, or native panic claim.",
+    "No object retry implemented by this patch; parent owns later retry work."
+  ]
+}

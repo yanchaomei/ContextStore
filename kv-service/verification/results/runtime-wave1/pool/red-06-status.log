@@ -1,0 +1,57 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+error[E0277]: `std::sync::mpsc::Receiver<()>` cannot be shared between threads safely
+   --> kv-service/client-rs/src/rail_read/connection_pool.rs:343:38
+    |
+343 |               let worker = scope.spawn(|| pool.acquire("route-a", || {
+    |  ________________________________-----_^
+    | |                                |
+    | |                                required by a bound introduced by this call
+344 | |                 started_tx.send(()).unwrap();
+345 | |                 release_rx.recv_timeout(std::time::Duration::from_secs(5)).unwrap();
+346 | |                 Ok(1)
+347 | |             }));
+    | |______________^ `std::sync::mpsc::Receiver<()>` cannot be shared between threads safely
+    |
+    = help: the trait `Sync` is not implemented for `std::sync::mpsc::Receiver<()>`
+    = note: required for `&std::sync::mpsc::Receiver<()>` to implement `Send`
+note: required because it's used within this closure
+   --> kv-service/client-rs/src/rail_read/connection_pool.rs:343:38
+    |
+343 |             let worker = scope.spawn(|| pool.acquire("route-a", || {
+    |                                      ^^
+note: required by a bound in `Scope::<'scope, 'env>::spawn`
+   --> /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/rust/lib/rustlib/src/rust/library/std/src/thread/scoped.rs:197:28
+    |
+195 |     pub fn spawn<F, T>(&'scope self, f: F) -> ScopedJoinHandle<'scope, T>
+    |            ----- required by a bound in this associated function
+196 |     where
+197 |         F: FnOnce() -> T + Send + 'scope,
+    |                            ^^^^ required by this bound in `Scope::<'scope, 'env>::spawn`
+
+error[E0373]: closure may outlive the current function, but it borrows `id`, which is owned by the current function
+   --> kv-service/client-rs/src/rail_read/connection_pool.rs:389:63
+    |
+389 |             let workers: Vec<_> = (0..8).map(|id| scope.spawn(|| {
+    |                                                               ^^ may outlive borrowed value `id`
+390 |                 let lease = pool.acquire("route-a", || Ok(id));
+    |                                                           -- `id` is borrowed here
+    |
+note: closure is returned here
+   --> kv-service/client-rs/src/rail_read/connection_pool.rs:389:51
+    |
+389 |               let workers: Vec<_> = (0..8).map(|id| scope.spawn(|| {
+    |  ___________________________________________________^
+390 | |                 let lease = pool.acquire("route-a", || Ok(id));
+391 | |                 acquired.wait();
+392 | |                 release.wait();
+393 | |                 drop(lease);
+394 | |             })).collect();
+    | |______________^
+help: to force the closure to take ownership of `id` (and any other referenced variables), use the `move` keyword
+    |
+389 |             let workers: Vec<_> = (0..8).map(|id| scope.spawn(move || {
+    |                                                               ++++
+
+Some errors have detailed explanations: E0277, E0373.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `contextstore-client-rs` (lib test) due to 2 previous errors

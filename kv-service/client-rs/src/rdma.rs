@@ -526,6 +526,18 @@ impl RdmaClient {
         buffer: &RegisteredBuffer<'_>,
         offset: usize,
     ) -> Result<RdmaReadResult> {
+        self.get_descriptor_into_detailed(descriptor, buffer, offset)
+            .map(|outcome| outcome.map(|outcome| outcome.bytes))
+    }
+
+    /// Read a complete descriptor while preserving the server's byte and chunk
+    /// counts so callers can validate the ACK before reusing this connection.
+    pub fn get_descriptor_into_detailed(
+        &mut self,
+        descriptor: &pb::ObjectDescriptor,
+        buffer: &RegisteredBuffer<'_>,
+        offset: usize,
+    ) -> Result<Option<RdmaReadOutcome>> {
         let key = descriptor
             .key
             .as_ref()
@@ -539,7 +551,6 @@ impl RdmaClient {
             available as u64,
         )?;
         self.exchange_get_detailed(&request)
-            .map(|outcome| outcome.map(|outcome| outcome.bytes))
     }
 
     /// Read only `stripes` of a striped object into `buffer[offset..]`.
@@ -1251,6 +1262,9 @@ fn read_get_response_detailed(stream: &mut TcpStream) -> Result<Option<RdmaReadO
     if body[0] == 0 {
         return Ok(None);
     }
+    if body[0] != 1 {
+        return Err(anyhow!("invalid RDMA GET response status {}", body[0]));
+    }
     let bytes = u64::from_le_bytes(body[1..9].try_into().expect("fixed get response length"));
     let bytes = usize::try_from(bytes).map_err(|_| anyhow!("RDMA read size exceeds usize"))?;
     let chunks = u32::from_le_bytes(body[9..13].try_into().expect("fixed get response length"));
@@ -1433,5 +1447,21 @@ mod tests {
             open_control_stream(&endpoint.to_string(), Duration::from_millis(20)).unwrap();
         assert!(read_get_response_detailed(&mut stream).is_err());
         server.join().unwrap();
+    }
+
+    #[test]
+    fn descriptor_reply_rejects_invalid_success_status() {
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        let endpoint = listener.local_addr().unwrap();
+        let writer = std::thread::spawn(move || {
+            let (mut stream, _) = listener.accept().unwrap();
+            let mut frame = vec![MSG_GET_RESP, 2];
+            frame.extend_from_slice(&8u64.to_le_bytes());
+            frame.extend_from_slice(&1u32.to_le_bytes());
+            stream.write_all(&frame).unwrap();
+        });
+        let mut stream = TcpStream::connect(endpoint).unwrap();
+        assert!(read_get_response_detailed(&mut stream).is_err());
+        writer.join().unwrap();
     }
 }

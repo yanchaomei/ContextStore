@@ -1,0 +1,10 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.82s
+     Running tests/rail_read_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/rail_read_e2e-d6145e305ed0b23e)
+
+running 1 test
+POOLED_REAL_RAIL_FINAL RailConnectionPoolSnapshot { created: 2, reused: 2, retired: 1, rejected: 0, live: 1, connecting: 0, active: 0, idle: 1, retiring: 0 }
+test pooled_real_rail_reuses_healthy_connection_and_retires_stale_read ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 20 filtered out; finished in 2.21s
+

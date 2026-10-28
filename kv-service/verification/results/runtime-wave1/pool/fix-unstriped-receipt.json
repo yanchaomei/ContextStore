@@ -1,0 +1,68 @@
+{
+  "correction": "P1 unstriped terminal ACK reuse unsafe; P2 unstriped ACK count compatibility",
+  "scope": "Pool only striped descriptors. Nonstriped entirely bypasses pool and pooled-owner validation, preserves legacy byte-only ACK checks and QP-before-MR teardown.",
+  "server_unchanged": true,
+  "open_issue": "Full-descriptor server fallback can reuse uncertain CQ completion. Not fixed or fault-tested here; unstriped pooling explicitly excluded.",
+  "earlier_receipt": "receipt.json is historical pre-review evidence; this correction supersedes its unstriped pooling/ACK behavior.",
+  "red_green": [
+    {
+      "red": "red-07-unstriped-write-count.log",
+      "green": "green-07-unstriped-lib.log",
+      "failure": "valid complete-object ACK counts 2/7 rejected"
+    },
+    {
+      "red": "red-08-provider-unstriped-bypass.log",
+      "green": "green-08-provider-unstriped-bypass.log",
+      "failure": "real unstriped request incorrectly created1 pooled connection"
+    }
+  ],
+  "results": {
+    "client_suite": {
+      "passed": 82,
+      "failed": 0,
+      "ignored": 25
+    },
+    "client_all_target_clippy_exit": 0,
+    "provider_unstriped": {
+      "passed": 1,
+      "object_bytes": 8192,
+      "reads": 2,
+      "all_pool_counts": 0
+    },
+    "provider_striped_recheck": {
+      "passed": 2,
+      "reuse_stale_final": {
+        "created": 2,
+        "reused": 2,
+        "retired": 1,
+        "live": 1,
+        "idle": 1
+      },
+      "parallel_final": {
+        "created": 4,
+        "reused": 4,
+        "retired": 0,
+        "rejected": 0,
+        "live": 4,
+        "idle": 4
+      }
+    }
+  },
+  "commands": [
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --lib ack_ -- --nocapture",
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --lib",
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --test rail_read_e2e unstriped_real_read_bypasses_enabled_connection_pool -- --ignored --exact --nocapture",
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --test rail_read_e2e pooled_real_rail -- --ignored --nocapture",
+    "cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma",
+    "cargo clippy --locked --offline -j 4 -p contextstore-client-rs --features rdma --all-targets -- -D warnings"
+  ],
+  "source_sha256": {
+    "kv-service/client-rs/src/rail_read.rs": "350fc277a09a047606eb3b1801965b623610a92fedb2fc7c63c556c6eba0db10",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs": "ce08b6aa123f3a0c179fdde6455188632b74b083f99f7d6aff61127d3339b1af",
+    "kv-service/client-rs/src/rail_read/tests.rs": "4823894d9c1cb4272a0e13cded9e8444789e293833f10c58d1f07d1b2eab9f58",
+    "kv-service/client-rs/src/rdma.rs": "f15e33baa7238e271e45525b452905a12fcff53294d6490b484d45e518426307",
+    "kv-service/client-rs/tests/rail_read_e2e.rs": "80addb9ad452feb19a55a2b1f59b4308bb4246b58d08b2e453ffab87548e73d7",
+    "README.md": "8a14b1d411cefff34d61280ef8fe1ee1ea00195f86f9916f3eedbd2590ed5b6e"
+  },
+  "limits": "Multiple-write-count test is deterministic ACK-validation seam, not a greater-than-1GiB native transfer. Native bypass uses 8192-byte unstriped object. Native evidence single-HCA only."
+}
