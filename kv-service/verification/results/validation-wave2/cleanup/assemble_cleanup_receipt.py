@@ -1,0 +1,29 @@
+from pathlib import Path
+import json,hashlib,subprocess,datetime,shutil
+root=Path(__file__).resolve().parent;repo=Path('work/ContextStore-runtime-wave1').resolve()
+def j(name):return json.loads((root/name).read_text())
+before=j('local-source-before.json');after={'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'status_before_evidence_copy':subprocess.check_output(['git','status','--short'],cwd=repo,text=True),'files':{n:hashlib.sha256((repo/n).read_bytes()).hexdigest() for n in before['files']}}
+assert after['head']==before['head']=='cdedaaad8add0f82225abce84d302b1ea677f2ed';assert after['files']==before['files'];assert not after['status_before_evidence_copy']
+(root/'local-source-after.json').write_text(json.dumps(after,indent=2)+'\n')
+physical={'SKV4':j('skv4-stop.json'),'SKV5':j('skv5-finalize.json')};guest=j('guest-server-stop.json');vm=j('skv2-host/poweroff-receipt.json');hosts={f'SKV{n}':j(f'skv{n}-final-readback.json') for n in [2,4,5,6]}
+for h in hosts.values():assert not any(h['pids_present'].values()) and not h['remaining_task_ports'] and not h['remaining_task_executables']
+archives=[]
+for target,phase in [('skv4','collect'),('skv4','stop'),('skv5','collect'),('skv5','finalize'),('guest-server','collect'),('guest-server','stop'),('guest-client','collect')]:
+ check=j(f'{target}-{phase}-local-verification.json');archives.append({'path':f'{target}-{phase}-logs-config-snapshots.tar.gz',**check})
+for name in ['host_pre_archive','host_post_archive']:
+ entry=vm[name];archives.append({'path':'skv2-host/'+Path(entry['path']).name,'archive_sha256':entry['sha256'],'files_verified':len(entry['files'])})
+for a in archives:assert hashlib.sha256((root/a['path']).read_bytes()).hexdigest()==a['archive_sha256']
+source_binding={}
+for target,phase in [('skv4','collect'),('skv5','collect'),('guest-server','collect')]:
+ r=j(f'{target}-{phase}.json');source_binding[target]={'guards':r['guards'],'artifact_hashes':r['collection']['artifact_hashes'],'archived_config_and_log_hashes':r['collection']['archived_files']}
+native={'server':j('guest-server-collect.json')['native_guard'],'client':j('guest-client-collect.json')['native_guard']}
+dest=repo/'kv-service/verification/results/validation-wave2/cleanup'
+r={'state':'CLEANUP_COMPLETE_ALL_WAVE2_TASK_RUNNING_RESOURCES_STOPPED','finished_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_head':after['head'],'source_business_files_before_after_equal':True,'source_files_verified':len(after['files']),'source_business_edits_by_cleanup':False,'git_commit_or_push_by_cleanup':False,'physical_stops':physical,'guest_fixture_stops':guest,'qemu_poweroff':vm,'final_host_readbacks':hosts,'archive_verification':archives,'archive_count':len(archives),'cumulative_archive_file_readbacks':sum(x['files_verified'] for x in archives),'process_config_binary_and_log_bindings':source_binding,'native_guard_readonly_confirmation':native,'data_preservation':{'SKV4':{k:physical['SKV4']['collection'][k] for k in ['preserved_data_files','preserved_data_bytes']},'SKV5_release':{k:physical['SKV5']['collection'][k] for k in ['preserved_data_files','preserved_data_bytes']},'RXE_server_guest':{k:guest['collection'][k] for k in ['preserved_data_files','preserved_data_bytes']},'guest_disks_firmware_seeds_preserved':True,'base_image_sha256_unchanged':vm['base_image_sha256_after']==j('qemu-identity-guard.json')['base_image_sha256'],'all_source_tools_configs_logs_and_binaries_kept':True,'no_file_or_directory_deletion':True,'private_guest_ssh_key_preserved_not_archived':True},'operation_boundaries':['Only S4wave2 provider/Redis, S5release-matrix512k server/Redis, guest large/small fixture server/Redis and the two task-owned restarted QEMU VMs were stopped','Every signalled service matched expected PID/startticks/exe/config path/hash; QEMU full argv/UUID/startticks/exe/disk path matched','Guest hostnames verified immediately before sudo poweroff via existing bash guest_ssh.sh wrapper; no chmod','Old S5debug fixture was not signalled again','Old SKV1 VMs and unrelated processes/host networking/drivers/groups were not changed','Native guard services already stopped: read-only confirmation only','No forced host QEMU kill; only normal guest poweroff'], 'known_stop_readback_note':'S5 release service and Redis both stopped in first attempt. An immediate post-stop port assertion failed; preserved stderr and stop-progress. A later readback confirmed both PIDs absent and ports free; finalization performed archive/readback only, no repeated signals.','poweroff_ssh_note':'Client guest poweroff closed SSH with255; exact QEMU PID exit plus management/UDP-port release verified. Server poweroff SSH exited0.','repository_evidence_directory':str(dest),'parent_handles_git_publication':True}
+(root/'cleanup-receipt.json').write_text(json.dumps(r,indent=2)+'\n')
+assert not dest.exists();shutil.copytree(root,dest)
+status=subprocess.check_output(['git','status','--short'],cwd=repo,text=True);assert all(line.endswith('kv-service/verification/results/validation-wave2/cleanup/') for line in status.splitlines()),status
+(root/'repository-status-after-evidence-copy.txt').write_text(status);(dest/'repository-status-after-evidence-copy.txt').write_text(status)
+hashes={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file() and p.name!='cleanup-file-hashes.json'}
+for name,digest in hashes.items():assert hashlib.sha256((dest/name).read_bytes()).hexdigest()==digest,name
+text=json.dumps(hashes,indent=2)+'\n';(root/'cleanup-file-hashes.json').write_text(text);(dest/'cleanup-file-hashes.json').write_text(text)
+print(r['state']);print('archives',len(archives),'cumulativefilechecks',r['cumulative_archive_file_readbacks'],'output-repo-identical-files',len(hashes)+1);print(r['data_preservation']);print(status)

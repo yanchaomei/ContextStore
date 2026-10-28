@@ -1,0 +1,309 @@
+{
+  "at": "2026-10-28T22:00:45.963336+00:00",
+  "hostname": "csw1-rxe-server",
+  "guards": {
+    "/home/railtest/cswave1/wave2": {
+      "server": {
+        "pid": 958,
+        "start_ticks": "5399",
+        "exe": "/home/railtest/cswave1/bin/contextstore-server",
+        "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+        "cwd": "/home/railtest/cswave1/wave2",
+        "argv": [
+          "/home/railtest/cswave1/bin/contextstore-server",
+          "--config",
+          "/home/railtest/cswave1/wave2/server.toml",
+          "--log-level",
+          "info"
+        ],
+        "CS_environment": {
+          "CS_RDMA_SLAB_MB": "64",
+          "CS_FORCE_DISK_READ": "1",
+          "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25353:1,rxe1:10.82.1.1:25354:1"
+        }
+      },
+      "redis": {
+        "pid": 953,
+        "start_ticks": "5388",
+        "exe": "/usr/bin/redis-check-rdb",
+        "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a",
+        "cwd": "/home/railtest/cswave1/wave2/redis",
+        "argv": [
+          "redis-server 127.0.0.1:26379"
+        ]
+      }
+    },
+    "/home/railtest/cswave1/wave2/small": {
+      "server": {
+        "pid": 1097,
+        "start_ticks": "19105",
+        "exe": "/home/railtest/cswave1/bin/contextstore-server",
+        "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+        "cwd": "/home/railtest/cswave1/wave2/small",
+        "argv": [
+          "/home/railtest/cswave1/bin/contextstore-server",
+          "--config",
+          "/home/railtest/cswave1/wave2/small/server.toml",
+          "--log-level",
+          "info"
+        ],
+        "CS_environment": {
+          "CS_RDMA_CQ_TIMEOUT_MS": "1000",
+          "CS_RDMA_SLAB_MB": "64",
+          "CS_FORCE_DISK_READ": "1",
+          "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25453:1,rxe1:10.82.1.1:25454:1"
+        }
+      },
+      "redis": {
+        "pid": 1092,
+        "start_ticks": "19095",
+        "exe": "/usr/bin/redis-check-rdb",
+        "exe_sha256": "863e4221e24830415c0e1d052a254e0bdb57a61425d9dcbd5f1b71997dfecd1a",
+        "cwd": "/home/railtest/cswave1/wave2/small/redis",
+        "argv": [
+          "redis-server 127.0.0.1:26479"
+        ]
+      }
+    }
+  },
+  "native_guard": {
+    "owned_native_guard_processes": [],
+    "private_native_guard_ports_free": true,
+    "action": "read-only confirmation; no process signals"
+  },
+  "collection": {
+    "archive_path": "/home/railtest/wave2-cleanup-final-20261029/prestop-logs-config-snapshots.tar.gz",
+    "archive_sha256": "713791db97b8a9e1b0ec2a92a5d8af04005d5bf809c929d3feb8767e44c74809",
+    "archive_bytes": 1018044,
+    "archived_files": {
+      "home/railtest/cswave1/evidence/active_guest.json": {
+        "size": 1437,
+        "sha256": "053321d6e405506f9787095a6be3db260175083f2d560d6d77f66edae430581c"
+      },
+      "home/railtest/cswave1/evidence/redis.log": {
+        "size": 1155,
+        "sha256": "bb5db1627a5ed34acb91b66629021a1eace24966ec427d1f5d5444285901c653"
+      },
+      "home/railtest/cswave1/evidence/redis_health.txt": {
+        "size": 5,
+        "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e"
+      },
+      "home/railtest/cswave1/evidence/server.log": {
+        "size": 29036,
+        "sha256": "5211e50583095491db270c04ee402fc78aafd812b3267cb420d998b229ae424e"
+      },
+      "home/railtest/cswave1/evidence/server.pid": {
+        "size": 5,
+        "sha256": "7e804b8177cbd21798f125089f01d3be1eef8798e376ff4ecd8fbbc12f3cc627"
+      },
+      "home/railtest/cswave1/evidence/server.started": {
+        "size": 21,
+        "sha256": "6beda1a04bd2c52cfc9acf67d2e61ca4a7b23e9f399c3a0b6cda8171150e7a6b"
+      },
+      "home/railtest/cswave1/evidence/server_launcher.log": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "home/railtest/cswave1/evidence/server_launcher.pid": {
+        "size": 5,
+        "sha256": "7e804b8177cbd21798f125089f01d3be1eef8798e376ff4ecd8fbbc12f3cc627"
+      },
+      "home/railtest/cswave1/evidence/setup.finished": {
+        "size": 21,
+        "sha256": "8f594c22820b61ddfd1b25069ce95cfca06334ab5b25f76bf72596adf9e34abb"
+      },
+      "home/railtest/cswave1/evidence/setup.log": {
+        "size": 12888,
+        "sha256": "85d915c22c46e268a2a899854c102bb742f28d65af6a05e19d2879a29fb3bf37"
+      },
+      "home/railtest/cswave1/evidence/topology.txt": {
+        "size": 2044,
+        "sha256": "a0223bb35145ebffe88b8baf8ba7d3f9238f5735aba97a4c446154fa0d0b075e"
+      },
+      "home/railtest/cswave1/guest_server_run.sh": {
+        "size": 460,
+        "sha256": "c2e58012a97c62dd0835d63fc4b2e8d07d2d41a0de707e0fbf22852b04073293"
+      },
+      "home/railtest/cswave1/redis/dump.rdb": {
+        "size": 12691,
+        "sha256": "39901060eaa31be014d396ddb62187dfb59ba6aa2643af52f59c20e64af509a0"
+      },
+      "home/railtest/cswave1/server.toml": {
+        "size": 1133,
+        "sha256": "8e29f8e3046fe7ff21953bdcaaef00bd12848f513ba6b6f4bf4498b11baa80f5"
+      },
+      "home/railtest/cswave1/setup_guest_rxe.sh": {
+        "size": 1567,
+        "sha256": "57be4024c09fa659b028f1c6cdaadee11bfca7036f9d01975329faa8a49b5e88"
+      },
+      "home/railtest/cswave1/start_guest_services.sh": {
+        "size": 485,
+        "sha256": "15a622f4d2f31b3cf9c14d2a53090d73a08ffc16773d6dca58aed095e2ecba93"
+      },
+      "home/railtest/cswave1/wave2/evidence/redis.log": {
+        "size": 881,
+        "sha256": "87f30d5dab6d4f28baa18915517623df370967f0d0728c251731f72059b07196"
+      },
+      "home/railtest/cswave1/wave2/evidence/redis.pid": {
+        "size": 4,
+        "sha256": "706716bd6afd3576bf5684cb4437471dbb867c23601697431a0b039c285e5988"
+      },
+      "home/railtest/cswave1/wave2/evidence/restore_receipt.json": {
+        "size": 2564,
+        "sha256": "1aa86948ea8b6e454f8fe613068ef8efde09809f7e0fdcdaf84e218f5abca7e6"
+      },
+      "home/railtest/cswave1/wave2/evidence/server.log": {
+        "size": 12676,
+        "sha256": "6687dddc3c7a3d2824f3698a31fd48b7561460af7b81608047c6831bd6bfb3c5"
+      },
+      "home/railtest/cswave1/wave2/evidence/server.pid": {
+        "size": 4,
+        "sha256": "27b22bf438eb5f32f4bab3a990a17765488557cebeb8747f65485b9e10a98fad"
+      },
+      "home/railtest/cswave1/wave2/recovery-holdout-v2-collection/large-server.log": {
+        "size": 12676,
+        "sha256": "6687dddc3c7a3d2824f3698a31fd48b7561460af7b81608047c6831bd6bfb3c5"
+      },
+      "home/railtest/cswave1/wave2/recovery-holdout-v2-collection/server-cutoffs.json": {
+        "size": 1118,
+        "sha256": "f384c878829f6875eb40483c7e2dc0fb2c113632721235f9e716c84d2ba9d35e"
+      },
+      "home/railtest/cswave1/wave2/recovery-holdout-v2-collection/small-server.log": {
+        "size": 5393531,
+        "sha256": "915e3791d432b50a4b06e390d301b13e9cefb882a4dff65e18a76aeb5070cd7a"
+      },
+      "home/railtest/cswave1/wave2/redis/dump.rdb": {
+        "size": 5946,
+        "sha256": "e33610137c326cda2cd7188d3bf31601db77dcdede96353d0148eba911e4dfa6"
+      },
+      "home/railtest/cswave1/wave2/server.toml": {
+        "size": 1145,
+        "sha256": "9d7595cfa32e4f921c4a6d4791e520805443d5ef8d60182a406e56e3c017ecff"
+      },
+      "home/railtest/cswave1/wave2/small/evidence/metadata-readback.json": {
+        "size": 1783,
+        "sha256": "9594d1a0a5ba310dfc54ad6c10f17795e83db229dce74a1b1b87a6b6b79ca92d"
+      },
+      "home/railtest/cswave1/wave2/small/evidence/redis.log": {
+        "size": 891,
+        "sha256": "138c833df307c964019261c57cd5bf0dc75e1a09311f7df2fcedbf921fc9592e"
+      },
+      "home/railtest/cswave1/wave2/small/evidence/redis.pid": {
+        "size": 5,
+        "sha256": "b1f399641fe8b9556a1f0106c4c5e7eaeb932ccdf84d265edd2593e0adadc8a5"
+      },
+      "home/railtest/cswave1/wave2/small/evidence/restore_receipt.json": {
+        "size": 2621,
+        "sha256": "2dc7ddc839d020e23d1954618b84d84ff44fbdda1f1186d3bbf295a39d1bf931"
+      },
+      "home/railtest/cswave1/wave2/small/evidence/server.log": {
+        "size": 5393531,
+        "sha256": "915e3791d432b50a4b06e390d301b13e9cefb882a4dff65e18a76aeb5070cd7a"
+      },
+      "home/railtest/cswave1/wave2/small/evidence/server.pid": {
+        "size": 5,
+        "sha256": "bd2352ec5628d620e3708f182a73c4a2d6afb2d46d52d34b3da0f556e5a40dca"
+      },
+      "home/railtest/cswave1/wave2/small/redis/dump.rdb": {
+        "size": 666762,
+        "sha256": "8a6746ba79457bc7aecdf8cc5f929c41291708604b355732e24301d0a4326905"
+      },
+      "home/railtest/cswave1/wave2/small/server.toml": {
+        "size": 1167,
+        "sha256": "730455a23ef32bbcab8b82c9ea1252d42572b72e0d5ca60447bb1741d19021e9"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/listeners.txt": {
+        "size": 198,
+        "sha256": "c95822747d36e9ef3111d33aaa86a9acc5ba4c772942dc5b2353b1f5fe10c59d"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/redis-ping.txt": {
+        "size": 5,
+        "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/redis.log": {
+        "size": 1116,
+        "sha256": "ad505bc89dd5560f512c63e0723ee0fac091a33671403902a9dc6f3947209876"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/server-after-client.txt": {
+        "size": 215,
+        "sha256": "2c580440252cdc8f70342f2f9e97020edba299dd0dd16d06a2da1ab27eb5e6c9"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/server-identity.json": {
+        "size": 711,
+        "sha256": "2798c067a427ffbfc91aa8a2875a2aaf646d2e09ccb399317c6e3f5004200b48"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/server.log": {
+        "size": 3362,
+        "sha256": "c912d4a735c50ce905dd985ccdbb4d8ebe7d714f3a59084ff81d61f3f19a0c55"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/server.pid": {
+        "size": 6,
+        "sha256": "62fee500e49fce5eae8d939fde9319e3522706612183b948de9a6c50e38022af"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/server.start": {
+        "size": 21,
+        "sha256": "f7aa0df6c4f1577ca7b5a0e44520a7c59b6bfad9b93b693b1fb8e140f49e3909"
+      },
+      "home/railtest/wave2-descriptor-guard/baseline/server.stop": {
+        "size": 21,
+        "sha256": "c996bab42b809f7819a31ed48fd2c081eab7084294207181a481a89a72dffa85"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/listeners.txt": {
+        "size": 198,
+        "sha256": "c95822747d36e9ef3111d33aaa86a9acc5ba4c772942dc5b2353b1f5fe10c59d"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/redis-ping.txt": {
+        "size": 5,
+        "sha256": "9597e5d74f44f182ebb56b65a79c6b1b84829735af1ff583d44c3384d8a0a45e"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/redis.log": {
+        "size": 1116,
+        "sha256": "442ecb9e38c33d7ec1c38f90c4d60def39cf954f12ac9e6e2b97bd7b9435b5c3"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/server-after-client.txt": {
+        "size": 216,
+        "sha256": "a0904b25e4ef92bcb6aba103166b61ea920dd7bf42ad9ac4d92a8ce71ae3eceb"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/server-identity.json": {
+        "size": 714,
+        "sha256": "94d42358e70e0d117381fa3b5a790cbf2dad58fd419f000fd83ac0cd854c7dce"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/server.log": {
+        "size": 3204,
+        "sha256": "9be76d49050706ed4dea395754d25434d1a505118c6dc0ff6f00765c9c11fe92"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/server.pid": {
+        "size": 6,
+        "sha256": "36e0a49fe7cfdd9660c3335787775e614c14fc014bb301edeca563420343fc3a"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/server.start": {
+        "size": 21,
+        "sha256": "76d53183562951107415089900ae3e6667ec68f8b271f42f765685d373462b25"
+      },
+      "home/railtest/wave2-descriptor-guard/candidate/server.stop": {
+        "size": 21,
+        "sha256": "033c3b0ddb1b5ec13eb101f2d35e44955c277d1b3cc7d62c03f5ed73d6bea168"
+      },
+      "home/railtest/wave2-descriptor-guard/server.toml": {
+        "size": 1071,
+        "sha256": "aff9592c1690d3625997b09e7b4c93658eb2ca5195d07bd26a5fc12a72e2d896"
+      }
+    },
+    "artifact_hashes": {
+      "/home/railtest/cswave1/bin/contextstore-server": {
+        "size": 150958536,
+        "sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+      },
+      "/home/railtest/wave2-descriptor-guard/native-frozen-bin/baseline-server-debug-rdma": {
+        "size": 150960768,
+        "sha256": "4a6458a6a2183b9db110d893748673e4591839b97f087b6e57949c325ab77902"
+      },
+      "/home/railtest/wave2-descriptor-guard/native-frozen-bin/candidate-server-debug-rdma": {
+        "size": 150964864,
+        "sha256": "580fd1cbf62c69dc4f2a1edc726b64b51a50934f6ca99b60ef8dee7805e2a418"
+      }
+    },
+    "preserved_data_files": 2898,
+    "preserved_data_bytes": 1088471040
+  }
+}

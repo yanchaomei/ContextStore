@@ -1,0 +1,93 @@
+{
+  "at": "2026-10-28T22:00:24.938827+00:00",
+  "hostname": "skv-node5",
+  "guards": {
+    "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k": {
+      "server": {
+        "pid": 1863559,
+        "start_ticks": "313697929",
+        "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server",
+        "exe_sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8",
+        "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k",
+        "argv": [
+          "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server",
+          "--config",
+          "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/server.toml",
+          "--log-level",
+          "info"
+        ],
+        "CS_environment": {
+          "CS_RDMA_SLAB_MB": "512",
+          "CS_FORCE_DISK_READ": "1",
+          "CS_RDMA_DEVICES": "mlx5_1:10.0.0.65:25553:3"
+        }
+      },
+      "redis": {
+        "pid": 1863490,
+        "start_ticks": "313697929",
+        "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+        "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c",
+        "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/redis",
+        "argv": [
+          "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server 127.0.0.1:26579"
+        ]
+      }
+    }
+  },
+  "native_guard": null,
+  "collection": {
+    "archive_path": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/cleanup-wave2-final-20261029/prestop-logs-config-snapshots.tar.gz",
+    "archive_sha256": "f5fdb3ce4b13990f7c947f8bdb330ac0161034bde0463b7ab306fd90d5256cad",
+    "archive_bytes": 395349,
+    "archived_files": {
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/evidence/layout-metadata.json": {
+        "size": 33802,
+        "sha256": "c724e7aa54d2f73666f08b57fddc64e8eccd951b2a30e32b070433f7b600cc03"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/evidence/redis.log": {
+        "size": 1390,
+        "sha256": "c12ed3a0f2e5335e3da8d695ccccd60ed63355959162d251341bce68740b471e"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/evidence/redis.pid": {
+        "size": 8,
+        "sha256": "03bb87c45e1b5e7636509a5c4b793df47e635201755cf964391d7c74c4a5d843"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/evidence/server.log": {
+        "size": 4270068,
+        "sha256": "cb61fee219d5f6e26121631fcb65d012f3f7a10fce5ae145f2c269bbea186e75"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/evidence/server.pid": {
+        "size": 8,
+        "sha256": "889257985a7bd69124ebef09dc9c1fdc40b918b1dad4800bd1b957ab4f2c81b8"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/evidence/startup-receipt.json": {
+        "size": 7466,
+        "sha256": "08a4f8515e1bf8027178c6cc27d8d80088a3b2ec18281a4355e1c6dc01bc7c4f"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/redis/dump.rdb": {
+        "size": 22051,
+        "sha256": "6255f52f89a77a2da8d0ecb0ab3470b70b5ed97d60656fe2784f46e042429485"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/server-source-freeze.json": {
+        "size": 2066,
+        "sha256": "bcbbbbd1f985345be026d4f33530f0bd9e2da2660a6979a2b1e8469f7ca58836"
+      },
+      "home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/server.toml": {
+        "size": 1292,
+        "sha256": "2a2e320557c6d65a233fc10523a9cda064b45b9153fecf065118ad6bfb750db3"
+      }
+    },
+    "artifact_hashes": {
+      "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server": {
+        "size": 9165120,
+        "sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8"
+      },
+      "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server": {
+        "size": 1029680,
+        "sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c"
+      }
+    },
+    "preserved_data_files": 568,
+    "preserved_data_bytes": 297795584
+  }
+}

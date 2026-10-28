@@ -1,0 +1,10 @@
+{
+  "hostname": "csw1-rxe-client",
+  "out": "/home/railtest/wave2-cleanup-final-20261029",
+  "fixtures": [],
+  "archive_roots": [
+    "/home/railtest/cswave1",
+    "/home/railtest/wave2-descriptor-guard"
+  ],
+  "native_guard_readonly": true
+}

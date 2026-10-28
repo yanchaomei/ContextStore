@@ -1,0 +1,54 @@
+{
+  "hostname": "skv-node4",
+  "out": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/cleanup-wave2-final-20261029",
+  "fixtures": [
+    {
+      "root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2",
+      "processes": {
+        "server": {
+          "pid": 1479087,
+          "start_ticks": "1531104895",
+          "command": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server --config /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/server.toml --log-level info",
+          "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2",
+          "exe": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server",
+          "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+          "environment": {
+            "PATH": "/usr/local/bin:/usr/bin:/bin",
+            "LANG": "C",
+            "CS_RDMA_SLAB_MB": "64",
+            "CS_FORCE_DISK_READ": "1",
+            "CS_RDMA_DEVICES": "mlx5_1:10.0.0.64:25353:3,mlx5_1:10.0.0.64:25354:3"
+          },
+          "environment_sha256": "67ab0ff0c47cbe0c95124567cc73edc75592cfe8f07a8302340a394b9032f05a"
+        },
+        "redis": {
+          "pid": 1479083,
+          "start_ticks": "1531104885",
+          "command": "redis-server 127.0.0.1:26379",
+          "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/redis",
+          "exe": "/usr/bin/redis-check-rdb",
+          "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c",
+          "environment": {},
+          "environment_sha256": "9e1736c43d19118e6ce4302118af337109491ecc52757dfb949bad6a7940b0c2"
+        }
+      },
+      "config_sha256": "50203f7373c83652ec26411d189284fa486854359e17fbd0284b84910bbf26a8",
+      "redis_port": 26379,
+      "ports": [
+        25351,
+        25353,
+        25354,
+        26379
+      ],
+      "redis_cli": "/usr/bin/redis-cli",
+      "redis_library_path": null
+    }
+  ],
+  "archive_roots": [
+    "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2"
+  ],
+  "hash_only": [
+    "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server",
+    "/usr/bin/redis-check-rdb"
+  ]
+}

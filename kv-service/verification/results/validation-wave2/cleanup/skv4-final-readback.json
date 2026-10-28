@@ -1,0 +1,11 @@
+{
+  "hostname": "skv-node4",
+  "at": "2026-10-28T22:05:52.972041+00:00",
+  "pids_present": {
+    "1479087": false,
+    "1479083": false
+  },
+  "remaining_task_executables": [],
+  "remaining_task_ports": [],
+  "root_preserved": true
+}

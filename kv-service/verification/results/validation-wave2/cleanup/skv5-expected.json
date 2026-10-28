@@ -1,0 +1,58 @@
+{
+  "root": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k",
+  "processes": {
+    "redis": {
+      "pid": 1863490,
+      "start_ticks": "313697929",
+      "command": [
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+        "--bind",
+        "127.0.0.1",
+        "--port",
+        "26579",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--dir",
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/redis"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/redis",
+      "environment": {},
+      "environment_sha256": "1171666c3e0af069667251bbb8dbac52aeff187a6866daa07c597c813aa289e0",
+      "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-server",
+      "exe_sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c"
+    },
+    "server": {
+      "pid": 1863559,
+      "start_ticks": "313697929",
+      "command": [
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server",
+        "--config",
+        "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/server.toml",
+        "--log-level",
+        "info"
+      ],
+      "cwd": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k",
+      "environment": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin",
+        "LANG": "C",
+        "CS_RDMA_SLAB_MB": "512",
+        "CS_FORCE_DISK_READ": "1",
+        "CS_RDMA_DEVICES": "mlx5_1:10.0.0.65:25553:3"
+      },
+      "environment_sha256": "4c20861cbe37055bab0270ae248382327dd94fda7ab407054a2080d922c4afb7",
+      "exe": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/release-matrix512k/bin/contextstore-server",
+      "exe_sha256": "f6607705f29e30bc293ada3f9e64422cda8e0dadd8dc2996d02cec8ce8d3f0d8"
+    }
+  },
+  "config_sha256": "2a2e320557c6d65a233fc10523a9cda064b45b9153fecf065118ad6bfb750db3",
+  "redis_port": 26579,
+  "ports": [
+    25551,
+    25553,
+    26579
+  ],
+  "redis_cli": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/bin/redis-cli",
+  "redis_library_path": "/home/kvgroup/chaomei/contextstore_validation_wave2_20261029/lib"
+}

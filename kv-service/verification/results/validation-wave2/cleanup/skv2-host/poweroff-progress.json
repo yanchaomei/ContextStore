@@ -1,0 +1,69 @@
+{
+  "started": "2026-10-28T22:04:03.978517+00:00",
+  "vms": {
+    "server": {
+      "pid": 2759196,
+      "start_ticks": "1334345715",
+      "uuid": "3cf534ce-653d-4171-9574-bba582db6338",
+      "guest_hostname": "csw1-rxe-server",
+      "active_task_processes_before": [],
+      "poweroff_ssh_exit": 0,
+      "qemu_exited": true
+    },
+    "client": {
+      "pid": 2759195,
+      "start_ticks": "1334345715",
+      "uuid": "782360c4-1d34-4a3e-9746-d9f96612d2dc",
+      "guest_hostname": "csw1-rxe-client",
+      "active_task_processes_before": [],
+      "poweroff_ssh_exit": 255,
+      "qemu_exited": true
+    }
+  },
+  "host_pre_archive": {
+    "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/wave2/cleanup-final-20261029/host-pre-poweroff-logs.tar.gz",
+    "sha256": "f72e0e3714d579fee094a968a3445595404af2fcd53fe25bc4d71af3bf37b9cc",
+    "files": {
+      "wave2/environment/vm-host/client/command.json": {
+        "size": 1510,
+        "sha256": "d2f6fb819d3cc609cccb4d72e4a2184ec641d7c1990a44bf0abcd2a08e29e1ee"
+      },
+      "wave2/environment/vm-host/client/qemu.log": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wave2/environment/vm-host/client/qemu.pid": {
+        "size": 8,
+        "sha256": "f09cf6bb755546b95ea9315c2d2b240df82793d930ff515bf89dcec17c1a015f"
+      },
+      "wave2/environment/vm-host/client/serial.log": {
+        "size": 69833,
+        "sha256": "4d44611d64e4e22b3ae6a6f788da3163588311f416d0bfc502f906aa312c8e4b"
+      },
+      "wave2/environment/vm-host/launch_receipt.json": {
+        "size": 4996,
+        "sha256": "9fe80f285ff2f97f9403cc2aa2497d88049a60a163f553a7cdc0265ae0a69a84"
+      },
+      "wave2/environment/vm-host/preflight.json": {
+        "size": 1160,
+        "sha256": "eb2b149a6811bbe873232a8059fdeb2468f739587f55f5aae9b040fc702ef147"
+      },
+      "wave2/environment/vm-host/server/command.json": {
+        "size": 1510,
+        "sha256": "316599c929fbba4f852b1fb30094442736805da420640e15f7861850c9ba0150"
+      },
+      "wave2/environment/vm-host/server/qemu.log": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wave2/environment/vm-host/server/qemu.pid": {
+        "size": 8,
+        "sha256": "097960fb7370c0b6fe16b5ffe6ccb5b83fe84ff30b2056562c3270dd266485f0"
+      },
+      "wave2/environment/vm-host/server/serial.log": {
+        "size": 70198,
+        "sha256": "43bf5406085856ab8b321f65a02a7839b8d89b1cae24f8ddcea57668c3b54cef"
+      }
+    }
+  }
+}

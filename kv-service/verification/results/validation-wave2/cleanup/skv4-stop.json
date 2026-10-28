@@ -1,0 +1,68 @@
+{
+  "started": "2026-10-28T22:01:29.913106+00:00",
+  "stops": {
+    "1479087": {
+      "root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2",
+      "label": "server",
+      "action": "SIGTERM",
+      "state": "exited_zombie",
+      "start_ticks": "1531104895"
+    },
+    "1479083": {
+      "root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2",
+      "label": "redis",
+      "action": "SHUTDOWN SAVE",
+      "state": "absent",
+      "start_ticks": "1531104885"
+    }
+  },
+  "task_listeners_after": [],
+  "collection": {
+    "archive_path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/cleanup-wave2-final-20261029/poststop-logs-config-snapshots.tar.gz",
+    "archive_sha256": "4ec3a4a3532313c4da4bb7cf398168e6be8e7843f78716dede3c7938e19bdd21",
+    "archive_bytes": 1667118,
+    "archived_files": {
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/evidence/redis.log": {
+        "size": 1312,
+        "sha256": "a954be1115c517edbf87d5c260a9a3c2fc440c3fb64199ad46f4abce6638b072"
+      },
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/evidence/redis.pid": {
+        "size": 8,
+        "sha256": "63ae18392fd7ad0eb5a3d86f973a1ac1d93bb0e26e50d6fb906bfee8c6ccff9e"
+      },
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/evidence/restore_receipt.json": {
+        "size": 5275,
+        "sha256": "5f1a9215b223bfb98a8d607185822e582f6cc9b9310bae3a7892ad8fec084e9d"
+      },
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/evidence/server.log": {
+        "size": 19125476,
+        "sha256": "4dfff0a5ba81499b68b7fbdfae110630a81c0d3494dc361bb1888e92aa4d6202"
+      },
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/evidence/server.pid": {
+        "size": 8,
+        "sha256": "9781fb453714da2f0986b4d0239eb63b642bad3149f5aa1040b57928df088adf"
+      },
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/redis/dump.rdb": {
+        "size": 14583,
+        "sha256": "fe49b43518ef090f9c0df31b26c40b1b14e215eab90cd17de2acce1a91b93e38"
+      },
+      "home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/wave2/server.toml": {
+        "size": 1218,
+        "sha256": "50203f7373c83652ec26411d189284fa486854359e17fbd0284b84910bbf26a8"
+      }
+    },
+    "artifact_hashes": {
+      "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server": {
+        "size": 150958536,
+        "sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+      },
+      "/usr/bin/redis-check-rdb": {
+        "size": 1029680,
+        "sha256": "22ec037f0a20dc580fbd5f9958cd53b70d352b5697201f3391d660cdd266321c"
+      }
+    },
+    "preserved_data_files": 40,
+    "preserved_data_bytes": 159399936
+  },
+  "finished": "2026-10-28T22:01:31.326199+00:00"
+}
