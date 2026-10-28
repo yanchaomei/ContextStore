@@ -1,0 +1,12 @@
+[
+  "ssh",
+  "-oBatchMode=yes",
+  "-oStrictHostKeyChecking=yes",
+  "-oUserKnownHostsFile=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/known_hosts",
+  "-i",
+  "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/railtest_ed25519",
+  "-p",
+  "22352",
+  "railtest@127.0.0.1",
+  "sha256sum /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/ffi_lifecycle_probe.py /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/libcontextstore_rdma_ffi.so /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/run_ffi_lifecycle_validation.py /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/verbs_failstop.so /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/verbs_failstop_shim.c"
+]

@@ -1,0 +1,1667 @@
+{
+  "base_commit": "75dba7a",
+  "status": "implemented_and_verified_not_committed",
+  "build_host": "SKV_2",
+  "remote_root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029",
+  "environment": "Real Linux RXE providers in two KVM guests, two isolated software paths, one SKV2 host; not physical dual-HCA.",
+  "limits": {
+    "recovery_default": "off",
+    "scope": "striped only",
+    "waves": 1,
+    "retries_per_failed_initial_task": 1,
+    "retry_payload_upper_bound": "object size",
+    "retry_task_upper_bound": "initial task count",
+    "deadline": "absolute admission/publication deadline; not a hard-return guarantee"
+  },
+  "sources_sha256": {
+    "README.md": "e3051b1c84ecc1f78cf9044b4423bfd413fee7e478c929287814203423cc46e3",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs": "cf9dc48aa77b9320af5b5fb0bce405aeb47ebed87047c091558472845a7a03df",
+    "kv-service/client-rs/src/rail_read/tests.rs": "6e44ef83c98e17a7a71c6651e5ceed8035123746d1b292e2a726ba6476d1a61f",
+    "kv-service/client-rs/src/lib.rs": "e6c1c9f78ce0709fd90a247f42e627550b387c145e0ed77e02faa692a5569964",
+    "kv-service/client-rs/src/rdma.rs": "62a73733c9455677cb529f563a49f157c58cdf687e08de6d2ced3ac059328d3d",
+    "kv-service/client-rs/src/bin/rail_read_bench.rs": "929cdb567327dce694a5d01b4f69660436276747896b4176eafabdd192853267",
+    "kv-service/client-rs/tests/rail_read_e2e.rs": "346bc6680ee2b65684fc343e2315eb4deaa72c094c3c7e22cf658913d795be0a"
+  },
+  "red_green": [
+    {
+      "red": "01-red.log",
+      "green": "03-green.log",
+      "behavior": "packed/direct retry only the failed task"
+    },
+    {
+      "red": "16-zero-timeout-red.log",
+      "green": "17-zero-timeout-green.log",
+      "extended_matrix": "25-zero-timeout-matrix.log",
+      "behavior": "legacy zero TCP timeout retains transport error, independent of recovery and striping"
+    }
+  ],
+  "known_failed_validation_attempts": [
+    {
+      "log": "02-green.log",
+      "cause": "test seam missing finish_transfer import; fixed"
+    },
+    {
+      "log": "07-clippy.log",
+      "cause": "too many arguments; consolidated immutable request context"
+    },
+    {
+      "log": "09-all-tests.log",
+      "cause": "local_cluster tests lacked CS_E2E_SERVER_BIN; configured frozen baseline server and reran green"
+    },
+    {
+      "log": "12-rxe-packed-unpooled.log",
+      "cause": "new transparent relay did not accept normal legacy BYE; test helper fixed"
+    }
+  ],
+  "final_checks": {
+    "all_tests": "18-final-all-tests.log",
+    "library": "90 passed, 1 intentional software benchmark ignored",
+    "bin_tests": "5 passed",
+    "local_cluster": "4 passed using frozen baseline server",
+    "clippy": "29-final-v3-clippy.log",
+    "default_no_rdma": "20-final-default-check.log",
+    "release": "29-release-build-v3.log",
+    "library_final_v3": "29-final-v3-library.log",
+    "physical_pool": "22-provider-pool.log: 2 passed",
+    "physical_unstriped": "23-provider-legacy.log: 1 passed",
+    "physical_single": "24-provider-single.log: 1 passed"
+  },
+  "release_benchmark": {
+    "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/pilot-frozen-bin/cs-rail-read-bench-recovery-off-v3",
+    "sha256": "6d90ed413283a513d32cb3b70428ba47cf3c7311ab47752bdc810db726bf3ca0",
+    "cli_verified": true,
+    "performance_experiment_run_by_this_agent": false
+  },
+  "historical_before_zero_timeout_fix": {
+    "runtime_rail_read_sha256": "ffc82a32c832a5ac0c9747ea6c30e207a8487ab1ac2409b16ae87cbdbce40c13",
+    "test_binary_sha256": "c92d1ee7415fd3e003e7443fa0eab6523bb9f89c5fd230ae502f28fc5ccf7b9d",
+    "test_summary": "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 23 filtered out; finished in 146.71s",
+    "raw_client_log": "14-rxe-four-modes.log",
+    "server_window_log": "14-rxe-server-window.log",
+    "cases": [
+      {
+        "direct_staging": true,
+        "connection_pool": true,
+        "key": "rail-e2e-1793209400764892429",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140550791500384,
+                635,
+                4194304
+              ],
+              [
+                140550795694688,
+                635,
+                4194304
+              ],
+              [
+                140550657281184,
+                846,
+                4194304
+              ],
+              [
+                140550657281184,
+                846,
+                4194304
+              ]
+            ],
+            "captured_us": 184280,
+            "forwarded_us": 2933893,
+            "terminal_us": 33011806,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              2,
+              3
+            ],
+            "segments": [
+              [
+                140550724390048,
+                938,
+                4194304
+              ],
+              [
+                140550724390048,
+                938,
+                4194304
+              ],
+              [
+                140550799888992,
+                713,
+                4194304
+              ],
+              [
+                140550804083296,
+                713,
+                4194304
+              ]
+            ],
+            "captured_us": 188466,
+            "forwarded_us": 188466,
+            "terminal_us": 2817921,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140550791500384,
+                881,
+                4194304
+              ],
+              [
+                140550795694688,
+                881,
+                4194304
+              ],
+              [
+                140550808278976,
+                1178,
+                4194304
+              ],
+              [
+                140550808278976,
+                1178,
+                4194304
+              ]
+            ],
+            "captured_us": 2933852,
+            "forwarded_us": 33012429,
+            "terminal_us": 35645425,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 36027,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": true
+        },
+        "server_write_attempt_warning": "2026-10-28T17:43:54.476441Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209400764892429 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:43:54.477316Z  WARN RDMA client 10.81.1.2:35744 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      },
+      {
+        "direct_staging": true,
+        "connection_pool": false,
+        "key": "rail-e2e-1793209437607716378",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140550925718128,
+                924,
+                4194304
+              ],
+              [
+                140550929912432,
+                924,
+                4194304
+              ],
+              [
+                140550724390048,
+                1171,
+                4194304
+              ],
+              [
+                140550724390048,
+                1171,
+                4194304
+              ]
+            ],
+            "captured_us": 183767,
+            "forwarded_us": 3062558,
+            "terminal_us": 33138433,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              2,
+              3
+            ],
+            "segments": [
+              [
+                140550657281088,
+                1280,
+                4194304
+              ],
+              [
+                140550657281088,
+                1280,
+                4194304
+              ],
+              [
+                140550934106736,
+                1077,
+                4194304
+              ],
+              [
+                140550938301040,
+                1077,
+                4194304
+              ]
+            ],
+            "captured_us": 183874,
+            "forwarded_us": 183875,
+            "terminal_us": 2944425,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140550925718128,
+                1512,
+                4194304
+              ],
+              [
+                140550929912432,
+                1512,
+                4194304
+              ],
+              [
+                140550942496112,
+                1644,
+                4194304
+              ],
+              [
+                140550942496112,
+                1644,
+                4194304
+              ]
+            ],
+            "captured_us": 3062529,
+            "forwarded_us": 33138700,
+            "terminal_us": 35421286,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 35825,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": true
+        },
+        "server_write_attempt_warning": "2026-10-28T17:44:31.496708Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209437607716378 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:44:31.496921Z  WARN RDMA client 10.81.1.2:33642 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      },
+      {
+        "direct_staging": false,
+        "connection_pool": true,
+        "key": "rail-e2e-1793209474298597671",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140550661513072,
+                1115,
+                4194304
+              ],
+              [
+                140550669901680,
+                1115,
+                4194304
+              ],
+              [
+                140550665707376,
+                1115,
+                4194304
+              ],
+              [
+                140550669901680,
+                1115,
+                4194304
+              ]
+            ],
+            "captured_us": 152735,
+            "forwarded_us": 3047877,
+            "terminal_us": 33126305,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              1,
+              3
+            ],
+            "segments": [
+              [
+                140550736979136,
+                1765,
+                4194304
+              ],
+              [
+                140550728590528,
+                1765,
+                4194304
+              ],
+              [
+                140550736979136,
+                1765,
+                4194304
+              ],
+              [
+                140550732784832,
+                1765,
+                4194304
+              ]
+            ],
+            "captured_us": 165523,
+            "forwarded_us": 165524,
+            "terminal_us": 2867582,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140550791500816,
+                1551,
+                4194304
+              ],
+              [
+                140550799889424,
+                1551,
+                4194304
+              ],
+              [
+                140550795695120,
+                1551,
+                4194304
+              ],
+              [
+                140550799889424,
+                1551,
+                4194304
+              ]
+            ],
+            "captured_us": 3047840,
+            "forwarded_us": 33126495,
+            "terminal_us": 35892343,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 36428,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": null
+        },
+        "server_write_attempt_warning": "2026-10-28T17:45:08.108713Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209474298597671 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:45:08.109374Z  WARN RDMA client 10.81.1.2:51474 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      },
+      {
+        "direct_staging": false,
+        "connection_pool": false,
+        "key": "rail-e2e-1793209511527026492",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140550724409456,
+                1143,
+                4194304
+              ],
+              [
+                140550732798064,
+                1143,
+                4194304
+              ],
+              [
+                140550728603760,
+                1143,
+                4194304
+              ],
+              [
+                140550732798064,
+                1143,
+                4194304
+              ]
+            ],
+            "captured_us": 111764,
+            "forwarded_us": 2918586,
+            "terminal_us": 32996709,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              1,
+              3
+            ],
+            "segments": [
+              [
+                140550669901680,
+                1745,
+                4194304
+              ],
+              [
+                140550661513072,
+                1745,
+                4194304
+              ],
+              [
+                140550669901680,
+                1745,
+                4194304
+              ],
+              [
+                140550665707376,
+                1745,
+                4194304
+              ]
+            ],
+            "captured_us": 112246,
+            "forwarded_us": 112247,
+            "terminal_us": 2740720,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140550925737936,
+                1585,
+                4194304
+              ],
+              [
+                140550934126544,
+                1585,
+                4194304
+              ],
+              [
+                140550929932240,
+                1585,
+                4194304
+              ],
+              [
+                140550934126544,
+                1585,
+                4194304
+              ]
+            ],
+            "captured_us": 2918557,
+            "forwarded_us": 32996866,
+            "terminal_us": 34546357,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 35129,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": null
+        },
+        "server_write_attempt_warning": "2026-10-28T17:45:45.225966Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209511527026492 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:45:45.227003Z  WARN RDMA client 10.81.1.2:48800 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      }
+    ]
+  },
+  "historical_before_strict_eof_and_diagnostic_fix": {
+    "runtime_rail_read_sha256": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "test_binary_sha256": "14717e77ada4ccd5863e335ff8cb289dc44a31a09fc3ba8cfb566f83c8b2425c",
+    "test_summary": "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 23 filtered out; finished in 145.66s",
+    "raw_client_log": "27-rxe-four-modes-v2.log",
+    "server_window_log": "27-rxe-server-window.log",
+    "cases": [
+      {
+        "direct_staging": true,
+        "connection_pool": true,
+        "key": "rail-e2e-1793209806812256930",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                139624554959456,
+                1072,
+                4194304
+              ],
+              [
+                139624559153760,
+                1072,
+                4194304
+              ],
+              [
+                139624622066848,
+                1321,
+                4194304
+              ],
+              [
+                139624622066848,
+                1321,
+                4194304
+              ]
+            ],
+            "captured_us": 185241,
+            "forwarded_us": 2511859,
+            "terminal_us": 32594347,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              2,
+              3
+            ],
+            "segments": [
+              [
+                139624420740256,
+                2018,
+                4194304
+              ],
+              [
+                139624420740256,
+                2018,
+                4194304
+              ],
+              [
+                139624563348064,
+                1573,
+                4194304
+              ],
+              [
+                139624567542368,
+                1573,
+                4194304
+              ]
+            ],
+            "captured_us": 185096,
+            "forwarded_us": 185097,
+            "terminal_us": 2404024,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                139624554959456,
+                1795,
+                4194304
+              ],
+              [
+                139624559153760,
+                1795,
+                4194304
+              ],
+              [
+                139624571738048,
+                2163,
+                4194304
+              ],
+              [
+                139624571738048,
+                2163,
+                4194304
+              ]
+            ],
+            "captured_us": 2511818,
+            "forwarded_us": 32594605,
+            "terminal_us": 34748475,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 35150,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": true
+        },
+        "server_write_attempt_warning": "2026-10-28T17:50:40.120168Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209806812256930 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:50:40.120954Z  WARN RDMA client 10.81.1.2:43504 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      },
+      {
+        "direct_staging": true,
+        "connection_pool": false,
+        "key": "rail-e2e-1793209842802298188",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                139624689177200,
+                1384,
+                4194304
+              ],
+              [
+                139624693371504,
+                1384,
+                4194304
+              ],
+              [
+                139624420740256,
+                1622,
+                4194304
+              ],
+              [
+                139624420740256,
+                1622,
+                4194304
+              ]
+            ],
+            "captured_us": 199940,
+            "forwarded_us": 2333796,
+            "terminal_us": 32415489,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              2,
+              3
+            ],
+            "segments": [
+              [
+                139624622066752,
+                2313,
+                4194304
+              ],
+              [
+                139624622066752,
+                2313,
+                4194304
+              ],
+              [
+                139624697565808,
+                2156,
+                4194304
+              ],
+              [
+                139624701760112,
+                2156,
+                4194304
+              ]
+            ],
+            "captured_us": 199941,
+            "forwarded_us": 199942,
+            "terminal_us": 2216151,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                139624689177200,
+                2506,
+                4194304
+              ],
+              [
+                139624693371504,
+                2506,
+                4194304
+              ],
+              [
+                139624705955184,
+                2651,
+                4194304
+              ],
+              [
+                139624705955184,
+                2651,
+                4194304
+              ]
+            ],
+            "captured_us": 2333764,
+            "forwarded_us": 32415548,
+            "terminal_us": 34568315,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 34949,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": true
+        },
+        "server_write_attempt_warning": "2026-10-28T17:51:15.901093Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209842802298188 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:51:15.902384Z  WARN RDMA client 10.81.1.2:45720 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      },
+      {
+        "direct_staging": false,
+        "connection_pool": true,
+        "key": "rail-e2e-1793209878565605442",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                139624626298736,
+                1696,
+                4194304
+              ],
+              [
+                139624634687344,
+                1696,
+                4194304
+              ],
+              [
+                139624630493040,
+                1696,
+                4194304
+              ],
+              [
+                139624634687344,
+                1696,
+                4194304
+              ]
+            ],
+            "captured_us": 154634,
+            "forwarded_us": 2627890,
+            "terminal_us": 32707912,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              1,
+              3
+            ],
+            "segments": [
+              [
+                139624433329344,
+                2686,
+                4194304
+              ],
+              [
+                139624424940736,
+                2686,
+                4194304
+              ],
+              [
+                139624433329344,
+                2686,
+                4194304
+              ],
+              [
+                139624429135040,
+                2686,
+                4194304
+              ]
+            ],
+            "captured_us": 167166,
+            "forwarded_us": 167167,
+            "terminal_us": 2454658,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                139624554959888,
+                2610,
+                4194304
+              ],
+              [
+                139624563348496,
+                2610,
+                4194304
+              ],
+              [
+                139624559154192,
+                2610,
+                4194304
+              ],
+              [
+                139624563348496,
+                2610,
+                4194304
+              ]
+            ],
+            "captured_us": 2627860,
+            "forwarded_us": 32708420,
+            "terminal_us": 35474379,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 36030,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": null
+        },
+        "server_write_attempt_warning": "2026-10-28T17:51:51.965008Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209878565605442 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:51:51.965233Z  WARN RDMA client 10.81.1.2:35302 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      },
+      {
+        "direct_staging": false,
+        "connection_pool": false,
+        "key": "rail-e2e-1793209915421100638",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                139624420759664,
+                1766,
+                4194304
+              ],
+              [
+                139624429148272,
+                1766,
+                4194304
+              ],
+              [
+                139624424953968,
+                1766,
+                4194304
+              ],
+              [
+                139624429148272,
+                1766,
+                4194304
+              ]
+            ],
+            "captured_us": 122488,
+            "forwarded_us": 2856755,
+            "terminal_us": 32937933,
+            "terminal": "eof",
+            "server_peer": null
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              1,
+              3
+            ],
+            "segments": [
+              [
+                139624634687344,
+                2693,
+                4194304
+              ],
+              [
+                139624626298736,
+                2693,
+                4194304
+              ],
+              [
+                139624634687344,
+                2693,
+                4194304
+              ],
+              [
+                139624630493040,
+                2693,
+                4194304
+              ]
+            ],
+            "captured_us": 117773,
+            "forwarded_us": 117778,
+            "terminal_us": 2674607,
+            "terminal": "success_ack",
+            "server_peer": null
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                139624689197008,
+                2585,
+                4194304
+              ],
+              [
+                139624697585616,
+                2585,
+                4194304
+              ],
+              [
+                139624693391312,
+                2585,
+                4194304
+              ],
+              [
+                139624697585616,
+                2585,
+                4194304
+              ]
+            ],
+            "captured_us": 2856699,
+            "forwarded_us": 32938146,
+            "terminal_us": 35701926,
+            "terminal": "success_ack",
+            "server_peer": null
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 36251,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": null
+        },
+        "server_write_attempt_warning": "2026-10-28T17:52:29.018493Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793209915421100638 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:52:29.019418Z  WARN RDMA client 10.81.1.2:52816 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8"
+      }
+    ]
+  },
+  "final_native_validation": {
+    "runtime_rail_read_sha256": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "test_binary_sha256": "7dbe55f923e073bbf6530c56f8bb843f5afb2c5b77650ca75ba21789954393d4",
+    "test_summary": "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 23 filtered out; finished in 144.14s",
+    "raw_client_log": "30-rxe-four-modes-v3.log",
+    "server_window_log": "30-rxe-server-window.log",
+    "cases": [
+      {
+        "direct_staging": true,
+        "connection_pool": true,
+        "key": "rail-e2e-1793210195886485932",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140421070066272,
+                1647,
+                4194304
+              ],
+              [
+                140421074260576,
+                1647,
+                4194304
+              ],
+              [
+                140420868738208,
+                1839,
+                4194304
+              ],
+              [
+                140420868738208,
+                1839,
+                4194304
+              ]
+            ],
+            "captured_us": 184140,
+            "forwarded_us": 2924811,
+            "terminal_us": 33005856,
+            "terminal": "eof",
+            "server_peer": "10.81.1.2:50344"
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              2,
+              3
+            ],
+            "segments": [
+              [
+                140420935847072,
+                3051,
+                4194304
+              ],
+              [
+                140420935847072,
+                3051,
+                4194304
+              ],
+              [
+                140421078454880,
+                2689,
+                4194304
+              ],
+              [
+                140421082649184,
+                2689,
+                4194304
+              ]
+            ],
+            "captured_us": 184008,
+            "forwarded_us": 184009,
+            "terminal_us": 2817099,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:34594"
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140421070066272,
+                2974,
+                4194304
+              ],
+              [
+                140421074260576,
+                2974,
+                4194304
+              ],
+              [
+                140421086844864,
+                3160,
+                4194304
+              ],
+              [
+                140421086844864,
+                3160,
+                4194304
+              ]
+            ],
+            "captured_us": 2924783,
+            "forwarded_us": 33006166,
+            "terminal_us": 36114238,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:34594"
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 36492,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": true
+        },
+        "server_write_attempt_warning": "2026-10-28T17:57:09.610205Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793210195886485932 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:57:09.610617Z  WARN RDMA client 10.81.1.2:50344 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "evidence_gate": "PASS: exact key WRITE completion timeout, exact peer retirement, expected EOF, then failed-stripe-only recovery"
+      },
+      {
+        "direct_staging": true,
+        "connection_pool": false,
+        "key": "rail-e2e-1793210233252537176",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140421137175152,
+                1877,
+                4194304
+              ],
+              [
+                140421141369456,
+                1877,
+                4194304
+              ],
+              [
+                140420935847072,
+                2277,
+                4194304
+              ],
+              [
+                140420935847072,
+                2277,
+                4194304
+              ]
+            ],
+            "captured_us": 199415,
+            "forwarded_us": 4220669,
+            "terminal_us": 34299851,
+            "terminal": "eof",
+            "server_peer": "10.81.1.2:35774"
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              2,
+              3
+            ],
+            "segments": [
+              [
+                140420868738112,
+                3572,
+                4194304
+              ],
+              [
+                140420868738112,
+                3572,
+                4194304
+              ],
+              [
+                140421145563760,
+                3237,
+                4194304
+              ],
+              [
+                140421149758064,
+                3237,
+                4194304
+              ]
+            ],
+            "captured_us": 199385,
+            "forwarded_us": 199385,
+            "terminal_us": 4097065,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:46866"
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              1
+            ],
+            "segments": [
+              [
+                140421137175152,
+                3456,
+                4194304
+              ],
+              [
+                140421141369456,
+                3456,
+                4194304
+              ],
+              [
+                140421153953136,
+                3802,
+                4194304
+              ],
+              [
+                140421153953136,
+                3802,
+                4194304
+              ]
+            ],
+            "captured_us": 4220560,
+            "forwarded_us": 34300637,
+            "terminal_us": 36247213,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:46878"
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 36643,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": true
+        },
+        "server_write_attempt_warning": "2026-10-28T17:57:48.251606Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793210233252537176 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:57:48.252356Z  WARN RDMA client 10.81.1.2:35774 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "evidence_gate": "PASS: exact key WRITE completion timeout, exact peer retirement, expected EOF, then failed-stripe-only recovery"
+      },
+      {
+        "direct_staging": false,
+        "connection_pool": true,
+        "key": "rail-e2e-1793210270755257871",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140420872970096,
+                2066,
+                4194304
+              ],
+              [
+                140420881358704,
+                2066,
+                4194304
+              ],
+              [
+                140420877164400,
+                2066,
+                4194304
+              ],
+              [
+                140420881358704,
+                2066,
+                4194304
+              ]
+            ],
+            "captured_us": 131402,
+            "forwarded_us": 2382736,
+            "terminal_us": 32462397,
+            "terminal": "eof",
+            "server_peer": "10.81.1.2:41798"
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              1,
+              3
+            ],
+            "segments": [
+              [
+                140420948436160,
+                3679,
+                4194304
+              ],
+              [
+                140420940047552,
+                3679,
+                4194304
+              ],
+              [
+                140420948436160,
+                3679,
+                4194304
+              ],
+              [
+                140420944241856,
+                3679,
+                4194304
+              ]
+            ],
+            "captured_us": 121886,
+            "forwarded_us": 121887,
+            "terminal_us": 2203847,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:57306"
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140421070066624,
+                3585,
+                4194304
+              ],
+              [
+                140421078455232,
+                3585,
+                4194304
+              ],
+              [
+                140421074260928,
+                3585,
+                4194304
+              ],
+              [
+                140421078455232,
+                3585,
+                4194304
+              ]
+            ],
+            "captured_us": 2382710,
+            "forwarded_us": 32462720,
+            "terminal_us": 34613657,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:57306"
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 35182,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": null
+        },
+        "server_write_attempt_warning": "2026-10-28T17:58:23.888207Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793210270755257871 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:58:23.888434Z  WARN RDMA client 10.81.1.2:41798 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "evidence_gate": "PASS: exact key WRITE completion timeout, exact peer retirement, expected EOF, then failed-stripe-only recovery"
+      },
+      {
+        "direct_staging": false,
+        "connection_pool": false,
+        "key": "rail-e2e-1793210306768835688",
+        "frames": {
+          "failed": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140420935866480,
+                2277,
+                4194304
+              ],
+              [
+                140420944255088,
+                2277,
+                4194304
+              ],
+              [
+                140420940060784,
+                2277,
+                4194304
+              ],
+              [
+                140420944255088,
+                2277,
+                4194304
+              ]
+            ],
+            "captured_us": 106862,
+            "forwarded_us": 702500,
+            "terminal_us": 30781563,
+            "terminal": "eof",
+            "server_peer": "10.81.1.2:49960"
+          },
+          "healthy_initial": {
+            "client_qpn": 17,
+            "stripes": [
+              1,
+              3
+            ],
+            "segments": [
+              [
+                140420881358704,
+                3615,
+                4194304
+              ],
+              [
+                140420872970096,
+                3615,
+                4194304
+              ],
+              [
+                140420881358704,
+                3615,
+                4194304
+              ],
+              [
+                140420877164400,
+                3615,
+                4194304
+              ]
+            ],
+            "captured_us": 105676,
+            "forwarded_us": 105677,
+            "terminal_us": 526744,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:37514"
+          },
+          "healthy_retry": {
+            "client_qpn": 17,
+            "stripes": [
+              0,
+              2
+            ],
+            "segments": [
+              [
+                140421137194944,
+                3631,
+                4194304
+              ],
+              [
+                140421145583552,
+                3631,
+                4194304
+              ],
+              [
+                140421141389248,
+                3631,
+                4194304
+              ],
+              [
+                140421145583552,
+                3631,
+                4194304
+              ]
+            ],
+            "captured_us": 702477,
+            "forwarded_us": 30781774,
+            "terminal_us": 31881415,
+            "terminal": "success_ack",
+            "server_peer": "10.82.1.2:37516"
+          }
+        },
+        "result": {
+          "payload_bytes": 16777216,
+          "retry_tasks": 1,
+          "requested_retry_payload": 8388608,
+          "elapsed_ms": 32434,
+          "payload_xxh3": "614d9758e87638c7",
+          "old_terminal": "eof",
+          "proof": "late_control_request_after_retry_target_registration",
+          "same_descriptor": true,
+          "caller_payload_exact": true
+        },
+        "observed_ordering": {
+          "retry_frame_registered_before_old_forward": true,
+          "old_server_terminal_before_retry_forward": true,
+          "failed_stripes_retried_exactly": true,
+          "initial_success_stripes_disjoint_from_retry": true,
+          "selected_direct_addresses_reused": null
+        },
+        "server_write_attempt_warning": "2026-10-28T17:58:58.207469Z  WARN RDMA stripe-subset stream failed without deleting object metadata key=8:rail-e2erail-e2e-1793210306768835688 error=poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "server_connection_retirement": "2026-10-28T17:58:58.208181Z  WARN RDMA client 10.81.1.2:49960 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8",
+        "evidence_gate": "PASS: exact key WRITE completion timeout, exact peer retirement, expected EOF, then failed-stripe-only recovery"
+      }
+    ]
+  },
+  "evidence_boundary": "Observed late control-request arrival after the retry target MR registration, actual server WRITE-completion timeout and connection retirement, then exact failed-stripe recovery. Does not establish a WRITE already in flight at injected EOF, every provider failure, physical dual-HCA failover, or performance gain.",
+  "validation_revision_notes": {
+    "v1": "Before zero-TCP-timeout compatibility fix; native 14 logs are historical only.",
+    "v2": "Zero-timeout compatibility fixed. Full suite 18, default check 20, and physical-provider 22/23/24 ran on this revision.",
+    "v3": "Only production change from v2 is preserving anyhow cause text with format!(error alternate display) at two connect-error conversions. Strict-EOF/peer oracle is a test-only change. Final library 29, clippy 29, release 29, and native 30 ran on v3. The prior default build excludes the modified RDMA module."
+  },
+  "reproduction_commands": {
+    "library": "source <remote_root>/env.sh; CARGO_TARGET_DIR=<remote_root>/target-candidate cargo test --offline --locked --features rdma --lib",
+    "workspace_client": "source <remote_root>/env.sh; CS_E2E_SERVER_BIN=<remote_root>/target-provider-baseline/debug/contextstore-server CARGO_TARGET_DIR=<remote_root>/target-candidate cargo test --offline --locked --features rdma",
+    "strict_native": "source /home/railtest/cswave1/client.env; CS_RAIL_OBJECT_MIB=16 /home/railtest/cswave1/bin/rail_read_e2e-recovery-v3 recovery_real_late_request_after_retry_registration --ignored --nocapture --test-threads=1",
+    "native_environment_receipt": "/Users/yanchaomei/.codex/.chatgpt-projects/g-p-6a8427e4c9d08191a2929ee4368fe629/outputs/implementation-wave1-20261029/rxe-environment/rxe-ready-receipt.json"
+  }
+}

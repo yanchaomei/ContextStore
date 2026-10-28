@@ -1,0 +1,14 @@
+{
+  "hostname": "csw1-rxe-client",
+  "captured_at": "2026-10-28T17:37:25.830343+00:00",
+  "kernel": "Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+  "bin_sha256": {
+    "rdma_e2e": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+    "rail_read_e2e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26"
+  },
+  "rdma_links": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+  "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5002/64 fe80::5054:ff:fe29:5002/64 \nrail0            UP             10.81.1.2/24 fe80::5054:ff:fe29:5102/64 \nrail1            UP             10.82.1.2/24 fe80::5054:ff:fe29:5202/64 \n",
+  "gid_index": 1,
+  "client.env_sha256": "ab1407bbab04e90fa5e84994f91a1494cdfe67481adb3f920a79e6000ac6b430",
+  "guest_run_baseline.sh_sha256": "1781db330a5777655951745067efe66cee9da0b0ecf992c929f71bb31b5546fc"
+}

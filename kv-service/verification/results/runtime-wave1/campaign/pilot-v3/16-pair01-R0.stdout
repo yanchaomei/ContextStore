@@ -1,0 +1,24 @@
+object_identity,generation=1,layout_version=1,stripe_count=4,chunk_size=4194304,handle_xxh3=ef2cf34ef1155c58,etag_xxh3=7f5dc8bf603ea110,descriptor_xxh3=741757a29ac1a699,placement_xxh3=efd9cb088276044f
+mode,direct_staging=false
+mode,contiguous_schedule=false
+mode,connection_pool_size=0,recovery_timeout_ms=None,verify_pattern=true,warmup=1,iterations=10,concurrency=1
+plan_assignment,id=single,stripes=[0, 1, 2, 3],bytes=16777216
+expected_pattern,pattern=index_mod_251,bytes=16777216,xxh3=614d9758e87638c7
+route,id=single,device=mlx5_1,port=1,gid=3,weight=1,advertised=10.0.0.64:25353,listener=10.0.0.64:25353
+pool_stats,phase=before_warmup,enabled=false
+pool_stats,phase=after_warmup,enabled=false
+sample,environment=physical,rails=1,iteration=1,bytes=16777216,latency_us=155311,gib_per_s=0.101,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=2,bytes=16777216,latency_us=153457,gib_per_s=0.102,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=3,bytes=16777216,latency_us=151857,gib_per_s=0.103,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=4,bytes=16777216,latency_us=134020,gib_per_s=0.117,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=5,bytes=16777216,latency_us=151461,gib_per_s=0.103,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=6,bytes=16777216,latency_us=131641,gib_per_s=0.119,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=7,bytes=16777216,latency_us=153386,gib_per_s=0.102,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=8,bytes=16777216,latency_us=133052,gib_per_s=0.117,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=9,bytes=16777216,latency_us=132587,gib_per_s=0.118,xxh3=614d9758e87638c7
+sample,environment=physical,rails=1,iteration=10,bytes=16777216,latency_us=132661,gib_per_s=0.118,xxh3=614d9758e87638c7
+summary,environment=physical,rails=1,bytes_per_iter=16777216,iters=10,median_us=151461,cpu_user_us=104590,cpu_system_us=3459,peak_rss_kb=40108,rail_bytes=[167772160]
+mode_effective,one=10,packed_greedy=0,packed_contiguous=0,direct=0
+pool_stats,phase=final,enabled=false
+rail_stats,id=single,device=mlx5_1,listener=10.0.0.64:25353,numa=Some(1),pci=Some("0000:af:00.1"),healthy=true,cooldown_ms=0,reads_ok=11,reads_err=0,bytes=184549376,avg_us=136420,inflight_requests=0,inflight_bytes=0,peak_inflight_bytes=16777216,registered_bytes_reserved=0,peak_registered_bytes=16777216
+object_identity_after,generation=1,layout_version=1,stripe_count=4,chunk_size=4194304,handle_xxh3=ef2cf34ef1155c58,etag_xxh3=7f5dc8bf603ea110,descriptor_xxh3=741757a29ac1a699,placement_xxh3=efd9cb088276044f

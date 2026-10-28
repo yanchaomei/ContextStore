@@ -1,0 +1,14 @@
+csw1-rxe-server
+unlimited
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+mgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 
+rail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 
+rail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 
+link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 
+link rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 
+    device          	   node GUID
+    ------          	----------------
+    rxe0            	505400fffe295101
+    rxe1            	505400fffe295201
+0000:0000:0000:0000:0000:ffff:0a51:0101
+0000:0000:0000:0000:0000:ffff:0a52:0101

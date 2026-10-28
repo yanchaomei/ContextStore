@@ -1,0 +1,579 @@
+{
+  "status": "PASS_FINAL_BUILD_AND_REGRESSION",
+  "captured_at": "2026-10-28T18:18:14.085152+00:00",
+  "source_label": "75dba7aa-working-tree-runtime-wave1-recovery-v3",
+  "git_base": "75dba7aa5243ef62df4f9104aec098d4659adbee",
+  "working_tree_not_committed": true,
+  "sources_sha256": {
+    "README.md": "e3051b1c84ecc1f78cf9044b4423bfd413fee7e478c929287814203423cc46e3",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs": "cf9dc48aa77b9320af5b5fb0bce405aeb47ebed87047c091558472845a7a03df",
+    "kv-service/client-rs/src/rail_read/tests.rs": "6e44ef83c98e17a7a71c6651e5ceed8035123746d1b292e2a726ba6476d1a61f",
+    "kv-service/client-rs/src/lib.rs": "e6c1c9f78ce0709fd90a247f42e627550b387c145e0ed77e02faa692a5569964",
+    "kv-service/client-rs/src/rdma.rs": "62a73733c9455677cb529f563a49f157c58cdf687e08de6d2ced3ac059328d3d",
+    "kv-service/client-rs/src/bin/rail_read_bench.rs": "929cdb567327dce694a5d01b4f69660436276747896b4176eafabdd192853267",
+    "kv-service/client-rs/tests/rail_read_e2e.rs": "346bc6680ee2b65684fc343e2315eb4deaa72c094c3c7e22cf658913d795be0a"
+  },
+  "full_source_file_count": 210,
+  "source_manifest_stable": true,
+  "pilot_frozen_files_unchanged": true,
+  "checks": {
+    "tool_versions": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:07:39.006709+00:00",
+      "finished": "2026-10-28T18:07:39.114974+00:00",
+      "stdout_sha256": "3c4e8fe366a342198669518c11727cf3865361d1060188d1f091b233bf72242f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": {
+        "command": [
+          "bash",
+          "-c",
+          "hostname; uname -a; rustc -vV; cargo -vV; cc --version; protoc --version"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:07:39.006709+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+        }
+      },
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "make_build": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:07:39.115272+00:00",
+      "finished": "2026-10-28T18:09:49.321926+00:00",
+      "stdout_sha256": "07c0a94899c3b32fb17685b5df17fb3fee3a8e3905f7dd4de6e6eb134d3c8563",
+      "stderr_sha256": "24ff9c13385fd3ad68df0dad04e99d27afc71b9b6aa4fd0635d33dee38993d5d",
+      "command": {
+        "command": [
+          "make",
+          "build",
+          "CARGO=cargo --locked --offline"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:07:39.115272+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+        }
+      },
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "default_fixture_build": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:09:49.820550+00:00",
+      "finished": "2026-10-28T18:10:37.063298+00:00",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "63985f74e2ea25d2b6329f09c0925b473feea5af5d94b893d87ef5198e7f2345",
+      "command": {
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--offline",
+          "-j",
+          "4",
+          "-p",
+          "contextstore-server",
+          "--bin",
+          "contextstore-server"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-baseline",
+        "started": "2026-10-28T18:09:49.820550+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-default-fixture",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+        }
+      },
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "make_test_server": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:10:37.650730+00:00",
+      "finished": "2026-10-28T18:12:25.638415+00:00",
+      "stdout_sha256": "c9d4002da65aed5a3c354e1c16643b730a62320fe93a834411bacdb7ff0d8da0",
+      "stderr_sha256": "45925defdb81c24a097f39a25fa00633180139d4467d1745325f03c18a5f5ca1",
+      "command": {
+        "command": [
+          "make",
+          "test-server",
+          "CARGO=cargo --locked --offline"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:10:37.650730+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp",
+          "CS_E2E_SERVER_BIN": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-default-fixture/debug/contextstore-server",
+          "CS_REDIS_URL": "redis://127.0.0.1:38355/"
+        }
+      },
+      "passed": 82,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "workspace_default": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:12:25.638888+00:00",
+      "finished": "2026-10-28T18:13:09.119567+00:00",
+      "stdout_sha256": "695030f7b06465c55ff358eb4e249729de9c9ba60441dd0ac49578801215d0e9",
+      "stderr_sha256": "c3c68d5d29b3367fc5e60e77b44d156f46fe7fe403ad69b67717d2c0df3db7da",
+      "command": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "4",
+          "--workspace",
+          "--",
+          "--nocapture"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:12:25.638888+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp",
+          "CS_E2E_SERVER_BIN": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-default-fixture/debug/contextstore-server",
+          "CS_REDIS_URL": "redis://127.0.0.1:38355/"
+        }
+      },
+      "passed": 86,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "workspace_rdma": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:13:09.120036+00:00",
+      "finished": "2026-10-28T18:13:31.789813+00:00",
+      "stdout_sha256": "acfc23baa4ac6f197e06172c0d02517bf86a0412ebfef1fd05ea181603ae1c2f",
+      "stderr_sha256": "df4216ff3c1cea43304f10f32a0ae0d9e404de8e9b8a8eac56e6aa132e425dcb",
+      "command": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "4",
+          "--workspace",
+          "--features",
+          "rdma",
+          "--",
+          "--nocapture"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:13:09.120036+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp",
+          "CS_E2E_SERVER_BIN": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-default-fixture/debug/contextstore-server",
+          "CS_REDIS_URL": "redis://127.0.0.1:38355/"
+        }
+      },
+      "passed": 206,
+      "failed": 0,
+      "ignored": 29,
+      "skip_markers": 0
+    },
+    "client_clippy": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:13:31.905178+00:00",
+      "finished": "2026-10-28T18:13:32.403413+00:00",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "29162d76fb109d9c6005d8544d63a4a438d15235d4f9b8e73d51adc9ba6e95d7",
+      "command": {
+        "command": [
+          "cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-j",
+          "4",
+          "-p",
+          "contextstore-client-rs",
+          "--all-targets",
+          "--features",
+          "rdma",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:13:31.905178+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+        }
+      },
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "client_targeted_fmt": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:13:32.406710+00:00",
+      "finished": "2026-10-28T18:13:32.584156+00:00",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": {
+        "command": [
+          "rustfmt",
+          "--check",
+          "--edition",
+          "2021",
+          "--config",
+          "skip_children=true",
+          "kv-service/client-rs/src/bin/rail_read_bench.rs",
+          "kv-service/client-rs/src/lib.rs",
+          "kv-service/client-rs/src/rail_read.rs",
+          "kv-service/client-rs/src/rail_read/connection_pool.rs",
+          "kv-service/client-rs/src/rail_read/tests.rs",
+          "kv-service/client-rs/src/rdma.rs",
+          "kv-service/client-rs/tests/rail_read_e2e.rs"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:13:32.406710+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+        }
+      },
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    },
+    "ffi_shim_build": {
+      "exit_code": 0,
+      "started": "2026-10-28T18:13:32.594853+00:00",
+      "finished": "2026-10-28T18:13:32.686495+00:00",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": {
+        "command": [
+          "cc",
+          "-shared",
+          "-fPIC",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-o",
+          "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/ffi-input/verbs_failstop.so",
+          "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/ffi-input/verbs_failstop_shim.c",
+          "-ldl"
+        ],
+        "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+        "started": "2026-10-28T18:13:32.594853+00:00",
+        "environment": {
+          "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+          "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+          "CARGO_BUILD_JOBS": "4",
+          "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+          "PROTOC": "/usr/local/bin/protoc",
+          "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+        }
+      },
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "skip_markers": 0
+    }
+  },
+  "default_e2e_fixture": {
+    "path": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-default-fixture/debug/contextstore-server",
+    "sha256": "43e7602578ff971aeab80bdd2d4e4591d0cd3b0aaea5a00e89cd148cd5294b4f",
+    "provenance": "fresh_default_feature_build_from_frozen_src_baseline",
+    "source_commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b"
+  },
+  "redis": {
+    "identity": {
+      "pid": 2715372,
+      "port": 38355,
+      "directory": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/redis",
+      "readiness": "PONG"
+    },
+    "stopped": {
+      "pid": 2715372,
+      "exit_code": 0,
+      "finished": "2026-10-28T18:13:31.904906+00:00"
+    },
+    "still_alive_at_final_readback": false
+  },
+  "release_binary_sha256": {
+    "contextstore-server": "79e854dd9976387992da3a97ce0c795dd9b58ab4dee23adc98c81c5bb7d4e6b0",
+    "cs-meta": "843e271ccce0ad3f967466f5218d57f05cfc71b29e394e8d43b710feb5998571",
+    "cs-rail-read-bench": "6d90ed413283a513d32cb3b70428ba47cf3c7311ab47752bdc810db726bf3ca0",
+    "libcontextstore_rdma_ffi.so": "f25cad4e1721ca8a380b392e83acaa365f01901c153db7f68f0be87faf26f30c"
+  },
+  "native_ffi": {
+    "all_13_passed": true,
+    "case_count": 13,
+    "cases": [
+      {
+        "case": "free_qp",
+        "exit": -6,
+        "passed": true,
+        "events": [
+          "destroy_qp"
+        ]
+      },
+      {
+        "case": "free_mr",
+        "exit": -6,
+        "passed": true,
+        "events": [
+          "dereg_mr"
+        ]
+      },
+      {
+        "case": "unregister_mr",
+        "exit": -6,
+        "passed": true,
+        "events": [
+          "dereg_mr"
+        ]
+      },
+      {
+        "case": "connect_error",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "get_error",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "get_into_error",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "descriptor_error",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "descriptor_into_error",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "put_error",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "oversized_reply",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "short_descriptor",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "init_failure",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "query_gid",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      },
+      {
+        "case": "timeout",
+        "exit": 0,
+        "passed": true,
+        "events": [
+          "destroy_qp",
+          "dereg_mr",
+          "dereg_mr",
+          "destroy_cq",
+          "dealloc_pd",
+          "close_device"
+        ]
+      }
+    ],
+    "summary": {
+      "source_label": "75dba7aa-working-tree-runtime-wave1-recovery-v3",
+      "host_attempt": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z",
+      "guest_directory": "/home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z",
+      "guest_role": "client",
+      "device": "rxe0",
+      "gid_index": 1,
+      "stages": {
+        "create_guest_directory": 0,
+        "copy_inputs": 0,
+        "guest_hashes": 0,
+        "guest_environment": 0,
+        "native_ffi_13": 0,
+        "collect_native_receipt": 0
+      },
+      "case_count": 13,
+      "all_13_passed": true,
+      "input_hashes": {
+        "ffi_lifecycle_probe.py": "70d6ac65c8a80497db5654787b19a39203fdd8a3c79e37d53b9ecebeeb71e542",
+        "libcontextstore_rdma_ffi.so": "f25cad4e1721ca8a380b392e83acaa365f01901c153db7f68f0be87faf26f30c",
+        "run_ffi_lifecycle_validation.py": "b44d6677b5785a50d09b1adc433cd3851ca9c378f89a75630711da44f2b4ee21",
+        "verbs_failstop.so": "8aaf43162c14c8437758bbe7b9d23bcb75c17c4c0595f1f0d52973fbce909125",
+        "verbs_failstop_shim.c": "529e38fca187d32d73935471525d9647d7eb62b53634e570779e06f53f3e9b42"
+      },
+      "scope": "real local Verbs allocations and self-QP control handshake; shim only in probe child processes; no server preload and no RDMA data-work-request claim"
+    },
+    "library_sha256_matches_make_build": true,
+    "raw_result_relative_path": "remote-evidence/host-20261028T180738Z/native-ffi-20261028T181504Z/native/result.json"
+  },
+  "known_failed_attempts": [
+    {
+      "attempt": "host-20261028T180648Z",
+      "stage": "source hash gate before any build/test",
+      "reason": "Only remote README differed from local recovery receipt; seven Rust pins already matched. Synced current local README only and restarted into a new attempt."
+    }
+  ],
+  "environment_resolution": [
+    {
+      "reason": "Old default server binary no longer matched its original default-build receipt hash.",
+      "action": "Built a new pure-default server from frozen src-baseline into independent target-default-fixture. No RDMA server used for local_cluster E2E."
+    }
+  ],
+  "preserved_fixtures": {
+    "SKV4": {
+      "pid": 871596,
+      "binary_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+      "redis_ping": "PONG"
+    },
+    "RXE_server": {
+      "guest_pid": 1334,
+      "binary_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+      "redis_ping": "PONG",
+      "LD_PRELOAD": "absent"
+    },
+    "RXE_VMs": "Both preserved and running"
+  },
+  "scope_limits": [
+    "Workspace RDMA has 29 explicitly ignored tests; this sweep does not turn them into executed provider tests.",
+    "FFI 13 uses real local Verbs allocations and a self-QP control handshake; the shim changes cleanup return codes only in probe child processes. It issues no RDMA data work requests.",
+    "No physical dual-HCA aggregation, failover performance, or broad provider-fault proof is asserted by this final sweep."
+  ],
+  "changes_by_environment_agent": [
+    "No business source edits",
+    "Synchronized the already-approved README to satisfy the eight-file freeze",
+    "No local build/test, no git commit or push",
+    "No pilot-frozen binaries overwritten"
+  ]
+}

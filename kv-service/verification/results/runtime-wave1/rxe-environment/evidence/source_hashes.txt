@@ -1,0 +1,6 @@
+2026-10-28T17:26:18Z
+skv-node1
+0c9811a81e6329acacbb5ae4e701a7650f85cd3f19852cd159d79ab8357b210e  /home/kvgroup/chaomei/contextstore_multirail_20261002/vm/jammy-server-cloudimg-amd64.img
+92838d7bd88a1cf8e68ab4219d918f9b8b4c029f533a2c44448dab9552526e54  /usr/bin/qemu-img
+06e19b51eb6d5bca08bee145fd8969d4bb6cd4c910e28910d18e9666bd369fbf  /usr/share/OVMF/OVMF_CODE.fd
+6ed987af3a3c155be71665f510eae3e007eda9b8b94afd59d45e91c4a11565cc  /usr/share/OVMF/OVMF_VARS.fd

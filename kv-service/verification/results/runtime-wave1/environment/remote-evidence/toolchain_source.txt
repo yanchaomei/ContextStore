@@ -1,0 +1,20 @@
+skv-node1
+rustc 1.90.0 (1159e78c4 2025-09-14)
+binary: rustc
+commit-hash: 1159e78c4747b02ef996e55082b704c09b970588
+commit-date: 2025-09-14
+host: x86_64-unknown-linux-gnu
+release: 1.90.0
+LLVM version: 20.1.8
+cargo 1.90.0 (840b83a10 2025-07-30)
+release: 1.90.0
+commit-hash: 840b83a10fb0e039a83f4d70ad032892c287570a
+commit-date: 2025-07-30
+host: x86_64-unknown-linux-gnu
+libgit2: 1.9.1 (sys:0.20.2 vendored)
+libcurl: 8.14.1-DEV (sys:0.4.82+curl-8.14.1 vendored ssl:OpenSSL/3.5.0)
+ssl: OpenSSL 3.5.0 8 Apr 2025
+os: Ubuntu 20.4.0 (focal) [64-bit]
+e6abf55ab1859e7c990be77fd593f51661ea99fb2fde626ae9f4108aaa34e7fa  /home/kvgroup/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc
+51de284e8bb0d03dcee595a0fb1cb3a952fe9e7e4b953a8b1467b7f71725b561  /home/kvgroup/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo
+b5ddd6eec01fdaa015191c58d1337e193a8cbad5b3dccc0ac0a8ae5b1e2e2e10  /home/kvgroup/.cargo/config.toml

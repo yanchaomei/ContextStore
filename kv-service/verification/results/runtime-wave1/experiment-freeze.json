@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-29",
+  "status": "FROZEN_PROTOCOL_SOURCE_HASH_REQUIRED_BEFORE_RUN",
+  "purpose": "First-wave engineering correctness and connection-reuse cost, not a dual-HCA or inference performance claim",
+  "baseline_revision": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+  "variants": {
+    "R0": "candidate binary with connection pooling disabled",
+    "R1": "same candidate binary with bounded striped connection pooling enabled; same per-request MR registration and byte layout"
+  },
+  "client": "SKV_2, mlx5_1, port 1, GID 3",
+  "server": "SKV_4, frozen baseline server, mlx5_1, port 1, GID 3",
+  "topology": "one physical HCA at each endpoint, one configured RailRoute",
+  "server_binary_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+  "sizes_mib": [16, 64],
+  "concurrency": 1,
+  "independent_process_pairs_per_size": 10,
+  "order": "alternate R0/R1 then R1/R0 by pair index",
+  "warmup_reads_per_process": 1,
+  "measured_reads_per_process": 10,
+  "identity": "reuse the exact seeded object per size and check descriptor, placement, generation and content hashes before/after each process",
+  "record": ["all process exits", "each read latency", "bytes", "content hash", "connection created/reused/retired/rejected", "CPU time", "peak RSS", "client and server binary hashes", "source hashes", "all failed runs"],
+  "analysis_unit": "paired process block; reads within a process are not independent replicates",
+  "gates": {
+    "correctness": "every read has exact length and verified content; unchanged identity; no silently discarded failures",
+    "reuse": "R1 creates one connection, reuses it for subsequent striped reads, returns active/retiring to zero",
+    "benefit": "report all paired block ratios and paired geometric mean with resampled paired interval; no numerical gain claimed until measured",
+    "adoption": "keep opt-in regardless of pilot speed; no default-on adoption without hardware fault campaign and sustained-load validation"
+  },
+  "recovery": {
+    "first_wave": "one synchronous retry wave only after every original task quiesces; preserve successful task ranges; same owner and frozen identity; absolute publication deadline",
+    "unit_gates": ["direct and packed preserve successful tasks", "exact attempted-byte accounting", "no retry before failed transfer returns safely", "nonretryable protocol/stale/checksum/panic rejection", "cancel/deadline/version changes leave caller buffer unchanged", "retry route budget and concurrent-read bounds"],
+    "provider_gate": "requires a legal same-owner alternate path; the current one-HCA fixture does not prove dual-path recovery or late-WR recovery",
+    "claim_boundary": "test result or reduced retry bytes does not imply end-to-end latency improvement"
+  }
+}

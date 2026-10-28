@@ -401,11 +401,60 @@ publish step; transfer and MR reservations end after all rail workers finish.
 On Linux, the reader caps its registered-memory budget at 80% of the process's
 soft `RLIMIT_MEMLOCK` when finite, rejecting excess reads before dispatch.
 Multiple independent RailReader instances still need a deployment-wide
-budget. No in-request transparent retry is attempted.
+budget. In-request recovery is off by default.
+
+Opt in to a single bounded recovery wave with
+`reader.with_recovery(RailRecoveryOptions { timeout: Duration::from_secs(30) })?`.
+Only striped reads can recover, with or without the connection pool. The reader
+waits for **every** initial worker to finish, retains successful whole tasks, and
+retries each failed task at most once on an enabled, healthy route to the same
+unambiguous placement owner and advertised endpoint. Every initially failed route
+is excluded. The original descriptor, placement, stripe indices and byte ranges
+stay frozen; there is no replica fallback or version relookup for recovery.
+Retries run sequentially, so requested retry payload cannot exceed the object's
+size or initial task count. Failed partial buffers never become publishable.
+
+Retry admission requires an opaque failure certificate created by the transport
+owner only after QP destruction and MR deregistration, or a connect failure before
+any data submission. Only structured transient control I/O kinds qualify:
+timeout, would-block, connection reset/aborted/refused, broken pipe and unexpected
+EOF. Protocol errors, stale descriptors, incomplete counts, checksum failures,
+panics, allocation/MR errors and cancellation do not qualify. Error strings and
+worker completion alone cannot authorize a retry. Successful initial tasks are
+checksum-checked before spending recovery bytes; the final whole-object checks
+and post-lookup descriptor/placement/capability checks still apply.
+
+One absolute monotonic deadline starts before the initial lookup in
+`KvClient::read_multi_rail_into`, or at entry to the low-level reader. All workers,
+retries, the post-lookup and publication gate share it. Attempt TCP timeouts are
+capped by the remaining budget. This is an **admission/publication deadline**,
+not a hard return-time guarantee: DNS, blocking TCP operations and provider
+quiescence can finish later. Cancellation and deadline are rechecked under the
+publication gate; once copying starts it completes successfully. Global staging,
+MR and in-flight reservations remain charged across initial cleanup and recovery.
+After the initial join barrier, per-rail credits are released and each retry must
+pass the alternate rail's active-task and in-flight-byte limits. Recovery counters
+report requested payload and successful private tasks, not wire bytes or published
+objects. The gated `recovery_real_late_request_after_retry_registration_*` tests
+exercise packed/direct reads with the pool off/on on actual dual RXE paths.
+Transparent TCP relays hold a retry frame after its target MR is registered,
+then release the original failed request and wait for a real server terminal
+observation before forwarding the retry. Receipts record stripe indices, SGE
+addresses, QP numbers, ordering and exact payload checks. This establishes the
+tested late-request/WRITE-attempt interleaving in software RoCE; it is not evidence
+of an already in-flight WRITE at the injected EOF, all provider failure cases,
+physical dual-HCA failover, or recovery latency improvement.
 
 Persistent connections for **striped reads only** are **off by default**. Opt in on a newly constructed
 manual or discovered reader with
 `reader.with_connection_pool(RailConnectionPoolOptions { max_live_connections: 8, configuration_generation: 1 })?`.
+The benchmark exposes `--connection-pool-size` (default `0`), prints pool snapshots
+before/after warmup and at completion, and reports effective mode options.
+`--recovery-timeout-ms` independently enables recovery; leave it unset for R0/R1
+pool comparisons. `--verify-pattern` verifies the known `(index % 251)` payload
+seeded by `cs-bench`, including warmup and measured reads, against an expected
+hash generated once before timing. It must only be used for that seeded workload.
+
 The pool is private to that reader and keys connections by route ID, advertised
 endpoint, placement owner node ID, listener, device, port, GID index, and route
 configuration generation. Pooled placements must identify exactly one nonempty

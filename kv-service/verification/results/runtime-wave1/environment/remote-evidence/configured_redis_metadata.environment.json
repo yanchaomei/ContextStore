@@ -1,0 +1,19 @@
+{
+  "redis_pid": 2626982,
+  "redis_url": "redis://127.0.0.1:37373/",
+  "redis_dir": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/redis-baseline",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "-j",
+    "4",
+    "-p",
+    "contextstore-server",
+    "--test",
+    "redis_metadata_e2e",
+    "--",
+    "--nocapture"
+  ]
+}

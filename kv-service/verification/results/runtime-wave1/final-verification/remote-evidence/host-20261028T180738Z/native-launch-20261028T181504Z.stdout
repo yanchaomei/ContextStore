@@ -1,0 +1,26 @@
+{
+  "source_label": "75dba7aa-working-tree-runtime-wave1-recovery-v3",
+  "host_attempt": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z",
+  "guest_directory": "/home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z",
+  "guest_role": "client",
+  "device": "rxe0",
+  "gid_index": 1,
+  "stages": {
+    "create_guest_directory": 0,
+    "copy_inputs": 0,
+    "guest_hashes": 0,
+    "guest_environment": 0,
+    "native_ffi_13": 0,
+    "collect_native_receipt": 0
+  },
+  "case_count": 13,
+  "all_13_passed": true,
+  "input_hashes": {
+    "ffi_lifecycle_probe.py": "70d6ac65c8a80497db5654787b19a39203fdd8a3c79e37d53b9ecebeeb71e542",
+    "libcontextstore_rdma_ffi.so": "f25cad4e1721ca8a380b392e83acaa365f01901c153db7f68f0be87faf26f30c",
+    "run_ffi_lifecycle_validation.py": "b44d6677b5785a50d09b1adc433cd3851ca9c378f89a75630711da44f2b4ee21",
+    "verbs_failstop.so": "8aaf43162c14c8437758bbe7b9d23bcb75c17c4c0595f1f0d52973fbce909125",
+    "verbs_failstop_shim.c": "529e38fca187d32d73935471525d9647d7eb62b53634e570779e06f53f3e9b42"
+  },
+  "scope": "real local Verbs allocations and self-QP control handshake; shim only in probe child processes; no server preload and no RDMA data-work-request claim"
+}

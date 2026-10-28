@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-29",
+  "status": "VALIDATED_FIRST_IMPLEMENTATION_WAVE",
+  "source_binding": "The eight source SHA256 values in final-verification/final-verification-receipt.json identify the tested code. This evidence is committed alongside that source snapshot. Prior receipts retain their original pre-commit labels.",
+  "implemented": [
+    "Opt-in per-reader bounded exclusive connection reuse for striped GET; per-request target/dummy MR lifetime retained",
+    "Opt-in once-per-failed-task recovery after resource-owner-certified cleanup, same owner/identity, retained successful task data",
+    "Shared absolute admission/publication deadline and per-rail retry budget checks",
+    "Benchmark flags and exact known-pattern verification"
+  ],
+  "defaults": "Both connection pooling and recovery remain disabled by default; unstriped reads bypass both paths.",
+  "checks": {
+    "tool_versions": {
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "make_build": {
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "default_fixture_build": {
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "make_test_server": {
+      "exit_code": 0,
+      "passed": 82,
+      "failed": 0,
+      "ignored": 0
+    },
+    "workspace_default": {
+      "exit_code": 0,
+      "passed": 86,
+      "failed": 0,
+      "ignored": 0
+    },
+    "workspace_rdma": {
+      "exit_code": 0,
+      "passed": 206,
+      "failed": 0,
+      "ignored": 29
+    },
+    "client_clippy": {
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "client_targeted_fmt": {
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "ffi_shim_build": {
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "native_ffi": {
+    "passed": 13,
+    "scope": "Real RXE Verbs allocations and self-QP control handshake with cleanup return-code injection; no data WR in these 13 cases"
+  },
+  "native_recovery": {
+    "passed": 4,
+    "combinations": "direct/packed x pool on/off",
+    "object_bytes": 16777216,
+    "retry_requested_payload_bytes": 8388608,
+    "retry_tasks": 1,
+    "scope": "Real dual RXE late control-request/WRITE-attempt after retry target registration; exact key/peer terminal evidence. Does not establish a WRITE already in flight when EOF was injected."
+  },
+  "pool_pilot": {
+    "processes": 42,
+    "measured_reads": 400,
+    "warmup_reads": 40,
+    "sizes_mib": [
+      16,
+      64
+    ],
+    "independent_process_pairs_per_size": 10,
+    "analysis": "For each process, sort 10 timed reads and take the sixth value; geometric mean of paired R0/R1 ratios. Additional full known-pattern verification occurs outside timed read calls.",
+    "latency_reduction_fraction": {
+      "16": 0.09314482241187527,
+      "64": 0.038735434939746516
+    },
+    "scope": "single physical HCA, 1 route, concurrency1, fixed debug server, release client, warm OS page cache; no inference or dual-HCA claim",
+    "caution": "64MiB has 3/10 slower pooled blocks; sensitivity log-paired-t interval spans 1. No stable production benefit claim."
+  },
+  "reviews": [
+    "pool-spec.md",
+    "pool-quality.md",
+    "recovery-spec.md",
+    "recovery-quality.md",
+    "pilot-evidence.md"
+  ],
+  "future_work": [
+    "Registered MR arena and shared cross-reader resource ledger",
+    "Completion-time adaptive scheduling and health probe policy",
+    "New Python multi-rail ABI",
+    "Physical dual-HCA tests, sustained-load and 100/1000-round recovery campaigns, inference end-to-end evaluation"
+  ],
+  "preserved_old_negative_control": "Historical exact-payload pollution and legacy RXE matrix remain in the original 3fe4b26 evidence at kv-service/verification/results/ffi-lifecycle-20261016; they are not presented as new-Rust-recovery experiments."
+}

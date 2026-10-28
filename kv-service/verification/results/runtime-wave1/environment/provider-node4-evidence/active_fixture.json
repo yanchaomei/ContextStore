@@ -1,0 +1,20 @@
+{
+  "captured_at": "2026-10-28T17:04:16.238767+00:00",
+  "hostname": "skv-node4",
+  "server_pid": 871596,
+  "redis_pid": 859697,
+  "server_start_ticks": "1530395150",
+  "server_exe": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server",
+  "server_actual_exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+  "server_file_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+  "server_config_sha256": "bbaa2351e7af2d4cfe781522c270d2ab2f1a9c6efb7f52c5f6677bcec81b0084",
+  "server_command_line": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server --config /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/server.toml --log-level info",
+  "server_environment": {
+    "CS_RDMA_SLAB_MB": "64",
+    "CS_FORCE_DISK_READ": "1",
+    "CS_RDMA_DEVICES": "mlx5_1:10.0.0.64:25353:3,mlx5_1:10.0.0.64:25354:3"
+  },
+  "redis_ping": "+PONG",
+  "physical_topology": "one physical mlx5_1 HCA per host; both node4 listeners share port1/GID3; not dual HCA",
+  "source_commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b"
+}

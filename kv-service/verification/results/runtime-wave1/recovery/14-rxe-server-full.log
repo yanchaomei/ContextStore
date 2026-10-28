@@ -1,0 +1,93 @@
+[2m2026-10-28T17:34:38.376920Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-28T17:34:38.376967Z[0m [32m INFO[0m config file: /home/railtest/cswave1/server.toml
+[2m2026-10-28T17:34:38.378323Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 0 MB, I/O executor = tier_a
+[2m2026-10-28T17:34:38.381604Z[0m [32m INFO[0m gRPC listening on: 10.81.1.1:25351
+[2m2026-10-28T17:34:38.381632Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=64
+[2m2026-10-28T17:34:38.381674Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 2 NIC(s) ["rxe0@10.81.1.1:25353", "rxe1@10.82.1.1:25354"]
+[2m2026-10-28T17:34:38.381695Z[0m [32m INFO[0m RDMA tier enabled: 2 NIC(s), primary listener=10.81.1.1:25353
+[2m2026-10-28T17:34:38.383315Z[0m [32m INFO[0m RdmaContext: opened device=rxe0 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 51, 01, 01]
+[2m2026-10-28T17:34:38.383354Z[0m [32m INFO[0m opened NIC 0: dev=rxe0 port=1 gid_index=1
+[2m2026-10-28T17:34:38.383535Z[0m [32m INFO[0m RdmaContext: opened device=rxe1 port=1 gid_index=1 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 52, 01, 01]
+[2m2026-10-28T17:34:38.383554Z[0m [32m INFO[0m opened NIC 1: dev=rxe1 port=1 gid_index=1
+[2m2026-10-28T17:34:38.383607Z[0m [32m INFO[0m SlabBacking: mmap 67108864 bytes at 0x7f47a4000000 (huge_pages=false)
+[2m2026-10-28T17:34:38.438416Z[0m [32m INFO[0m RdmaSlab registered: 67108864 bytes (64 MB) on 2 NIC(s), lkeys=["0x239", "0x2d8"] rkeys=["0x239", "0x2d8"]
+[2m2026-10-28T17:34:38.438496Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (64 MB, 2 NICs)
+[2m2026-10-28T17:34:38.438623Z[0m [32m INFO[0m RDMA server listening on 10.81.1.1:25353 (nic_idx=0 dev=rxe0 port=1 gid_index=1)
+[2m2026-10-28T17:34:38.438717Z[0m [32m INFO[0m RDMA server listening on 10.82.1.1:25354 (nic_idx=1 dev=rxe1 port=1 gid_index=1)
+[2m2026-10-28T17:34:50.366244Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:37364 (nic_idx=0)
+[2m2026-10-28T17:34:50.366466Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x5d6788
+[2m2026-10-28T17:34:50.366576Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:34:50.367792Z[0m [32m INFO[0m MISS_DETAIL wall_us=1793208890367205 key=12:rdma-sdk-e2eread-1793208890344594853 bytes=8192 meta_us=0 alloc_us=24 stream_setup_us=78 first_stream_completion_us=143 last_stream_completion_us=143 post_done_us=200 poll_us=254 inject_us=0 n_writes=1
+[2m2026-10-28T17:34:51.801251Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:37378 (nic_idx=0)
+[2m2026-10-28T17:34:51.801575Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xe74e0e
+[2m2026-10-28T17:34:51.801693Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:34:57.719623Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793208890367025472 bytes=16777216 stripes=4 requests=16 alloc_us=72 stream_setup_us=5656 first_io_us=43112 last_io_us=151535 poll_us=5623396 total_us=5775030
+[2m2026-10-28T17:34:58.631242Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:34720 (nic_idx=1)
+[2m2026-10-28T17:34:58.631258Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:37392 (nic_idx=0)
+[2m2026-10-28T17:34:58.631485Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xff511c
+[2m2026-10-28T17:34:58.631488Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xff8c91
+[2m2026-10-28T17:34:58.631573Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:34:58.631578Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:35:01.570798Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793208897873355021 bytes=8388608 stripes=2 requests=8 alloc_us=18 stream_setup_us=1872 first_io_us=42081 last_io_us=80167 poll_us=2744735 total_us=2824952
+[2m2026-10-28T17:35:01.651333Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793208897873355021 bytes=8388608 stripes=2 requests=8 alloc_us=13 stream_setup_us=91 first_io_us=39097 last_io_us=74875 poll_us=2820943 total_us=2895835
+[2m2026-10-28T17:35:02.037524Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:55282 (nic_idx=0)
+[2m2026-10-28T17:35:02.037699Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x64d62
+[2m2026-10-28T17:35:02.037770Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:35:07.939849Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793208897873355021 bytes=16777216 stripes=4 requests=16 alloc_us=18 stream_setup_us=3806 first_io_us=39752 last_io_us=148299 poll_us=5613522 total_us=5761824
+[2m2026-10-28T17:42:21.542001Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:36692 (nic_idx=0)
+[2m2026-10-28T17:42:21.542478Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x8cda2e
+[2m2026-10-28T17:42:21.542610Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:42:21.544175Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:32838 (nic_idx=1)
+[2m2026-10-28T17:42:21.544403Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xaa6650
+[2m2026-10-28T17:42:21.544496Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:42:24.348042Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209340816070307 bytes=8388608 stripes=2 requests=8 alloc_us=79 stream_setup_us=5302 first_io_us=41438 last_io_us=78548 poll_us=2616492 total_us=2695161
+[2m2026-10-28T17:43:21.648823Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:35744 (nic_idx=0)
+[2m2026-10-28T17:43:21.649026Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x2e2a5a
+[2m2026-10-28T17:43:21.649119Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:43:21.653104Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:35224 (nic_idx=1)
+[2m2026-10-28T17:43:21.653288Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x6f3bce
+[2m2026-10-28T17:43:21.653363Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:43:24.283338Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209400764892429 bytes=8388608 stripes=2 requests=8 alloc_us=18 stream_setup_us=3070 first_io_us=39836 last_io_us=76028 poll_us=2552597 total_us=2628673
+[2m2026-10-28T17:43:54.476037Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209400764892429 bytes=8388608 stripes=2 requests=8 alloc_us=15 stream_setup_us=115 first_io_us=39314 last_io_us=75218 poll_us=30000177 total_us=30075477
+[2m2026-10-28T17:43:54.476441Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793209400764892429 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:43:54.477316Z[0m [33m WARN[0m RDMA client 10.81.1.2:35744 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:43:57.110756Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209400764892429 bytes=8388608 stripes=2 requests=8 alloc_us=29 stream_setup_us=341 first_io_us=41266 last_io_us=77575 poll_us=2553292 total_us=2630978
+[2m2026-10-28T17:43:58.541476Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:33642 (nic_idx=0)
+[2m2026-10-28T17:43:58.541475Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:58118 (nic_idx=1)
+[2m2026-10-28T17:43:58.541778Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x28da10
+[2m2026-10-28T17:43:58.541778Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x28a91c
+[2m2026-10-28T17:43:58.541923Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:43:58.541923Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:44:01.302757Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209437607716378 bytes=8388608 stripes=2 requests=8 alloc_us=18 stream_setup_us=1902 first_io_us=38548 last_io_us=74472 poll_us=2685315 total_us=2759807
+[2m2026-10-28T17:44:01.420327Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:39948 (nic_idx=1)
+[2m2026-10-28T17:44:01.420540Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xbf4740
+[2m2026-10-28T17:44:01.420629Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:44:31.496638Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209437607716378 bytes=8388608 stripes=2 requests=8 alloc_us=13 stream_setup_us=95 first_io_us=38978 last_io_us=74948 poll_us=30000032 total_us=30075008
+[2m2026-10-28T17:44:31.496708Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793209437607716378 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:44:31.496921Z[0m [33m WARN[0m RDMA client 10.81.1.2:33642 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:44:33.779505Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209437607716378 bytes=8388608 stripes=2 requests=8 alloc_us=13 stream_setup_us=113 first_io_us=37887 last_io_us=74745 poll_us=2206879 total_us=2281669
+[2m2026-10-28T17:44:34.994201Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:57894 (nic_idx=1)
+[2m2026-10-28T17:44:34.994204Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:51474 (nic_idx=0)
+[2m2026-10-28T17:44:34.994480Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xe8bf34
+[2m2026-10-28T17:44:34.994482Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xe9058b
+[2m2026-10-28T17:44:34.994604Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:44:34.994604Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:44:37.850602Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209474298597671 bytes=8388608 stripes=2 requests=8 alloc_us=17 stream_setup_us=2286 first_io_us=39935 last_io_us=76730 poll_us=2624537 total_us=2701278
+[2m2026-10-28T17:45:08.108466Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209474298597671 bytes=8388608 stripes=2 requests=8 alloc_us=15 stream_setup_us=169 first_io_us=40214 last_io_us=76168 poll_us=30000154 total_us=30076404
+[2m2026-10-28T17:45:08.108713Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793209474298597671 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:45:08.109374Z[0m [33m WARN[0m RDMA client 10.81.1.2:51474 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:45:10.875239Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209474298597671 bytes=8388608 stripes=2 requests=8 alloc_us=28 stream_setup_us=275 first_io_us=38837 last_io_us=75566 poll_us=2688480 total_us=2764104
+[2m2026-10-28T17:45:12.241418Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:48800 (nic_idx=0)
+[2m2026-10-28T17:45:12.241513Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:33756 (nic_idx=1)
+[2m2026-10-28T17:45:12.241689Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x43673
+[2m2026-10-28T17:45:12.241791Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x5c883
+[2m2026-10-28T17:45:12.241843Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:45:12.241917Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:45:14.971008Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209511527026492 bytes=8388608 stripes=2 requests=8 alloc_us=26 stream_setup_us=906 first_io_us=39639 last_io_us=76524 poll_us=2551112 total_us=2627659
+[2m2026-10-28T17:45:15.047880Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:33764 (nic_idx=1)
+[2m2026-10-28T17:45:15.048058Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x4a0c56
+[2m2026-10-28T17:45:15.048150Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:45:45.225521Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209511527026492 bytes=8388608 stripes=2 requests=8 alloc_us=14 stream_setup_us=95 first_io_us=38860 last_io_us=75195 poll_us=30000232 total_us=30075557
+[2m2026-10-28T17:45:45.225966Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793209511527026492 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:45:45.227003Z[0m [33m WARN[0m RDMA client 10.81.1.2:48800 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:45:46.776139Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793209511527026492 bytes=8388608 stripes=2 requests=8 alloc_us=42 stream_setup_us=487 first_io_us=45039 last_io_us=81698 poll_us=1464793 total_us=1546618

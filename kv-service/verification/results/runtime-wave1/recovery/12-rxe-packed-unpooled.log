@@ -1,0 +1,15 @@
+
+running 1 test
+
+thread 'recovery_real_late_request_after_retry_registration_packed_unpooled' panicked at kv-service/client-rs/tests/rail_read_e2e.rs:1642:10:
+failed-path relay: channel is empty and sending half is closed
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test recovery_real_late_request_after_retry_registration_packed_unpooled ... FAILED
+
+failures:
+
+failures:
+    recovery_real_late_request_after_retry_registration_packed_unpooled
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 26 filtered out; finished in 3.59s
+

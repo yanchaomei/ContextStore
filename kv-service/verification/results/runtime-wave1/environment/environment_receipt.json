@@ -1,0 +1,76 @@
+{
+  "root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029",
+  "host": "SKV_2 / skv-node2",
+  "commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+  "env_script": "env.sh",
+  "source": "src-baseline",
+  "baseline_target": "target",
+  "candidate_target_recommendation": "Set CARGO_TARGET_DIR to a separate target-candidate directory after sourcing env.sh; keep target as baseline.",
+  "build_jobs": 4,
+  "toolchain": "rustc/cargo 1.90.0, copied from SKV_1 stable toolchain",
+  "source_files": 209,
+  "archive_sha256": "78954630337f8c888291f83d2080d8b2726f51e4dc6081b245fec5cf0f17a5bf",
+  "no_changes": [
+    "No business source files modified",
+    "No system Rust, host drivers, host network, user groups or old VMs modified",
+    "No candidate source build launched",
+    "No new VM started",
+    "No system package installed",
+    "No sudo process launched",
+    "No Git commit created"
+  ],
+  "rxe_feasibility": {
+    "state": "feasible_pending_setup_and_boot_verification",
+    "qemu_version": "4.2.1",
+    "management": "QEMU user networking with loopback host forwards",
+    "data": "Two QEMU socket netdev links between isolated guest pair; no host TAP/bridge changes",
+    "available": [
+      "qemu-system-x86_64",
+      "genisoimage",
+      "TCG",
+      "KVM capability in binary",
+      "host rdma_rxe module file"
+    ],
+    "missing_or_unverified": [
+      "Current user cannot access /dev/kvm",
+      "qemu-img absent on node2",
+      "OVMF_CODE/OVMF_VARS absent at standard node2 path",
+      "Guest kernel RXE module and userspace packages not yet verified",
+      "New guest SSH readiness not yet verified"
+    ],
+    "optional_tool_sources": "SKV_1 /usr/bin/qemu-img and /usr/share/OVMF/{OVMF_CODE,OVMF_VARS}.fd, hashes recorded in rxe_optional_tool_sources.log",
+    "base_image": "SKV_1 /home/kvgroup/chaomei/contextstore_multirail_20261002/vm/jammy-server-cloudimg-amd64.img",
+    "base_image_sha256": "0c9811a81e6329acacbb5ae4e701a7650f85cd3f19852cd159d79ab8357b210e",
+    "suggested_ports_checked_free": [
+      22351,
+      22352,
+      24351,
+      24352
+    ],
+    "acceleration_options": [
+      "TCG without privilege, likely slower; no benchmark claim",
+      "Dedicated KVM process with controlled privilege/drop-user only after parent decision; no group/driver changes"
+    ]
+  },
+  "recommended_provider_path": {
+    "server": "SKV_4 10.0.0.64 mlx5_1 port 1 gid 3",
+    "client": "SKV_2 10.0.0.62 mlx5_1 port 1 gid 3",
+    "scope": "single physical HCA per host, two listeners/multiple QPs, pool correctness only",
+    "server_root_proposed": "/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029",
+    "server_root_exists": true,
+    "server_ports": [
+      25351,
+      25353,
+      25354
+    ],
+    "private_redis_port": 26379,
+    "node4_free_disk": "39 GiB",
+    "node4_glibc": "2.31",
+    "reachability": "2/2 ICMP replies, correct ens4f1 route",
+    "state": "healthy_single_physical_path_fixture_ready_for_candidate_pool_tests",
+    "commands": "provider-commands.proposed.txt",
+    "config": "provider-node4.proposed.toml",
+    "client_env": "provider-client.proposed.env"
+  },
+  "active_provider_fixture": "provider-ready-receipt.json"
+}

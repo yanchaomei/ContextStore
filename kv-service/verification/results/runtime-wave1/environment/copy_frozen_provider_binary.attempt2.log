@@ -1,0 +1,4 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+Verified frozen server binary SHA256 0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c

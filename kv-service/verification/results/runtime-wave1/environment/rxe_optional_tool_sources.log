@@ -1,0 +1,9 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+-rw-r--r-- 1 root root 1966080 Oct  8  2024 /usr/share/OVMF/OVMF_CODE.fd
+-rw-r--r-- 1 root root  131072 Oct  8  2024 /usr/share/OVMF/OVMF_VARS.fd
+06e19b51eb6d5bca08bee145fd8969d4bb6cd4c910e28910d18e9666bd369fbf  /usr/share/OVMF/OVMF_CODE.fd
+6ed987af3a3c155be71665f510eae3e007eda9b8b94afd59d45e91c4a11565cc  /usr/share/OVMF/OVMF_VARS.fd
+qemu-img version 4.2.1 (Debian 1:4.2-3ubuntu6.30)
+Copyright (c) 2003-2019 Fabrice Bellard and the QEMU Project developers

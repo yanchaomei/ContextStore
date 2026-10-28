@@ -1,0 +1,20 @@
+PING 10.81.1.2 (10.81.1.2) 56(84) bytes of data.
+64 bytes from 10.81.1.2: icmp_seq=1 ttl=64 time=0.204 ms
+64 bytes from 10.81.1.2: icmp_seq=2 ttl=64 time=0.289 ms
+
+--- 10.81.1.2 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1024ms
+rtt min/avg/max/mdev = 0.204/0.246/0.289/0.042 ms
+PING 10.82.1.2 (10.82.1.2) 56(84) bytes of data.
+64 bytes from 10.82.1.2: icmp_seq=1 ttl=64 time=0.129 ms
+64 bytes from 10.82.1.2: icmp_seq=2 ttl=64 time=0.275 ms
+
+--- 10.82.1.2 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1022ms
+rtt min/avg/max/mdev = 0.129/0.202/0.275/0.073 ms
+10.81.1.2 dev rail0 lladdr 52:54:00:29:51:02 REACHABLE
+10.0.2.3 dev mgmt0 lladdr 52:55:0a:00:02:03 STALE
+10.82.1.2 dev rail1 lladdr 52:54:00:29:52:02 REACHABLE
+10.0.2.2 dev mgmt0 lladdr 52:55:0a:00:02:02 REACHABLE
+fe80::2 dev mgmt0 lladdr 52:56:00:00:00:02 router STALE
+fec0::2 dev mgmt0 lladdr 52:56:00:00:00:02 router STALE

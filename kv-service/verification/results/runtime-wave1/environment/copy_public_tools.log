@@ -1,0 +1,37 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+
+Number of files: 51,362 (reg: 49,481, dir: 1,881)
+Number of created files: 51,361 (reg: 49,481, dir: 1,880)
+Number of deleted files: 0
+Number of regular files transferred: 49,481
+Total file size: 1,250,712,882 bytes
+Total transferred file size: 1,250,712,882 bytes
+Literal data: 1,250,712,882 bytes
+Matched data: 0 bytes
+File list size: 1,376,185
+File list generation time: 0.001 seconds
+File list transfer time: 0.000 seconds
+Total bytes sent: 1,254,716,706
+Total bytes received: 952,818
+
+sent 1,254,716,706 bytes  received 952,818 bytes  67,874,028.32 bytes/sec
+total size is 1,250,712,882  speedup is 1.00
+
+Number of files: 12,196 (reg: 10,056, dir: 2,140)
+Number of created files: 12,196 (reg: 10,056, dir: 2,140)
+Number of deleted files: 0
+Number of regular files transferred: 10,056
+Total file size: 2,388,212,977 bytes
+Total transferred file size: 2,388,212,977 bytes
+Literal data: 2,388,212,977 bytes
+Matched data: 0 bytes
+File list size: 524,247
+File list generation time: 0.001 seconds
+File list transfer time: 0.000 seconds
+Total bytes sent: 2,389,497,882
+Total bytes received: 205,915
+
+sent 2,389,497,882 bytes  received 205,915 bytes  111,149,013.81 bytes/sec
+total size is 2,388,212,977  speedup is 1.00

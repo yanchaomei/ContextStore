@@ -1,0 +1,12 @@
+   Compiling prost-build v0.12.6
+   Compiling tonic-build v0.11.0
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-baseline/kv-service/server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.64s
+     Running tests/redis_metadata_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target/debug/deps/redis_metadata_e2e-d298fa765abe4df5)
+
+running 2 tests
+test redis_if_absent_commits_only_once ... ok
+test shared_redis_metadata_is_visible_across_contexts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

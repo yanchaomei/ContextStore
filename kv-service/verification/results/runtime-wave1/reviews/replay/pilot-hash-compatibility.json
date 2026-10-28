@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "audit_utc": "2026-10-28T18:19:44.606337+00:00",
+  "method": "Independent Python integer transcription of twox-hash 1.6.3 long-input 64-bit hash; secret extracted from copied pinned crate source; explicit 64-bit wrapping, scalar accumulate/scramble/merge; verified 5 existing crate long-input known-answer vectors before deterministic payloads. No Rust build or benchmark run.",
+  "crate_source_sha256": "1c1489aab48f78ccca0330f11e76d14c703a06910d2482c6d93ce88ac6541686",
+  "source_reference": "twox-hash-1.6.3/src/xxh3.rs: long-key loop, generic scalar accumulate512/scramble_acc, merge_accs, avalanche",
+  "known_answer_vectors_passed": {
+    "403": "4834389b15d981e8",
+    "512": "6a1b982631f059a8",
+    "2048": "efefd4449323cdd4",
+    "2240": "998c0437486672c7",
+    "2243": "a559d20581d742d3"
+  },
+  "deterministic_pattern_i_mod_251_hashes": {
+    "16": "614d9758e87638c7",
+    "64": "a0a4cbfa5cad46af"
+  },
+  "modern_xxhash_mismatch_resolution": "twox-hash 1.6.3 documents an in-progress historical XXH3 algorithm; modern xxhash.xxh3_64 is not a compatible oracle. Independent transcription reproduces both pilot expected hashes exactly."
+}

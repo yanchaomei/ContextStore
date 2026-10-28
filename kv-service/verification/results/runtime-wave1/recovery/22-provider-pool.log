@@ -1,0 +1,11 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.15s
+     Running tests/rail_read_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/rail_read_e2e-d6145e305ed0b23e)
+
+running 2 tests
+test pooled_real_rail_parallel_reads_preserve_exclusive_leases ... POOLED_REAL_RAIL_PARALLEL_FINAL RailConnectionPoolSnapshot { created: 4, reused: 4, retired: 0, rejected: 0, live: 4, connecting: 0, active: 0, idle: 4, retiring: 0 }
+ok
+test pooled_real_rail_reuses_healthy_connection_and_retires_stale_read ... POOLED_REAL_RAIL_FINAL RailConnectionPoolSnapshot { created: 2, reused: 2, retired: 1, rejected: 0, live: 1, connecting: 0, active: 0, idle: 1, retiring: 0 }
+ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 25 filtered out; finished in 3.61s
+

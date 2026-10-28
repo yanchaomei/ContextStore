@@ -1,0 +1,2 @@
+0: mlx5_0: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 
+1: mlx5_1: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 

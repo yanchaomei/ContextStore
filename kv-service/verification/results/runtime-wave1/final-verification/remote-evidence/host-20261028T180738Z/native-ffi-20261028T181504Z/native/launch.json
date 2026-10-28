@@ -1,0 +1,11 @@
+{
+  "source_commit_label": "75dba7aa-working-tree-runtime-wave1-recovery-v3",
+  "library_sha256": "f25cad4e1721ca8a380b392e83acaa365f01901c153db7f68f0be87faf26f30c",
+  "shim_sha256": "8aaf43162c14c8437758bbe7b9d23bcb75c17c4c0595f1f0d52973fbce909125",
+  "probe_sha256": "70d6ac65c8a80497db5654787b19a39203fdd8a3c79e37d53b9ecebeeb71e542",
+  "runner_sha256": "b44d6677b5785a50d09b1adc433cd3851ca9c378f89a75630711da44f2b4ee21",
+  "python_optimize": 0,
+  "device": "rxe0",
+  "gid_index": 1,
+  "scope": "real local Verbs allocations and self-QP control handshake; no RDMA data WR, no bandwidth claim; shim fakes cleanup return codes"
+}

@@ -242,10 +242,13 @@ impl KvClient {
         cancel: Option<rail_read::RailCancel>,
     ) -> anyhow::Result<Option<usize>> {
         let timing_start = std::time::Instant::now();
+        // Recovery uses one absolute deadline beginning before coordinator I/O.
+        let deadline = reader.start_deadline()?;
         let initial = match self.lookup_object(namespace, object_key).await? {
             Some(lookup) => lookup,
             None => return Ok(None),
         };
+        let deadline = deadline.filter(|_| initial.descriptor.is_striped);
         let size = usize::try_from(initial.descriptor.size)?;
         if destination.len() < size {
             return Err(rail_read::RailReadError::BufferTooSmall {
@@ -263,10 +266,11 @@ impl KvClient {
         let lookup_us = timing_start.elapsed().as_micros();
         let transfer_start = std::time::Instant::now();
         let payload = tokio::task::spawn_blocking(move || {
-            reader.read_staged(&descriptor, &placement, fetch_cancel.as_ref())
+            reader.read_staged_until(&descriptor, &placement, fetch_cancel.as_ref(), deadline)
         })
         .await??;
         let transfer_us = transfer_start.elapsed().as_micros();
+        payload.ensure_live(cancel.as_ref())?;
         let post_lookup_start = std::time::Instant::now();
         let current = self
             .lookup_object(namespace, object_key)
@@ -274,12 +278,13 @@ impl KvClient {
             .ok_or(rail_read::RailReadError::VersionChanged)?;
         let post_lookup_us = post_lookup_start.elapsed().as_micros();
         let publish_start = std::time::Instant::now();
-        let copied_result = rail_read::commit_if_unchanged(
+        let copied_result = rail_read::commit_if_unchanged_until(
             &initial,
             &current,
             payload.as_bytes(),
             destination,
             cancel.as_ref(),
+            payload.deadline,
         );
         if let Err(rail_read::RailReadError::VersionChanged) = &copied_result {
             if rail_timing_enabled() {

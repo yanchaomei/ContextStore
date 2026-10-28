@@ -1,0 +1,401 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+hca_id:	mlx5_1
+	transport:			InfiniBand (0)
+	fw_ver:				22.27.6106
+	node_guid:			043f:7203:00e2:59d7
+	sys_image_guid:			043f:7203:00e2:59d6
+	vendor_id:			0x02c9
+	vendor_part_id:			4125
+	hw_ver:				0x0
+	board_id:			DEL0000000027
+	phys_port_cnt:			1
+	max_mr_size:			0xffffffffffffffff
+	page_size_cap:			0xfffffffffffff000
+	max_qp:				262144
+	max_qp_wr:			32768
+	device_cap_flags:		0xed721c36
+					BAD_PKEY_CNTR
+					BAD_QKEY_CNTR
+					AUTO_PATH_MIG
+					CHANGE_PHY_PORT
+					PORT_ACTIVE_EVENT
+					SYS_IMAGE_GUID
+					RC_RNR_NAK_GEN
+					MEM_WINDOW
+					XRC
+					MEM_MGT_EXTENSIONS
+					MEM_WINDOW_TYPE_2B
+					RAW_IP_CSUM
+					MANAGED_FLOW_STEERING
+					Unknown flags: 0xC8400000
+	max_sge:			30
+	max_sge_rd:			30
+	max_cq:				16777216
+	max_cqe:			4194303
+	max_mr:				16777216
+	max_pd:				16777216
+	max_qp_rd_atom:			16
+	max_ee_rd_atom:			0
+	max_res_rd_atom:		4194304
+	max_qp_init_rd_atom:		16
+	max_ee_init_rd_atom:		0
+	atomic_cap:			ATOMIC_HCA (1)
+	max_ee:				0
+	max_rdd:			0
+	max_mw:				16777216
+	max_raw_ipv6_qp:		0
+	max_raw_ethy_qp:		0
+	max_mcast_grp:			2097152
+	max_mcast_qp_attach:		240
+	max_total_mcast_qp_attach:	503316480
+	max_ah:				2147483647
+	max_fmr:			0
+	max_srq:			8388608
+	max_srq_wr:			32767
+	max_srq_sge:			31
+	max_pkeys:			128
+	local_ca_ack_delay:		16
+	general_odp_caps:
+					ODP_SUPPORT
+					ODP_SUPPORT_IMPLICIT
+	rc_odp_caps:
+					SUPPORT_SEND
+					SUPPORT_RECV
+					SUPPORT_WRITE
+					SUPPORT_READ
+					SUPPORT_SRQ
+	uc_odp_caps:
+					NO SUPPORT
+	ud_odp_caps:
+					SUPPORT_SEND
+	xrc_odp_caps:
+					SUPPORT_SEND
+					SUPPORT_WRITE
+					SUPPORT_READ
+					SUPPORT_SRQ
+	completion timestamp_mask:			0x7fffffffffffffff
+	hca_core_clock:			156250kHZ
+	raw packet caps:
+					C-VLAN stripping offload
+					Scatter FCS offload
+					IP csum offload
+					Delay drop
+	device_cap_flags_ex:		0x30000054ED721C36
+					RAW_SCATTER_FCS
+					PCI_WRITE_END_PADDING
+					Unknown flags: 0x3000004000000000
+	tso_caps:
+		max_tso:			262144
+		supported_qp:
+					SUPPORT_RAW_PACKET
+	rss_caps:
+		max_rwq_indirection_tables:			65536
+		max_rwq_indirection_table_size:			2048
+		rx_hash_function:				0x1
+		rx_hash_fields_mask:				0x800000FF
+		supported_qp:
+					SUPPORT_RAW_PACKET
+	max_wq_type_rq:			8388608
+	packet_pacing_caps:
+		qp_rate_limit_min:	1kbps
+		qp_rate_limit_max:	100000000kbps
+		supported_qp:
+					SUPPORT_RAW_PACKET
+	tag matching not supported
+
+	cq moderation caps:
+		max_cq_count:	65535
+		max_cq_period:	4095 us
+
+	maximum available device memory:	131072Bytes
+
+	num_comp_vectors:		63
+		port:	1
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			port_lmc:		0x00
+			link_layer:		Ethernet
+			max_msg_sz:		0x40000000
+			port_cap_flags:		0x04010000
+			port_cap_flags2:	0x0000
+			max_vl_num:		invalid value (0)
+			bad_pkey_cntr:		0x0
+			qkey_viol_cntr:		0x0
+			sm_sl:			0
+			pkey_tbl_len:		1
+			gid_tbl_len:		256
+			subnet_timeout:		0
+			init_type_reply:	0
+			active_width:		4X (2)
+			active_speed:		25.0 Gbps (32)
+			phys_state:		LINK_UP (5)
+			GID[  0]:		fe80:0000:0000:0000:063f:72ff:fee2:59d7, RoCE v1
+			GID[  1]:		fe80::63f:72ff:fee2:59d7, RoCE v2
+			GID[  2]:		0000:0000:0000:0000:0000:ffff:0a00:003e, RoCE v1
+			GID[  3]:		::ffff:10.0.0.62, RoCE v2
+
+/sys/class/infiniband/mlx5_1/ports/1/gids/0 fe80:0000:0000:0000:063f:72ff:fee2:59d7
+/sys/class/infiniband/mlx5_1/ports/1/gids/1 fe80:0000:0000:0000:063f:72ff:fee2:59d7
+/sys/class/infiniband/mlx5_1/ports/1/gids/10 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/100 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/101 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/102 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/103 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/104 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/105 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/106 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/107 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/108 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/109 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/11 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/110 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/111 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/112 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/113 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/114 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/115 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/116 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/117 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/118 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/119 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/12 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/120 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/121 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/122 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/123 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/124 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/125 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/126 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/127 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/128 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/129 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/13 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/130 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/131 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/132 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/133 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/134 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/135 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/136 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/137 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/138 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/139 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/14 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/140 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/141 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/142 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/143 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/144 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/145 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/146 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/147 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/148 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/149 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/15 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/150 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/151 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/152 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/153 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/154 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/155 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/156 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/157 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/158 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/159 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/16 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/160 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/161 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/162 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/163 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/164 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/165 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/166 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/167 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/168 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/169 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/17 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/170 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/171 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/172 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/173 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/174 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/175 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/176 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/177 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/178 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/179 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/18 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/180 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/181 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/182 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/183 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/184 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/185 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/186 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/187 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/188 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/189 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/19 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/190 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/191 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/192 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/193 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/194 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/195 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/196 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/197 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/198 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/199 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/2 0000:0000:0000:0000:0000:ffff:0a00:003e
+/sys/class/infiniband/mlx5_1/ports/1/gids/20 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/200 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/201 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/202 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/203 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/204 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/205 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/206 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/207 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/208 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/209 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/21 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/210 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/211 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/212 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/213 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/214 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/215 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/216 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/217 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/218 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/219 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/22 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/220 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/221 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/222 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/223 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/224 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/225 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/226 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/227 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/228 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/229 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/23 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/230 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/231 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/232 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/233 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/234 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/235 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/236 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/237 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/238 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/239 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/24 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/240 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/241 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/242 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/243 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/244 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/245 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/246 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/247 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/248 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/249 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/25 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/250 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/251 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/252 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/253 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/254 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/255 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/26 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/27 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/28 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/29 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/3 0000:0000:0000:0000:0000:ffff:0a00:003e
+/sys/class/infiniband/mlx5_1/ports/1/gids/30 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/31 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/32 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/33 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/34 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/35 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/36 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/37 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/38 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/39 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/4 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/40 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/41 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/42 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/43 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/44 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/45 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/46 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/47 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/48 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/49 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/5 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/50 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/51 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/52 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/53 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/54 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/55 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/56 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/57 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/58 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/59 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/6 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/60 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/61 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/62 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/63 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/64 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/65 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/66 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/67 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/68 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/69 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/7 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/70 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/71 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/72 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/73 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/74 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/75 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/76 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/77 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/78 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/79 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/8 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/80 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/81 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/82 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/83 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/84 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/85 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/86 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/87 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/88 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/89 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/9 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/90 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/91 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/92 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/93 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/94 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/95 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/96 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/97 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/98 0000:0000:0000:0000:0000:0000:0000:0000
+/sys/class/infiniband/mlx5_1/ports/1/gids/99 0000:0000:0000:0000:0000:0000:0000:0000
+10.0.0.63 dev ens4f1 src 10.0.0.62 uid 1000 
+    cache 
+0: mlx5_0: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 
+1: mlx5_1: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 

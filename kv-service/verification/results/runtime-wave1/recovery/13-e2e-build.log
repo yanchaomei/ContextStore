@@ -1,0 +1,3 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.21s
+  Executable tests/rail_read_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/rail_read_e2e-d6145e305ed0b23e)

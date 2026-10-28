@@ -1,0 +1,27 @@
+{
+  "command": [
+    "rustfmt",
+    "--check",
+    "--edition",
+    "2021",
+    "--config",
+    "skip_children=true",
+    "kv-service/client-rs/src/bin/rail_read_bench.rs",
+    "kv-service/client-rs/src/lib.rs",
+    "kv-service/client-rs/src/rail_read.rs",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs",
+    "kv-service/client-rs/src/rail_read/tests.rs",
+    "kv-service/client-rs/src/rdma.rs",
+    "kv-service/client-rs/tests/rail_read_e2e.rs"
+  ],
+  "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+  "started": "2026-10-28T18:13:32.406710+00:00",
+  "environment": {
+    "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+    "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+    "CARGO_BUILD_JOBS": "4",
+    "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+    "PROTOC": "/usr/local/bin/protoc",
+    "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+  }
+}

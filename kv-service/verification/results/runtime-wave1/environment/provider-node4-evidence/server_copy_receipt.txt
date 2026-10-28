@@ -1,0 +1,7 @@
+source_commit=3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b
+source=skv-node2:/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-provider-baseline/debug/contextstore-server
+destination=skv-node4:/home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/bin/contextstore-server
+source_sha256=0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c
+destination_sha256=0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c
+verified=true
+2026-10-28T17:02:17Z

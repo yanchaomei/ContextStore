@@ -1,0 +1,6 @@
+{
+  "pid": 2715372,
+  "port": 38355,
+  "directory": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/redis",
+  "readiness": "PONG"
+}

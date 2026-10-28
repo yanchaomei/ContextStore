@@ -1,0 +1,25 @@
+{
+  "hostname": "csw1-rxe-server",
+  "captured_at": "2026-10-28T17:37:23.923698+00:00",
+  "kernel": "Linux csw1-rxe-server 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+  "bin_sha256": {
+    "contextstore-server": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+  },
+  "rdma_links": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+  "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 \nrail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 \nrail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 \n",
+  "gid_index": 1,
+  "server.toml_sha256": "8e29f8e3046fe7ff21953bdcaaef00bd12848f513ba6b6f4bf4498b11baa80f5",
+  "guest_server_run.sh_sha256": "c2e58012a97c62dd0835d63fc4b2e8d07d2d41a0de707e0fbf22852b04073293",
+  "server": {
+    "pid": 1334,
+    "start_ticks": "11076",
+    "exe": "/home/railtest/cswave1/bin/contextstore-server",
+    "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+    "environment": {
+      "CS_RDMA_SLAB_MB": "64",
+      "CS_FORCE_DISK_READ": "1",
+      "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25353:1,rxe1:10.82.1.1:25354:1"
+    }
+  },
+  "private_redis_ping": "+PONG"
+}

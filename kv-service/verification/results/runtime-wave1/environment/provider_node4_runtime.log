@@ -1,0 +1,12 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+ldd (Ubuntu GLIBC 2.31-0ubuntu9.18) 2.31
+	libmlx5.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libmlx5.so.1
+	libibverbs.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libibverbs.so.1
+	libgcc_s.so.1 (libc6,x32) => /libx32/libgcc_s.so.1
+	libgcc_s.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libgcc_s.so.1
+	libgcc_s.so.1 (libc6) => /lib32/libgcc_s.so.1
+Redis server v=5.0.7 sha=00000000:0 malloc=jemalloc-5.2.1 bits=64 build=66bd629f924ac924
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2       879G  796G   39G  96% /

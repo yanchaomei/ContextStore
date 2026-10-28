@@ -1,0 +1,13 @@
+{
+  "commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+  "archive_sha256": "78954630337f8c888291f83d2080d8b2726f51e4dc6081b245fec5cf0f17a5bf",
+  "file_count": 209,
+  "excludes": [
+    ".git",
+    "target",
+    "docs",
+    "kv-service/verification/results",
+    "kv-service/benchmarks/results",
+    "outputs"
+  ]
+}

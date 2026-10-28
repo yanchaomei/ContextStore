@@ -1,0 +1,10 @@
+{
+  "record_written_after_pilot": true,
+  "evidence_source": "Parent agent's direct SSH tool result in this conversation, immediately before launching tmux cs-wave1-pilot-v3-20261029",
+  "exact_utc_timestamp_captured": false,
+  "command": "ssh -o BatchMode=yes -o ConnectTimeout=10 SKV_4 'sha256sum /proc/871596/exe && redis-cli -h 127.0.0.1 -p 26379 ping'",
+  "observed_exit_code": 0,
+  "observed_stdout": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c  /proc/871596/exe\nPONG\n",
+  "client_preflight": "In the same pre-launch tool call, remote source-file hashes were compared with pilot-source-freeze-v3.json and the frozen benchmark binary hash was checked; all matched.",
+  "limits": "This preserves the observed tool result with explicit provenance. It is not a newly recovered timestamped pre-pilot process/environment snapshot. The earlier provider-ready-receipt and post-pilot snapshot independently contain matching PID/start_ticks/executable/environment."
+}

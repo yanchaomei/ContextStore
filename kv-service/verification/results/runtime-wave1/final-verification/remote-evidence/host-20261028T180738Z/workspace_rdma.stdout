@@ -1,0 +1,320 @@
+
+running 91 tests
+test rail_read::connection_pool::tests::active_connection_limit_fails_fast_without_opening_another_client ... ok
+test rail_read::connection_pool::tests::deregistration_runs_while_lease_is_still_active ... ok
+test rail_read::connection_pool::tests::dropping_reader_pool_drains_all_idle_clients ... ok
+test rail_read::connection_pool::tests::connecting_slot_counts_toward_capacity_without_holding_pool_lock ... ok
+test rail_read::connection_pool::tests::healthy_transfer_deregisters_mr_before_making_connection_idle ... ok
+test rail_read::connection_pool::tests::failed_and_panicking_connect_release_the_reserved_slot ... ok
+test rail_read::connection_pool::tests::failure_and_panic_destroy_qp_before_both_mrs ... ok
+test rail_read::connection_pool::tests::healthy_connection_is_reused_exclusively ... ok
+test rail_read::connection_pool::tests::idle_other_route_is_evicted_before_opening_new_route ... ok
+test rail_read::connection_pool::tests::legacy_success_still_destroys_qp_before_mr ... ok
+test rail_read::connection_pool::tests::only_whitelisted_structured_control_io_is_certified_after_cleanup ... ok
+test rail_read::connection_pool::tests::concurrent_acquisition_never_exceeds_reader_bound ... ok
+test rail_read::tests::cancellation_before_publish_preserves_caller_buffer ... ok
+test rail_read::connection_pool::tests::retiring_slot_remains_charged_until_client_destruction_returns ... ok
+test rail_read::tests::changed_generation_cannot_publish_completed_rail_bytes ... ok
+test rail_read::tests::cancellation_and_publish_have_one_order ... ok
+test rail_read::connection_pool::tests::recovery_certificate_is_not_returned_while_qp_or_mr_destruction_is_blocked ... ok
+test rail_read::tests::connection_keys_separate_route_owner_device_listener_and_generation ... ok
+test rail_read::tests::descriptor_identity_rejects_generation_and_layout_changes ... ok
+test rail_read::tests::connection_pool_is_opt_in_and_rejects_zero_capacity ... ok
+test rail_read::tests::checksum_failure_keeps_destination_unchanged ... ok
+test rail_read::tests::direct_staging_sge_uses_the_owned_slice_and_separate_dummy_mr ... ok
+test rail_read::tests::advertised_rails_resolve_local_fabrics_and_restore_one_object ... ok
+test rail_read::tests::completed_payload_keeps_staging_and_active_read_reserved_until_drop ... ok
+test rail_read::tests::active_read_limit_rejects_concurrent_second_request ... ok
+test rail_read::tests::direct_staging_assigns_disjoint_ordered_slices_and_restores_the_object ... ok
+test rail_read::tests::discovery_rejects_duplicate_fabrics_and_legacy_absence ... ok
+test rail_read::tests::discovery_rejects_one_listener_claimed_by_two_owners ... ok
+test rail_read::tests::direct_staging_checksum_failure_preserves_caller_sentinel ... ok
+test rail_read::tests::direct_staging_partial_second_rail_failure_never_publishes ... ok
+test rail_read::tests::discovery_rejects_a_capability_for_another_owner ... ok
+test rail_read::tests::discovered_reader_rejects_a_changed_listener_before_transport ... ok
+test rail_read::tests::incomplete_ack_never_returns_connection_to_pool ... ok
+test rail_read::tests::disabled_second_rail_falls_back_to_first_listener ... ok
+test rail_read::tests::duplicate_stripe_is_rejected_before_transport ... ok
+test rail_read::tests::direct_staging_weighted_ranges_and_multi_owner_fallback_are_explicit ... ok
+test rail_read::tests::direct_staging_reserves_one_object_buffer_and_keeps_it_until_drop ... ok
+test rail_read::tests::discovered_reader_rejects_a_changed_storage_owner_before_transport ... ok
+test rail_read::tests::missing_or_out_of_bounds_stripe_is_rejected_before_dispatch ... ok
+test rail_read::tests::fixed_task_cap_preserves_nine_routes_and_rejects_excess ... ok
+test rail_read::tests::discovery_maps_one_local_fabric_to_each_actual_storage_owner ... ok
+test rail_read::tests::one_complete_rail_hands_off_its_receive_allocation_without_reassembly ... ok
+test rail_read::tests::matching_stripe_checksums_allow_complete_read ... ok
+test rail_read::tests::per_rail_inflight_limit_counts_concurrent_requests ... ok
+test rail_read::tests::per_rail_task_limit_counts_concurrent_requests ... ok
+test rail_read::tests::one_rail_restores_the_same_object_layout ... ok
+test rail_read::tests::partial_rail_failure_leaves_caller_buffer_unchanged ... ok
+test rail_read::tests::partially_populated_checksums_are_rejected_before_dispatch ... ok
+test rail_read::tests::one_rail_checksum_failure_preserves_caller_buffer ... ok
+test rail_read::tests::process_memlock_headroom_caps_registered_bytes_before_dispatch ... ok
+test rail_read::tests::pooled_transport_rejects_ambiguous_placement_owner_before_opening_connections ... ok
+test rail_read::tests::panicked_worker_releases_inflight_metrics_and_preserves_buffer ... ok
+test rail_read::tests::packed_contiguous_control_uses_the_same_rail_ranges_as_direct_staging ... ok
+test rail_read::tests::placement_for_another_object_is_rejected_before_dispatch ... ok
+test rail_read::tests::recovery_rejects_unrepresentable_deadline_instead_of_disabling_it ... ok
+test rail_read::tests::software_only_mock_benchmark ... ignored, software-only Mock measurement; this is not RDMA bandwidth
+test rail_read::tests::recovery_checks_successful_task_checksums_before_retry ... ok
+test rail_read::tests::sge_map_keeps_every_stripe_inside_its_registered_region ... ok
+test rail_read::tests::striped_ack_still_requires_exact_selected_stripe_count ... ok
+test rail_read::tests::recovery_direct_partial_bytes_are_discarded_until_whole_task_succeeds ... ok
+test rail_read::tests::recovery_never_retries_unstriped_or_default_reader_failures ... ok
+test rail_read::tests::registration_budget_rejects_before_transport ... ok
+test rail_read::tests::recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry ... ok
+test rail_read::tests::unstriped_reads_bypass_pooled_owner_constraints_and_keep_legacy_byte_validation ... ok
+test rail_read::tests::two_rails_for_one_node_require_distinct_local_ports ... ok
+test rail_read::tests::stale_descriptor_does_not_mark_healthy_transport_as_down ... ok
+test rdma::tests::canonical_key_preserves_namespace_boundary ... ok
+test rdma::tests::config_uses_roce_defaults ... ok
+test rail_read::tests::topology_reads_numa_and_pci_address_from_sysfs_shape ... ok
+test rail_read::tests::recovery_does_not_retry_a_failed_retry ... ok
+test rail_read::tests::recovery_rechecks_version_capabilities_and_deadline_before_publication ... ok
+test rail_read::tests::unstriped_ack_accepts_multiple_server_writes_for_the_complete_object ... ok
+test rail_read::tests::weighted_scheduler_assigns_more_stripes_to_faster_rail ... ok
+test rail_read::tests::virtual_soft_roce_device_is_not_reported_as_pci_hardware ... ok
+test rail_read::tests::runtime_disable_and_enable_replans_without_changing_placement ... ok
+test rdma::tests::descriptor_request_contains_identity_and_destination ... ok
+test rail_read::tests::two_independent_listeners_restore_one_unmodified_placement ... ok
+test rail_read::tests::recovery_retries_only_failed_stripes_in_packed_and_direct_modes ... ok
+test rdma::tests::descriptor_reply_preserves_server_chunk_count ... ok
+test rdma::tests::request_rejects_oversized_wire_string ... ok
+test rail_read::tests::recovery_two_failed_tasks_share_one_alternate_sequentially ... ok
+test rdma::tests::descriptor_reply_rejects_invalid_success_status ... ok
+test rail_read::tests::recovery_requires_an_enabled_healthy_unambiguous_same_owner_alternate ... ok
+test rail_read::tests::recovery_obeys_other_reads_active_and_byte_limits_on_the_alternate ... ok
+test rail_read::tests::recovery_waits_for_every_initial_worker_and_cancel_stops_the_wave ... ok
+test rail_read::tests::recovery_rejects_uncertified_protocol_stale_incomplete_resource_and_panic_failures ... ok
+test rail_read::tests::recovery_deadline_is_checked_under_publication_gate_and_not_after_copy ... ok
+test rail_read::tests::failed_rail_cools_down_then_recovers_on_next_request ... ok
+test rail_read::tests::recovery_deadline_expires_at_barrier_without_resetting_or_retrying ... ok
+test rail_read::tests::cancellation_waits_for_started_mock_transfer_and_preserves_buffer ... ok
+test rdma::tests::control_socket_timeout_bounds_missing_get_reply ... ok
+
+test result: ok. 90 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test tests::local_rail_spec_names_a_fabric_without_hardcoding_a_listener ... ok
+test tests::rail_spec_accepts_a_capacity_weight ... ok
+test tests::rail_spec_keeps_advertised_owner_separate_from_listener ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test tests::raw_object_key_explains_readable_selector ... ok
+test tests::readable_selector_encodes_canonical_key ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test two_node_streaming_put_places_stripes_on_all_devices ... ok
+test two_node_cross_node_get_returns_original_payload ... ok
+test two_node_distributed_delete_retires_then_reclaims_all_stripe_files ... ok
+test two_node_restart_recovers_shared_metadata_and_stripes ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.13s
+
+
+running 27 tests
+test advertised_second_link_down_cannot_publish_partial_object ... ignored, requires advertised rails; externally disable the second client RXE link
+test advertised_two_rails_restore_one_object ... ignored, requires two real rails and server-advertised fabric/listener capabilities
+test cancellation_after_real_transfer_starts_cannot_write_reused_buffer ... ignored, requires one reachable HCA or RXE listener and a large striped object
+test cancellation_during_direct_staging_preserves_reused_buffer ... ignored, requires two real rails and a large striped object
+test cancellation_during_two_rail_transfer_preserves_reused_buffer ... ignored, requires two real rails and a large striped object
+test concurrent_rewrites_never_publish_mixed_direct_staging_bytes ... ignored, requires two RXE/HCA Rails, a striped KVService, and repeated writes
+test corrupt_stripe_on_second_rail_cannot_publish_partial_object ... ignored, requires two real rails and a deliberately corrupted stripe 1 on an isolated object
+test corrupted_real_stripe_does_not_publish_bytes ... ignored, requires an existing striped object with one deliberately corrupted physical stripe
+test dead_single_real_rail_leaves_destination_unchanged ... ignored, requires a striped KVService and an injected dead RDMA listener
+test failed_second_rail_direct_staging_does_not_publish_partial_bytes ... ignored, requires one reachable RDMA listener and one injected dead listener
+test failed_second_rail_does_not_publish_partial_bytes ... ignored, requires one reachable RDMA listener and one injected dead listener
+test late_second_rail_after_first_completion_cannot_publish_or_corrupt ... ignored, requires two real rails and a three-second pre-WRITE delay on server nic_idx=1
+test late_second_rail_direct_staging_cannot_publish_or_corrupt ... ignored, requires two real rails and a three-second pre-WRITE delay on server nic_idx=1
+test late_server_write_after_timeout_cannot_corrupt_reused_buffer ... ignored, requires CS_RDMA_TEST_PRE_WRITE_DELAY_MS=3000 on an isolated real RDMA server
+test legacy_get_timeout_retires_qp_before_buffer_reuse ... ignored, requires an isolated RXE server with CS_FORCE_DISK_READ=1 and a 64 MiB object
+test old_generation_is_rejected_without_publishing_bytes ... ignored, requires two reachable RDMA listeners and a striped KVService
+test pooled_real_rail_parallel_reads_preserve_exclusive_leases ... ignored, requires one reachable HCA or RXE listener and a striped KVService
+test pooled_real_rail_reuses_healthy_connection_and_retires_stale_read ... ignored, requires one reachable HCA or RXE listener and a striped KVService
+test recovery_real_late_request_after_retry_registration_direct_pooled ... ignored, requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration
+test recovery_real_late_request_after_retry_registration_direct_unpooled ... ignored, requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration
+test recovery_real_late_request_after_retry_registration_packed_pooled ... ignored, requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration
+test recovery_real_late_request_after_retry_registration_packed_unpooled ... ignored, requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration
+test same_object_matches_single_and_dual_rail ... ignored, requires two reachable RDMA listeners on the same storage node
+test single_real_rail_restores_verified_object ... ignored, requires one reachable HCA or RXE listener and a striped KVService
+test uncertain_completion_retires_old_server_connection ... ignored, requires a three-second delay on server nic_idx=1 and a two-second CQ deadline
+test unique_generations_survive_concurrent_direct_rail_reads ... ignored, requires two real Rails, striped writes, and CS_RAIL_TIMING=1
+test unstriped_real_read_bypasses_enabled_connection_pool ... ignored, requires one reachable HCA or RXE listener and a KVService accepting unstriped objects
+
+test result: ok. 0 passed; 0 failed; 27 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test rdma_put_and_get_round_trip ... ignored, requires an RDMA-enabled ContextStore server and an HCA
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 102 tests
+test api::service::tests::descriptor_contains_version_identity ... ok
+test api::service::tests::descriptor_validation_rejects_stale_generation ... ok
+test api::service::tests::meta_from_pb_applies_put_options_ttl ... ok
+test api::service::tests::meta_from_pb_clamps_negative_ttl_to_disabled ... ok
+test config::rail_advertisement_tests::blank_fabric_or_listener_is_rejected ... ok
+test config::rail_advertisement_tests::duplicate_fabric_or_listener_is_rejected ... ok
+test io_executor::aligned_buffer::tests::align_4k_ptr ... ok
+test io_executor::aligned_buffer::tests::pool_distinct_capacity_classes ... ok
+test io_executor::aligned_buffer::tests::pool_bounded_per_class ... ok
+test io_executor::aligned_buffer::tests::pool_reuses_same_capacity ... ok
+test io_executor::aligned_buffer::tests::pooled_buffer_returns_on_drop ... ok
+test io_executor::aligned_buffer::tests::truncate_shortens ... ok
+test io_executor::aligned_buffer::tests::pooled_buffer_via_bytes_from_owner ... ok
+test io_executor::aligned_buffer::tests::write_via_ptr_then_read ... ok
+test io_executor::tier_a::tests::direct_io_flag_matches_native_platform ... ok
+test io_executor::tier_a::tests::write_read_roundtrip ... ok
+test io_executor::tier_a::tests::pointer_stream_reports_every_range_and_fills_aligned_destination ... ok
+test metadata::tests::block_meta_expiry_uses_created_at_and_positive_ttl ... ok
+test metadata::tests::delete_block_if_matches_keeps_newer_metadata ... ok
+test io_executor::tier_a::tests::batch_read_parallel ... ok
+test metadata::tests::delete_block_if_matches_uses_generation_identity ... ok
+test metadata::tests::injected_put_failure_is_one_shot ... ok
+test metadata::tests::expired_gc_lease_can_be_reclaimed ... ok
+test metadata::tests::next_generation_is_monotonic ... ok
+test metadata::tests::put_block_if_absent_commits_only_once ... ok
+test metadata::tests::replace_block_enqueues_the_superseded_generation ... ok
+test metadata::tests::retiring_a_block_preserves_the_generation_counter ... ok
+test metadata::tests::stale_retire_does_not_remove_a_newer_identity ... ok
+test rdma::server::sge_tests::cq_timeout_configuration_is_bounded ... ok
+test metadata::tests::test_block_meta_roundtrip ... ok
+test rdma::qp::completion_tests::failed_cqe_is_still_counted_as_consumed ... ok
+test rdma::server::sge_tests::exact_tail_fit ... ok
+test rdma::server::sge_tests::missing_or_duplicate_stream_completions_cannot_report_success ... ok
+test rdma::server::sge_tests::fallback_targets_use_compact_sge_addresses_for_noncontiguous_stripes ... ok
+test rdma::server::sge_tests::range_beyond_coverage_errors ... ok
+test rdma::server::sge_tests::range_spans_segments ... ok
+test rdma::server::sge_tests::range_within_one_segment ... ok
+test rdma::server::sge_tests::uncertain_cq_completion_forces_connection_error ... ok
+test rdma::server::tests::distributed_placement_requires_multi_endpoint_get ... ok
+test rdma::server::tests::local_striped_placement_allows_single_endpoint_get ... ok
+test rdma::slab::tests::alloc_full_returns_none ... ok
+test rdma::slab::tests::alloc_split_and_offset ... ok
+test rdma::slab::tests::alloc_too_big_returns_none ... ok
+test rdma::slab::tests::best_fit_picks_smallest_sufficient ... ok
+test rdma::slab::tests::fragmentation_then_recover ... ok
+test rdma::slab::tests::free_coalesce_both_sides ... ok
+test rdma::slab::tests::free_coalesce_right ... ok
+test rdma::slab::tests::round_up_to_align ... ok
+test rdma::wire::tests::descriptor_get_req_empty_stripes_keeps_legacy_tag ... ok
+test rdma::wire::tests::descriptor_get_req_stripe_subset_round_trips ... ok
+test rdma::wire::tests::put_req_with_ttl_round_trips_through_options_body ... ok
+test rdma::wire::tests::put_req_without_ttl_uses_legacy_tag_and_body ... ok
+test router::tests::canonical_key_round_trips_with_delimiters ... ok
+test rdma::wire::tests::put_stripes_req_round_trips ... ok
+test rdma::wire::tests::put_stripes_resp_round_trips ... ok
+test router::tests::object_hash_is_stable_for_same_object ... ok
+test router::tests::chunk_device_stripes_from_object_home ... ok
+test router::tests::group_by_device_works ... ok
+test router::tests::unsafe_namespace_stays_under_device_root ... ok
+test storage_tier::tests::disabled_metrics_skip_startup_capacity_scan ... ok
+test storage_tier::tests::missing_single_file_clears_current_metadata ... ok
+test storage_tier::tests::put_get_delete_roundtrip ... ok
+test storage_tier::tests::placement_chunk_integrity_skips_non_striped_objects ... ok
+test api::service::tests::placement_uses_materialized_chunk_locations ... ok
+test api::service::tests::empty_rail_advertisement_keeps_legacy_placement ... ok
+test storage_tier::tests::overwrite_writes_new_physical_path_without_mutating_old_file ... ok
+test memory_tier::tests::expired_chunks_cache_entry_is_not_returned ... ok
+test api::service::tests::local_stripe_indices_handle_duplicate_local_data_nodes ... ok
+test memory_tier::tests::expired_single_cache_entry_is_not_returned ... ok
+test api::service::tests::local_cluster_entry_without_node_id_uses_local_rail_advertisements ... ok
+test storage_tier::tests::expired_object_retires_metadata_without_synchronous_chunk_cleanup ... ok
+test memory_tier::tests::put_chunks_if_absent_keeps_existing_chunks_cache_entry ... ok
+test api::service::tests::rail_capabilities_follow_actual_local_and_remote_owners ... ok
+test api::service::tests::gc_worker_reclaims_only_the_retired_generation ... ok
+test storage_tier::tests::expired_single_object_is_retired_on_get ... ok
+test memory_tier::tests::put_if_absent_keeps_existing_cache_entry ... ok
+test storage_tier::tests::metadata_put_failure_rolls_back_single_file ... ok
+test api::service::tests::placement_validation_rejects_stale_epoch ... ok
+test storage_tier::tests::put_if_absent_can_replace_expired_object ... ok
+test storage_tier::tests::striped_delete_continues_after_unroutable_chunk ... ok
+test memory_tier::tests::single_put_invalidates_chunks_cache_for_same_object ... ok
+test api::service::tests::metadata_get_live_purges_expired_metadata ... ok
+test memory_tier::tests::cache_hit_after_put ... ok
+test storage_tier::tests::put_if_absent_does_not_overwrite_existing_object ... ok
+test memory_tier::tests::chunk_put_invalidates_single_cache_for_same_object ... ok
+test storage_tier::tests::placement_chunk_integrity_rejects_corruption ... ok
+test api::service::tests::placement_validation_accepts_current_descriptor ... ok
+test storage_tier::tests::batch_distributes_to_multiple_devices ... ok
+test storage_tier::tests::non_striped_get_uses_metadata_path_after_device_count_changes ... ok
+test api::service::tests::local_stripe_indices_rotate_devices_per_data_node ... ok
+test api::service::tests::lookup_placement_advertises_two_local_rails_without_changing_stripes ... ok
+test api::service::tests::placement_epoch_changes_when_topology_changes ... ok
+test api::service::tests::placement_epoch_is_stable_across_local_nodes ... ok
+test storage_tier::tests::expired_striped_object_is_retired_on_get ... ok
+test storage_tier::tests::metadata_put_failure_rolls_back_striped_chunks ... ok
+test storage_tier::tests::missing_striped_chunk_clears_current_metadata ... ok
+test storage_tier::tests::put_chunks_if_absent_does_not_overwrite_striped_object ... ok
+test storage_tier::tests::stripe_subset_read_preserves_indices_and_checks_integrity ... ok
+test storage_tier::tests::stripe_integrity_disabled_keeps_legacy_read_behavior ... ok
+test storage_tier::tests::large_value_is_striped ... ok
+test storage_tier::tests::stripe_integrity_is_opt_in_and_corruption_becomes_cache_miss ... ok
+test storage_tier::tests::striped_overwrite_uses_new_chunk_paths ... ok
+
+test result: ok. 102 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.41s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test tests::checksum_status_distinguishes_legacy_metadata ... ok
+test tests::readable_selector_encodes_canonical_key ... ok
+test tests::table_truncation_preserves_character_boundaries ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test redis_if_absent_commits_only_once ... ok
+test shared_redis_metadata_is_visible_across_contexts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

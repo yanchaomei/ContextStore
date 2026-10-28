@@ -1,0 +1,23 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.93s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/debug/deps/contextstore_client_rs-da9b35b4bb2023c7)
+
+running 1 test
+test rail_read::tests::recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry ... FAILED
+
+failures:
+
+---- rail_read::tests::recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry stdout ----
+
+thread 'rail_read::tests::recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry' panicked at kv-service/client-rs/src/rail_read/tests.rs:2427:9:
+assertion failed: matches!(reader.read_staged_with(&descriptor, &placement, &mock, None),
+    Err(RailReadError::Transport(_)))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    rail_read::tests::recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 90 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

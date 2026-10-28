@@ -1,0 +1,12 @@
+[
+  "ssh",
+  "-oBatchMode=yes",
+  "-oStrictHostKeyChecking=yes",
+  "-oUserKnownHostsFile=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/known_hosts",
+  "-i",
+  "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/railtest_ed25519",
+  "-p",
+  "22352",
+  "railtest@127.0.0.1",
+  "env -u LD_PRELOAD -u PYTHONOPTIMIZE python3 /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/run_ffi_lifecycle_validation.py --library /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/libcontextstore_rdma_ffi.so --shim /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/verbs_failstop.so --device rxe0 --gid 1 --output /home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/native --source-commit 75dba7aa-working-tree-runtime-wave1-recovery-v3 --require-timeout"
+]

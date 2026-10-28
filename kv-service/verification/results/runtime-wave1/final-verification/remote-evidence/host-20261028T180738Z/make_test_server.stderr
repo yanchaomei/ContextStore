@@ -1,0 +1,32 @@
+   Compiling tokio v1.52.3
+   Compiling prettyplease v0.2.37
+   Compiling regex-syntax v0.8.11
+   Compiling getrandom v0.4.3
+   Compiling rustix v1.1.4
+   Compiling bitflags v2.13.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling fastrand v2.4.1
+   Compiling regex-automata v0.4.15
+   Compiling tempfile v3.27.0
+   Compiling regex v1.13.0
+   Compiling prost-build v0.12.6
+   Compiling tonic-build v0.11.0
+   Compiling contextstore-server v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/server)
+   Compiling tokio-util v0.7.18
+   Compiling tokio-io-timeout v1.2.1
+   Compiling tokio-stream v0.1.18
+   Compiling tokio-test v0.4.5
+   Compiling h2 v0.3.27
+   Compiling tower v0.4.13
+   Compiling hyper v0.14.32
+   Compiling hyper-timeout v0.4.1
+   Compiling axum v0.6.20
+   Compiling tonic v0.11.0
+    Finished `release` profile [optimized] target(s) in 1m 46s
+     Running unittests src/lib.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/release/deps/contextstore_server-810d37d9491c5959)
+     Running unittests src/main.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/release/deps/contextstore_server-0d6ddec49d2e135b)
+     Running unittests src/bin/cs_kvservice_bench.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/release/deps/cs_kvservice_bench-5aa644f7cd8e8254)
+     Running unittests src/bin/cs_meta.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/release/deps/cs_meta-95afa4622b0656b3)
+     Running tests/gds_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/release/deps/gds_e2e-9bd12dcb1f8b53d8)
+     Running tests/redis_metadata_e2e.rs (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate/release/deps/redis_metadata_e2e-25ad127c613fdb92)
+   Doc-tests contextstore_server

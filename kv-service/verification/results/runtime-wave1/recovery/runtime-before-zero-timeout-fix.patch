@@ -1,0 +1,1387 @@
+diff --git a/kv-service/client-rs/src/bin/rail_read_bench.rs b/kv-service/client-rs/src/bin/rail_read_bench.rs
+index 1413d28..0437f4a 100644
+--- a/kv-service/client-rs/src/bin/rail_read_bench.rs
++++ b/kv-service/client-rs/src/bin/rail_read_bench.rs
+@@ -3,7 +3,8 @@
+ use anyhow::{anyhow, Context, Result};
+ use clap::Parser;
+ use contextstore_client_rs::rail_read::{
+-    LocalRailPath, RailLimits, RailModeCounts, RailReader, RailRoute,
++    LocalRailPath, RailConnectionPoolOptions, RailLimits, RailModeCounts, RailReader,
++    RailRecoveryOptions, RailRoute,
+ };
+ use contextstore_client_rs::rdma::RdmaClientConfig;
+ use contextstore_client_rs::{KvClient, ObjectLookup};
+@@ -43,6 +44,15 @@ struct Args {
+     /// Use the direct path's contiguous stripe planner with packed buffers.
+     #[arg(long)]
+     contiguous_schedule: bool,
++    /// Maximum persistent striped-read connections; zero keeps legacy teardown.
++    #[arg(long, default_value_t = 0)]
++    connection_pool_size: usize,
++    /// Opt in to one striped-read recovery wave with this total deadline.
++    #[arg(long)]
++    recovery_timeout_ms: Option<u64>,
++    /// Verify the known (index % 251) payload seeded by cs-bench.
++    #[arg(long)]
++    verify_pattern: bool,
+ }
+ 
+ fn parse_route(spec: &str) -> Result<RailRoute> {
+@@ -137,6 +147,16 @@ fn print_effective_modes(reader: &RailReader, before: RailModeCounts) {
+     );
+ }
+ 
++fn print_pool_stats(label: &str, reader: &RailReader) {
++    if let Some(stats) = reader.connection_pool_snapshot() {
++        println!("pool_stats,phase={label},enabled=true,created={},reused={},retired={},rejected={},live={},connecting={},active={},idle={},retiring={}",
++            stats.created, stats.reused, stats.retired, stats.rejected, stats.live,
++            stats.connecting, stats.active, stats.idle, stats.retiring);
++    } else {
++        println!("pool_stats,phase={label},enabled=false");
++    }
++}
++
+ fn print_object_identity(label: &str, lookup: &ObjectLookup) -> Result<()> {
+     let placement = lookup
+         .placement
+@@ -180,15 +200,15 @@ async fn run_concurrent(
+     client: &KvClient,
+     reader: Arc<RailReader>,
+     size: usize,
+-    warmup_bytes: &[u64],
+-    warmup_modes: RailModeCounts,
++    warmup: (&[u64], RailModeCounts),
+     initial_lookup: &ObjectLookup,
++    mut expected_hash: Option<u64>,
+ ) -> Result<()> {
++    let (warmup_bytes, warmup_modes) = warmup;
+     let mut request_times = Vec::<Duration>::new();
+     let mut batch_times = Vec::<Duration>::new();
+     let mut cpu_user_us = 0u64;
+     let mut cpu_system_us = 0u64;
+-    let mut expected_hash = None;
+     for batch in 0..args.iterations {
+         let destinations = (0..args.concurrency)
+             .map(|_| vec![0xA5; size])
+@@ -293,6 +313,7 @@ async fn run_concurrent(
+         process_usage().2
+     );
+     print_effective_modes(&reader, warmup_modes);
++    print_pool_stats("final", &reader);
+     let mut verification_client = client.clone();
+     verify_object_identity(&mut verification_client, args, initial_lookup).await?;
+     Ok(())
+@@ -340,7 +361,7 @@ async fn main() -> Result<()> {
+         contiguous_schedule: args.contiguous_schedule,
+         ..RailLimits::default()
+     };
+-    let reader = Arc::new(if local_paths.is_empty() {
++    let mut reader = if local_paths.is_empty() {
+         RailReader::new(explicit_routes, limits)?
+     } else {
+         let placement = lookup
+@@ -348,9 +369,23 @@ async fn main() -> Result<()> {
+             .as_ref()
+             .ok_or_else(|| anyhow!("object lookup returned no placement"))?;
+         RailReader::discover_from_placement(placement, &local_paths, limits)?
+-    });
++    };
++    if args.connection_pool_size > 0 {
++        reader = reader.with_connection_pool(RailConnectionPoolOptions {
++            max_live_connections: args.connection_pool_size,
++            configuration_generation: 0,
++        })?;
++    }
++    if let Some(timeout_ms) = args.recovery_timeout_ms {
++        reader = reader.with_recovery(RailRecoveryOptions {
++            timeout: Duration::from_millis(timeout_ms),
++        })?;
++    }
++    let reader = Arc::new(reader);
+     println!("mode,direct_staging={}", args.direct_staging);
+     println!("mode,contiguous_schedule={}", args.contiguous_schedule);
++    println!("mode,connection_pool_size={},recovery_timeout_ms={:?},verify_pattern={},warmup={},iterations={},concurrency={}",
++        args.connection_pool_size, args.recovery_timeout_ms, args.verify_pattern, args.warmup, args.iterations, args.concurrency);
+     let placement = lookup
+         .placement
+         .as_ref()
+@@ -362,6 +397,14 @@ async fn main() -> Result<()> {
+         );
+     }
+     let size = usize::try_from(lookup.descriptor.size)?;
++    let mut expected_hash = if args.verify_pattern {
++        let expected: Vec<u8> = (0..size).map(|index| (index % 251) as u8).collect();
++        let hash = twox_hash::xxh3::hash64(&expected);
++        println!("expected_pattern,pattern=index_mod_251,bytes={size},xxh3={hash:016x}");
++        Some(hash)
++    } else {
++        None
++    };
+     let mut destination = vec![0u8; size];
+     for route in reader.routes() {
+         println!(
+@@ -375,6 +418,7 @@ async fn main() -> Result<()> {
+             route.connection.endpoint
+         );
+     }
++    print_pool_stats("before_warmup", &reader);
+     for _ in 0..args.warmup {
+         client
+             .read_multi_rail_into(
+@@ -386,7 +430,13 @@ async fn main() -> Result<()> {
+             )
+             .await?
+             .ok_or_else(|| anyhow!("object disappeared during warmup"))?;
++        let hash = twox_hash::xxh3::hash64(&destination);
++        if expected_hash.is_some_and(|expected| expected != hash) {
++            return Err(anyhow!("warmup payload does not match expected hash"));
++        }
++        expected_hash.get_or_insert(hash);
+     }
++    print_pool_stats("after_warmup", &reader);
+     let warmup_bytes: Vec<_> = reader.snapshots().iter().map(|rail| rail.bytes).collect();
+     let warmup_modes = reader.mode_counts();
+     if args.concurrency > 1 {
+@@ -395,9 +445,9 @@ async fn main() -> Result<()> {
+             &client,
+             reader,
+             size,
+-            &warmup_bytes,
+-            warmup_modes,
++            (&warmup_bytes, warmup_modes),
+             &lookup,
++            expected_hash,
+         )
+         .await;
+     }
+@@ -426,6 +476,10 @@ async fn main() -> Result<()> {
+             return Err(anyhow!("short read: {bytes} of {size} bytes"));
+         }
+         let checksum = twox_hash::xxh3::hash64(&destination);
++        if expected_hash.is_some_and(|expected| expected != checksum) {
++            return Err(anyhow!("measured payload does not match expected hash"));
++        }
++        expected_hash.get_or_insert(checksum);
+         let gib_per_s = bytes as f64 / elapsed.as_secs_f64() / 1024f64.powi(3);
+         println!(
+             "sample,environment={},rails={},iteration={},bytes={},latency_us={},gib_per_s={gib_per_s:.3},xxh3={checksum:016x}",
+@@ -457,6 +511,7 @@ async fn main() -> Result<()> {
+         process_usage().2
+     );
+     print_effective_modes(&reader, warmup_modes);
++    print_pool_stats("final", &reader);
+     for snapshot in reader.snapshots() {
+         let completed = snapshot.reads_ok + snapshot.reads_err;
+         let average_us = snapshot.duration_us / completed.max(1);
+diff --git a/kv-service/client-rs/src/lib.rs b/kv-service/client-rs/src/lib.rs
+index 52dd65b..bc8952b 100644
+--- a/kv-service/client-rs/src/lib.rs
++++ b/kv-service/client-rs/src/lib.rs
+@@ -242,10 +242,13 @@ impl KvClient {
+         cancel: Option<rail_read::RailCancel>,
+     ) -> anyhow::Result<Option<usize>> {
+         let timing_start = std::time::Instant::now();
++        // Recovery uses one absolute deadline beginning before coordinator I/O.
++        let deadline = reader.start_deadline()?;
+         let initial = match self.lookup_object(namespace, object_key).await? {
+             Some(lookup) => lookup,
+             None => return Ok(None),
+         };
++        let deadline = deadline.filter(|_| initial.descriptor.is_striped);
+         let size = usize::try_from(initial.descriptor.size)?;
+         if destination.len() < size {
+             return Err(rail_read::RailReadError::BufferTooSmall {
+@@ -263,10 +266,11 @@ impl KvClient {
+         let lookup_us = timing_start.elapsed().as_micros();
+         let transfer_start = std::time::Instant::now();
+         let payload = tokio::task::spawn_blocking(move || {
+-            reader.read_staged(&descriptor, &placement, fetch_cancel.as_ref())
++            reader.read_staged_until(&descriptor, &placement, fetch_cancel.as_ref(), deadline)
+         })
+         .await??;
+         let transfer_us = transfer_start.elapsed().as_micros();
++        payload.ensure_live(cancel.as_ref())?;
+         let post_lookup_start = std::time::Instant::now();
+         let current = self
+             .lookup_object(namespace, object_key)
+@@ -274,12 +278,13 @@ impl KvClient {
+             .ok_or(rail_read::RailReadError::VersionChanged)?;
+         let post_lookup_us = post_lookup_start.elapsed().as_micros();
+         let publish_start = std::time::Instant::now();
+-        let copied_result = rail_read::commit_if_unchanged(
++        let copied_result = rail_read::commit_if_unchanged_until(
+             &initial,
+             &current,
+             payload.as_bytes(),
+             destination,
+             cancel.as_ref(),
++            payload.deadline,
+         );
+         if let Err(rail_read::RailReadError::VersionChanged) = &copied_result {
+             if rail_timing_enabled() {
+diff --git a/kv-service/client-rs/src/rail_read.rs b/kv-service/client-rs/src/rail_read.rs
+index 804c2da..699c302 100644
+--- a/kv-service/client-rs/src/rail_read.rs
++++ b/kv-service/client-rs/src/rail_read.rs
+@@ -10,9 +10,18 @@ use std::sync::{Arc, Mutex};
+ use std::time::{Duration, Instant};
+ 
+ mod connection_pool;
+-use connection_pool::{finish_transfer, ConnectionPool, Lease};
++pub use connection_pool::QuiescentTransportFailure;
++use connection_pool::{ConnectionPool, Lease};
+ pub use connection_pool::{RailConnectionPoolOptions, RailConnectionPoolSnapshot};
+ 
++/// Opt in to one bounded recovery wave for striped objects.
++#[derive(Clone, Copy, Debug)]
++pub struct RailRecoveryOptions {
++    /// One admission/publication deadline, including both coordinator lookups.
++    /// Provider cleanup and blocking TCP operations may outlive this budget.
++    pub timeout: Duration,
++}
++
+ /// One local RDMA device and one listener on the node advertised by placement.
+ #[derive(Clone, Debug)]
+ pub struct RailRoute {
+@@ -181,14 +190,25 @@ impl Default for RailLimits {
+ pub enum RailReadError {
+     InvalidPlacement(String),
+     ResourceExhausted(String),
+-    BufferTooSmall { need: usize, have: usize },
++    BufferTooSmall {
++        need: usize,
++        have: usize,
++    },
+     Transport(String),
++    /// A transient control I/O failure certified after connection/MR cleanup.
++    QuiescentTransport(QuiescentTransportFailure),
+     StaleDescriptor,
+-    Incomplete { expected: usize, actual: usize },
+-    Checksum { stripe: u32 },
++    Incomplete {
++        expected: usize,
++        actual: usize,
++    },
++    Checksum {
++        stripe: u32,
++    },
+     VersionChanged,
+     Cancelled,
+     WorkerPanic,
++    DeadlineExceeded,
+ }
+ 
+ impl fmt::Display for RailReadError {
+@@ -200,6 +220,7 @@ impl fmt::Display for RailReadError {
+                 write!(f, "read buffer needs {need} bytes, has {have}")
+             }
+             Self::Transport(reason) => write!(f, "rail transfer failed: {reason}"),
++            Self::QuiescentTransport(reason) => write!(f, "rail transfer failed: {reason}"),
+             Self::StaleDescriptor => write!(f, "object descriptor became stale"),
+             Self::Incomplete { expected, actual } => {
+                 write!(
+@@ -211,6 +232,7 @@ impl fmt::Display for RailReadError {
+             Self::VersionChanged => write!(f, "object version changed during rail read"),
+             Self::Cancelled => write!(f, "rail read cancelled"),
+             Self::WorkerPanic => write!(f, "rail worker panicked"),
++            Self::DeadlineExceeded => write!(f, "rail read deadline exceeded"),
+         }
+     }
+ }
+@@ -232,12 +254,24 @@ pub(crate) fn same_descriptor_identity(
+         && left.chunk_size == right.chunk_size
+ }
+ 
++#[cfg(test)]
+ pub(crate) fn commit_if_unchanged(
+     initial: &crate::ObjectLookup,
+     current: &crate::ObjectLookup,
+     payload: &[u8],
+     destination: &mut [u8],
+     cancel: Option<&RailCancel>,
++) -> Result<usize, RailReadError> {
++    commit_if_unchanged_until(initial, current, payload, destination, cancel, None)
++}
++
++pub(crate) fn commit_if_unchanged_until(
++    initial: &crate::ObjectLookup,
++    current: &crate::ObjectLookup,
++    payload: &[u8],
++    destination: &mut [u8],
++    cancel: Option<&RailCancel>,
++    deadline: Option<Instant>,
+ ) -> Result<usize, RailReadError> {
+     if !same_descriptor_identity(&initial.descriptor, &current.descriptor)
+         || initial.placement != current.placement
+@@ -258,11 +292,9 @@ pub(crate) fn commit_if_unchanged(
+             have: destination.len(),
+         });
+     }
+-    if let Some(cancel) = cancel {
+-        cancel.publish_if_live(|| destination[..size].copy_from_slice(payload))?;
+-    } else {
+-        destination[..size].copy_from_slice(payload);
+-    }
++    publish_before(cancel, deadline, || {
++        destination[..size].copy_from_slice(payload)
++    })?;
+     Ok(size)
+ }
+ 
+@@ -288,15 +320,56 @@ impl RailCancel {
+         self.0.cancelled.load(Ordering::Acquire)
+     }
+ 
++    #[cfg(test)]
+     fn publish_if_live<T>(&self, publish: impl FnOnce() -> T) -> Result<T, RailReadError> {
++        self.publish_before(None, publish)
++    }
++
++    fn publish_before<T>(
++        &self,
++        deadline: Option<Instant>,
++        publish: impl FnOnce() -> T,
++    ) -> Result<T, RailReadError> {
+         let _gate = self.0.publish_gate.lock().unwrap();
+-        if self.is_cancelled() {
+-            return Err(RailReadError::Cancelled);
+-        }
++        check_live(Some(self), deadline)?;
++        // Publication is atomic with cancellation. Once copying starts, it
++        // completes successfully even if the clock passes the deadline.
+         Ok(publish())
+     }
+ }
+ 
++fn check_live(cancel: Option<&RailCancel>, deadline: Option<Instant>) -> Result<(), RailReadError> {
++    if cancel.is_some_and(RailCancel::is_cancelled) {
++        return Err(RailReadError::Cancelled);
++    }
++    if deadline.is_some_and(|deadline| Instant::now() >= deadline) {
++        return Err(RailReadError::DeadlineExceeded);
++    }
++    Ok(())
++}
++
++fn publish_before<T>(
++    cancel: Option<&RailCancel>,
++    deadline: Option<Instant>,
++    publish: impl FnOnce() -> T,
++) -> Result<T, RailReadError> {
++    if let Some(cancel) = cancel {
++        cancel.publish_before(deadline, publish)
++    } else {
++        check_live(None, deadline)?;
++        Ok(publish())
++    }
++}
++
++/// Frozen identity and request lifetime shared by initial workers and recovery.
++#[derive(Clone, Copy)]
++struct ReadRequest<'a> {
++    descriptor: &'a pb::ObjectDescriptor,
++    placement: &'a pb::PlacementDescriptor,
++    cancel: Option<&'a RailCancel>,
++    deadline: Option<Instant>,
++}
++
+ #[derive(Clone, Debug)]
+ struct StripeRead {
+     index: u32,
+@@ -659,7 +732,7 @@ pub struct RailSnapshot {
+     pub reads_ok: u64,
+     /// Failed stripe-subset requests.
+     pub reads_err: u64,
+-    /// Verified payload bytes returned by this rail.
++    /// Payload bytes acknowledged by successful tasks, not published or wire bytes.
+     pub bytes: u64,
+     /// Requests currently executing on this rail.
+     pub inflight_requests: u64,
+@@ -700,6 +773,19 @@ pub struct RailReader {
+     budget: Arc<Mutex<BudgetState>>,
+     connection_pool: Option<ConnectionPool<ConnectionKey, RdmaClient>>,
+     configuration_generation: u64,
++    recovery: Option<RailRecoveryOptions>,
++    recovery_counts: [AtomicU64; 3],
++}
++
++/// Recovery observations; these do not count DMA wire traffic or publications.
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub struct RailRecoverySnapshot {
++    /// Retry tasks that reached the transport boundary.
++    pub retry_tasks: u64,
++    /// Payload requested by those attempts, including failed attempts.
++    pub requested_payload_bytes: u64,
++    /// Whole retry tasks whose length and available checksums passed.
++    pub successful_tasks: u64,
+ }
+ 
+ /// Counts admitted reads by the plan actually selected after route filtering.
+@@ -729,6 +815,35 @@ struct BudgetGuard {
+ }
+ 
+ impl BudgetGuard {
++    fn release_rails(&mut self) {
++        let mut budget = self.state.lock().unwrap();
++        for (index, bytes) in self.rail_reservations.drain(..) {
++            budget.rail_active_reads[index] -= 1;
++            budget.rail_inflight_bytes[index] -= bytes;
++        }
++    }
++
++    fn reserve_retry(&mut self, task: &RailTask, limits: &RailLimits) -> Result<(), RailReadError> {
++        debug_assert!(self.rail_reservations.is_empty());
++        let index = task.route_index;
++        let bytes = task.packed_len as u64;
++        let mut budget = self.state.lock().unwrap();
++        if budget.rail_active_reads[index] >= limits.max_active_reads_per_rail
++            || budget.rail_inflight_bytes[index].saturating_add(bytes)
++                > limits.max_inflight_bytes_per_rail
++        {
++            return Err(RailReadError::ResourceExhausted(
++                "retry exceeds per-rail active tasks or in-flight bytes".into(),
++            ));
++        }
++        // Global staging/MR/in-flight reservations remain charged throughout
++        // the wave. One sequential retry reuses a failed task's allocation.
++        budget.rail_active_reads[index] += 1;
++        budget.rail_inflight_bytes[index] += bytes;
++        self.rail_reservations.push((index, bytes));
++        Ok(())
++    }
++
+     fn finish_transfer(&mut self) {
+         let mut budget = self.state.lock().unwrap();
+         budget.staging_bytes -= self.transient_staging;
+@@ -764,6 +879,7 @@ impl Drop for BudgetGuard {
+ pub struct StagedRailRead {
+     bytes: Vec<u8>,
+     _budget: BudgetGuard,
++    pub(crate) deadline: Option<Instant>,
+ }
+ 
+ impl StagedRailRead {
+@@ -771,6 +887,10 @@ impl StagedRailRead {
+     pub fn as_bytes(&self) -> &[u8] {
+         &self.bytes
+     }
++
++    pub(crate) fn ensure_live(&self, cancel: Option<&RailCancel>) -> Result<(), RailReadError> {
++        check_live(cancel, self.deadline)
++    }
+ }
+ 
+ fn effective_registered_budget(configured: u64, soft_memlock_limit: Option<u64>) -> u64 {
+@@ -956,6 +1076,8 @@ impl RailReader {
+             routes,
+             connection_pool: None,
+             configuration_generation: 0,
++            recovery: None,
++            recovery_counts: std::array::from_fn(|_| AtomicU64::new(0)),
+             discovered_capabilities: None,
+             discovered_owners: None,
+             topologies,
+@@ -995,6 +1117,27 @@ impl RailReader {
+         self.connection_pool.as_ref().map(ConnectionPool::snapshot)
+     }
+ 
++    /// Enable at most one retry per failed initial task, on a healthy path to
++    /// the same placement owner. Defaults off and never retries unstriped reads.
++    pub fn with_recovery(mut self, options: RailRecoveryOptions) -> Result<Self, RailReadError> {
++        if options.timeout.is_zero() || Instant::now().checked_add(options.timeout).is_none() {
++            return Err(RailReadError::InvalidPlacement(
++                "recovery timeout must be positive and representable".into(),
++            ));
++        }
++        self.recovery = Some(options);
++        Ok(self)
++    }
++
++    /// Cumulative retry work, independent of initial-task and publication counts.
++    pub fn recovery_snapshot(&self) -> RailRecoverySnapshot {
++        RailRecoverySnapshot {
++            retry_tasks: self.recovery_counts[0].load(Ordering::Relaxed),
++            requested_payload_bytes: self.recovery_counts[1].load(Ordering::Relaxed),
++            successful_tasks: self.recovery_counts[2].load(Ordering::Relaxed),
++        }
++    }
++
+     /// The resolved route map used by this reader, including discovered listeners.
+     pub fn routes(&self) -> &[RailRoute] {
+         &self.routes
+@@ -1146,13 +1289,212 @@ impl RailReader {
+         })
+     }
+ 
++    pub(crate) fn start_deadline(&self) -> Result<Option<Instant>, RailReadError> {
++        self.recovery
++            .map(|options| {
++                Instant::now().checked_add(options.timeout).ok_or_else(|| {
++                    RailReadError::InvalidPlacement(
++                        "recovery deadline exceeds monotonic clock range".into(),
++                    )
++                })
++            })
++            .transpose()
++    }
++
++    fn attempt<T>(
++        &self,
++        task: &RailTask,
++        cancel: Option<&RailCancel>,
++        deadline: Option<Instant>,
++        fetch: impl FnOnce(Duration) -> Result<T, RailReadError>,
++    ) -> Result<T, RailReadError> {
++        check_live(cancel, deadline)?;
++        let timeout = deadline.map_or(self.limits.io_timeout, |deadline| {
++            self.limits
++                .io_timeout
++                .min(deadline.saturating_duration_since(Instant::now()))
++        });
++        if timeout.is_zero() {
++            return Err(RailReadError::DeadlineExceeded);
++        }
++        let counters = &self.counters[task.route_index];
++        let started = Instant::now();
++        let _activity = RailActivityGuard::new(
++            counters,
++            task.packed_len as u64,
++            (task.packed_len + task.dummy_len) as u64,
++        );
++        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| fetch(timeout)))
++            .unwrap_or(Err(RailReadError::WorkerPanic));
++        counters
++            .duration_us
++            .fetch_add(started.elapsed().as_micros() as u64, Ordering::Relaxed);
++        if result.is_ok() {
++            counters.reads_ok.fetch_add(1, Ordering::Relaxed);
++            counters
++                .bytes
++                .fetch_add(task.packed_len as u64, Ordering::Relaxed);
++        } else {
++            counters.reads_err.fetch_add(1, Ordering::Relaxed);
++            if matches!(
++                &result,
++                Err(RailReadError::Transport(_)
++                    | RailReadError::QuiescentTransport(_)
++                    | RailReadError::Incomplete { .. }
++                    | RailReadError::WorkerPanic)
++            ) {
++                *counters.cooldown_until.lock().unwrap() =
++                    Some(Instant::now() + self.limits.rail_cooldown);
++            }
++        }
++        result
++    }
++
++    fn validate_task(
++        &self,
++        plan: &RailPlan,
++        task: &RailTask,
++        packed: &[u8],
++    ) -> Result<(), RailReadError> {
++        if packed.len() != task.packed_len {
++            return Err(RailReadError::Incomplete {
++                expected: task.packed_len,
++                actual: packed.len(),
++            });
++        }
++        for stripe in &task.stripes {
++            let checksum = &plan.checksums[stripe.index as usize];
++            if !checksum.is_empty() {
++                let actual = format!(
++                    "{:016x}",
++                    twox_hash::xxh3::hash64(
++                        &packed[stripe.packed_offset..stripe.packed_offset + stripe.length]
++                    )
++                );
++                if !checksum.eq_ignore_ascii_case(&actual) {
++                    return Err(RailReadError::Checksum {
++                        stripe: stripe.index,
++                    });
++                }
++            }
++        }
++        Ok(())
++    }
++
++    fn retry_failed_tasks<T>(
++        &self,
++        plan: &RailPlan,
++        request: ReadRequest<'_>,
++        mut results: Vec<Result<T, RailReadError>>,
++        budget: &mut BudgetGuard,
++        mut fetch: impl FnMut(&RailTask, Duration) -> Result<T, RailReadError>,
++    ) -> Result<Vec<T>, RailReadError> {
++        let ReadRequest {
++            descriptor,
++            placement,
++            cancel,
++            deadline,
++        } = request;
++        // Called only after the scoped join barrier. Successful whole tasks
++        // remain private, and every failed packed allocation has been dropped.
++        check_live(cancel, deadline)?;
++        let failed_routes: HashSet<usize> = plan
++            .tasks
++            .iter()
++            .zip(&results)
++            .filter(|(_, result)| result.is_err())
++            .map(|(task, _)| task.route_index)
++            .collect();
++        if failed_routes.is_empty() {
++            return results.into_iter().collect();
++        }
++        // Reject the entire recovery wave before issuing any retry when an
++        // initial task has a permanent/uncertified failure.
++        let rejected = results.iter().position(|result| match result {
++            Err(RailReadError::QuiescentTransport(_)) => {
++                self.recovery.is_none() || !descriptor.is_striped
++            }
++            Err(_) => true,
++            Ok(_) => false,
++        });
++        if let Some(index) = rejected {
++            return match results.swap_remove(index) {
++                Err(error) => Err(error),
++                Ok(_) => unreachable!(),
++            };
++        }
++        budget.release_rails();
++        for (task, result) in plan.tasks.iter().zip(&mut results) {
++            if result.is_ok() {
++                continue;
++            }
++            check_live(cancel, deadline)?;
++            let endpoint = &self.routes[task.route_index].advertised_endpoint;
++            let mut owners = placement
++                .chunks
++                .iter()
++                .filter(|chunk| &chunk.rdma_endpoint == endpoint)
++                .map(|chunk| chunk.node_id.as_str());
++            let owner = owners.next().filter(|owner| !owner.trim().is_empty());
++            let unambiguous = owner.is_some_and(|owner| owners.all(|other| other == owner));
++            let alternative = if unambiguous {
++                self.routes
++                    .iter()
++                    .enumerate()
++                    .find(|(index, route)| {
++                        !failed_routes.contains(index)
++                            && &route.advertised_endpoint == endpoint
++                            && self.counters[*index].is_available()
++                    })
++                    .map(|(index, _)| index)
++            } else {
++                None
++            };
++            let Some(route_index) = alternative else {
++                return match std::mem::replace(result, Err(RailReadError::WorkerPanic)) {
++                    Err(error) => Err(error),
++                    Ok(_) => unreachable!(),
++                };
++            };
++            // Clone only the frozen failed task and replace its route. The
++            // descriptor, stripe list, offsets and lengths never change.
++            let mut retry = task.clone();
++            retry.route_index = route_index;
++            budget.reserve_retry(&retry, &self.limits)?;
++            *result = self.attempt(&retry, cancel, deadline, |timeout| {
++                self.recovery_counts[0].fetch_add(1, Ordering::Relaxed);
++                self.recovery_counts[1].fetch_add(retry.packed_len as u64, Ordering::Relaxed);
++                let result = fetch(&retry, timeout);
++                if result.is_ok() {
++                    self.recovery_counts[2].fetch_add(1, Ordering::Relaxed);
++                }
++                result
++            });
++            budget.release_rails();
++            // One sequential attempt per initial failed task; never recurse.
++            if result.is_err() {
++                return match std::mem::replace(result, Err(RailReadError::WorkerPanic)) {
++                    Err(error) => Err(error),
++                    Ok(_) => unreachable!(),
++                };
++            }
++        }
++        results.into_iter().collect()
++    }
++
+     fn fetch_direct_staged<T: RailTransport>(
+         &self,
+         plan: &RailPlan,
+-        descriptor: &pb::ObjectDescriptor,
++        request: ReadRequest<'_>,
+         transport: &T,
+-        cancel: Option<&RailCancel>,
++        budget: &mut BudgetGuard,
+     ) -> Result<(Vec<u8>, u128), RailReadError> {
++        let ReadRequest {
++            descriptor,
++            cancel,
++            deadline,
++            ..
++        } = request;
+         let workers_start = Instant::now();
+         let mut staged = Vec::new();
+         staged
+@@ -1177,46 +1519,16 @@ impl RailReader {
+                 .iter()
+                 .zip(targets)
+                 .map(|(task, target)| {
+-                    let route = &self.routes[task.route_index];
+-                    let counters = &self.counters[task.route_index];
+                     scope.spawn(move || {
+-                        let started = Instant::now();
+-                        let _activity = RailActivityGuard::new(
+-                            counters,
+-                            task.packed_len as u64,
+-                            (task.packed_len + task.dummy_len) as u64,
+-                        );
+-                        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
++                        self.attempt(task, cancel, deadline, |timeout| {
+                             transport.fetch_into(
+-                                route,
++                                &self.routes[task.route_index],
+                                 task,
+                                 descriptor,
+                                 target,
+-                                self.limits.io_timeout,
++                                timeout,
+                             )
+-                        }))
+-                        .unwrap_or(Err(RailReadError::WorkerPanic));
+-                        counters
+-                            .duration_us
+-                            .fetch_add(started.elapsed().as_micros() as u64, Ordering::Relaxed);
+-                        if result.is_ok() {
+-                            counters.reads_ok.fetch_add(1, Ordering::Relaxed);
+-                            counters
+-                                .bytes
+-                                .fetch_add(task.packed_len as u64, Ordering::Relaxed);
+-                        } else {
+-                            counters.reads_err.fetch_add(1, Ordering::Relaxed);
+-                            if matches!(
+-                                &result,
+-                                Err(RailReadError::Transport(_)
+-                                    | RailReadError::Incomplete { .. }
+-                                    | RailReadError::WorkerPanic)
+-                            ) {
+-                                *counters.cooldown_until.lock().unwrap() =
+-                                    Some(Instant::now() + self.limits.rail_cooldown);
+-                            }
+-                        }
+-                        result
++                        })
+                     })
+                 })
+                 .collect();
+@@ -1225,16 +1537,32 @@ impl RailReader {
+                 .map(|handle| handle.join().unwrap_or(Err(RailReadError::WorkerPanic)))
+                 .collect::<Vec<_>>()
+         });
+-        let workers_us = workers_start.elapsed().as_micros();
+-        if cancel.is_some_and(RailCancel::is_cancelled) {
+-            return Err(RailReadError::Cancelled);
+-        }
+-        for result in results {
+-            result?;
++        // All old mutable borrows have ended. Check every successful task before
++        // spending recovery bytes; partial failed ranges are never Ready.
++        if self.recovery.is_some() && results.iter().any(Result::is_err) {
++            for (task, result) in plan.tasks.iter().zip(&results) {
++                if result.is_ok() {
++                    let offset = task.stripes[0].object_offset;
++                    self.validate_task(plan, task, &staged[offset..offset + task.packed_len])?;
++                }
++            }
+         }
+-        Ok((staged, workers_us))
++        self.retry_failed_tasks(plan, request, results, budget, |task, timeout| {
++            let offset = task.stripes[0].object_offset;
++            let target = &mut staged[offset..offset + task.packed_len];
++            transport.fetch_into(
++                &self.routes[task.route_index],
++                task,
++                descriptor,
++                target,
++                timeout,
++            )?;
++            self.validate_task(plan, task, target)
++        })?;
++        Ok((staged, workers_start.elapsed().as_micros()))
+     }
+ 
++    #[cfg(test)]
+     fn read_staged_with<T: RailTransport>(
+         &self,
+         descriptor: &pb::ObjectDescriptor,
+@@ -1242,6 +1570,29 @@ impl RailReader {
+         transport: &T,
+         cancel: Option<&RailCancel>,
+     ) -> Result<StagedRailRead, RailReadError> {
++        let deadline = if descriptor.is_striped {
++            self.start_deadline()?
++        } else {
++            None
++        };
++        self.read_staged_with_deadline(descriptor, placement, transport, cancel, deadline)
++    }
++
++    fn read_staged_with_deadline<T: RailTransport>(
++        &self,
++        descriptor: &pb::ObjectDescriptor,
++        placement: &pb::PlacementDescriptor,
++        transport: &T,
++        cancel: Option<&RailCancel>,
++        deadline: Option<Instant>,
++    ) -> Result<StagedRailRead, RailReadError> {
++        check_live(cancel, deadline)?;
++        let request = ReadRequest {
++            descriptor,
++            placement,
++            cancel,
++            deadline,
++        };
+         let timing_start = Instant::now();
+         if let Some(expected) = &self.discovered_owners {
+             let current: HashSet<(&str, &str)> = placement
+@@ -1296,7 +1647,7 @@ impl RailReader {
+         let reserve_us = reserve_start.elapsed().as_micros();
+         if plan.direct_staging {
+             let (staged, workers_us) =
+-                self.fetch_direct_staged(&plan, descriptor, transport, cancel)?;
++                self.fetch_direct_staged(&plan, request, transport, &mut budget)?;
+             let checksum_start = Instant::now();
+             for (index, checksum) in plan.checksums.iter().enumerate() {
+                 if checksum.is_empty() {
+@@ -1313,6 +1664,7 @@ impl RailReader {
+             }
+             let checksum_us = checksum_start.elapsed().as_micros();
+             let finish_start = Instant::now();
++            check_live(cancel, deadline)?;
+             budget.finish_transfer();
+             if crate::rail_timing_enabled() {
+                 eprintln!(
+@@ -1326,6 +1678,7 @@ impl RailReader {
+             return Ok(StagedRailRead {
+                 bytes: staged,
+                 _budget: budget,
++                deadline,
+             });
+         }
+         let workers_start = Instant::now();
+@@ -1334,40 +1687,15 @@ impl RailReader {
+                 .tasks
+                 .iter()
+                 .map(|task| {
+-                    let route = &self.routes[task.route_index];
+-                    let counters = &self.counters[task.route_index];
+                     scope.spawn(move || {
+-                        let started = Instant::now();
+-                        let _activity = RailActivityGuard::new(
+-                            counters,
+-                            task.packed_len as u64,
+-                            (task.packed_len + task.dummy_len) as u64,
+-                        );
+-                        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+-                            transport.fetch(route, task, descriptor, self.limits.io_timeout)
+-                        }))
+-                        .unwrap_or(Err(RailReadError::WorkerPanic));
+-                        counters
+-                            .duration_us
+-                            .fetch_add(started.elapsed().as_micros() as u64, Ordering::Relaxed);
+-                        if result.is_ok() {
+-                            counters.reads_ok.fetch_add(1, Ordering::Relaxed);
+-                            counters
+-                                .bytes
+-                                .fetch_add(task.packed_len as u64, Ordering::Relaxed);
+-                        } else {
+-                            counters.reads_err.fetch_add(1, Ordering::Relaxed);
+-                            if matches!(
+-                                &result,
+-                                Err(RailReadError::Transport(_)
+-                                    | RailReadError::Incomplete { .. }
+-                                    | RailReadError::WorkerPanic)
+-                            ) {
+-                                *counters.cooldown_until.lock().unwrap() =
+-                                    Some(Instant::now() + self.limits.rail_cooldown);
+-                            }
+-                        }
+-                        result
++                        self.attempt(task, cancel, deadline, |timeout| {
++                            transport.fetch(
++                                &self.routes[task.route_index],
++                                task,
++                                descriptor,
++                                timeout,
++                            )
++                        })
+                     })
+                 })
+                 .collect();
+@@ -1376,10 +1704,21 @@ impl RailReader {
+                 .map(|handle| handle.join().unwrap_or(Err(RailReadError::WorkerPanic)))
+                 .collect::<Vec<_>>()
+         });
+-        let workers_us = workers_start.elapsed().as_micros();
+-        if cancel.is_some_and(RailCancel::is_cancelled) {
+-            return Err(RailReadError::Cancelled);
++        if self.recovery.is_some() && descriptor.is_striped && results.iter().any(Result::is_err) {
++            for (task, result) in plan.tasks.iter().zip(&results) {
++                if let Ok(packed) = result {
++                    self.validate_task(&plan, task, packed)?;
++                }
++            }
+         }
++        let results =
++            self.retry_failed_tasks(&plan, request, results, &mut budget, |task, timeout| {
++                let packed =
++                    transport.fetch(&self.routes[task.route_index], task, descriptor, timeout)?;
++                self.validate_task(&plan, task, &packed)?;
++                Ok(packed)
++            })?;
++        let workers_us = workers_start.elapsed().as_micros();
+         let assembly_start = Instant::now();
+         let single_ordered = plan.tasks.len() == 1
+             && plan.tasks[0].packed_len == plan.size
+@@ -1390,7 +1729,7 @@ impl RailReader {
+         let staged = if single_ordered {
+             // The transfer has completed and its temporary MR is deregistered.
+             // This private buffer is exactly the object in descriptor order.
+-            let packed = results.into_iter().next().expect("one planned task")?;
++            let packed = results.into_iter().next().expect("one planned task");
+             if packed.len() != plan.size {
+                 return Err(RailReadError::Incomplete {
+                     expected: plan.size,
+@@ -1404,8 +1743,7 @@ impl RailReader {
+                 .try_reserve_exact(plan.size)
+                 .map_err(|error| RailReadError::ResourceExhausted(error.to_string()))?;
+             staged.resize(plan.size, 0);
+-            for (task, result) in plan.tasks.iter().zip(results) {
+-                let packed = result?;
++            for (task, packed) in plan.tasks.iter().zip(results) {
+                 if packed.len() != task.packed_len {
+                     return Err(RailReadError::Incomplete {
+                         expected: task.packed_len,
+@@ -1438,6 +1776,7 @@ impl RailReader {
+         }
+         let checksum_us = checksum_start.elapsed().as_micros();
+         let finish_start = Instant::now();
++        check_live(cancel, deadline)?;
+         budget.finish_transfer();
+         if crate::rail_timing_enabled() {
+             eprintln!(
+@@ -1451,9 +1790,11 @@ impl RailReader {
+         Ok(StagedRailRead {
+             bytes: staged,
+             _budget: budget,
++            deadline,
+         })
+     }
+ 
++    #[cfg(test)]
+     fn read_into_with<T: RailTransport>(
+         &self,
+         descriptor: &pb::ObjectDescriptor,
+@@ -1462,6 +1803,11 @@ impl RailReader {
+         transport: &T,
+         cancel: Option<&RailCancel>,
+     ) -> Result<usize, RailReadError> {
++        let deadline = if descriptor.is_striped {
++            self.start_deadline()?
++        } else {
++            None
++        };
+         let size = usize::try_from(descriptor.size).map_err(|_| {
+             RailReadError::InvalidPlacement("object size exceeds address space".into())
+         })?;
+@@ -1471,12 +1817,11 @@ impl RailReader {
+                 have: destination.len(),
+             });
+         }
+-        let staged = self.read_staged_with(descriptor, placement, transport, cancel)?;
+-        if let Some(cancel) = cancel {
+-            cancel.publish_if_live(|| destination[..size].copy_from_slice(staged.as_bytes()))?;
+-        } else {
+-            destination[..size].copy_from_slice(staged.as_bytes());
+-        }
++        let staged =
++            self.read_staged_with_deadline(descriptor, placement, transport, cancel, deadline)?;
++        publish_before(cancel, staged.deadline, || {
++            destination[..size].copy_from_slice(staged.as_bytes())
++        })?;
+         Ok(size)
+     }
+ 
+@@ -1488,9 +1833,24 @@ impl RailReader {
+         descriptor: &pb::ObjectDescriptor,
+         placement: &pb::PlacementDescriptor,
+         cancel: Option<&RailCancel>,
++    ) -> Result<StagedRailRead, RailReadError> {
++        let deadline = if descriptor.is_striped {
++            self.start_deadline()?
++        } else {
++            None
++        };
++        self.read_staged_until(descriptor, placement, cancel, deadline)
++    }
++
++    pub(crate) fn read_staged_until(
++        &self,
++        descriptor: &pb::ObjectDescriptor,
++        placement: &pb::PlacementDescriptor,
++        cancel: Option<&RailCancel>,
++        deadline: Option<Instant>,
+     ) -> Result<StagedRailRead, RailReadError> {
+         let transport = VerbsTransport::new(self, placement, descriptor)?;
+-        self.read_staged_with(descriptor, placement, &transport, cancel)
++        self.read_staged_with_deadline(descriptor, placement, &transport, cancel, deadline)
+     }
+ 
+     /// Copy a completed read into the caller's buffer. This low-level method
+@@ -1503,8 +1863,25 @@ impl RailReader {
+         destination: &mut [u8],
+         cancel: Option<&RailCancel>,
+     ) -> Result<usize, RailReadError> {
+-        let transport = VerbsTransport::new(self, placement, descriptor)?;
+-        self.read_into_with(descriptor, placement, destination, &transport, cancel)
++        let deadline = if descriptor.is_striped {
++            self.start_deadline()?
++        } else {
++            None
++        };
++        let size = usize::try_from(descriptor.size).map_err(|_| {
++            RailReadError::InvalidPlacement("object size exceeds address space".into())
++        })?;
++        if destination.len() < size {
++            return Err(RailReadError::BufferTooSmall {
++                need: size,
++                have: destination.len(),
++            });
++        }
++        let staged = self.read_staged_until(descriptor, placement, cancel, deadline)?;
++        publish_before(cancel, staged.deadline, || {
++            destination[..size].copy_from_slice(staged.as_bytes())
++        })?;
++        Ok(size)
+     }
+ }
+ 
+@@ -1645,6 +2022,7 @@ struct VerbsTransport<'a> {
+     pool: Option<&'a ConnectionPool<ConnectionKey, RdmaClient>>,
+     configuration_generation: u64,
+     owners: HashMap<&'a str, &'a str>,
++    recovery: bool,
+ }
+ 
+ impl<'a> VerbsTransport<'a> {
+@@ -1680,6 +2058,7 @@ impl<'a> VerbsTransport<'a> {
+             pool,
+             configuration_generation: reader.configuration_generation,
+             owners,
++            recovery: reader.recovery.is_some() && descriptor.is_striped,
+         })
+     }
+ 
+@@ -1689,8 +2068,10 @@ impl<'a> VerbsTransport<'a> {
+         timeout: Duration,
+     ) -> Result<Lease<ConnectionKey, RdmaClient>, RailReadError> {
+         let open = || {
+-            RdmaClient::connect(route.connection.clone().with_io_timeout(timeout))
+-                .map_err(|error| RailReadError::Transport(error.to_string()))
++            connection_pool::connect_for_read(
++                route.connection.clone().with_io_timeout(timeout),
++                self.recovery,
++            )
+         };
+         if let Some(pool) = self.pool {
+             let owner = self
+@@ -1779,11 +2160,11 @@ impl RailTransport for VerbsTransport<'_> {
+                     client.get_descriptor_into_detailed(descriptor, &registered, 0)
+                 }
+             })();
+-            validate_outcome(result, task, descriptor)
++            result
+         }));
+         let get_us = get_start.elapsed().as_micros();
+         let teardown_start = Instant::now();
+-        finish_transfer(lease, registered, result)?;
++        connection_pool::finish_get(lease, registered, result, task, descriptor, self.recovery)?;
+         let teardown_us = teardown_start.elapsed().as_micros();
+         packed.truncate(task.packed_len);
+         if crate::rail_timing_enabled() {
+@@ -1857,11 +2238,18 @@ impl RailTransport for VerbsTransport<'_> {
+                     .client()
+                     .get_descriptor_stripes_sge_detailed(descriptor, &indices, &segments)
+             })();
+-            validate_outcome(result, task, descriptor)
++            result
+         }));
+         let get_us = get_start.elapsed().as_micros();
+         let teardown_start = Instant::now();
+-        finish_transfer(lease, (registered_dummy, registered_target), result)?;
++        connection_pool::finish_get(
++            lease,
++            (registered_dummy, registered_target),
++            result,
++            task,
++            descriptor,
++            self.recovery,
++        )?;
+         let teardown_us = teardown_start.elapsed().as_micros();
+         if crate::rail_timing_enabled() {
+             eprintln!(
+diff --git a/kv-service/client-rs/src/rail_read/connection_pool.rs b/kv-service/client-rs/src/rail_read/connection_pool.rs
+index cf392ce..c9d5066 100644
+--- a/kv-service/client-rs/src/rail_read/connection_pool.rs
++++ b/kv-service/client-rs/src/rail_read/connection_pool.rs
+@@ -3,6 +3,85 @@
+ use super::RailReadError;
+ use std::sync::{Arc, Mutex, MutexGuard};
+ 
++/// Opaque evidence that a transient transport failure has no live QP or MR.
++/// Only the resource owner can create this evidence; strings are insufficient.
++#[derive(Debug)]
++pub struct QuiescentTransportFailure {
++    reason: String,
++}
++
++impl std::fmt::Display for QuiescentTransportFailure {
++    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
++        self.reason.fmt(f)
++    }
++}
++
++fn transient_control_io(error: &anyhow::Error) -> bool {
++    use std::io::ErrorKind;
++    error
++        .chain()
++        .find_map(|cause| cause.downcast_ref::<std::io::Error>())
++        .is_some_and(|error| {
++            matches!(
++                error.kind(),
++                ErrorKind::TimedOut
++                    | ErrorKind::WouldBlock
++                    | ErrorKind::ConnectionReset
++                    | ErrorKind::ConnectionAborted
++                    | ErrorKind::ConnectionRefused
++                    | ErrorKind::BrokenPipe
++                    | ErrorKind::UnexpectedEof
++            )
++        })
++}
++
++pub(super) fn connect_for_read(
++    config: crate::rdma::RdmaClientConfig,
++    recovery: bool,
++) -> Result<crate::rdma::RdmaClient, RailReadError> {
++    // Connect never registers a target or submits a data transfer. Its failure
++    // path destroys the handshake QP before returning to this owner boundary.
++    crate::rdma::RdmaClient::connect(config).map_err(|error| {
++        if recovery && transient_control_io(&error) {
++            RailReadError::QuiescentTransport(QuiescentTransportFailure {
++                reason: error.to_string(),
++            })
++        } else {
++            RailReadError::Transport(error.to_string())
++        }
++    })
++}
++
++pub(super) fn finish_get<K, C, R>(
++    lease: Lease<K, C>,
++    registrations: R,
++    result: std::thread::Result<anyhow::Result<Option<crate::rdma::RdmaReadOutcome>>>,
++    task: &super::RailTask,
++    descriptor: &crate::pb::ObjectDescriptor,
++    recovery: bool,
++) -> Result<(), RailReadError> {
++    let transient = recovery
++        && descriptor.is_striped
++        && matches!(&result, Ok(Err(error)) if transient_control_io(error));
++    let result = result.map(|result| super::validate_outcome(result, task, descriptor));
++    // The cleanup certificate is constructed only AFTER QP destruction and MR
++    // deregistration have completed. Panic/protocol/count errors get no proof.
++    match finish_transfer(lease, registrations, result) {
++        Err(RailReadError::Transport(reason)) if transient => Err(
++            RailReadError::QuiescentTransport(QuiescentTransportFailure { reason }),
++        ),
++        result => result,
++    }
++}
++
++#[cfg(test)]
++pub(super) fn mock_quiescent_failure() -> RailReadError {
++    // Explicit private mock seam only, never evidence of provider quiescence.
++    RailReadError::QuiescentTransport(QuiescentTransportFailure {
++        reason: "mock transient control disconnect after simulated cleanup".into(),
++    })
++}
++
+ /// Bounds established, connecting, idle, and retiring clients in one reader.
+ #[derive(Clone, Copy, Debug)]
+ pub struct RailConnectionPoolOptions {
+@@ -469,4 +548,136 @@ mod tests {
+         drop(pool);
+         assert_eq!(events.lock().unwrap().len(), 2);
+     }
++    #[test]
++    fn only_whitelisted_structured_control_io_is_certified_after_cleanup() {
++        use std::io::ErrorKind;
++        let descriptor = crate::pb::ObjectDescriptor {
++            is_striped: true,
++            ..Default::default()
++        };
++        let task = super::super::RailTask {
++            route_index: 0,
++            packed_len: 8,
++            dummy_len: 8,
++            stripes: vec![super::super::StripeRead {
++                index: 0,
++                object_offset: 0,
++                packed_offset: 0,
++                length: 8,
++            }],
++        };
++        for kind in [
++            ErrorKind::TimedOut,
++            ErrorKind::WouldBlock,
++            ErrorKind::ConnectionReset,
++            ErrorKind::ConnectionAborted,
++            ErrorKind::ConnectionRefused,
++            ErrorKind::BrokenPipe,
++            ErrorKind::UnexpectedEof,
++            ErrorKind::InvalidData,
++            ErrorKind::PermissionDenied,
++            ErrorKind::OutOfMemory,
++        ] {
++            let events = Arc::new(Mutex::new(Vec::new()));
++            let lease: Lease<&str, _> = Lease::unpooled(probe(&events, "QP"));
++            let raw = anyhow::Error::new(std::io::Error::new(kind, "injected control I/O"))
++                .context("GET control channel");
++            let result = finish_get(
++                lease,
++                probe(&events, "MR"),
++                Ok(Err(raw)),
++                &task,
++                &descriptor,
++                true,
++            );
++            assert_eq!(*events.lock().unwrap(), vec!["QP", "MR"]);
++            let allowed = !matches!(
++                kind,
++                ErrorKind::InvalidData | ErrorKind::PermissionDenied | ErrorKind::OutOfMemory
++            );
++            assert_eq!(
++                matches!(result, Err(RailReadError::QuiescentTransport(_))),
++                allowed
++            );
++        }
++        let events = Arc::new(Mutex::new(Vec::new()));
++        let lease: Lease<&str, _> = Lease::unpooled(probe(&events, "QP"));
++        let result = finish_get(
++            lease,
++            probe(&events, "MR"),
++            Ok(Err(anyhow::anyhow!("ConnectionReset"))),
++            &task,
++            &descriptor,
++            true,
++        );
++        assert!(
++            matches!(result, Err(RailReadError::Transport(_))),
++            "text never certifies a failure"
++        );
++    }
++
++    #[test]
++    fn recovery_certificate_is_not_returned_while_qp_or_mr_destruction_is_blocked() {
++        use std::sync::mpsc;
++        for block_mr in [false, true] {
++            let (entered_tx, entered_rx) = mpsc::channel();
++            let (release_tx, release_rx) = mpsc::channel();
++            let (result_tx, result_rx) = mpsc::channel();
++            let blocking = DropProbe(Box::new(move || {
++                entered_tx.send(()).unwrap();
++                release_rx
++                    .recv_timeout(std::time::Duration::from_secs(5))
++                    .unwrap();
++            }));
++            let idle = DropProbe(Box::new(|| {}));
++            let (client, registration) = if block_mr {
++                (idle, blocking)
++            } else {
++                (blocking, idle)
++            };
++            std::thread::scope(|scope| {
++                scope.spawn(move || {
++                    let lease: Lease<&str, _> = Lease::unpooled(client);
++                    let descriptor = crate::pb::ObjectDescriptor {
++                        is_striped: true,
++                        ..Default::default()
++                    };
++                    let task = super::super::RailTask {
++                        route_index: 0,
++                        packed_len: 8,
++                        dummy_len: 8,
++                        stripes: vec![],
++                    };
++                    let raw = anyhow::Error::new(std::io::Error::new(
++                        std::io::ErrorKind::ConnectionReset,
++                        "mock TCP",
++                    ));
++                    result_tx
++                        .send(finish_get(
++                            lease,
++                            registration,
++                            Ok(Err(raw)),
++                            &task,
++                            &descriptor,
++                            true,
++                        ))
++                        .unwrap();
++                });
++                entered_rx
++                    .recv_timeout(std::time::Duration::from_secs(5))
++                    .unwrap();
++                assert!(matches!(
++                    result_rx.try_recv(),
++                    Err(mpsc::TryRecvError::Empty)
++                ));
++                release_tx.send(()).unwrap();
++                assert!(matches!(
++                    result_rx
++                        .recv_timeout(std::time::Duration::from_secs(5))
++                        .unwrap(),
++                    Err(RailReadError::QuiescentTransport(_))
++                ));
++            });
++        }
++    }
+ }
+diff --git a/kv-service/client-rs/src/rdma.rs b/kv-service/client-rs/src/rdma.rs
+index a0e0599..97de89c 100644
+--- a/kv-service/client-rs/src/rdma.rs
++++ b/kv-service/client-rs/src/rdma.rs
+@@ -130,12 +130,15 @@ fn open_control_stream(endpoint: &str, timeout: Duration) -> Result<TcpStream> {
+             Err(error) => last_error = Some(error),
+         }
+     }
+-    Err(anyhow!(
+-        "connect RDMA control endpoint {endpoint}: {}",
+-        last_error
+-            .map(|error| error.to_string())
+-            .unwrap_or_else(|| "no resolved addresses".to_string())
+-    ))
++    match last_error {
++        Some(error) => {
++            Err(anyhow::Error::new(error)
++                .context(format!("connect RDMA control endpoint {endpoint}")))
++        }
++        None => Err(anyhow!(
++            "connect RDMA control endpoint {endpoint}: no resolved addresses"
++        )),
++    }
+ }
+ 
+ /// Result of an RDMA read. `None` means the object did not exist.

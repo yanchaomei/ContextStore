@@ -1,0 +1,16 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+PING 10.0.0.64 (10.0.0.64) 56(84) bytes of data.
+64 bytes from 10.0.0.64: icmp_seq=1 ttl=64 time=0.211 ms
+64 bytes from 10.0.0.64: icmp_seq=2 ttl=64 time=0.135 ms
+
+--- 10.0.0.64 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1021ms
+rtt min/avg/max/mdev = 0.135/0.173/0.211/0.038 ms
+10.0.0.64 dev ens4f1 src 10.0.0.62 uid 1000 
+    cache 
+0000:0000:0000:0000:0000:ffff:0a00:003e
+RoCE v2
+0: mlx5_0: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 
+1: mlx5_1: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 

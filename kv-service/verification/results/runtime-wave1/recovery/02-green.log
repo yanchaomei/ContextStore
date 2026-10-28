@@ -1,0 +1,14 @@
+   Compiling contextstore-client-rs v0.1.0 (/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate/kv-service/client-rs)
+error[E0425]: cannot find function `finish_transfer` in this scope
+    --> kv-service/client-rs/src/rail_read/tests.rs:1562:17
+     |
+1562 |         assert!(finish_transfer(lease, (), Ok(result)).is_err());
+     |                 ^^^^^^^^^^^^^^^ not found in this scope
+     |
+help: consider importing this function
+     |
+   1 + use crate::rail_read::connection_pool::finish_transfer;
+     |
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `contextstore-client-rs` (lib test) due to 1 previous error

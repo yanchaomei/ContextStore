@@ -3,6 +3,85 @@
 use super::RailReadError;
 use std::sync::{Arc, Mutex, MutexGuard};
 
+/// Opaque evidence that a transient transport failure has no live QP or MR.
+/// Only the resource owner can create this evidence; strings are insufficient.
+#[derive(Debug)]
+pub struct QuiescentTransportFailure {
+    reason: String,
+}
+
+impl std::fmt::Display for QuiescentTransportFailure {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.reason.fmt(f)
+    }
+}
+
+fn transient_control_io(error: &anyhow::Error) -> bool {
+    use std::io::ErrorKind;
+    error
+        .chain()
+        .find_map(|cause| cause.downcast_ref::<std::io::Error>())
+        .is_some_and(|error| {
+            matches!(
+                error.kind(),
+                ErrorKind::TimedOut
+                    | ErrorKind::WouldBlock
+                    | ErrorKind::ConnectionReset
+                    | ErrorKind::ConnectionAborted
+                    | ErrorKind::ConnectionRefused
+                    | ErrorKind::BrokenPipe
+                    | ErrorKind::UnexpectedEof
+            )
+        })
+}
+
+pub(super) fn connect_for_read(
+    config: crate::rdma::RdmaClientConfig,
+    recovery: bool,
+) -> Result<crate::rdma::RdmaClient, RailReadError> {
+    // Connect never registers a target or submits a data transfer. Its failure
+    // path destroys the handshake QP before returning to this owner boundary.
+    crate::rdma::RdmaClient::connect(config).map_err(|error| {
+        if recovery && transient_control_io(&error) {
+            RailReadError::QuiescentTransport(QuiescentTransportFailure {
+                reason: format!("{error:#}"),
+            })
+        } else {
+            RailReadError::Transport(format!("{error:#}"))
+        }
+    })
+}
+
+pub(super) fn finish_get<K, C, R>(
+    lease: Lease<K, C>,
+    registrations: R,
+    result: std::thread::Result<anyhow::Result<Option<crate::rdma::RdmaReadOutcome>>>,
+    task: &super::RailTask,
+    descriptor: &crate::pb::ObjectDescriptor,
+    recovery: bool,
+) -> Result<(), RailReadError> {
+    let transient = recovery
+        && descriptor.is_striped
+        && matches!(&result, Ok(Err(error)) if transient_control_io(error));
+    let result = result.map(|result| super::validate_outcome(result, task, descriptor));
+    // The cleanup certificate is constructed only AFTER QP destruction and MR
+    // deregistration have completed. Panic/protocol/count errors get no proof.
+    match finish_transfer(lease, registrations, result) {
+        Err(RailReadError::Transport(reason)) if transient => Err(
+            RailReadError::QuiescentTransport(QuiescentTransportFailure { reason }),
+        ),
+        result => result,
+    }
+}
+
+#[cfg(test)]
+pub(super) fn mock_quiescent_failure() -> RailReadError {
+    // Explicit private mock seam only, never evidence of provider quiescence.
+    RailReadError::QuiescentTransport(QuiescentTransportFailure {
+        reason: "mock transient control disconnect after simulated cleanup".into(),
+    })
+}
+
 /// Bounds established, connecting, idle, and retiring clients in one reader.
 #[derive(Clone, Copy, Debug)]
 pub struct RailConnectionPoolOptions {
@@ -468,5 +547,137 @@ mod tests {
         assert!(events.lock().unwrap().is_empty());
         drop(pool);
         assert_eq!(events.lock().unwrap().len(), 2);
+    }
+    #[test]
+    fn only_whitelisted_structured_control_io_is_certified_after_cleanup() {
+        use std::io::ErrorKind;
+        let descriptor = crate::pb::ObjectDescriptor {
+            is_striped: true,
+            ..Default::default()
+        };
+        let task = super::super::RailTask {
+            route_index: 0,
+            packed_len: 8,
+            dummy_len: 8,
+            stripes: vec![super::super::StripeRead {
+                index: 0,
+                object_offset: 0,
+                packed_offset: 0,
+                length: 8,
+            }],
+        };
+        for kind in [
+            ErrorKind::TimedOut,
+            ErrorKind::WouldBlock,
+            ErrorKind::ConnectionReset,
+            ErrorKind::ConnectionAborted,
+            ErrorKind::ConnectionRefused,
+            ErrorKind::BrokenPipe,
+            ErrorKind::UnexpectedEof,
+            ErrorKind::InvalidData,
+            ErrorKind::PermissionDenied,
+            ErrorKind::OutOfMemory,
+        ] {
+            let events = Arc::new(Mutex::new(Vec::new()));
+            let lease: Lease<&str, _> = Lease::unpooled(probe(&events, "QP"));
+            let raw = anyhow::Error::new(std::io::Error::new(kind, "injected control I/O"))
+                .context("GET control channel");
+            let result = finish_get(
+                lease,
+                probe(&events, "MR"),
+                Ok(Err(raw)),
+                &task,
+                &descriptor,
+                true,
+            );
+            assert_eq!(*events.lock().unwrap(), vec!["QP", "MR"]);
+            let allowed = !matches!(
+                kind,
+                ErrorKind::InvalidData | ErrorKind::PermissionDenied | ErrorKind::OutOfMemory
+            );
+            assert_eq!(
+                matches!(result, Err(RailReadError::QuiescentTransport(_))),
+                allowed
+            );
+        }
+        let events = Arc::new(Mutex::new(Vec::new()));
+        let lease: Lease<&str, _> = Lease::unpooled(probe(&events, "QP"));
+        let result = finish_get(
+            lease,
+            probe(&events, "MR"),
+            Ok(Err(anyhow::anyhow!("ConnectionReset"))),
+            &task,
+            &descriptor,
+            true,
+        );
+        assert!(
+            matches!(result, Err(RailReadError::Transport(_))),
+            "text never certifies a failure"
+        );
+    }
+
+    #[test]
+    fn recovery_certificate_is_not_returned_while_qp_or_mr_destruction_is_blocked() {
+        use std::sync::mpsc;
+        for block_mr in [false, true] {
+            let (entered_tx, entered_rx) = mpsc::channel();
+            let (release_tx, release_rx) = mpsc::channel();
+            let (result_tx, result_rx) = mpsc::channel();
+            let blocking = DropProbe(Box::new(move || {
+                entered_tx.send(()).unwrap();
+                release_rx
+                    .recv_timeout(std::time::Duration::from_secs(5))
+                    .unwrap();
+            }));
+            let idle = DropProbe(Box::new(|| {}));
+            let (client, registration) = if block_mr {
+                (idle, blocking)
+            } else {
+                (blocking, idle)
+            };
+            std::thread::scope(|scope| {
+                scope.spawn(move || {
+                    let lease: Lease<&str, _> = Lease::unpooled(client);
+                    let descriptor = crate::pb::ObjectDescriptor {
+                        is_striped: true,
+                        ..Default::default()
+                    };
+                    let task = super::super::RailTask {
+                        route_index: 0,
+                        packed_len: 8,
+                        dummy_len: 8,
+                        stripes: vec![],
+                    };
+                    let raw = anyhow::Error::new(std::io::Error::new(
+                        std::io::ErrorKind::ConnectionReset,
+                        "mock TCP",
+                    ));
+                    result_tx
+                        .send(finish_get(
+                            lease,
+                            registration,
+                            Ok(Err(raw)),
+                            &task,
+                            &descriptor,
+                            true,
+                        ))
+                        .unwrap();
+                });
+                entered_rx
+                    .recv_timeout(std::time::Duration::from_secs(5))
+                    .unwrap();
+                assert!(matches!(
+                    result_rx.try_recv(),
+                    Err(mpsc::TryRecvError::Empty)
+                ));
+                release_tx.send(()).unwrap();
+                assert!(matches!(
+                    result_rx
+                        .recv_timeout(std::time::Duration::from_secs(5))
+                        .unwrap(),
+                    Err(RailReadError::QuiescentTransport(_))
+                ));
+            });
+        }
     }
 }

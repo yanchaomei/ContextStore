@@ -3,7 +3,8 @@
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
 use contextstore_client_rs::rail_read::{
-    LocalRailPath, RailLimits, RailModeCounts, RailReader, RailRoute,
+    LocalRailPath, RailConnectionPoolOptions, RailLimits, RailModeCounts, RailReader,
+    RailRecoveryOptions, RailRoute,
 };
 use contextstore_client_rs::rdma::RdmaClientConfig;
 use contextstore_client_rs::{KvClient, ObjectLookup};
@@ -43,6 +44,15 @@ struct Args {
     /// Use the direct path's contiguous stripe planner with packed buffers.
     #[arg(long)]
     contiguous_schedule: bool,
+    /// Maximum persistent striped-read connections; zero keeps legacy teardown.
+    #[arg(long, default_value_t = 0)]
+    connection_pool_size: usize,
+    /// Opt in to one striped-read recovery wave with this total deadline.
+    #[arg(long)]
+    recovery_timeout_ms: Option<u64>,
+    /// Verify the known (index % 251) payload seeded by cs-bench.
+    #[arg(long)]
+    verify_pattern: bool,
 }
 
 fn parse_route(spec: &str) -> Result<RailRoute> {
@@ -137,6 +147,16 @@ fn print_effective_modes(reader: &RailReader, before: RailModeCounts) {
     );
 }
 
+fn print_pool_stats(label: &str, reader: &RailReader) {
+    if let Some(stats) = reader.connection_pool_snapshot() {
+        println!("pool_stats,phase={label},enabled=true,created={},reused={},retired={},rejected={},live={},connecting={},active={},idle={},retiring={}",
+            stats.created, stats.reused, stats.retired, stats.rejected, stats.live,
+            stats.connecting, stats.active, stats.idle, stats.retiring);
+    } else {
+        println!("pool_stats,phase={label},enabled=false");
+    }
+}
+
 fn print_object_identity(label: &str, lookup: &ObjectLookup) -> Result<()> {
     let placement = lookup
         .placement
@@ -180,15 +200,15 @@ async fn run_concurrent(
     client: &KvClient,
     reader: Arc<RailReader>,
     size: usize,
-    warmup_bytes: &[u64],
-    warmup_modes: RailModeCounts,
+    warmup: (&[u64], RailModeCounts),
     initial_lookup: &ObjectLookup,
+    mut expected_hash: Option<u64>,
 ) -> Result<()> {
+    let (warmup_bytes, warmup_modes) = warmup;
     let mut request_times = Vec::<Duration>::new();
     let mut batch_times = Vec::<Duration>::new();
     let mut cpu_user_us = 0u64;
     let mut cpu_system_us = 0u64;
-    let mut expected_hash = None;
     for batch in 0..args.iterations {
         let destinations = (0..args.concurrency)
             .map(|_| vec![0xA5; size])
@@ -293,6 +313,7 @@ async fn run_concurrent(
         process_usage().2
     );
     print_effective_modes(&reader, warmup_modes);
+    print_pool_stats("final", &reader);
     let mut verification_client = client.clone();
     verify_object_identity(&mut verification_client, args, initial_lookup).await?;
     Ok(())
@@ -340,7 +361,7 @@ async fn main() -> Result<()> {
         contiguous_schedule: args.contiguous_schedule,
         ..RailLimits::default()
     };
-    let reader = Arc::new(if local_paths.is_empty() {
+    let mut reader = if local_paths.is_empty() {
         RailReader::new(explicit_routes, limits)?
     } else {
         let placement = lookup
@@ -348,9 +369,23 @@ async fn main() -> Result<()> {
             .as_ref()
             .ok_or_else(|| anyhow!("object lookup returned no placement"))?;
         RailReader::discover_from_placement(placement, &local_paths, limits)?
-    });
+    };
+    if args.connection_pool_size > 0 {
+        reader = reader.with_connection_pool(RailConnectionPoolOptions {
+            max_live_connections: args.connection_pool_size,
+            configuration_generation: 0,
+        })?;
+    }
+    if let Some(timeout_ms) = args.recovery_timeout_ms {
+        reader = reader.with_recovery(RailRecoveryOptions {
+            timeout: Duration::from_millis(timeout_ms),
+        })?;
+    }
+    let reader = Arc::new(reader);
     println!("mode,direct_staging={}", args.direct_staging);
     println!("mode,contiguous_schedule={}", args.contiguous_schedule);
+    println!("mode,connection_pool_size={},recovery_timeout_ms={:?},verify_pattern={},warmup={},iterations={},concurrency={}",
+        args.connection_pool_size, args.recovery_timeout_ms, args.verify_pattern, args.warmup, args.iterations, args.concurrency);
     let placement = lookup
         .placement
         .as_ref()
@@ -362,6 +397,14 @@ async fn main() -> Result<()> {
         );
     }
     let size = usize::try_from(lookup.descriptor.size)?;
+    let mut expected_hash = if args.verify_pattern {
+        let expected: Vec<u8> = (0..size).map(|index| (index % 251) as u8).collect();
+        let hash = twox_hash::xxh3::hash64(&expected);
+        println!("expected_pattern,pattern=index_mod_251,bytes={size},xxh3={hash:016x}");
+        Some(hash)
+    } else {
+        None
+    };
     let mut destination = vec![0u8; size];
     for route in reader.routes() {
         println!(
@@ -375,6 +418,7 @@ async fn main() -> Result<()> {
             route.connection.endpoint
         );
     }
+    print_pool_stats("before_warmup", &reader);
     for _ in 0..args.warmup {
         client
             .read_multi_rail_into(
@@ -386,7 +430,13 @@ async fn main() -> Result<()> {
             )
             .await?
             .ok_or_else(|| anyhow!("object disappeared during warmup"))?;
+        let hash = twox_hash::xxh3::hash64(&destination);
+        if expected_hash.is_some_and(|expected| expected != hash) {
+            return Err(anyhow!("warmup payload does not match expected hash"));
+        }
+        expected_hash.get_or_insert(hash);
     }
+    print_pool_stats("after_warmup", &reader);
     let warmup_bytes: Vec<_> = reader.snapshots().iter().map(|rail| rail.bytes).collect();
     let warmup_modes = reader.mode_counts();
     if args.concurrency > 1 {
@@ -395,9 +445,9 @@ async fn main() -> Result<()> {
             &client,
             reader,
             size,
-            &warmup_bytes,
-            warmup_modes,
+            (&warmup_bytes, warmup_modes),
             &lookup,
+            expected_hash,
         )
         .await;
     }
@@ -426,6 +476,10 @@ async fn main() -> Result<()> {
             return Err(anyhow!("short read: {bytes} of {size} bytes"));
         }
         let checksum = twox_hash::xxh3::hash64(&destination);
+        if expected_hash.is_some_and(|expected| expected != checksum) {
+            return Err(anyhow!("measured payload does not match expected hash"));
+        }
+        expected_hash.get_or_insert(checksum);
         let gib_per_s = bytes as f64 / elapsed.as_secs_f64() / 1024f64.powi(3);
         println!(
             "sample,environment={},rails={},iteration={},bytes={},latency_us={},gib_per_s={gib_per_s:.3},xxh3={checksum:016x}",
@@ -457,6 +511,7 @@ async fn main() -> Result<()> {
         process_usage().2
     );
     print_effective_modes(&reader, warmup_modes);
+    print_pool_stats("final", &reader);
     for snapshot in reader.snapshots() {
         let completed = snapshot.reads_ok + snapshot.reads_err;
         let average_us = snapshot.duration_us / completed.max(1);

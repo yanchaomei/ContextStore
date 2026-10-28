@@ -1,0 +1,161 @@
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test two_node_streaming_put_places_stripes_on_all_devices ... ok
+test two_node_cross_node_get_returns_original_payload ... ok
+test two_node_distributed_delete_retires_then_reclaims_all_stripe_files ... ok
+test two_node_restart_recovers_shared_metadata_and_stripes ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.26s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 77 tests
+test api::service::tests::descriptor_contains_version_identity ... ok
+test api::service::tests::descriptor_validation_rejects_stale_generation ... ok
+test api::service::tests::meta_from_pb_applies_put_options_ttl ... ok
+test api::service::tests::meta_from_pb_clamps_negative_ttl_to_disabled ... ok
+test config::rail_advertisement_tests::blank_fabric_or_listener_is_rejected ... ok
+test config::rail_advertisement_tests::duplicate_fabric_or_listener_is_rejected ... ok
+test io_executor::aligned_buffer::tests::align_4k_ptr ... ok
+test io_executor::aligned_buffer::tests::pool_bounded_per_class ... ok
+test io_executor::aligned_buffer::tests::pooled_buffer_returns_on_drop ... ok
+test io_executor::aligned_buffer::tests::pool_reuses_same_capacity ... ok
+test io_executor::aligned_buffer::tests::pool_distinct_capacity_classes ... ok
+test io_executor::aligned_buffer::tests::truncate_shortens ... ok
+test io_executor::aligned_buffer::tests::pooled_buffer_via_bytes_from_owner ... ok
+test io_executor::aligned_buffer::tests::write_via_ptr_then_read ... ok
+test io_executor::tier_a::tests::direct_io_flag_matches_native_platform ... ok
+test io_executor::tier_a::tests::write_read_roundtrip ... ok
+test io_executor::tier_a::tests::pointer_stream_reports_every_range_and_fills_aligned_destination ... ok
+test metadata::tests::block_meta_expiry_uses_created_at_and_positive_ttl ... ok
+test metadata::tests::delete_block_if_matches_keeps_newer_metadata ... ok
+test metadata::tests::delete_block_if_matches_uses_generation_identity ... ok
+test io_executor::tier_a::tests::batch_read_parallel ... ok
+test metadata::tests::injected_put_failure_is_one_shot ... ok
+test metadata::tests::put_block_if_absent_commits_only_once ... ok
+test metadata::tests::expired_gc_lease_can_be_reclaimed ... ok
+test metadata::tests::next_generation_is_monotonic ... ok
+test metadata::tests::retiring_a_block_preserves_the_generation_counter ... ok
+test metadata::tests::stale_retire_does_not_remove_a_newer_identity ... ok
+test metadata::tests::replace_block_enqueues_the_superseded_generation ... ok
+test router::tests::canonical_key_round_trips_with_delimiters ... ok
+test metadata::tests::test_block_meta_roundtrip ... ok
+test router::tests::chunk_device_stripes_from_object_home ... ok
+test router::tests::object_hash_is_stable_for_same_object ... ok
+test router::tests::group_by_device_works ... ok
+test router::tests::unsafe_namespace_stays_under_device_root ... ok
+test storage_tier::tests::disabled_metrics_skip_startup_capacity_scan ... ok
+test storage_tier::tests::expired_object_retires_metadata_without_synchronous_chunk_cleanup ... ok
+test storage_tier::tests::missing_single_file_clears_current_metadata ... ok
+test storage_tier::tests::expired_single_object_is_retired_on_get ... ok
+test storage_tier::tests::batch_distributes_to_multiple_devices ... ok
+test storage_tier::tests::overwrite_writes_new_physical_path_without_mutating_old_file ... ok
+test api::service::tests::local_cluster_entry_without_node_id_uses_local_rail_advertisements ... ok
+test api::service::tests::local_stripe_indices_handle_duplicate_local_data_nodes ... ok
+test api::service::tests::empty_rail_advertisement_keeps_legacy_placement ... ok
+test api::service::tests::placement_validation_rejects_stale_epoch ... ok
+test api::service::tests::placement_validation_accepts_current_descriptor ... ok
+test storage_tier::tests::put_if_absent_can_replace_expired_object ... ok
+test memory_tier::tests::cache_hit_after_put ... ok
+test storage_tier::tests::put_get_delete_roundtrip ... ok
+test memory_tier::tests::expired_single_cache_entry_is_not_returned ... ok
+test memory_tier::tests::put_if_absent_keeps_existing_cache_entry ... ok
+test api::service::tests::placement_uses_materialized_chunk_locations ... ok
+test api::service::tests::metadata_get_live_purges_expired_metadata ... ok
+test memory_tier::tests::expired_chunks_cache_entry_is_not_returned ... ok
+test api::service::tests::rail_capabilities_follow_actual_local_and_remote_owners ... ok
+test memory_tier::tests::single_put_invalidates_chunks_cache_for_same_object ... ok
+test memory_tier::tests::put_chunks_if_absent_keeps_existing_chunks_cache_entry ... ok
+test api::service::tests::gc_worker_reclaims_only_the_retired_generation ... ok
+test storage_tier::tests::placement_chunk_integrity_skips_non_striped_objects ... ok
+test storage_tier::tests::metadata_put_failure_rolls_back_single_file ... ok
+test memory_tier::tests::chunk_put_invalidates_single_cache_for_same_object ... ok
+test storage_tier::tests::put_if_absent_does_not_overwrite_existing_object ... ok
+test storage_tier::tests::striped_delete_continues_after_unroutable_chunk ... ok
+test storage_tier::tests::placement_chunk_integrity_rejects_corruption ... ok
+test storage_tier::tests::non_striped_get_uses_metadata_path_after_device_count_changes ... ok
+test api::service::tests::local_stripe_indices_rotate_devices_per_data_node ... ok
+test api::service::tests::lookup_placement_advertises_two_local_rails_without_changing_stripes ... ok
+test api::service::tests::placement_epoch_is_stable_across_local_nodes ... ok
+test api::service::tests::placement_epoch_changes_when_topology_changes ... ok
+test storage_tier::tests::put_chunks_if_absent_does_not_overwrite_striped_object ... ok
+test storage_tier::tests::metadata_put_failure_rolls_back_striped_chunks ... ok
+test storage_tier::tests::stripe_integrity_is_opt_in_and_corruption_becomes_cache_miss ... ok
+test storage_tier::tests::large_value_is_striped ... ok
+test storage_tier::tests::expired_striped_object_is_retired_on_get ... ok
+test storage_tier::tests::stripe_integrity_disabled_keeps_legacy_read_behavior ... ok
+test storage_tier::tests::missing_striped_chunk_clears_current_metadata ... ok
+test storage_tier::tests::stripe_subset_read_preserves_indices_and_checks_integrity ... ok
+test storage_tier::tests::striped_overwrite_uses_new_chunk_paths ... ok
+
+test result: ok. 77 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test tests::checksum_status_distinguishes_legacy_metadata ... ok
+test tests::readable_selector_encodes_canonical_key ... ok
+test tests::table_truncation_preserves_character_boundaries ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test redis_if_absent_commits_only_once ... ok
+test shared_redis_metadata_is_visible_across_contexts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

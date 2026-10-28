@@ -1,0 +1,5 @@
+CS_E2E_SERVER_BIN=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target/debug/contextstore-server
+TMPDIR=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tmp
+Redis server v=255.255.255 sha=6b240f9f:1 malloc=jemalloc-5.1.0 bits=64 build=a59b02a2cd435d47
+1859ffb78812886458a27f52cbb9f8cd05ff04047982ff2621c1b081485bda08  /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target/debug/contextstore-server
+a59ba77b9758fa0ad267a3ca6801f45858caba4f253149cbde89399a69d13296  /usr/local/bin/redis-server

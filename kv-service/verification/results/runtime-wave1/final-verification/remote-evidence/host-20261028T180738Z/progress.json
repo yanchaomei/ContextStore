@@ -1,0 +1,65 @@
+{
+  "tool_versions": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:07:39.006709+00:00",
+    "finished": "2026-10-28T18:07:39.114974+00:00",
+    "stdout_sha256": "3c4e8fe366a342198669518c11727cf3865361d1060188d1f091b233bf72242f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "make_build": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:07:39.115272+00:00",
+    "finished": "2026-10-28T18:09:49.321926+00:00",
+    "stdout_sha256": "07c0a94899c3b32fb17685b5df17fb3fee3a8e3905f7dd4de6e6eb134d3c8563",
+    "stderr_sha256": "24ff9c13385fd3ad68df0dad04e99d27afc71b9b6aa4fd0635d33dee38993d5d"
+  },
+  "default_fixture_build": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:09:49.820550+00:00",
+    "finished": "2026-10-28T18:10:37.063298+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "63985f74e2ea25d2b6329f09c0925b473feea5af5d94b893d87ef5198e7f2345"
+  },
+  "make_test_server": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:10:37.650730+00:00",
+    "finished": "2026-10-28T18:12:25.638415+00:00",
+    "stdout_sha256": "c9d4002da65aed5a3c354e1c16643b730a62320fe93a834411bacdb7ff0d8da0",
+    "stderr_sha256": "45925defdb81c24a097f39a25fa00633180139d4467d1745325f03c18a5f5ca1"
+  },
+  "workspace_default": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:12:25.638888+00:00",
+    "finished": "2026-10-28T18:13:09.119567+00:00",
+    "stdout_sha256": "695030f7b06465c55ff358eb4e249729de9c9ba60441dd0ac49578801215d0e9",
+    "stderr_sha256": "c3c68d5d29b3367fc5e60e77b44d156f46fe7fe403ad69b67717d2c0df3db7da"
+  },
+  "workspace_rdma": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:13:09.120036+00:00",
+    "finished": "2026-10-28T18:13:31.789813+00:00",
+    "stdout_sha256": "acfc23baa4ac6f197e06172c0d02517bf86a0412ebfef1fd05ea181603ae1c2f",
+    "stderr_sha256": "df4216ff3c1cea43304f10f32a0ae0d9e404de8e9b8a8eac56e6aa132e425dcb"
+  },
+  "client_clippy": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:13:31.905178+00:00",
+    "finished": "2026-10-28T18:13:32.403413+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "29162d76fb109d9c6005d8544d63a4a438d15235d4f9b8e73d51adc9ba6e95d7"
+  },
+  "client_targeted_fmt": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:13:32.406710+00:00",
+    "finished": "2026-10-28T18:13:32.584156+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "ffi_shim_build": {
+    "exit_code": 0,
+    "started": "2026-10-28T18:13:32.594853+00:00",
+    "finished": "2026-10-28T18:13:32.686495+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "state": "READY_REAL_DUAL_RXE_BASELINE_PASSED",
+  "source_commit": "3fe4b26d72fffbe3a3d95236b858ab2ed0d78a6b",
+  "server_binary_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+  "base_image_sha256_after_run": "0c9811a81e6329acacbb5ae4e701a7650f85cd3f19852cd159d79ab8357b210e",
+  "host": "SKV_2 / skv-node2",
+  "host_root": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe",
+  "guest_root": "/home/railtest/cswave1",
+  "ssh_wrapper": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/guest_ssh.sh",
+  "ssh_wrapper_roles": [
+    "server",
+    "client"
+  ],
+  "ssh_management_ports": {
+    "server": 22351,
+    "client": 22352
+  },
+  "data_backend": "QEMU socket netdev UDP pairs on host loopback; no host bridge/TAP/network/driver/group changes",
+  "udp_ports": {
+    "rail0": {
+      "server": 24351,
+      "client": 24361
+    },
+    "rail1": {
+      "server": 24352,
+      "client": 24362
+    }
+  },
+  "paths": {
+    "rxe0": {
+      "server": "10.81.1.1",
+      "client": "10.81.1.2",
+      "gid_index": 1
+    },
+    "rxe1": {
+      "server": "10.82.1.1",
+      "client": "10.82.1.2",
+      "gid_index": 1
+    }
+  },
+  "grpc": "http://10.81.1.1:25351",
+  "rdma_listeners": [
+    "10.81.1.1:25353",
+    "10.82.1.1:25354"
+  ],
+  "vm_allocation": {
+    "each_vcpus": 2,
+    "each_memory_mib": 3072,
+    "each_overlay_gib": 16,
+    "accelerator": "KVM",
+    "runas": "kvgroup"
+  },
+  "guest_uuids": {
+    "server": "3cf534ce-653d-4171-9574-bba582db6338",
+    "client": "782360c4-1d34-4a3e-9746-d9f96612d2dc"
+  },
+  "guest_kernel": "Linux csw1-rxe-server 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+  "tests": {
+    "rdma_put_and_get_round_trip": {
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "log_sha256": "bf6157c0599357889f8fe00a855c2d5c3c46042451f21e6cd988d77d21d728df",
+      "started": "2026-10-28T17:34:50Z",
+      "finished": "2026-10-28T17:34:50Z"
+    },
+    "single_real_rail_restores_verified_object": {
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "log_sha256": "b66c087fa887c689351d63072d288cc7d078825c0ead4def406f04e3709712cf",
+      "started": "2026-10-28T17:34:50Z",
+      "finished": "2026-10-28T17:34:57Z"
+    },
+    "same_object_matches_single_and_dual_rail": {
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "log_sha256": "a68158974bdfc582c68a9c55fab987232bae438b28c141552ff6e10b7753ef45",
+      "started": "2026-10-28T17:34:57Z",
+      "finished": "2026-10-28T17:35:08Z"
+    }
+  },
+  "server_snapshot": {
+    "hostname": "csw1-rxe-server",
+    "captured_at": "2026-10-28T17:37:23.923698+00:00",
+    "kernel": "Linux csw1-rxe-server 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+    "bin_sha256": {
+      "contextstore-server": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c"
+    },
+    "rdma_links": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+    "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5001/64 fe80::5054:ff:fe29:5001/64 \nrail0            UP             10.81.1.1/24 fe80::5054:ff:fe29:5101/64 \nrail1            UP             10.82.1.1/24 fe80::5054:ff:fe29:5201/64 \n",
+    "gid_index": 1,
+    "server.toml_sha256": "8e29f8e3046fe7ff21953bdcaaef00bd12848f513ba6b6f4bf4498b11baa80f5",
+    "guest_server_run.sh_sha256": "c2e58012a97c62dd0835d63fc4b2e8d07d2d41a0de707e0fbf22852b04073293",
+    "server": {
+      "pid": 1334,
+      "start_ticks": "11076",
+      "exe": "/home/railtest/cswave1/bin/contextstore-server",
+      "exe_sha256": "0e9c081f15f809839684bab64e24b75c547ec1ce4e0e1a4a2060f6146c76c87c",
+      "environment": {
+        "CS_RDMA_SLAB_MB": "64",
+        "CS_FORCE_DISK_READ": "1",
+        "CS_RDMA_DEVICES": "rxe0:10.81.1.1:25353:1,rxe1:10.82.1.1:25354:1"
+      }
+    },
+    "private_redis_ping": "+PONG"
+  },
+  "client_snapshot": {
+    "hostname": "csw1-rxe-client",
+    "captured_at": "2026-10-28T17:37:25.830343+00:00",
+    "kernel": "Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+    "bin_sha256": {
+      "rdma_e2e": "a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957",
+      "rail_read_e2e": "06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26"
+    },
+    "rdma_links": "link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 \nlink rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 \n",
+    "ip_addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \nmgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5002/64 fe80::5054:ff:fe29:5002/64 \nrail0            UP             10.81.1.2/24 fe80::5054:ff:fe29:5102/64 \nrail1            UP             10.82.1.2/24 fe80::5054:ff:fe29:5202/64 \n",
+    "gid_index": 1,
+    "client.env_sha256": "ab1407bbab04e90fa5e84994f91a1494cdfe67481adb3f920a79e6000ac6b430",
+    "guest_run_baseline.sh_sha256": "1781db330a5777655951745067efe66cee9da0b0ecf992c929f71bb31b5546fc"
+  },
+  "known_initial_failure": {
+    "backend": "TCP listen/connect socket netdev",
+    "symptoms": [
+      "host direct TCP connect to24351/24352 timed out after2s",
+      "no established host data socket connections",
+      "guest ARP FAILED and zero RX frames on both paths"
+    ],
+    "cause": "not established; no host firewall or network changes attempted",
+    "resolution": "one bounded change to separate localhost UDP socket pairs; both paths and all baseline tests passed",
+    "preserved_evidence": [
+      "evidence/server_command_tcp.json",
+      "evidence/client_command_tcp.json",
+      "evidence/tcp_socket_probe.txt",
+      "evidence/server_serial_tcp.log",
+      "evidence/client_serial_tcp.log"
+    ]
+  },
+  "server_config_path": "/home/railtest/cswave1/server.toml",
+  "server_launch_script": "/home/railtest/cswave1/guest_server_run.sh",
+  "server_log_path": "/home/railtest/cswave1/evidence/server.log",
+  "client_environment_path": "/home/railtest/cswave1/client.env",
+  "binary_directory": "/home/railtest/cswave1/bin",
+  "fault_hooks": "none",
+  "scope": "Real Soft-RoCE Verbs correctness over two independent guest RXE paths; not physical multi-HCA bandwidth or scaling",
+  "lifecycle": "New VM pair and guest server remain running for parent-coordinated recovery tests. SKV4 physical provider was left running.",
+  "qemu_process_ids": {
+    "server": 2666540,
+    "client": 2666541
+  },
+  "qemu_tmux_sessions": {
+    "server": "csw1-rxe-server-20261029",
+    "client": "csw1-rxe-client-20261029"
+  },
+  "shutdown_after_parent_coordination": "Use guest_ssh.sh server/client sudo poweroff for only these new guests; preserve evidence first."
+}

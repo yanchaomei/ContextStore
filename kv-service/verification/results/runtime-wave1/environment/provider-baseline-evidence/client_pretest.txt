@@ -1,0 +1,10 @@
+skv-node2
+bbd6020dc4ae2be81683691a371785744bea25a1b5f070cfe69b9c4957e28938  /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/provider-client.env
+4284adf14591a6f2f2343b6d955a51db7268de4db373e3e2c4e17b83ace7ac8b  /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/run_provider_baseline.sh
+338ef957ad21a4b5c1ee509be3f7b07e1a5a1c65478e9a2f7f09af2323d742fd  Cargo.lock
+a458392eeaff6e5b9d64a9fcec2f08fb1832fa16253be213d79c1f9da6fa5957  /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-provider-baseline/debug/deps/rdma_e2e-8ac8901d52660419
+06a2a6657c14b1099dead47a8dcb120efaa9676c880f09a302c483a813a0ee26  /home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-provider-baseline/debug/deps/rail_read_e2e-d6145e305ed0b23e
+link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 
+link mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 
+0: mlx5_0: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 
+1: mlx5_1: pd 2 cq 3 qp 1 cm_id 0 mr 0 ctx 0 srq 2 

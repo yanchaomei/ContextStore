@@ -1,0 +1,15 @@
+{
+  "git_head": "75dba7aa5243ef62df4f9104aec098d4659adbee",
+  "recovery_receipt_sources_match": true,
+  "source_count": 8,
+  "sources_sha256": {
+    "README.md": "e3051b1c84ecc1f78cf9044b4423bfd413fee7e478c929287814203423cc46e3",
+    "kv-service/client-rs/src/rail_read.rs": "1d46ea5f1813cc78693299adb8e3dc6cbdf97a66370d96c09e810dfe3f8f2ab5",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs": "cf9dc48aa77b9320af5b5fb0bce405aeb47ebed87047c091558472845a7a03df",
+    "kv-service/client-rs/src/rail_read/tests.rs": "6e44ef83c98e17a7a71c6651e5ceed8035123746d1b292e2a726ba6476d1a61f",
+    "kv-service/client-rs/src/lib.rs": "e6c1c9f78ce0709fd90a247f42e627550b387c145e0ed77e02faa692a5569964",
+    "kv-service/client-rs/src/rdma.rs": "62a73733c9455677cb529f563a49f157c58cdf687e08de6d2ced3ac059328d3d",
+    "kv-service/client-rs/src/bin/rail_read_bench.rs": "929cdb567327dce694a5d01b4f69660436276747896b4176eafabdd192853267",
+    "kv-service/client-rs/tests/rail_read_e2e.rs": "346bc6680ee2b65684fc343e2315eb4deaa72c094c3c7e22cf658913d795be0a"
+  }
+}

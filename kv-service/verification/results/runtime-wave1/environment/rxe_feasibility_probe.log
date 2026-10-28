@@ -1,0 +1,43 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+2026-10-28T16:45:37Z
+skv-node2
+Linux skv-node2 5.15.167 #1 SMP Sat Sep 28 16:50:31 CST 2024 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(kvgroup) gid=1000(kvgroup) groups=1000(kvgroup),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lxd),119(libvirt),998(docker)
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv  878G  694G  147G  83% /
+              total        used        free      shared  buff/cache   available
+Mem:          188Gi       134Gi       761Mi       512Mi        53Gi        52Gi
+Swap:            0B          0B          0B
+/usr/bin/qemu-system-x86_64
+/usr/bin/genisoimage
+/usr/bin/rdma
+/usr/sbin/modinfo
+/usr/bin/virsh
+QEMU emulator version 4.2.1 (Debian 1:4.2-3ubuntu6.30)
+Copyright (c) 2003-2019 Fabrice Bellard and the QEMU Project developers
+Accelerators supported in QEMU binary:
+tcg
+kvm
+crw-rw---- 1 root kvm 10, 232 Sep 28 12:06 /dev/kvm
+KVM_USER_ACCESSIBLE=false
+	libnettle.so.7 (libc6,x86-64) => /lib/x86_64-linux-gnu/libnettle.so.7
+	libgnutls.so.30 (libc6,x86-64) => /lib/x86_64-linux-gnu/libgnutls.so.30
+	libffi.so.7 (libc6,x86-64) => /lib/x86_64-linux-gnu/libffi.so.7
+	libaio.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libaio.so.1
+link mlx5_0/1 state DOWN physical_state DISABLED netdev ens4f0 
+link mlx5_1/1 state ACTIVE physical_state LINK_UP netdev ens4f1 
+filename:       /lib/modules/5.15.167/kernel/drivers/infiniband/sw/rxe/rdma_rxe.ko
+alias:          rdma-link-rxe
+license:        Dual BSD/GPL
+description:    Soft RDMA transport
+author:         Bob Pearson, Frank Zago, John Groves, Kamal Heib
+srcversion:     96952BBEC45996FFD229AF0
+depends:        ib_core,ip6_udp_tunnel,udp_tunnel,ib_uverbs
+retpoline:      Y
+intree:         Y
+name:           rdma_rxe
+vermagic:       5.15.167 SMP mod_unload modversions 
+sig_id:         PKCS#7
+State   Recv-Q   Send-Q     Local Address:Port     Peer Address:Port  Process   

@@ -1,0 +1,66 @@
+2026-10-28T17:30:37Z
+csw1-rxe-client
+Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+mgmt0            UP             10.0.2.15/24 metric 100 fec0::5054:ff:fe29:5002/64 fe80::5054:ff:fe29:5002/64 
+rail0            UP             10.81.1.2/24 fe80::5054:ff:fe29:5102/64 
+rail1            UP             10.82.1.2/24 fe80::5054:ff:fe29:5202/64 
+link rxe0/1 state ACTIVE physical_state LINK_UP netdev rail0 
+link rxe1/1 state ACTIVE physical_state LINK_UP netdev rail1 
+    device          	   node GUID
+    ------          	----------------
+    rxe0            	505400fffe295102
+    rxe1            	505400fffe295202
+hca_id:	rxe0
+	transport:			InfiniBand (0)
+	fw_ver:				0.0.0
+	node_guid:			5054:00ff:fe29:5102
+	sys_image_guid:			5054:00ff:fe29:5102
+	vendor_id:			0xffffff
+	vendor_part_id:			0
+	hw_ver:				0x0
+	phys_port_cnt:			1
+		port:	1
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		1024 (3)
+			sm_lid:			0
+			port_lid:		0
+			port_lmc:		0x00
+			link_layer:		Ethernet
+
+rxe0 gid0 fe80:0000:0000:0000:5054:00ff:fe29:5102
+RoCE v2
+rxe0 gid1 0000:0000:0000:0000:0000:ffff:0a51:0102
+RoCE v2
+rxe0 gid2 0000:0000:0000:0000:0000:0000:0000:0000
+rxe0 gid3 0000:0000:0000:0000:0000:0000:0000:0000
+hca_id:	rxe1
+	transport:			InfiniBand (0)
+	fw_ver:				0.0.0
+	node_guid:			5054:00ff:fe29:5202
+	sys_image_guid:			5054:00ff:fe29:5202
+	vendor_id:			0xffffff
+	vendor_part_id:			0
+	hw_ver:				0x0
+	phys_port_cnt:			1
+		port:	1
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		1024 (3)
+			sm_lid:			0
+			port_lid:		0
+			port_lmc:		0x00
+			link_layer:		Ethernet
+
+rxe1 gid0 fe80:0000:0000:0000:5054:00ff:fe29:5202
+RoCE v2
+rxe1 gid1 0000:0000:0000:0000:0000:ffff:0a52:0102
+RoCE v2
+rxe1 gid2 0000:0000:0000:0000:0000:0000:0000:0000
+rxe1 gid3 0000:0000:0000:0000:0000:0000:0000:0000
+ibverbs-providers:amd64	39.0-1
+ibverbs-utils	39.0-1
+iproute2	5.15.0-1ubuntu2.2
+rdma-core	39.0-1
+redis-server	5:6.0.16-1ubuntu1.2

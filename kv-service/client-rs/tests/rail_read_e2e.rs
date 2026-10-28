@@ -6,7 +6,8 @@
 #![cfg(feature = "rdma")]
 
 use contextstore_client_rs::rail_read::{
-    LocalRailPath, RailCancel, RailConnectionPoolOptions, RailLimits, RailReader, RailRoute,
+    LocalRailPath, RailCancel, RailConnectionPoolOptions, RailLimits, RailReader,
+    RailRecoveryOptions, RailRoute,
 };
 use contextstore_client_rs::rdma::{RdmaClient, RdmaClientConfig};
 use contextstore_client_rs::KvClient;
@@ -1375,4 +1376,367 @@ async fn unstriped_real_read_bypasses_enabled_connection_pool() {
         "UNSTRIPED_POOL_BYPASS_FINAL {:?}",
         reader.connection_pool_snapshot().unwrap()
     );
+}
+
+// These test-only TCP relays preserve actual Verbs handshakes and DMA. They
+// delay control frames, never inject a provider completion or return value.
+#[derive(Debug)]
+struct RecoveryFrame {
+    wire: Vec<u8>,
+    stripes: Vec<u32>,
+    segments: Vec<(u64, u32, u64)>,
+    captured: Instant,
+}
+
+fn receive_recovery_frame(
+    stream: &mut std::net::TcpStream,
+) -> std::io::Result<Option<RecoveryFrame>> {
+    use std::io::{Error, ErrorKind, Read};
+    fn take(
+        stream: &mut std::net::TcpStream,
+        wire: &mut Vec<u8>,
+        count: usize,
+    ) -> std::io::Result<()> {
+        let offset = wire.len();
+        wire.resize(offset + count, 0);
+        stream.read_exact(&mut wire[offset..])
+    }
+    fn string(stream: &mut std::net::TcpStream, wire: &mut Vec<u8>) -> std::io::Result<()> {
+        let offset = wire.len();
+        take(stream, wire, 2)?;
+        let length = u16::from_le_bytes(wire[offset..offset + 2].try_into().unwrap()) as usize;
+        take(stream, wire, length)
+    }
+    let mut tag = [0];
+    if stream.read(&mut tag)? == 0 || tag[0] == 99 {
+        // Legacy per-request clients send BYE after successful QP teardown.
+        return Ok(None);
+    }
+    if tag[0] != 15 {
+        return Err(Error::new(
+            ErrorKind::InvalidData,
+            "relay requires descriptor-stripe-SGE tag 15",
+        ));
+    }
+    let mut wire = vec![tag[0]];
+    string(stream, &mut wire)?; // Canonical key.
+    string(stream, &mut wire)?; // Object handle.
+    take(stream, &mut wire, 8)?; // Generation.
+    string(stream, &mut wire)?; // Content etag.
+    take(stream, &mut wire, 49)?; // Layout, size, striping, and legacy destination.
+    let offset = wire.len();
+    take(stream, &mut wire, 2)?;
+    let count = u16::from_le_bytes(wire[offset..offset + 2].try_into().unwrap()) as usize;
+    let mut stripes = Vec::with_capacity(count);
+    for _ in 0..count {
+        let offset = wire.len();
+        take(stream, &mut wire, 4)?;
+        stripes.push(u32::from_le_bytes(
+            wire[offset..offset + 4].try_into().unwrap(),
+        ));
+    }
+    let offset = wire.len();
+    take(stream, &mut wire, 2)?;
+    let count = u16::from_le_bytes(wire[offset..offset + 2].try_into().unwrap()) as usize;
+    let mut segments = Vec::with_capacity(count);
+    for _ in 0..count {
+        let offset = wire.len();
+        take(stream, &mut wire, 20)?;
+        segments.push((
+            u64::from_le_bytes(wire[offset..offset + 8].try_into().unwrap()),
+            u32::from_le_bytes(wire[offset + 8..offset + 12].try_into().unwrap()),
+            u64::from_le_bytes(wire[offset + 12..offset + 20].try_into().unwrap()),
+        ));
+    }
+    Ok(Some(RecoveryFrame {
+        wire,
+        stripes,
+        segments,
+        captured: Instant::now(),
+    }))
+}
+
+fn recovery_relay_accept(listener: &std::net::TcpListener) -> std::io::Result<std::net::TcpStream> {
+    let until = Instant::now() + Duration::from_secs(90);
+    loop {
+        match listener.accept() {
+            Ok((stream, _)) => return Ok(stream),
+            Err(error)
+                if error.kind() == std::io::ErrorKind::WouldBlock && Instant::now() < until =>
+            {
+                std::thread::sleep(Duration::from_millis(5));
+            }
+            Err(error) => return Err(error),
+        }
+    }
+}
+
+fn recovery_relay_handshake(
+    downstream: &mut std::net::TcpStream,
+    endpoint: &str,
+) -> std::io::Result<(std::net::TcpStream, u32)> {
+    use std::io::{Read, Write};
+    let mut upstream = std::net::TcpStream::connect(endpoint)?;
+    for stream in [&*downstream, &upstream] {
+        stream.set_nodelay(true)?;
+        stream.set_read_timeout(Some(Duration::from_secs(90)))?;
+        stream.set_write_timeout(Some(Duration::from_secs(90)))?;
+    }
+    let mut hello = [0; 25];
+    downstream.read_exact(&mut hello)?;
+    assert_eq!(hello[0], 1);
+    let qpn = u32::from_le_bytes(hello[1..5].try_into().unwrap());
+    upstream.write_all(&hello)?;
+    upstream.read_exact(&mut hello)?;
+    assert_eq!(hello[0], 1);
+    downstream.write_all(&hello)?;
+    Ok((upstream, qpn))
+}
+
+#[derive(Debug)]
+struct RecoveryRelayReceipt {
+    frame: RecoveryFrame,
+    client_qpn: u32,
+    server_peer: String,
+    forwarded: Instant,
+    terminal: Instant,
+    terminal_kind: &'static str,
+}
+
+async fn real_recovery_after_late_request_case(direct_staging: bool, pooled: bool) {
+    use std::io::{Read, Write};
+    use std::net::{Shutdown, TcpListener};
+    use std::sync::mpsc;
+    let (mut client, key, payload, advertised) = seeded_object().await;
+    let initial = client
+        .lookup_object("rail-e2e", &key)
+        .await
+        .unwrap()
+        .unwrap();
+    let placement = initial.placement.as_ref().unwrap();
+    let failed_listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let healthy_listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    failed_listener.set_nonblocking(true).unwrap();
+    healthy_listener.set_nonblocking(true).unwrap();
+    let failed_endpoint = failed_listener.local_addr().unwrap().to_string();
+    let healthy_endpoint = healthy_listener.local_addr().unwrap().to_string();
+    let real_failed = setting("CS_RAIL_LISTENER0", &advertised);
+    let real_healthy = setting("CS_RAIL_LISTENER1", "10.82.1.1:25354");
+    let (retry_registered_tx, retry_registered_rx) = mpsc::channel();
+    let (old_terminal_tx, old_terminal_rx) = mpsc::channel();
+    let started = Instant::now();
+    let failed_key = key.clone();
+    let failed_relay = std::thread::spawn(move || -> anyhow::Result<RecoveryRelayReceipt> {
+        let mut downstream = recovery_relay_accept(&failed_listener)?;
+        let (mut upstream, client_qpn) = recovery_relay_handshake(&mut downstream, &real_failed)?;
+        let frame = receive_recovery_frame(&mut downstream)?.expect("first failed-path request");
+        let server_peer = upstream.local_addr()?.to_string();
+        // Preserve the real frame even if the evidence gate later rejects a
+        // stale/not-found ACK, reset, timeout, or another unexpected terminal.
+        eprintln!("RECOVERY_RXE_OLD_REQUEST direct={direct_staging} pooled={pooled} key={failed_key} server_peer={server_peer} qpn={client_qpn} frame={frame:?}");
+        downstream.shutdown(Shutdown::Both)?;
+        // The client observes a typed UnexpectedEof.
+        drop(downstream);
+        // The healthy relay signals only after receiving the retry's complete
+        // SGE frame. Its target MR is already registered and remains alive.
+        retry_registered_rx.recv_timeout(Duration::from_secs(90))?;
+        let forwarded = Instant::now();
+        upstream.write_all(&frame.wire)?;
+        let mut reply = [0; 14];
+        let terminal_kind = match upstream.read(&mut reply[..1]) {
+            Ok(0) => "eof",
+            Ok(1) => {
+                upstream.read_exact(&mut reply[1..])?;
+                eprintln!("RECOVERY_RXE_REJECTED_OLD_TERMINAL key={failed_key} server_peer={server_peer} reply={reply:02x?}");
+                anyhow::bail!("INCONCLUSIVE: an old-request ACK does not meet this late-WRITE-attempt experiment's expected EOF gate");
+            }
+            Ok(_) => unreachable!(),
+            Err(error) => {
+                return Err(anyhow::anyhow!(
+                    "INCONCLUSIVE: expected old-server EOF, observed {error}"
+                ))
+            } // Reset/timeout is not this experiment's evidence.
+        };
+        let terminal = Instant::now();
+        old_terminal_tx.send(())?;
+        Ok(RecoveryRelayReceipt {
+            frame,
+            client_qpn,
+            server_peer,
+            forwarded,
+            terminal,
+            terminal_kind,
+        })
+    });
+    let healthy_relay = std::thread::spawn(move || -> anyhow::Result<Vec<RecoveryRelayReceipt>> {
+        let mut receipts = Vec::new();
+        while receipts.len() < 2 {
+            let mut downstream = recovery_relay_accept(&healthy_listener)?;
+            let (mut upstream, client_qpn) =
+                recovery_relay_handshake(&mut downstream, &real_healthy)?;
+            while let Some(frame) = receive_recovery_frame(&mut downstream)? {
+                if receipts.len() == 1 {
+                    retry_registered_tx.send(())?;
+                    old_terminal_rx.recv_timeout(Duration::from_secs(90))?;
+                }
+                let forwarded = Instant::now();
+                upstream.write_all(&frame.wire)?;
+                let mut reply = [0; 14];
+                upstream.read_exact(&mut reply)?;
+                anyhow::ensure!(
+                    reply[0] == 3 && reply[1] == 1,
+                    "healthy path needs a full success ACK"
+                );
+                downstream.write_all(&reply)?;
+                receipts.push(RecoveryRelayReceipt {
+                    frame,
+                    client_qpn,
+                    server_peer: upstream.local_addr()?.to_string(),
+                    forwarded,
+                    terminal: Instant::now(),
+                    terminal_kind: "success_ack",
+                });
+                if receipts.len() == 2 {
+                    return Ok(receipts);
+                }
+            }
+        }
+        Ok(receipts)
+    });
+    let mut reader = RailReader::new(
+        vec![
+            route(&advertised, 0, &failed_endpoint),
+            route(&advertised, 1, &healthy_endpoint),
+        ],
+        RailLimits {
+            direct_staging,
+            io_timeout: Duration::from_secs(90),
+            ..RailLimits::default()
+        },
+    )
+    .unwrap()
+    .with_recovery(RailRecoveryOptions {
+        timeout: Duration::from_secs(120),
+    })
+    .unwrap();
+    if pooled {
+        reader = reader
+            .with_connection_pool(RailConnectionPoolOptions {
+                max_live_connections: 2,
+                configuration_generation: 1,
+            })
+            .unwrap();
+    }
+    let assignment = reader
+        .describe_assignment(&initial.descriptor, placement)
+        .unwrap();
+    let failed_task = assignment.iter().find(|task| task.id == "rail0").unwrap();
+    let healthy_task = assignment.iter().find(|task| task.id == "rail1").unwrap();
+    let reader = Arc::new(reader);
+    let mut destination = vec![0xA5; payload.len()];
+    let result = client
+        .read_multi_rail_into(
+            Arc::clone(&reader),
+            "rail-e2e",
+            &key,
+            &mut destination,
+            None,
+        )
+        .await;
+    let failed_receipt = failed_relay.join().expect("failed-path relay panicked");
+    let healthy_receipts = healthy_relay.join().expect("healthy-path relay panicked");
+    assert!(
+        failed_receipt.is_ok() && healthy_receipts.is_ok(),
+        "relay outcomes: failed={failed_receipt:?}, healthy={healthy_receipts:?}"
+    );
+    let failed_receipt = failed_receipt.unwrap();
+    let healthy_receipts = healthy_receipts.unwrap();
+    assert_eq!(result.expect("bounded real recovery"), Some(payload.len()));
+    assert_eq!(destination, payload);
+    let current = client
+        .lookup_object("rail-e2e", &key)
+        .await
+        .unwrap()
+        .unwrap();
+    assert_eq!(current.descriptor, initial.descriptor);
+    assert_eq!(current.placement, initial.placement);
+    assert_eq!(failed_receipt.frame.stripes, failed_task.stripe_indices);
+    assert_eq!(
+        healthy_receipts[0].frame.stripes,
+        healthy_task.stripe_indices
+    );
+    assert_eq!(
+        healthy_receipts[1].frame.stripes,
+        failed_task.stripe_indices
+    );
+    assert!(healthy_receipts[1].frame.captured <= failed_receipt.forwarded);
+    assert!(failed_receipt.terminal <= healthy_receipts[1].forwarded);
+    if direct_staging {
+        for stripe in &failed_task.stripe_indices {
+            assert_eq!(
+                failed_receipt.frame.segments[*stripe as usize].0,
+                healthy_receipts[1].frame.segments[*stripe as usize].0,
+                "direct retry must reuse the failed private range after old QP retirement"
+            );
+        }
+    }
+    let recovery = reader.recovery_snapshot();
+    assert_eq!(recovery.retry_tasks, 1);
+    assert_eq!(recovery.requested_payload_bytes, failed_task.bytes as u64);
+    assert_eq!(recovery.successful_tasks, 1);
+    let rails = reader.snapshots();
+    assert_eq!(rails[0].reads_err, 1);
+    assert_eq!(rails[1].reads_ok, 2);
+    assert_eq!(rails[1].bytes, payload.len() as u64);
+    assert!(rails.iter().all(|rail| rail.inflight_requests == 0
+        && rail.inflight_bytes == 0
+        && rail.registered_bytes == 0));
+    if pooled {
+        let pool = reader.connection_pool_snapshot().unwrap();
+        assert_eq!(pool.created, 2);
+        assert_eq!(pool.reused, 1);
+        assert_eq!(pool.retired, 1);
+        assert_eq!(pool.active, 0);
+        assert_eq!(pool.retiring, 0);
+    }
+    for (name, receipt) in [
+        ("failed", &failed_receipt),
+        ("healthy_initial", &healthy_receipts[0]),
+        ("healthy_retry", &healthy_receipts[1]),
+    ] {
+        eprintln!("RECOVERY_RXE_FRAME direct={direct_staging} pooled={pooled} key={key} role={name} qpn={} server_peer={} stripes={:?} segments={:?} captured_us={} forwarded_us={} terminal_us={} terminal={} wire={:02x?}",
+            receipt.client_qpn, receipt.server_peer, receipt.frame.stripes, receipt.frame.segments,
+            receipt.frame.captured.duration_since(started).as_micros(), receipt.forwarded.duration_since(started).as_micros(),
+            receipt.terminal.duration_since(started).as_micros(), receipt.terminal_kind, receipt.frame.wire);
+    }
+    eprintln!("RECOVERY_RXE_RESULT direct={direct_staging} pooled={pooled} payload_bytes={} payload_xxh3={:016x} retry_tasks={} requested_retry_payload={} same_descriptor=true caller_payload_exact=true elapsed_ms={} old_terminal={} proof=late_control_request_after_retry_target_registration",
+        payload.len(), twox_hash::xxh3::hash64(&destination), recovery.retry_tasks, recovery.requested_payload_bytes,
+        started.elapsed().as_millis(), failed_receipt.terminal_kind);
+    // All old requests have a real terminal observation before buffer reuse.
+    destination.fill(0x5A);
+    assert!(destination.iter().all(|byte| *byte == 0x5A));
+}
+
+#[tokio::test]
+#[ignore = "requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration"]
+async fn recovery_real_late_request_after_retry_registration_packed_unpooled() {
+    real_recovery_after_late_request_case(false, false).await;
+}
+
+#[tokio::test]
+#[ignore = "requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration"]
+async fn recovery_real_late_request_after_retry_registration_packed_pooled() {
+    real_recovery_after_late_request_case(false, true).await;
+}
+
+#[tokio::test]
+#[ignore = "requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration"]
+async fn recovery_real_late_request_after_retry_registration_direct_unpooled() {
+    real_recovery_after_late_request_case(true, false).await;
+}
+
+#[tokio::test]
+#[ignore = "requires isolated dual RXE/HCA paths; delays a real old request until retry MR registration"]
+async fn recovery_real_late_request_after_retry_registration_direct_pooled() {
+    real_recovery_after_late_request_case(true, true).await;
 }

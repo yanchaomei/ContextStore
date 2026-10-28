@@ -1,0 +1,194 @@
+2026-10-28T17:28:52Z
+Linux csw1-rxe-client 5.15.0-194-generic #204-Ubuntu SMP Wed Sep 2 13:09:23 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+status: done
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [3643 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [510 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [6505 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [1250 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1055 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [238 kB]
+Get:13 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [23.2 kB]
+Get:14 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [79.6 kB]
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [13.7 kB]
+Get:16 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [544 B]
+Get:17 http://archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:18 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:19 http://archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3936 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [578 kB]
+Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [6778 kB]
+Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [1302 kB]
+Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1289 kB]
+Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [326 kB]
+Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [30.8 kB]
+Get:28 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [86.1 kB]
+Get:29 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [16.6 kB]
+Get:30 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [756 B]
+Get:31 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [70.2 kB]
+Get:32 http://archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.4 kB]
+Get:33 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [412 B]
+Get:34 http://archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:35 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [30.8 kB]
+Get:36 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.9 kB]
+Get:37 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [676 B]
+Get:38 http://archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 48.5 MB in 23s (2089 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+iproute2 is already the newest version (5.15.0-1ubuntu2.2).
+iproute2 set to manually installed.
+The following additional packages will be installed:
+  libatomic1 libibverbs1 libjemalloc2 liblua5.1-0 liblzf1 libnl-route-3-200
+  lua-bitop lua-cjson redis-tools
+Suggested packages:
+  ruby-redis
+The following NEW packages will be installed:
+  ibverbs-providers ibverbs-utils libatomic1 libibverbs1 libjemalloc2
+  liblua5.1-0 liblzf1 libnl-route-3-200 lua-bitop lua-cjson rdma-core
+  redis-server redis-tools
+0 upgraded, 13 newly installed, 0 to remove and 56 not upgraded.
+Need to get 1998 kB of archives.
+After this operation, 8296 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 rdma-core amd64 39.0-1 [62.7 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libatomic1 amd64 12.3.0-1ubuntu1~22.04.3 [10.5 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libjemalloc2 amd64 5.2.1-4ubuntu1 [240 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy/universe amd64 liblua5.1-0 amd64 5.1.5-8.1build4 [99.9 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/universe amd64 liblzf1 amd64 3.6-3 [7444 B]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 lua-bitop amd64 1.0.2-5 [6680 B]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/universe amd64 lua-cjson amd64 2.1.0+dfsg-2.1 [17.4 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 redis-tools amd64 5:6.0.16-1ubuntu1.2 [861 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 redis-server amd64 5:6.0.16-1ubuntu1.2 [45.9 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 libnl-route-3-200 amd64 3.5.0-0.1 [180 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/main amd64 libibverbs1 amd64 39.0-1 [69.3 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 ibverbs-providers amd64 39.0-1 [341 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy/universe amd64 ibverbs-utils amd64 39.0-1 [57.3 kB]
+Fetched 1998 kB in 3s (670 kB/s)
+Selecting previously unselected package rdma-core.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64626 files and directories currently installed.)
+Preparing to unpack .../00-rdma-core_39.0-1_amd64.deb ...
+Unpacking rdma-core (39.0-1) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../01-libatomic1_12.3.0-1ubuntu1~22.04.3_amd64.deb ...
+Unpacking libatomic1:amd64 (12.3.0-1ubuntu1~22.04.3) ...
+Selecting previously unselected package libjemalloc2:amd64.
+Preparing to unpack .../02-libjemalloc2_5.2.1-4ubuntu1_amd64.deb ...
+Unpacking libjemalloc2:amd64 (5.2.1-4ubuntu1) ...
+Selecting previously unselected package liblua5.1-0:amd64.
+Preparing to unpack .../03-liblua5.1-0_5.1.5-8.1build4_amd64.deb ...
+Unpacking liblua5.1-0:amd64 (5.1.5-8.1build4) ...
+Selecting previously unselected package liblzf1:amd64.
+Preparing to unpack .../04-liblzf1_3.6-3_amd64.deb ...
+Unpacking liblzf1:amd64 (3.6-3) ...
+Selecting previously unselected package lua-bitop:amd64.
+Preparing to unpack .../05-lua-bitop_1.0.2-5_amd64.deb ...
+Unpacking lua-bitop:amd64 (1.0.2-5) ...
+Selecting previously unselected package lua-cjson:amd64.
+Preparing to unpack .../06-lua-cjson_2.1.0+dfsg-2.1_amd64.deb ...
+Unpacking lua-cjson:amd64 (2.1.0+dfsg-2.1) ...
+Selecting previously unselected package redis-tools.
+Preparing to unpack .../07-redis-tools_5%3a6.0.16-1ubuntu1.2_amd64.deb ...
+Unpacking redis-tools (5:6.0.16-1ubuntu1.2) ...
+Selecting previously unselected package redis-server.
+Preparing to unpack .../08-redis-server_5%3a6.0.16-1ubuntu1.2_amd64.deb ...
+Unpacking redis-server (5:6.0.16-1ubuntu1.2) ...
+Selecting previously unselected package libnl-route-3-200:amd64.
+Preparing to unpack .../09-libnl-route-3-200_3.5.0-0.1_amd64.deb ...
+Unpacking libnl-route-3-200:amd64 (3.5.0-0.1) ...
+Selecting previously unselected package libibverbs1:amd64.
+Preparing to unpack .../10-libibverbs1_39.0-1_amd64.deb ...
+Unpacking libibverbs1:amd64 (39.0-1) ...
+Selecting previously unselected package ibverbs-providers:amd64.
+Preparing to unpack .../11-ibverbs-providers_39.0-1_amd64.deb ...
+Unpacking ibverbs-providers:amd64 (39.0-1) ...
+Selecting previously unselected package ibverbs-utils.
+Preparing to unpack .../12-ibverbs-utils_39.0-1_amd64.deb ...
+Unpacking ibverbs-utils (39.0-1) ...
+Setting up libjemalloc2:amd64 (5.2.1-4ubuntu1) ...
+Setting up libnl-route-3-200:amd64 (3.5.0-0.1) ...
+Setting up lua-cjson:amd64 (2.1.0+dfsg-2.1) ...
+Setting up liblzf1:amd64 (3.6-3) ...
+Setting up libatomic1:amd64 (12.3.0-1ubuntu1~22.04.3) ...
+Setting up lua-bitop:amd64 (1.0.2-5) ...
+Setting up liblua5.1-0:amd64 (5.1.5-8.1build4) ...
+Setting up rdma-core (39.0-1) ...
+iwpmd.service is a disabled or a static unit not running, not starting it.
+rdma-hw.target is a disabled or a static unit not running, not starting it.
+rdma-ndd.service is a disabled or a static unit not running, not starting it.
+Setting up libibverbs1:amd64 (39.0-1) ...
+Setting up ibverbs-providers:amd64 (39.0-1) ...
+Setting up ibverbs-utils (39.0-1) ...
+Setting up redis-tools (5:6.0.16-1ubuntu1.2) ...
+Setting up redis-server (5:6.0.16-1ubuntu1.2) ...
+Created symlink /etc/systemd/system/redis.service → /lib/systemd/system/redis-server.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/redis-server.service → /lib/systemd/system/redis-server.service.
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.15) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  wireless-regdb
+The following NEW packages will be installed:
+  linux-modules-extra-5.15.0-194-generic wireless-regdb
+0 upgraded, 2 newly installed, 0 to remove and 56 not upgraded.
+Need to get 63.9 MB of archives.
+After this operation, 353 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 wireless-regdb all 2026.05.30-0ubuntu1~22.04.1 [10.2 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-modules-extra-5.15.0-194-generic amd64 5.15.0-194.204 [63.8 MB]
+Fetched 63.9 MB in 37s (1720 kB/s)
+Selecting previously unselected package wireless-regdb.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64824 files and directories currently installed.)
+Preparing to unpack .../wireless-regdb_2026.05.30-0ubuntu1~22.04.1_all.deb ...
+Unpacking wireless-regdb (2026.05.30-0ubuntu1~22.04.1) ...
+Selecting previously unselected package linux-modules-extra-5.15.0-194-generic.
+Preparing to unpack .../linux-modules-extra-5.15.0-194-generic_5.15.0-194.204_amd64.deb ...
+Unpacking linux-modules-extra-5.15.0-194-generic (5.15.0-194.204) ...
+Setting up wireless-regdb (2026.05.30-0ubuntu1~22.04.1) ...
+Setting up linux-modules-extra-5.15.0-194-generic (5.15.0-194.204) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for linux-image-5.15.0-194-generic (5.15.0-194.204) ...
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-5.15.0-194-generic
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/50-cloudimg-settings.cfg'
+Sourcing file `/etc/default/grub.d/init-select.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-5.15.0-194-generic
+Found initrd image: /boot/initrd.img-5.15.0-194-generic
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+railtest soft memlock unlimited
+railtest hard memlock unlimited

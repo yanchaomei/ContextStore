@@ -1,6 +1,103 @@
+use super::connection_pool::finish_transfer;
 use super::*;
 use crate::pb;
 use std::sync::Mutex;
+
+// This private transport seam exercises scheduling/publication, not Verbs.
+struct RecoveringMock {
+    object: Vec<u8>,
+    calls: Mutex<Vec<(String, Vec<u32>)>>,
+}
+
+impl RailTransport for RecoveringMock {
+    fn fetch(
+        &self,
+        route: &RailRoute,
+        task: &RailTask,
+        _descriptor: &pb::ObjectDescriptor,
+        _timeout: Duration,
+    ) -> Result<Vec<u8>, RailReadError> {
+        self.calls.lock().unwrap().push((
+            route.id.clone(),
+            task.stripes.iter().map(|stripe| stripe.index).collect(),
+        ));
+        if route.id == "rail0" {
+            return Err(connection_pool::mock_quiescent_failure());
+        }
+        let mut packed = vec![0; task.packed_len];
+        for stripe in &task.stripes {
+            packed[stripe.packed_offset..stripe.packed_offset + stripe.length].copy_from_slice(
+                &self.object[stripe.object_offset..stripe.object_offset + stripe.length],
+            );
+        }
+        Ok(packed)
+    }
+}
+
+#[test]
+fn recovery_retries_only_failed_stripes_in_packed_and_direct_modes() {
+    for direct_staging in [false, true] {
+        let object: Vec<u8> = (0..64).collect();
+        let mock = RecoveringMock {
+            object: object.clone(),
+            calls: Mutex::new(Vec::new()),
+        };
+        let reader = RailReader::new(
+            routes(),
+            RailLimits {
+                direct_staging,
+                ..RailLimits::default()
+            },
+        )
+        .unwrap()
+        .with_recovery(RailRecoveryOptions {
+            timeout: Duration::from_secs(5),
+        })
+        .unwrap();
+        let (descriptor, placement) = fixture(64, 8);
+        let mut destination = vec![0xA5; 64];
+        assert_eq!(
+            reader
+                .read_into_with(&descriptor, &placement, &mut destination, &mock, None)
+                .unwrap(),
+            64
+        );
+        assert_eq!(destination, object);
+        let calls = mock.calls.lock().unwrap();
+        assert_eq!(calls.len(), 3);
+        assert_eq!(
+            reader.recovery_snapshot(),
+            RailRecoverySnapshot {
+                retry_tasks: 1,
+                requested_payload_bytes: 32,
+                successful_tasks: 1
+            }
+        );
+        let failed = &calls.iter().find(|(rail, _)| rail == "rail0").unwrap().1;
+        assert_eq!(
+            calls
+                .iter()
+                .filter(|(_, stripes)| stripes == failed)
+                .count(),
+            2
+        );
+        assert_eq!(
+            calls
+                .iter()
+                .filter(|(_, stripes)| stripes != failed)
+                .count(),
+            1
+        );
+        let budget = reader.budget.lock().unwrap();
+        assert_eq!(budget.active_reads, 0);
+        assert_eq!(
+            budget.staging_bytes + budget.registered_bytes + budget.inflight_bytes,
+            0
+        );
+        assert!(budget.rail_active_reads.iter().all(|count| *count == 0));
+        assert!(budget.rail_inflight_bytes.iter().all(|bytes| *bytes == 0));
+    }
+}
 
 struct MockTransport {
     object: Vec<u8>,
@@ -1612,4 +1709,743 @@ fn unstriped_reads_bypass_pooled_owner_constraints_and_keep_legacy_byte_validati
         reader.connection_pool_snapshot().unwrap(),
         Default::default()
     );
+}
+
+fn assert_recovery_budget_empty(reader: &RailReader) {
+    let budget = reader.budget.lock().unwrap();
+    assert_eq!(budget.active_reads, 0);
+    assert_eq!(budget.staging_bytes, 0);
+    assert_eq!(budget.registered_bytes, 0);
+    assert_eq!(budget.inflight_bytes, 0);
+    assert!(budget.rail_active_reads.iter().all(|count| *count == 0));
+    assert!(budget.rail_inflight_bytes.iter().all(|bytes| *bytes == 0));
+    assert!(reader
+        .snapshots()
+        .iter()
+        .all(|rail| rail.inflight_requests == 0
+            && rail.inflight_bytes == 0
+            && rail.registered_bytes == 0));
+}
+
+struct RecoveryScript<F>(F);
+impl<F> RailTransport for RecoveryScript<F>
+where
+    F: Fn(&RailRoute, &RailTask, &pb::ObjectDescriptor, Duration) -> Result<Vec<u8>, RailReadError>
+        + Sync,
+{
+    fn fetch(
+        &self,
+        route: &RailRoute,
+        task: &RailTask,
+        descriptor: &pb::ObjectDescriptor,
+        timeout: Duration,
+    ) -> Result<Vec<u8>, RailReadError> {
+        (self.0)(route, task, descriptor, timeout)
+    }
+}
+
+fn recovery_reader(direct_staging: bool) -> RailReader {
+    RailReader::new(
+        routes(),
+        RailLimits {
+            direct_staging,
+            ..RailLimits::default()
+        },
+    )
+    .unwrap()
+    .with_recovery(RailRecoveryOptions {
+        timeout: Duration::from_secs(5),
+    })
+    .unwrap()
+}
+
+#[test]
+fn recovery_waits_for_every_initial_worker_and_cancel_stops_the_wave() {
+    use std::sync::mpsc;
+    for direct in [false, true] {
+        for cancel_before_release in [false, true] {
+            let reader = recovery_reader(direct);
+            let cancel = RailCancel::default();
+            let (started_tx, started_rx) = mpsc::channel();
+            let (release_tx, release_rx) = mpsc::channel();
+            let release_rx = Mutex::new(release_rx);
+            let calls = Mutex::new(Vec::new());
+            let mock = RecoveryScript(
+                |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, _: Duration| {
+                    let initial = {
+                        let mut calls = calls.lock().unwrap();
+                        let initial = !calls
+                            .iter()
+                            .any(|(id, _): &(String, usize)| id == &route.id);
+                        calls.push((route.id.clone(), task.packed_len));
+                        initial
+                    };
+                    if initial {
+                        started_tx.send(()).unwrap();
+                        if route.id == "rail0" {
+                            return Err(connection_pool::mock_quiescent_failure());
+                        }
+                        release_rx
+                            .lock()
+                            .unwrap()
+                            .recv_timeout(Duration::from_secs(5))
+                            .unwrap();
+                    }
+                    Ok(vec![0x42; task.packed_len])
+                },
+            );
+            let (descriptor, placement) = fixture(64, 8);
+            let mut destination = vec![0xA5; 64];
+            std::thread::scope(|scope| {
+                let worker = scope.spawn(|| {
+                    reader.read_into_with(
+                        &descriptor,
+                        &placement,
+                        &mut destination,
+                        &mock,
+                        Some(&cancel),
+                    )
+                });
+                started_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+                started_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+                assert_eq!(
+                    calls.lock().unwrap().len(),
+                    2,
+                    "retry cannot precede the join barrier"
+                );
+                {
+                    let budget = reader.budget.lock().unwrap();
+                    assert_eq!(budget.inflight_bytes, 64);
+                    assert_eq!(budget.registered_bytes, 80);
+                    assert_eq!(budget.rail_active_reads, vec![1, 1]);
+                    assert_eq!(budget.staging_bytes, if direct { 80 } else { 144 });
+                }
+                if cancel_before_release {
+                    cancel.cancel();
+                }
+                release_tx.send(()).unwrap();
+                let result = worker.join().unwrap();
+                if cancel_before_release {
+                    assert!(matches!(result, Err(RailReadError::Cancelled)));
+                } else {
+                    assert_eq!(result.unwrap(), 64);
+                }
+            });
+            assert_eq!(
+                destination,
+                vec![if cancel_before_release { 0xA5 } else { 0x42 }; 64]
+            );
+            assert_eq!(
+                calls.lock().unwrap().len(),
+                if cancel_before_release { 2 } else { 3 }
+            );
+            assert_recovery_budget_empty(&reader);
+        }
+    }
+}
+
+#[test]
+fn recovery_rejects_uncertified_protocol_stale_incomplete_resource_and_panic_failures() {
+    for direct in [false, true] {
+        for failure in 0..7 {
+            let reader = recovery_reader(direct);
+            let calls = AtomicU64::new(0);
+            let mock = RecoveryScript(
+                |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, _: Duration| {
+                    calls.fetch_add(1, Ordering::SeqCst);
+                    if route.id != "rail0" {
+                        return Ok(vec![0x42; task.packed_len]);
+                    }
+                    match failure {
+                        0 => Err(RailReadError::Transport(
+                            "ConnectionReset in untrusted string".into(),
+                        )),
+                        1 => Err(RailReadError::StaleDescriptor),
+                        2 => Err(RailReadError::Incomplete {
+                            expected: task.packed_len,
+                            actual: 1,
+                        }),
+                        3 => Err(RailReadError::ResourceExhausted("MR failure".into())),
+                        4 => Err(RailReadError::InvalidPlacement("bad owner".into())),
+                        5 => Err(RailReadError::Cancelled),
+                        _ => panic!("mock worker panic"),
+                    }
+                },
+            );
+            let (descriptor, placement) = fixture(64, 8);
+            let mut destination = vec![0xA5; 64];
+            assert!(reader
+                .read_into_with(&descriptor, &placement, &mut destination, &mock, None)
+                .is_err());
+            assert_eq!(destination, vec![0xA5; 64]);
+            assert_eq!(calls.load(Ordering::SeqCst), 2);
+            assert_recovery_budget_empty(&reader);
+        }
+    }
+}
+
+#[test]
+fn recovery_checks_successful_task_checksums_before_retry() {
+    for direct in [false, true] {
+        let reader = recovery_reader(direct);
+        let mock = RecoveringMock {
+            object: vec![0x42; 64],
+            calls: Mutex::new(Vec::new()),
+        };
+        let (descriptor, mut placement) = fixture(64, 8);
+        for chunk in &mut placement.chunks {
+            chunk.checksum = format!("{:016x}", twox_hash::xxh3::hash64(&[0x43; 8]));
+        }
+        let mut destination = vec![0xA5; 64];
+        assert!(matches!(
+            reader.read_into_with(&descriptor, &placement, &mut destination, &mock, None),
+            Err(RailReadError::Checksum { .. })
+        ));
+        assert_eq!(mock.calls.lock().unwrap().len(), 2);
+        assert_eq!(destination, vec![0xA5; 64]);
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_requires_an_enabled_healthy_unambiguous_same_owner_alternate() {
+    for case in 0..5 {
+        let reader = recovery_reader(false);
+        let (descriptor, mut placement) = fixture(64, 8);
+        if case == 0 {
+            reader.set_enabled("rail1", false);
+        }
+        if case == 1 {
+            placement.chunks[0].node_id.clear();
+        }
+        if case == 2 {
+            placement.chunks[0].node_id = "another-owner".into();
+        }
+        let calls = AtomicU64::new(0);
+        let mock = RecoveryScript(
+            |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, _: Duration| {
+                calls.fetch_add(1, Ordering::SeqCst);
+                if route.id == "rail0" || case == 3 {
+                    if case == 4 {
+                        reader.set_enabled("rail1", false);
+                    }
+                    Err(connection_pool::mock_quiescent_failure())
+                } else {
+                    Ok(vec![0x42; task.packed_len])
+                }
+            },
+        );
+        let mut destination = vec![0xA5; 64];
+        assert!(matches!(
+            reader.read_into_with(&descriptor, &placement, &mut destination, &mock, None),
+            Err(RailReadError::QuiescentTransport(_))
+        ));
+        assert_eq!(calls.load(Ordering::SeqCst), if case == 0 { 1 } else { 2 });
+        assert_eq!(destination, vec![0xA5; 64]);
+        assert_recovery_budget_empty(&reader);
+    }
+    // A path to another advertised owner can never serve as a replica.
+    let mut configured = routes();
+    configured[1].advertised_endpoint = "10.9.9.9:50053".into();
+    let reader = RailReader::new(configured, RailLimits::default())
+        .unwrap()
+        .with_recovery(RailRecoveryOptions {
+            timeout: Duration::from_secs(5),
+        })
+        .unwrap();
+    let mock = RecoveringMock {
+        object: vec![0x42; 64],
+        calls: Mutex::new(Vec::new()),
+    };
+    let (descriptor, placement) = fixture(64, 8);
+    assert!(reader
+        .read_staged_with(&descriptor, &placement, &mock, None)
+        .is_err());
+    assert_eq!(mock.calls.lock().unwrap().len(), 1);
+    assert_recovery_budget_empty(&reader);
+}
+
+#[test]
+fn recovery_never_retries_unstriped_or_default_reader_failures() {
+    for unstriped in [false, true] {
+        let reader = if unstriped {
+            recovery_reader(false)
+        } else {
+            RailReader::new(routes(), RailLimits::default()).unwrap()
+        };
+        let (mut descriptor, placement) = fixture(64, if unstriped { 64 } else { 8 });
+        descriptor.is_striped = !unstriped;
+        let mock = RecoveringMock {
+            object: vec![0x42; 64],
+            calls: Mutex::new(Vec::new()),
+        };
+        assert!(reader
+            .read_staged_with(&descriptor, &placement, &mock, None)
+            .is_err());
+        assert_eq!(
+            mock.calls.lock().unwrap().len(),
+            if unstriped { 1 } else { 2 }
+        );
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_two_failed_tasks_share_one_alternate_sequentially() {
+    for direct in [false, true] {
+        let mut configured = routes();
+        configured.push(RailRoute::new(
+            "rail2",
+            "10.0.0.1:50053",
+            crate::rdma::RdmaClientConfig::new("10.0.2.1:50055", "mock2"),
+        ));
+        let reader = RailReader::new(
+            configured,
+            RailLimits {
+                direct_staging: direct,
+                max_active_reads_per_rail: 1,
+                max_inflight_bytes_per_rail: 24,
+                rail_cooldown: Duration::ZERO,
+                ..RailLimits::default()
+            },
+        )
+        .unwrap()
+        .with_recovery(RailRecoveryOptions {
+            timeout: Duration::from_secs(5),
+        })
+        .unwrap();
+        let calls = Mutex::new(Vec::new());
+        let mock = RecoveryScript(
+            |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, _: Duration| {
+                calls.lock().unwrap().push((
+                    route.id.clone(),
+                    task.stripes
+                        .iter()
+                        .map(|stripe| stripe.index)
+                        .collect::<Vec<_>>(),
+                ));
+                if route.id != "rail2" {
+                    return Err(connection_pool::mock_quiescent_failure());
+                }
+                let budget = reader.budget.lock().unwrap();
+                assert_eq!(budget.rail_active_reads[2], 1);
+                assert!(budget.rail_inflight_bytes[2] <= 24);
+                assert_eq!(
+                    budget.inflight_bytes, 72,
+                    "global allocation stays charged during recovery"
+                );
+                Ok(vec![0x42; task.packed_len])
+            },
+        );
+        let (descriptor, placement) = fixture(72, 8);
+        let mut destination = vec![0xA5; 72];
+        reader
+            .read_into_with(&descriptor, &placement, &mut destination, &mock, None)
+            .unwrap();
+        assert_eq!(destination, vec![0x42; 72]);
+        let calls = calls.lock().unwrap();
+        assert_eq!(calls.len(), 5);
+        assert_eq!(calls.iter().filter(|(rail, _)| rail == "rail2").count(), 3);
+        assert!(calls[3..].iter().all(|(rail, _)| rail == "rail2"));
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_does_not_retry_a_failed_retry() {
+    for direct in [false, true] {
+        let reader = recovery_reader(direct);
+        let calls = Mutex::new(Vec::new());
+        let mock = RecoveryScript(
+            |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, _: Duration| {
+                calls.lock().unwrap().push(route.id.clone());
+                if task.stripes[0].index == 0 {
+                    return Err(connection_pool::mock_quiescent_failure());
+                }
+                Ok(vec![0x42; task.packed_len])
+            },
+        );
+        let (descriptor, placement) = fixture(64, 8);
+        let mut destination = vec![0xA5; 64];
+        assert!(reader
+            .read_into_with(&descriptor, &placement, &mut destination, &mock, None)
+            .is_err());
+        assert_eq!(calls.lock().unwrap().len(), 3);
+        assert_eq!(destination, vec![0xA5; 64]);
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_obeys_other_reads_active_and_byte_limits_on_the_alternate() {
+    use std::sync::mpsc;
+    for byte_limit in [false, true] {
+        let reader = RailReader::new(
+            routes(),
+            RailLimits {
+                max_active_reads_per_rail: if byte_limit { 2 } else { 1 },
+                max_inflight_bytes_per_rail: if byte_limit { 64 } else { 128 },
+                ..RailLimits::default()
+            },
+        )
+        .unwrap()
+        .with_recovery(RailRecoveryOptions {
+            timeout: Duration::from_secs(5),
+        })
+        .unwrap();
+        reader.set_enabled("rail1", false);
+        let (entered_tx, entered_rx) = mpsc::channel();
+        let (fail_tx, fail_rx) = mpsc::channel();
+        let (other_tx, other_rx) = mpsc::channel();
+        let fail_rx = Mutex::new(fail_rx);
+        let other_rx = Mutex::new(other_rx);
+        let calls = AtomicU64::new(0);
+        let mock = RecoveryScript(
+            |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, _: Duration| {
+                calls.fetch_add(1, Ordering::SeqCst);
+                entered_tx.send(()).unwrap();
+                if route.id == "rail0" {
+                    fail_rx
+                        .lock()
+                        .unwrap()
+                        .recv_timeout(Duration::from_secs(5))
+                        .unwrap();
+                    Err(connection_pool::mock_quiescent_failure())
+                } else {
+                    other_rx
+                        .lock()
+                        .unwrap()
+                        .recv_timeout(Duration::from_secs(5))
+                        .unwrap();
+                    Ok(vec![0x42; task.packed_len])
+                }
+            },
+        );
+        let (descriptor, placement) = fixture(64, 8);
+        let mut destination = vec![0xA5; 64];
+        std::thread::scope(|scope| {
+            let failed = scope.spawn(|| {
+                reader.read_into_with(&descriptor, &placement, &mut destination, &mock, None)
+            });
+            entered_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+            reader.set_enabled("rail0", false);
+            reader.set_enabled("rail1", true);
+            let other =
+                scope.spawn(|| reader.read_staged_with(&descriptor, &placement, &mock, None));
+            entered_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+            fail_tx.send(()).unwrap();
+            assert!(matches!(
+                failed.join().unwrap(),
+                Err(RailReadError::ResourceExhausted(_))
+            ));
+            assert_eq!(
+                calls.load(Ordering::SeqCst),
+                2,
+                "rejected retries never reach transport"
+            );
+            assert_eq!(reader.budget.lock().unwrap().rail_active_reads, vec![0, 1]);
+            other_tx.send(()).unwrap();
+            drop(other.join().unwrap().unwrap());
+        });
+        assert_eq!(destination, vec![0xA5; 64]);
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_deadline_expires_at_barrier_without_resetting_or_retrying() {
+    use std::sync::mpsc;
+    for direct in [false, true] {
+        let reader = recovery_reader(direct);
+        let deadline = Instant::now() + Duration::from_millis(30);
+        let (entered_tx, entered_rx) = mpsc::channel();
+        let (release_tx, release_rx) = mpsc::channel();
+        let release_rx = Mutex::new(release_rx);
+        let calls = AtomicU64::new(0);
+        let mock = RecoveryScript(
+            |route: &RailRoute, task: &RailTask, _: &pb::ObjectDescriptor, timeout: Duration| {
+                calls.fetch_add(1, Ordering::SeqCst);
+                assert!(timeout <= Duration::from_millis(30));
+                entered_tx.send(()).unwrap();
+                if route.id == "rail0" {
+                    return Err(connection_pool::mock_quiescent_failure());
+                }
+                release_rx
+                    .lock()
+                    .unwrap()
+                    .recv_timeout(Duration::from_secs(5))
+                    .unwrap();
+                Ok(vec![0x42; task.packed_len])
+            },
+        );
+        let (descriptor, placement) = fixture(64, 8);
+        std::thread::scope(|scope| {
+            let worker = scope.spawn(|| {
+                reader.read_staged_with_deadline(
+                    &descriptor,
+                    &placement,
+                    &mock,
+                    None,
+                    Some(deadline),
+                )
+            });
+            entered_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+            entered_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+            // Latches control ownership; waiting for this fixed clock instant
+            // tests the real monotonic deadline rather than a reset timeout.
+            while Instant::now() < deadline {
+                std::thread::park_timeout(deadline.saturating_duration_since(Instant::now()));
+            }
+            release_tx.send(()).unwrap();
+            assert!(matches!(
+                worker.join().unwrap(),
+                Err(RailReadError::DeadlineExceeded)
+            ));
+        });
+        assert_eq!(calls.load(Ordering::SeqCst), 2);
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_rechecks_version_capabilities_and_deadline_before_publication() {
+    for direct in [false, true] {
+        let reader = recovery_reader(direct);
+        let (descriptor, placement) = fixture(64, 8);
+        let initial = crate::ObjectLookup {
+            descriptor: descriptor.clone(),
+            placement: Some(placement.clone()),
+        };
+        let mock = RecoveringMock {
+            object: vec![0x42; 64],
+            calls: Mutex::new(Vec::new()),
+        };
+        let staged = reader
+            .read_staged_with(&descriptor, &placement, &mock, None)
+            .unwrap();
+        for changed_capability in [false, true] {
+            let mut current = initial.clone();
+            if changed_capability {
+                current
+                    .placement
+                    .as_mut()
+                    .unwrap()
+                    .rdma_rails
+                    .push(pb::RdmaRailEndpoint::default());
+            } else {
+                current.descriptor.object_generation += 1;
+            }
+            let mut destination = vec![0xA5; 64];
+            assert!(matches!(
+                commit_if_unchanged_until(
+                    &initial,
+                    &current,
+                    staged.as_bytes(),
+                    &mut destination,
+                    None,
+                    staged.deadline
+                ),
+                Err(RailReadError::VersionChanged)
+            ));
+            assert_eq!(destination, vec![0xA5; 64]);
+        }
+        let mut destination = vec![0xA5; 64];
+        let cancel = RailCancel::default();
+        assert!(matches!(
+            commit_if_unchanged_until(
+                &initial,
+                &initial,
+                staged.as_bytes(),
+                &mut destination,
+                Some(&cancel),
+                Some(Instant::now())
+            ),
+            Err(RailReadError::DeadlineExceeded)
+        ));
+        assert_eq!(destination, vec![0xA5; 64]);
+        cancel.cancel();
+        assert!(matches!(
+            commit_if_unchanged_until(
+                &initial,
+                &initial,
+                staged.as_bytes(),
+                &mut destination,
+                Some(&cancel),
+                staged.deadline
+            ),
+            Err(RailReadError::Cancelled)
+        ));
+        assert_eq!(destination, vec![0xA5; 64]);
+        drop(staged);
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_direct_partial_bytes_are_discarded_until_whole_task_succeeds() {
+    struct PartialDirect {
+        calls: Mutex<Vec<(String, Vec<u32>)>>,
+        corrupt_retry: bool,
+    }
+    impl RailTransport for PartialDirect {
+        fn fetch(
+            &self,
+            _: &RailRoute,
+            _: &RailTask,
+            _: &pb::ObjectDescriptor,
+            _: Duration,
+        ) -> Result<Vec<u8>, RailReadError> {
+            panic!("must use disjoint direct ranges");
+        }
+        fn fetch_into(
+            &self,
+            route: &RailRoute,
+            task: &RailTask,
+            _: &pb::ObjectDescriptor,
+            target: &mut [u8],
+            _: Duration,
+        ) -> Result<(), RailReadError> {
+            self.calls.lock().unwrap().push((
+                route.id.clone(),
+                task.stripes.iter().map(|stripe| stripe.index).collect(),
+            ));
+            if route.id == "rail0" {
+                target.fill(0xEE);
+                return Err(connection_pool::mock_quiescent_failure());
+            }
+            target.fill(if self.corrupt_retry && task.stripes[0].index == 0 {
+                0xDD
+            } else {
+                0x42
+            });
+            Ok(())
+        }
+    }
+    for corrupt_retry in [false, true] {
+        let reader = recovery_reader(true);
+        let mock = PartialDirect {
+            calls: Mutex::new(Vec::new()),
+            corrupt_retry,
+        };
+        let (descriptor, mut placement) = fixture(64, 8);
+        for chunk in &mut placement.chunks {
+            chunk.checksum = format!("{:016x}", twox_hash::xxh3::hash64(&[0x42; 8]));
+        }
+        let mut destination = vec![0xA5; 64];
+        let result = reader.read_into_with(&descriptor, &placement, &mut destination, &mock, None);
+        if corrupt_retry {
+            assert!(matches!(result, Err(RailReadError::Checksum { stripe: 0 })));
+            assert_eq!(destination, vec![0xA5; 64]);
+        } else {
+            assert_eq!(result.unwrap(), 64);
+            assert_eq!(destination, vec![0x42; 64]);
+        }
+        assert_eq!(mock.calls.lock().unwrap().len(), 3);
+        assert_recovery_budget_empty(&reader);
+    }
+}
+
+#[test]
+fn recovery_deadline_is_checked_under_publication_gate_and_not_after_copy() {
+    use std::sync::mpsc;
+    let cancel = RailCancel::default();
+    let guard = cancel.0.publish_gate.lock().unwrap();
+    let deadline = Instant::now() + Duration::from_millis(20);
+    let (entered_tx, entered_rx) = mpsc::channel();
+    let published = AtomicBool::new(false);
+    std::thread::scope(|scope| {
+        let worker = scope.spawn(|| {
+            entered_tx.send(()).unwrap();
+            cancel.publish_before(Some(deadline), || published.store(true, Ordering::SeqCst))
+        });
+        entered_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+        while Instant::now() < deadline {
+            std::thread::park_timeout(deadline.saturating_duration_since(Instant::now()));
+        }
+        drop(guard);
+        assert!(matches!(
+            worker.join().unwrap(),
+            Err(RailReadError::DeadlineExceeded)
+        ));
+    });
+    assert!(!published.load(Ordering::SeqCst));
+    let deadline = Instant::now() + Duration::from_millis(10);
+    cancel
+        .publish_before(Some(deadline), || {
+            published.store(true, Ordering::SeqCst);
+            while Instant::now() < deadline {
+                std::thread::park_timeout(deadline.saturating_duration_since(Instant::now()));
+            }
+        })
+        .unwrap();
+    assert!(
+        published.load(Ordering::SeqCst),
+        "a completed publication must not become a timeout error"
+    );
+}
+
+#[test]
+fn recovery_rejects_unrepresentable_deadline_instead_of_disabling_it() {
+    assert!(RailReader::new(routes(), RailLimits::default())
+        .unwrap()
+        .with_recovery(RailRecoveryOptions {
+            timeout: Duration::MAX
+        })
+        .is_err());
+    assert!(RailReader::new(routes(), RailLimits::default())
+        .unwrap()
+        .with_recovery(RailRecoveryOptions {
+            timeout: Duration::ZERO
+        })
+        .is_err());
+    let mut reader = recovery_reader(false);
+    // Simulate a clock-range overflow at request entry after configuration.
+    reader.recovery = Some(RailRecoveryOptions {
+        timeout: Duration::MAX,
+    });
+    assert!(matches!(
+        reader.start_deadline(),
+        Err(RailReadError::InvalidPlacement(_))
+    ));
+}
+
+#[test]
+fn recovery_does_not_relabel_legacy_zero_io_timeout_as_deadline_expiry() {
+    for is_striped in [false, true] {
+        for recovery_enabled in [false, true] {
+            let mut reader = RailReader::new(
+                routes(),
+                RailLimits {
+                    io_timeout: Duration::ZERO,
+                    ..RailLimits::default()
+                },
+            )
+            .unwrap();
+            if recovery_enabled {
+                reader = reader
+                    .with_recovery(RailRecoveryOptions {
+                        timeout: Duration::from_secs(5),
+                    })
+                    .unwrap();
+            }
+            let calls = AtomicU64::new(0);
+            let mock = RecoveryScript(
+                |_: &RailRoute, _: &RailTask, _: &pb::ObjectDescriptor, timeout: Duration| {
+                    calls.fetch_add(1, Ordering::SeqCst);
+                    assert!(timeout.is_zero());
+                    Err(RailReadError::Transport(
+                        "legacy transport rejects zero socket timeout".into(),
+                    ))
+                },
+            );
+            let (mut descriptor, placement) = fixture(64, 64);
+            descriptor.is_striped = is_striped;
+            assert!(matches!(
+                reader.read_staged_with(&descriptor, &placement, &mock, None),
+                Err(RailReadError::Transport(_))
+            ));
+            assert_eq!(calls.load(Ordering::SeqCst), 1);
+            assert_recovery_budget_empty(&reader);
+        }
+    }
 }

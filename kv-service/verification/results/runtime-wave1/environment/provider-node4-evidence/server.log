@@ -1,0 +1,33 @@
+[2m2026-10-28T17:02:33.446609Z[0m [32m INFO[0m starting ContextStore KV Service v0.1.0...
+[2m2026-10-28T17:02:33.446654Z[0m [32m INFO[0m config file: /home/kvgroup/chaomei/contextstore_runtime_wave1_provider_20261029/server.toml
+[2m2026-10-28T17:02:33.447970Z[0m [32m INFO[0m loaded config: 2 storage device(s), L1 capacity 0 MB, I/O executor = tier_a
+[2m2026-10-28T17:02:33.450897Z[0m [32m INFO[0m gRPC listening on: 10.0.0.64:25351
+[2m2026-10-28T17:02:33.450921Z[0m [32m INFO[0m CS_RDMA_SLAB_MB override rdma_slab_size_mb=64
+[2m2026-10-28T17:02:33.450958Z[0m [32m INFO[0m CS_RDMA_DEVICES override: 2 NIC(s) ["mlx5_1@10.0.0.64:25353", "mlx5_1@10.0.0.64:25354"]
+[2m2026-10-28T17:02:33.450974Z[0m [32m INFO[0m RDMA tier enabled: 2 NIC(s), primary listener=10.0.0.64:25353
+[2m2026-10-28T17:02:33.457227Z[0m [32m INFO[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 40]
+[2m2026-10-28T17:02:33.457256Z[0m [32m INFO[0m opened NIC 0: dev=mlx5_1 port=1 gid_index=3
+[2m2026-10-28T17:02:33.459886Z[0m [32m INFO[0m RdmaContext: opened device=mlx5_1 port=1 gid_index=3 gid=[00, 00, 00, 00, 00, 00, 00, 00, 00, 00, ff, ff, 0a, 00, 00, 40]
+[2m2026-10-28T17:02:33.459906Z[0m [32m INFO[0m opened NIC 1: dev=mlx5_1 port=1 gid_index=3
+[2m2026-10-28T17:02:33.460035Z[0m [32m INFO[0m SlabBacking: mmap 67108864 bytes at 0x7f5a78000000 (huge_pages=false)
+[2m2026-10-28T17:02:33.485357Z[0m [32m INFO[0m RdmaSlab registered: 67108864 bytes (64 MB) on 2 NIC(s), lkeys=["0x6cecf", "0x6a2a1"] rkeys=["0x6cecf", "0x6a2a1"]
+[2m2026-10-28T17:02:33.485411Z[0m [32m INFO[0m RDMA slab injected into MemoryTier (64 MB, 2 NICs)
+[2m2026-10-28T17:02:33.485515Z[0m [32m INFO[0m RDMA server listening on 10.0.0.64:25353 (nic_idx=0 dev=mlx5_1 port=1 gid_index=3)
+[2m2026-10-28T17:02:33.485562Z[0m [32m INFO[0m RDMA server listening on 10.0.0.64:25354 (nic_idx=1 dev=mlx5_1 port=1 gid_index=3)
+[2m2026-10-28T17:02:46.343888Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:55292 (nic_idx=0)
+[2m2026-10-28T17:02:46.344769Z[0m [32m INFO[0m RcQp created: qpn=49714 psn=0xbc30b2
+[2m2026-10-28T17:02:46.345412Z[0m [32m INFO[0m RDMA QP established: local_qpn=49714 remote_qpn=18380
+[2m2026-10-28T17:02:46.345835Z[0m [32m INFO[0m MISS_DETAIL wall_us=1793206966345642 key=12:rdma-sdk-e2eread-1793206966310390733 bytes=8192 meta_us=0 alloc_us=22 stream_setup_us=80 first_stream_completion_us=137 last_stream_completion_us=137 post_done_us=61 poll_us=10 inject_us=0 n_writes=1
+[2m2026-10-28T17:02:47.223828Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:55298 (nic_idx=0)
+[2m2026-10-28T17:02:47.224456Z[0m [32m INFO[0m RcQp created: qpn=49715 psn=0x2b3787
+[2m2026-10-28T17:02:47.224928Z[0m [32m INFO[0m RDMA QP established: local_qpn=49715 remote_qpn=18381
+[2m2026-10-28T17:02:47.493619Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793206966542082545 bytes=16777216 stripes=4 requests=16 alloc_us=22 stream_setup_us=119 first_io_us=32241 last_io_us=127787 poll_us=384 total_us=128188
+[2m2026-10-28T17:03:39.040055Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:40006 (nic_idx=0)
+[2m2026-10-28T17:03:39.040700Z[0m [32m INFO[0m RcQp created: qpn=49716 psn=0xa85495
+[2m2026-10-28T17:03:39.041166Z[0m [32m INFO[0m RDMA QP established: local_qpn=49716 remote_qpn=18382
+[2m2026-10-28T17:03:39.302831Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793207018375991057 bytes=16777216 stripes=4 requests=16 alloc_us=20 stream_setup_us=99 first_io_us=31273 last_io_us=121229 poll_us=402 total_us=121631
+[2m2026-10-28T17:03:39.719412Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793207018375991057 bytes=16777216 stripes=4 requests=16 alloc_us=22 stream_setup_us=109 first_io_us=31176 last_io_us=118383 poll_us=370 total_us=118779
+[2m2026-10-28T17:03:40.171818Z[0m [32m INFO[0m RDMA client connected: 10.0.0.62:40014 (nic_idx=0)
+[2m2026-10-28T17:03:40.172382Z[0m [32m INFO[0m RcQp created: qpn=49717 psn=0x1c7849
+[2m2026-10-28T17:03:40.172799Z[0m [32m INFO[0m RDMA QP established: local_qpn=49717 remote_qpn=18383
+[2m2026-10-28T17:03:40.426124Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793207018375991057 bytes=16777216 stripes=4 requests=16 alloc_us=20 stream_setup_us=90 first_io_us=30682 last_io_us=121253 poll_us=359 total_us=121643

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/scripts/run_final_host.py", line 161, in <module>
+    main()
+  File "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/scripts/run_final_host.py", line 77, in main
+    assert all(before.get(name)==value for name,value in expected.items()), 'Final source pins differ from recovery receipt'
+AssertionError: Final source pins differ from recovery receipt

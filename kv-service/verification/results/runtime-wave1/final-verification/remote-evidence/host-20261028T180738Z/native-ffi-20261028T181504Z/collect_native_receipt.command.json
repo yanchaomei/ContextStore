@@ -1,0 +1,13 @@
+[
+  "scp",
+  "-oBatchMode=yes",
+  "-oStrictHostKeyChecking=yes",
+  "-oUserKnownHostsFile=/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/known_hosts",
+  "-i",
+  "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/railtest_ed25519",
+  "-P",
+  "22352",
+  "-r",
+  "railtest@127.0.0.1:/home/railtest/cswave1/final-ffi/host-20261028T180738Z-20261028T181504Z/native",
+  "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/native-ffi-20261028T181504Z/native"
+]

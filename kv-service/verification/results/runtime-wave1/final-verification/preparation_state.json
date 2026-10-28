@@ -1,0 +1,19 @@
+{
+  "state": "COMPLETED_ALL_REQUESTED_FINAL_CHECKS",
+  "builds_or_tests_started": true,
+  "changed_rust_files": [
+    "kv-service/client-rs/src/bin/rail_read_bench.rs",
+    "kv-service/client-rs/src/lib.rs",
+    "kv-service/client-rs/src/rail_read.rs",
+    "kv-service/client-rs/src/rail_read/connection_pool.rs",
+    "kv-service/client-rs/src/rail_read/tests.rs",
+    "kv-service/client-rs/src/rdma.rs",
+    "kv-service/client-rs/tests/rail_read_e2e.rs"
+  ],
+  "default_fixture_provenance": "Existing default-feature build receipt; verify hash at GO; build new default fixture from src-baseline if mismatch",
+  "native_ffi": "Separate stage after coordination with recovery agent; no server preload",
+  "remote_attempt": "host-20261028T180738Z",
+  "initial_attempt_note": "First attempt stopped at source hash gate before builds: only remote README stale; copied current receipt-matching local README and restarted in a new attempt.",
+  "default_fixture_note": "Original target/debug server SHA no longer matches original default-build receipt; fresh pure-default fixture will be built from frozen src-baseline.",
+  "final_receipt": "final-verification-receipt.json"
+}

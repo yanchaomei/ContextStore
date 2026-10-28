@@ -1,0 +1,23 @@
+run_id,stage,purpose,variant,block,priority,status,evidence_directory
+E00,P0,冻结代码/构建/拓扑/配置/输入,existing,B1,MUST,EXECUTED_BASELINE_AND_FINAL,environment/; final-verification/
+E01,P0,cold/warm分段成本与真实WR事件,R0,B2/B3,MUST,PARTIAL_COST_AND_LATE_REQUEST_EVIDENCE,campaign/; recovery/
+E02,P1,持续连接单项对照,R0/R1,B3,MUST,EXECUTED_SCOPED_PAIRED_PILOT,campaign/pilot-v3/
+E03,P1,健康归池/错误退役/panic顺序,R1,B1/B2,MUST,PARTIAL_UNIT_AND_NATIVE_CASES,pool/; recovery/
+E04,P1,多轨原子准入与无循环等待,R1,B1/B3,MUST,PARTIAL_FAIL_FAST_ADMISSION,pool/; recovery/
+E05,P2,成功task保留与一次缺片补读,F0/F1/F2,B1/B2,MUST,PARTIAL_F2_ONLY,recovery/
+E06,P2,版本/capability/取消/期限拒绝,F2,B1/B2,MUST,UNIT_VALIDATED_NATIVE_MATRIX_PENDING,recovery/
+E07,P2,同owner备用rail与精确补读bytes,F1/F2,B2,MUST,EXECUTED_DUAL_RXE_F2,recovery/
+E08,P2,新Python入口真实双路与恢复,Rust/new-ABI,B5,MUST,PLANNED,
+E09,P2,旧FFI12项矩阵回归,legacy-FFI,B2,MUST,NATIVE13_RERUN_LEGACY12_NOT_RERUN,final-verification/
+E10,P3,dummy常驻MR消融,R1/R2,B3,SHOULD,PLANNED,
+E11,P3,registered-arena与direct净成本,R1/R3,B3,MUST_IF_ARENA,PLANNED,
+E12,P3,池扩容驱逐/同址多代/MR代际,R3,B1/B2,MUST_IF_ARENA,PLANNED,
+E13,P3,对称与慢路调度,S0/S1/S2,B3,MUST_IF_ADAPTIVE,PLANNED,
+E14,P3,共享NIC/NUMA/PCIe与多reader,S2/S3,B3/B4,SHOULD,PLANNED,
+E15,P3,窗口粒度控制开销,S3/S4,B3,OPTIONAL,PLANNED,
+E16,P4,单NIC1QP/2QP与双物理路径,runtime fixed,B4,HARDWARE_GATE,PARTIAL_SINGLE_PHYSICAL_HCA,environment/; campaign/
+E17,P4,真实对象读轨迹回放,features toggled,B5,MUST,PLANNED,
+E18,P4,推理框架模型端到端,features toggled,B5,HARDWARE_GATE,PLANNED,
+E19,P4,100/1000轮复用恢复与2h长测,integrated,B2/B5,MUST,PLANNED,
+E20,P4,8–24h持续故障与稳定性,integrated,B5,SHOULD,PLANNED,
+E21,later,异步隔离补读必要性,F2/F3,B2/B3,OPTIONAL_AFTER_PROFILING,PLANNED,

@@ -1,0 +1,1 @@
+timeout 90s cargo test --locked --offline -j 4 -p contextstore-client-rs --features rdma --test rail_read_e2e single_real_rail_restores_verified_object -- --ignored --exact --nocapture --test-threads=1

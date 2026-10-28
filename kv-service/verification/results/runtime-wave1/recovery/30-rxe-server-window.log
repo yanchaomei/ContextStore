@@ -1,0 +1,50 @@
+[2m2026-10-28T17:56:36.789808Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:50344 (nic_idx=0)
+[2m2026-10-28T17:56:36.789827Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:34594 (nic_idx=1)
+[2m2026-10-28T17:56:36.790049Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x472e79
+[2m2026-10-28T17:56:36.790050Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x47543e
+[2m2026-10-28T17:56:36.790187Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:56:36.790187Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:56:39.423312Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210195886485932 bytes=8388608 stripes=2 requests=8 alloc_us=17 stream_setup_us=3040 first_io_us=39141 last_io_us=76226 poll_us=2556061 total_us=2632336
+[2m2026-10-28T17:57:09.610082Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210195886485932 bytes=8388608 stripes=2 requests=8 alloc_us=14 stream_setup_us=115 first_io_us=41462 last_io_us=77822 poll_us=30000058 total_us=30077947
+[2m2026-10-28T17:57:09.610205Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793210195886485932 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:57:09.610617Z[0m [33m WARN[0m RDMA client 10.81.1.2:50344 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:57:12.718725Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210195886485932 bytes=8388608 stripes=2 requests=8 alloc_us=13 stream_setup_us=146 first_io_us=40028 last_io_us=76328 poll_us=3030569 total_us=3106944
+[2m2026-10-28T17:57:14.153049Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:35774 (nic_idx=0)
+[2m2026-10-28T17:57:14.153049Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:46866 (nic_idx=1)
+[2m2026-10-28T17:57:14.153312Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x4d21cb
+[2m2026-10-28T17:57:14.153333Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x4d8c2e
+[2m2026-10-28T17:57:14.153438Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:57:14.153443Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:57:18.050959Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210233252537176 bytes=8388608 stripes=2 requests=8 alloc_us=17 stream_setup_us=4304 first_io_us=40563 last_io_us=79720 poll_us=3816948 total_us=3896712
+[2m2026-10-28T17:57:18.173665Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:46878 (nic_idx=1)
+[2m2026-10-28T17:57:18.173842Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xf1dedd
+[2m2026-10-28T17:57:18.173925Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:57:48.251299Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210233252537176 bytes=8388608 stripes=2 requests=8 alloc_us=14 stream_setup_us=90 first_io_us=38876 last_io_us=75439 poll_us=30000128 total_us=30075675
+[2m2026-10-28T17:57:48.251606Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793210233252537176 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:57:48.252356Z[0m [33m WARN[0m RDMA client 10.81.1.2:35774 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:57:50.199617Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210233252537176 bytes=8388608 stripes=2 requests=8 alloc_us=25 stream_setup_us=967 first_io_us=38694 last_io_us=74874 poll_us=1869580 total_us=1944557
+[2m2026-10-28T17:57:51.438542Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:57306 (nic_idx=1)
+[2m2026-10-28T17:57:51.438540Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:41798 (nic_idx=0)
+[2m2026-10-28T17:57:51.438778Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xb0877f
+[2m2026-10-28T17:57:51.438802Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xb0db27
+[2m2026-10-28T17:57:51.438896Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:57:51.438920Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:57:53.631188Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210270755257871 bytes=8388608 stripes=2 requests=8 alloc_us=19 stream_setup_us=4692 first_io_us=40716 last_io_us=78156 poll_us=2002695 total_us=2080900
+[2m2026-10-28T17:58:23.888135Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210270755257871 bytes=8388608 stripes=2 requests=8 alloc_us=13 stream_setup_us=108 first_io_us=40902 last_io_us=77247 poll_us=30000037 total_us=30077338
+[2m2026-10-28T17:58:23.888207Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793210270755257871 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:58:23.888434Z[0m [33m WARN[0m RDMA client 10.81.1.2:41798 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:58:26.039464Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210270755257871 bytes=8388608 stripes=2 requests=8 alloc_us=14 stream_setup_us=92 first_io_us=40082 last_io_us=77434 poll_us=2072489 total_us=2149971
+[2m2026-10-28T17:58:27.433614Z[0m [32m INFO[0m RDMA client connected: 10.81.1.2:49960 (nic_idx=0)
+[2m2026-10-28T17:58:27.433635Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:37514 (nic_idx=1)
+[2m2026-10-28T17:58:27.433847Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x298f98
+[2m2026-10-28T17:58:27.433853Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0x29b3af
+[2m2026-10-28T17:58:27.433926Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:58:27.433948Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:58:27.954629Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210306768835688 bytes=8388608 stripes=2 requests=8 alloc_us=17 stream_setup_us=644 first_io_us=40447 last_io_us=76985 poll_us=343277 total_us=420307
+[2m2026-10-28T17:58:28.031243Z[0m [32m INFO[0m RDMA client connected: 10.82.1.2:37516 (nic_idx=1)
+[2m2026-10-28T17:58:28.031426Z[0m [32m INFO[0m RcQp created: qpn=17 psn=0xc7f2f4
+[2m2026-10-28T17:58:28.031516Z[0m [32m INFO[0m RDMA QP established: local_qpn=17 remote_qpn=17
+[2m2026-10-28T17:58:58.207214Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210306768835688 bytes=8388608 stripes=2 requests=8 alloc_us=11 stream_setup_us=66 first_io_us=39569 last_io_us=75385 poll_us=30000176 total_us=30075639
+[2m2026-10-28T17:58:58.207469Z[0m [33m WARN[0m RDMA stripe-subset stream failed without deleting object metadata [3mkey[0m[2m=[0m8:rail-e2erail-e2e-1793210306768835688 [3merror[0m[2m=[0mpoll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:58:58.208181Z[0m [33m WARN[0m RDMA client 10.81.1.2:49960 (nic_idx=0) disconnected: RDMA connection retired after uncertain stripe-subset completion: poll final RDMA completions: poll_n timeout after 30000ms, got 0/8
+[2m2026-10-28T17:58:59.307549Z[0m [32m INFO[0m RDMA_SUBSET_DETAIL key=8:rail-e2erail-e2e-1793210306768835688 bytes=8388608 stripes=2 requests=8 alloc_us=28 stream_setup_us=313 first_io_us=41245 last_io_us=77725 poll_us=1019703 total_us=1097533

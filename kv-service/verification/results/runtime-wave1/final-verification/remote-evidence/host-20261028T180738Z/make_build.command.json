@@ -1,0 +1,17 @@
+{
+  "command": [
+    "make",
+    "build",
+    "CARGO=cargo --locked --offline"
+  ],
+  "cwd": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/src-candidate",
+  "started": "2026-10-28T18:07:39.115272+00:00",
+  "environment": {
+    "CARGO_HOME": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/tools/cargo",
+    "CARGO_TARGET_DIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/target-candidate",
+    "CARGO_BUILD_JOBS": "4",
+    "LIBCLANG_PATH": "/usr/lib/x86_64-linux-gnu",
+    "PROTOC": "/usr/local/bin/protoc",
+    "TMPDIR": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/final-verification/host-20261028T180738Z/tmp"
+  }
+}

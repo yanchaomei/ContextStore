@@ -1,0 +1,19 @@
+{
+  "private_key_location_only": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/railtest_ed25519",
+  "guests": {
+    "server": {
+      "uuid": "3cf534ce-653d-4171-9574-bba582db6338",
+      "management_port": 22351,
+      "path0": "10.81.1.1",
+      "path1": "10.82.1.1",
+      "directory": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/server"
+    },
+    "client": {
+      "uuid": "782360c4-1d34-4a3e-9746-d9f96612d2dc",
+      "management_port": 22352,
+      "path0": "10.81.1.2",
+      "path1": "10.82.1.2",
+      "directory": "/home/kvgroup/chaomei/contextstore_runtime_wave1_20261029/vm-rxe/client"
+    }
+  }
+}

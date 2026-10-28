@@ -130,12 +130,15 @@ fn open_control_stream(endpoint: &str, timeout: Duration) -> Result<TcpStream> {
             Err(error) => last_error = Some(error),
         }
     }
-    Err(anyhow!(
-        "connect RDMA control endpoint {endpoint}: {}",
-        last_error
-            .map(|error| error.to_string())
-            .unwrap_or_else(|| "no resolved addresses".to_string())
-    ))
+    match last_error {
+        Some(error) => {
+            Err(anyhow::Error::new(error)
+                .context(format!("connect RDMA control endpoint {endpoint}")))
+        }
+        None => Err(anyhow!(
+            "connect RDMA control endpoint {endpoint}: no resolved addresses"
+        )),
+    }
 }
 
 /// Result of an RDMA read. `None` means the object did not exist.

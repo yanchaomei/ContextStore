@@ -1,0 +1,96 @@
+{
+  "baseline_client_rdma": {
+    "exit_code": 101,
+    "passed": 58,
+    "failed": 4,
+    "ignored": 1,
+    "test_suites": 5,
+    "log_sha256": "e07c58ce8a88413af1ee6537b4312dbea5531c6dd397198262cd2863a77ad26f",
+    "ignored_tests": [
+      "test rail_read::tests::software_only_mock_benchmark ... ignored, software-only Mock measurement; this is not RDMA bandwidth"
+    ],
+    "started": "2026-10-28T16:45:15Z",
+    "finished": "2026-10-28T16:45:47Z"
+  },
+  "baseline_workspace_default": {
+    "exit_code": 101,
+    "passed": 0,
+    "failed": 4,
+    "ignored": 0,
+    "test_suites": 3,
+    "log_sha256": "7298cb6017090c33e263951c81aa272c33fc53a1aca21ee6b6f4d12736227a20",
+    "ignored_tests": [],
+    "started": "2026-10-28T16:45:47Z",
+    "finished": "2026-10-28T16:46:27Z"
+  },
+  "baseline_server_build": {
+    "exit_code": 0,
+    "passed": 0,
+    "failed": 0,
+    "ignored": 0,
+    "test_suites": 0,
+    "log_sha256": "6d64fd7319a3e3141191958c625425ff3b0b5996a236c0240ed38ee0158bf3a4",
+    "ignored_tests": [],
+    "started": "2026-10-28T16:47:23Z",
+    "finished": "2026-10-28T16:47:46Z"
+  },
+  "configured_client_rdma": {
+    "exit_code": 0,
+    "passed": 62,
+    "failed": 0,
+    "ignored": 22,
+    "test_suites": 8,
+    "log_sha256": "557593d09e0f96b62b42358b66187e6a0d58f18d5a9ec114edf2a77efd337292",
+    "ignored_tests": [
+      "test rail_read::tests::software_only_mock_benchmark ... ignored, software-only Mock measurement; this is not RDMA bandwidth",
+      "test advertised_second_link_down_cannot_publish_partial_object ... ignored, requires advertised rails; externally disable the second client RXE link",
+      "test advertised_two_rails_restore_one_object ... ignored, requires two real rails and server-advertised fabric/listener capabilities",
+      "test cancellation_after_real_transfer_starts_cannot_write_reused_buffer ... ignored, requires one reachable HCA or RXE listener and a large striped object",
+      "test cancellation_during_direct_staging_preserves_reused_buffer ... ignored, requires two real rails and a large striped object",
+      "test cancellation_during_two_rail_transfer_preserves_reused_buffer ... ignored, requires two real rails and a large striped object",
+      "test concurrent_rewrites_never_publish_mixed_direct_staging_bytes ... ignored, requires two RXE/HCA Rails, a striped KVService, and repeated writes",
+      "test corrupt_stripe_on_second_rail_cannot_publish_partial_object ... ignored, requires two real rails and a deliberately corrupted stripe 1 on an isolated object",
+      "test corrupted_real_stripe_does_not_publish_bytes ... ignored, requires an existing striped object with one deliberately corrupted physical stripe",
+      "test dead_single_real_rail_leaves_destination_unchanged ... ignored, requires a striped KVService and an injected dead RDMA listener",
+      "test failed_second_rail_direct_staging_does_not_publish_partial_bytes ... ignored, requires one reachable RDMA listener and one injected dead listener",
+      "test failed_second_rail_does_not_publish_partial_bytes ... ignored, requires one reachable RDMA listener and one injected dead listener",
+      "test late_second_rail_after_first_completion_cannot_publish_or_corrupt ... ignored, requires two real rails and a three-second pre-WRITE delay on server nic_idx=1",
+      "test late_second_rail_direct_staging_cannot_publish_or_corrupt ... ignored, requires two real rails and a three-second pre-WRITE delay on server nic_idx=1",
+      "test late_server_write_after_timeout_cannot_corrupt_reused_buffer ... ignored, requires CS_RDMA_TEST_PRE_WRITE_DELAY_MS=3000 on an isolated real RDMA server",
+      "test legacy_get_timeout_retires_qp_before_buffer_reuse ... ignored, requires an isolated RXE server with CS_FORCE_DISK_READ=1 and a 64 MiB object",
+      "test old_generation_is_rejected_without_publishing_bytes ... ignored, requires two reachable RDMA listeners and a striped KVService",
+      "test same_object_matches_single_and_dual_rail ... ignored, requires two reachable RDMA listeners on the same storage node",
+      "test single_real_rail_restores_verified_object ... ignored, requires one reachable HCA or RXE listener and a striped KVService",
+      "test uncertain_completion_retires_old_server_connection ... ignored, requires a three-second delay on server nic_idx=1 and a two-second CQ deadline",
+      "test unique_generations_survive_concurrent_direct_rail_reads ... ignored, requires two real Rails, striped writes, and CS_RAIL_TIMING=1",
+      "test rdma_put_and_get_round_trip ... ignored, requires an RDMA-enabled ContextStore server and an HCA"
+    ],
+    "started": "2026-10-28T16:47:47Z",
+    "finished": "2026-10-28T16:47:49Z"
+  },
+  "configured_workspace_default": {
+    "exit_code": 0,
+    "passed": 86,
+    "failed": 0,
+    "ignored": 0,
+    "test_suites": 15,
+    "log_sha256": "6c4faca4954736f035db0cf79dc4baa7a43cec4924d0fcee8da17c743caaf4fc",
+    "ignored_tests": [],
+    "started": "2026-10-28T16:47:49Z",
+    "finished": "2026-10-28T16:47:51Z",
+    "runtime_gate_note": "Two Redis metadata tests returned early because CS_REDIS_URL was absent. Both were subsequently exercised with private Redis in configured_redis_metadata."
+  },
+  "source_hash_verification": {
+    "files": 209,
+    "all_ok": true
+  },
+  "configured_redis_metadata": {
+    "exit_code": 0,
+    "passed": 2,
+    "failed": 0,
+    "ignored": 0,
+    "skip_markers": 0,
+    "log_sha256": "7dd220694dfa08c8b543373c33beffd30fcfa56017f97c27e47f0fbe3a39ff84",
+    "private_redis_stopped": true
+  }
+}
